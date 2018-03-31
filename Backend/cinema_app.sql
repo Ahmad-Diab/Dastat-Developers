@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 30, 2018 at 11:31 PM
+-- Generation Time: Mar 31, 2018 at 02:27 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -121,8 +121,7 @@ CREATE TABLE `Movies` (
   `cast` text,
   `year` int(11) DEFAULT NULL,
   `feature` int(11) DEFAULT NULL,
-  `start_date` datetime DEFAULT NULL,
-  `end_date` datetime DEFAULT NULL,
+  `release_date` datetime DEFAULT NULL,
   `rating` float DEFAULT NULL,
   `status` varchar(20) DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

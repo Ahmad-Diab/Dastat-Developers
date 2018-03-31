@@ -8,4 +8,4 @@ module.exports.getUsers = function(req, res, next){
     if(error) return next(error);
     return res.send(results);
   });
-}
+};

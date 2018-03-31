@@ -7,17 +7,17 @@ var database = require('../config/db-connection');
 module.exports.searchByKeyWord = function(req,res,next){
     var searchKeyS = req.params.searchKeyWord + '%';
     var searchKeyN = req.params.searchKeyWord;
-    var sql = 'SELECT title,genre,imagePath,year,rating FROM Movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
-    var sql = "SELECT * FROM Cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?";
+    var sqlMovie = 'SELECT title,genre,imagePath,year,rating FROM Movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
+    var sqlCinema = "SELECT * FROM Cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?";
     var resultCinema;
     var resultMovie;
-    database.query(sql, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, result, fields){
+    database.query(sqlMovie, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, result1, fields){
         if(error) return next(error);
-        resultMovie = result;
+        resultMovie = result1;
     });
-    database.query(sql, [searchKeyS,searchKeyS,searchKeyS], function(error, result, fields){
+    database.query(sqlCinema, [searchKeyS,searchKeyS,searchKeyS], function(error, result2, fields){
         if(error) return next(error);
-        resultCinema = result;
+        resultCinema = result2;
     });
-    return res.send({"Movies": resultMovie, "Cinemas": resultCinema});
+    return res.send({"Movies": resultMovie,"Cinemas": resultCinema});
 }

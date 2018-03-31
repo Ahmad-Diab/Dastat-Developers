@@ -5,7 +5,9 @@ var database = require('../config/db-connection');
 
 
 module.exports.searchByKeyWord = function(req,res,next){
-    database.query('SELECT * FROM cinemas WHERE name = Mayo Movies ', function(error,result){
+    var where = req.params.searchKeyWord;
+    var sql = 'SELECT * FROM cinemas WHERE number_of_halls = ' + database.escape(where);
+    database.query(sql, function(error, result, fields){
         if(error) return next(error);
         return res.send(result);
     }); 

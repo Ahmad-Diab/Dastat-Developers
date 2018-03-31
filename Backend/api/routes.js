@@ -12,7 +12,7 @@ router.get('/users', User.getUsers);
 
 
 //----------------------------------------------------Search routes--------------------------------------------//
-router.get('/searchs/:searchKeyWord', Search.searchByKeyWord);
+router.get('/search', Search.searchByKeyWord);
 
 //exporting routes to the project
 module.exports = router;

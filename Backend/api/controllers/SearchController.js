@@ -5,8 +5,11 @@ var database = require('../config/db-connection');
 
 
 module.exports.searchByKeyWord = function(req,res,next){
-    database.query('select * from cinemas where name = req.params', function(error,result){
-        if(error) return next(error);
+    database.query('SELECT * FROM cinemas', function(error,result,fields){
+        if(error){ 
+            return next(error);
+            console.log("hoba");
+        }
         return res.send(result);
     }); 
 }

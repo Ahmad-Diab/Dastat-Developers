@@ -11,8 +11,7 @@ var Movie = require('./controllers/MovieController')
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users', User.getUsers);
-
-
+router.get('/users/actors/:actor', User.getActors);
 
 
 

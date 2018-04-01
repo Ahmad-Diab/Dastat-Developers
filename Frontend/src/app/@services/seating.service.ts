@@ -10,7 +10,19 @@ export class SeatingService extends HttpService{
     super(http);
   }
 
-  testing() {
-    return this.get('users');
+  view(data) {
+    return this.get('layout/encoding', data);
+  }
+
+  addLayout(data) {
+    return this.post('layout/add', data);
+  }
+
+  editLayout(data) {
+    return this.post('layout/edit', data);
+  }
+
+  deleteLayout(data) {
+    return this.post('layout/delete', data);
   }
 }

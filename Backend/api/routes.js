@@ -12,7 +12,6 @@ var Movie = require('./controllers/MovieController')
 //------------------------USERS ROUTES-------------------------------
 router.get('/users', User.getUsers);
 
-<<<<<<< HEAD
 
 
 
@@ -48,9 +47,6 @@ router.get('/movies/Bio',Movie.getMoviesBiography);
 
 
 
-=======
-router.post('/test', User.test);
->>>>>>> 7d7fb693d707cb3acbd98993e2a12fe6b731c8d7
 
 //exporting routes to the project
 module.exports = router;

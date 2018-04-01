@@ -21,11 +21,11 @@ module.exports.searchByKeyWord = function(req,res,next){
             if(error) return next(error);
             database.query(sqlActor, [searchKeyS] , function(error, actorResult, fields){
                 if(error) return next(error);
-            res.status(200).json({
-                err : null,   
-                data : {"Movies": movieResult,"Cinemas": cinemaResult,"Actors": actorResult},
-                msg : "search done successfully"
-            })
+                res.status(200).json({
+                    err : null,   
+                    data : {"Movies": movieResult,"Cinemas": cinemaResult,"Actors": actorResult},
+                    msg : "search done successfully"
+                })
             });
         });
     });   

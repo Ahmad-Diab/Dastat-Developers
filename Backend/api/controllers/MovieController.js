@@ -5,6 +5,24 @@ var database = require('../config/db-connection');
 //DONT FORGET TO ADD IT IN THE ROUTES
 
 
+
+
+
+//--View All Movies 
+module.exports.getMovies = function(req,res,next){
+
+    database.query('SELECT * from movies ORDER BY feature desc',
+function(error,results,fields){
+    if(error) return next(error);
+    if(results.length ==0){
+        return res.send("No Movies found.");
+    }
+    else{
+        return res.send(results);
+    }
+});
+}
+
 //-------------VIEW RATINGS-----------------
 //--View Movies by High ratings
 

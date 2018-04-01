@@ -18,6 +18,7 @@ router.get('/users', User.getUsers);
 
 //------------------------MOVIES ROUTES------------------------------
 
+router.get('/movies',Movie.getMovies);
 
 router.get('/movies',Movie.getMoviesHighRatings);
 router.get('/movies',Movie.getMoviesLowRatings);

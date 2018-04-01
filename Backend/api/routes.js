@@ -31,7 +31,7 @@ router.get('/movies',Movie.getMoviesComedy);
 router.get('/movies',Movie.getMoviesDrama);
 router.get('/movies',Movie.getMoviesHorror);
 router.get('/movies',Movie.getMoviesThriller);
-router.get('/movies',Movie.getMoviesSciFi); 
+router.get('/movies',Movie.getMoviesBiography); 
 
 
 

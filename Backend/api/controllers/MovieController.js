@@ -78,14 +78,14 @@ function(error,results,fields){
 
 //------------------------VIEW BY GENRE-------------------
 
-//--View Sci-fi Movies
-module.exports.getMoviesSciFi = function(req,res,next){
+//--View Biography Movies
+module.exports.getMoviesBiography = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Sci-fi" ORDER BY year desc ',
+    database.query('Select * FROM movies where genre="Biography" ORDER BY year desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
-        return res.send("No Sci-fi Movies found");
+        return res.send("No Biography Movies found");
     }
     else{
         return res.send(results);

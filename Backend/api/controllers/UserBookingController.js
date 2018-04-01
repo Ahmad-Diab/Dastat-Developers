@@ -10,7 +10,6 @@ var database = require('../config/db-connection'),
  *  Movie, Cinema, as well as Date (Day).
  * @param req
  * @param res
- * @param next
  */
 module.exports.getParties = function(req, res){
     //TODO Get parties of movies just chosen according to chosen day

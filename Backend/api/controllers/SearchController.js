@@ -3,7 +3,12 @@ var database = require('../config/db-connection');
 //User Controllers should be implemented here
 //DONT FORGET TO USE MODULE exports
 
-// Used to search in Movies or Cinemas with a key word
+/**
+ * Search on Movies, Cinemas, Actors using a search keyword
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next
+ */
 module.exports.searchByKeyWord = function(req,res,next){
     var searchKeyS = '%' +  req.params.searchKeyWord + '%';        // used in comparison to char columns using LIKE
     var searchKeyN = req.params.searchKeyWord;              // used in comparison to int columns usin =

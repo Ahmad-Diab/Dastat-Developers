@@ -84,6 +84,8 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
+    var success = true;
+
     for( var i = 0; i< tickets.length; i++) {
         var seatNum = tickets[i];
 
@@ -98,19 +100,21 @@ module.exports.makeReservation = function(req, res, next){
             cinema_name: cinema_name
         };
 
-        database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error) {
-            if(error){
+        database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
+            if (error) {
                 return next(error);
             }
-
-            res.status(200).json({
-                err: null,
-                msg: 'Booking Request has been completed successfully.',
-                data: req.body
-            });
+            success = true;
         });
     }
 
+    if(success) {
+        res.status(200).json({
+            err: null,
+            msg: 'Booking Request has been completed successfully.',
+            data: req.body
+        });
+    }
 
 };
 

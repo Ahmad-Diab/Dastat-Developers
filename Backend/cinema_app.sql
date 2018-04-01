@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 01, 2018 at 05:13 PM
+-- Generation Time: Apr 01, 2018 at 09:22 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -56,7 +56,7 @@ INSERT INTO `Actors` (`name`, `age`, `birth_date`, `gender`, `bio`) VALUES
 --
 
 CREATE TABLE `Actors_Movies` (
-  `actor` varchar(15) NOT NULL,
+  `actor` varchar(115) NOT NULL,
   `movie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -100,6 +100,48 @@ CREATE TABLE `Admins_Cinemas` (
   `cinema_location` varchar(100) DEFAULT NULL,
   `cinema_name` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Admins_Cinemas`
+--
+
+INSERT INTO `Admins_Cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
+('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
+('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
+('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
+('Amir_Karara', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Amir_Karara', 'New Cairo', 'Point 90'),
+('Amir_Karara', 'Al Haram', 'Pharoahs Cinema'),
+('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
+('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
+('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
+('Amir_Karara', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Amir_Karara', 'New Cairo', 'Point 90'),
+('Amir_Karara', 'Al Haram', 'Pharoahs Cinema'),
+('Andrew_Shady', 'New Cairo', 'Galaxy Cinema'),
+('Andrew_Shady', 'Mokattam', 'Cinema Mawlana'),
+('Andrew_Shady', '9th of Mayo', 'Mayo Movies'),
+('Andrew_Shady', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Andrew_Shady', 'New Cairo', 'Point 90'),
+('Andrew_Shady', 'Al Haram', 'Pharoahs Cinema'),
+('Israa_Yasser', 'New Cairo', 'Galaxy Cinema'),
+('Israa_Yasser', 'Mokattam', 'Cinema Mawlana'),
+('Israa_Yasser', '9th of Mayo', 'Mayo Movies'),
+('Israa_Yasser', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Israa_Yasser', 'New Cairo', 'Point 90'),
+('Israa_Yasser', 'Al Haram', 'Pharoahs Cinema'),
+('Laila_Khaled', 'New Cairo', 'Galaxy Cinema'),
+('Laila_Khaled', 'Mokattam', 'Cinema Mawlana'),
+('Laila_Khaled', '9th of Mayo', 'Mayo Movies'),
+('Laila_Khaled', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Laila_Khaled', 'New Cairo', 'Point 90'),
+('Laila_Khaled', 'Al Haram', 'Pharoahs Cinema'),
+('Yehia_Gamal', 'New Cairo', 'Galaxy Cinema'),
+('Yehia_Gamal', 'Mokattam', 'Cinema Mawlana'),
+('Yehia_Gamal', '9th of Mayo', 'Mayo Movies'),
+('Yehia_Gamal', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Yehia_Gamal', 'New Cairo', 'Point 90'),
+('Yehia_Gamal', 'Al Haram', 'Pharoahs Cinema');
 
 -- --------------------------------------------------------
 
@@ -267,6 +309,162 @@ CREATE TABLE `Movies_in_Cinemas` (
   `cinema_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Movies_in_Cinemas`
+--
+
+INSERT INTO `Movies_in_Cinemas` (`movie`, `cinema_location`, `cinema_name`) VALUES
+(1, 'New Cairo', 'Galaxy Cinema'),
+(1, 'Mokattam', 'Cinema Mawlana'),
+(1, '9th of Mayo', 'Mayo Movies'),
+(1, 'Old Cairo', 'El Zaaeem El Cinema'),
+(1, 'New Cairo', 'Point 90'),
+(1, 'Al Haram', 'Pharoahs Cinema'),
+(2, 'New Cairo', 'Galaxy Cinema'),
+(2, 'Mokattam', 'Cinema Mawlana'),
+(2, '9th of Mayo', 'Mayo Movies'),
+(2, 'Old Cairo', 'El Zaaeem El Cinema'),
+(2, 'New Cairo', 'Point 90'),
+(2, 'Al Haram', 'Pharoahs Cinema'),
+(3, 'New Cairo', 'Galaxy Cinema'),
+(3, 'Mokattam', 'Cinema Mawlana'),
+(3, '9th of Mayo', 'Mayo Movies'),
+(3, 'Old Cairo', 'El Zaaeem El Cinema'),
+(3, 'New Cairo', 'Point 90'),
+(3, 'Al Haram', 'Pharoahs Cinema'),
+(4, 'New Cairo', 'Galaxy Cinema'),
+(4, 'Mokattam', 'Cinema Mawlana'),
+(4, '9th of Mayo', 'Mayo Movies'),
+(4, 'Old Cairo', 'El Zaaeem El Cinema'),
+(4, 'New Cairo', 'Point 90'),
+(4, 'Al Haram', 'Pharoahs Cinema'),
+(5, 'New Cairo', 'Galaxy Cinema'),
+(5, 'Mokattam', 'Cinema Mawlana'),
+(5, '9th of Mayo', 'Mayo Movies'),
+(5, 'Old Cairo', 'El Zaaeem El Cinema'),
+(5, 'New Cairo', 'Point 90'),
+(5, 'Al Haram', 'Pharoahs Cinema'),
+(6, 'New Cairo', 'Galaxy Cinema'),
+(6, 'Mokattam', 'Cinema Mawlana'),
+(6, '9th of Mayo', 'Mayo Movies'),
+(6, 'Old Cairo', 'El Zaaeem El Cinema'),
+(6, 'New Cairo', 'Point 90'),
+(6, 'Al Haram', 'Pharoahs Cinema'),
+(7, 'New Cairo', 'Galaxy Cinema'),
+(7, 'Mokattam', 'Cinema Mawlana'),
+(7, '9th of Mayo', 'Mayo Movies'),
+(7, 'Old Cairo', 'El Zaaeem El Cinema'),
+(7, 'New Cairo', 'Point 90'),
+(7, 'Al Haram', 'Pharoahs Cinema'),
+(8, 'New Cairo', 'Galaxy Cinema'),
+(8, 'Mokattam', 'Cinema Mawlana'),
+(8, '9th of Mayo', 'Mayo Movies'),
+(8, 'Old Cairo', 'El Zaaeem El Cinema'),
+(8, 'New Cairo', 'Point 90'),
+(8, 'Al Haram', 'Pharoahs Cinema'),
+(9, 'New Cairo', 'Galaxy Cinema'),
+(9, 'Mokattam', 'Cinema Mawlana'),
+(9, '9th of Mayo', 'Mayo Movies'),
+(9, 'Old Cairo', 'El Zaaeem El Cinema'),
+(9, 'New Cairo', 'Point 90'),
+(9, 'Al Haram', 'Pharoahs Cinema'),
+(10, 'New Cairo', 'Galaxy Cinema'),
+(10, 'Mokattam', 'Cinema Mawlana'),
+(10, '9th of Mayo', 'Mayo Movies'),
+(10, 'Old Cairo', 'El Zaaeem El Cinema'),
+(10, 'New Cairo', 'Point 90'),
+(10, 'Al Haram', 'Pharoahs Cinema'),
+(11, 'New Cairo', 'Galaxy Cinema'),
+(11, 'Mokattam', 'Cinema Mawlana'),
+(11, '9th of Mayo', 'Mayo Movies'),
+(11, 'Old Cairo', 'El Zaaeem El Cinema'),
+(11, 'New Cairo', 'Point 90'),
+(11, 'Al Haram', 'Pharoahs Cinema'),
+(12, 'New Cairo', 'Galaxy Cinema'),
+(12, 'Mokattam', 'Cinema Mawlana'),
+(12, '9th of Mayo', 'Mayo Movies'),
+(12, 'Old Cairo', 'El Zaaeem El Cinema'),
+(12, 'New Cairo', 'Point 90'),
+(12, 'Al Haram', 'Pharoahs Cinema'),
+(13, 'New Cairo', 'Galaxy Cinema'),
+(13, 'Mokattam', 'Cinema Mawlana'),
+(13, '9th of Mayo', 'Mayo Movies'),
+(13, 'Old Cairo', 'El Zaaeem El Cinema'),
+(13, 'New Cairo', 'Point 90'),
+(13, 'Al Haram', 'Pharoahs Cinema'),
+(14, 'New Cairo', 'Galaxy Cinema'),
+(14, 'Mokattam', 'Cinema Mawlana'),
+(14, '9th of Mayo', 'Mayo Movies'),
+(14, 'Old Cairo', 'El Zaaeem El Cinema'),
+(14, 'New Cairo', 'Point 90'),
+(14, 'Al Haram', 'Pharoahs Cinema'),
+(15, 'New Cairo', 'Galaxy Cinema'),
+(15, 'Mokattam', 'Cinema Mawlana'),
+(15, '9th of Mayo', 'Mayo Movies'),
+(15, 'Old Cairo', 'El Zaaeem El Cinema'),
+(15, 'New Cairo', 'Point 90'),
+(15, 'Al Haram', 'Pharoahs Cinema'),
+(16, 'New Cairo', 'Galaxy Cinema'),
+(16, 'Mokattam', 'Cinema Mawlana'),
+(16, '9th of Mayo', 'Mayo Movies'),
+(16, 'Old Cairo', 'El Zaaeem El Cinema'),
+(16, 'New Cairo', 'Point 90'),
+(16, 'Al Haram', 'Pharoahs Cinema'),
+(17, 'New Cairo', 'Galaxy Cinema'),
+(17, 'Mokattam', 'Cinema Mawlana'),
+(17, '9th of Mayo', 'Mayo Movies'),
+(17, 'Old Cairo', 'El Zaaeem El Cinema'),
+(17, 'New Cairo', 'Point 90'),
+(17, 'Al Haram', 'Pharoahs Cinema'),
+(18, 'New Cairo', 'Galaxy Cinema'),
+(18, 'Mokattam', 'Cinema Mawlana'),
+(18, '9th of Mayo', 'Mayo Movies'),
+(18, 'Old Cairo', 'El Zaaeem El Cinema'),
+(18, 'New Cairo', 'Point 90'),
+(18, 'Al Haram', 'Pharoahs Cinema'),
+(19, 'New Cairo', 'Galaxy Cinema'),
+(19, 'Mokattam', 'Cinema Mawlana'),
+(19, '9th of Mayo', 'Mayo Movies'),
+(19, 'Old Cairo', 'El Zaaeem El Cinema'),
+(19, 'New Cairo', 'Point 90'),
+(19, 'Al Haram', 'Pharoahs Cinema'),
+(20, 'New Cairo', 'Galaxy Cinema'),
+(20, 'Mokattam', 'Cinema Mawlana'),
+(20, '9th of Mayo', 'Mayo Movies'),
+(20, 'Old Cairo', 'El Zaaeem El Cinema'),
+(20, 'New Cairo', 'Point 90'),
+(20, 'Al Haram', 'Pharoahs Cinema'),
+(21, 'New Cairo', 'Galaxy Cinema'),
+(21, 'Mokattam', 'Cinema Mawlana'),
+(21, '9th of Mayo', 'Mayo Movies'),
+(21, 'Old Cairo', 'El Zaaeem El Cinema'),
+(21, 'New Cairo', 'Point 90'),
+(21, 'Al Haram', 'Pharoahs Cinema'),
+(22, 'New Cairo', 'Galaxy Cinema'),
+(22, 'Mokattam', 'Cinema Mawlana'),
+(22, '9th of Mayo', 'Mayo Movies'),
+(22, 'Old Cairo', 'El Zaaeem El Cinema'),
+(22, 'New Cairo', 'Point 90'),
+(22, 'Al Haram', 'Pharoahs Cinema'),
+(23, 'New Cairo', 'Galaxy Cinema'),
+(23, 'Mokattam', 'Cinema Mawlana'),
+(23, '9th of Mayo', 'Mayo Movies'),
+(23, 'Old Cairo', 'El Zaaeem El Cinema'),
+(23, 'New Cairo', 'Point 90'),
+(23, 'Al Haram', 'Pharoahs Cinema'),
+(24, 'New Cairo', 'Galaxy Cinema'),
+(24, 'Mokattam', 'Cinema Mawlana'),
+(24, '9th of Mayo', 'Mayo Movies'),
+(24, 'Old Cairo', 'El Zaaeem El Cinema'),
+(24, 'New Cairo', 'Point 90'),
+(24, 'Al Haram', 'Pharoahs Cinema'),
+(25, 'New Cairo', 'Galaxy Cinema'),
+(25, 'Mokattam', 'Cinema Mawlana'),
+(25, '9th of Mayo', 'Mayo Movies'),
+(25, 'Old Cairo', 'El Zaaeem El Cinema'),
+(25, 'New Cairo', 'Point 90'),
+(25, 'Al Haram', 'Pharoahs Cinema');
+
 -- --------------------------------------------------------
 
 --
@@ -334,6 +532,24 @@ CREATE TABLE `Promocodes_Cinemas` (
   `cinema_name` varchar(30) NOT NULL,
   `promocode` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Promocodes_Cinemas`
+--
+
+INSERT INTO `Promocodes_Cinemas` (`cinema_location`, `cinema_name`, `promocode`) VALUES
+('9th of Mayo', 'Mayo Movies', '1H4H1LS0W'),
+('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
+('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
+('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
+('New Cairo', 'Point 90', '1H4H1LS0W'),
+('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
+('9th of Mayo', 'Mayo Movies', '1M2NN4N22'),
+('Al Haram', 'Pharoahs Cinema', '1M2NN4N22'),
+('Mokattam', 'Cinema Mawlana', '1M2NN4N22'),
+('New Cairo', 'Galaxy Cinema', '1M2NN4N22'),
+('New Cairo', 'Point 90', '1M2NN4N22'),
+('Old Cairo', 'El Zaaeem El Cinema', '1M2NN4N22');
 
 -- --------------------------------------------------------
 

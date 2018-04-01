@@ -16,7 +16,7 @@ router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.g
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
-router.post('/userBooking/makeReservation',UserBooking.makeReservation);
+router.post('/userBooking/makeReservation/',UserBooking.makeReservation);
 
 
 

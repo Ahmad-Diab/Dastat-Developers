@@ -36,13 +36,13 @@ module.exports.getParties = function(req, res){
 module.exports.makeReservation = function(req, res, next){
     //COMPLETED Make a reservation based on all data need for reservation.
     //TODO User-name validation needs to be done!
-    var username = req.params.username,
-        cinema_name = req.params['cinema_name'],
-        cinema_location = req.params['cinema_location'],
-        party_datetime = req.params['date_time'],
-        hall = req.params['hall'],
-        payment = req.params['payment'],
-        tickets = req.params['tickets'];
+    var username = req.body['username'],
+        cinema_name = req.body['cinema_name'],
+        cinema_location = req.body['cinema_location'],
+        party_datetime = req.body['date_time'],
+        hall = req.body['hall'],
+        payment = req.body['payment'],
+        tickets = req.body['tickets'];
 
     if(!username) {
         return res.status(422).json({

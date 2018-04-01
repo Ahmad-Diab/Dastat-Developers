@@ -4,7 +4,7 @@ var cors = require('cors');
 
 
 var app = express();
-var port = 8000;
+var port = 7000;
 
 app.use('/api', router);
 

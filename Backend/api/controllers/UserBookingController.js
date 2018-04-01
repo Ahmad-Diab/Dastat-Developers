@@ -75,7 +75,7 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    if(!Validations.isBoolean(payment) || !Validations.isDate(party_datetime) ||
+    if(!Validations.isBoolean(payment) ||
         !Validations.isNumber(hall)) {
         return res.status(422).json({
             err: null,
@@ -88,14 +88,17 @@ module.exports.makeReservation = function(req, res, next){
         var seatNum = tickets[i];
 
         //TODO seatNum type validation
+        var ticketDetails = {
+            user: username,
+            payment: payment,
+            seat_number: seatNum,
+            date_time: party_datetime,
+            hall: hall,
+            cinema_location: cinema_location,
+            cinema_name: cinema_name
+        };
 
-        var sqlInsertionIntoTicket =
-            'INSERT INTO Tickets VALUES' +
-            '(username, payment, seat_number, data_time, hall, cinema_location, cinema_name)' +
-            '('+username+','+payment+','+seatNum+','+party_datetime+','+hall+','+
-            cinema_location+','+cinema_name+');';
-
-        database.query(sqlInsertionIntoTicket, function (error) {
+        database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error) {
             if(error){
                 return next(error);
             }

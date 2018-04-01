@@ -11,6 +11,6 @@ export class SeatingService extends HttpService{
   }
 
   testing() {
-    return this.http.get('users');
+    return this.get('users');
   }
 }

@@ -15,6 +15,7 @@ router.get('/users', User.getUsers);
 
 router.get('/filterByLocation/:location', Cinema.filterByLocation);
 router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
+router.get('/viewCinema/:cinema',Cinema.viewCinema);
 
 
 //viewCinemas routes

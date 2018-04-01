@@ -35,3 +35,13 @@ module.exports.ViewCinemas = function(req, res, next){
       return res.send(results);
     });
   }
+
+  module.exports.viewCinema = function(req,res,next){
+    var cinema = req.params.cinema;
+    var q = "SELECT * FROM cinemas WHERE cinemas.name = ?";
+    database.query(q,[cinema], function(error, results, fields){
+      if(error) return next(error);
+      return res.send(results);
+    }); 
+  }
+  

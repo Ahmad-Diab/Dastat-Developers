@@ -11,13 +11,13 @@ var Movie = require('./controllers/MovieController')
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users', User.getUsers);
-
-
+router.get('/users/actors/:actor', User.getActors);
 
 
 
 //------------------------MOVIES ROUTES------------------------------
 
+router.get('/movies',Movie.getMovies);
 
 router.get('/movies/highrate',Movie.getMoviesHighRatings);
 router.get('/movies/lowrate',Movie.getMoviesLowRatings);

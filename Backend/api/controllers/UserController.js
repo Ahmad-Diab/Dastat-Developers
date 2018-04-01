@@ -10,6 +10,12 @@ module.exports.getUsers = function(req, res, next){
   });
 }
 
-module.exports.test = function(req, res, next) {
-  console.log(req.body);
+  module.exports.getActors = function(req, res, next){
+    var actor = req.params.actor;
+    database.query('SELECT * FROM actors WHERE name = ?', [actor], function (error, results, fields) {
+      if(error) return next(error);
+      return res.send(results);
+    });
+
+
 }

@@ -11,8 +11,7 @@ var Movie = require('./controllers/MovieController')
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users', User.getUsers);
-
-
+router.get('/users/actors/:actor', User.getActors);
 
 
 
@@ -20,19 +19,19 @@ router.get('/users', User.getUsers);
 
 router.get('/movies',Movie.getMovies);
 
-router.get('/movies',Movie.getMoviesHighRatings);
-router.get('/movies',Movie.getMoviesLowRatings);
+router.get('/movies/highrate',Movie.getMoviesHighRatings);
+router.get('/movies/lowrate',Movie.getMoviesLowRatings);
 
-router.get('/movies',Movie.getMoviesLastestDate);
-router.get('/movies',Movie.getMoviesOldesttDate);
+router.get('/movies/latest',Movie.getMoviesLastestDate);
+router.get('/movies/oldest',Movie.getMoviesOldesttDate);
 
-router.get('/movies',Movie.getMoviesAction);
-router.get('/movies',Movie.getMoviesAdventure);
-router.get('/movies',Movie.getMoviesComedy);
-router.get('/movies',Movie.getMoviesDrama);
-router.get('/movies',Movie.getMoviesHorror);
-router.get('/movies',Movie.getMoviesThriller);
-router.get('/movies',Movie.getMoviesBiography); 
+router.get('/movies/Action',Movie.getMoviesAction);
+router.get('/movies/Adventure',Movie.getMoviesAdventure);
+router.get('/movies/Comedy',Movie.getMoviesComedy);
+router.get('/movies/Drama',Movie.getMoviesDrama);
+router.get('/movies/Horror',Movie.getMoviesHorror);
+router.get('/movies/Thriller',Movie.getMoviesThriller);
+router.get('/movies/Bio',Movie.getMoviesBiography); 
 
 
 

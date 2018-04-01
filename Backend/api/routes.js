@@ -16,3 +16,11 @@ router.get('/search/:searchKeyWord', Search.searchByKeyWord);
 
 //exporting routes to the project
 module.exports = router;
+
+
+router.get('viewMovies',Search.viewMovies);
+router.get('viewMovies3',Search.viewMovies3);
+router.get('viewMovies2',Search.viewMovies2);
+router.get('viewMovies1',Search.viewMovies1);
+router.get('viewMovies0',Search.viewMovies0);
+router.get('viewCinemas',Search.viewCinemas);

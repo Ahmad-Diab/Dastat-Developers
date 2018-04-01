@@ -2,7 +2,6 @@
  * A Controller, having the functions to handle ordinary user booking process.
  */
 var database = require('../config/db-connection'),
-    // moment = require('moment'),
     Validations = require('../utils/validations');
 
 
@@ -13,7 +12,7 @@ var database = require('../config/db-connection'),
  * @param res
  * @param next
  */
-module.exports.getParties = function(req, res, next){
+module.exports.getParties = function(req, res){
     //TODO Get parties of movies just chosen according to chosen day
     var cinemaName = req.params.cinemaName,
         movieName = req.params.movieName;

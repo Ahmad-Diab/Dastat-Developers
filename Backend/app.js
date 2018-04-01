@@ -1,8 +1,7 @@
-
 var router = require('./api/routes');
 var express = require('express');
 var cors = require('cors');
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser')
 
 var app = express();
 var port = 8000;
@@ -14,28 +13,24 @@ app.use('/api', router);
 
 app.use(cors());
 
-// Middleware to handle any (500 Internal server error) that may occur while doing database related functions
+// 500 internal server error handler
 app.use(function(err, req, res, next) {
-  if (err.statusCode === 404) return next();
-  res.status(500).json({
-    // Never leak the stack trace of the err if running in production mode
-    err: process.env.NODE_ENV === 'production' ? null : err,
-    msg: '500 Internal Server Error',
-    data: null
-  });
+    if (err.statusCode === 404) return next();
+    res.status(500).json({
+        // Never leak the stack trace of the err if running in production mode
+        err: process.env.NODE_ENV === 'production' ? null : err,
+        msg: '500 Internal Server Error',
+        data: null
+    });
 });
 
-/*
-  Middleware to handle any (404 Not Found) error that may occur if the request didn't find
-  a matching route on our server, or the requested data could not be found in the database
-*/
+// 404 error handler
 app.use(function(req, res) {
-  res.status(404).json({
-    err: null,
-    msg: '404 Not Found',
-    data: null
-  });
+    res.status(404).json({
+        err: null,
+        msg: '404 Not Found',
+        data: null
+    });
 });
 
 app.listen(port, console.log('listening on port: ' + port));
-module.exports = app;

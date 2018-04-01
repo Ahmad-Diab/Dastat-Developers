@@ -5,6 +5,7 @@ var database = require('../config/db-connection'),
     moment = require('moment'),
     Validations = require('../utils/validations');
 
+
 /**
  *  A function to show parties to ordinary user based on his/her choice of
  *  Movie, Cinema, as well as Date (Day).
@@ -15,6 +16,7 @@ var database = require('../config/db-connection'),
 module.exports.getParties = function(req, res, next){
     //TODO Get parties of movies just chosen according to chosen day
 };
+
 
 /**
  * A function to handle making the reservation of (one or more) tickets

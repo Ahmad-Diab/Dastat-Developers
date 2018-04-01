@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 //Schema Controllers
+var User = require('./controllers/UserController');
+var UserBooking = require('./controllers/UserBookingController');
 var User = require('./controllers/UserController'),
     UserBooking = require('./Controllers/UserBookingController');
 
@@ -10,6 +12,9 @@ var User = require('./controllers/UserController'),
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
 router.get('/users', User.getUsers);
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+
+// router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
 
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking

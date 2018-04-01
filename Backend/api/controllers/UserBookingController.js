@@ -2,7 +2,7 @@
  * A Controller, having the functions to handle ordinary user booking process.
  */
 var database = require('../config/db-connection'),
-    moment = require('moment'),
+    // moment = require('moment'),
     Validations = require('../utils/validations');
 
 
@@ -15,6 +15,15 @@ var database = require('../config/db-connection'),
  */
 module.exports.getParties = function(req, res, next){
     //TODO Get parties of movies just chosen according to chosen day
+    var cinemaName = req.params.cinemaName,
+        movieName = req.params.movieName;
+        date = req.params.date;
+    var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
+
+        database.query(query,[cinemaName,movieName,date],function (err, result, fields) {
+            if (err) throw err;
+            return res.send(result);
+          });
 };
 
 

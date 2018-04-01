@@ -1,0 +1,7 @@
+#search {
+    margin-top: 100px;
+}
+
+.hebe .tparrows::before {
+    font-size: 0px;
+}

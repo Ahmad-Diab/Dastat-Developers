@@ -1,0 +1,87 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "angular"
+  },
+  "apps": [{
+    "root": "src",
+    "outDir": "dist",
+    "assets": [
+      "assets",
+      "favicon.ico"
+    ],
+    "index": "index.html",
+    "main": "main.ts",
+    "polyfills": "polyfills.ts",
+    "test": "test.ts",
+    "tsconfig": "tsconfig.app.json",
+    "testTsconfig": "tsconfig.spec.json",
+    "prefix": "app",
+    "styles": [
+      "styles.css",
+      "assets/css/external/jquery.selectbox.css",
+      "assets/css/external/idangerous.swiper.css",
+      "assets/css/external/magnific-popup.css",
+      "assets/css/gozha-nav.css",
+      "assets/css/touch.css",
+      "assets/css/style.css",
+      "assets/revolution/css/settings.css",
+      "assets/revolution/css/layers.css",
+      "assets/revolution/css/navigation.css"
+    ],
+    "scripts": [
+      "../node_modules/raty-js/lib/jquery.raty.js",
+      "assets/js/external/modernizr.custom.js",
+      "assets/js/external/jquery-migrate-1.2.1.min.js",
+      "assets/revolution/js/jquery.themepunch.tools.min.js",
+      "assets/revolution/js/jquery.themepunch.revolution.min.js",
+      "assets/revolution/js/extensions/revolution.extension.actions.min.js",
+      "assets/revolution/js/extensions/revolution.extension.carousel.min.js",
+      "assets/revolution/js/extensions/revolution.extension.kenburn.min.js",
+      "assets/revolution/js/extensions/revolution.extension.layeranimation.min.js",
+      "assets/revolution/js/extensions/revolution.extension.migration.min.js",
+      "assets/revolution/js/extensions/revolution.extension.navigation.min.js",
+      "assets/revolution/js/extensions/revolution.extension.parallax.min.js",
+      "assets/revolution/js/extensions/revolution.extension.slideanims.min.js",
+      "assets/revolution/js/extensions/revolution.extension.video.min.js",
+      "assets/js/external/idangerous.swiper.min.js",
+      "assets/js/min/jquery.mobile.menu.min.js",
+      "assets/js/external/jquery.selectbox-0.2.min.js",
+      "assets/js/external/form-element.js",
+      "assets/js/form.js",
+      "assets/js/custom.js"
+    ],
+    "environmentSource": "environments/environment.ts",
+    "environments": {
+      "dev": "environments/environment.ts",
+      "prod": "environments/environment.prod.ts"
+    }
+  }],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [{
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

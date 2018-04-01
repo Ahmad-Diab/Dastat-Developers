@@ -11,7 +11,7 @@ var User = require('./controllers/UserController'),
 
 router.get('/users', User.getUsers);
 
-//-------------------------------List Routes---------------------------------
+//-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking
 router.post('/userBooking/makeReservation',UserBooking.makeReservation());
 

@@ -117,20 +117,66 @@ module.exports.makeReservation = function(req, res, next){
 module.exports.getCurrentMovies = function(req, res, next){
 
     var currentDate = new Date();
-    var currentDay = currentDate.getDay;
-    console.log(currentDate);
-    var sqlSelectionFromMovies = 'SELECT release_date FROM movies';
+    
+    var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date <= ?';
 
-    database.query(sqlSelectionFromMovies, function (error, results) {
+    database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
         if(error){
             return next(error);
         }
 
-        res.status(200).json({
-            err: null,
-            msg: 'Movies Successfully Retrieved',
-            data: results
-        });
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No current movies availiable',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
+
+    });
+};
+
+
+module.exports.getUpcomingMovies = function(req, res, next){
+
+    var currentDate = new Date();
+    
+    var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date > ?';
+
+    database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No Upcoming movies availiable',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
 
     });
 };
@@ -139,6 +185,7 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;
     var cinemaLocation = req.params.cinema_location;
+    var currentDate = new Date();
 
     if(!cinemaName) {
         return res.status(422).json({
@@ -148,18 +195,93 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
         });
     }
 
-    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id';
+    if(!cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
 
-    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
+    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id'+
+    'AND m.release_date <= ?';
+
+    database.query(sqlSelection, [cinemaName , cinemaLocation , currentDate], function (error, results) {
         if(error){
             return next(error);
         }
 
-        res.status(200).json({
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No current movies Availiable.',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
+
+    });
+};
+
+module.exports.getUpcomingMoviesForCinema = function(req, res, next){
+
+    var cinemaName = req.params.cinema_name;
+    var cinemaLocation = req.params.cinema_location;
+    var currentDate = new Date();
+
+    if(!cinemaName) {
+        return res.status(422).json({
             err: null,
-            msg: 'Movies Successfully Retrieved',
-            data: results
+            msg: 'Cinema Name is required.',
+            data: null
         });
+    }
+
+    if(!cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
+    
+
+    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id'+
+    'AND m.release_date > ?';
+
+    database.query(sqlSelection, [cinemaName, cinemaLocation, currentDate], function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No Upcoming Movies Availible.',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
 
     });
 };

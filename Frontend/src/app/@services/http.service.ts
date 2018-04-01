@@ -1,21 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class HttpService {
 
-  constructor(public http: Http) {
-
-    console.log(environment);
-
-   }
+  constructor(public http: Http) { }
 
   get(url: string, data?: any) {
-    this.http.get(environment.api + url, data);
+    return this.http.get(environment.api + url, data).pipe(map(res => res.json()));
   }
 
   post(url: string, data?: any) {
-    this.http.post(environment.api + url, data);
+    return this.http.post(environment.api + url, data).pipe(map(res => res.json()));
   }
 }

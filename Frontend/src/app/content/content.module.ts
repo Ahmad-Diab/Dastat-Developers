@@ -8,13 +8,15 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
+import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(ContentRoutes)
   ],
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent]
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent]
 })
 
 export class ContentModule { }

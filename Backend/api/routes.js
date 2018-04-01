@@ -18,6 +18,8 @@ router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.g
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
 
+router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 
 

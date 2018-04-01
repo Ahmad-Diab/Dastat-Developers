@@ -109,4 +109,55 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
+
+};
+
+module.exports.getCurrentMovies = function(req, res, next){
+
+    var currentDate = new Date();
+    var currentDay = currentDate.getDay;
+    console.log(currentDate);
+    var sqlSelectionFromMovies = 'SELECT release_date FROM movies';
+
+    database.query(sqlSelectionFromMovies, function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        res.status(200).json({
+            err: null,
+            msg: 'Movies Successfully Retrieved',
+            data: results
+        });
+
+    });
+};
+
+module.exports.getCurrentMoviesForCinema = function(req, res, next){
+
+    var cinemaName = req.params.cinema_name;
+    var cinemaLocation = req.params.cinema_location;
+
+    if(!cinemaName) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Name is required.',
+            data: null
+        });
+    }
+
+    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id';
+
+    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        res.status(200).json({
+            err: null,
+            msg: 'Movies Successfully Retrieved',
+            data: results
+        });
+
+    });
 };

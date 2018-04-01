@@ -3,7 +3,8 @@ var router = express.Router();
 
 //Schema Controllers
 var User = require('./controllers/UserController');
-var Movie = require('./controllers/MovieController')
+var Movie = require('./controllers/MovieController');
+var Actor = require('./controllers/ActorController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -11,7 +12,19 @@ var Movie = require('./controllers/MovieController')
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users', User.getUsers);
-router.get('/users/actors/:actor', User.getActors);
+
+
+
+
+
+
+
+//-----------------------ACTOR ROUTES-------------------------------
+
+router.post('/actors/:actor', Actor.getActors);
+
+
+
 
 
 

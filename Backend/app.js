@@ -6,12 +6,11 @@ var bodyParser = require('body-parser')
 var app = express();
 var port = 8000;
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/api', router);
-
-app.use(cors());
 
 // 500 internal server error handler
 app.use(function(err, req, res, next) {

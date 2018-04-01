@@ -25,8 +25,6 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `Actors`
 --
-DROP DATABASE cinema_app;
-CREATE DATABASE cinema_app;
 
 CREATE TABLE `Actors` (
   `name` varchar(115) NOT NULL,
@@ -408,32 +406,6 @@ CREATE TABLE `Users` (
   `gender` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Promo_Codes`
---
-
-CREATE TABLE `Promo_Codes` (
-  `promo_code` varchar(15) NOT NULL,
-  `type` varchar(7) NOT NULL,
-  `value` varchar(20) NOT NULL,
-  primary key(promo_code)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Promo_Codes_Cinemas`
---
-
-CREATE TABLE `Promo_Codes_Cinemas` (
-  `promo_code` varchar(15) NOT NULL,
-  `location` varchar(100) NOT NULL,
-  `name` varchar(15) NOT NULL,
-  PRIMARY KEY (promo_code, location, name)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Dumping data for table `Users`
 --
@@ -621,20 +593,6 @@ ALTER TABLE `Promocodes_Cinemas`
 ALTER TABLE `Tickets`
   ADD CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`date_time`,`hall`,`cinema_name`,`cinema_location`) REFERENCES `Parties` (`date_time`, `hall`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
---
--- Constaints for table 'Promo_Codes'
---
-  ALTER TABLE `Promo_Codes` ADD CONSTRAINT
-  my_constraint CHECK (type = 'percentage' OR type = 'amount' OR type = 'package');
-
-  --
-  -- Constraints for table `Promo_Codes_Cinemas`
-  --
-  ALTER TABLE `Promo_Codes_Cinemas`
-    ADD CONSTRAINT `Promo_Codes_Cinemas_ibkf_1` FOREIGN KEY (promo_code) REFERENCES `Promo_Codes` (promo_code) ON DELETE CASCADE ON UPDATE CASCADE,
-    ADD CONSTRAINT `Promo_Codes_Cinemas_ibkf_2` FOREIGN KEY (location, name) REFERENCES `Cinemas` (location, name) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

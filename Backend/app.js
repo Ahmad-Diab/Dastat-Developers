@@ -1,10 +1,22 @@
 var router = require('./api/routes');
 var express = require('express');
 var cors = require('cors');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var config = require('./api/config/config');
 
 var app = express();
 var port = 8000;
+
+// Set the secret of the app that will be used in authentication
+app.set('secret', config.secret);
+
+app.use(
+    cors({
+        origin: true,
+        credentials: true,
+        methods: ['GET', 'POST', 'PATCH', 'DELETE']
+    })
+);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

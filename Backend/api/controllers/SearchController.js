@@ -23,8 +23,8 @@ module.exports.searchByKeyWord = function(req,res,next){
                 if(error) return next(error);
                 res.status(200).json({
                     err : null,   
-                    data : {"Movies": movieResult,"Cinemas": cinemaResult,"Actors": actorResult},
-                    msg : "search done successfully"
+                    msg : "Search done successfully",
+                    data : {"Movies": movieResult,"Cinemas": cinemaResult,"Actors": actorResult}
                 })
             });
         });

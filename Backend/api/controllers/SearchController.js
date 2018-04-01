@@ -16,8 +16,12 @@ module.exports.searchByKeyWord = function(req,res,next){
             if(error) return next(error);
             database.query(sqlActor, [searchKeyS] , function(error, actorResult, fields){
                 if(error) return next(error);
-            return res.send({"Movies": movieResult,"Cinemas": cinemaResult,"Actors": actorResult});
-        });
+            res.status(200).json({
+                err : null,   
+                data : {"Movies": movieResult,"Cinemas": cinemaResult,"Actors": actorResult},
+                msg : "search done successfully"
+            })
+            });
         });
     });   
 }

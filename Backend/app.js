@@ -1,52 +1,15 @@
-var express = require('express'),
-    logger = require('morgan'),
-    cors = require('cors'),
-    helmet = require('helmet'),
-    compression = require('compression'),
-    bodyParser = require('body-parser'),
-    router = require('./api/routes'),
-    config = require('./api/config'),
-    app = express();
 
+var router = require('./api/routes');
+var express = require('express');
+var cors = require('cors');
+var bodyParser = require('body-parser');
+
+var app = express();
 var port = 8000;
 
-// Set the secret of the app that will be used in authentication
-app.set('secret', config.secret);
-
-// Middleware to log all of the requests that comes to the server
-app.use(logger(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-
-// Middleware to allow requests from any frontend that is not hosted on the same machine as the server's
-app.use(
-    cors({
-        origin: true,
-        credentials: true,
-        methods: ['GET', 'POST', 'PATCH', 'DELETE']
-    })
-);
-
-// Middleware to protect the server against common known security vulnerabilities
-app.use(helmet());
-
-// Middleware to compress the server json responses to be smaller in size
-app.use(compression());
-
-/*
-  Middleware to parse the request body that is in format "application/json" or
-  "application/x-www-form-urlencoded" as json and make it available as a key on the req
-  object as req.body
-*/
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: false
-    })
-);
 
-/*
-  Middleware to match the request with one of our defined routes to do a certain function,
-  All requests should have /api before writing the route as a convention for api servers
-*/
 app.use('/api', router);
 
 app.use(cors());

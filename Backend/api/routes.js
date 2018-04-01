@@ -21,5 +21,7 @@ router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.g
 router.post('/userBooking/makeReservation',UserBooking.makeReservation());
 
 
+router.post('/test', User.test);
+
 //exporting routes to the project
 module.exports = router;

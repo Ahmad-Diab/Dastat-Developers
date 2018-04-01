@@ -9,15 +9,12 @@ module.exports.searchByKeyWord = function(req,res,next){
     var searchKeyN = req.params.searchKeyWord;              // used in comparison to int columns usin =
     var sqlMovie = 'SELECT title,genre,imagePath,year,rating FROM Movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
     var sqlCinema = "SELECT * FROM Cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?";
-    var resultCinema;
-    var resultMovie;
-    database.query(sqlMovie, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, result1, fields){
+    database.query(sqlMovie, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, , fields){
         if(error) return next(error);
-        resultMovie = result1;
+        database.query(sqlCinema, [searchKeyS,searchKeyS,searchKeyS], function(error, result2, fields){
+            if(error) return next(error);
+            return res.send({"Movies": result1,"Cinemas": result2});
+        });
     });
-    database.query(sqlCinema, [searchKeyS,searchKeyS,searchKeyS], function(error, result2, fields){
-        if(error) return next(error);
-        resultCinema = result2;
-    });
-    return res.send({"Movies": resultMovie,"Cinemas": resultCinema});
+    
 }

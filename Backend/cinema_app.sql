@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 31, 2018 at 02:27 PM
+-- Generation Time: Apr 01, 2018 at 03:42 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -102,9 +102,21 @@ CREATE TABLE `Halls` (
   `cinema_name` varchar(200) NOT NULL,
   `hall_number` int(11) NOT NULL,
   `type` varchar(15) DEFAULT NULL,
-  `layout` varchar(30) DEFAULT NULL,
+  `layout` int(11) DEFAULT NULL,
   `number_of_seats` int(11) NOT NULL,
   `movie` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Layout`
+--
+
+CREATE TABLE `Layout` (
+  `id` int(11) NOT NULL,
+  `encoded` varchar(30) DEFAULT NULL,
+  `name` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -151,6 +163,30 @@ CREATE TABLE `Parties` (
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
   `cinema_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Promocodes`
+--
+
+CREATE TABLE `Promocodes` (
+  `promocode` varchar(30) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `value` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Promocodes_Cinemas`
+--
+
+CREATE TABLE `Promocodes_Cinemas` (
+  `cinema_location` varchar(30) NOT NULL,
+  `cinema_name` varchar(30) NOT NULL,
+  `promocode` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -255,7 +291,14 @@ ALTER TABLE `Cinemas`
 ALTER TABLE `Halls`
   ADD PRIMARY KEY (`hall_number`,`cinema_name`,`cinema_location`),
   ADD KEY `cinema_location` (`cinema_location`,`cinema_name`),
-  ADD KEY `movie` (`movie`);
+  ADD KEY `movie` (`movie`),
+  ADD KEY `layout` (`layout`);
+
+--
+-- Indexes for table `Layout`
+--
+ALTER TABLE `Layout`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Movies`
@@ -278,6 +321,19 @@ ALTER TABLE `Parties`
   ADD KEY `hall` (`hall`,`cinema_name`,`cinema_location`);
 
 --
+-- Indexes for table `Promocodes`
+--
+ALTER TABLE `Promocodes`
+  ADD PRIMARY KEY (`promocode`);
+
+--
+-- Indexes for table `Promocodes_Cinemas`
+--
+ALTER TABLE `Promocodes_Cinemas`
+  ADD PRIMARY KEY (`cinema_location`,`cinema_name`,`promocode`),
+  ADD KEY `promocode` (`promocode`);
+
+--
 -- Indexes for table `Tickets`
 --
 ALTER TABLE `Tickets`
@@ -295,6 +351,11 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `Layout`
+--
+ALTER TABLE `Layout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `Movies`
 --
@@ -328,7 +389,8 @@ ALTER TABLE `Admins_Cinemas`
 --
 ALTER TABLE `Halls`
   ADD CONSTRAINT `Halls_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `Cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Halls_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Halls_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Halls_ibfk_3` FOREIGN KEY (`layout`) REFERENCES `Layout` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Movies_in_Cinemas`
@@ -342,6 +404,13 @@ ALTER TABLE `Movies_in_Cinemas`
 --
 ALTER TABLE `Parties`
   ADD CONSTRAINT `Parties_ibfk_1` FOREIGN KEY (`hall`,`cinema_name`,`cinema_location`) REFERENCES `Halls` (`hall_number`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Promocodes_Cinemas`
+--
+ALTER TABLE `Promocodes_Cinemas`
+  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `Cinemas` (`location`, `name`),
+  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_2` FOREIGN KEY (`promocode`) REFERENCES `Promocodes` (`promocode`);
 
 --
 -- Constraints for table `Tickets`

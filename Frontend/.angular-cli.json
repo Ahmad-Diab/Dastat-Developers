@@ -19,6 +19,7 @@
     "prefix": "app",
     "styles": [
       "styles.css",
+      "../node_modules/raty-js/lib/jquery.raty.css",
       "assets/css/external/jquery.selectbox.css",
       "assets/css/external/idangerous.swiper.css",
       "assets/css/external/magnific-popup.css",

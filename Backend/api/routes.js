@@ -13,7 +13,7 @@ router.get('/users', User.getUsers);
 
 
 //----------------------------------------------------Search routes--------------------------------------------//
-router.get('/search/:searchKeyWord', Search.searchByKeyWord);
+router.get('/search/:searchKeyword', Search.searchByKeyword);
 router.post('/test', User.test);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 

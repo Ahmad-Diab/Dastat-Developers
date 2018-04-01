@@ -10,5 +10,7 @@ var User = require('./controllers/UserController');
 
 router.get('/users', User.getUsers);
 
+router.post('/test', User.test);
+
 //exporting routes to the project
 module.exports = router;

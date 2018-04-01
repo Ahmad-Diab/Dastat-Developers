@@ -4,6 +4,7 @@ var router = express.Router();
 //Schema Controllers
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
+var UserBooking = require('./Controllers/UserBookingController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -11,6 +12,7 @@ var Seat = require('./controllers/SeatController');
 router.get('/users', User.getUsers);
 
 router.post('/test', User.test);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 //SEAT ROUTES
 router.get('/layout/encoding', Seat.getSeats);

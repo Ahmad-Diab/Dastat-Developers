@@ -19,6 +19,10 @@
     "prefix": "app",
     "styles": [
       "styles.css",
+<<<<<<< HEAD
+=======
+      "../node_modules/raty-js/lib/jquery.raty.css",
+>>>>>>> master
       "assets/css/external/jquery.selectbox.css",
       "assets/css/external/idangerous.swiper.css",
       "assets/css/external/magnific-popup.css",

@@ -1,0 +1,13 @@
+.hebe.tparrows.tp-rightarrow::before {
+	content: "\E825";
+	font-size: 0;
+}
+
+.hebe.tparrows.tp-leftarrow::before {
+	content: "\E825";
+	font-size: 0;
+}
+
+#control {
+	box-shadow: none;
+}

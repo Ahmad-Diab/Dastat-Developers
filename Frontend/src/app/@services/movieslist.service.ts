@@ -21,5 +21,37 @@ export class MovieslistService extends HttpService{
    getMovies(){
     return  this.get('movies/feature');
   }
+
+  getLowRate(){
+    return this.get('movies/lowrate');
+  }
+
+  getLatest(){
+    return this.get('movies/latest');
+  }
+  getOldest(){
+    return this.get('movies/oldest');
+  }
+  getAction(){
+    return this.get('movies/Action');
+  }
+  getAdventure(){
+    return this.get('movies/Adventure');
+  }
+  getComedy(){
+    return this.get('movies/Comedy');
+  }
+  getDrama(){
+    return this.get('movies/Drama');
+  }
+  getHorror(){
+    return this.get('movies/Horror');
+  }
+  getThriller(){
+    return this.get('movies/Thriller');
+  }
+  getBio(){
+    return this.get('movies/Bio');
+  }
  
 }

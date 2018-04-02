@@ -7,8 +7,6 @@ import { MovieslistService } from '../../../@services/movieslist.service';
 })
 export class MoviesListComponent implements OnInit {
   movies=[];
-  highMovies=[];
-
 
   constructor(public movieslistService: MovieslistService) { 
     
@@ -37,6 +35,91 @@ viewMovies(){
   });
 }
 
+viewLowRate(){
+  this.movieslistService.getLowRate().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewLatest(){
+  this.movieslistService.getLatest().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewOldest(){
+
+  this.movieslistService.getOldest().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewAction(){
+
+  this.movieslistService.getAction().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewAdventure(){
+
+  this.movieslistService.getAdventure().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewComedy(){
+
+  this.movieslistService.getComedy().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewDrama(){
+
+  this.movieslistService.getDrama().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
 
 
+viewHorror(){
+
+  this.movieslistService.getHorror().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewThriller(){
+
+  this.movieslistService.getThriller().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+viewBio(){
+
+  this.movieslistService.getBio().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
 }

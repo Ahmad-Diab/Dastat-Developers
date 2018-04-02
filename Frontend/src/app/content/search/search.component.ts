@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  movies = [];
+  cinemas = [];
+  actors = [];
+  
+  constructor() { public searchService: SearchService }
 
   ngOnInit() {
+    this.searchService.getSearch().subscribe((response) => {
+      this.movies = response.data.Movies;
+      this.cinemas = response.data.Cinemas;
+      this.actors = response.data.Actors;
+    });
   }
 
 }

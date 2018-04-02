@@ -4,8 +4,13 @@ var database = require('../config/db-connection');
 //DONT FORGET TO USE MODULE exports
 
 module.exports.getMovieInfo = function(req, res, next){
-    database.query('SELECT * FROM movies where movies.movie_id = movie_id', function (error, results, fields) {
+
+    database.query('SELECT * FROM movies where movies.movie_id = ?', [req.params.movie_id], function (error, results, fields) {
       if(error) return next(error);
-      return res.send(results);
+      res.status(200).json({
+        err : null,   
+        msg : "Info succussfully retreived",
+        data : results
+      });
     });
-  }
+}

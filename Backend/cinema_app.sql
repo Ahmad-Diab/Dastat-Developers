@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 02, 2018 at 09:53 PM
+-- Generation Time: Apr 02, 2018 at 11:38 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -68,7 +68,7 @@ CREATE TABLE `Actors_Movies` (
 
 CREATE TABLE `Admins` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(230) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
@@ -601,7 +601,7 @@ INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, 
 
 CREATE TABLE `Users` (
   `username` varchar(115) NOT NULL,
-  `password` varchar(130) NOT NULL,
+  `password` varchar(330) NOT NULL,
   `email` varchar(130) NOT NULL,
   `phone_number` int(11) DEFAULT NULL,
   `credit_card` varchar(200) DEFAULT NULL,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 02, 2018 at 09:36 PM
+-- Generation Time: Apr 02, 2018 at 09:53 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -476,31 +476,32 @@ CREATE TABLE `Parties` (
   `date_time` datetime NOT NULL,
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
-  `cinema_name` varchar(20) NOT NULL
+  `cinema_name` varchar(20) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Parties`
 --
 
-INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`) VALUES
-('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90'),
-('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies'),
-('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90');
+INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`, `price`) VALUES
+('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 50),
+('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 50),
+('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90', 0),
+('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 50),
+('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 50),
+('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 50),
+('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 50),
+('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 50),
+('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 50);
 
 -- --------------------------------------------------------
 
@@ -567,29 +568,30 @@ CREATE TABLE `Tickets` (
   `cinema_location` varchar(20) NOT NULL,
   `cinema_name` varchar(20) NOT NULL,
   `user` varchar(115) DEFAULT NULL,
-  `movie_id` int(11) NOT NULL
+  `movie_id` int(11) NOT NULL,
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Tickets`
 --
 
-INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`, `movie_id`) VALUES
-(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 10),
-(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Mostafa_Fathy', 11),
-(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 19),
-(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Nour_Gaber', 14),
-(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Omar_Mehrez', 16),
-(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Omar_Gamal', 19),
-(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed', 1),
-(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed', 9),
-(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Mai_Emad', 8),
-(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Lola_Wael', 7),
-(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 6),
-(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 5),
-(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4),
-(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3),
-(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2);
+INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`, `movie_id`, `price`) VALUES
+(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 10, 50),
+(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Mostafa_Fathy', 11, 50),
+(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 19, 50),
+(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Nour_Gaber', 14, 50),
+(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Omar_Mehrez', 16, 50),
+(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Omar_Gamal', 19, 50),
+(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed', 1, 50),
+(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed', 9, 50),
+(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Mai_Emad', 8, 50),
+(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Lola_Wael', 7, 50),
+(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 6, 50),
+(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 5, 50),
+(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4, 50),
+(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3, 50),
+(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50);
 
 -- --------------------------------------------------------
 

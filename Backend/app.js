@@ -1,8 +1,6 @@
 var express = require('express'),
-    logger = require('morgan'),
+
     cors = require('cors'),
-    helmet = require('helmet'),
-    compression = require('compression'),
     bodyParser = require('body-parser'),
     router = require('./api/routes'),
     config = require('./api/config/config'),
@@ -14,7 +12,6 @@ var port = 8000;
 app.set('secret', config.secret);
 
 // Middleware to log all of the requests that comes to the server
-app.use(logger(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Middleware to allow requests from any frontend that is not hosted on the same machine as the server's
 app.use(
@@ -26,10 +23,8 @@ app.use(
 );
 
 // Middleware to protect the server against common known security vulnerabilities
-app.use(helmet());
 
 // Middleware to compress the server json responses to be smaller in size
-app.use(compression());
 
 
 /*

@@ -153,7 +153,7 @@ module.exports.makeReservation = function(req, res, next){
 module.exports.getCurrentMovies = function(req, res, next){
 
     var currentDate = new Date();
-    
+
     var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date <= ?';
 
     database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
@@ -187,7 +187,7 @@ module.exports.getCurrentMovies = function(req, res, next){
 module.exports.getUpcomingMovies = function(req, res, next){
 
     var currentDate = new Date();
-    
+
     var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date > ?';
 
     database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
@@ -230,7 +230,6 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
             data: null
         });
     }
-
     if(!cinemaLocation) {
         return res.status(422).json({
             err: null,
@@ -267,9 +266,9 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
         }
 
     });
-};
+  };
 
-module.exports.getUpcomingMoviesForCinema = function(req, res, next){
+  module.exports.getUpcomingMoviesForCinema = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;
     var cinemaLocation = req.params.cinema_location;
@@ -290,7 +289,7 @@ module.exports.getUpcomingMoviesForCinema = function(req, res, next){
             data: null
         });
     }
-    
+
 
     var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id'+
     'AND m.release_date > ?';
@@ -320,4 +319,74 @@ module.exports.getUpcomingMoviesForCinema = function(req, res, next){
         }
 
     });
-};
+  };
+
+module.exports.usePromoCode = function(req, res, next){
+  var oldPrice = req.body.price;
+  var promocode = req.body.code;
+  var cinemaName = req.body.name;
+  var cinemaLocation = req.body.location;
+  /*var oldPrice = 2000;
+  console.log(oldPrice);
+  var promocode = '1H4H1LS0W';
+  var cinemaName = 'Pharoahs Cinema';
+  var cinemaLocation = 'Al Haram';*/
+  database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',
+  [promocode, cinemaName, cinemaLocation], function (error, results, fields) {
+    if(error) return next(error);
+    if(results.length == 0){
+        return res.status(404).send({
+          "error": "This cinema does not have this promocode",
+          "msg": null,
+          "data": null
+        });
+    }
+    if(results.length !== 1){
+      return res.status().send("Error in database")
+    }
+    database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) {
+    var type = results[0].type;
+    var value = results[0].value;
+    if(type == "percentage") {
+      var newPrice = oldPrice - (oldPrice * parseFloat(value)/100);
+      return res.status(200).send({
+        "error": null,
+        "msg": "Promocode success",
+        "data":{
+          "price": newPrice,
+          "description": value +" percent has been deducted from the original price."
+        }
+      });
+    } else if(type == "amount") {
+      var newPrice = oldPrice - value;
+      if(newPrice < 0) {
+        newPrice = 0;
+        return res.status(200).send({
+          "error": null,
+          "msg": "Promocode success",
+          "data":{
+            "price": newPrice,
+            "description": "The discount is larger than the original price, so new price is 0."
+          }
+        });
+      }
+      return res.status(200).send({
+        "error": null,
+        "msg": "Promocode success",
+        "data":{
+          "price": newPrice,
+          "description": value +" EGP has been deducted from the original price."
+        }
+      });
+    } else {
+      return res.status(200).send({
+        "error": null,
+        "msg": "Promocode success",
+        "data":{
+          "price": oldPrice,
+          "description": value
+        }
+      });
+    }
+  });
+})};

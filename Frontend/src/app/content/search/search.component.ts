@@ -12,7 +12,7 @@ export class SearchComponent implements OnInit {
   constructor(public searchService: SearchService) { }
 
   ngOnInit() {
-    this.searchService.get().subscribe((response) => {
+    this.searchService.getSearchResult().subscribe((response) => {
       this.movies=response.data;
       console.log(this.movies);
     });

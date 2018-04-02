@@ -9,8 +9,13 @@ export class MovieslistService extends HttpService{
     super(http);
    }
 
-   getCurrentMovies(){
+/*    getCurrentMovies(){
      return this.get('userBooking/getCurrentMovies');
+   } */
+    //DO NOT FORGET TO CALL ALL OF THE SERVICES IN THE MOVIES-LIST COMPONENTS
+   //---------------------ALL VIEW MOVIES SERVICES-------------------
+   geHighRateMovies(){
+     return  this.get('movies/highrate');
    }
-
+ 
 }

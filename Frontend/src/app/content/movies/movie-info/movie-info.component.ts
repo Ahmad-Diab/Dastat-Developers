@@ -16,7 +16,7 @@ movie;
   }
 getMovieInfo(){
   this.MovieInfoService.getMovieInfo("1").subscribe((response)=>{
-    this.movie=response;
+    this.movie=response.data;
     console.log(response);
   });
 }

@@ -1,3 +1,58 @@
-<p>
-  movie-info works!
-</p>
+<div class="search-wrapper">
+  <div class="container container--add">
+      <form id='search-form' method='get' class="search">
+          <input type="text" class="search__field" placeholder="Search">
+          <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
+      </form>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="container">
+  <div class="col-sm-12">
+      <h2 class="page-heading">Movies</h2>
+      
+      
+      <!-- Movie preview item -->
+      <div [(ngModel)]="movie"  class="movie movie--preview movie--full release">
+           <div class="col-sm-3 col-md-2 col-lg-2">
+                  <div class="movie__images">
+                      <img alt='' src={{movie.imagePath}}>
+                  </div>
+                
+          </div>
+
+          <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
+                  <a href='movie-page-full.html' class="movie__title link--huge">{{movie.title}}</a>
+
+                  <p class="movie__time">{{movie.duration}} hrs</p>
+
+               
+                  <p class="movie__option"><strong>Category: </strong><a href="#">{{movie.genre}}</a></p>
+                  <p class="movie__option"><strong>Release date: </strong>{{movie.year}}</p>
+
+                  <div class="movie__btns">
+                      <a href="#" class="btn btn-md btn--warning">book a ticket <span class="hidden-sm">for this movie</span></a>
+                      <a href="#" class="watchlist">Add to watchlist</a>
+                  </div>
+
+                  <div class="preview-footer">
+                      <div class="movie__rate"><p class="movie__rate-number"><strong> Rating</strong></p> <span class="movie__rating">{{movie.rating}}</span></div>
+                      
+
+                      <a href="#" class="movie__show-btn">Showtime</a>
+                  </div>
+          </div>
+
+          <div class="clearfix"></div>
+          
+
+      </div>
+      <!-- end movie preview item -->
+
+    
+
+
+  </div>
+
+</section>

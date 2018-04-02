@@ -8,8 +8,8 @@ export class MovieInfoService extends HttpService{
   constructor(public http: Http) {
     super(http);
     }
-getMovieInfo(){
-  return this.get('movies/movie_id');
+getMovieInfo(movie_id: string){
+  return this.get('movies/'+ movie_id);
 }
 
 }

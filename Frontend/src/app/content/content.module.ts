@@ -9,6 +9,7 @@ import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 
 @NgModule({
@@ -17,7 +18,7 @@ import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
     SharedModule,
     RouterModule.forChild(ContentRoutes)
   ],
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, MovieInfoComponent]
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, AboutusComponent,MovieInfoComponent]
 })
 
 export class ContentModule { }

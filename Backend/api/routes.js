@@ -22,6 +22,9 @@ router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 
+router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
+
+
 
 router.post('/test', User.test);
 

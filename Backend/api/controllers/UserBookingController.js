@@ -132,6 +132,29 @@ module.exports.getCurrentMovies = function(req, res, next){
     });
 };
 
+
+
+
+module.exports.getBookings = function(req, res, next){
+    
+        var username = req.params.username;
+        
+        var sqlBookings = 'SELECT reservation_id,seat_number,date_time,hall,cinema_location,cinema_name FROM tickets WHERE user=?';
+    
+        database.query(sqlBookings,[username], function (error, results) {
+            if(error){
+                return next(error);
+            }
+    
+            res.status(200).json({
+                err: null,
+                msg: 'Bookings Successfully Retrieved',
+                data: results
+            });
+    
+        });
+    };
+
 module.exports.getCurrentMoviesForCinema = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;

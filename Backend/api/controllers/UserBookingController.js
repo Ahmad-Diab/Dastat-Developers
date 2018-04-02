@@ -35,6 +35,7 @@ module.exports.getParties = function(req, res){
 module.exports.makeReservation = function(req, res, next){
     //COMPLETED Make a reservation based on all data need for reservation.
     //TODO User-name validation needs to be done!
+
     var username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
@@ -84,8 +85,32 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    var success = true;
+    /*
+    // Verify that hall exists in Cinema, and retrieve movie
+    var hallDetails = {
+        hall_number: hall,
+        cinema_location: cinema_location,
+        cinema_name: cinema_name
+    };
 
+    var movieData = null;
+    database.query('SELECT movie FROM halls WHERE ?',
+        hallDetails, function (error, results) {
+        if (error) {
+            return next(error);
+        }
+        movieData = results;
+    });
+    /*
+    if(movieData || !movieData.length) {
+        return res.status(404).send({
+            err: "The assigned hall does not exist.",
+            msg: null,
+            data: null
+        })
+    }*/
+
+    var success = true;
     for( var i = 0; i< tickets.length; i++) {
         var seatNum = tickets[i];
 
@@ -118,6 +143,13 @@ module.exports.makeReservation = function(req, res, next){
 
 };
 
+
+/**
+ *  Get Current Movies..
+ * @param req
+ * @param res
+ * @param next
+ */
 module.exports.getCurrentMovies = function(req, res, next){
 
     var currentDate = new Date();

@@ -7,7 +7,6 @@ import { MovieslistService } from '../../../@services/movieslist.service';
 })
 export class MoviesListComponent implements OnInit {
   movies=[];
-  highMovies=[];
 
 
   constructor(public movieslistService: MovieslistService) { 
@@ -15,11 +14,11 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnInit() {
- /*    this.movieslistService.getCurrentMovies().subscribe((response) => {
+    this.movieslistService.getCurrentMovies().subscribe((response) => {
       this.movies=response.data;
       console.log(this.movies);
       
-    }); */
+    }); 
   }
     //----- HERE IS THE FUNCTIONS YOU CALL ON CLICK
     //------ DO NOT FORGET TO IMPLEMENT IT FIRST IN THE SERVICES----

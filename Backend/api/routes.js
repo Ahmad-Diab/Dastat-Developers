@@ -15,7 +15,7 @@ var Actor = require('./controllers/ActorController');
 /* router.get('/users', User.getUsers);
 router.get('/movies/:movie_id', Movie.getMovieInfo);
  */
-router.post('/test', User.test);
+/* router.post('/test', User.test); */
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 

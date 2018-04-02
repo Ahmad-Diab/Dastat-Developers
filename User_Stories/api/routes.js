@@ -12,6 +12,6 @@ var Admin = require('./controllers/AdminController');
 router.get('/users', User.getUsers);
 router.get('/users/viewMyInfo/:username',User.viewMyInfo);
 router.get('/admins', Admin.getAdmins);
-
+router.post('/users/editUsers/:username', User.editUsers);
 //exporting routes to the project
 module.exports = router;

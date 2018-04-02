@@ -42,7 +42,9 @@ module.exports.makeReservation = function(req, res, next){
         party_datetime = req.body['date_time'],
         hall = req.body['hall'],
         payment = req.body['payment'],
-        tickets = req.body['tickets'];
+        tickets = req.body['tickets'],
+        tickets_price = req.body['price'],
+        movie = req.body['movie'];
 
     if(!username) {
         return res.status(422).json({
@@ -60,7 +62,7 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    if(!party_datetime || !hall) {
+    if(!party_datetime || !hall || !movie) {
         return res.status(422).json({
             err: null,
             msg: 'Party data is required.',
@@ -68,7 +70,7 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    if(!tickets || !payment) {
+    if(!tickets || !payment || !tickets_price) {
         return res.status(422).json({
             err: null,
             msg: 'Tickets data is required.',
@@ -123,7 +125,9 @@ module.exports.makeReservation = function(req, res, next){
             date_time: party_datetime,
             hall: hall,
             cinema_location: cinema_location,
-            cinema_name: cinema_name
+            cinema_name: cinema_name,
+            price: tickets_price,
+            movie_id: movie
         };
 
         database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
@@ -223,8 +227,6 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
     });
 };
-
-
 
 
 module.exports.getBookings = function(req, res, next){

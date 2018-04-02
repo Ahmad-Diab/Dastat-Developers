@@ -20,7 +20,7 @@ module.exports.getMovieInfo = function(req, res, next){
 
 module.exports.getMovies = function(req,res,next){
 
-    database.query('SELECT * from movies ORDER BY feature desc',
+    database.query('SELECT * from movies ORDER BY year asc',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -43,7 +43,7 @@ module.exports.getMovies = function(req,res,next){
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
-        return res.send("No Movies found.");
+        return res.send("No Movies found!");
     }
     else{
         return res.send(results);

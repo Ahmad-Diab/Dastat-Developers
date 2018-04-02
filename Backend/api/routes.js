@@ -9,6 +9,6 @@ var Movie = require('./controllers/MovieController')
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
 router.get('/users', User.getUsers);
-
+router.get('/movies/:movie_id', Movie.getMovieInfo);
 //exporting routes to the project
 module.exports = router;

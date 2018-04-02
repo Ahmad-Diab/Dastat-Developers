@@ -4,6 +4,7 @@ var database = require('../config/db-connection');
 //DONT FORGET TO USE MODULE exports
 
 module.exports.getUsers = function(req, res, next){
+  console.log(req.body);
   database.query('SELECT * FROM users', function (error, results, fields) {
     if(error) return next(error);
     return res.send(results);

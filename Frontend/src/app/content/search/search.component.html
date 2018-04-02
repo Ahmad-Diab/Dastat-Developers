@@ -1,7 +1,7 @@
 <div class="search-wrapper">
   <div class="container container--add">
       <form id='search-form' method='get' class="search">
-          <input type="text" class="search__field" placeholder="Search">
+          <input type="text" class="search__field" placeholder="Search" (keydown.enter)="onSearch(search.value)">
           <button type='submit' class="btn btn-md btn--danger search__button">Search</button>
       </form>
   </div>

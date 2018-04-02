@@ -10,17 +10,29 @@ export class SearchComponent implements OnInit {
   movies = [];
   cinemas = [];
   actors = [];
+
+  search;
   
   constructor(public searchService: SearchService ) {
 
   }
 
   ngOnInit() {
+    this.search = "";
     this.searchService.getSearchResult("m").subscribe((response) => {
       this.movies = response.data.Movies;
       this.cinemas = response.data.Cinemas;
       this.actors = response.data.Actors;
     });
+  }
+
+  onSearch(searchKey : String) {
+    this.searchService.getSearchResult(searchKey).subscribe((response) => {
+      this.movies = response.data.Movies;
+      this.cinemas = response.data.Cinemas;
+      this.actors = response.data.Actors;
+    });
+    console.log(searchKey);
   }
 
 }

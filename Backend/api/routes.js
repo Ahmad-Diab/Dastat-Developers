@@ -12,5 +12,13 @@ router.get('/users', User.getUsers);
 
 router.post('/test', User.test);
 
+router.post('/auth', User.authenticate);
+
+
+router.route('/auth/forgot_password')
+    .get( User.render_forgot_password_template)
+    .post(User.forgot_password);
+
+
 //exporting routes to the project
 module.exports = router;

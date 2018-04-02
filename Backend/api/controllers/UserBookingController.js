@@ -110,3 +110,73 @@ module.exports.makeReservation = function(req, res, next){
     }
 
 };
+
+module.exports.usePromoCode = function(req, res, next){
+  var oldPrice = req.body.price;
+  var promocode = req.body.code;
+  var cinemaName = req.body.name;
+  var cinemaLocation = req.body.location;
+  /*var oldPrice = 2000;
+  console.log(oldPrice);
+  var promocode = '1H4H1LS0W';
+  var cinemaName = 'Pharoahs Cinema';
+  var cinemaLocation = 'Al Haram';*/
+  database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',
+  [promocode, cinemaName, cinemaLocation], function (error, results, fields) {
+    if(error) return next(error);
+    if(results.length == 0){
+        return res.send({
+          "error": "This cinema does not have this promocode",
+          "msg": null,
+          "data": null
+        });
+    }
+    if(results.length !== 1){
+      return res.send("Error in database")
+    }
+    database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) {
+    var type = results[0].type;
+    var value = results[0].value;
+    if(type == "percentage") {
+      var newPrice = oldPrice - (oldPrice * parseFloat(value)/100);
+      return res.send({
+        "error": null,
+        "msg": "Promocode success",
+        "data":{
+          "price": newPrice,
+          "description": value +" percent has been deducted from the original price."
+        }
+      });
+    } else if(type == "amount") {
+      var newPrice = oldPrice - value;
+      if(newPrice < 0) {
+        newPrice = 0;
+        return res.send({
+          "error": null,
+          "msg": "Promocode success",
+          "data":{
+            "price": newPrice,
+            "description": "The discount is larger than the original price, so new price is 0."
+          }
+        });
+      }
+      return res.send({
+        "error": null,
+        "msg": "Promocode success",
+        "data":{
+          "price": newPrice,
+          "description": value +" EGP has been deducted from the original price."
+        }
+      });
+    } else {
+      return res.send({
+        "error": null,
+        "msg": "Promocode success",
+        "data":{
+          "price": oldPrice,
+          "description": value
+        }
+      });
+    }
+  });
+})};

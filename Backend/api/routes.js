@@ -3,7 +3,7 @@ var router = express.Router();
 
 //Schema Controllers
 var User = require('./controllers/UserController'),
-    UserBooking = require('./Controllers/UserBookingController');
+    UserBooking = require('./controllers/UserBookingController');
 
 
 //please add only routers here, if you need to call a function require its class
@@ -17,6 +17,7 @@ router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.g
 //TODO Authentication before booking
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
+router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 
 
 

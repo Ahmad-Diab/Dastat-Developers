@@ -9,7 +9,6 @@ export class HttpService {
   constructor(public http: Http) { }
 
   get(url: string, data: any = []) {
-    console.log(data);
     return this.http.get(environment.api + url, {params: data}).pipe(map(res => res.json()));
   }
 

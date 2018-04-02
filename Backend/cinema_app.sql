@@ -17,7 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cinema_app`
+ CREATE DATABASE cinema_app;
+ use cinema_app;
 --
 
 -- --------------------------------------------------------

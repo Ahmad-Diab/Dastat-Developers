@@ -303,21 +303,21 @@ module.exports.usePromoCode = function(req, res, next){
   [promocode, cinemaName, cinemaLocation], function (error, results, fields) {
     if(error) return next(error);
     if(results.length == 0){
-        return res.send({
+        return res.status(404).send({
           "error": "This cinema does not have this promocode",
           "msg": null,
           "data": null
         });
     }
     if(results.length !== 1){
-      return res.send("Error in database")
+      return res.status().send("Error in database")
     }
     database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) {
     var type = results[0].type;
     var value = results[0].value;
     if(type == "percentage") {
       var newPrice = oldPrice - (oldPrice * parseFloat(value)/100);
-      return res.send({
+      return res.status(200).send({
         "error": null,
         "msg": "Promocode success",
         "data":{
@@ -329,7 +329,7 @@ module.exports.usePromoCode = function(req, res, next){
       var newPrice = oldPrice - value;
       if(newPrice < 0) {
         newPrice = 0;
-        return res.send({
+        return res.status(200).send({
           "error": null,
           "msg": "Promocode success",
           "data":{
@@ -338,7 +338,7 @@ module.exports.usePromoCode = function(req, res, next){
           }
         });
       }
-      return res.send({
+      return res.status(200).send({
         "error": null,
         "msg": "Promocode success",
         "data":{
@@ -347,7 +347,7 @@ module.exports.usePromoCode = function(req, res, next){
         }
       });
     } else {
-      return res.send({
+      return res.status(200).send({
         "error": null,
         "msg": "Promocode success",
         "data":{

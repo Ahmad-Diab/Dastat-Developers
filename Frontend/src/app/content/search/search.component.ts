@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../@services/search.service';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -14,7 +15,6 @@ export class SearchComponent implements OnInit {
   search;
   
   constructor(public searchService: SearchService ) {
-
   }
 
   ngOnInit() {
@@ -23,8 +23,20 @@ export class SearchComponent implements OnInit {
       this.movies = response.data.Movies;
       this.cinemas = response.data.Cinemas;
       this.actors = response.data.Actors;
+      let btn = document.getElementById("searchButton");
+      btn.addEventListener("hhee", (e:Event) => this.getSearchResults());
     });
+    
   }
+ getSearchResults(){
+   console.log("hobaa");
+  this.searchService.getSearchResult(document.getElementById("searchText").nodeValue).subscribe((response) => {
+    this.movies = response.data.Movies;
+    this.cinemas = response.data.Cinemas;
+    this.actors = response.data.Actors;
+  });
+}
+  
 
   onSearch(searchKey : String) {
     this.searchService.getSearchResult(searchKey).subscribe((response) => {
@@ -36,3 +48,4 @@ export class SearchComponent implements OnInit {
   }
 
 }
+

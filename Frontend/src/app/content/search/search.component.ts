@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../../../@services/search.service';
+import { SearchService } from '../../@services/search.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -11,10 +11,12 @@ export class SearchComponent implements OnInit {
   cinemas = [];
   actors = [];
   
-  constructor() { public searchService: SearchService }
+  constructor(public searchService: SearchService ) {
+
+  }
 
   ngOnInit() {
-    this.searchService.getSearch().subscribe((response) => {
+    this.searchService.getSearchResult("1").subscribe((response) => {
       this.movies = response.data.Movies;
       this.cinemas = response.data.Cinemas;
       this.actors = response.data.Actors;

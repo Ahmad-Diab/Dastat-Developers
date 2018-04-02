@@ -9,8 +9,8 @@ export class SearchService extends HttpService{
     super(http);
    }
 
-   getSearchResult(){
-     return this.get('search/:searchKeyword');
+   getSearchResult(key: String){
+     return this.get('search/:searchKeyword', key);
    }
 
 }

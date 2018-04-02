@@ -13,6 +13,7 @@ module.exports.getMovieInfo = function(req, res, next){
         data : results
       });
     });
+  }
 //DONT FORGET TO ADD IT IN THE ROUTES
 
 
@@ -208,4 +209,4 @@ function(error,results,fields){
         return res.send(results);
     }
 });
-}}
+}

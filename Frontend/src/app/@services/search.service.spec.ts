@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
-import { Http } from '@angular/http';
+import { TestBed, inject } from '@angular/core/testing';
 
-@Injectable()
-export class SearchService extends HttpService{
+import { SearchService } from './search.service';
 
-  constructor(public http: Http) {
-    super(http);
-   }
+describe('SearchService', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [SearchService]
+    });
+  });
 
-   getSearchResult(){
-     return this.get('search/:searchKeyword');
-   }
-
-}
+  it('should be created', inject([SearchService], (service: SearchService) => {
+    expect(service).toBeTruthy();
+  }));
+});

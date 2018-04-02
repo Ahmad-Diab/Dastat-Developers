@@ -26,12 +26,12 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="dc490313-ffb2-4106-b7d3-2a4ac0d42f66">
-      <console name="Cinema_App" type="STANDARD" />
+    <connection id="99d1ab09-854f-45e2-93f4-f65fdd5b3eba">
+      <console name="cinema_app" type="STANDARD" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="dc490313-ffb2-4106-b7d3-2a4ac0d42f66" />
+    <connection id="99d1ab09-854f-45e2-93f4-f65fdd5b3eba" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -56,9 +56,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="dc490313-ffb2-4106-b7d3-2a4ac0d42f66" active="true">
+      <connection id="99d1ab09-854f-45e2-93f4-f65fdd5b3eba" active="true">
         <database>
-          <name value="Cinema_App" />
+          <name value="cinema_app" />
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
@@ -70,7 +70,7 @@
           <host value="localhost" />
           <port value="3306" />
           <database value="mysql" />
-          <os-authentication value="false" />
+          <os-authentication value="true" />
           <empty-password value="false" />
           <user value="" />
           <password value="" />
@@ -96,7 +96,7 @@
           <connect-automatically value="true" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="true" />
-          <environment-type value="default" />
+          <environment-type value="development" />
           <idle-time-to-disconnect value="30" />
           <password-expiry-time value="10" />
           <max-connection-pool-size value="7" />

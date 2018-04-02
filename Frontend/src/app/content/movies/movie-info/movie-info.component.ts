@@ -15,7 +15,7 @@ movie;
   ngOnInit() {
   }
 getMovieInfo(){
-  this.MovieInfoService.getMovieInfo().subscribe((response)=>{
+  this.MovieInfoService.getMovieInfo("1").subscribe((response)=>{
     this.movie=response;
     console.log(response);
   });

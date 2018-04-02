@@ -9,6 +9,7 @@ import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { MoviesListComponent } from './movies/movies-list/movies-list.component'
     SharedModule,
     RouterModule.forChild(ContentRoutes)
   ],
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent]
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, CinemasListComponent]
 })
 
 export class ContentModule { }

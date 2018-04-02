@@ -11,8 +11,8 @@ module.exports.getUsers = function(req, res, next){
   }
     return res.send(results);
   });
-}
+};
 
 module.exports.test = function(req, res, next) {
   console.log(req.body);
-}
+};

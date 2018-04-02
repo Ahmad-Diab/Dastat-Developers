@@ -1,4 +1,5 @@
-// var moment = require('moment');
+var moment = require('moment');
+
 
 // Helper functions for doing all kind of validations on the request body inputs
 module.exports.isString = function(str) {
@@ -17,9 +18,9 @@ module.exports.isBoolean = function(bool) {
   );
 };
 
-//module.exports.isDate = function(date) {
-//  return moment.isDate(date) || moment.isMoment(date);
-//};
+module.exports.isDate = function(date) {
+   return moment.isDate(date) || moment.isMoment(date);
+};
 
 
 module.exports.isObject = function(obj) {

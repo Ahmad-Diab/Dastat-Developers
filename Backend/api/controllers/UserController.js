@@ -9,12 +9,3 @@ module.exports.getUsers = function(req, res, next){
     return res.send(results);
   });
 };
-
-module.exports.test = function(req, res, next) {
-  console.log(req.body);
-<<<<<<< HEAD
-};
-=======
-  return res.send("hi");
-}
->>>>>>> bcf5e230ec0119e16ba7dbe9fff56c9aa5d027e2

@@ -64,6 +64,22 @@ router.get('/movies/Bio',Movie.getMoviesBiography);
 
 
 
+//-------------------------------User Booking Routes---------------------------------
+//TODO Authentication before booking
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.post('/userBooking/makeReservation',UserBooking.makeReservation);
+router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
+
+router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
+router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
+router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
+
+
+router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
+
+
+
 // router.post('/test', User.test);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 

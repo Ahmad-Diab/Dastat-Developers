@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 01, 2018 at 09:22 PM
+-- Generation Time: Apr 02, 2018 at 11:38 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -68,7 +68,7 @@ CREATE TABLE `Actors_Movies` (
 
 CREATE TABLE `Admins` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(230) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
@@ -154,20 +154,21 @@ CREATE TABLE `Cinemas` (
   `address` varchar(200) NOT NULL,
   `name` varchar(115) NOT NULL,
   `number_of_halls` int(11) DEFAULT NULL,
-  `company` varchar(30) NOT NULL
+  `company` varchar(30) NOT NULL,
+  `imagePath` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Cinemas`
 --
 
-INSERT INTO `Cinemas` (`location`, `address`, `name`, `number_of_halls`, `company`) VALUES
-('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, 'Rainassance'),
-('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, 'Egyptian Producers'),
-('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, 'Rainassance'),
-('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, 'Galaxco'),
-('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, 'Galaxco'),
-('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, 'Rainassance');
+INSERT INTO `Cinemas` (`location`, `address`, `name`, `number_of_halls`, `company`, `imagePath`) VALUES
+('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, 'Rainassance', ''),
+('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, 'Egyptian Producers', ''),
+('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, 'Rainassance', ''),
+('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, 'Galaxco', ''),
+('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, 'Galaxco', ''),
+('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, 'Rainassance', '');
 
 -- --------------------------------------------------------
 
@@ -296,6 +297,7 @@ INSERT INTO `Movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `
 (28, 'Game Night', 1.4, 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'PENDING'),
 (29, 'Annihilation', 1.55, 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'PENDING'),
 (30, 'Every Day', 1.37, 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'PENDING');
+
 -- --------------------------------------------------------
 
 --
@@ -474,31 +476,32 @@ CREATE TABLE `Parties` (
   `date_time` datetime NOT NULL,
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
-  `cinema_name` varchar(20) NOT NULL
+  `cinema_name` varchar(20) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Parties`
 --
 
-INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`) VALUES
-('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90'),
-('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies'),
-('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90');
+INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`, `price`) VALUES
+('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 50),
+('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 50),
+('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90', 0),
+('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 50),
+('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 50),
+('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 50),
+('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 50),
+('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 50),
+('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 50);
 
 -- --------------------------------------------------------
 
@@ -564,44 +567,31 @@ CREATE TABLE `Tickets` (
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
   `cinema_name` varchar(20) NOT NULL,
-  `user` varchar(115) DEFAULT NULL
+  `user` varchar(115) DEFAULT NULL,
+  `movie_id` int(11) NOT NULL,
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Tickets`
 --
 
-INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`) VALUES
-(1, b'0', '1D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(8, b'1', '1C', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(9, b'0', '1A', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(10, b'1', '2B', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(11, b'0', '1D', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(12, b'1', '3F', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(13, b'0', '13C', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(15, b'0', '12C', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(16, b'1', '23B', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(17, b'1', '24B', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(19, b'0', '4A', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(26, b'1', '3A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(27, b'1', '4A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(28, b'1', '6D', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(29, b'0', '5D', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed');
+INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`, `movie_id`, `price`) VALUES
+(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 10, 50),
+(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Mostafa_Fathy', 11, 50),
+(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 19, 50),
+(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Nour_Gaber', 14, 50),
+(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Omar_Mehrez', 16, 50),
+(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Omar_Gamal', 19, 50),
+(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed', 1, 50),
+(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed', 9, 50),
+(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Mai_Emad', 8, 50),
+(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Lola_Wael', 7, 50),
+(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 6, 50),
+(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 5, 50),
+(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4, 50),
+(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3, 50),
+(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50);
 
 -- --------------------------------------------------------
 
@@ -611,7 +601,7 @@ INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, 
 
 CREATE TABLE `Users` (
   `username` varchar(115) NOT NULL,
-  `password` varchar(130) NOT NULL,
+  `password` varchar(330) NOT NULL,
   `email` varchar(130) NOT NULL,
   `phone_number` int(11) DEFAULT NULL,
   `credit_card` varchar(200) DEFAULT NULL,
@@ -728,7 +718,8 @@ ALTER TABLE `Promocodes_Cinemas`
 ALTER TABLE `Tickets`
   ADD PRIMARY KEY (`reservation_id`,`seat_number`,`date_time`,`hall`,`cinema_name`,`cinema_location`),
   ADD KEY `date_time` (`date_time`,`hall`,`cinema_name`,`cinema_location`),
-  ADD KEY `user` (`user`);
+  ADD KEY `user` (`user`),
+  ADD KEY `movie_id` (`movie_id`);
 
 --
 -- Indexes for table `Users`
@@ -807,7 +798,8 @@ ALTER TABLE `Promocodes_Cinemas`
 --
 ALTER TABLE `Tickets`
   ADD CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`date_time`,`hall`,`cinema_name`,`cinema_location`) REFERENCES `Parties` (`date_time`, `hall`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Tickets_ibfk_3` FOREIGN KEY (`movie_id`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

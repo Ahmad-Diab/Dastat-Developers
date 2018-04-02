@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require('express'),
     logger = require('morgan'),
     cors = require('cors'),
@@ -7,16 +8,26 @@ var express = require('express'),
     router = require('./api/routes'),
     config = require('./api/config/config'),
     app = express();
+=======
+var router = require('./api/routes');
+var express = require('express');
+var cors = require('cors');
+var bodyParser = require('body-parser');
+var config = require('./api/config/config');
+>>>>>>> bcf5e230ec0119e16ba7dbe9fff56c9aa5d027e2
 
 var port = 8000;
 
 // Set the secret of the app that will be used in authentication
 app.set('secret', config.secret);
 
+<<<<<<< HEAD
 // Middleware to log all of the requests that comes to the server
 app.use(logger(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
 // Middleware to allow requests from any frontend that is not hosted on the same machine as the server's
+=======
+>>>>>>> bcf5e230ec0119e16ba7dbe9fff56c9aa5d027e2
 app.use(
     cors({
         origin: true,
@@ -25,6 +36,7 @@ app.use(
     })
 );
 
+<<<<<<< HEAD
 // Middleware to protect the server against common known security vulnerabilities
 app.use(helmet());
 
@@ -36,6 +48,10 @@ app.use(compression());
   "application/x-www-form-urlencoded" as json and make it available as a key on the req
   object as req.body
 */
+=======
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+>>>>>>> bcf5e230ec0119e16ba7dbe9fff56c9aa5d027e2
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({

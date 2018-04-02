@@ -9,8 +9,8 @@ module.exports.getUsers = function(req, res, next){
     if(error) return next(error);
     return res.send(results);
   });
-}
+};
 
 module.exports.test = function(req, res, next) {
   console.log(req.body);
-}
+};

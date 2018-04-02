@@ -24,6 +24,9 @@ router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
 
 
+router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
+
+
 
 router.post('/test', User.test);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);

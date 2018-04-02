@@ -49,6 +49,7 @@ router.get('/movies/Drama',Movie.getMoviesDrama);
 router.get('/movies/Horror',Movie.getMoviesHorror);
 router.get('/movies/Thriller',Movie.getMoviesThriller);
 router.get('/movies/Bio',Movie.getMoviesBiography); 
+router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 
 

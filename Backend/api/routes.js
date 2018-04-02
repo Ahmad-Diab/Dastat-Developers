@@ -19,6 +19,10 @@ router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.g
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
 router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 
+router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
+router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
+router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
 
 
 

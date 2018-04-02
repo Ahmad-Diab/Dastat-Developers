@@ -3,6 +3,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
+import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -16,4 +17,7 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'booking/payment',
   component: PaymentComponent
+},{
+  path: 'movies/list',
+  component: MoviesListComponent
 }];

@@ -111,6 +111,7 @@ module.exports.makeReservation = function(req, res, next){
     }*/
 
     var success = true;
+
     for( var i = 0; i< tickets.length; i++) {
         var seatNum = tickets[i];
 
@@ -214,6 +215,12 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
         }
 
+        res.status(200).json({
+            err: null,
+            msg: 'Movies Successfully Retrieved',
+            data: results
+        });
+
     });
 };
 
@@ -230,6 +237,7 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
             data: null
         });
     }
+
     if(!cinemaLocation) {
         return res.status(422).json({
             err: null,
@@ -289,7 +297,6 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
             data: null
         });
     }
-
 
     var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id'+
     'AND m.release_date > ?';

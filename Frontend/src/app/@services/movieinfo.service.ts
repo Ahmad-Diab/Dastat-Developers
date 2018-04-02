@@ -9,7 +9,7 @@ export class MovieinfoService extends HttpService {
     super(http);
    }
 
-   getMovieInfo(){
+   getMovieInfo(event){
      return this.get('/movies/:movie_id');
    }
 }

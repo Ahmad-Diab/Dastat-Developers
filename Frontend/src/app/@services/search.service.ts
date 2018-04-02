@@ -10,7 +10,7 @@ export class SearchService extends HttpService{
    }
 
    getSearchResult(key: String){
-     return this.get('search/:searchKeyword', key);
+     return this.get('search/' + key);
    }
 
 }

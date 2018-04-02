@@ -5,6 +5,9 @@ var router = express.Router();
 var User = require('./controllers/UserController'),
     UserBooking = require('./controllers/UserBookingController');
 
+var viewCinemas = require('./controllers/CinemasController');
+
+
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -30,6 +33,9 @@ router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 
 router.post('/test', User.test);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
+
+//viewCinemas routes
+router.get('/viewCinemas',viewCinemas.ViewCinemas);
 
 //exporting routes to the project
 module.exports = router;

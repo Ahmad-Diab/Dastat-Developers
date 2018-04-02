@@ -4,7 +4,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser')
 
 var app = express();
-var port = 8000;
+var port = 7000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));

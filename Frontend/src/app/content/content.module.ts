@@ -10,7 +10,6 @@ import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 
-
 @NgModule({
   imports: [
     CommonModule,

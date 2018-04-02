@@ -12,10 +12,10 @@ var Actor = require('./controllers/ActorController');
 
 
 //------------------------USERS ROUTES-------------------------------
-/* router.get('/users', User.getUsers);
-router.get('/movies/:movie_id', Movie.getMovieInfo);
- */
-/* router.post('/test', User.test); */
+router.get('/users', User.getUsers);
+// router.get('/movies/:movie_id', Movie.getMovieInfo);
+
+// router.post('/test', User.test);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 
@@ -34,7 +34,7 @@ router.post('/actors/:actor', Actor.getActors);
 
 //------------------------MOVIES ROUTES------------------------------
 
-router.get('/movies',Movie.getMovies);
+router.get('/movies/feature',Movie.getMovies);
 
 router.get('/movies/highrate/',Movie.getMoviesHighRatings);
 router.get('/movies/lowrate',Movie.getMoviesLowRatings);
@@ -50,6 +50,22 @@ router.get('/movies/Horror',Movie.getMoviesHorror);
 router.get('/movies/Thriller',Movie.getMoviesThriller);
 router.get('/movies/Bio',Movie.getMoviesBiography); 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// router.post('/test', User.test);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 //exporting routes to the project
 module.exports = router;

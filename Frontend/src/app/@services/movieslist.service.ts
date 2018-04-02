@@ -17,5 +17,9 @@ export class MovieslistService extends HttpService{
    geHighRateMovies(){
      return  this.get('movies/highrate');
    }
+
+   getMovies(){
+    return  this.get('movies/feature');
+  }
  
 }

@@ -1,14 +1,16 @@
 var router = require('./api/routes');
 var express = require('express');
 var cors = require('cors');
-
+var bodyParser = require('body-parser')
 
 var app = express();
 var port = 8000;
 
-app.use('/api', router);
-
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/api', router);
 
 // 500 internal server error handler
 app.use(function(err, req, res, next) {

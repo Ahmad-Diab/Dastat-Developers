@@ -5,6 +5,7 @@ var router = express.Router();
 var User = require('./controllers/UserController');
 var Movie = require('./controllers/MovieController')
 var UserBooking = require('./Controllers/UserBookingController');
+var Actor = require('./controllers/ActorController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -12,6 +13,20 @@ var UserBooking = require('./Controllers/UserBookingController');
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users', User.getUsers);
+router.get('/movies/:movie_id', Movie.getMovieInfo);
+
+router.post('/test', User.test);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
+
+
+
+
+
+
+//-----------------------ACTOR ROUTES-------------------------------
+
+router.post('/actors/:actor', Actor.getActors);
+
 
 
 

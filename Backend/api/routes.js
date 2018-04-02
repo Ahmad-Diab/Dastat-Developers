@@ -4,7 +4,7 @@ var router = express.Router();
 //Schema Controllers
 var User = require('./controllers/UserController');
 var Movie = require('./controllers/MovieController')
-var UserBooking = require('./Controllers/UserBookingController');
+var UserBooking = require('./controllers/UserBookingController');
 var Actor = require('./controllers/ActorController');
 
 //please add only routers here, if you need to call a function require its class

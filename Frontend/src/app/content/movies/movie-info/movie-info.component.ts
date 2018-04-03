@@ -12,12 +12,10 @@ movie;
 
   }
 
-  ngOnInit() {
-  }
-getMovieInfo(){
+ngOnInit(){
   this.MovieInfoService.getMovieInfo("1").subscribe((response)=>{
-    this.movie=response.data;
-    console.log(response);
+    this.movie=response.data[0];
+    console.log(response.data[0]);
   });
 }
 }

@@ -11,9 +11,12 @@ import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     SharedModule,
     RouterModule.forChild(ContentRoutes)

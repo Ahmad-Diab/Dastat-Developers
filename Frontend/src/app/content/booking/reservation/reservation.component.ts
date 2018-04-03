@@ -14,6 +14,7 @@ export class ReservationComponent implements OnInit {
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
+
     var bookingDetails = this.cookie.get('booking');
 
     var tickets = bookingDetails['seats'],
@@ -34,8 +35,8 @@ export class ReservationComponent implements OnInit {
       eachPrice: eachPrice,
       movie: bookingDetails['movie']
     }
-
-   /* // For test purposes
+  /*
+   // For test purposes
     var tickets = [1, 5, 9],
       ticketsNum = tickets.length,
       price = "150",
@@ -58,7 +59,6 @@ export class ReservationComponent implements OnInit {
   }
 
   onUnpaidReserve(event): void {
-    this.reserveData["payment"] = false;
 
     this.bookingService.makeReservation(
       this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
@@ -70,7 +70,6 @@ export class ReservationComponent implements OnInit {
     });
 
   }
-
 
   onPaidReserve(event): void {
     this.reserveData["payment"] = true;
@@ -85,4 +84,24 @@ export class ReservationComponent implements OnInit {
 
   }
 
+  onReserve(event): void {
+    this.bookingService.makeReservation(
+      this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
+      this.reserveData['date_time'],this.reserveData['hall'], this.reserveData['payment'],
+      this.reserveData['tickets'],this.reserveData['price'],this.reserveData['movie']
+    ).subscribe((response) => {
+      event.confirm.resolve(response);
+      console.log("onReserve order is met");
+    });
+  }
+
+  onUnpaid(event): void{
+    this.reserveData["payment"] = false;
+
+  }
+
+  onPaid(event): void {
+    this.reserveData["payment"] = true;
+    //event.confirm();
+  }
 }

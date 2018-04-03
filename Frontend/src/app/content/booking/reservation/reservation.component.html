@@ -5,8 +5,8 @@
       <img class="order__images" alt='' src="../../../../assets/images/tickets.png">
       <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
       <div class="order__control">
-        <a href="../payment/payment.component.html" class="order__control-btn">Purchase</a>
-        <a href="" class="order__control-btn active">Reserve</a>
+        <a href="../payment/payment.component.html" class="order__control-btn" (click)="onPaid($event)">Purchase</a>
+        <a href="" class="order__control-btn active" (click)="onUnpaid($event)">Reserve</a>
       </div>
     </div>
   </div>
@@ -30,9 +30,12 @@
     <div class="order">
       <a class="btn btn-md btn--warning btn--wide" (click)="onUnpaidReserve($event)" >reserve</a>
       <a class="btn btn-md btn--warning btn--wide" (click)="onPaidReserve($event)" >purchase</a>
+
     </div>
 
     <!-- Commented for now till we make ticket.component.html
+          <a href="../../user/booking-details/booking-details.component.html" (click)="onPaidReserve($event)" >purchase</a>
+
     <div class="order">
       <a href="../ticket/ticket.component.html" class="btn btn-md btn--warning btn--wide" ng-click="onUnpaidReserve()" >reserve</a>
       <a href="../ticket/ticket.component.html" class="btn btn-md btn--warning btn--wide" ng-click="onPaidReserve()" >purchase</a>

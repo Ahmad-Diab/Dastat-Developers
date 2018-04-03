@@ -4,6 +4,8 @@ import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
+
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -20,4 +22,7 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'movies/list',
   component: MoviesListComponent
+},{
+  path: 'cinemas/filter-cinema',
+  component: FilterCinemaComponent
 }];

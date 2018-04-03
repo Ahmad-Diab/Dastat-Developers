@@ -17,6 +17,7 @@ router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 
 //-------------------------------User fetching Routes--------------------------------
+router.get('/userBooking/getCinemasForThatMovie/:movie_id', UserBooking.getCinemasForThatMovie);
 router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
 router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);

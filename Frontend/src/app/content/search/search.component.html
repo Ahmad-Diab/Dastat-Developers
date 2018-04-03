@@ -1,8 +1,8 @@
 <div class="search-wrapper">
   <div class="container container--add">
       <form id='search-form' method='get' class="search">
-          <input type="text" class="search__field" placeholder="Search" (keydown.enter)="onSearch(search.value)">
-          <button type='submit' class="btn btn-md btn--danger search__button">Search</button>
+          <input #search type="text" class="search__field" placeholder="Search" (keydown.enter)="onSearch(search.value)">
+          <button (click) = "onSearch(search.value)" type='submit' class="btn btn-md btn--danger search__button">Search</button>
       </form>
   </div>
 </div>
@@ -75,13 +75,10 @@
     <div *ngFor="let actor of actors"  class="movie movie--preview movie--full release">
 
       <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-              <a href='movie-page-full.html' class="movie__title link--huge">{{Actor.name}}</a>
- 
-              <p class="movie__time">{{Actor.name}}</p>
- 
+              <a href='movie-page-full.html' class="movie__title link--huge">{{actor.name}}</a> 
            
-              <p class="movie__option"><strong>Address: </strong><a href="#">{{Actor.name}}</a></p>
-              <p class="movie__option"><strong>Location: </strong>{{Actor.name}}</p>
+              <p class="movie__option"><strong>Age: </strong>{{actor.age}}</p>
+              <p class="movie__option"><strong>Bio: </strong>{{actor.bio}}</p>
  
       </div>
       </div>

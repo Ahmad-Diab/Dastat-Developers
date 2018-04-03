@@ -20,6 +20,7 @@ import { UsersService } from './@services/users.service';
 import { FilterCinemaService } from './@services/filter-cinema.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { MovieInfoService } from './@services/movie-info.service';
+import { SearchService } from './@services/search.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { MovieInfoService } from './@services/movie-info.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService,MovieslistService, AuthService, AuthGuard, CookieService, UsersService, FilterCinemaService,CinemaslistService,MovieInfoService],
+  providers: [SeatingService, HttpService,MovieslistService, AuthService, AuthGuard, CookieService, UsersService, FilterCinemaService,CinemaslistService,MovieInfoService,SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

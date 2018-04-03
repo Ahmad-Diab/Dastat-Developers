@@ -54,4 +54,12 @@ export class MovieslistService extends HttpService{
     return this.get('movies/Bio');
   }
  
+
+   getFeaturedMovies(){
+     return this.get('viewMovies3');
+   }
+
+   getTopMovies(){
+     return this.get('getTopMovies')
+   }
 }

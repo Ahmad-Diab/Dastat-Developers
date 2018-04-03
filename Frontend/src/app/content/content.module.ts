@@ -9,17 +9,16 @@ import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
-<<<<<<< HEAD
+
 import { SigninComponent } from './users/signin/signin.component';
-import { FormsModule } from '@angular/forms';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
-=======
 import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
 import { FormsModule } from '@angular/forms';
 import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
+
+import { SearchComponent } from './search/search.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
->>>>>>> de780be62a9b712c55d9f181ad91af94679129a9
 
 @NgModule({
   imports: [
@@ -28,11 +27,9 @@ import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
     FormsModule,
     RouterModule.forChild(ContentRoutes)
   ],
-<<<<<<< HEAD
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, SigninComponent, UserProfileComponent]
-=======
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent]
->>>>>>> de780be62a9b712c55d9f181ad91af94679129a9
+
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent]
+
 })
 
 export class ContentModule { }

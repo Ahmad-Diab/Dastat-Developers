@@ -26,15 +26,18 @@
                   <p class="movie__time">{{movie.duration}} hrs</p>
 
                
-                  <p class="movie__option"><strong>Category: </strong><a href="#">{{movie.genre}}</a></p>
+                  <p class="movie__option"><strong>Category: </strong>{{movie.genre}}</p>
                   <p class="movie__option"><strong>Release date: </strong>{{movie.year}}</p>
 
-                  <div class="preview-footer">
-                      <div class="movie__rate"><p class="movie__rate-number"><strong> Rating</strong></p> <span class="movie__rating">{{movie.rating}}</span></div>
-                      
+                  <div class="movie__btns">
+                    <a href="#" class="btn btn-md btn--warning">book a ticket <span class="hidden-sm">for this movie</span></a>
+                    <a href="#" class="watchlist">Add to watchlist</a>
+                </div>
 
-                      <a href="#" class="movie__show-btn">Showtime</a>
-                  </div>
+                  <div class="preview-footer">
+                    <div class="movie__rate"><p class="movie__rate-number"><strong> Rating</strong></p> <span class="movie__rating">{{movie.rating}}</span></div>
+                    <a href="#" class="movie__show-btn">Showtime</a>
+                </div>
           </div>
 
           <div class="clearfix"></div>

@@ -36,6 +36,7 @@ app.use(compression());
   "application/x-www-form-urlencoded" as json and make it available as a key on the req
   object as req.body
 */
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({
@@ -47,6 +48,10 @@ app.use(
   Middleware to match the request with one of our defined routes to do a certain function,
   All requests should have /api before writing the route as a convention for api servers
 */
+
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/api', router);
 
@@ -71,4 +76,3 @@ app.use(function(req, res) {
 });
 
 app.listen(port, console.log('listening on port: ' + port));
-module.exports = app;

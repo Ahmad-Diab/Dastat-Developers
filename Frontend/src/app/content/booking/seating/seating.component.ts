@@ -68,12 +68,13 @@ export class SeatingComponent implements OnInit {
   }
 
   submit() {
-    var booking = this.cookie.getObject('booking');
+
+    var booking = <Booking>(this.cookie.getObject('booking'));
     booking.seats = this.selected;
     
     this.cookie.putObject('booking', booking);
 
-    console.log(this.cookie.getObject('booking'))
+    console.log(this.cookie.getObject('booking'));
   }
 
   createJSON(seats: Number[][]) {
@@ -111,7 +112,6 @@ export class SeatingComponent implements OnInit {
 
 }
 
-
 export class rowObj {
   margin: boolean;
   row: any[]
@@ -122,5 +122,5 @@ export class Booking {
   cinema_location: string;
   hall_number: string;
   datetime: string;
-  seats: string;
+  seats: any;
 }

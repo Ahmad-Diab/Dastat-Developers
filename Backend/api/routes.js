@@ -3,13 +3,10 @@ var router = express.Router();
 
 //Schema Controllers
 var User = require('./controllers/UserController');
-<<<<<<< HEAD
 
 var Authentication = require('./controllers/Authentication');
-=======
 var Search = require('./controllers/SearchController');
 var User = require('./controllers/UserController');
->>>>>>> Search
 var Movie = require('./controllers/MovieController')
 var UserBooking = require('./controllers/UserBookingController');
 var Actor = require('./controllers/ActorController');

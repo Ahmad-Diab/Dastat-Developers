@@ -28,12 +28,13 @@
     </div>
 
     <div class="order">
-      <a class="btn btn-md btn--warning btn--wide" (click)="onUnpaidReserve($event)" >reserve</a>
-      <a class="btn btn-md btn--warning btn--wide" (click)="onPaidReserve($event)" >purchase</a>
+      <a href="/user/bookings" class="btn btn-md btn--warning btn--wide" (click)="onReserve($event)" >reserve</a>
 
     </div>
 
     <!-- Commented for now till we make ticket.component.html
+          <a class="btn btn-md btn--warning btn--wide" (click)="onPaidReserve($event)" >purchase</a>
+
           <a href="../../user/booking-details/booking-details.component.html" (click)="onPaidReserve($event)" >purchase</a>
 
     <div class="order">

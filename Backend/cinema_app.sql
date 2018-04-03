@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 01, 2018 at 09:22 PM
+-- Generation Time: Apr 02, 2018 at 11:38 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -17,7 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cinema_app`
+CREATE DATABASE cinema_app;
+use cinema_app;
 --
 
 -- --------------------------------------------------------
@@ -68,7 +69,7 @@ CREATE TABLE `Actors_Movies` (
 
 CREATE TABLE `Admins` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(230) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
@@ -229,7 +230,7 @@ INSERT INTO `Halls` (`cinema_location`, `cinema_name`, `hall_number`, `type`, `l
 
 CREATE TABLE `Layout` (
   `id` int(11) NOT NULL,
-  `encoded` varchar(30) DEFAULT NULL,
+  `encoded` text DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -237,8 +238,13 @@ CREATE TABLE `Layout` (
 -- Dumping data for table `Layout`
 --
 
-INSERT INTO `Layout` (`id`, `encoded`, `name`) VALUES
-(1, '', 'A');
+INSERT INTO `layout` (`id`, `encoded`, `name`) VALUES
+(1, '[{\"margin\":false,\"row\":[\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"A4\"}},{\"seat\":{\"number\":\"A5\"}},{\"seat\":{\"number\":\"A6\"}},{\"seat\":{\"number\":\"A7\"}},{\"seat\":{\"number\":\"A8\"}},{\"seat\":{\"number\":\"A9\"}},\"offset\",\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"B1\"}},{\"seat\":{\"number\":\"B2\"}},{\"seat\":{\"number\":\"B3\"}},{\"seat\":{\"number\":\"B4\"}},{\"seat\":{\"number\":\"B5\"}},{\"seat\":{\"number\":\"B6\"}},{\"seat\":{\"number\":\"B7\"}},{\"seat\":{\"number\":\"B8\"}},{\"seat\":{\"number\":\"B9\"}},{\"seat\":{\"number\":\"B10\"}},{\"seat\":{\"number\":\"B11\"}},{\"seat\":{\"number\":\"B12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"C1\"}},{\"seat\":{\"number\":\"C2\"}},{\"seat\":{\"number\":\"C3\"}},{\"seat\":{\"number\":\"C4\"}},{\"seat\":{\"number\":\"C5\"}},{\"seat\":{\"number\":\"C6\"}},{\"seat\":{\"number\":\"C7\"}},{\"seat\":{\"number\":\"C8\"}},{\"seat\":{\"number\":\"C9\"}},{\"seat\":{\"number\":\"C10\"}},{\"seat\":{\"number\":\"C11\"}},{\"seat\":{\"number\":\"C12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"D1\"}},{\"seat\":{\"number\":\"D2\"}},{\"seat\":{\"number\":\"D3\"}},{\"seat\":{\"number\":\"D4\"}},{\"seat\":{\"number\":\"D5\"}},{\"seat\":{\"number\":\"D6\"}},{\"seat\":{\"number\":\"D7\"}},{\"seat\":{\"number\":\"D8\"}},{\"seat\":{\"number\":\"D9\"}},{\"seat\":{\"number\":\"D10\"}},{\"seat\":{\"number\":\"D11\"}},{\"seat\":{\"number\":\"D12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"E1\"}},{\"seat\":{\"number\":\"E2\"}},{\"seat\":{\"number\":\"E3\"}},{\"seat\":{\"number\":\"E4\"}},{\"seat\":{\"number\":\"E5\"}},{\"seat\":{\"number\":\"E6\"}},{\"seat\":{\"number\":\"E7\"}},{\"seat\":{\"number\":\"E8\"}},{\"seat\":{\"number\":\"E9\"}},{\"seat\":{\"number\":\"E10\"}},{\"seat\":{\"number\":\"E11\"}},{\"seat\":{\"number\":\"E12\"}}]},{\"margin\":false,\"row\":[\"offset\",{\"seat\":{\"number\":\"F2\"}},{\"seat\":{\"number\":\"F3\"}},{\"seat\":{\"number\":\"F4\"}},{\"seat\":{\"number\":\"F5\"}},{\"seat\":{\"number\":\"F6\"}},{\"seat\":{\"number\":\"F7\"}},{\"seat\":{\"number\":\"F8\"}},{\"seat\":{\"number\":\"F9\"}},{\"seat\":{\"number\":\"F10\"}},{\"seat\":{\"number\":\"F11\"}},\"offset\"]},{\"margin\":false,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"G3\"}},{\"seat\":{\"number\":\"G4\"}},{\"seat\":{\"number\":\"G5\"}},{\"seat\":{\"number\":\"G6\"}},{\"seat\":{\"number\":\"G7\"}},{\"seat\":{\"number\":\"G8\"}},{\"seat\":{\"number\":\"G9\"}},{\"seat\":{\"number\":\"G10\"}},\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"H1\"}},{\"seat\":{\"number\":\"H2\"}},{\"seat\":{\"number\":\"H3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"H10\"}},{\"seat\":{\"number\":\"H11\"}},{\"seat\":{\"number\":\"H12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"I1\"}},{\"seat\":{\"number\":\"I2\"}},{\"seat\":{\"number\":\"I3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"I10\"}},{\"seat\":{\"number\":\"I11\"}},{\"seat\":{\"number\":\"I12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"J1\"}},{\"seat\":{\"number\":\"J2\"}},{\"seat\":{\"number\":\"J3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"J10\"}},{\"seat\":{\"number\":\"J11\"}},{\"seat\":{\"number\":\"J12\"}}]}]', 'A'),
+(2, '[{\"margin\":false,\"row\":[\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"A4\"}},{\"seat\":{\"number\":\"A5\"}},{\"seat\":{\"number\":\"A6\"}},{\"seat\":{\"number\":\"A7\"}},{\"seat\":{\"number\":\"A8\"}},{\"seat\":{\"number\":\"A9\"}},\"offset\",\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"B1\"}},{\"seat\":{\"number\":\"B2\"}},{\"seat\":{\"number\":\"B3\"}},{\"seat\":{\"number\":\"B4\"}},{\"seat\":{\"number\":\"B5\"}},{\"seat\":{\"number\":\"B6\"}},{\"seat\":{\"number\":\"B7\"}},{\"seat\":{\"number\":\"B8\"}},{\"seat\":{\"number\":\"B9\"}},{\"seat\":{\"number\":\"B10\"}},{\"seat\":{\"number\":\"B11\"}},{\"seat\":{\"number\":\"B12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"C1\"}},{\"seat\":{\"number\":\"C2\"}},{\"seat\":{\"number\":\"C3\"}},{\"seat\":{\"number\":\"C4\"}},{\"seat\":{\"number\":\"C5\"}},{\"seat\":{\"number\":\"C6\"}},{\"seat\":{\"number\":\"C7\"}},{\"seat\":{\"number\":\"C8\"}},{\"seat\":{\"number\":\"C9\"}},{\"seat\":{\"number\":\"C10\"}},{\"seat\":{\"number\":\"C11\"}},{\"seat\":{\"number\":\"C12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"D1\"}},{\"seat\":{\"number\":\"D2\"}},{\"seat\":{\"number\":\"D3\"}},{\"seat\":{\"number\":\"D4\"}},{\"seat\":{\"number\":\"D5\"}},{\"seat\":{\"number\":\"D6\"}},{\"seat\":{\"number\":\"D7\"}},{\"seat\":{\"number\":\"D8\"}},{\"seat\":{\"number\":\"D9\"}},{\"seat\":{\"number\":\"D10\"}},{\"seat\":{\"number\":\"D11\"}},{\"seat\":{\"number\":\"D12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"E1\"}},{\"seat\":{\"number\":\"E2\"}},{\"seat\":{\"number\":\"E3\"}},{\"seat\":{\"number\":\"E4\"}},{\"seat\":{\"number\":\"E5\"}},{\"seat\":{\"number\":\"E6\"}},{\"seat\":{\"number\":\"E7\"}},{\"seat\":{\"number\":\"E8\"}},{\"seat\":{\"number\":\"E9\"}},{\"seat\":{\"number\":\"E10\"}},{\"seat\":{\"number\":\"E11\"}},{\"seat\":{\"number\":\"E12\"}}]},{\"margin\":true,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"F3\"}},{\"seat\":{\"number\":\"F4\"}},{\"seat\":{\"number\":\"F5\"}},{\"seat\":{\"number\":\"F6\"}},{\"seat\":{\"number\":\"F7\"}},{\"seat\":{\"number\":\"F8\"}},{\"seat\":{\"number\":\"F9\"}},{\"seat\":{\"number\":\"F10\"}},\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"G1\"}},{\"seat\":{\"number\":\"G2\"}},{\"seat\":{\"number\":\"G3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"G10\"}},{\"seat\":{\"number\":\"G11\"}},{\"seat\":{\"number\":\"G12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"H1\"}},{\"seat\":{\"number\":\"H2\"}},{\"seat\":{\"number\":\"H3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"H10\"}},{\"seat\":{\"number\":\"H11\"}},{\"seat\":{\"number\":\"H12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"I1\"}},{\"seat\":{\"number\":\"I2\"}},{\"seat\":{\"number\":\"I3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"I10\"}},{\"seat\":{\"number\":\"I11\"}},{\"seat\":{\"number\":\"I12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"J1\"}},{\"seat\":{\"number\":\"J2\"}},{\"seat\":{\"number\":\"J3\"}},{\"seat\":{\"number\":\"J4\"}},{\"seat\":{\"number\":\"J5\"}},{\"seat\":{\"number\":\"J6\"}},{\"seat\":{\"number\":\"J7\"}},{\"seat\":{\"number\":\"J8\"}},{\"seat\":{\"number\":\"J9\"}},{\"seat\":{\"number\":\"J10\"}},{\"seat\":{\"number\":\"J11\"}},{\"seat\":{\"number\":\"J12\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"K1\"}},{\"seat\":{\"number\":\"K2\"}},{\"seat\":{\"number\":\"K3\"}},{\"seat\":{\"number\":\"K4\"}},{\"seat\":{\"number\":\"K5\"}},{\"seat\":{\"number\":\"K6\"}},{\"seat\":{\"number\":\"K7\"}},{\"seat\":{\"number\":\"K8\"}},{\"seat\":{\"number\":\"K9\"}},{\"seat\":{\"number\":\"K10\"}},{\"seat\":{\"number\":\"K11\"}},{\"seat\":{\"number\":\"K12\"}}]}]', 'B'),
+(3, '[{\"margin\":false,\"row\":[\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"A5\"}},{\"seat\":{\"number\":\"A6\"}},{\"seat\":{\"number\":\"A7\"}},{\"seat\":{\"number\":\"A8\"}},{\"seat\":{\"number\":\"A9\"}},{\"seat\":{\"number\":\"A10\"}},\"offset\",\"offset\",\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"B1\"}},{\"seat\":{\"number\":\"B2\"}},{\"seat\":{\"number\":\"B3\"}},\"offset\",{\"seat\":{\"number\":\"B5\"}},{\"seat\":{\"number\":\"B6\"}},{\"seat\":{\"number\":\"B7\"}},{\"seat\":{\"number\":\"B8\"}},{\"seat\":{\"number\":\"B9\"}},{\"seat\":{\"number\":\"B10\"}},\"offset\",{\"seat\":{\"number\":\"B12\"}},{\"seat\":{\"number\":\"B13\"}},{\"seat\":{\"number\":\"B14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"C1\"}},{\"seat\":{\"number\":\"C2\"}},{\"seat\":{\"number\":\"C3\"}},\"offset\",{\"seat\":{\"number\":\"C5\"}},{\"seat\":{\"number\":\"C6\"}},{\"seat\":{\"number\":\"C7\"}},{\"seat\":{\"number\":\"C8\"}},{\"seat\":{\"number\":\"C9\"}},{\"seat\":{\"number\":\"C10\"}},\"offset\",{\"seat\":{\"number\":\"C12\"}},{\"seat\":{\"number\":\"C13\"}},{\"seat\":{\"number\":\"C14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"D1\"}},{\"seat\":{\"number\":\"D2\"}},{\"seat\":{\"number\":\"D3\"}},\"offset\",{\"seat\":{\"number\":\"D5\"}},{\"seat\":{\"number\":\"D6\"}},{\"seat\":{\"number\":\"D7\"}},{\"seat\":{\"number\":\"D8\"}},{\"seat\":{\"number\":\"D9\"}},{\"seat\":{\"number\":\"D10\"}},\"offset\",{\"seat\":{\"number\":\"D12\"}},{\"seat\":{\"number\":\"D13\"}},{\"seat\":{\"number\":\"D14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"E1\"}},{\"seat\":{\"number\":\"E2\"}},{\"seat\":{\"number\":\"E3\"}},\"offset\",{\"seat\":{\"number\":\"E5\"}},{\"seat\":{\"number\":\"E6\"}},{\"seat\":{\"number\":\"E7\"}},{\"seat\":{\"number\":\"E8\"}},{\"seat\":{\"number\":\"E9\"}},{\"seat\":{\"number\":\"E10\"}},\"offset\",{\"seat\":{\"number\":\"E12\"}},{\"seat\":{\"number\":\"E13\"}},{\"seat\":{\"number\":\"E14\"}}]},{\"margin\":true,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"F3\"}},\"offset\",{\"seat\":{\"number\":\"F5\"}},{\"seat\":{\"number\":\"F6\"}},{\"seat\":{\"number\":\"F7\"}},{\"seat\":{\"number\":\"F8\"}},{\"seat\":{\"number\":\"F9\"}},{\"seat\":{\"number\":\"F10\"}},\"offset\",{\"seat\":{\"number\":\"F12\"}},\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"G1\"}},{\"seat\":{\"number\":\"G2\"}},{\"seat\":{\"number\":\"G3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"G12\"}},{\"seat\":{\"number\":\"G13\"}},{\"seat\":{\"number\":\"G14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"H1\"}},{\"seat\":{\"number\":\"H2\"}},{\"seat\":{\"number\":\"H3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"H12\"}},{\"seat\":{\"number\":\"H13\"}},{\"seat\":{\"number\":\"H14\"}}]},{\"margin\":true,\"row\":[{\"seat\":{\"number\":\"I1\"}},{\"seat\":{\"number\":\"I2\"}},{\"seat\":{\"number\":\"I3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"I12\"}},{\"seat\":{\"number\":\"I13\"}},{\"seat\":{\"number\":\"I14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"J1\"}},{\"seat\":{\"number\":\"J2\"}},{\"seat\":{\"number\":\"J3\"}},\"offset\",{\"seat\":{\"number\":\"J5\"}},{\"seat\":{\"number\":\"J6\"}},{\"seat\":{\"number\":\"J7\"}},{\"seat\":{\"number\":\"J8\"}},{\"seat\":{\"number\":\"J9\"}},{\"seat\":{\"number\":\"J10\"}},\"offset\",{\"seat\":{\"number\":\"J12\"}},{\"seat\":{\"number\":\"J13\"}},{\"seat\":{\"number\":\"J14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"K1\"}},{\"seat\":{\"number\":\"K2\"}},{\"seat\":{\"number\":\"K3\"}},\"offset\",{\"seat\":{\"number\":\"K5\"}},{\"seat\":{\"number\":\"K6\"}},{\"seat\":{\"number\":\"K7\"}},{\"seat\":{\"number\":\"K8\"}},{\"seat\":{\"number\":\"K9\"}},{\"seat\":{\"number\":\"K10\"}},\"offset\",{\"seat\":{\"number\":\"K12\"}},{\"seat\":{\"number\":\"K13\"}},{\"seat\":{\"number\":\"K14\"}}]}]', 'C'),
+(4, '[{\"margin\":false,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"A3\"}},{\"seat\":{\"number\":\"A4\"}},{\"seat\":{\"number\":\"A5\"}},{\"seat\":{\"number\":\"A6\"}},{\"seat\":{\"number\":\"A7\"}},{\"seat\":{\"number\":\"A8\"}},\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"B1\"}},{\"seat\":{\"number\":\"B2\"}},{\"seat\":{\"number\":\"B3\"}},{\"seat\":{\"number\":\"B4\"}},{\"seat\":{\"number\":\"B5\"}},{\"seat\":{\"number\":\"B6\"}},{\"seat\":{\"number\":\"B7\"}},{\"seat\":{\"number\":\"B8\"}},{\"seat\":{\"number\":\"B9\"}},{\"seat\":{\"number\":\"B10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"C1\"}},{\"seat\":{\"number\":\"C2\"}},{\"seat\":{\"number\":\"C3\"}},{\"seat\":{\"number\":\"C4\"}},{\"seat\":{\"number\":\"C5\"}},{\"seat\":{\"number\":\"C6\"}},{\"seat\":{\"number\":\"C7\"}},{\"seat\":{\"number\":\"C8\"}},{\"seat\":{\"number\":\"C9\"}},{\"seat\":{\"number\":\"C10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"D1\"}},{\"seat\":{\"number\":\"D2\"}},{\"seat\":{\"number\":\"D3\"}},{\"seat\":{\"number\":\"D4\"}},{\"seat\":{\"number\":\"D5\"}},{\"seat\":{\"number\":\"D6\"}},{\"seat\":{\"number\":\"D7\"}},{\"seat\":{\"number\":\"D8\"}},{\"seat\":{\"number\":\"D9\"}},{\"seat\":{\"number\":\"D10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"E1\"}},{\"seat\":{\"number\":\"E2\"}},{\"seat\":{\"number\":\"E3\"}},{\"seat\":{\"number\":\"E4\"}},{\"seat\":{\"number\":\"E5\"}},{\"seat\":{\"number\":\"E6\"}},{\"seat\":{\"number\":\"E7\"}},{\"seat\":{\"number\":\"E8\"}},{\"seat\":{\"number\":\"E9\"}},{\"seat\":{\"number\":\"E10\"}}]},{\"margin\":true,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"F3\"}},{\"seat\":{\"number\":\"F4\"}},{\"seat\":{\"number\":\"F5\"}},{\"seat\":{\"number\":\"F6\"}},{\"seat\":{\"number\":\"F7\"}},{\"seat\":{\"number\":\"F8\"}},{\"seat\":{\"number\":\"F9\"}},{\"seat\":{\"number\":\"F10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"G1\"}},{\"seat\":{\"number\":\"G2\"}},{\"seat\":{\"number\":\"G3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"G10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"H1\"}},{\"seat\":{\"number\":\"H2\"}},{\"seat\":{\"number\":\"H3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"H10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"I1\"}},{\"seat\":{\"number\":\"I2\"}},{\"seat\":{\"number\":\"I3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"I10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"J1\"}},{\"seat\":{\"number\":\"J2\"}},{\"seat\":{\"number\":\"J3\"}},{\"seat\":{\"number\":\"J4\"}},{\"seat\":{\"number\":\"J5\"}},{\"seat\":{\"number\":\"J6\"}},{\"seat\":{\"number\":\"J7\"}},{\"seat\":{\"number\":\"J8\"}},{\"seat\":{\"number\":\"J9\"}},{\"seat\":{\"number\":\"J10\"}}]},{\"margin\":true,\"row\":[{\"seat\":{\"number\":\"K1\"}},{\"seat\":{\"number\":\"K2\"}},{\"seat\":{\"number\":\"K3\"}},{\"seat\":{\"number\":\"K4\"}},{\"seat\":{\"number\":\"K5\"}},{\"seat\":{\"number\":\"K6\"}},{\"seat\":{\"number\":\"K7\"}},{\"seat\":{\"number\":\"K8\"}},{\"seat\":{\"number\":\"K9\"}},{\"seat\":{\"number\":\"K10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"L1\"}},{\"seat\":{\"number\":\"L2\"}},{\"seat\":{\"number\":\"L3\"}},{\"seat\":{\"number\":\"L4\"}},{\"seat\":{\"number\":\"L5\"}},{\"seat\":{\"number\":\"L6\"}},{\"seat\":{\"number\":\"L7\"}},{\"seat\":{\"number\":\"L8\"}},{\"seat\":{\"number\":\"L9\"}},{\"seat\":{\"number\":\"L10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"M1\"}},{\"seat\":{\"number\":\"M2\"}},{\"seat\":{\"number\":\"M3\"}},{\"seat\":{\"number\":\"M4\"}},{\"seat\":{\"number\":\"M5\"}},{\"seat\":{\"number\":\"M6\"}},{\"seat\":{\"number\":\"M7\"}},{\"seat\":{\"number\":\"M8\"}},{\"seat\":{\"number\":\"M9\"}},{\"seat\":{\"number\":\"M10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"N1\"}},{\"seat\":{\"number\":\"N2\"}},{\"seat\":{\"number\":\"N3\"}},{\"seat\":{\"number\":\"N4\"}},{\"seat\":{\"number\":\"N5\"}},{\"seat\":{\"number\":\"N6\"}},{\"seat\":{\"number\":\"N7\"}},{\"seat\":{\"number\":\"N8\"}},{\"seat\":{\"number\":\"N9\"}},{\"seat\":{\"number\":\"N10\"}}]}]', 'D');
+
+--
 
 -- --------------------------------------------------------
 
@@ -572,36 +578,36 @@ CREATE TABLE `Tickets` (
 --
 
 INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`) VALUES
-(1, b'0', '1D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(8, b'1', '1C', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(9, b'0', '1A', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(10, b'1', '2B', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(11, b'0', '1D', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(12, b'1', '3F', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(13, b'0', '13C', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(15, b'0', '12C', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(16, b'1', '23B', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(17, b'1', '24B', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(19, b'0', '4A', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(26, b'1', '3A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(27, b'1', '4A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(28, b'1', '6D', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(29, b'0', '5D', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed');
+(1, b'0', 'D1', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(2, b'0', 'D2', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(3, b'1', 'B1', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(4, b'0', 'C3', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(5, b'0', 'A1', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(6, b'1', 'F2', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(7, b'0', 'D1', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(8, b'1', 'C1', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(9, b'0', 'A1', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(10, b'1', 'B2', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(11, b'0', 'D1', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(12, b'1', 'F3', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(13, b'0', 'C13', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
+(14, b'1', 'D10', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
+(15, b'0', 'C12', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
+(16, b'1', 'B23', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
+(17, b'1', 'B24', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
+(18, b'0', 'F4', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
+(19, b'0', 'A4', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(20, b'1', 'C2', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(21, b'0', 'B5', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(22, b'1', 'D6', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(23, b'0', 'A3', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(24, b'1', 'B4', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(25, b'1', 'A2', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(26, b'1', 'A3', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(27, b'1', 'A4', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(28, b'1', 'D6', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(29, b'0', 'D5', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(30, b'1', 'B4', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed');
 
 -- --------------------------------------------------------
 
@@ -611,7 +617,7 @@ INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, 
 
 CREATE TABLE `Users` (
   `username` varchar(115) NOT NULL,
-  `password` varchar(130) NOT NULL,
+  `password` varchar(330) NOT NULL,
   `email` varchar(130) NOT NULL,
   `phone_number` int(11) DEFAULT NULL,
   `credit_card` varchar(200) DEFAULT NULL,

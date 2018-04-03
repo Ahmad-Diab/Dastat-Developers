@@ -9,14 +9,24 @@ import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
+import { ReservationComponent } from './booking/reservation/reservation.component';
+import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
+import { FormsModule } from '@angular/forms';
+import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 import { PartiesComponent } from './booking/parties/parties.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild(ContentRoutes)
   ],
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
+    FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent]
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, PartiesComponent]
 })
 

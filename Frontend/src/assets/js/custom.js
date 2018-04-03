@@ -1027,7 +1027,7 @@ function init_MovieList () {
     $('.score').raty({
         width:130, 
         score: 0,
-        path: 'assets/images/rate/',
+        path: '../images/rate/',
         starOff : 'star-off.svg',
         starOn  : 'star-on.svg' 
     });
@@ -1720,7 +1720,7 @@ function init_Rates () {
                 $('.score').raty({
                     width:130, 
                     score: 0,
-                    path: 'assets/images/rate/',
+                    path: '../images/rate/',
                     starOff : 'star-off.svg',
                     starOn  : 'star-on.svg' 
                 });

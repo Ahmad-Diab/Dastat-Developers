@@ -14,15 +14,16 @@ import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
 import { UserService } from './@services/user.service';
 import {BookingService} from "./@services/booking.service";
+import {CookieService} from "angular2-cookie/core";
 import { AuthService } from './@services/auth.service';
 import { AuthGuard } from './@guards/auth.guard';
 import { User } from './@objects/User';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { UsersService } from './@services/users.service';
 import { FilterCinemaService } from './@services/filter-cinema.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
+
 import { PartiesService } from './@services/parties.service';
 
 

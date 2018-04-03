@@ -32,6 +32,7 @@ import { PartiesComponent } from './booking/parties/parties.component';
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
     FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent, FilterCinemaComponent, CinemasListComponent,AboutusComponent,
     MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent]
+
 })
 
 export class ContentModule { }

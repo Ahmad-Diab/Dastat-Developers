@@ -17,7 +17,7 @@ export class UsersService extends HttpService {
   }
   
   viewMyInfo(data){
-    return this.get('users/viewMyInfo/',data);
+    return this.get('users/viewMyInfo',data);
   }
   
 }

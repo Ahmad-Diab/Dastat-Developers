@@ -1,37 +1,53 @@
+<section class="container">
+  <div class="order-container">
+    <h3>Ticket</h3>
 
-        <section class="container">
-          <div class="order-container">
-              <h3>Ticket</h3>
+    <div *ngFor="let ticket of tickets" class="ticket">
+      <div class="ticket-position">
+        <div class="ticket__indecator indecator--pre">
+          <div class="indecator-text pre--text">online ticket</div>
+        </div>
+        <div class="ticket__inner">
 
-              <div *ngFor="let ticket of tickets" class="ticket">
-                  <div class="ticket-position">
-                      <div class="ticket__indecator indecator--pre"><div class="indecator-text pre--text">online ticket</div> </div>
-                      <div class="ticket__inner">
+          <div class="ticket-secondary">
+            <span class="ticket__item">Ticket number
+              <strong class="ticket__number">{{ticket.reservation_id}}</strong>
+            </span>
+            <span class="ticket__item ticket__date">{{ticket.date_time}}</span>
 
-                          <div class="ticket-secondary">
-                              <span class="ticket__item">Ticket number <strong class="ticket__number">{{ticket.reservation_id}}</strong></span>
-                              <span class="ticket__item ticket__date">{{ticket.date_time}}</span>
-                              
-                              <span class="ticket__item">Cinema: <span class="ticket__cinema">{{ticket.cinema_name}}</span></span>
-                              <span class="ticket__item">Hall: <span class="ticket__hall">{{ticket.hall}}</span></span>
-                              <span class="ticket__item ticket__price">price: <strong class="ticket__cost">$60</strong></span>
-                          </div>
-
-                          <div class="ticket-primery">
-                              <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">The Fifth Estate (2013)</strong></span>
-                              <span class="ticket__item ticket__item--primery">Seat: <span class="ticket__place">{{ticket.seat_number}}</span></span>
-                          </div>
-
-
-                      </div>
-                      <div class="ticket__indecator indecator--post"><div class="indecator-text post--text">online ticket</div></div>
-                  </div>
-              </div>
-
-              <div class="ticket-control">
-                  <a href="#" class="watchlist list--download">Download</a>
-                  <a href="#" class="watchlist list--print">Print</a>
-              </div>
-
+            <span class="ticket__item">Cinema:
+              <span class="ticket__cinema">{{ticket.cinema_name}}</span>
+            </span>
+            <span class="ticket__item">Hall:
+              <span class="ticket__hall">{{ticket.hall}}</span>
+            </span>
+            <span class="ticket__item ticket__price">price:
+              <strong class="ticket__cost">$60</strong>
+            </span>
           </div>
-      </section>
+
+          <div class="ticket-primery">
+            <span class="ticket__item ticket__item--primery ticket__film">Film
+              <br>
+              <strong class="ticket__movie">The Fifth Estate (2013)</strong>
+            </span>
+            <span class="ticket__item ticket__item--primery">Seat:
+              <span class="ticket__place">{{ticket.seat_number}}</span>
+            </span>
+          </div>
+
+
+        </div>
+        <div class="ticket__indecator indecator--post">
+          <div class="indecator-text post--text">online ticket</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticket-control">
+      <a href="#" class="watchlist list--download">Download</a>
+      <a href="#" class="watchlist list--print">Print</a>
+    </div>
+
+  </div>
+</section>

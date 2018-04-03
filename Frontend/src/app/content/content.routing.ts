@@ -9,6 +9,7 @@ import {ReservationComponent} from "./booking/reservation/reservation.component"
 import { SigninComponent } from './users/signin/signin.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
+import { PartiesComponent } from './booking/parties/parties.component';
 import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
 import { SearchComponent } from './search/search.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
@@ -29,7 +30,7 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'booking/reservation',
   component: ReservationComponent
-},{
+}, {
   path: 'movies/list',
   component: MoviesListComponent
 },{
@@ -59,4 +60,7 @@ export const ContentRoutes: Routes = [{
 },{
   path : 'info',
   component : MovieInfoComponent
+},{
+  path: 'booking/parties',
+  component: PartiesComponent
 }];

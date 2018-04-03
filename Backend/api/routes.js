@@ -7,7 +7,7 @@ var Seat = require('./controllers/SeatController');
 var UserBooking = require('./Controllers/UserBookingController');
 var Authentication = require('./controllers/Authentication');
 var Search = require('./controllers/SearchController');
-var Movie = require('./controllers/MovieController')
+var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
@@ -72,9 +72,6 @@ router.get('/movies/Drama',Movie.getMoviesDrama);
 router.get('/movies/Horror',Movie.getMoviesHorror);
 router.get('/movies/Thriller',Movie.getMoviesThriller);
 router.get('/movies/Bio',Movie.getMoviesBiography);
-
-
-
 
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking

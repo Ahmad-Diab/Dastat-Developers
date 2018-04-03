@@ -20,6 +20,7 @@ import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.compon
 import { SearchComponent } from './search/search.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
+import { PartiesComponent } from './booking/parties/parties.component';
 
 @NgModule({
   imports: [
@@ -30,8 +31,7 @@ import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
     FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent, FilterCinemaComponent, CinemasListComponent,AboutusComponent,
-    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent]
-
+    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent]
 
 })
 

@@ -24,6 +24,8 @@ import { CinemaslistService } from './@services/cinemaslist.service';
 import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
 
+import { PartiesService } from './@services/parties.service';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,6 @@ import { SearchService } from './@services/search.service';
   CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
     AuthService, AuthGuard, CookieService, UsersService, FilterCinemaService,
     CinemaslistService,MovieInfoService,SearchService],
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }

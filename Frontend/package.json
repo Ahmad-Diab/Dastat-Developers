@@ -31,9 +31,8 @@
     "popper.js": "^1.14.1",
     "raty-js": "^2.8.0",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.21",
-    "angular2-cookie": "latest"
-  },
+    "zone.js": "^0.8.21"
+    },
   "devDependencies": {
     "@angular/cli": "1.5.6",
     "@angular/compiler-cli": "^5.1.0",

@@ -29,7 +29,7 @@ export class FilterCinemaComponent implements OnInit {
       });}
         else if(this.sorting_item == 2){
           this.FilterCinemaService.filterByLocation(this.searchValue).subscribe((response) => {
-            this.cinemas = response;  
+            this.cinemas = response; 
           });
         }
       

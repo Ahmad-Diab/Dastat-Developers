@@ -14,7 +14,7 @@ module.exports.searchByKeyword = function(req,res,next){
     var searchKeyN = req.params.searchKeyword;              // used in comparison to int columns usin =
     var sqlMovie = 'SELECT title,genre,imagePath,year,rating FROM Movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
     var sqlCinema = 'SELECT * FROM Cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?';
-    var sqlActor = 'SELECT name FROM Actors WHERE name LIKE ?'
+    var sqlActor = 'SELECT name,age,bio FROM Actors WHERE name LIKE ?'
     database.query(sqlMovie, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, movieResult, fields){
         if(error) return next(error);
         database.query(sqlCinema, [searchKeyS,searchKeyS,searchKeyS], function(error, cinemaResult, fields){

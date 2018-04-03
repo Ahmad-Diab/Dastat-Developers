@@ -23,6 +23,7 @@ import { FilterCinemaService } from './@services/filter-cinema.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
+import { PartiesService } from './@services/parties.service';
 
 
 @NgModule({

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 01, 2018 at 05:13 PM
+-- Generation Time: Apr 02, 2018 at 11:38 PM
 -- Server version: 5.7.21-0ubuntu0.17.10.1
 -- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
@@ -56,7 +56,7 @@ INSERT INTO `Actors` (`name`, `age`, `birth_date`, `gender`, `bio`) VALUES
 --
 
 CREATE TABLE `Actors_Movies` (
-  `actor` varchar(15) NOT NULL,
+  `actor` varchar(115) NOT NULL,
   `movie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -68,7 +68,7 @@ CREATE TABLE `Actors_Movies` (
 
 CREATE TABLE `Admins` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(230) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
@@ -101,6 +101,48 @@ CREATE TABLE `Admins_Cinemas` (
   `cinema_name` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Admins_Cinemas`
+--
+
+INSERT INTO `Admins_Cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
+('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
+('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
+('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
+('Amir_Karara', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Amir_Karara', 'New Cairo', 'Point 90'),
+('Amir_Karara', 'Al Haram', 'Pharoahs Cinema'),
+('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
+('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
+('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
+('Amir_Karara', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Amir_Karara', 'New Cairo', 'Point 90'),
+('Amir_Karara', 'Al Haram', 'Pharoahs Cinema'),
+('Andrew_Shady', 'New Cairo', 'Galaxy Cinema'),
+('Andrew_Shady', 'Mokattam', 'Cinema Mawlana'),
+('Andrew_Shady', '9th of Mayo', 'Mayo Movies'),
+('Andrew_Shady', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Andrew_Shady', 'New Cairo', 'Point 90'),
+('Andrew_Shady', 'Al Haram', 'Pharoahs Cinema'),
+('Israa_Yasser', 'New Cairo', 'Galaxy Cinema'),
+('Israa_Yasser', 'Mokattam', 'Cinema Mawlana'),
+('Israa_Yasser', '9th of Mayo', 'Mayo Movies'),
+('Israa_Yasser', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Israa_Yasser', 'New Cairo', 'Point 90'),
+('Israa_Yasser', 'Al Haram', 'Pharoahs Cinema'),
+('Laila_Khaled', 'New Cairo', 'Galaxy Cinema'),
+('Laila_Khaled', 'Mokattam', 'Cinema Mawlana'),
+('Laila_Khaled', '9th of Mayo', 'Mayo Movies'),
+('Laila_Khaled', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Laila_Khaled', 'New Cairo', 'Point 90'),
+('Laila_Khaled', 'Al Haram', 'Pharoahs Cinema'),
+('Yehia_Gamal', 'New Cairo', 'Galaxy Cinema'),
+('Yehia_Gamal', 'Mokattam', 'Cinema Mawlana'),
+('Yehia_Gamal', '9th of Mayo', 'Mayo Movies'),
+('Yehia_Gamal', 'Old Cairo', 'El Zaaeem El Cinema'),
+('Yehia_Gamal', 'New Cairo', 'Point 90'),
+('Yehia_Gamal', 'Al Haram', 'Pharoahs Cinema');
+
 -- --------------------------------------------------------
 
 --
@@ -112,20 +154,21 @@ CREATE TABLE `Cinemas` (
   `address` varchar(200) NOT NULL,
   `name` varchar(115) NOT NULL,
   `number_of_halls` int(11) DEFAULT NULL,
-  `company` varchar(30) NOT NULL
+  `company` varchar(30) NOT NULL,
+  `imagePath` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Cinemas`
 --
 
-INSERT INTO `Cinemas` (`location`, `address`, `name`, `number_of_halls`, `company`) VALUES
-('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, 'Rainassance'),
-('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, 'Egyptian Producers'),
-('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, 'Rainassance'),
-('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, 'Galaxco'),
-('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, 'Galaxco'),
-('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, 'Rainassance');
+INSERT INTO `Cinemas` (`location`, `address`, `name`, `number_of_halls`, `company`, `imagePath`) VALUES
+('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, 'Rainassance', ''),
+('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, 'Egyptian Producers', ''),
+('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, 'Rainassance', ''),
+('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, 'Galaxco', ''),
+('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, 'Galaxco', ''),
+('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, 'Rainassance', '');
 
 -- --------------------------------------------------------
 
@@ -224,36 +267,36 @@ CREATE TABLE `Movies` (
 --
 
 INSERT INTO `Movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `imagePath`, `cast`, `year`, `feature`, `release_date`, `rating`, `status`) VALUES
-(1, 'Ready Player One', 2.2, 'Action', 'When the creator of a virtual reality world called the OASIS dies, he releases a video in which he challenges all OASIS users to find his Easter Egg, which will give the finder his fortune.', 'https://ibb.co/m0Ti77', 'Tye Sheridan, Olivia Cooke, Ben Mendelsohn', 2018, 3, '2018-03-18 00:00:00', 8, 'PENDING'),
-(2, 'I Can Only Imagine', 1.5, 'Drama', 'The inspiring and unknown true story behind MercyMes beloved, chart topping song that brings ultimate hope to so many is a gripping reminder of the power of true forgiveness.', 'https://ibb.co/k9vBc7', 'Dennis Quaid, J. Michael Finley, Brody Rose', 2018, 3, '2018-03-15 00:00:00', 7.6, 'PENDING'),
-(3, 'Tomb Raider', 1.58, 'Action', 'Lara Croft, the fiercely independent daughter of a missing adventurer, must push herself beyond her limits when she finds herself on the island where her father disappeared.', 'https://ibb.co/kL49VS', 'Alicia Vikander, Dominic West, Walton Goggins', 2018, 3, '2018-03-07 00:00:00', 6.8, 'PENDING'),
-(4, 'Love, Simon', 1.5, 'Comedy', 'Simon Spier keeps a huge secret from his family, his friends, and all of his classmates: he is gay. When that secret is threatened, Simon must face everyone and come to terms with his identity.', 'https://ibb.co/dRVGAS', 'Nick Robinson, Jennifer Garner, Josh Duhamel', 2018, 3, '2018-03-16 00:00:00', 8.1, 'PENDING'),
-(5, 'Pacific Rim Uprising', 1.51, 'Action', 'Jake Pentecost, son of Stacker Pentecost, reunites with Mako Mori to lead a new generation of Jaeger pilots, including rival Lambert and 15-year-old hacker Amara, against a new Kaiju threat.', 'https://ibb.co/cLYuVS', 'John Boyega, Scott Eastwood, Cailee Spaeny', 2018, 3, '2018-03-21 00:00:00', 6, 'PENDING'),
-(6, 'Tyler Perrys Acrimony', 2, 'Thriller', 'A faithful wife, tired of standing by her devious husband, is enraged when it becomes clear she has been betrayed.', 'https://ibb.co/heZeFS', 'Taraji P. Henson, Lyriq Bent, Crystle Stewar', 2018, 3, '2018-03-30 00:00:00', 4.6, 'PENDING'),
-(7, 'Midnight Sun', 1.31, 'Drama', 'A 17-year-old girl suffers from a condition that prevents her from being out in the sunlight.', 'https://ibb.co/iYNuh7', 'Bella Thorne, Patrick Schwarzenegger, Rob Riggle', 2018, 3, '2018-03-22 00:00:00', 6.1, 'PENDING'),
-(8, 'Unsane', 1.38, 'Horror', 'A young woman is involuntarily committed to a mental institution, where she is confronted by her greatest fear--but is it real or a product of her delusion?', 'https://ibb.co/cXpMvS', 'Claire Foy, Joshua Leonard, Jay Pharoah', 2018, 3, '2018-03-21 00:00:00', 6.8, 'PENDING'),
-(9, 'God is not Dead: A Light in Darkness', 2, 'Drama', 'Pastor Dave responds to the unimaginable tragedy of having his church, located on the grounds of the local university, burned down.', 'https://ibb.co/bFrJaS', 'David A.R. White, John Corbett, Shane Harper', 2018, 3, '2018-03-30 00:00:00', 2.5, 'PENDING'),
-(10, 'Pole, Apostle of Christ', 1.48, 'Drama', 'The story covers Paul going from the most infamous persecutor of Christians to Jesus Christs most influential apostle.', 'https://ibb.co/eE5apn', 'Jim Caviezel, James Faulkner, Olivier Martinez', 2018, 3, '2018-03-23 00:00:00', 7, 'PENDING'),
-(11, 'The Hurricane Heist', 1.43, 'Thriller', 'Thieves attempt a massive heist against the U.S. Treasury as a Category 5 hurricane approaches one of its Mint facilities.', 'https://ibb.co/dD0Zh7', 'Toby Kebbell, Maggie Grace, Ryan Kwanten', 2018, 3, '2018-03-09 00:00:00', 4.9, 'PENDING'),
-(12, 'The Strangers: Prey at Night', 1.25, 'Horror', 'A family of four staying at a secluded mobile home park for the night are stalked and then hunted by three masked psychopaths.', 'https://ibb.co/hZ1os7', 'Christina Hendricks, Bailee Madison, Martin Henderson', 2018, 3, '2018-03-09 00:00:00', 5.8, 'PENDING'),
-(13, 'Sherlock Gnomes', 1.26, 'Animation', 'Garden gnomes, Gnomeo & Juliet, recruit renowned detective Sherlock Gnomes to investigate the mysterious disappearance of other garden ornaments.', 'https://ibb.co/iARzzn', 'Kelly Asbury, Mary J. Blige, Emily Blunt', 2018, 3, '2018-03-23 00:00:00', 4.8, 'PENDING'),
-(14, 'A Wrinkle in Time', 1.49, 'Adventure', 'After the disappearance of her scientist father, three peculiar beings send Meg, her brother, and her friend to space in order to find him. ', 'https://ibb.co/kVmos7', 'Storm Reid, Oprah Winfrey, Reese Witherspoon', 2018, 3, '2018-03-09 00:00:00', 4.2, 'PENDING'),
-(15, 'Birthmarked', 1.3, 'Comedy', 'Two scientists raise 3 children contrarily to their genetic tendencies to prove the ultimate power of nurture over nature. ', 'https://ibb.co/eahxKn', 'Matthew Goode, Toni Collette, Fionnula Flanagan', 2018, 3, '2018-03-30 00:00:00', 5.5, 'PENDING'),
-(16, 'Detroit', 2.33, 'Crime', 'Fact-based drama set during the 1967 Detroit riots in which a group of rogue police officers respond to a complaint with retribution rather than justice on their minds.', 'https://ibb.co/gyxuX7', 'John Boyega, Anthony Mackie, Algee Smith', 2017, 0, '2017-08-04 00:00:00', 7.4, 'PENDING'),
-(17, 'Logan', 2.33, 'Action', 'In the near future, a weary Logan cares for an ailing Professor X,somewhere on the Mexican border.However, Logans attempts to hide from the world, and his legacy,are upended when a young mutant arrives, pursued by dark forces', 'https://ibb.co/fAMtQS', 'Hugh Jackman, Patrick Stewart, Dafne Keen', 2017, 0, '2017-03-03 00:00:00', 8.1, 'PENDING'),
-(18, 'Dunkirk', 1.46, 'Action', 'Allied soldiers from Belgium, the British Empire and France are surrounded by the German Army, and evacuated during a fierce battle in World War II.', 'https://ibb.co/i0BhKn', 'Fionn Whitehead, Barry Keoghan, Mark Rylance', 2017, 0, '2017-07-21 00:00:00', 8, 'PENDING'),
-(19, 'Getout', 1.44, 'Horror', 'A young African-American visits his white girlfriends parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.', 'https://ibb.co/j8E2Kn', 'Daniel Kaluuya, Allison Williams, Bradley Whitford', 2017, 0, '2017-02-24 00:00:00', 7.7, 'PENDING'),
-(20, 'The post', 1.56, 'Biography', 'A cover-up that spanned four U.S. Presidents pushed the countrys first female newspaperpublisher and a hard-driving editor to join an unprecedented battle between the press and the government.', 'https://ibb.co/bJPDQS', 'Meryl Streep, Tom Hanks, Sarah Paulson ', 2017, 0, '2017-01-12 00:00:00', 7.3, 'PENDING'),
-(21, 'Acts of Violence', 1.26, 'Action', 'When his fiancee is kidnapped by human traffickers, Roman (Ashton Holmes) and his ex-military brothers set out to track her down and save her before it is too late.', 'https://ibb.co/m7Spzn', 'Bruce Willis, Cole Hauser, Shawn Ashmore ', 2018, 1, '2018-01-12 00:00:00', 5, 'PENDING'),
-(22, 'Forever My Girl', 1.48, 'Drama', 'After being gone for a decade a country star returns home to the love he left behind.', 'https://ibb.co/eczV5S', 'Alex Roe, Jessica Rothe, John Benjamin Hickey ', 2018, 1, '2018-01-19 00:00:00', 6.1, 'PENDING'),
-(23, '12 Strong', 2.1, 'Action', '12 Strong tells the story of the first Special Forces team deployed to Afghanistan after 9/11; under the leadership of a new captain, the team must work with an Afghan warlord to take down for the Taliban.', 'https://ibb.co/jT9xkS', 'Chris Hemsworth, Michael Shannon, Michael Peña  ', 2018, 1, '2018-01-19 00:00:00', 7, 'PENDING'),
-(24, 'Maze Runner: The Death Cure', 2.21, 'Action', 'Young hero Thomas embarks on a mission to find a cure for a deadly disease known as the \"Flare\".', 'https://ibb.co/bG6os7', 'Dylan O Brien, Ki Hong Lee, Kaya Scodelario   ', 2018, 1, '2018-01-19 00:00:00', 7, 'PENDING'),
-(25, 'Den of Thieves', 2.2, 'Action', 'A gritty crime saga which follows the lives of an elite unit of the LA County Sheriff s Dept. and the state s most successful bank robbery crew as the outlaws plan a seemingly impossible heist on the Federal Reserve Bank.', 'https://ibb.co/bQjKzn', 'Gerard Butler, Pablo Schreiber, O Shea Jackson Jr.', 2018, 1, '2018-01-19 00:00:00', 7.1, 'PENDING'),
-(26, 'Black Panther', 2.14, 'Action', 'T Challa, the King of Wakanda, rises to the throne in the isolated, technologically advanced African nation, but his claim is challenged by a vengeful outsider who was a childhood victim of T Challa s father s mistake.', 'https://ibb.co/gbfsKn', 'Chadwick Boseman, Michael B. Jordan, Lupita Nyong', 2018, 2, '2018-02-16 00:00:00', 7.8, 'PENDING'),
-(27, 'Peter Rabbit', 1.35, 'Animation', 'Feature adaptation of Beatrix Potters classic tale of a rebellious rabbit trying to sneak into a farmers vegetable garden.', 'https://ibb.co/gK2BC7', 'James Corden, Fayssal Bazzi, Domhnall Gleeson', 2018, 2, '2018-02-09 00:00:00', 6.5, 'PENDING'),
-(28, 'Game Night', 1.4, 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://ibb.co/kgGSkS', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'PENDING'),
-(29, 'Annihilation', 1.55, 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://ibb.co/kEXpzn', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'PENDING'),
-(30, 'Every Day', 1.37, 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://ibb.co/b8c05S', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'PENDING');
+(1, 'Ready Player One', 2.2, 'Action', 'When the creator of a virtual reality world called the OASIS dies, he releases a video in which he challenges all OASIS users to find his Easter Egg, which will give the finder his fortune.', 'https://image.ibb.co/gVP1un/ready_Player_One.jpg', 'Tye Sheridan, Olivia Cooke, Ben Mendelsohn', 2018, 3, '2018-03-18 00:00:00', 8, 'PENDING'),
+(2, 'I Can Only Imagine', 1.5, 'Drama', 'The inspiring and unknown true story behind MercyMes beloved, chart topping song that brings ultimate hope to so many is a gripping reminder of the power of true forgiveness.', 'https://image.ibb.co/g20Njn/ICan_Only_Imagine.jpg', 'Dennis Quaid, J. Michael Finley, Brody Rose', 2018, 3, '2018-03-15 00:00:00', 7.6, 'PENDING'),
+(3, 'Tomb Raider', 1.58, 'Action', 'Lara Croft, the fiercely independent daughter of a missing adventurer, must push herself beyond her limits when she finds herself on the island where her father disappeared.', 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg', 'Alicia Vikander, Dominic West, Walton Goggins', 2018, 3, '2018-03-07 00:00:00', 6.8, 'PENDING'),
+(4, 'Love, Simon', 1.5, 'Comedy', 'Simon Spier keeps a huge secret from his family, his friends, and all of his classmates: he is gay. When that secret is threatened, Simon must face everyone and come to terms with his identity.', 'https://image.ibb.co/fVygc7/Love_Simon.jpg', 'Nick Robinson, Jennifer Garner, Josh Duhamel', 2018, 3, '2018-03-16 00:00:00', 8.1, 'PENDING'),
+(5, 'Pacific Rim Uprising', 1.51, 'Action', 'Jake Pentecost, son of Stacker Pentecost, reunites with Mako Mori to lead a new generation of Jaeger pilots, including rival Lambert and 15-year-old hacker Amara, against a new Kaiju threat.', 'https://image.ibb.co/fYSzx7/Pacific_Rim.jpg', 'John Boyega, Scott Eastwood, Cailee Spaeny', 2018, 3, '2018-03-21 00:00:00', 6, 'PENDING'),
+(6, 'Tyler Perrys Acrimony', 2, 'Thriller', 'A faithful wife, tired of standing by her devious husband, is enraged when it becomes clear she has been betrayed.', 'https://image.ibb.co/cHDvpn/Tyler_Perrys_Acrimony.jpg', 'Taraji P. Henson, Lyriq Bent, Crystle Stewar', 2018, 3, '2018-03-30 00:00:00', 4.6, 'PENDING'),
+(7, 'Midnight Sun', 1.31, 'Drama', 'A 17-year-old girl suffers from a condition that prevents her from being out in the sunlight.', 'https://image.ibb.co/eB19FS/Midnight_Sun.jpg', 'Bella Thorne, Patrick Schwarzenegger, Rob Riggle', 2018, 3, '2018-03-22 00:00:00', 6.1, 'PENDING'),
+(8, 'Unsane', 1.38, 'Horror', 'A young woman is involuntarily committed to a mental institution, where she is confronted by her greatest fear--but is it real or a product of her delusion?', 'https://image.ibb.co/c1xVpn/Unsane.jpg', 'Claire Foy, Joshua Leonard, Jay Pharoah', 2018, 3, '2018-03-21 00:00:00', 6.8, 'PENDING'),
+(9, 'God is not Dead: A Light in Darkness', 2, 'Drama', 'Pastor Dave responds to the unimaginable tragedy of having his church, located on the grounds of the local university, burned down.', 'https://image.ibb.co/nR94FS/God_Is_Not_Dead_A_Light_In_Darkness.jpg', 'David A.R. White, John Corbett, Shane Harper', 2018, 3, '2018-03-30 00:00:00', 2.5, 'PENDING'),
+(10, 'Paul, Apostle of Christ', 1.48, 'Drama', 'The story covers Paul going from the most infamous persecutor of Christians to Jesus Christs most influential apostle.', 'https://image.ibb.co/dgU1Un/poly.jpg', 'Jim Caviezel, James Faulkner, Olivier Martinez', 2018, 3, '2018-03-23 00:00:00', 7, 'PENDING'),
+(11, 'The Hurricane Heist', 1.43, 'Thriller', 'Thieves attempt a massive heist against the U.S. Treasury as a Category 5 hurricane approaches one of its Mint facilities.', 'https://image.ibb.co/ezJLN7/HURRICANEHEIST_QUAD_preview_600x450.jpg', 'Toby Kebbell, Maggie Grace, Ryan Kwanten', 2018, 3, '2018-03-09 00:00:00', 4.9, 'PENDING'),
+(12, 'The Strangers: Prey at Night', 1.25, 'Horror', 'A family of four staying at a secluded mobile home park for the night are stalked and then hunted by three masked psychopaths.', 'https://image.ibb.co/kkBA5S/strangerset1.jpg', 'Christina Hendricks, Bailee Madison, Martin Henderson', 2018, 3, '2018-03-09 00:00:00', 5.8, 'PENDING'),
+(13, 'Sherlock Gnomes', 1.26, 'Animation', 'Garden gnomes, Gnomeo & Juliet, recruit renowned detective Sherlock Gnomes to investigate the mysterious disappearance of other garden ornaments.', 'https://image.ibb.co/fMgos7/index.jpg', 'Kelly Asbury, Mary J. Blige, Emily Blunt', 2018, 3, '2018-03-23 00:00:00', 4.8, 'PENDING'),
+(14, 'A Wrinkle in Time', 1.49, 'Adventure', 'After the disappearance of her scientist father, three peculiar beings send Meg, her brother, and her friend to space in order to find him. ', 'https://image.ibb.co/gjGA5S/index.jpg', 'Storm Reid, Oprah Winfrey, Reese Witherspoon', 2018, 3, '2018-03-09 00:00:00', 4.2, 'PENDING'),
+(15, 'Birthmarked', 1.3, 'Comedy', 'Two scientists raise 3 children contrarily to their genetic tendencies to prove the ultimate power of nurture over nature. ', 'https://image.ibb.co/eyrren/birth_Marked.jpg', 'Matthew Goode, Toni Collette, Fionnula Flanagan', 2018, 3, '2018-03-30 00:00:00', 5.5, 'PENDING'),
+(16, 'Detroit', 2.33, 'Crime', 'Fact-based drama set during the 1967 Detroit riots in which a group of rogue police officers respond to a complaint with retribution rather than justice on their minds.', 'https://image.ibb.co/kDagC7/indexx.jpg', 'John Boyega, Anthony Mackie, Algee Smith', 2017, 0, '2017-08-04 00:00:00', 7.4, 'PENDING'),
+(17, 'Logan', 2.33, 'Action', 'In the near future, a weary Logan cares for an ailing Professor X,somewhere on the Mexican border.However, Logans attempts to hide from the world, and his legacy,are upended when a young mutant arrives, pursued by dark forces', 'https://image.ibb.co/icxBC7/170244.jpg', 'Hugh Jackman, Patrick Stewart, Dafne Keen', 2017, 0, '2017-03-03 00:00:00', 8.1, 'PENDING'),
+(18, 'Dunkirk', 1.46, 'Action', 'Allied soldiers from Belgium, the British Empire and France are surrounded by the German Army, and evacuated during a fierce battle in World War II.', 'https://image.ibb.co/ggHNKn/Christopher_Segunda_Guerra_Mundial_Dunkerque_MEDIMA20170718_0058_31.jpg', 'Fionn Whitehead, Barry Keoghan, Mark Rylance', 2017, 0, '2017-07-21 00:00:00', 8, 'PENDING'),
+(19, 'Getout', 1.44, 'Horror', 'A young African-American visits his white girlfriends parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.', 'https://image.ibb.co/gJUrC7/indeex.jpg', 'Daniel Kaluuya, Allison Williams, Bradley Whitford', 2017, 0, '2017-02-24 00:00:00', 7.7, 'PENDING'),
+(20, 'The post', 1.56, 'Biography', 'A cover-up that spanned four U.S. Presidents pushed the countrys first female newspaperpublisher and a hard-driving editor to join an unprecedented battle between the press and the government.', 'https://image.ibb.co/dE9f5S/indyex.jpg', 'Meryl Streep, Tom Hanks, Sarah Paulson ', 2017, 0, '2017-01-12 00:00:00', 7.3, 'PENDING'),
+(21, 'Acts of Violence', 1.26, 'Action', 'When his fiancee is kidnapped by human traffickers, Roman (Ashton Holmes) and his ex-military brothers set out to track her down and save her before it is too late.', 'https://image.ibb.co/cbSYQS/indeyyx.jpg', 'Bruce Willis, Cole Hauser, Shawn Ashmore ', 2018, 1, '2018-01-12 00:00:00', 5, 'PENDING'),
+(22, 'Forever My Girl', 1.48, 'Drama', 'After being gone for a decade a country star returns home to the love he left behind.', 'https://image.ibb.co/jPDq5S/FOREVER_MY_GIRL_1024x576.jpg', 'Alex Roe, Jessica Rothe, John Benjamin Hickey ', 2018, 1, '2018-01-19 00:00:00', 6.1, 'PENDING'),
+(23, '12 Strong', 2.1, 'Action', '12 Strong tells the story of the first Special Forces team deployed to Afghanistan after 9/11; under the leadership of a new captain, the team must work with an Afghan warlord to take down for the Taliban.', 'https://image.ibb.co/hm7iQS/12_Strong_2018_movie_poster.jpg', 'Chris Hemsworth, Michael Shannon, Michael Peña  ', 2018, 1, '2018-01-19 00:00:00', 7, 'PENDING'),
+(24, 'Maze Runner: The Death Cure', 2.21, 'Action', 'Young hero Thomas embarks on a mission to find a cure for a deadly disease known as the \"Flare\".', 'https://image.ibb.co/dpgMC7/indyeuyx.jpg', 'Dylan O Brien, Ki Hong Lee, Kaya Scodelario   ', 2018, 1, '2018-01-19 00:00:00', 7, 'PENDING'),
+(25, 'Den of Thieves', 2.2, 'Action', 'A gritty crime saga which follows the lives of an elite unit of the LA County Sheriff s Dept. and the state s most successful bank robbery crew as the outlaws plan a seemingly impossible heist on the Federal Reserve Bank.', 'https://image.ibb.co/d53q5S/denofthievesheader.jpg', 'Gerard Butler, Pablo Schreiber, O Shea Jackson Jr.', 2018, 1, '2018-01-19 00:00:00', 7.1, 'PENDING'),
+(26, 'Black Panther', 2.14, 'Action', 'T Challa, the King of Wakanda, rises to the throne in the isolated, technologically advanced African nation, but his claim is challenged by a vengeful outsider who was a childhood victim of T Challa s father s mistake.', 'https://image.ibb.co/cOmos7/pt_blackpanther_characterposter_panther_123cbd2f.jpg', 'Chadwick Boseman, Michael B. Jordan, Lupita Nyong', 2018, 2, '2018-02-16 00:00:00', 7.8, 'PENDING'),
+(27, 'Peter Rabbit', 1.35, 'Animation', 'Feature adaptation of Beatrix Potters classic tale of a rebellious rabbit trying to sneak into a farmers vegetable garden.', 'https://image.ibb.co/m4Xpzn/inoidex.jpg', 'James Corden, Fayssal Bazzi, Domhnall Gleeson', 2018, 2, '2018-02-09 00:00:00', 6.5, 'PENDING'),
+(28, 'Game Night', 1.4, 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'PENDING'),
+(29, 'Annihilation', 1.55, 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'PENDING'),
+(30, 'Every Day', 1.37, 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -267,6 +310,162 @@ CREATE TABLE `Movies_in_Cinemas` (
   `cinema_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Movies_in_Cinemas`
+--
+
+INSERT INTO `Movies_in_Cinemas` (`movie`, `cinema_location`, `cinema_name`) VALUES
+(1, 'New Cairo', 'Galaxy Cinema'),
+(1, 'Mokattam', 'Cinema Mawlana'),
+(1, '9th of Mayo', 'Mayo Movies'),
+(1, 'Old Cairo', 'El Zaaeem El Cinema'),
+(1, 'New Cairo', 'Point 90'),
+(1, 'Al Haram', 'Pharoahs Cinema'),
+(2, 'New Cairo', 'Galaxy Cinema'),
+(2, 'Mokattam', 'Cinema Mawlana'),
+(2, '9th of Mayo', 'Mayo Movies'),
+(2, 'Old Cairo', 'El Zaaeem El Cinema'),
+(2, 'New Cairo', 'Point 90'),
+(2, 'Al Haram', 'Pharoahs Cinema'),
+(3, 'New Cairo', 'Galaxy Cinema'),
+(3, 'Mokattam', 'Cinema Mawlana'),
+(3, '9th of Mayo', 'Mayo Movies'),
+(3, 'Old Cairo', 'El Zaaeem El Cinema'),
+(3, 'New Cairo', 'Point 90'),
+(3, 'Al Haram', 'Pharoahs Cinema'),
+(4, 'New Cairo', 'Galaxy Cinema'),
+(4, 'Mokattam', 'Cinema Mawlana'),
+(4, '9th of Mayo', 'Mayo Movies'),
+(4, 'Old Cairo', 'El Zaaeem El Cinema'),
+(4, 'New Cairo', 'Point 90'),
+(4, 'Al Haram', 'Pharoahs Cinema'),
+(5, 'New Cairo', 'Galaxy Cinema'),
+(5, 'Mokattam', 'Cinema Mawlana'),
+(5, '9th of Mayo', 'Mayo Movies'),
+(5, 'Old Cairo', 'El Zaaeem El Cinema'),
+(5, 'New Cairo', 'Point 90'),
+(5, 'Al Haram', 'Pharoahs Cinema'),
+(6, 'New Cairo', 'Galaxy Cinema'),
+(6, 'Mokattam', 'Cinema Mawlana'),
+(6, '9th of Mayo', 'Mayo Movies'),
+(6, 'Old Cairo', 'El Zaaeem El Cinema'),
+(6, 'New Cairo', 'Point 90'),
+(6, 'Al Haram', 'Pharoahs Cinema'),
+(7, 'New Cairo', 'Galaxy Cinema'),
+(7, 'Mokattam', 'Cinema Mawlana'),
+(7, '9th of Mayo', 'Mayo Movies'),
+(7, 'Old Cairo', 'El Zaaeem El Cinema'),
+(7, 'New Cairo', 'Point 90'),
+(7, 'Al Haram', 'Pharoahs Cinema'),
+(8, 'New Cairo', 'Galaxy Cinema'),
+(8, 'Mokattam', 'Cinema Mawlana'),
+(8, '9th of Mayo', 'Mayo Movies'),
+(8, 'Old Cairo', 'El Zaaeem El Cinema'),
+(8, 'New Cairo', 'Point 90'),
+(8, 'Al Haram', 'Pharoahs Cinema'),
+(9, 'New Cairo', 'Galaxy Cinema'),
+(9, 'Mokattam', 'Cinema Mawlana'),
+(9, '9th of Mayo', 'Mayo Movies'),
+(9, 'Old Cairo', 'El Zaaeem El Cinema'),
+(9, 'New Cairo', 'Point 90'),
+(9, 'Al Haram', 'Pharoahs Cinema'),
+(10, 'New Cairo', 'Galaxy Cinema'),
+(10, 'Mokattam', 'Cinema Mawlana'),
+(10, '9th of Mayo', 'Mayo Movies'),
+(10, 'Old Cairo', 'El Zaaeem El Cinema'),
+(10, 'New Cairo', 'Point 90'),
+(10, 'Al Haram', 'Pharoahs Cinema'),
+(11, 'New Cairo', 'Galaxy Cinema'),
+(11, 'Mokattam', 'Cinema Mawlana'),
+(11, '9th of Mayo', 'Mayo Movies'),
+(11, 'Old Cairo', 'El Zaaeem El Cinema'),
+(11, 'New Cairo', 'Point 90'),
+(11, 'Al Haram', 'Pharoahs Cinema'),
+(12, 'New Cairo', 'Galaxy Cinema'),
+(12, 'Mokattam', 'Cinema Mawlana'),
+(12, '9th of Mayo', 'Mayo Movies'),
+(12, 'Old Cairo', 'El Zaaeem El Cinema'),
+(12, 'New Cairo', 'Point 90'),
+(12, 'Al Haram', 'Pharoahs Cinema'),
+(13, 'New Cairo', 'Galaxy Cinema'),
+(13, 'Mokattam', 'Cinema Mawlana'),
+(13, '9th of Mayo', 'Mayo Movies'),
+(13, 'Old Cairo', 'El Zaaeem El Cinema'),
+(13, 'New Cairo', 'Point 90'),
+(13, 'Al Haram', 'Pharoahs Cinema'),
+(14, 'New Cairo', 'Galaxy Cinema'),
+(14, 'Mokattam', 'Cinema Mawlana'),
+(14, '9th of Mayo', 'Mayo Movies'),
+(14, 'Old Cairo', 'El Zaaeem El Cinema'),
+(14, 'New Cairo', 'Point 90'),
+(14, 'Al Haram', 'Pharoahs Cinema'),
+(15, 'New Cairo', 'Galaxy Cinema'),
+(15, 'Mokattam', 'Cinema Mawlana'),
+(15, '9th of Mayo', 'Mayo Movies'),
+(15, 'Old Cairo', 'El Zaaeem El Cinema'),
+(15, 'New Cairo', 'Point 90'),
+(15, 'Al Haram', 'Pharoahs Cinema'),
+(16, 'New Cairo', 'Galaxy Cinema'),
+(16, 'Mokattam', 'Cinema Mawlana'),
+(16, '9th of Mayo', 'Mayo Movies'),
+(16, 'Old Cairo', 'El Zaaeem El Cinema'),
+(16, 'New Cairo', 'Point 90'),
+(16, 'Al Haram', 'Pharoahs Cinema'),
+(17, 'New Cairo', 'Galaxy Cinema'),
+(17, 'Mokattam', 'Cinema Mawlana'),
+(17, '9th of Mayo', 'Mayo Movies'),
+(17, 'Old Cairo', 'El Zaaeem El Cinema'),
+(17, 'New Cairo', 'Point 90'),
+(17, 'Al Haram', 'Pharoahs Cinema'),
+(18, 'New Cairo', 'Galaxy Cinema'),
+(18, 'Mokattam', 'Cinema Mawlana'),
+(18, '9th of Mayo', 'Mayo Movies'),
+(18, 'Old Cairo', 'El Zaaeem El Cinema'),
+(18, 'New Cairo', 'Point 90'),
+(18, 'Al Haram', 'Pharoahs Cinema'),
+(19, 'New Cairo', 'Galaxy Cinema'),
+(19, 'Mokattam', 'Cinema Mawlana'),
+(19, '9th of Mayo', 'Mayo Movies'),
+(19, 'Old Cairo', 'El Zaaeem El Cinema'),
+(19, 'New Cairo', 'Point 90'),
+(19, 'Al Haram', 'Pharoahs Cinema'),
+(20, 'New Cairo', 'Galaxy Cinema'),
+(20, 'Mokattam', 'Cinema Mawlana'),
+(20, '9th of Mayo', 'Mayo Movies'),
+(20, 'Old Cairo', 'El Zaaeem El Cinema'),
+(20, 'New Cairo', 'Point 90'),
+(20, 'Al Haram', 'Pharoahs Cinema'),
+(21, 'New Cairo', 'Galaxy Cinema'),
+(21, 'Mokattam', 'Cinema Mawlana'),
+(21, '9th of Mayo', 'Mayo Movies'),
+(21, 'Old Cairo', 'El Zaaeem El Cinema'),
+(21, 'New Cairo', 'Point 90'),
+(21, 'Al Haram', 'Pharoahs Cinema'),
+(22, 'New Cairo', 'Galaxy Cinema'),
+(22, 'Mokattam', 'Cinema Mawlana'),
+(22, '9th of Mayo', 'Mayo Movies'),
+(22, 'Old Cairo', 'El Zaaeem El Cinema'),
+(22, 'New Cairo', 'Point 90'),
+(22, 'Al Haram', 'Pharoahs Cinema'),
+(23, 'New Cairo', 'Galaxy Cinema'),
+(23, 'Mokattam', 'Cinema Mawlana'),
+(23, '9th of Mayo', 'Mayo Movies'),
+(23, 'Old Cairo', 'El Zaaeem El Cinema'),
+(23, 'New Cairo', 'Point 90'),
+(23, 'Al Haram', 'Pharoahs Cinema'),
+(24, 'New Cairo', 'Galaxy Cinema'),
+(24, 'Mokattam', 'Cinema Mawlana'),
+(24, '9th of Mayo', 'Mayo Movies'),
+(24, 'Old Cairo', 'El Zaaeem El Cinema'),
+(24, 'New Cairo', 'Point 90'),
+(24, 'Al Haram', 'Pharoahs Cinema'),
+(25, 'New Cairo', 'Galaxy Cinema'),
+(25, 'Mokattam', 'Cinema Mawlana'),
+(25, '9th of Mayo', 'Mayo Movies'),
+(25, 'Old Cairo', 'El Zaaeem El Cinema'),
+(25, 'New Cairo', 'Point 90'),
+(25, 'Al Haram', 'Pharoahs Cinema');
+
 -- --------------------------------------------------------
 
 --
@@ -277,31 +476,32 @@ CREATE TABLE `Parties` (
   `date_time` datetime NOT NULL,
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
-  `cinema_name` varchar(20) NOT NULL
+  `cinema_name` varchar(20) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Parties`
 --
 
-INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`) VALUES
-('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90'),
-('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema'),
-('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies'),
-('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90');
+INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`, `price`) VALUES
+('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 50),
+('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 50),
+('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90', 0),
+('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 50),
+('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 50),
+('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 50),
+('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 50),
+('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 50),
+('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 50),
+('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 50),
+('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 50);
 
 -- --------------------------------------------------------
 
@@ -335,6 +535,24 @@ CREATE TABLE `Promocodes_Cinemas` (
   `promocode` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `Promocodes_Cinemas`
+--
+
+INSERT INTO `Promocodes_Cinemas` (`cinema_location`, `cinema_name`, `promocode`) VALUES
+('9th of Mayo', 'Mayo Movies', '1H4H1LS0W'),
+('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
+('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
+('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
+('New Cairo', 'Point 90', '1H4H1LS0W'),
+('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
+('9th of Mayo', 'Mayo Movies', '1M2NN4N22'),
+('Al Haram', 'Pharoahs Cinema', '1M2NN4N22'),
+('Mokattam', 'Cinema Mawlana', '1M2NN4N22'),
+('New Cairo', 'Galaxy Cinema', '1M2NN4N22'),
+('New Cairo', 'Point 90', '1M2NN4N22'),
+('Old Cairo', 'El Zaaeem El Cinema', '1M2NN4N22');
+
 -- --------------------------------------------------------
 
 --
@@ -349,44 +567,31 @@ CREATE TABLE `Tickets` (
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
   `cinema_name` varchar(20) NOT NULL,
-  `user` varchar(115) DEFAULT NULL
+  `user` varchar(115) DEFAULT NULL,
+  `movie_id` int(11) NOT NULL,
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Tickets`
 --
 
-INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`) VALUES
-(1, b'0', '1D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(8, b'1', '1C', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(9, b'0', '1A', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(10, b'1', '2B', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(11, b'0', '1D', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(12, b'1', '3F', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(13, b'0', '13C', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(15, b'0', '12C', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(16, b'1', '23B', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(17, b'1', '24B', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(19, b'0', '4A', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(26, b'1', '3A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(27, b'1', '4A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(28, b'1', '6D', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(29, b'0', '5D', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed');
+INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`, `movie_id`, `price`) VALUES
+(2, b'0', '2D', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 10, 50),
+(3, b'1', '1B', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Mostafa_Fathy', 11, 50),
+(4, b'0', '3C', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 19, 50),
+(5, b'0', '1A', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Nour_Gaber', 14, 50),
+(6, b'1', '2F', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Omar_Mehrez', 16, 50),
+(7, b'0', '1D', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Omar_Gamal', 19, 50),
+(14, b'1', '10D', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed', 1, 50),
+(18, b'0', '4F', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed', 9, 50),
+(20, b'1', '2C', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Mai_Emad', 8, 50),
+(21, b'0', '5B', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Lola_Wael', 7, 50),
+(22, b'1', '6D', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 6, 50),
+(23, b'0', '3A', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 5, 50),
+(24, b'1', '4B', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4, 50),
+(25, b'1', '2A', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3, 50),
+(30, b'1', '4B', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50);
 
 -- --------------------------------------------------------
 
@@ -396,7 +601,7 @@ INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, 
 
 CREATE TABLE `Users` (
   `username` varchar(115) NOT NULL,
-  `password` varchar(130) NOT NULL,
+  `password` varchar(330) NOT NULL,
   `email` varchar(130) NOT NULL,
   `phone_number` int(11) DEFAULT NULL,
   `credit_card` varchar(200) DEFAULT NULL,
@@ -513,7 +718,8 @@ ALTER TABLE `Promocodes_Cinemas`
 ALTER TABLE `Tickets`
   ADD PRIMARY KEY (`reservation_id`,`seat_number`,`date_time`,`hall`,`cinema_name`,`cinema_location`),
   ADD KEY `date_time` (`date_time`,`hall`,`cinema_name`,`cinema_location`),
-  ADD KEY `user` (`user`);
+  ADD KEY `user` (`user`),
+  ADD KEY `movie_id` (`movie_id`);
 
 --
 -- Indexes for table `Users`
@@ -592,7 +798,8 @@ ALTER TABLE `Promocodes_Cinemas`
 --
 ALTER TABLE `Tickets`
   ADD CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`date_time`,`hall`,`cinema_name`,`cinema_location`) REFERENCES `Parties` (`date_time`, `hall`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Tickets_ibfk_3` FOREIGN KEY (`movie_id`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

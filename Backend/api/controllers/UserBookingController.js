@@ -166,8 +166,8 @@ module.exports.makeReservation = function(req, res, next){
             hall: hall,
             cinema_location: cinema_location,
             cinema_name: cinema_name,
-            price: tickets_price,
-            movie_id: movie
+            //price: tickets_price,
+            //movie_id: movie
         };
 
         database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {

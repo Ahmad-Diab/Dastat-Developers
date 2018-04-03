@@ -7,6 +7,8 @@ import { MoviesListComponent } from './movies/movies-list/movies-list.component'
 import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
 
 import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -32,4 +34,13 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'cinemas/:name/:location',
   component: CinemasListComponent
-}];
+}
+,{
+  path : 'aboutus',
+  component : AboutusComponent
+},
+{
+  path : 'info',
+  component : MovieInfoComponent
+}
+];

@@ -13,6 +13,3 @@ module.exports.getUsers = function(req, res, next){
   });
 };
 
-module.exports.test = function(req, res, next) {
-  console.log(req.body);
-};

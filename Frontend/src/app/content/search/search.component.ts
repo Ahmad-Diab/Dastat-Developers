@@ -19,24 +19,8 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.search = "";
-    this.searchService.getSearchResult("m").subscribe((response) => {
-      this.movies = response.data.Movies;
-      this.cinemas = response.data.Cinemas;
-      this.actors = response.data.Actors;
-      let btn = document.getElementById("searchButton");
-      btn.addEventListener("hhee", (e:Event) => this.getSearchResults());
-    });
-    
   }
- getSearchResults(){
-   console.log("hobaa");
-  this.searchService.getSearchResult(document.getElementById("searchText").nodeValue).subscribe((response) => {
-    this.movies = response.data.Movies;
-    this.cinemas = response.data.Cinemas;
-    this.actors = response.data.Actors;
-  });
-}
-  
+ 
 
   onSearch(searchKey : String) {
     this.searchService.getSearchResult(searchKey).subscribe((response) => {

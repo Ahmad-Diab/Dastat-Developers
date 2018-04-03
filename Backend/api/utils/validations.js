@@ -21,6 +21,7 @@ module.exports.isBoolean = function(bool) {
 //  return moment.isDate(date) || moment.isMoment(date);
 //};
 
+
 module.exports.isObject = function(obj) {
   return typeof obj === 'object';
 };

@@ -38,10 +38,15 @@ module.exports.ViewCinemas = function(req, res, next){
 
   module.exports.viewCinema = function(req,res,next){
     var cinema = req.params.cinema;
-    var q = "SELECT * FROM cinemas WHERE cinemas.name = ?";
-    database.query(q,[cinema], function(error, results, fields){
+    var loc = req.params.loc;
+    
+    var q = "SELECT * FROM cinemas WHERE cinemas.name = ? and cinemas.location = ?";
+    database.query(q,[cinema,loc], function(error, results, fields){
+      console.log(cinema);
+    console.log(loc);
+    console.log("bosssboss");
       if(error) return next(error);
-      return res.send(results);
+      return res.send(results[0]);
     }); 
   }
   

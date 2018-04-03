@@ -5,6 +5,9 @@ var router = express.Router();
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
 var UserBooking = require('./Controllers/UserBookingController');
+var Authentication = require('./controllers/Authentication');
+var Search = require('./controllers/SearchController');
+var User = require('./controllers/UserController');
 var Movie = require('./controllers/MovieController')
 var UserBooking = require('./controllers/UserBookingController');
 var Actor = require('./controllers/ActorController');
@@ -90,7 +93,11 @@ router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.g
 router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 router.get('/movies/:movie_id',Movie.getMovieInfo);
 
+router.post('/login', Authentication.authenticate);
+//----------------------------------------------------Search routes--------------------------------------------//
+router.get('/search/:searchKeyword', Search.searchByKeyword);
 
+router.post('/register', Authentication.Register);
 // router.post('/test', User.test);
 
 //viewCinemas routes
@@ -100,5 +107,15 @@ router.get('/movies/:movie_id',Movie.getMovieInfo);
 router.get('/layout/encoding', Seat.getSeats);
 
 //exporting routes to the project
-module.exports = router;
 
+
+router.get('/viewMovies',Search.viewMovies);
+router.get('/viewMovies3',Search.viewMovies3);
+router.get('/viewMovies2',Search.viewMovies2);
+router.get('/viewMovies1',Search.viewMovies1);
+router.get('/viewMovies0',Search.viewMovies0);
+router.get('/viewCinemas',Search.viewCinemas);
+router.get('/getTopMovies',Search.getTopMovies);
+
+
+module.exports = router;

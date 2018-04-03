@@ -7,5 +7,7 @@ export const AppRoutes: Routes = [{
     children: [{
         path: '',
         loadChildren: './content/content.module#ContentModule'
-    }]
+    },
+
+]
 }]

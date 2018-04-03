@@ -88,12 +88,15 @@ router.get('/search/:searchKeyword', Search.searchByKeyword);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 
 //exporting routes to the project
+
+
+router.get('/viewMovies',Search.viewMovies);
+router.get('/viewMovies3',Search.viewMovies3);
+router.get('/viewMovies2',Search.viewMovies2);
+router.get('/viewMovies1',Search.viewMovies1);
+router.get('/viewMovies0',Search.viewMovies0);
+router.get('/viewCinemas',Search.viewCinemas);
+router.get('/getTopMovies',Search.getTopMovies);
+
+
 module.exports = router;
-
-
-router.get('viewMovies',Search.viewMovies);
-router.get('viewMovies3',Search.viewMovies3);
-router.get('viewMovies2',Search.viewMovies2);
-router.get('viewMovies1',Search.viewMovies1);
-router.get('viewMovies0',Search.viewMovies0);
-router.get('viewCinemas',Search.viewCinemas);

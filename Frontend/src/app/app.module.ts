@@ -16,6 +16,8 @@ import { AuthService } from './@services/auth.service';
 import { AuthGuard } from './@guards/auth.guard';
 import { User } from './@objects/User';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { UsersService } from './@services/users.service';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService,MovieslistService, AuthService, AuthGuard, CookieService],
+  providers: [SeatingService, HttpService,MovieslistService, AuthService, AuthGuard, CookieService, UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

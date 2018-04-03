@@ -11,6 +11,7 @@ import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { SigninComponent } from './users/signin/signin.component';
 import { FormsModule } from '@angular/forms';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     RouterModule.forChild(ContentRoutes)
   ],
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, SigninComponent]
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, SigninComponent, UserProfileComponent]
 })
 
 export class ContentModule { }

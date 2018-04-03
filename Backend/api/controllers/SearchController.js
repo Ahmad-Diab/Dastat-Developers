@@ -37,6 +37,7 @@ module.exports.viewCinemas = function(req,res,next){
 module.exports.viewMovies3 = function(req,res,next){
     database.query('SELECT * FROM Movies WHERE feature=3', function (error, results, fields) {
         if(error) return next(error);
+        console.log(results);
         return res.send(results);
       });
 }
@@ -54,6 +55,12 @@ module.exports.viewMovies1 = function(req,res,next){
 }
 module.exports.viewMovies0 = function(req,res,next){
     database.query('SELECT * FROM Movies WHERE feature=0', function (error, results, fields) {
+        if(error) return next(error);
+        return res.send(results);
+      });
+}
+module.exports.getTopMovies = function(req,res,next){
+    database.query('SELECT * FROM `movies` WHERE feature = 3 ORDER BY rating DESC LIMIT 6', function (error, results, fields) {
         if(error) return next(error);
         return res.send(results);
       });

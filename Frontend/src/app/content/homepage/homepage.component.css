@@ -1,0 +1,11 @@
+#search {
+    margin-top: 100px;
+}
+
+.hebe .tparrows::before {
+    font-size: 0px;
+}
+
+.movie-best .movie-beta__info {
+    width: 100%;
+}

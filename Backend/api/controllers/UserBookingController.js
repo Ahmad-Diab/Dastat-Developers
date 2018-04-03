@@ -63,15 +63,23 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    if(!party_datetime || !hall || !movie) {
+    if(!party_datetime) {
         return res.status(422).json({
             err: null,
-            msg: 'Party data is required.',
+            msg: 'Party data-time is required.',
             data: null
         });
     }
 
-    if(!tickets || !payment || !tickets_price) {
+    if(!hall & !movie) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Party hall and movie are required.',
+            data: null
+        });
+    }
+
+    if(!tickets || !tickets_price) {
         return res.status(422).json({
             err: null,
             msg: 'Tickets data is required.',

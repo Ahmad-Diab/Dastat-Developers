@@ -5,6 +5,7 @@ import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
+import {ReservationComponent} from "./booking/reservation/reservation.component";
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -18,6 +19,9 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'booking/payment',
   component: PaymentComponent
+},{
+  path: 'booking/reservation',
+  component: ReservationComponent
 },{
   path: 'movies/list',
   component: MoviesListComponent

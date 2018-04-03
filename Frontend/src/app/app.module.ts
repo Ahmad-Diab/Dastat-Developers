@@ -13,6 +13,8 @@ import { SeatingService } from './@services/seating.service';
 import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
 import { UserService } from './@services/user.service';
+import {BookingService} from "./@services/booking.service";
+import {CookieService} from "angular2-cookie/core";
 
 
 @NgModule({
@@ -21,7 +23,7 @@ import { UserService } from './@services/user.service';
     HeaderComponent,
     FooterComponent,
     TicketComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { UserService } from './@services/user.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService,MovieslistService,UserService],
+  providers: [SeatingService, HttpService,MovieslistService,UserService, BookingService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

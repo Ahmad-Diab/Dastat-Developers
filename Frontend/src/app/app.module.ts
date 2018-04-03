@@ -12,7 +12,10 @@ import { TicketComponent } from './content/booking/ticket/ticket.component';
 import { SeatingService } from './@services/seating.service';
 import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
+import { FilterCinemaService } from './@services/filter-cinema.service';
 import { CinemaInfoService } from './@services/cinema-info.service';
+
+import { CinemaslistService } from './@services/cinemaslist.service';
 
 
 @NgModule({
@@ -29,7 +32,7 @@ import { CinemaInfoService } from './@services/cinema-info.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService,MovieslistService, CinemaInfoService],
+  providers: [SeatingService, HttpService,MovieslistService, CinemaInfoService,FilterCinemaService,CinemaslistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -36,7 +36,7 @@ export class ReservationComponent implements OnInit {
       movie: bookingDetails['movie']
     }
     */
-
+    
    // For test purposes
     var tickets = [1, 5, 9],
       ticketsNum = tickets.length,

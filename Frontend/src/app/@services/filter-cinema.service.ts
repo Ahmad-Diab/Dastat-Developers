@@ -16,7 +16,9 @@ export class FilterCinemaService extends HttpService{
    filterByLocation(location){
     return this.get('filterByLocation/' + location);
   }
-
+  getAllCinemas(){
+    return this.get('viewCinemas');
+  }
 
   
 

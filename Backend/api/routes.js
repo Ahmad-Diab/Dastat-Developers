@@ -6,7 +6,45 @@ var User = require('./controllers/UserController');
 var Movie = require('./controllers/MovieController')
 var UserBooking = require('./controllers/UserBookingController');
 var Actor = require('./controllers/ActorController');
+var viewCinemas = require('./controllers/CinemasController');
+var Cinema = require('./controllers/CinemasController');
 
+
+
+
+//please add only routers here, if you need to call a function require its class
+//DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
+
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.get('/users', User.getUsers);
+
+//-------------------------------User Booking Routes---------------------------------
+//TODO Authentication before booking
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.post('/userBooking/makeReservation',UserBooking.makeReservation);
+router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
+
+router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
+router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
+router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
+router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
+
+
+router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
+
+
+
+router.get('/filterByLocation/:location', Cinema.filterByLocation);
+router.get('/viewCinema/:cinema',Cinema.viewCinema);
+router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
+
+
+//viewCinemas routes
+router.get('/viewCinemas',Cinema.ViewCinemas);
+var User = require('./controllers/UserController');
+var Movie = require('./controllers/MovieController')
+var UserBooking = require('./controllers/UserBookingController');
+var Actor = require('./controllers/ActorController');
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -15,22 +53,11 @@ var Actor = require('./controllers/ActorController');
 router.get('/users', User.getUsers);
 // router.get('/movies/:movie_id', Movie.getMovieInfo);
 
-// router.post('/test', User.test);
-router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
-
-
-
-
 
 
 //-----------------------ACTOR ROUTES-------------------------------
 
 router.post('/actors/:actor', Actor.getActors);
-
-
-
-
-
 
 //------------------------MOVIES ROUTES------------------------------
 
@@ -53,17 +80,6 @@ router.get('/movies/Bio',Movie.getMoviesBiography);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
@@ -78,10 +94,14 @@ router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
 
 router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 
+router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 
 // router.post('/test', User.test);
-router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
+
+//viewCinemas routes
+
 
 //exporting routes to the project
 module.exports = router;
+

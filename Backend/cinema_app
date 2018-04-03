@@ -1,14 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
-
--- Generation Time: Apr 01, 2018 at 09:22 PM
--- Server version: 5.7.21-0ubuntu0.17.10.1
--- PHP Version: 7.1.15-0ubuntu0.17.10.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 03, 2018 at 06:57 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -18,17 +19,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
-CREATE DATABASE cinema_app;
-use cinema_app;
+-- Database: `cinema_app`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Actors`
+-- Table structure for table `actors`
 --
 
-CREATE TABLE `Actors` (
+CREATE TABLE `actors` (
   `name` varchar(115) NOT NULL,
   `age` int(11) DEFAULT NULL,
   `birth_date` datetime DEFAULT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE `Actors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Actors`
+-- Dumping data for table `actors`
 --
 
-INSERT INTO `Actors` (`name`, `age`, `birth_date`, `gender`, `bio`) VALUES
+INSERT INTO `actors` (`name`, `age`, `birth_date`, `gender`, `bio`) VALUES
 ('Alicia Vikander', 29, '1988-10-03 00:00:00', 'Female', 'Alicia Vikander is a Swedish actress, dancer and producer. She was born and raised in Gothenburg, Västra Götalands län, Sweden, to Maria Fahl-Vikander, an actress of stage and screen, and Svante Vikander, a psychiatrist. She is of Swedish and one quarter Finnish descent.'),
 ('Bella Thorne', 20, '1997-10-08 00:00:00', 'Female', 'Bella Thorne was born in Pembroke Pines, Florida, to Tamara (Beckett) and Delancey Reinaldo \"Rey\" Thorne. She has three siblings, Remy Thorne, Dani Thorne and Kaili Thorne, all of whom have also acted. She is of Cuban (father) and Irish, Italian, English, German, and Welsh (mother) ancestry.'),
 ('Chadwick Boseman', 40, '1996-11-29 00:00:00', 'Male', 'Chadwick Boseman is an American actor. He is known for his portrayal of TChalla / Black Panther in the Marvel Cinematic Universe (since 2016), particular in Black Panther (2018), and for his starring roles in as Jackie Robinson in 42 (2013), James Brown in Get on Up (2014), and Thurgood Marshall in Marshall (2017).'),
@@ -54,10 +54,10 @@ INSERT INTO `Actors` (`name`, `age`, `birth_date`, `gender`, `bio`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Actors_Movies`
+-- Table structure for table `actors_movies`
 --
 
-CREATE TABLE `Actors_Movies` (
+CREATE TABLE `actors_movies` (
   `actor` varchar(115) NOT NULL,
   `movie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -65,12 +65,12 @@ CREATE TABLE `Actors_Movies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Admins`
+-- Table structure for table `admins`
 --
 
-CREATE TABLE `Admins` (
+CREATE TABLE `admins` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(230) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
@@ -81,10 +81,10 @@ CREATE TABLE `Admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Admins`
+-- Dumping data for table `admins`
 --
 
-INSERT INTO `Admins` (`username`, `password`, `email`, `salary`, `type`, `first_name`, `last_name`, `phone_number`, `gender`) VALUES
+INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `first_name`, `last_name`, `phone_number`, `gender`) VALUES
 ('Amir_Karara', 'miko333', 'amir.karara@gmail.com', 60000, 'Cinema Owner', 'Amir', 'Karara', 7776644, 'male'),
 ('Andrew_Shady', 'geeksF0rGeeks', 'masterOfSwift@icloud.com', 4600, 'Booking Usher', 'Andrew', 'Shady', 32332999, 'male'),
 ('Israa_Yasser', 'yy22mm44', 'f0rtnite017@microsoft.com', 12000, 'Branch Manager', 'Israa', 'Yasser', 2030355152, 'female'),
@@ -94,20 +94,20 @@ INSERT INTO `Admins` (`username`, `password`, `email`, `salary`, `type`, `first_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Admins_Cinemas`
+-- Table structure for table `admins_cinemas`
 --
 
-CREATE TABLE `Admins_Cinemas` (
+CREATE TABLE `admins_cinemas` (
   `admin` varchar(20) DEFAULT NULL,
   `cinema_location` varchar(100) DEFAULT NULL,
   `cinema_name` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Admins_Cinemas`
+-- Dumping data for table `admins_cinemas`
 --
 
-INSERT INTO `Admins_Cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
+INSERT INTO `admins_cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
 ('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
 ('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
 ('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
@@ -148,10 +148,10 @@ INSERT INTO `Admins_Cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Cinemas`
+-- Table structure for table `cinemas`
 --
 
-CREATE TABLE `Cinemas` (
+CREATE TABLE `cinemas` (
   `location` varchar(100) NOT NULL,
   `address` varchar(200) NOT NULL,
   `name` varchar(115) NOT NULL,
@@ -160,10 +160,10 @@ CREATE TABLE `Cinemas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Cinemas`
+-- Dumping data for table `cinemas`
 --
 
-INSERT INTO `Cinemas` (`location`, `address`, `name`, `number_of_halls`, `company`) VALUES
+INSERT INTO `cinemas` (`location`, `address`, `name`, `number_of_halls`, `company`) VALUES
 ('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, 'Rainassance'),
 ('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, 'Egyptian Producers'),
 ('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, 'Rainassance'),
@@ -174,10 +174,10 @@ INSERT INTO `Cinemas` (`location`, `address`, `name`, `number_of_halls`, `compan
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Halls`
+-- Table structure for table `halls`
 --
 
-CREATE TABLE `Halls` (
+CREATE TABLE `halls` (
   `cinema_location` varchar(100) NOT NULL,
   `cinema_name` varchar(200) NOT NULL,
   `hall_number` int(11) NOT NULL,
@@ -188,16 +188,16 @@ CREATE TABLE `Halls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Halls`
+-- Dumping data for table `halls`
 --
 
-INSERT INTO `Halls` (`cinema_location`, `cinema_name`, `hall_number`, `type`, `layout`, `number_of_seats`, `movie`) VALUES
+INSERT INTO `halls` (`cinema_location`, `cinema_name`, `hall_number`, `type`, `layout`, `number_of_seats`, `movie`) VALUES
 ('Mokattam', 'Cinema Mawlana', 1, 'VIP', 1, 80, 5),
 ('Old Cairo', 'El Zaaeem El Cinema', 1, 'NORMAL', 1, 50, 28),
 ('New Cairo', 'Galaxy Cinema', 1, 'VIP', 1, 80, 5),
 ('9th of Mayo', 'Mayo Movies', 1, 'VIP', 1, 80, 5),
 ('Al Haram', 'Pharoahs Cinema', 1, 'VIP', 1, 100, 28),
-('New Cairo', 'Point 90', 1, 'VIP', 1, 100, 3),
+('New Cairo', 'Point 90', 1, 'VIP', 2, 100, 3),
 ('Mokattam', 'Cinema Mawlana', 2, 'NORMAL', 1, 50, 4),
 ('Old Cairo', 'El Zaaeem El Cinema', 2, 'NORMAL', 1, 50, 5),
 ('New Cairo', 'Galaxy Cinema', 2, 'VIP', 1, 100, 26),
@@ -226,17 +226,17 @@ INSERT INTO `Halls` (`cinema_location`, `cinema_name`, `hall_number`, `type`, `l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Layout`
+-- Table structure for table `layout`
 --
 
-CREATE TABLE `Layout` (
+CREATE TABLE `layout` (
   `id` int(11) NOT NULL,
-  `encoded` text DEFAULT NULL,
+  `encoded` text,
   `name` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Layout`
+-- Dumping data for table `layout`
 --
 
 INSERT INTO `layout` (`id`, `encoded`, `name`) VALUES
@@ -245,15 +245,13 @@ INSERT INTO `layout` (`id`, `encoded`, `name`) VALUES
 (3, '[{\"margin\":false,\"row\":[\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"A5\"}},{\"seat\":{\"number\":\"A6\"}},{\"seat\":{\"number\":\"A7\"}},{\"seat\":{\"number\":\"A8\"}},{\"seat\":{\"number\":\"A9\"}},{\"seat\":{\"number\":\"A10\"}},\"offset\",\"offset\",\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"B1\"}},{\"seat\":{\"number\":\"B2\"}},{\"seat\":{\"number\":\"B3\"}},\"offset\",{\"seat\":{\"number\":\"B5\"}},{\"seat\":{\"number\":\"B6\"}},{\"seat\":{\"number\":\"B7\"}},{\"seat\":{\"number\":\"B8\"}},{\"seat\":{\"number\":\"B9\"}},{\"seat\":{\"number\":\"B10\"}},\"offset\",{\"seat\":{\"number\":\"B12\"}},{\"seat\":{\"number\":\"B13\"}},{\"seat\":{\"number\":\"B14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"C1\"}},{\"seat\":{\"number\":\"C2\"}},{\"seat\":{\"number\":\"C3\"}},\"offset\",{\"seat\":{\"number\":\"C5\"}},{\"seat\":{\"number\":\"C6\"}},{\"seat\":{\"number\":\"C7\"}},{\"seat\":{\"number\":\"C8\"}},{\"seat\":{\"number\":\"C9\"}},{\"seat\":{\"number\":\"C10\"}},\"offset\",{\"seat\":{\"number\":\"C12\"}},{\"seat\":{\"number\":\"C13\"}},{\"seat\":{\"number\":\"C14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"D1\"}},{\"seat\":{\"number\":\"D2\"}},{\"seat\":{\"number\":\"D3\"}},\"offset\",{\"seat\":{\"number\":\"D5\"}},{\"seat\":{\"number\":\"D6\"}},{\"seat\":{\"number\":\"D7\"}},{\"seat\":{\"number\":\"D8\"}},{\"seat\":{\"number\":\"D9\"}},{\"seat\":{\"number\":\"D10\"}},\"offset\",{\"seat\":{\"number\":\"D12\"}},{\"seat\":{\"number\":\"D13\"}},{\"seat\":{\"number\":\"D14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"E1\"}},{\"seat\":{\"number\":\"E2\"}},{\"seat\":{\"number\":\"E3\"}},\"offset\",{\"seat\":{\"number\":\"E5\"}},{\"seat\":{\"number\":\"E6\"}},{\"seat\":{\"number\":\"E7\"}},{\"seat\":{\"number\":\"E8\"}},{\"seat\":{\"number\":\"E9\"}},{\"seat\":{\"number\":\"E10\"}},\"offset\",{\"seat\":{\"number\":\"E12\"}},{\"seat\":{\"number\":\"E13\"}},{\"seat\":{\"number\":\"E14\"}}]},{\"margin\":true,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"F3\"}},\"offset\",{\"seat\":{\"number\":\"F5\"}},{\"seat\":{\"number\":\"F6\"}},{\"seat\":{\"number\":\"F7\"}},{\"seat\":{\"number\":\"F8\"}},{\"seat\":{\"number\":\"F9\"}},{\"seat\":{\"number\":\"F10\"}},\"offset\",{\"seat\":{\"number\":\"F12\"}},\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"G1\"}},{\"seat\":{\"number\":\"G2\"}},{\"seat\":{\"number\":\"G3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"G12\"}},{\"seat\":{\"number\":\"G13\"}},{\"seat\":{\"number\":\"G14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"H1\"}},{\"seat\":{\"number\":\"H2\"}},{\"seat\":{\"number\":\"H3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"H12\"}},{\"seat\":{\"number\":\"H13\"}},{\"seat\":{\"number\":\"H14\"}}]},{\"margin\":true,\"row\":[{\"seat\":{\"number\":\"I1\"}},{\"seat\":{\"number\":\"I2\"}},{\"seat\":{\"number\":\"I3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"I12\"}},{\"seat\":{\"number\":\"I13\"}},{\"seat\":{\"number\":\"I14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"J1\"}},{\"seat\":{\"number\":\"J2\"}},{\"seat\":{\"number\":\"J3\"}},\"offset\",{\"seat\":{\"number\":\"J5\"}},{\"seat\":{\"number\":\"J6\"}},{\"seat\":{\"number\":\"J7\"}},{\"seat\":{\"number\":\"J8\"}},{\"seat\":{\"number\":\"J9\"}},{\"seat\":{\"number\":\"J10\"}},\"offset\",{\"seat\":{\"number\":\"J12\"}},{\"seat\":{\"number\":\"J13\"}},{\"seat\":{\"number\":\"J14\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"K1\"}},{\"seat\":{\"number\":\"K2\"}},{\"seat\":{\"number\":\"K3\"}},\"offset\",{\"seat\":{\"number\":\"K5\"}},{\"seat\":{\"number\":\"K6\"}},{\"seat\":{\"number\":\"K7\"}},{\"seat\":{\"number\":\"K8\"}},{\"seat\":{\"number\":\"K9\"}},{\"seat\":{\"number\":\"K10\"}},\"offset\",{\"seat\":{\"number\":\"K12\"}},{\"seat\":{\"number\":\"K13\"}},{\"seat\":{\"number\":\"K14\"}}]}]', 'C'),
 (4, '[{\"margin\":false,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"A3\"}},{\"seat\":{\"number\":\"A4\"}},{\"seat\":{\"number\":\"A5\"}},{\"seat\":{\"number\":\"A6\"}},{\"seat\":{\"number\":\"A7\"}},{\"seat\":{\"number\":\"A8\"}},\"offset\",\"offset\"]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"B1\"}},{\"seat\":{\"number\":\"B2\"}},{\"seat\":{\"number\":\"B3\"}},{\"seat\":{\"number\":\"B4\"}},{\"seat\":{\"number\":\"B5\"}},{\"seat\":{\"number\":\"B6\"}},{\"seat\":{\"number\":\"B7\"}},{\"seat\":{\"number\":\"B8\"}},{\"seat\":{\"number\":\"B9\"}},{\"seat\":{\"number\":\"B10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"C1\"}},{\"seat\":{\"number\":\"C2\"}},{\"seat\":{\"number\":\"C3\"}},{\"seat\":{\"number\":\"C4\"}},{\"seat\":{\"number\":\"C5\"}},{\"seat\":{\"number\":\"C6\"}},{\"seat\":{\"number\":\"C7\"}},{\"seat\":{\"number\":\"C8\"}},{\"seat\":{\"number\":\"C9\"}},{\"seat\":{\"number\":\"C10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"D1\"}},{\"seat\":{\"number\":\"D2\"}},{\"seat\":{\"number\":\"D3\"}},{\"seat\":{\"number\":\"D4\"}},{\"seat\":{\"number\":\"D5\"}},{\"seat\":{\"number\":\"D6\"}},{\"seat\":{\"number\":\"D7\"}},{\"seat\":{\"number\":\"D8\"}},{\"seat\":{\"number\":\"D9\"}},{\"seat\":{\"number\":\"D10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"E1\"}},{\"seat\":{\"number\":\"E2\"}},{\"seat\":{\"number\":\"E3\"}},{\"seat\":{\"number\":\"E4\"}},{\"seat\":{\"number\":\"E5\"}},{\"seat\":{\"number\":\"E6\"}},{\"seat\":{\"number\":\"E7\"}},{\"seat\":{\"number\":\"E8\"}},{\"seat\":{\"number\":\"E9\"}},{\"seat\":{\"number\":\"E10\"}}]},{\"margin\":true,\"row\":[\"offset\",\"offset\",{\"seat\":{\"number\":\"F3\"}},{\"seat\":{\"number\":\"F4\"}},{\"seat\":{\"number\":\"F5\"}},{\"seat\":{\"number\":\"F6\"}},{\"seat\":{\"number\":\"F7\"}},{\"seat\":{\"number\":\"F8\"}},{\"seat\":{\"number\":\"F9\"}},{\"seat\":{\"number\":\"F10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"G1\"}},{\"seat\":{\"number\":\"G2\"}},{\"seat\":{\"number\":\"G3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"G10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"H1\"}},{\"seat\":{\"number\":\"H2\"}},{\"seat\":{\"number\":\"H3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"H10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"I1\"}},{\"seat\":{\"number\":\"I2\"}},{\"seat\":{\"number\":\"I3\"}},\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",\"offset\",{\"seat\":{\"number\":\"I10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"J1\"}},{\"seat\":{\"number\":\"J2\"}},{\"seat\":{\"number\":\"J3\"}},{\"seat\":{\"number\":\"J4\"}},{\"seat\":{\"number\":\"J5\"}},{\"seat\":{\"number\":\"J6\"}},{\"seat\":{\"number\":\"J7\"}},{\"seat\":{\"number\":\"J8\"}},{\"seat\":{\"number\":\"J9\"}},{\"seat\":{\"number\":\"J10\"}}]},{\"margin\":true,\"row\":[{\"seat\":{\"number\":\"K1\"}},{\"seat\":{\"number\":\"K2\"}},{\"seat\":{\"number\":\"K3\"}},{\"seat\":{\"number\":\"K4\"}},{\"seat\":{\"number\":\"K5\"}},{\"seat\":{\"number\":\"K6\"}},{\"seat\":{\"number\":\"K7\"}},{\"seat\":{\"number\":\"K8\"}},{\"seat\":{\"number\":\"K9\"}},{\"seat\":{\"number\":\"K10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"L1\"}},{\"seat\":{\"number\":\"L2\"}},{\"seat\":{\"number\":\"L3\"}},{\"seat\":{\"number\":\"L4\"}},{\"seat\":{\"number\":\"L5\"}},{\"seat\":{\"number\":\"L6\"}},{\"seat\":{\"number\":\"L7\"}},{\"seat\":{\"number\":\"L8\"}},{\"seat\":{\"number\":\"L9\"}},{\"seat\":{\"number\":\"L10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"M1\"}},{\"seat\":{\"number\":\"M2\"}},{\"seat\":{\"number\":\"M3\"}},{\"seat\":{\"number\":\"M4\"}},{\"seat\":{\"number\":\"M5\"}},{\"seat\":{\"number\":\"M6\"}},{\"seat\":{\"number\":\"M7\"}},{\"seat\":{\"number\":\"M8\"}},{\"seat\":{\"number\":\"M9\"}},{\"seat\":{\"number\":\"M10\"}}]},{\"margin\":false,\"row\":[{\"seat\":{\"number\":\"N1\"}},{\"seat\":{\"number\":\"N2\"}},{\"seat\":{\"number\":\"N3\"}},{\"seat\":{\"number\":\"N4\"}},{\"seat\":{\"number\":\"N5\"}},{\"seat\":{\"number\":\"N6\"}},{\"seat\":{\"number\":\"N7\"}},{\"seat\":{\"number\":\"N8\"}},{\"seat\":{\"number\":\"N9\"}},{\"seat\":{\"number\":\"N10\"}}]}]', 'D');
 
---
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Movies`
+-- Table structure for table `movies`
 --
 
-CREATE TABLE `Movies` (
+CREATE TABLE `movies` (
   `movie_id` int(11) NOT NULL,
   `title` varchar(130) DEFAULT NULL,
   `duration` float DEFAULT NULL,
@@ -269,10 +267,10 @@ CREATE TABLE `Movies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Movies`
+-- Dumping data for table `movies`
 --
 
-INSERT INTO `Movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `imagePath`, `cast`, `year`, `feature`, `release_date`, `rating`, `status`) VALUES
+INSERT INTO `movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `imagePath`, `cast`, `year`, `feature`, `release_date`, `rating`, `status`) VALUES
 (1, 'Ready Player One', 2.2, 'Action', 'When the creator of a virtual reality world called the OASIS dies, he releases a video in which he challenges all OASIS users to find his Easter Egg, which will give the finder his fortune.', 'https://image.ibb.co/gVP1un/ready_Player_One.jpg', 'Tye Sheridan, Olivia Cooke, Ben Mendelsohn', 2018, 3, '2018-03-18 00:00:00', 8, 'PENDING'),
 (2, 'I Can Only Imagine', 1.5, 'Drama', 'The inspiring and unknown true story behind MercyMes beloved, chart topping song that brings ultimate hope to so many is a gripping reminder of the power of true forgiveness.', 'https://image.ibb.co/g20Njn/ICan_Only_Imagine.jpg', 'Dennis Quaid, J. Michael Finley, Brody Rose', 2018, 3, '2018-03-15 00:00:00', 7.6, 'PENDING'),
 (3, 'Tomb Raider', 1.58, 'Action', 'Lara Croft, the fiercely independent daughter of a missing adventurer, must push herself beyond her limits when she finds herself on the island where her father disappeared.', 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg', 'Alicia Vikander, Dominic West, Walton Goggins', 2018, 3, '2018-03-07 00:00:00', 6.8, 'PENDING'),
@@ -303,23 +301,24 @@ INSERT INTO `Movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `
 (28, 'Game Night', 1.4, 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'PENDING'),
 (29, 'Annihilation', 1.55, 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'PENDING'),
 (30, 'Every Day', 1.37, 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'PENDING');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Movies_in_Cinemas`
+-- Table structure for table `movies_in_cinemas`
 --
 
-CREATE TABLE `Movies_in_Cinemas` (
+CREATE TABLE `movies_in_cinemas` (
   `movie` int(11) DEFAULT NULL,
   `cinema_location` varchar(20) DEFAULT NULL,
   `cinema_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Movies_in_Cinemas`
+-- Dumping data for table `movies_in_cinemas`
 --
 
-INSERT INTO `Movies_in_Cinemas` (`movie`, `cinema_location`, `cinema_name`) VALUES
+INSERT INTO `movies_in_cinemas` (`movie`, `cinema_location`, `cinema_name`) VALUES
 (1, 'New Cairo', 'Galaxy Cinema'),
 (1, 'Mokattam', 'Cinema Mawlana'),
 (1, '9th of Mayo', 'Mayo Movies'),
@@ -474,10 +473,10 @@ INSERT INTO `Movies_in_Cinemas` (`movie`, `cinema_location`, `cinema_name`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Parties`
+-- Table structure for table `parties`
 --
 
-CREATE TABLE `Parties` (
+CREATE TABLE `parties` (
   `date_time` datetime NOT NULL,
   `hall` int(11) NOT NULL,
   `cinema_location` varchar(20) NOT NULL,
@@ -485,85 +484,85 @@ CREATE TABLE `Parties` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Parties`
+-- Dumping data for table `parties`
 --
 
-INSERT INTO `Parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`) VALUES
+INSERT INTO `parties` (`date_time`, `hall`, `cinema_location`, `cinema_name`) VALUES
+('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90'),
+('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90'),
+('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90'),
+('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90'),
 ('2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana'),
 ('2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema'),
 ('2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema'),
 ('2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90'),
-('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana'),
 ('2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema'),
-('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema'),
+('2018-04-11 16:00:00', 2, 'Mokattam', 'Cinema Mawlana'),
 ('2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies'),
-('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema'),
-('2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90'),
-('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana'),
-('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema'),
+('2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema'),
 ('2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies'),
-('2018-04-01 10:00:00', 3, 'New Cairo', 'Point 90');
+('2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema'),
+('2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema'),
+('2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana'),
+('2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Promocodes`
+-- Table structure for table `promocodes`
 --
 
-CREATE TABLE `Promocodes` (
+CREATE TABLE `promocodes` (
   `promocode` varchar(30) NOT NULL,
   `type` varchar(10) NOT NULL,
   `value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Promocodes`
+-- Dumping data for table `promocodes`
 --
 
-INSERT INTO `Promocodes` (`promocode`, `type`, `value`) VALUES
+INSERT INTO `promocodes` (`promocode`, `type`, `value`) VALUES
 ('1H4H1LS0W', 'amount', '1000'),
 ('1M2NN4N22', 'percentage', '10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Promocodes_Cinemas`
+-- Table structure for table `promocodes_cinemas`
 --
 
-CREATE TABLE `Promocodes_Cinemas` (
+CREATE TABLE `promocodes_cinemas` (
   `cinema_location` varchar(30) NOT NULL,
   `cinema_name` varchar(30) NOT NULL,
   `promocode` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Promocodes_Cinemas`
+-- Dumping data for table `promocodes_cinemas`
 --
 
-INSERT INTO `Promocodes_Cinemas` (`cinema_location`, `cinema_name`, `promocode`) VALUES
+INSERT INTO `promocodes_cinemas` (`cinema_location`, `cinema_name`, `promocode`) VALUES
 ('9th of Mayo', 'Mayo Movies', '1H4H1LS0W'),
-('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
-('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
-('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
-('New Cairo', 'Point 90', '1H4H1LS0W'),
-('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
 ('9th of Mayo', 'Mayo Movies', '1M2NN4N22'),
+('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
 ('Al Haram', 'Pharoahs Cinema', '1M2NN4N22'),
+('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
 ('Mokattam', 'Cinema Mawlana', '1M2NN4N22'),
+('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
 ('New Cairo', 'Galaxy Cinema', '1M2NN4N22'),
+('New Cairo', 'Point 90', '1H4H1LS0W'),
 ('New Cairo', 'Point 90', '1M2NN4N22'),
+('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
 ('Old Cairo', 'El Zaaeem El Cinema', '1M2NN4N22');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tickets`
+-- Table structure for table `tickets`
 --
 
-CREATE TABLE `Tickets` (
+CREATE TABLE `tickets` (
   `reservation_id` int(11) NOT NULL,
   `payment` bit(1) DEFAULT NULL,
   `seat_number` varchar(30) NOT NULL,
@@ -575,50 +574,50 @@ CREATE TABLE `Tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Tickets`
+-- Dumping data for table `tickets`
 --
 
-INSERT INTO `Tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`) VALUES
-(1, b'0', 'D1', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(2, b'0', 'D2', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(3, b'1', 'B1', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(4, b'0', 'C3', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(5, b'0', 'A1', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(6, b'1', 'F2', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
-(7, b'0', 'D1', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(8, b'1', 'C1', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(9, b'0', 'A1', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(10, b'1', 'B2', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(11, b'0', 'D1', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(12, b'1', 'F3', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
-(13, b'0', 'C13', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(14, b'1', 'D10', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(15, b'0', 'C12', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
-(16, b'1', 'B23', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(17, b'1', 'B24', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(18, b'0', 'F4', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
-(19, b'0', 'A4', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(20, b'1', 'C2', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(21, b'0', 'B5', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(22, b'1', 'D6', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(23, b'0', 'A3', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(24, b'1', 'B4', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
-(25, b'1', 'A2', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(26, b'1', 'A3', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(27, b'1', 'A4', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(28, b'1', 'D6', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(29, b'0', 'D5', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
-(30, b'1', 'B4', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed');
+INSERT INTO `tickets` (`reservation_id`, `payment`, `seat_number`, `date_time`, `hall`, `cinema_location`, `cinema_name`, `user`) VALUES
+(1, b'1111111111111111111111111111111', 'D1', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(2, b'1111111111111111111111111111111', 'D2', '2018-04-01 10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(3, b'1111111111111111111111111111111', 'B1', '2018-04-01 10:00:00', 2, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(4, b'1111111111111111111111111111111', 'C3', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(5, b'1111111111111111111111111111111', 'A1', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(6, b'1111111111111111111111111111111', 'F2', '2018-04-01 13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed'),
+(7, b'1111111111111111111111111111111', 'D1', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(8, b'1111111111111111111111111111111', 'C1', '2018-04-10 13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(9, b'1111111111111111111111111111111', 'A1', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(10, b'1111111111111111111111111111111', 'B2', '2018-04-12 16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(11, b'1111111111111111111111111111111', 'D1', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(12, b'1111111111111111111111111111111', 'F3', '2018-04-14 19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 'Anas_Mohamed'),
+(13, b'1111111111111111111111111111111', 'C13', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
+(14, b'1111111111111111111111111111111', 'D10', '2018-04-10 19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
+(15, b'1111111111111111111111111111111', 'C12', '2018-04-10 13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed'),
+(16, b'1111111111111111111111111111111', 'B23', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
+(17, b'1111111111111111111111111111111', 'B24', '2018-04-14 10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
+(18, b'1111111111111111111111111111111', 'F4', '2018-04-14 16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed'),
+(19, b'1111111111111111111111111111111', 'A4', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(20, b'1111111111111111111111111111111', 'C2', '2018-04-10 16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(21, b'1111111111111111111111111111111', 'B5', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(22, b'1111111111111111111111111111111', 'D6', '2018-04-11 16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(23, b'1111111111111111111111111111111', 'A3', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(24, b'1111111111111111111111111111111', 'B4', '2018-04-12 19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed'),
+(25, b'1111111111111111111111111111111', 'A2', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(26, b'1111111111111111111111111111111', 'A3', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(27, b'1111111111111111111111111111111', 'A4', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(28, b'1111111111111111111111111111111', 'D6', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(29, b'1111111111111111111111111111111', 'D5', '2018-04-10 13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed'),
+(30, b'1111111111111111111111111111111', 'B4', '2018-04-14 19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Anas_Mohamed');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `username` varchar(115) NOT NULL,
-  `password` varchar(330) NOT NULL,
+  `password` varchar(130) NOT NULL,
   `email` varchar(130) NOT NULL,
   `phone_number` int(11) DEFAULT NULL,
   `credit_card` varchar(200) DEFAULT NULL,
@@ -629,10 +628,10 @@ CREATE TABLE `Users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `Users` (`username`, `password`, `email`, `phone_number`, `credit_card`, `first_name`, `last_name`, `age`, `gender`) VALUES
+INSERT INTO `users` (`username`, `password`, `email`, `phone_number`, `credit_card`, `first_name`, `last_name`, `age`, `gender`) VALUES
 ('Anas_Mohamed', 'anasanas123', 'anasmohamed@gmail.com', 1511123623, '5332662665265921', 'Anas', 'Mohamed', 24, 'male'),
 ('Farida_Omar', 'farida123456', 'faridaomar@yahool.com', 1012100252, '5332225826245445', 'Farida', 'Omar', 31, 'Female'),
 ('Hamza_Namira', 'hamza123789', 'hamzanamira@gmail.com', 1000000588, '5338224448618485', 'Hamza', 'Namira', 37, 'male'),
@@ -650,97 +649,97 @@ INSERT INTO `Users` (`username`, `password`, `email`, `phone_number`, `credit_ca
 --
 
 --
--- Indexes for table `Actors`
+-- Indexes for table `actors`
 --
-ALTER TABLE `Actors`
+ALTER TABLE `actors`
   ADD PRIMARY KEY (`name`);
 
 --
--- Indexes for table `Actors_Movies`
+-- Indexes for table `actors_movies`
 --
-ALTER TABLE `Actors_Movies`
+ALTER TABLE `actors_movies`
   ADD PRIMARY KEY (`actor`,`movie`),
   ADD KEY `movie` (`movie`);
 
 --
--- Indexes for table `Admins`
+-- Indexes for table `admins`
 --
-ALTER TABLE `Admins`
+ALTER TABLE `admins`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `Admins_Cinemas`
+-- Indexes for table `admins_cinemas`
 --
-ALTER TABLE `Admins_Cinemas`
+ALTER TABLE `admins_cinemas`
   ADD KEY `cinema_location` (`cinema_location`,`cinema_name`),
   ADD KEY `admin` (`admin`);
 
 --
--- Indexes for table `Cinemas`
+-- Indexes for table `cinemas`
 --
-ALTER TABLE `Cinemas`
+ALTER TABLE `cinemas`
   ADD PRIMARY KEY (`location`,`name`);
 
 --
--- Indexes for table `Halls`
+-- Indexes for table `halls`
 --
-ALTER TABLE `Halls`
+ALTER TABLE `halls`
   ADD PRIMARY KEY (`hall_number`,`cinema_name`,`cinema_location`),
   ADD KEY `cinema_location` (`cinema_location`,`cinema_name`),
   ADD KEY `movie` (`movie`),
   ADD KEY `layout` (`layout`);
 
 --
--- Indexes for table `Layout`
+-- Indexes for table `layout`
 --
-ALTER TABLE `Layout`
+ALTER TABLE `layout`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Movies`
+-- Indexes for table `movies`
 --
-ALTER TABLE `Movies`
+ALTER TABLE `movies`
   ADD PRIMARY KEY (`movie_id`);
 
 --
--- Indexes for table `Movies_in_Cinemas`
+-- Indexes for table `movies_in_cinemas`
 --
-ALTER TABLE `Movies_in_Cinemas`
+ALTER TABLE `movies_in_cinemas`
   ADD KEY `cinema_location` (`cinema_location`,`cinema_name`),
   ADD KEY `movie` (`movie`);
 
 --
--- Indexes for table `Parties`
+-- Indexes for table `parties`
 --
-ALTER TABLE `Parties`
+ALTER TABLE `parties`
   ADD PRIMARY KEY (`date_time`,`hall`,`cinema_name`,`cinema_location`),
   ADD KEY `hall` (`hall`,`cinema_name`,`cinema_location`);
 
 --
--- Indexes for table `Promocodes`
+-- Indexes for table `promocodes`
 --
-ALTER TABLE `Promocodes`
+ALTER TABLE `promocodes`
   ADD PRIMARY KEY (`promocode`);
 
 --
--- Indexes for table `Promocodes_Cinemas`
+-- Indexes for table `promocodes_cinemas`
 --
-ALTER TABLE `Promocodes_Cinemas`
+ALTER TABLE `promocodes_cinemas`
   ADD PRIMARY KEY (`cinema_location`,`cinema_name`,`promocode`),
   ADD KEY `promocode` (`promocode`);
 
 --
--- Indexes for table `Tickets`
+-- Indexes for table `tickets`
 --
-ALTER TABLE `Tickets`
+ALTER TABLE `tickets`
   ADD PRIMARY KEY (`reservation_id`,`seat_number`,`date_time`,`hall`,`cinema_name`,`cinema_location`),
   ADD KEY `date_time` (`date_time`,`hall`,`cinema_name`,`cinema_location`),
   ADD KEY `user` (`user`);
 
 --
--- Indexes for table `Users`
+-- Indexes for table `users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
@@ -749,72 +748,76 @@ ALTER TABLE `Users`
 --
 
 --
--- AUTO_INCREMENT for table `Layout`
+-- AUTO_INCREMENT for table `layout`
 --
-ALTER TABLE `Layout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `layout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `Movies`
+-- AUTO_INCREMENT for table `movies`
 --
-ALTER TABLE `Movies`
+ALTER TABLE `movies`
   MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
--- AUTO_INCREMENT for table `Tickets`
+-- AUTO_INCREMENT for table `tickets`
 --
-ALTER TABLE `Tickets`
+ALTER TABLE `tickets`
   MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Actors_Movies`
+-- Constraints for table `actors_movies`
 --
-ALTER TABLE `Actors_Movies`
-  ADD CONSTRAINT `Actors_Movies_ibfk_1` FOREIGN KEY (`actor`) REFERENCES `Actors` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Actors_Movies_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `actors_movies`
+  ADD CONSTRAINT `Actors_Movies_ibfk_1` FOREIGN KEY (`actor`) REFERENCES `actors` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Actors_Movies_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Admins_Cinemas`
+-- Constraints for table `admins_cinemas`
 --
-ALTER TABLE `Admins_Cinemas`
-  ADD CONSTRAINT `Admins_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `Cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Admins_Cinemas_ibfk_2` FOREIGN KEY (`admin`) REFERENCES `Admins` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `admins_cinemas`
+  ADD CONSTRAINT `Admins_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Admins_Cinemas_ibfk_2` FOREIGN KEY (`admin`) REFERENCES `admins` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Halls`
+-- Constraints for table `halls`
 --
-ALTER TABLE `Halls`
-  ADD CONSTRAINT `Halls_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `Cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Halls_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Halls_ibfk_3` FOREIGN KEY (`layout`) REFERENCES `Layout` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `halls`
+  ADD CONSTRAINT `Halls_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Halls_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Halls_ibfk_3` FOREIGN KEY (`layout`) REFERENCES `layout` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Movies_in_Cinemas`
+-- Constraints for table `movies_in_cinemas`
 --
-ALTER TABLE `Movies_in_Cinemas`
-  ADD CONSTRAINT `Movies_in_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `Cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Movies_in_Cinemas_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `Movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `movies_in_cinemas`
+  ADD CONSTRAINT `Movies_in_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Movies_in_Cinemas_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Parties`
+-- Constraints for table `parties`
 --
-ALTER TABLE `Parties`
-  ADD CONSTRAINT `Parties_ibfk_1` FOREIGN KEY (`hall`,`cinema_name`,`cinema_location`) REFERENCES `Halls` (`hall_number`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `parties`
+  ADD CONSTRAINT `Parties_ibfk_1` FOREIGN KEY (`hall`,`cinema_name`,`cinema_location`) REFERENCES `halls` (`hall_number`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Promocodes_Cinemas`
+-- Constraints for table `promocodes_cinemas`
 --
-ALTER TABLE `Promocodes_Cinemas`
-  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `Cinemas` (`location`, `name`),
-  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_2` FOREIGN KEY (`promocode`) REFERENCES `Promocodes` (`promocode`);
+ALTER TABLE `promocodes_cinemas`
+  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`),
+  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_2` FOREIGN KEY (`promocode`) REFERENCES `promocodes` (`promocode`);
 
 --
--- Constraints for table `Tickets`
+-- Constraints for table `tickets`
 --
-ALTER TABLE `Tickets`
-  ADD CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`date_time`,`hall`,`cinema_name`,`cinema_location`) REFERENCES `Parties` (`date_time`, `hall`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `Users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`date_time`,`hall`,`cinema_name`,`cinema_location`) REFERENCES `parties` (`date_time`, `hall`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

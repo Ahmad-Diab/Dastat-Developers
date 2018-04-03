@@ -14,7 +14,7 @@ export class ReservationComponent implements OnInit {
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
-
+    /*
     var bookingDetails = this.cookie.get('booking');
 
     var tickets = bookingDetails['seats'],
@@ -35,7 +35,8 @@ export class ReservationComponent implements OnInit {
       eachPrice: eachPrice,
       movie: bookingDetails['movie']
     }
-  /*
+    */
+
    // For test purposes
     var tickets = [1, 5, 9],
       ticketsNum = tickets.length,
@@ -55,7 +56,7 @@ export class ReservationComponent implements OnInit {
       eachPrice: eachPrice,
       movie: "10"
     }
-    */
+
   }
 
   onUnpaidReserve(event): void {

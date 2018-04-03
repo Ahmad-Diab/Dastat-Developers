@@ -15,6 +15,9 @@ import { MovieslistService } from './@services/movieslist.service';
 import { UserService } from './@services/user.service';
 import {BookingService} from "./@services/booking.service";
 import {CookieService} from "angular2-cookie/core";
+import { FilterCinemaService } from './@services/filter-cinema.service';
+import { CinemaslistService } from './@services/cinemaslist.service';
+import { MovieInfoService } from './@services/movie-info.service';
 
 
 @NgModule({
@@ -31,7 +34,9 @@ import {CookieService} from "angular2-cookie/core";
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService, MovieslistService, UserService, BookingService, CookieService],
+  providers: [SeatingService, HttpService, MovieslistService, FilterCinemaService,
+  CinemaslistService,MovieInfoService, UserService, BookingService, CookieService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -32,7 +32,7 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'movies/list',
   component: MoviesListComponent
-}, {
+},{
   path: 'user/bookings',
   component: BookingDetailsComponent
 },{
@@ -50,16 +50,13 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'cinemas/:name/:location',
   component: CinemasListComponent
-}
-,{
+},{
   path: 'search',
   component: SearchComponent
 },{
   path : 'aboutus',
   component : AboutusComponent
-},
-{
+},{
   path : 'info',
   component : MovieInfoComponent
-}
-];
+}];

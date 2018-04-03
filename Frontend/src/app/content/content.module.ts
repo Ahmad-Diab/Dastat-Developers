@@ -32,6 +32,7 @@ import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
     FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent, FilterCinemaComponent, CinemasListComponent,AboutusComponent,
     MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent]
 
+
 })
 
 export class ContentModule { }

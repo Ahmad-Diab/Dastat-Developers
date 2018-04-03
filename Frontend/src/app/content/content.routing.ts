@@ -6,6 +6,10 @@ import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { SigninComponent } from './users/signin/signin.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
+import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -28,4 +32,22 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'user/:username',
   component: UserProfileComponent
-}];
+},{
+  path: 'cinemas/filter-cinema',
+  component: FilterCinemaComponent
+},{
+  path: 'cinemas/list',
+  component: CinemasListComponent
+},{
+  path: 'cinemas/:name/:location',
+  component: CinemasListComponent
+}
+,{
+  path : 'aboutus',
+  component : AboutusComponent
+},
+{
+  path : 'info',
+  component : MovieInfoComponent
+}
+];

@@ -8,17 +8,118 @@ import { MovieslistService } from '../../../@services/movieslist.service';
 export class MoviesListComponent implements OnInit {
   movies=[];
 
-
   constructor(public movieslistService: MovieslistService) { 
     
   }
 
   ngOnInit() {
-    this.movieslistService.getCurrentMovies().subscribe((response) => {
-      this.movies=response.data;
-      console.log(this.movies);
-      
-    });
-  }
 
+    this.viewMovies();
+  }
+    //----- HERE IS THE FUNCTIONS YOU CALL ON CLICK
+    //------ DO NOT FORGET TO IMPLEMENT IT FIRST IN THE SERVICES----
+  
+viewHighRate(){
+  this.movieslistService.geHighRateMovies().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewMovies(){
+  this.movieslistService.getMovies().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewLowRate(){
+  this.movieslistService.getLowRate().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewLatest(){
+  this.movieslistService.getLatest().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewOldest(){
+
+  this.movieslistService.getOldest().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewAction(){
+
+  this.movieslistService.getAction().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewAdventure(){
+
+  this.movieslistService.getAdventure().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewComedy(){
+
+  this.movieslistService.getComedy().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewDrama(){
+
+  this.movieslistService.getDrama().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+
+viewHorror(){
+
+  this.movieslistService.getHorror().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+
+viewThriller(){
+
+  this.movieslistService.getThriller().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
+viewBio(){
+
+  this.movieslistService.getBio().subscribe((response)=>{
+    this.movies=response;
+    console.log(response);
+    
+  });
+}
 }

@@ -35,6 +35,7 @@ export class SeatingComponent implements OnInit {
       var fetched = response.layout.encoded.replace(/\\/g, '');
       this.layout = JSON.parse(fetched);
       this.seats = response.seats;
+      console.log(this.layout);
     });
 
     

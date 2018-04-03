@@ -12,7 +12,10 @@ import { TicketComponent } from './content/booking/ticket/ticket.component';
 import { SeatingService } from './@services/seating.service';
 import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { UserService } from './@services/user.service';
+import {BookingService} from "./@services/booking.service";
+import {CookieService} from "angular2-cookie/core";
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     HeaderComponent,
     FooterComponent,
     TicketComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService, MovieslistService, CookieService],
+  providers: [SeatingService, HttpService, MovieslistService, UserService, BookingService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

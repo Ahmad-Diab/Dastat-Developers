@@ -12,6 +12,7 @@ import { TicketComponent } from './content/booking/ticket/ticket.component';
 import { SeatingService } from './@services/seating.service';
 import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
+import { PartiesService } from './@services/parties.service';
 
 
 @NgModule({

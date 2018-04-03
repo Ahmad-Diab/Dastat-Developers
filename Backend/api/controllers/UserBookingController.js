@@ -13,6 +13,14 @@ var database = require('../config/db-connection'),
 module.exports.getCinemasForThatMovie = function(req, res){
     var movie_id = req.params['movie_id'];
 
+    if(!movie_id) {
+        return res.status(422).json({
+            err: null,
+            msg: 'movie_id is required.',
+            data: null
+        });
+    }
+
     var sql = "SELECT C.* FROM cinemas C INNER JOIN movies_in_cinemas M ON ? WHERE ?";
     var joinCond = {
         'M.cinema_location': 'C.location',

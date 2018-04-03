@@ -12,7 +12,10 @@ import { TicketComponent } from './content/booking/ticket/ticket.component';
 import { SeatingService } from './@services/seating.service';
 import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
-
+import { AuthService } from './@services/auth.service';
+import { AuthGuard } from './@guards/auth.guard';
+import { User } from './@objects/User';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,7 @@ import { MovieslistService } from './@services/movieslist.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService,MovieslistService],
+  providers: [SeatingService, HttpService,MovieslistService, AuthService, AuthGuard, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

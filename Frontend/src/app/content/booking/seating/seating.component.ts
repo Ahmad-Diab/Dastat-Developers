@@ -20,12 +20,15 @@ export class SeatingComponent implements OnInit {
 
   ngOnInit() {
     var booking = {
+      username: 'mai_emad',
       cinema_name: 'Point 90',
       cinema_location: 'New Cairo',
       hall_number: '1',
       datetime: '2018-04-01 13:00:00',
-      seats: null
-    }
+      seats: null,
+      eachPrice: 50,
+      movie: "1"
+    };
 
     this.cookie.putObject('booking', booking);
 
@@ -38,7 +41,7 @@ export class SeatingComponent implements OnInit {
       console.log(this.layout);
     });
 
-    
+
   }
 
   letter(index: number) {
@@ -47,7 +50,7 @@ export class SeatingComponent implements OnInit {
   }
 
   booked(seat: string) {
-    for(var i = 0; i < this.seats.length; i++) 
+    for(var i = 0; i < this.seats.length; i++)
       if(this.seats[i].seat_number == seat)
         return true;
     return false;
@@ -62,7 +65,7 @@ export class SeatingComponent implements OnInit {
       var index = this.selected.indexOf(seat);
       this.selected.splice( index, 1 );
     }
-    else 
+    else
       this.selected.push(seat);
 
     console.log(this.selected);
@@ -72,7 +75,7 @@ export class SeatingComponent implements OnInit {
 
     var booking = <Booking>(this.cookie.getObject('booking'));
     booking.seats = this.selected;
-    
+
     this.cookie.putObject('booking', booking);
 
     console.log(this.cookie.getObject('booking'));

@@ -14,24 +14,25 @@ export class ReservationComponent implements OnInit {
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
+    var bookingDetails = this.cookie.get('booking');
 
-    var tickets = this.cookie.get("tickets"),
+    var tickets = bookingDetails['seats'],
       ticketsNum = tickets.length,
-      price = this.cookie.get("price"),
-      eachPrice = parseInt(price)/ticketsNum;
+      eachPrice = bookingDetails['eachPrice'],
+      price = eachPrice*ticketsNum;
 
     this.reserveData = {
-      username: this.cookie.get("username"),
-      cinema_name: this.cookie.get("cinema_name"),
-      cinema_location: this.cookie.get("cinema_location"),
-      date_time: this.cookie.get("data_time"),
-      hall: this.cookie.get("hall"),
+      username: bookingDetails['username'],
+      cinema_name: bookingDetails['cinema_name'],
+      cinema_location: bookingDetails['cinema_location'],
+      date_time: bookingDetails['datatime'],
+      hall: bookingDetails['hall_number'],
       payment: null,                      //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
       tickets: tickets,                   //Meaning Reserve (Not Paid), Or Buy (Paid)
       ticketsNum: ticketsNum,
       price: price,
       eachPrice: eachPrice,
-      movie: this.cookie.get("movie")
+      movie: bookingDetails['movie']
     }
 
    /* // For test purposes

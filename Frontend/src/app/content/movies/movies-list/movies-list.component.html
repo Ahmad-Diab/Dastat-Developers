@@ -78,7 +78,7 @@
       <div *ngFor="let movie of movies"  class="movie movie--preview movie--full release">
            <div class="col-sm-3 col-md-2 col-lg-2">
                   <div class="movie__images">
-                      <img alt='' src="https://image.ibb.co/gVP1un/ready_Player_One.jpg">
+                      <img [src] = 'movie.imagePath'>
                   </div>
                   <div class="movie__feature">
                       <a href="#" class="movie__feature-item movie__feature--comment">123</a>
@@ -90,7 +90,7 @@
           <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
                   <a href='movie-page-full.html' class="movie__title link--huge">{{movie.title}}</a>
 
-                  <p class="movie__time">105 min</p>
+                  <p class="movie__time">{{movie.duration}} HOURS</p>
 
                   <p class="movie__option"><strong>Country: </strong><a href="#">USA</a></p>
                   <p class="movie__option"><strong>Category: </strong><a href="#">Comady</a></p>

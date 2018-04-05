@@ -20,30 +20,23 @@
       <ul id="navigation">
         <li>
           <span class="sub-nav-toggle plus"></span>
-          <a href="#">Homepage</a>
+          <a href="">Homepage</a>
+        </li>
+        <li>
+            <span class="sub-nav-toggle plus"></span>
+            <a [routerLink]="['/search']">Search</a>
+          </li>
+        <li>
+          <span class="sub-nav-toggle plus"></span>
+          <a [routerLink]="['/movies/list']">Movies</a>
         </li>
         <li>
           <span class="sub-nav-toggle plus"></span>
-          <a href="page-elements.html">Movies</a>
+          <a [routerLink]="['/cinemas/list']">Cinemas</a>
         </li>
         <li>
           <span class="sub-nav-toggle plus"></span>
-          <a href="page-elements.html">Cinemas</a>
-        </li>
-        <li>
-          <span class="sub-nav-toggle plus"></span>
-          <a href="gallery-four.html">Contact</a>
-          <ul>
-            <li class="menu__nav-item">
-              <a href="gallery-four.html">4 col gallery</a>
-            </li>
-            <li class="menu__nav-item">
-              <a href="gallery-three.html">3 col gallery</a>
-            </li>
-            <li class="menu__nav-item">
-              <a href="gallery-two.html">2 col gallery</a>
-            </li>
-          </ul>
+          <a [routerLink]="['aboutus']">Contact</a>
         </li>
         <li>
           <span class="sub-nav-toggle plus"></span>
@@ -142,7 +135,7 @@
             <a href="#" class="auth__function-item">Watchlist</a>
           </li>
           <li>
-            <a href="#" class="auth__function-item">Booked tickets</a>
+            <a href="/user/bookings" class="auth__function-item">Booked tickets</a>
           </li>
           <li>
             <a href="#" class="auth__function-item">Discussion</a>
@@ -158,7 +151,6 @@
 
   </div>
 </header>
-
 
 
 
@@ -200,3 +192,10 @@
 
   </section>
 </div>
+
+
+
+
+
+
+

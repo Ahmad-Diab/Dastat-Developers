@@ -9,15 +9,31 @@ import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
+import { BookingDetailsComponent } from './user/booking-details/booking-details.component';
+import { ReservationComponent } from './booking/reservation/reservation.component';
+import { SigninComponent } from './users/signin/signin.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
+import { FormsModule } from '@angular/forms';
+import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
+
+import { SearchComponent } from './search/search.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
+import { PartiesComponent } from './booking/parties/parties.component';
 import { RegisterComponent } from './users/register/register.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild(ContentRoutes)
   ],
-  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent,RegisterComponent]
+  declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
+    FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent, FilterCinemaComponent, CinemasListComponent,AboutusComponent,
+    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent]
+
 })
 
 export class ContentModule { }

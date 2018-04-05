@@ -51,17 +51,19 @@ module.exports.authenticate = function(req, res, next) {
           });
         }
         else {
-          res.send({
-            "code": 204,
-            "success": "Username and password does not match",
+          res.status(200).json({
+            err: null,
+            msg: "Wrong Password",
+            success: false
           });
         }
       });      
     }
     else {
-      res.send({
-      "code": 204,
-      "success": "Username does not exits"
+      res.status(200).json({
+        err: null,
+        msg: "Wrong User Name",
+        success: false
       });
     }
   });
@@ -76,7 +78,7 @@ module.exports.Register=function(req, res, next){
 var username=req.body.username;
 var password=req.body.password;
 var email = req.body.email;
-var phone_num=req.body.phone_num;
+var phone_number=req.body.phone_number;
 var credit_card=req.body.credit_card;
 var first_name=req.body.first_name;
 var last_name = req.body.last_name;
@@ -90,7 +92,7 @@ var valid =
 req.body.username &&
 req.body.password &&
 req.body.email&&
-req.body.phone_num&&
+req.body.phone_number&&
 req.body.first_name&&
 req.body.last_name&&
 req.body.age&&
@@ -115,7 +117,7 @@ bcrypt.genSalt(10, (err, salt) => {
             username:username,
             password:hashed_pass,
             email:email,
-            phone_number:phone_num,
+            phone_number:phone_number,
             credit_card:credit_card,
             first_name:first_name,
             last_name:last_name,

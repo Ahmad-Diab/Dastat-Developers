@@ -1,0 +1,12 @@
+#empty-seat {
+    position: relative;
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    font-size: 10px;
+    color: #ffffff;
+    z-index: 13;
+    text-indent: -9999px;
+}

@@ -12,7 +12,19 @@ import { TicketComponent } from './content/booking/ticket/ticket.component';
 import { SeatingService } from './@services/seating.service';
 import { HttpService } from './@services/http.service';
 import { MovieslistService } from './@services/movieslist.service';
-import { authService } from './@services/auth.service';
+import { UserService } from './@services/user.service';
+import {BookingService} from "./@services/booking.service";
+import {CookieService} from "angular2-cookie/core";
+import { AuthService } from './@services/auth.service';
+import { AuthGuard } from './@guards/auth.guard';
+import { User } from './@objects/User';
+import { UsersService } from './@services/users.service';
+import { FilterCinemaService } from './@services/filter-cinema.service';
+import { CinemaslistService } from './@services/cinemaslist.service';
+import { MovieInfoService } from './@services/movie-info.service';
+import { SearchService } from './@services/search.service';
+
+import { PartiesService } from './@services/parties.service';
 
 
 @NgModule({
@@ -21,7 +33,7 @@ import { authService } from './@services/auth.service';
     HeaderComponent,
     FooterComponent,
     TicketComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +41,10 @@ import { authService } from './@services/auth.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService,MovieslistService, authService],
+  providers: [SeatingService, HttpService, MovieslistService, FilterCinemaService,
+  CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
+    AuthService, AuthGuard, CookieService, UsersService, FilterCinemaService,
+    CinemaslistService,MovieInfoService,SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

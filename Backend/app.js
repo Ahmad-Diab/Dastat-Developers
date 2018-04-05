@@ -36,6 +36,7 @@ app.use(compression());
   "application/x-www-form-urlencoded" as json and make it available as a key on the req
   object as req.body
 */
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
     bodyParser.urlencoded({

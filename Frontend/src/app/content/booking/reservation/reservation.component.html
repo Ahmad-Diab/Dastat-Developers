@@ -1,0 +1,61 @@
+<!-- Main content -->
+<section class="container">
+  <div class="order-container">
+    <div class="order">
+      <img class="order__images" alt='' src="../../../../assets/images/tickets.png">
+      <p class="order__title">Book a ticket <br><span class="order__descript">and have fun movie time</span></p>
+      <div class="order__control">
+        <a href="../payment/payment.component.html" class="order__control-btn" (click)="onPaid($event)">Purchase</a>
+        <a href="" class="order__control-btn active" (click)="onUnpaid($event)">Reserve</a>
+      </div>
+    </div>
+  </div>
+  <div class="order-step-area">
+    <div class="order-step first--step order-step--disable ">1. What &amp; Where &amp; When</div>
+    <div class="order-step second--step order-step--disable">2. Choose a sit</div>
+    <div class="order-step third--step">3. Check out</div>
+  </div>
+
+  <div class="col-sm-12">
+    <div class="checkout-wrapper">
+      <h2 class="page-heading">price</h2>
+      <ul class="book-result">
+        <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{reserveData['ticketsNum']}}</span></li>
+        <li class="book-result__item">One item price: <span class="book-result__count booking-price">{{reserveData['eachPrice']}}</span></li>
+        <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{reserveData['price']}}</span></li>
+      </ul>
+
+    </div>
+
+    <div class="order">
+      <a class="btn btn-md btn--warning btn--wide" (click)="onUnpaidReserve($event)" >reserve</a>
+      <a class="btn btn-md btn--warning btn--wide" (click)="onPaidReserve($event)" >purchase</a>
+
+    </div>
+
+    <!-- Commented for now till we make ticket.component.html
+          <a href="../../user/booking-details/booking-details.component.html" (click)="onPaidReserve($event)" >purchase</a>
+
+    <div class="order">
+      <a href="../ticket/ticket.component.html" class="btn btn-md btn--warning btn--wide" ng-click="onUnpaidReserve()" >reserve</a>
+      <a href="../ticket/ticket.component.html" class="btn btn-md btn--warning btn--wide" ng-click="onPaidReserve()" >purchase</a>
+    </div>
+    -->
+  </div>
+
+</section>
+
+
+<div class="clearfix"></div>
+
+<div class="booking-pagination">
+  <a href="../seating/seating.component.html" class="booking-pagination__prev">
+    <p class="arrow__text arrow--prev">prev step</p>
+    <span class="arrow__info">choose a sit</span>
+  </a>
+  <a href="#" class="booking-pagination__next hide--arrow">
+    <p class="arrow__text arrow--next">next step</p>
+    <span class="arrow__info"></span>
+  </a>
+</div>
+

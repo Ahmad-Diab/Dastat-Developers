@@ -4,6 +4,37 @@
 var database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
+/**
+ * A function to show the cinemas showing the requested movie
+ *
+ * @param req, data of a movie
+ * @param res, data of all cinemas which have the movie available
+ */
+module.exports.getCinemasForThatMovie = function(req, res){
+    var movie_id = req.params['movie_id'];
+
+    if(!movie_id) {
+        return res.status(422).json({
+            err: null,
+            msg: 'movie_id is required.',
+            data: null
+        });
+    }
+
+    var sql = "SELECT C.* FROM cinemas C INNER JOIN movies_in_cinemas M ON ? WHERE ?";
+    var joinCond = {
+        'M.cinema_location': 'C.location',
+        'M.cinema_name':'M.name'
+    };
+    var whereCond = {
+        'movie': movie_id
+    };
+    console.log("I am here before looking for cinemas in the db");
+    database.query(sql,[joinCond, whereCond],function (err, result) {
+        if (err) throw err;
+        return res.send(result);
+    });
+};
 
 /**
  *  A function to show parties to ordinary user based on his/her choice of
@@ -12,16 +43,22 @@ var database = require('../config/db-connection'),
  * @param res
  */
 module.exports.getParties = function(req, res){
-    //TODO Get parties of movies just chosen according to chosen day
+    //COMPLETED Get parties of movies just chosen according to chosen day
     var cinemaName = req.params.cinemaName,
-        movieName = req.params.movieName;
+        movieName = req.params.movieName,
         date = req.params.date;
-    var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
 
-        database.query(query,[cinemaName,movieName,date],function (err, result, fields) {
-            if (err) throw err;
-            return res.send(result);
-          });
+    var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
+    //TODO Get parties of movies just chosen according to chosen day
+    var cinemaName = req.body['cinemaName'],
+        movieName = req.body['movieName'],
+        date = req.body['date'],
+        query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
+
+    database.query(query,[cinemaName,movieName,date],function (err, result, fields) {
+        if (err) throw err;
+        return res.send(result);
+      });
 };
 
 
@@ -42,7 +79,9 @@ module.exports.makeReservation = function(req, res, next){
         party_datetime = req.body['date_time'],
         hall = req.body['hall'],
         payment = req.body['payment'],
-        tickets = req.body['tickets'];
+        tickets = req.body['tickets'],
+        tickets_price = req.body['price'],
+        movie = req.body['movie'];
 
     if(!username) {
         return res.status(422).json({
@@ -60,15 +99,23 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    if(!party_datetime || !hall) {
+    if(!party_datetime) {
         return res.status(422).json({
             err: null,
-            msg: 'Party data is required.',
+            msg: 'Party data-time is required.',
             data: null
         });
     }
 
-    if(!tickets || !payment) {
+    if(!hall & !movie) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Party hall and movie are required.',
+            data: null
+        });
+    }
+
+    if(!tickets || !tickets_price) {
         return res.status(422).json({
             err: null,
             msg: 'Tickets data is required.',
@@ -123,7 +170,9 @@ module.exports.makeReservation = function(req, res, next){
             date_time: party_datetime,
             hall: hall,
             cinema_location: cinema_location,
-            cinema_name: cinema_name
+            cinema_name: cinema_name,
+            //price: tickets_price,
+            //movie_id: movie
         };
 
         database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
@@ -223,8 +272,6 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
     });
 };
-
-
 
 
 module.exports.getBookings = function(req, res, next){

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieslistService } from '../../../@services/movieslist.service';
+import { SearchService } from '../../../@services/search.service';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -8,7 +9,7 @@ import { MovieslistService } from '../../../@services/movieslist.service';
 export class MoviesListComponent implements OnInit {
   movies=[];
 
-  constructor(public movieslistService: MovieslistService) { 
+  constructor(public movieslistService: MovieslistService, public searchService: SearchService) { 
     
   }
 
@@ -122,4 +123,12 @@ viewBio(){
     
   });
 }
+
+onSearch(searchKey : String = '') {
+  console.log(searchKey);
+  this.searchService.getSearchResult(searchKey).subscribe((response) => {
+    this.movies = response.data.Movies;
+  });
+}
+
 }

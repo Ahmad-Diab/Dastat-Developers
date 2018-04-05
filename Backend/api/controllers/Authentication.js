@@ -51,17 +51,19 @@ module.exports.authenticate = function(req, res, next) {
           });
         }
         else {
-          res.send({
-            "code": 204,
-            "success": "Username and password does not match",
+          res.status(200).json({
+            err: null,
+            msg: "Wrong Password",
+            success: false
           });
         }
       });      
     }
     else {
-      res.send({
-      "code": 204,
-      "success": "Username does not exits"
+      res.status(200).json({
+        err: null,
+        msg: "Wrong User Name",
+        success: false
       });
     }
   });

@@ -14,6 +14,7 @@ export class SigninComponent implements OnInit {
   
   user: User = new User();
   message;
+
   constructor(public cookie: CookieService, public router: Router, public authService: AuthService) { }
 
   ngOnInit() {
@@ -30,13 +31,18 @@ export class SigninComponent implements OnInit {
       this.message = "please enter a password"
       return;
     }    
-    this.cookie.put('username', this.user.username);
+  
     this.authService.authenticateUser(this.user).subscribe((response)=>{
       if(!response.success){
-      this.message = "username or passsword is incorrect"
-      return;}
+      this.message = response.msg;
+      return;
+    }
       else{
-        this.router.navigate(['']);
+        this.cookie.put('username',this.user.username);
+        this.message=response.msg;
+
+       // this.router.navigate(['']);
+    
 
       }
         });

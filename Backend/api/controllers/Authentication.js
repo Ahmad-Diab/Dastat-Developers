@@ -108,7 +108,7 @@ var hashed_pass ;
 bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(req.body.password, salt, (err, hash) => {
         if(err) return next(err);
-      
+        
         hashed_pass= hash;
         
         var user={
@@ -127,10 +127,14 @@ bcrypt.genSalt(10, (err, salt) => {
         
         database.query('INSERT INTO users SET ?',user, function (error, results, fields) {
             if(error){ 
-                
+              
                 return next(error);
                }
-            return res.send("Done");
+               res.status(200).json({
+                err: null,
+                msg: "Register Done",
+                success: true
+              });
           });
         
     });

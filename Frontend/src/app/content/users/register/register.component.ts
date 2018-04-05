@@ -48,15 +48,16 @@ export class RegisterComponent implements OnInit {
       this.message = "please enter your age"
       return;
     }
-    console.log(this.user.phone_num);
+
     this.authService.register(this.user).subscribe((response)=>{
       if(!response.success){
       this.message = "username or passsword is incorrect"
+  
       return;}
 
-      else{
-        
-        this.message = "Done"
+      else{  
+
+        this.message = response.msg;
         return;
       }
     })

@@ -1,0 +1,27 @@
+<!-- Main content -->
+
+    <p class="login__title">sign up
+        <br>
+
+    </p>
+
+
+
+    <div class="field-wrap">
+        <input type='text' placeholder='Username' [(ngModel)]="user.username"  class="login__input">
+        <input type='password' placeholder='Password' [(ngModel)]="user.password"  class="login__input">
+        <input type='email' placeholder='Email' [(ngModel)]="user.email"  class="login__input">
+        <input type='text' placeholder='Phone Number' [(ngModel)]="user.phone_num"  class="login__input">
+        <input type='text' placeholder='Credit Card' [(ngModel)]="user.credit_card" class="login__input">
+        <input type='text' placeholder='First Name'  [(ngModel)]="user.first_name" class="login__input">
+        <input type='text' placeholder='Last Name' [(ngModel)]="user.last_name"  class="login__input">
+        <input type='text' placeholder='Age' [(ngModel)]="user.age" class="login__input">
+        <input type='text' placeholder='Gender' [(ngModel)]="user.gender"  class="login__input">
+        <h6 style="color:red; margin-top: 20px">{{message}}</h6>
+
+    </div>
+
+    <div class="login__control">
+        <button type='submit' class="btn btn-md btn--warning btn--wider" (click)="onRegister() ">sign up</button>
+
+    </div>

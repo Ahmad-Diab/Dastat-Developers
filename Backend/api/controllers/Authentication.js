@@ -72,7 +72,7 @@ module.exports.authenticate = function(req, res, next) {
 //Authentication Register
 
 module.exports.Register=function(req, res, next){
-    
+  
 var username=req.body.username;
 var password=req.body.password;
 var email = req.body.email;

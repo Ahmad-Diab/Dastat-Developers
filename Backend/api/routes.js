@@ -13,6 +13,7 @@ router.get('/users', User.getUsers);
 
 router.post('/login', Authentication.authenticate);
 
+
 router.post('/register', Authentication.Register);
 
 //exporting routes to the project

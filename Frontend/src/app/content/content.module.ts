@@ -13,8 +13,6 @@ import { BookingDetailsComponent } from './user/booking-details/booking-details.
 import { ReservationComponent } from './booking/reservation/reservation.component';
 import { SigninComponent } from './users/signin/signin.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
-import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
-import { FormsModule } from '@angular/forms';
 import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
 
 import { SearchComponent } from './search/search.component';

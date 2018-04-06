@@ -30,7 +30,7 @@ export const ContentRoutes: Routes = [{
 }
 ,
 {
-  path : 'info',
+  path : 'info/:movie_id',
   component : MovieInfoComponent
 }
 ];

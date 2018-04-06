@@ -6,13 +6,13 @@ var database = require('../config/db-connection');
 /**
  * Search on Movies, Cinemas, Actors using a search keyword
  * @param {*} req 
- * @param {*} res 
+ * @param {*} res The result of the function. res.data contains the result of the search whic are: res.data.Movies, res.data.Cinemas, res.data.Actors
  * @param {*} next
  */
 module.exports.searchByKeyword = function(req,res,next){
-    var searchKeyS = '%' +  req.params.searchKeyword + '%';        // used in comparison to char columns using LIKE
-    var searchKeyN = req.params.searchKeyword;              // used in comparison to int columns usin =
-    var sqlMovie = 'SELECT title,genre,imagePath,year,rating FROM Movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
+    var searchKeyS = '%' +  req.params.searchKeyword + '%';        // used in comparison to char columns using 'LIKE'
+    var searchKeyN = req.params.searchKeyword;                     // used in comparison to int columns using '='
+    var sqlMovie = 'SELECT title,genre,imagePath,year,rating,duration FROM Movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
     var sqlCinema = 'SELECT * FROM Cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?';
     var sqlActor = 'SELECT name,age,bio FROM Actors WHERE name LIKE ?'
     database.query(sqlMovie, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, movieResult, fields){

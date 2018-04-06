@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BookingService} from "../../../@services/booking.service";
-import {CookieService} from "angular2-cookie/services/cookies.service";
+import {CookieService} from "angular2-cookie/core";
 
 
 @Component({
@@ -11,16 +11,21 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 export class ReservationComponent implements OnInit {
 
   reserveData = {};
+  reservationType = "";
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
 
-    let bookingDetails = this.cookie.get('booking');
+    this.reservationType = "reserve";
+
+    let bookingDetails = this.cookie.getObject('booking');
 
     let tickets = bookingDetails['seats'],
-      ticketsNum = 3,
+      ticketsNum = tickets.length,
       eachPrice = bookingDetails['eachPrice'],
       price = eachPrice*ticketsNum;
+
+
 
     this.reserveData = {
       username: bookingDetails['username'],
@@ -36,7 +41,7 @@ export class ReservationComponent implements OnInit {
       movie: bookingDetails['movie']
     };
 
-  /*
+/*
    // For test purposes
     var tickets = [1, 5, 9],
       ticketsNum = tickets.length,
@@ -55,8 +60,8 @@ export class ReservationComponent implements OnInit {
       price: price,
       eachPrice: eachPrice,
       movie: "10"
-    }
-    */
+    };
+*/
 
   }
 
@@ -66,18 +71,18 @@ export class ReservationComponent implements OnInit {
       this.reserveData['date_time'],this.reserveData['hall'], this.reserveData['payment'],
       this.reserveData['tickets'],this.reserveData['price'],this.reserveData['movie']
     ).subscribe((response) => {
-      //event.confirm.resolve(response);
+      event.confirm.resolve(response);
       console.log("onReserve order is met");
     });
   }
 
   onUnpaid(event): void{
     this.reserveData["payment"] = false;
-
+    this.reservationType = "Reserve";
   }
 
   onPaid(event): void {
     this.reserveData["payment"] = true;
-    //event.confirm();
+    this.reservationType = "Purchase";
   }
 }

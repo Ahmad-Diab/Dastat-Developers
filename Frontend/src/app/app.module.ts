@@ -19,12 +19,11 @@ import { AuthService } from './@services/auth.service';
 import { AuthGuard } from './@guards/auth.guard';
 import { User } from './@objects/User';
 import { UsersService } from './@services/users.service';
-import { FilterCinemaService } from './@services/filter-cinema.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
-
 import { PartiesService } from './@services/parties.service';
+import { CinemaInfoService } from './@services/cinema-info.service';
 
 
 @NgModule({
@@ -41,10 +40,10 @@ import { PartiesService } from './@services/parties.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService, MovieslistService, FilterCinemaService,
+  providers: [SeatingService, HttpService, MovieslistService,
   CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
-    AuthService, AuthGuard, CookieService, UsersService, FilterCinemaService,
-    CinemaslistService,MovieInfoService,SearchService],
+    AuthService, AuthGuard, CookieService, UsersService,
+    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

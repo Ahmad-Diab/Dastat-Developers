@@ -8,9 +8,9 @@ import { SearchService } from '../../@services/search.service';
 })
 export class SearchComponent implements OnInit {
 
-  movies = [];
-  cinemas = [];
-  actors = [];
+  movies = [];    // holds the movies that to be displayed in search
+  cinemas = [];   // holds the mcinemas that to be displayed in search
+  actors = [];    // holds the actors that to be displayed in search
 
   constructor(public searchService: SearchService ) {
   }
@@ -23,7 +23,10 @@ export class SearchComponent implements OnInit {
     }); 
   }
   
-
+  /**
+   * Search and find results of movies, cinemas, actors that are matching a given keyword in any of the table columns that matter
+   * @param searchKey The keyword used to search with
+   */
   onSearch(searchKey : String = '') {
     console.log(searchKey);
     this.searchService.getSearchResult(searchKey).subscribe((response) => {

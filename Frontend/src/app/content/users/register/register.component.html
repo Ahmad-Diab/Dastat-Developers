@@ -1,0 +1,29 @@
+<!-- Main content -->
+<form id="login-form"  class="login" method='get' novalidate='' >
+    <p class="login__title">sign up
+        <br>
+
+    </p>
+
+
+ 
+    <div class="field-wrap">
+        <input type='text' placeholder='Username' [(ngModel)]="user.username" name="username" class="login__input">
+        <input type='password' placeholder='Password' [(ngModel)]="user.password" name="password"  class="login__input">
+        <input type='email' placeholder='Email' [(ngModel)]="user.email" name="email"  class="login__input">
+        <input type='text' placeholder='Phone Number' [(ngModel)]="user.phone_number" name="phone_number"  class="login__input">
+        <input type='text' placeholder='Credit Card' [(ngModel)]="user.credit_card" name="credit_card" class="login__input">
+        <input type='text' placeholder='First Name'  [(ngModel)]="user.first_name" name="first_name" class="login__input">
+        <input type='text' placeholder='Last Name' [(ngModel)]="user.last_name" name="last_name" class="login__input">
+        <input type='text' placeholder='Age' [(ngModel)]="user.age" name="age" class="login__input">
+        <input type='text' placeholder='Gender' [(ngModel)]="user.gender" name="gender"  class="login__input">
+        <h6 style="color:red; margin-top: 20px">{{message}}</h6>
+
+    </div>
+
+
+    <div class="login__control">
+        <button type='button' class="btn btn-md btn--warning btn--wider" (click)="onRegister() ">sign up</button>
+
+    </div>
+    <form>

@@ -92,6 +92,7 @@ router.post('/login', Authentication.authenticate);
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 
+
 router.post('/register', Authentication.Register);
 // router.post('/test', User.test);
 

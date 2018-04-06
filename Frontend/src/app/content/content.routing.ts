@@ -14,6 +14,7 @@ import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.compon
 import { SearchComponent } from './search/search.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
+import { RegisterComponent } from './users/register/register.component';
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -60,6 +61,9 @@ export const ContentRoutes: Routes = [{
 },{
   path : 'info',
   component : MovieInfoComponent
+},{ 
+  path: 'register',
+  component: RegisterComponent
 },{
   path: 'booking/parties',
   component: PartiesComponent

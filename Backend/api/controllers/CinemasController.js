@@ -38,10 +38,24 @@ module.exports.ViewCinemas = function(req, res, next){
 
   module.exports.viewCinema = function(req,res,next){
     var cinema = req.params.cinema;
-    var q = "SELECT * FROM cinemas WHERE cinemas.name = ?";
-    database.query(q,[cinema], function(error, results, fields){
+    var loc = req.params.loc;
+    
+    var q = "SELECT * FROM cinemas WHERE cinemas.name = ? and cinemas.location = ?";
+    database.query(q,[cinema,loc], function(error, results, fields){
+      
       if(error) return next(error);
-      return res.send(results);
+      return res.send(results[0]);
     }); 
   }
-  
+  //View movies in cinema
+  module.exports.moviesInCinema = function(req, res, next){
+    var cinema = req.params.cinema;
+    var loc = req.params.loc;
+    database.query('SELECT * FROM movies m INNER JOIN movies_in_cinemas x on m.movie_id = x.movie WHERE x.cinema_name = ? AND x.cinema_location = ? ', [cinema,loc],function (error, results, fields) {
+      if(error){
+        return next(error);
+      }
+      return res.send(results);
+    });
+  }
+    

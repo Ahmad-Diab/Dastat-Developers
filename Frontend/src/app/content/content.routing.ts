@@ -59,8 +59,10 @@ export const ContentRoutes: Routes = [{
 },{
   path : 'aboutus',
   component : AboutusComponent
-},{
-  path : 'info',
+}
+,
+{
+  path : 'info/:movie_id',
   component : MovieInfoComponent
 },{ 
   path: 'register',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieslistService } from '../../../@services/movieslist.service';
 import { SearchService } from '../../../@services/search.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -9,8 +10,7 @@ import { SearchService } from '../../../@services/search.service';
 export class MoviesListComponent implements OnInit {
   movies=[];
 
-  constructor(public movieslistService: MovieslistService, public searchService: SearchService) { 
-    
+  constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router) { 
   }
 
   ngOnInit() {
@@ -129,6 +129,9 @@ onSearch(searchKey : String = '') {
   this.searchService.getSearchResult(searchKey).subscribe((response) => {
     this.movies = response.data.Movies;
   });
+}
+getMovieInfo(movie){
+  this.router.navigate(['info',movie.movie_id]);
 }
 
 }

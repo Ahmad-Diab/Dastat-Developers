@@ -61,28 +61,29 @@ module.exports.getParties = function(req, res){
       });
 };
 
-
 /**
  * A function to handle making the reservation of (one or more) tickets
  * to a movie in a cinema at the end of the booking process.
- * @param req
- * @param res
- * @param next
+ * @param req, required data for processing the request of making the reservation
+ * @param res, results of changes on the tickets table in database
+ * @param next, next middleware to handle errors
  */
 module.exports.makeReservation = function(req, res, next){
-    //COMPLETED Make a reservation based on all data need for reservation.
-    //TODO User-name validation needs to be done!
+    // COMPLETED Make a reservation based on all data need for reservation.
+    // TODO User-name validation needs to be done!
 
     var username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
         party_datetime = req.body['date_time'],
         hall = req.body['hall'],
+        movie = req.body['movie'],
         payment = req.body['payment'],
         tickets = req.body['tickets'],
         tickets_price = req.body['price'],
-        movie = req.body['movie'];
+        numOfTickets = tickets.length;
 
+    // Null Checkers
     if(!username) {
         return res.status(422).json({
             err: null,
@@ -90,7 +91,6 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
     if(!cinema_name || !cinema_location) {
         return res.status(422).json({
             err: null,
@@ -98,7 +98,6 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
     if(!party_datetime) {
         return res.status(422).json({
             err: null,
@@ -106,7 +105,6 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
     if(!hall & !movie) {
         return res.status(422).json({
             err: null,
@@ -114,7 +112,6 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
     if(!tickets || !tickets_price) {
         return res.status(422).json({
             err: null,
@@ -122,9 +119,10 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
+    // Validations of correct types
     if(!Validations.isBoolean(payment) ||
-        !Validations.isNumber(hall)) {
+        !Validations.isNumber(hall) ||
+        !Validations.isNumber(tickets_price)) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -132,33 +130,25 @@ module.exports.makeReservation = function(req, res, next){
         });
     }
 
-    /*
-    // Verify that hall exists in Cinema, and retrieve movie
-    var hallDetails = {
-        hall_number: hall,
-        cinema_location: cinema_location,
-        cinema_name: cinema_name
-    };
 
-    var movieData = null;
-    database.query('SELECT movie FROM halls WHERE ?',
-        hallDetails, function (error, results) {
+    // TODO make it one response
+    // Verify that hall exists in Cinema, and retrieve movie
+    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+        [hall, cinema_location, cinema_name],function (res, error, results) {
         if (error) {
             return next(error);
         }
-        movieData = results;
+        console.log("error : " +  results);
+        if(!results || results.length == 0) {
+            return res.status(404).send({
+                err: null,
+                msg: "The assigned hall does not exist.",
+                data: null
+            });
+        }
     });
-    /*
-    if(movieData || !movieData.length) {
-        return res.status(404).send({
-            err: "The assigned hall does not exist.",
-            msg: null,
-            data: null
-        })
-    }*/
 
     var success = true;
-
     for( var i = 0; i< tickets.length; i++) {
         var seatNum = tickets[i];
 
@@ -175,24 +165,25 @@ module.exports.makeReservation = function(req, res, next){
             //movie_id: movie
         };
 
+        var queryResults = null;
         database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
             if (error) {
                 return next(error);
             }
             success = true;
+            queryResults = results;
         });
     }
-
+    console.log("Results = " + queryResults);
     if(success) {
-        res.status(200).json({
+        return res.status(200).json({
             err: null,
             msg: 'Booking Request has been completed successfully.',
-            data: req.body
+            data: queryResults
         });
     }
 
 };
-
 
 /**
  *  Get Current Movies..
@@ -233,7 +224,6 @@ module.exports.getCurrentMovies = function(req, res, next){
     });
 };
 
-
 module.exports.getUpcomingMovies = function(req, res, next){
 
     var currentDate = new Date();
@@ -272,7 +262,6 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
     });
 };
-
 
 module.exports.getBookings = function(req, res, next){
     
@@ -346,7 +335,7 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
     });
   };
 
-  module.exports.getUpcomingMoviesForCinema = function(req, res, next){
+module.exports.getUpcomingMoviesForCinema = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;
     var cinemaLocation = req.params.cinema_location;
@@ -396,7 +385,7 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
         }
 
     });
-  };
+    };
 
 module.exports.usePromoCode = function(req, res, next){
   var oldPrice = req.body.price;

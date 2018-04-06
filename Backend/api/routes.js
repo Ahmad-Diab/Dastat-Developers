@@ -35,8 +35,10 @@ router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 
 
 router.get('/filterByLocation/:location', Cinema.filterByLocation);
-router.get('/viewCinema/:cinema',Cinema.viewCinema);
 router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
+router.get('/viewCinema/:cinema/:loc',Cinema.viewCinema,Cinema.moviesInCinema);
+router.get('/viewCinema/:cinema/:loc/allMovies',Cinema.moviesInCinema);
+
 
 
 //viewCinemas routes
@@ -91,6 +93,7 @@ router.get('/movies/:movie_id',Movie.getMovieInfo);
 router.post('/login', Authentication.authenticate);
 //--------------------------------Search routes---------------------------------------
 router.get('/search/:searchKeyword', Search.searchByKeyword);
+
 
 router.post('/register', Authentication.Register);
 // router.post('/test', User.test);

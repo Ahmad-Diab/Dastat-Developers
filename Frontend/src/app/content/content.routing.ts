@@ -8,12 +8,13 @@ import { BookingDetailsComponent } from './user/booking-details/booking-details.
 import {ReservationComponent} from "./booking/reservation/reservation.component";
 import { SigninComponent } from './users/signin/signin.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
-import { FilterCinemaComponent } from './cinemas/filter-cinema/filter-cinema.component';
 import { PartiesComponent } from './booking/parties/parties.component';
 import { CinemasListComponent } from './cinemas/cinemas-list/cinemas-list.component';
 import { SearchComponent } from './search/search.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
+import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component';
+import { RegisterComponent } from './users/register/register.component';
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -43,14 +44,15 @@ export const ContentRoutes: Routes = [{
   path: 'user/:username',
   component: UserProfileComponent
 },{
-  path: 'cinemas/filter-cinema',
-  component: FilterCinemaComponent
-},{
   path: 'cinemas/list',
+  component: CinemasListComponent
+},
+{
+  path: 'cinemas/list/:sorting_item/:searchValue',
   component: CinemasListComponent
 },{
   path: 'cinemas/:name/:location',
-  component: CinemasListComponent
+  component: CinemaInfoComponent
 },{
   path: 'search',
   component: SearchComponent
@@ -60,6 +62,9 @@ export const ContentRoutes: Routes = [{
 },{
   path : 'info',
   component : MovieInfoComponent
+},{ 
+  path: 'register',
+  component: RegisterComponent
 },{
   path: 'booking/parties',
   component: PartiesComponent

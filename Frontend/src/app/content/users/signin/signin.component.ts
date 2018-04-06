@@ -14,13 +14,12 @@ export class SigninComponent implements OnInit {
   
   user: User = new User();
   message;
+
   constructor(public cookie: CookieService, public router: Router, public authService: AuthService) { }
 
   ngOnInit() {
-    console.log('reach login');
   }
   onLogin(){
-    console.log(this.user);
     if(!this.user.username){
       this.message = "please enter a username"
       return;
@@ -30,52 +29,24 @@ export class SigninComponent implements OnInit {
       this.message = "please enter a password"
       return;
     }    
-    this.cookie.put('username', this.user.username);
+  
     this.authService.authenticateUser(this.user).subscribe((response)=>{
       if(!response.success){
-      this.message = "username or passsword is incorrect"
-      return;}
+      this.message = response.msg;
+      return;
+    }
       else{
-        this.router.navigate(['']);
+        this.cookie.put('username',this.user.username);
+        this.message=response.msg;
+
+       // this.router.navigate(['']);
+    
 
       }
         });
   }
   
-  onRegister(){
+
     
-    if(!this.user.username){
-      this.message = "please enter a username"
-      return;
-    }
-
-    if(!this.user.password){
-      this.message = "please enter a password"
-      return;
-    }   
-    
-    if(!this.user.name){
-      this.message = "please enter a fullname"
-      return;
-    }
-
-    if(!this.user.email){
-      this.message = "please enter an email"
-      return;
-    }
-
-    this.cookie.put('username', this.user.username);
-    this.authService.register(this.user).subscribe((response)=>{
-      if(!response.success){
-      this.message = "please enter the correct data"
-      return;}
-
-      else{
-        this.router.navigate(['']);
-
-      }
-        });
-    
-  }
-
+  
 }

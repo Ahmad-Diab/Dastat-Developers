@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-=======
 # dependencies
 /.idea
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 
 
->>>>>>> 6b12da153c4a8669680adad0234d24872db37591
 # dependencies
 /node_modules
 

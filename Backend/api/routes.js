@@ -89,7 +89,7 @@ router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 router.post('/login', Authentication.authenticate);
-//----------------------------------------------------Search routes--------------------------------------------//
+//--------------------------------Search routes---------------------------------------
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 router.post('/register', Authentication.Register);

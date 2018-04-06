@@ -1,12 +1,11 @@
 var database = require('../config/db-connection');
 
-//User Controllers should be implemented here
-//DONT FORGET TO USE MODULE exports
+//Search Controllers should be implemented here
 
 /**
  * Search on Movies, Cinemas, Actors using a search keyword
  * @param {*} req 
- * @param {*} res The result of the function. res.data contains the result of the search whic are: res.data.Movies, res.data.Cinemas, res.data.Actors
+ * @param {*} res The result of the function. res.data contains the result of the search which are: res.data.Movies, res.data.Cinemas, res.data.Actors
  * @param {*} next
  */
 module.exports.searchByKeyword = function(req,res,next){

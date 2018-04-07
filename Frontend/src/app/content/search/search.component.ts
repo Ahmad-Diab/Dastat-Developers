@@ -37,9 +37,16 @@ export class SearchComponent implements OnInit {
     });
   }
 
-
+  /**
+   * navigates to movie info
+   * @param movie The movie that the info will be about
+   */
   getMovieInfo(movie){
     this.router.navigate(['info', movie.movie_id]);
+  }
+
+  getCinemaInfo(cinema){
+    this.router.navigate(['cinemas', cinema.name, cinema.location]);
   }
 
 }

@@ -1,15 +1,13 @@
-//process.env.Node_ENV = 'test';
+process.env.NODE_ENV = 'test';
 
-require('chai/register-should');  // Using Should style
-
-//Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../../app');
+let should = chai.should();
 
 chai.use(chaiHttp);
 describe('Booking Tickets', () => {
-    beforeEach((done) => {});
+    beforeEach((done) => {done();});
     /**
      * Reserving multiple tickets
      */
@@ -28,11 +26,11 @@ describe('Booking Tickets', () => {
                 "movie": 10,
                 "comment": "abc"
             };
-            chai.request(server).post('/userBooking/makeReservation')
-                .send(bookingDetails).end((err, res) => {
+            chai.request(server)
+                .post('/api/userBooking/makeReservation')
+                .send(bookingDetails)
+                .end((err, res) => {
                     res.should.have.status(200);
-                    res.should.be.json();
-                    console.log(res);
                     done();
                 });
         });

@@ -75,13 +75,15 @@ module.exports.makeReservation = function(req, res, next){
     var username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
-        party_datetime = req.body['date_time'],
+        party_date = req.body['date'],
+        party_time = req.body['time'],
         hall = req.body['hall'],
         movie = req.body['movie'],
         payment = req.body['payment'],
         tickets = req.body['tickets'],
         tickets_price = req.body['price'],
-        numOfTickets = tickets.length;
+        numOfTickets = tickets.length,
+        comment = req.body['comment'];
 
     // Null Checkers
     if(!username) {
@@ -98,14 +100,14 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-    if(!party_datetime) {
+    if(!party_date || !party_time) {
         return res.status(422).json({
             err: null,
             msg: 'Party data-time is required.',
             data: null
         });
     }
-    if(!hall & !movie) {
+    if(!hall || !movie) {
         return res.status(422).json({
             err: null,
             msg: 'Party hall and movie are required.',
@@ -129,59 +131,47 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
-
-    // TODO make it one response
+    // Verify that movie exists in hall
     // Verify that hall exists in Cinema, and retrieve movie
     database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
-        [hall, cinema_location, cinema_name],function (res, error, results) {
+        [hall, cinema_location, cinema_name],function (error, results) {
         if (error) {
             return next(error);
         }
-        console.log("error : " +  results);
-        if(!results || results.length == 0) {
+        console.log(results);
+        if(!results || !results.length) {
             return res.status(404).send({
                 err: null,
                 msg: "The assigned hall does not exist.",
                 data: null
             });
         }
-    });
 
-    var success = true;
-    for( var i = 0; i< tickets.length; i++) {
-        var seatNum = tickets[i];
+        var values = [];
+        for(var i = 0; i< numOfTickets; i++) {
+            var seatNum = tickets[i];
+            var ticket_details = [username,payment,seatNum,party_date,party_time,hall,cinema_location, cinema_name,
+                tickets_price, movie, comment];
+            values.push(ticket_details);
+        }
 
-        //TODO seatNum type validation
-        var ticketDetails = {
-            user: username,
-            payment: payment,
-            seat_number: seatNum,
-            date_time: party_datetime,
-            hall: hall,
-            cinema_location: cinema_location,
-            cinema_name: cinema_name,
-            //price: tickets_price,
-            //movie_id: movie
-        };
+            var sqlQuery = 'INSERT INTO Tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
 
-        var queryResults = null;
-        database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
+        database.query(sqlQuery,[values], function (error, results) {
             if (error) {
                 return next(error);
             }
-            success = true;
-            queryResults = results;
+
+            return res.status(200).json({
+                err: null,
+                msg: 'Booking Request has been completed successfully.',
+                data: results
+            });
+
         });
-    }
-    console.log("Results = " + queryResults);
-    if(success) {
-        return res.status(200).json({
-            err: null,
-            msg: 'Booking Request has been completed successfully.',
-            data: queryResults
-        });
-    }
+    });
+
+
 
 };
 

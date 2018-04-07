@@ -1,67 +1,70 @@
-        <!-- Search bar -->
-        <div class="search-wrapper">
-          <div class="container container--add">
-              <form id='search-form' method='get' class="search">
-                  <input type="text" class="search__field" placeholder="Search">
-                  <select name="sorting_item" id="search-sort" class="search__sort" tabindex="0">
-                      <option value="1" selected='selected'>By title</option>
-                      <option value="2">By year</option>
-                      <option value="3">By producer</option>
-                      <option value="4">By title</option>
-                      <option value="5">By year</option>
-                  </select>
-                  <button type='submit' class="btn btn-md btn--danger search__button">search a movie</button>
-              </form>
-          </div>
-      </div>
-      
-      <!-- Main content -->
-      <section class="container">
-          <div class="col-sm-12">
-              <h2 class="page-heading">cinemas</h2>
-
-              <div class="tags-area tags-area--thin">
-                  <form id='select' class="select" method='get'>
-                        <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
-                          <option value="1" selected='selected'>London</option>
-                          <option value="2">New York</option>
-                          <option value="3">Paris</option>
-                          <option value="4">Berlin</option>
-                          <option value="5">Moscow</option>
-                          <option value="3">Minsk</option>
-                          <option value="4">Warsawa</option>
-                          <option value="5">Kiev</option>
-                      </select>
-                  </form>
-
-                  <div class="tags tags--unmarked tags--aside">
-                      <span class="tags__label">Sorted by:</span>
-                          <ul>
-                              <li class="item-wrap"><a href="#" class="tags__item item-active" data-filter='all'>all</a></li>
-                              <li class="item-wrap"><a href="#" class="tags__item" data-filter='name'>name</a></li>
-                              <li class="item-wrap"><a href="#" class="tags__item" data-filter='popularity'>popularity</a></li>
-                          </ul>
-                  </div>
+<!-- Search bar -->
+<div class="search-wrapper">
+    <div class="container container--add">
+        <form id='search-form' method='get' class="search">
+            <input [(ngModel)]="searchValue" name="searchValue"  type="text" class="search__field" placeholder="Search" >          
+            <select [(ngModel)]="sorting_item" name="sorting_item" id="search-sort" class="sbHolder" stylclass="search__sort" tabindex="0">
+                <option class="" value="1" selected='selected'>number of halls</option>
+                <option value="2">location</option>
+                <option value="3">By producer</option>
+                <option value="4">By title</option>
+                <option value="5">By year</option>
+            </select>
+          
+          <button (click)="filterBy(sorting_item,searchValue)"  class="btn btn-md btn--danger search__button">search a movie</button>
+  
+            
+        </form>
+    </div>
+  </div>
+  
+  <!-- Main content -->
+  <section class="container">
+    <div class="col-sm-12">
+        <h2 class="page-heading">cinemas</h2>
+  
+        <div class="tags-area tags-area--thin">
+            <form id='select' class="select" method='get'>
+                  <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
+                    <option value="1" selected='selected'>London</option>
+                    <option value="2">New York</option>
+                    <option value="3">Paris</option>
+                    <option value="4">Berlin</option>
+                    <option value="5">Moscow</option>
+                    <option value="3">Minsk</option>
+                    <option value="4">Warsawa</option>
+                    <option value="5">Kiev</option>
+                </select>
+            </form>
+  
+            <div class="tags tags--unmarked tags--aside">
+                <span class="tags__label">Sorted by:</span>
+                    <ul>
+                        <li class="item-wrap"><a href="#" class="tags__item item-active" data-filter='all'>all</a></li>
+                        <li class="item-wrap"><a href="#" class="tags__item" data-filter='name'>name</a></li>
+                        <li class="item-wrap"><a href="#" class="tags__item" data-filter='popularity'>popularity</a></li>
+                    </ul>
+            </div>
+        </div>
+  
+        <!-- Cinema preview item -->
+        <div *ngFor="let cinema of cinemas">
+              <div class="col-xs-6 col-sm-3 cinema-item name">
+                      <div (click)="cinemanav(cinema)" class="cinema">
+                          <a class="cinema__images">
+                              <img alt='' src="assets/images/cinema/cinema2.jpg">
+                          </a>
+                          <a class="cinema-title">{{cinema.name}}</a>
+                      </div>
               </div>
-
-              <!-- Cinema preview item -->
-              <div *ngFor="let cinema of cinemas">
-                    <div class="col-xs-6 col-sm-3 cinema-item name">
-                            <div (click)="cinemanav(cinema)" class="cinema">
-                                <a class="cinema__images">
-                                    <img alt='' src="assets/images/cinema/cinema2.jpg">
-                                </a>
-                                <a class="cinema-title">{{cinema.name}}</a>
-                            </div>
-                    </div>
-              </div>>
-              
-                  
-
-                  <div class="pagination paginatioon--full">
-                          <a href='#' class="pagination__prev">prev</a>
-                          <a href='#' class="pagination__next">next</a>
-                  </div>
+        </div>>
         
-          </div>
-      </section>
+            
+  
+            <div class="pagination paginatioon--full">
+                    <a href='#' class="pagination__prev">prev</a>
+                    <a href='#' class="pagination__next">next</a>
+            </div>
+  
+    </div>
+  </section>

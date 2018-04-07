@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterCinemaComponent } from './filter-cinema.component';
+import { CinemaInfoComponent } from './cinema-info.component';
 
-describe('FilterCinemaComponent', () => {
-  let component: FilterCinemaComponent;
-  let fixture: ComponentFixture<FilterCinemaComponent>;
+describe('CinemaInfoComponent', () => {
+  let component: CinemaInfoComponent;
+  let fixture: ComponentFixture<CinemaInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterCinemaComponent ]
+      declarations: [ CinemaInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FilterCinemaComponent);
+    fixture = TestBed.createComponent(CinemaInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

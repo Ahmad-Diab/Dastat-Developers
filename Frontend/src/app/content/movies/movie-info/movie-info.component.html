@@ -10,11 +10,11 @@
 <!-- Main content -->
 <section class="container">
   <div class="col-sm-12">
-      <h2 class="page-heading">Movies</h2>
+      <h2 class="page-heading">Movie info</h2>
       
       
       <!-- Movie preview item -->
-      <div [(ngModel)]="movie"  class="movie movie--preview movie--full release">
+      <div *ngIf="movie" class="movie movie--preview movie--full release">
            <div class="col-sm-3 col-md-2 col-lg-2">
                   <div class="movie__images">
                       <img alt='' src={{movie.imagePath}}>
@@ -23,14 +23,15 @@
           </div>
 
           <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-                  <a href='movie-page-full.html' class="movie__title link--huge">{{movie.title}}</a>
+                  <a class="movie__title link--huge">{{movie.title}}</a>
 
                   <p class="movie__time">{{movie.duration}} hrs</p>
 
                
                   <p class="movie__option"><strong>Category: </strong><a href="#">{{movie.genre}}</a></p>
                   <p class="movie__option"><strong>Release date: </strong>{{movie.year}}</p>
-
+                  <p class="movie__option"><strong>Description: </strong>{{movie.description}}</p>
+                  <p class="movie__option"><strong>Cast: </strong>{{movie.cast}}</p>
                   <div class="movie__btns">
                       <a href="#" class="btn btn-md btn--warning">book a ticket <span class="hidden-sm">for this movie</span></a>
                       <a href="#" class="watchlist">Add to watchlist</a>

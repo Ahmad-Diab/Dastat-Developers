@@ -1,7 +1,4 @@
-# Project Title
 
-
-**Sprint - 1**
 
 
 ## About

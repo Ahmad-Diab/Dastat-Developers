@@ -512,13 +512,13 @@
         <!-- Movie variant with time -->
         <div *ngFor ="let movie of movies" class="movie movie--test movie--test--dark movie--test--left">
           <div class="movie__images">
-            <a href="movie-page-left.html" class="movie-beta__link">
+            <a [routerLink] = '' (click)=getMovieInfo(movie)  class="movie-beta__link">
               <img [src] = "movie.imagePath">
             </a>
           </div>
 
           <div class="movie__info">
-            <a href='movie-page-left.html' class="movie__title">{{movie.title}} </a>
+            <a  [routerLink] = '' (click)=getMovieInfo(movie)   class="movie__title">{{movie.title}} </a>
 
             <p class="movie__time">{{movie.duration}} hours</p>
 

@@ -14,14 +14,14 @@
       
       <!-- Movie preview item -->
       <div *ngFor="let movie of movies"  class="movie movie--preview movie--full release">
-           <div class="col-sm-3 col-md-2 col-lg-2">
+           <div [routerLink] = '' (click)= "getMovieInfo(movie)" class="col-sm-3 col-md-2 col-lg-2">
                   <div class="movie__images">
                       <img alt='' src={{movie.imagePath}}>
                   </div>
           </div>
 
           <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-                  <a href='movie-page-full.html' class="movie__title link--huge">{{movie.title}}</a>
+                  <a [routerLink] = '' (click)= "getMovieInfo(movie)" class="movie__title link--huge">{{movie.title}}</a>
 
                   <p class="movie__time">{{movie.duration}} hrs</p>
 

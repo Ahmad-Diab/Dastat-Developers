@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../@services/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +13,7 @@ export class SearchComponent implements OnInit {
   cinemas = [];   // holds the mcinemas that to be displayed in search
   actors = [];    // holds the actors that to be displayed in search
 
-  constructor(public searchService: SearchService ) {
+  constructor(public searchService: SearchService, private router: Router ) {
   }
 
   ngOnInit() {
@@ -34,6 +35,11 @@ export class SearchComponent implements OnInit {
       this.cinemas = response.data.Cinemas;
       this.actors = response.data.Actors;
     });
+  }
+
+
+  getMovieInfo(movie){
+    this.router.navigate(['info', movie.movie_id]);
   }
 
 }

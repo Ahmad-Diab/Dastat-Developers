@@ -13,7 +13,7 @@ export class HomepageComponent implements OnInit {
   constructor(public moviesService: MovieslistService) { }
 
   ngOnInit() {
-
+    //this.load();
     this.moviesService.getFeaturedMovies().subscribe((response) => { 
       this.movies = response;
       console.log(response);
@@ -24,4 +24,5 @@ export class HomepageComponent implements OnInit {
       console.log(response);
     });
   }
+
 }

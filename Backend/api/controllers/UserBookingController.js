@@ -46,9 +46,9 @@ module.exports.getCinemasForThatMovie = function(req, res){
 module.exports.getParties = function(req, res, next){
     //COMPLETED Get parties of movies just chosen according to chosen day
     //TODO Get parties of movies just chosen according to chosen day
-    var cinemaName = req.body['cinemaName'],
-        movieName = req.body['movieName'],
-        date = req.body['date'],
+    var cinemaName = req.params.cinemaName,
+        movieName = req.params.movieName,
+        date = req.params.date,
         //query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = 'Mayo Movies' AND h.movie = 13 AND DATE(p.date_time) = '2018-4-12'";
         query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
 

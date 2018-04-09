@@ -698,38 +698,38 @@ describe('Booking Tickets', () => {
 
 
 //Youssef Hatem
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Using Promocode', () =>{
+        it('It should update the price by deducting the amount in the promocode', (done) => {
+            let promocodeDetails = {
+                 "price": 1500,
+                 "code": "1H4H1LS0W",
+                 "name": "Pharoahs Cinema",
+                 "location": "Al Haram"
+              };
+              chai.request(server)
+                  .post('/api/userBooking/usePromoCode')
+                  .send(promocodeDetails)
+                  .end((err, res) => {
+                      res.should.have.status(200);
+                      done();
+                  });
+        });
+        it('it should not update the price and inform the user if the promocode is not in the specified cinema', (done) => {
+            let promocodeDetails = {
+                "price": 1500,
+                "code": "1H4H1LS0W",
+                "name": "Cinema Mawlana",
+                "location": "Mokattam"
+             };
+             chai.request(server)
+                  .post('/api/userBooking/usePromoCode')
+                  .send(promocodeDetails)
+                  .end((err, res) => {
+                      res.shoud.have.status(404);
+                      done();
+                  });
+       });
+});
 
 
 
@@ -1322,35 +1322,3 @@ describe('HOMEPAGE', function(){
 
 
 //George Maged
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

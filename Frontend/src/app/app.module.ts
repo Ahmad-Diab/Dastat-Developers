@@ -40,7 +40,7 @@ import { CinemaInfoService } from './@services/cinema-info.service';
     ContentModule,
     RouterModule.forRoot(AppRoutes)
   ],
-  providers: [SeatingService, HttpService, MovieslistService,
+  providers: [SeatingService, HttpService, MovieslistService, PartiesService,
   CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
     AuthService, AuthGuard, CookieService, UsersService,
     CinemaslistService,MovieInfoService,SearchService,CinemaInfoService],

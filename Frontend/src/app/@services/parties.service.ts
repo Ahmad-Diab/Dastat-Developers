@@ -9,8 +9,8 @@ export class PartiesService extends HttpService{
     super(http);
    }
 
-   getParties(){
-     return this.get('/userBooking/getParties/:cinemaName/:movieName/:date');
+   getParties(cinemaName : string , movieName : string , date : string){
+    return this.get('/userBooking/getParties/:'+cinemaName+'/:'+movieName+'/:'+date);
    }
 
 }

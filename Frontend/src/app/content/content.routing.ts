@@ -68,6 +68,6 @@ export const ContentRoutes: Routes = [{
   path: 'register',
   component: RegisterComponent
 },{
-  path: 'booking/parties',
+  path: 'booking/parties/:cinemaName/:movieName/:date',
   component: PartiesComponent
 }];

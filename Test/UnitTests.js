@@ -7,7 +7,7 @@
 //Initializing Chai
 
 // FIRST YOU HAVE TO INSTALL MOCHA AS IT'S NOT IN THE package.json ---> npm install -g mocha@2.3.1
-
+// THEN INSTALL npm install chai@3.2.0 chai-http@1.0.0 --save-dev
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../Backend/app');

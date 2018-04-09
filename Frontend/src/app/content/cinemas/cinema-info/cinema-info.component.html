@@ -3,15 +3,9 @@
   <div class="container container--add">
     <form id='search-form' method='get' class="search">
       <input [(ngModel)]="searchValue" name="searchValue"  type="text" class="search__field" placeholder="Search" >          
-      <select [(ngModel)]="sorting_item" name="sorting_item" id="search-sort" class="sbHolder" stylclass="search__sort" tabindex="0">
-          <option class="" value="1" selected='selected'>number of halls</option>
-          <option value="2">location</option>
-          <option value="3">By producer</option>
-          <option value="4">By title</option>
-          <option value="5">By year</option>
-      </select>
+     
     
-    <button (click)="filterBy(sorting_item,searchValue)"  class="btn btn-md btn--danger search__button">search a movie</button>
+    <button (click)="filterBy(sorting_item,searchValue)"  class="btn btn-md btn--danger search__button">search cinema</button>
 
       
   </form>
@@ -27,7 +21,7 @@
       <div class="swiper-container">
       
           <!--First Slide-->
-            <img alt='' src="{{cinema.imagePath}}">
+            <img alt='' src="{{cinema.imagePath2}}">
       </div>
     </div>
     <div class="cinema__info">
@@ -55,10 +49,8 @@
     <div class="container">
       <ul class="nav nav-tabs" id="hTab">
         <li>
-          <a href="#movie1" data-toggle="tab">Movies</a>
-        </li>
-        
-     
+          <a href="#movie1" data-toggle="tab" id="moviesTab" >Movies</a>
+        </li>     
       </ul>
     </div>
 
@@ -68,11 +60,7 @@
         <div class="container">
           <div class="movie-time-wrap">
 
-            <div class="datepicker">
-              <span class="datepicker__marker">
-                <i class="fa fa-calendar"></i>Date</span>
-              <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
-            </div>
+           
 
             <div class="clearfix"></div>
             <div *ngFor="let movie of moviesInCinema">
@@ -100,15 +88,7 @@
                    
                     </p>
                   </div>
-                  <div class="time-select">
-                    <ul class="items-wrap">
-                      <li class="time-select__item" data-time='09:40'>09:40</li>
-                      <li class="time-select__item" data-time='13:45'>13:45</li>
-                      <li class="time-select__item" data-time='15:45'>15:45</li>
-                      <li class="time-select__item" data-time='19:50'>19:50</li>
-                      <li class="time-select__item" data-time='21:50'>21:50</li>
-                    </ul>
-                  </div>
+                  
 
                 </div>
               </div>

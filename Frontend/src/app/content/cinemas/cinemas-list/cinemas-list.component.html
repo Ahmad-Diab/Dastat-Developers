@@ -3,15 +3,9 @@
     <div class="container container--add">
         <form #f="ngForm" id='search-form' method='get' class="search">
             <input  type="text" class="search__field" placeholder="Search" >          
-            <select id="search-sort" class="sbHolder" stylclass="search__sort" tabindex="0">
-                <option class="" value="1" selected='selected'>number of halls</option>
-                <option value="2">location</option>
-                <option value="3">By producer</option>
-                <option value="4">By title</option>
-                <option value="5">By year</option>
-            </select>
+           
           
-          <button (click)="filterBy(sorting_item,searchValue)"  class="btn btn-md btn--danger search__button">search a movie</button>
+          <button (click)="filterBy(sorting_item,searchValue)"  class="btn btn-md btn--danger search__button">search cinema</button>
   
             
         </form>
@@ -25,50 +19,46 @@
        
         <div class="tags-area tags-area--thin">
             <form id='select' class="select" method='get'>
-                  <select [(ngModel)]="searchValue"  (ngModelChange)="filter()" name="searchValue"  tabindex="0">
-                        <option selected='selected' value="All">All</option>
+                  <select [(ngModel)]="searchValue"  (ngModelChange)="filter()" name="searchValue" tabindex="0">
+                    <option value="All">All</option>
                     <option *ngFor="let location of locations" value ={{location.location}} >{{location.location}}</option>
                 </select>
-              
             </form>
-            <label class="container">3D
-                    <input type="checkbox"  [(ngModel)]="is3D" (ngModelChange)="filter()" checked="checked">
-                    <span class="checkmark"></span>
-                    </label>
-                    <label class="container">4D
-                    <input type="checkbox"  [(ngModel)]="is4D" (ngModelChange)="filter()" checked="checked">
-                    <span class="checkmark"></span>
-                    </label>
- 
+      
             <div class="tags tags--unmarked tags--aside">
-                <span class="tags__label">Sorted by:</span>
-                    <ul>
-                        
-                        <li class="item-wrap"><a href="#" class="tags__item item-active" data-filter='all'>all</a></li>
-                        <li class="item-wrap"><a href="#" class="tags__item" data-filter='name'>name</a></li>
-                        <li class="item-wrap"><a href="#" class="tags__item" data-filter='popularity'>popularity</a></li>
-                    </ul>
+                <div class="floating-box">
+                    <label class="Radio-button"><a class="page-heading2">3D</a>
+                            <input type="checkbox"  [(ngModel)]="is3D" (ngModelChange)="filter()" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                </div>
+                <div class="floating-box">
+        
+                            <label class="Radio-button"><a class="page-heading2">4D</a>
+                            <input type="checkbox"  [(ngModel)]="is4D" (ngModelChange)="filter()" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                </div>
             </div>
         </div>
-  
+        <p><br/>
         <!-- Cinema preview item -->
         <div *ngFor="let cinema of cinemas">
               <div class="col-xs-6 col-sm-3 cinema-item name">
                       <div (click)="cinemanav(cinema)" class="cinema">
                           <a class="cinema__images">
-                              <img alt='' src="{{cinema.imagePath2}}">
+                              <img alt="" src="{{cinema.imagePath}}">
                           </a>
                           <a class="cinema-title">{{cinema.name}}</a>
                       </div>
               </div>
-        </div>>
-        
-            
+        </div>
+
   
-            <div class="pagination paginatioon--full">
-                    <a href='#' class="pagination__prev">prev</a>
-                    <a href='#' class="pagination__next">next</a>
-            </div>
-  
+    </div>
+    
+    <div class="pagination paginatioon--full">
+            <a href='#' class="pagination__prev">prev</a>
+            <a href='#' class="pagination__next">next</a>
     </div>
   </section>

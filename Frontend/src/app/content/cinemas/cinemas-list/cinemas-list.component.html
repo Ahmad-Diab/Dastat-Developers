@@ -19,7 +19,7 @@
        
         <div class="tags-area tags-area--thin">
             <form id='select' class="select" method='get'>
-                  <select  name="searchValue" tabindex="0">
+                  <select [(ngModel)]="searchValue"  (ngModelChange)="filter()" name="searchValue" tabindex="0">
                     <option value="All">All</option>
                     <option *ngFor="let location of locations" value ={{location.location}} >{{location.location}}</option>
                 </select>

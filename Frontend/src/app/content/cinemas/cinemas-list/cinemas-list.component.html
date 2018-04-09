@@ -19,49 +19,46 @@
        
         <div class="tags-area tags-area--thin">
             <form id='select' class="select" method='get'>
-                  <select [(ngModel)]="searchValue"  (ngModelChange)="filter()" name="searchValue" tabindex="0">
-                    <option value="All" >All</option>
+                  <select  name="searchValue" tabindex="0">
+                    <option value="All">All</option>
                     <option *ngFor="let location of locations" value ={{location.location}} >{{location.location}}</option>
                 </select>
-                
-              
             </form>
       
             <div class="tags tags--unmarked tags--aside">
                 <div class="floating-box">
-                    <label class="Radio-button">3D
+                    <label class="Radio-button"><a class="page-heading2">3D</a>
                             <input type="checkbox"  [(ngModel)]="is3D" (ngModelChange)="filter()" checked="checked">
                             <span class="checkmark"></span>
                             </label>
                 </div>
                 <div class="floating-box">
         
-                            <label class="Radio-button">4D
+                            <label class="Radio-button"><a class="page-heading2">4D</a>
                             <input type="checkbox"  [(ngModel)]="is4D" (ngModelChange)="filter()" checked="checked">
                             <span class="checkmark"></span>
                             </label>
                 </div>
             </div>
         </div>
-  
+        <p><br/>
         <!-- Cinema preview item -->
         <div *ngFor="let cinema of cinemas">
               <div class="col-xs-6 col-sm-3 cinema-item name">
                       <div (click)="cinemanav(cinema)" class="cinema">
                           <a class="cinema__images">
-                              <img alt='' src="{{cinema.imagePath}}">
+                              <img alt="" src="{{cinema.imagePath}}">
                           </a>
                           <a class="cinema-title">{{cinema.name}}</a>
                       </div>
               </div>
-        </div>>
-        
-            
+        </div>
+
   
-            <div class="pagination paginatioon--full">
-                    <a href='#' class="pagination__prev">prev</a>
-                    <a href='#' class="pagination__next">next</a>
-            </div>
-  
+    </div>
+    
+    <div class="pagination paginatioon--full">
+            <a href='#' class="pagination__prev">prev</a>
+            <a href='#' class="pagination__next">next</a>
     </div>
   </section>

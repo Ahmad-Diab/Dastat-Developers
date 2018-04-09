@@ -39,6 +39,7 @@ export class SeatingComponent implements OnInit {
       this.layout = JSON.parse(fetched);
       this.seats = response.seats;
       console.log(this.layout);
+      console.log(this.seats);
     });
 
 

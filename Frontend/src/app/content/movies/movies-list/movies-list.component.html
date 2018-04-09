@@ -106,8 +106,10 @@
                  <!--  <p class="movie__option"><strong>Actors: </strong><a href="#">Robert De Niro</a>, <a href="#">Michael Douglas</a>, <a href="#">Morgan Freeman</a>, <a href="#">Kevin Kline</a>, <a href="#">Mary Steenburgen</a>, <a href="#">Jerry Ferrara</a>, <a href="#">Romany Malco</a> <a href="#">...</a></p>
  -->
                   <div class="movie__btns">
-                      <a href="#" class="btn btn-md btn--warning">book a ticket <span class="hidden-sm">for this movie</span></a>
-                      <a href="#" class="watchlist">Add to watchlist</a>
+                    <div *ngIf="movie.feature == 2 || movie.feature == 3">
+                        <a href='booking/cinemas' class="btn btn-md btn--warning" (click)="GoToReservation(movie)">book a ticket <span class="hidden-sm">for this movie</span></a>
+                    </div>
+                        <a href="#" class="watchlist">Add to watchlist</a>
                   </div>
 
                   <div class="preview-footer">

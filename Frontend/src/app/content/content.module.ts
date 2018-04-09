@@ -22,6 +22,7 @@ import { PartiesComponent } from './booking/parties/parties.component';
 import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component';
 import { RegisterComponent } from './users/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cinemas-list-booking.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
    CinemasListComponent,AboutusComponent,MovieInfoComponent,  CinemaInfoComponent,AboutusComponent,
-    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent]
+    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent, CinemasListBookingComponent]
 
 })
 

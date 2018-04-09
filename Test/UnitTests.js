@@ -805,27 +805,26 @@ describe('Movie',function(){
 
 //Zeyad Yasser & Nayer Ezzat
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('HOMEPAGE', function(){
+  it('Viewing Featured Movies', function(done){
+    chai.request("localhost:8000").get("/api/getTopMovies")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      assert.isArray(res.body, 'Cinema');
+      done();
+    });
+  });
+  it('Viewing Currently Showed Movies', function(done){
+    chai.request("localhost:8000").get("/api/viewMovies3")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      assert.isArray(res.body, 'Cinema');
+      done();
+    });
+  });
+});
 
 
 

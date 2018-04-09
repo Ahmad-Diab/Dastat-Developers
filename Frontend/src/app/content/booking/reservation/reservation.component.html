@@ -24,6 +24,10 @@
         <li class="book-result__item">One item price: <span class="book-result__count booking-price">{{reserveData['eachPrice']}}</span></li>
         <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{reserveData['price']}}</span></li>
       </ul>
+      <input type="text" width="80px" placeholder="Enter promocode here" *ngIf="vis"  [(ngModel)]="promo" #ctrl="ngModel" required/>{{promo}}
+      <button *ngIf="vis" (click)="usePromo($event)">Submit</button>
+      <div *ngIf="show">Promocode Successfully used</div>
+      <div *ngIf="err">Error 404: Promocode not found in this cinema</div>
 
     </div>
 
@@ -49,4 +53,3 @@
     <span class="arrow__info"></span>
   </a>
 </div>
-

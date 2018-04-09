@@ -10,8 +10,13 @@ import {CookieService} from "angular2-cookie/core";
 })
 export class ReservationComponent implements OnInit {
 
+  err = false;
+  vis = true;
+  show = false;
   reserveData = {};
   reservationType = "";
+  promo = "";
+  promoEffect = {};
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
@@ -45,22 +50,22 @@ export class ReservationComponent implements OnInit {
    // For test purposes
     var tickets = [1, 5, 9],
       ticketsNum = tickets.length,
-      price = "150",
+      price = "1500",
       eachPrice = parseInt(price)/ticketsNum;
 
-    this.reserveData = {
-      username: "mai_emad",
-      cinema_name: "Point 90",
-      cinema_location: "New Cairo",
-      date_time: "2018-04-01 10:00:00",
-      hall:  "1",
-      payment: null,                      //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
-      tickets: tickets,                   //Meaning Reserve (Not Paid), Or Buy (Paid)
-      ticketsNum: ticketsNum,
-      price: price,
-      eachPrice: eachPrice,
-      movie: "10"
-    };
+      this.reserveData = {
+        username: "mai_emad",
+        cinema_name: "Pharoahs Cinema",
+        cinema_location: "Al Haram",
+        date_time: "2018-04-01 10:00:00",
+        hall:  "1",
+        payment: null,                      //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
+        tickets: tickets,                   //Meaning Reserve (Not Paid), Or Buy (Paid)
+        ticketsNum: ticketsNum,
+        price: price,
+        eachPrice: eachPrice,
+        movie: "10"
+      };
 */
 
   }
@@ -85,4 +90,20 @@ export class ReservationComponent implements OnInit {
     this.reserveData["payment"] = true;
     this.reservationType = "Purchase";
   }
+
+  usePromo(event): any {
+     this.bookingService.usePromoCode(this.reserveData['price'], this.promo,
+      this.reserveData['cinema_name'], this.reserveData['cinema_location'])
+      .subscribe((response) => {
+        if(response.error != null){
+          this.err = true;
+        } else {
+        this.reserveData['price'] = response.data.price;
+        var descp = response.data.description;
+        this.show = true;
+        this.vis = false;
+      }
+     });
+   }
+   
 }

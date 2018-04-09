@@ -24,5 +24,13 @@ export class BookingService extends HttpService {
     });
   }
 
+  usePromoCode(price: number, code: string, name: string, location: string){
+      return this.post("userBooking/usePromoCode", {
+        'price': price,
+        'code': code,
+        'name': name,
+        'location': location
+      });
+    }
 
 }

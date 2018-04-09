@@ -6,7 +6,6 @@ module.exports.getSeats = function(req, res, next){
       database.query('SELECT seat_number FROM tickets WHERE cinema_location =? AND cinema_name=? AND hall=? AND date_time=?',[req.query.cinema_location,req.query.cinema_name,req.query.hall_number,req.query.datetime] ,function (error, seats, fields){
         layout = layout[0];
         var output={ layout, seats };
-        console.log(layout.encoded);
         return res.send( output );
       })
     });

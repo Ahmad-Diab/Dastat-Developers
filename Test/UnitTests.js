@@ -10,6 +10,7 @@
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
+var server = require('../Backend/app');
 var should = chai.should();
 var assert = chai.assert;
 chai.use(chaiHttp);

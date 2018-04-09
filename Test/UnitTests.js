@@ -699,7 +699,7 @@ describe('Booking Tickets', () => {
 
 //Youssef Hatem
 describe('Using Promocode', () =>{
-        it('It should update the price by deducting the amount in the promocode', (done) => {
+        it('It should update the price by deducting the amount in the promocode', (done) => { //testing when the promocode exists in the cinema
             let promocodeDetails = {
                  "price": 1500,
                  "code": "1H4H1LS0W",
@@ -714,7 +714,7 @@ describe('Using Promocode', () =>{
                       done();
                   });
         });
-        it('it should not update the price and inform the user if the promocode is not in the specified cinema', (done) => {
+        it('it should not update the price and respond with 404 error since the promocode is not in the specified cinema', (done) => {//testing when the promocode does not exist in the cinema
             let promocodeDetails = {
                 "price": 1500,
                 "code": "1H4H1LS0W",
@@ -725,7 +725,7 @@ describe('Using Promocode', () =>{
                   .post('/api/userBooking/usePromoCode')
                   .send(promocodeDetails)
                   .end((err, res) => {
-                      res.shoud.have.status(404);
+                      res.should.have.status(404);
                       done();
                   });
        });

@@ -10,7 +10,12 @@ import { CinemasListComponent } from '../cinemas-list/cinemas-list.component'
   styleUrls: ['./cinema-info.component.css']
 })
 export class CinemaInfoComponent implements OnInit {
-  
+  cinema;
+   name;
+   location;
+   moviesInCinema;
+   chooseDate;
+   
 
 
   constructor(public cinemaSerive: CinemaInfoService,
@@ -23,10 +28,7 @@ export class CinemaInfoComponent implements OnInit {
     });
 
    }
-   cinema;
-   name;
-   location;
-   moviesInCinema;
+   
   ngOnInit() {
     
     var data = {
@@ -34,8 +36,8 @@ export class CinemaInfoComponent implements OnInit {
      location:this.location,
      
     }
-  
 
+    
     this.cinemaSerive.getCinemaInfo(data.cinema,data.location).subscribe((response) => {
       this.cinema=response;
     });
@@ -49,6 +51,8 @@ export class CinemaInfoComponent implements OnInit {
     if(sorting_item != undefined && searchValue != undefined) this.router.navigate(['cinemas/list',sorting_item,searchValue]);
     else this.router.navigate(['cinemas/list']);
 }
-  
+searchDate(){
+  console.log("hey");
+}
 
 }

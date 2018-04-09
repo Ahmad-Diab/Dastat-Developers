@@ -8,10 +8,20 @@ var database = require('../config/db-connection');
 //filter cinemas according to location
 module.exports.filterByLocation = function(req, res, next){
     var location = req.params.location;
-  database.query('SELECT * FROM cinemas WHERE location LIKE ?',[location], function (error, results, fields) {
+    var is3D = req.params.is3D;
+    var is4D = req.params.is4D;
+    if(location == 'All'){
+      database.query('SELECT * FROM cinemas WHERE is3D = ? and is4D = ?',[is3D,is4D], function (error, results, fields) {
+        if(error) return next(error);
+        return res.send(results);
+      });
+    }
+    else{
+  database.query('SELECT * FROM cinemas WHERE location LIKE ? and is3D = ? and is4D = ?',[location,is3D,is4D], function (error, results, fields) {
     if(error) return next(error);
     return res.send(results);
   });
+}
 }
 
 
@@ -52,6 +62,14 @@ module.exports.ViewCinemas = function(req, res, next){
     var cinema = req.params.cinema;
     var loc = req.params.loc;
     database.query('SELECT * FROM movies m INNER JOIN movies_in_cinemas x on m.movie_id = x.movie WHERE x.cinema_name = ? AND x.cinema_location = ? ', [cinema,loc],function (error, results, fields) {
+      if(error){
+        return next(error);
+      }
+      return res.send(results);
+    });
+  }
+  module.exports.DistinctLocation = function(req, res, next){
+    database.query('SELECT DISTINCT location FROM cinemas',function (error, results, fields) {
       if(error){
         return next(error);
       }

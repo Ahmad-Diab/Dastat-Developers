@@ -25,53 +25,9 @@
     <div class="cinema__rating">5.0</div>
     <div class="cinema__gallery">
       <div class="swiper-container">
-        <div class="swiper-wrapper">
+      
           <!--First Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner1.jpg">
-          </div>
-
-          <!--Second Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner2.jpg">
-          </div>
-
-          <!--Third Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner3.jpg">
-          </div>
-
-          <!--Four Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner4.jpg">
-          </div>
-
-          <!--Five Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner5.jpg">
-          </div>
-
-          <!--Six Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner6.jpg">
-          </div>
-
-          <!--Seven Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner7.jpg">
-          </div>
-
-          <!--Eight Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner8.jpg">
-          </div>
-
-          <!--Nine Slide-->
-          <div class="swiper-slide">
-            <img alt='' src="assets/images/cinema/cinema-inner9.jpg">
-          </div>
-
-        </div>
+            <img alt='' src="{{cinema.imagePath}}">
       </div>
     </div>
     <div class="cinema__info">
@@ -101,12 +57,8 @@
         <li>
           <a href="#movie1" data-toggle="tab">Movies</a>
         </li>
-        <li>
-          <a href="#comment1" data-toggle="tab">Comments</a>
-        </li>
-        <li class="active">
-          <a href="#map1" data-toggle="tab">Map</a>
-        </li>
+        
+     
       </ul>
     </div>
 
@@ -123,11 +75,11 @@
             </div>
 
             <div class="clearfix"></div>
-
+            <div *ngFor="let movie of moviesInCinema">
             <div class="col-sm-6">
 
               <!-- Movie variant with time -->
-              <div *ngFor="let movie of moviesInCinema">
+             
               <div class="movie movie--time">
                 <div class="row">
                   <div class="col-sm-6 col-md-5">
@@ -160,122 +112,15 @@
 
                 </div>
               </div>
-            </div>>
 
               <!-- Movie variant with time -->
             </div>
+          </div>>
 
           </div>
         </div>
       </div>
-      <div class="tab-pane" id="comment1">
-        <div class="container">
-          <div class="comment-wrapper">
-            <form id="comment-form" class="comment-form" method='post'>
-              <textarea class="comment-form__text" placeholder='Add you comment here'></textarea>
-              <label class="comment-form__info">250 characters left</label>
-              <button type='submit' class="btn btn-md btn--danger comment-form__btn">add comment</button>
-            </form>
-
-            <div class="comment-sets comment--light">
-
-              <div class="comment">
-                <div class="comment__images">
-                  <img alt='' src="images/comment/avatar.jpg">
-                </div>
-
-                <a href='#' class="comment__author">
-                  <span class="social-used fa fa-facebook"></span>Roberta Inetti</a>
-                <p class="comment__date">today | 03:04</p>
-                <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla
-                  lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie
-                  rhoncus enim, vitae sagittis dolor tristique et.</p>
-                <a href='#' class="comment__reply">Reply</a>
-              </div>
-
-              <div class="comment">
-                <div class="comment__images">
-                  <img alt='' src="images/comment/avatar-olia.jpg">
-                </div>
-
-                <a href='#' class="comment__author">
-                  <span class="social-used fa fa-vk"></span>Olia Gozha</a>
-                <p class="comment__date">22.10.2013 | 14:40</p>
-                <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla
-                  lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie
-                  rhoncus enim, vitae sagittis dolor tristique et.</p>
-                <a href='#' class="comment__reply">Reply</a>
-              </div>
-
-              <div class="comment comment--answer">
-                <div class="comment__images">
-                  <img alt='' src="images/comment/avatar-dmitriy.jpg">
-                </div>
-
-                <a href='#' class="comment__author">
-                  <span class="social-used fa fa-vk"></span>Dmitriy Pustovalov</a>
-                <p class="comment__date">today | 10:19</p>
-                <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla
-                  lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie
-                  rhoncus enim, vitae sagittis dolor tristique et.</p>
-                <a href='#' class="comment__reply">Reply</a>
-              </div>
-
-              <div class="comment comment--last">
-                <div class="comment__images">
-                  <img alt='' src="images/comment/avatar-sia.jpg">
-                </div>
-
-                <a href='#' class="comment__author">
-                  <span class="social-used fa fa-facebook"></span>Sia Andrews</a>
-                <p class="comment__date"> 22.10.2013 | 12:31 </p>
-                <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla
-                  lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie
-                  rhoncus enim, vitae sagittis dolor tristique et.</p>
-                <a href='#' class="comment__reply">Reply</a>
-              </div>
-
-              <div id='hide-comments' class="hide-comments">
-                <div class="comment">
-                  <div class="comment__images">
-                    <img alt='' src="images/comment/avatar.jpg">
-                  </div>
-
-                  <a href='#' class="comment__author">
-                    <span class="social-used fa fa-facebook"></span>Roberta Inetti</a>
-                  <p class="comment__date">today | 03:04</p>
-                  <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla
-                    lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie
-                    rhoncus enim, vitae sagittis dolor tristique et.</p>
-                  <a href='#' class="comment__reply">Reply</a>
-                </div>
-
-                <div class="comment">
-                  <div class="comment__images">
-                    <img alt='' src="images/comment/avatar-olia.jpg">
-                  </div>
-
-                  <a href='#' class="comment__author">
-                    <span class="social-used fa fa-vk"></span>Olia Gozha</a>
-                  <p class="comment__date">22.10.2013 | 14:40</p>
-                  <p class="comment__message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae enim sollicitudin, euismod erat id, fringilla
-                    lacus. Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra a, mattis in velit. Morbi molestie
-                    rhoncus enim, vitae sagittis dolor tristique et.</p>
-                  <a href='#' class="comment__reply">Reply</a>
-                </div>
-              </div>
-
-              <div class="comment-more">
-                <a href="#" class="watchlist">Show more comments</a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane active" id="map1">
-        <div id='cinema-map' class="map"></div>
-      </div>
+   
     </div>
   </div>
 

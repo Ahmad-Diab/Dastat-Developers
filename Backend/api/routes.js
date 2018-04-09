@@ -15,7 +15,6 @@ var Cinema = require('./controllers/CinemasController');
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
 
-router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.get('/users', User.getUsers);
 
 //-------------------------------User Booking Routes---------------------------------

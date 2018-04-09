@@ -41,23 +41,40 @@ module.exports.getCinemasForThatMovie = function(req, res){
  *  Movie, Cinema, as well as Date (Day).
  * @param req
  * @param res
+ * @param next
  */
-module.exports.getParties = function(req, res){
+module.exports.getParties = function(req, res, next){
     //COMPLETED Get parties of movies just chosen according to chosen day
+    //TODO Get parties of movies just chosen according to chosen day
     var cinemaName = req.params.cinemaName,
         movieName = req.params.movieName,
-        date = req.params.date;
-
-    var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
-    //TODO Get parties of movies just chosen according to chosen day
-    var cinemaName = req.body['cinemaName'],
-        movieName = req.body['movieName'],
-        date = req.body['date'],
+        date = req.params.date,
+        //query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = 'Mayo Movies' AND h.movie = 13 AND DATE(p.date_time) = '2018-4-12'";
         query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
 
-    database.query(query,[cinemaName,movieName,date],function (err, result, fields) {
-        if (err) throw err;
-        return res.send(result);
+    database.query(query,[cinemaName,movieName,date],function (error, results, fields) {
+        if(error){
+            return next(error);
+        }
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No parties availiable!',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Parties Successfully Retrieved',
+                data: results
+            });
+
+        }
+        console.log(results);
       });
 };
 
@@ -75,13 +92,15 @@ module.exports.makeReservation = function(req, res, next){
     var username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
-        party_datetime = req.body['date_time'],
+        party_date = req.body['date'],
+        party_time = req.body['time'],
         hall = req.body['hall'],
         movie = req.body['movie'],
         payment = req.body['payment'],
         tickets = req.body['tickets'],
         tickets_price = req.body['price'],
-        numOfTickets = tickets.length;
+        numOfTickets = tickets.length,
+        comment = req.body['comment'];
 
     // Null Checkers
     if(!username) {
@@ -98,14 +117,14 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-    if(!party_datetime) {
+    if(!party_date || !party_time) {
         return res.status(422).json({
             err: null,
             msg: 'Party data-time is required.',
             data: null
         });
     }
-    if(!hall & !movie) {
+    if(!hall || !movie) {
         return res.status(422).json({
             err: null,
             msg: 'Party hall and movie are required.',
@@ -129,59 +148,47 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-
-
-    // TODO make it one response
+    // Verify that movie exists in hall
     // Verify that hall exists in Cinema, and retrieve movie
     database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
-        [hall, cinema_location, cinema_name],function (res, error, results) {
+        [hall, cinema_location, cinema_name],function (error, results) {
         if (error) {
             return next(error);
         }
-        console.log("error : " +  results);
-        if(!results || results.length == 0) {
+        console.log(results);
+        if(!results || !results.length) {
             return res.status(404).send({
                 err: null,
                 msg: "The assigned hall does not exist.",
                 data: null
             });
         }
-    });
 
-    var success = true;
-    for( var i = 0; i< tickets.length; i++) {
-        var seatNum = tickets[i];
+        var values = [];
+        for(var i = 0; i< numOfTickets; i++) {
+            var seatNum = tickets[i];
+            var ticket_details = [username,payment,seatNum,party_date,party_time,hall,cinema_location, cinema_name,
+                tickets_price, movie, comment];
+            values.push(ticket_details);
+        }
 
-        //TODO seatNum type validation
-        var ticketDetails = {
-            user: username,
-            payment: payment,
-            seat_number: seatNum,
-            date_time: party_datetime,
-            hall: hall,
-            cinema_location: cinema_location,
-            cinema_name: cinema_name,
-            //price: tickets_price,
-            //movie_id: movie
-        };
+            var sqlQuery = 'INSERT INTO Tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
 
-        var queryResults = null;
-        database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
+        database.query(sqlQuery,[values], function (error, results) {
             if (error) {
                 return next(error);
             }
-            success = true;
-            queryResults = results;
+
+            return res.status(200).json({
+                err: null,
+                msg: 'Booking Request has been completed successfully.',
+                data: results
+            });
+
         });
-    }
-    console.log("Results = " + queryResults);
-    if(success) {
-        return res.status(200).json({
-            err: null,
-            msg: 'Booking Request has been completed successfully.',
-            data: queryResults
-        });
-    }
+    });
+
+
 
 };
 

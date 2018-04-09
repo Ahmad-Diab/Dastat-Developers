@@ -10634,7 +10634,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   }
 }
 /* The container */
-.container {
+.Radio-button {
   display: block;
   position: relative;
   padding-left: 30px;
@@ -10648,7 +10648,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 
 /* Hide the browser's default radio button */
-.container input {
+.Radio-button input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -10667,12 +10667,12 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.Radio-button:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.Radio-button input:checked ~ .checkmark {
   background-color: #ffd564;
 }
 
@@ -10684,16 +10684,22 @@ ul#navigation li.mega-menu__nav-item:hover:before {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.Radio-button input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the indicator (dot/circle) */
-.container .checkmark:after {
+.Radio-button .checkmark:after {
  top: 5.4px;
 left: 6.3px;
 width: 8px;
 height: 8px;
 border-radius: 50%;
 background: white;
+}
+.floating-box {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
 }

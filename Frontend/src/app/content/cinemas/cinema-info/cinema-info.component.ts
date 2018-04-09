@@ -30,7 +30,7 @@ export class CinemaInfoComponent implements OnInit {
    }
    
   ngOnInit() {
-    
+    document.getElementById("moviesTab").click();
     var data = {
      cinema:this.name,
      location:this.location,
@@ -50,9 +50,6 @@ export class CinemaInfoComponent implements OnInit {
   filterBy(sorting_item,searchValue){
     if(sorting_item != undefined && searchValue != undefined) this.router.navigate(['cinemas/list',sorting_item,searchValue]);
     else this.router.navigate(['cinemas/list']);
-}
-searchDate(){
-  console.log("hey");
 }
 
 }

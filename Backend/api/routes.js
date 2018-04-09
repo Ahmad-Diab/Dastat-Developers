@@ -59,7 +59,7 @@ router.post('/actors/:actor', Actor.getActors);
 //------------------------MOVIES ROUTES------------------------------
 router.get('/movies/feature',Movie.getMovies);
 
-router.get('/movies/highrate/',Movie.getMoviesHighRatings);
+router.get('/movies/highrate',Movie.getMoviesHighRatings);
 router.get('/movies/lowrate',Movie.getMoviesLowRatings);
 
 router.get('/movies/latest',Movie.getMoviesLastestDate);

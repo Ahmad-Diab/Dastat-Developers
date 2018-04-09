@@ -74,21 +74,117 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-
-
 //Joe William
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Movie',function(){
+  it('High Rates movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/highrate")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Low Rates movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/lowrate")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Latest  movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/latest")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Oldest movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/oldest")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Action movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Action")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Adventure movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Adventure")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Comedy movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Comedy")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Drama movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Drama")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Horror movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Horror")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Thriller movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Thriller")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
+describe('Movie',function(){
+  it('Biography movies are found' , function(done){
+    chai.request("localhost:8000").get("/api/movies/Bio")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+ });
+});
 
 
 

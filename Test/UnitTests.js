@@ -5,6 +5,9 @@
 //EVERY TIME YOU USE THE CURSOR INSTEAD OF THE ENTER BUTTON IT WILL SAVE ME A CONFLICT TO RESOLVE :)
 
 //Initializing Chai
+
+// FIRST YOU HAVE TO INSTALL MOCHA AS IT'S NOT IN THE package.json ---> npm install -g mocha@2.3.1
+
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var should = chai.should();

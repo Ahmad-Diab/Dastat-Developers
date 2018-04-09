@@ -24,5 +24,9 @@ export class BookingService extends HttpService {
     });
   }
 
+  getMoviesForThisCinema(movie_id: number){
+    return this.get('/userBooking/getCinemasForThatMovie/'+ movie_id);
+  }
+
 
 }

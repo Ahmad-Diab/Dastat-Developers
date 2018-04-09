@@ -25,7 +25,7 @@ export class CinemasListBookingComponent implements OnInit {
   }
 
   AddCinemaToCookie(cinema){
-    this.router.navigate(['booking/seating']);
+    this.router.navigate(['booking/parties']);
     console.log(cinema);
     this.cookie.put("cinema" , cinema);
 

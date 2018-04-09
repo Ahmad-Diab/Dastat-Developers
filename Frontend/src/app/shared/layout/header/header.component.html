@@ -22,6 +22,7 @@
           <span class="sub-nav-toggle plus"></span>
           <a href="">Homepage</a>
         </li>
+        
         <li>
             <span class="sub-nav-toggle plus"></span>
             <a [routerLink]="['/search']">Search</a>
@@ -123,14 +124,21 @@
     <div class="control-panel">
       <div class="auth auth--home">
         <div class="auth__show">
-          <span class="auth__image">
+          <span *ngIf="Signed_in" class="auth__image">
             <img alt="" src="assets/images/client-photo/auth.png">
           </span>
         </div>
-        <a href="#" class="btn btn--sign btn--singin">
-          me
+        <a *ngIf="!Signed_in" (click)="signin()" class="btn btn--sign btn--singin">Sign in</a>       
+        <a *ngIf="Signed_in" (click)="signin()"  class="btn btn--sign btn--singin">
+         {{message}}
         </a>
-        <ul class="auth__function">
+        <ul *ngIf="Signed_in"  class="auth__function">
+          <li>
+            <a  (click)="name_or_signin()" class="auth__function-item">Profile</a>
+          </li>
+          <li>
+              <a  (click)="log_out()" class="auth__function-item">Log out</a>
+            </li>
           <li>
             <a href="#" class="auth__function-item">Watchlist</a>
           </li>
@@ -146,7 +154,7 @@
         </ul>
 
       </div>
-      <a href="#" class="btn btn-md btn--warning btn--book btn-control--home login-window">Book a ticket</a>
+      <a (click)="Book_or_Register()" class="btn btn-md btn--warning btn--book btn-control--home login-window">{{message2}}</a>
     </div>
 
   </div>

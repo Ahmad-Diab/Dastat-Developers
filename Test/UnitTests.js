@@ -7,13 +7,17 @@
 //Initializing Chai
 
 // FIRST YOU HAVE TO INSTALL MOCHA AS IT'S NOT IN THE package.json ---> npm install -g mocha@2.3.1
-// THEN INSTALL npm install chai@3.2.0 chai-http@1.0.0 --save-dev
+
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../Backend/app');
 var should = chai.should();
 var assert = chai.assert;
 chai.use(chaiHttp);
+
+
+
+
 
 
 //Amir Zaghloul
@@ -70,97 +74,21 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
+
+
 //Joe William
-describe('Movie',function(){
-  it('High Rates movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/highrate")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Low Rates movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/lowrate")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Latest  movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/latest")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Oldest movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/oldest")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Action movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Action")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Adventure movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Adventure")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Comedy movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Comedy")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Drama movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Drama")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Horror movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Horror")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
-  it('Thriller movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Thriller")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
-    });
- });
- it('Biography movies are found' , function(done){
-   chai.request("localhost:8000").get("/api/movies/Bio")
-   .end(function(req,res){
-     res.should.have.status(200);
-     res.should.be.json;
-     done();
-    });
-  });
-});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -519,53 +447,7 @@ describe('Movie',function(){
 
 //Bas Rizk
 
-describe('Booking Tickets', () => {
-        it('it should POST (make Reservations)', (done) => {
-            let bookingDetails = {
-                "username": "mai_emad",
-                "cinema_name": "Point 90",
-                "cinema_location": "New Cairo",
-                "date": "2018-04-0",
-                "time": "10:00:00",
-                "hall": "2",
-                "payment": true,
-                "tickets": [3, 31, 32],
-                "price": 150,
-                "movie": 10,
-                "comment": "abc"
-            };
-            chai.request(server)
-                .post('/api/userBooking/makeReservation')
-                .send(bookingDetails)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    done();
-                });
-        });
 
-    it('it should fail to reserve given null inputs', (done) => {
-        let bookingDetails = {
-            "username": null,
-            "cinema_name": null,
-            "cinema_location": null,
-            "date": "2018-04-0",
-            "time": "10:00:00",
-            "hall": null,
-            "payment": true,
-            "tickets": [3, 31, 32],
-            "price": 150,
-            "movie": 10,
-            "comment": "abc"
-        };
-        chai.request(server)
-            .post('/api/userBooking/makeReservation')
-            .send(bookingDetails)
-            .end((err, res) => {
-                res.should.have.status(422);
-                done();
-            });
-    });
-});
 
 
 
@@ -827,26 +709,27 @@ describe('Booking Tickets', () => {
 
 //Zeyad Yasser & Nayer Ezzat
 
-describe('HOMEPAGE', function(){
-  it('Viewing Featured Movies', function(done){
-    chai.request("localhost:8000").get("/api/getTopMovies")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-      assert.isArray(res.body, 'Cinema');
-      done();
-    });
-  });
-  it('Viewing Currently Showed Movies', function(done){
-    chai.request("localhost:8000").get("/api/viewMovies3")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-      assert.isArray(res.body, 'Cinema');
-      done();
-    });
-  });
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -959,25 +842,16 @@ describe('HOMEPAGE', function(){
 
 
 //Mariam Fawzy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Viewing all cinemas' , function() {
+  it('Should list all cinemas ' , function(done){
+    chai.request("localhost:8000").get("/api/viewCinemas").end(function(req,res){
+      res.should.have.status(200); // check that is found
+      res.should.be.json; // check it is json file
+      assert.isArray(res.body, 'Cinema'); //make sure it is an array of cinemas
+      done();
+    });
+  });
+});
 
 
 

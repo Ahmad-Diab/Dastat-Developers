@@ -7,21 +7,71 @@
   </div>
 </div>
 
+
+
 <!-- Main content -->
 <section class="container">
+        <div id="search" class="col-sm-12">
+                <div class="mega-select-present mega-select-top mega-select--full">
+                  <div class="mega-select-marker">
+                    <div class="marker-indecator location">
+                      <p class="select-marker">
+                        <span>movie to watch now</span>
+                        <br>in your city</p>
+                    </div>
+            
+                    <div class="marker-indecator cinema">
+                      <p class="select-marker">
+                        <span>find your </span>
+                        <br>cinema</p>
+                    </div>
+            
+                    <div class="marker-indecator film-category">
+                      <p class="select-marker">
+                        <span>find movie due to </span>
+                        <br> your mood</p>
+                    </div>
+            
+                    <div class="marker-indecator actors">
+                      <p class="select-marker">
+                        <span> like particular stars</span>
+                        <br>find them</p>
+                    </div>
+                  </div>
+            
+                  <div class="mega-select pull-right">
+                    <span class="mega-select__point"> You can search with: </span>
+                    <ul class="mega-select__sort">
+                      
+                      <li class="filter-wrap">
+                        <a [routerLink]="['/cinemas/list']"  data-filter='cinema'>Cinema</a>
+                      </li>
+                      <li class="filter-wrap">
+                        <a [routerLink]="['/movies/list']"  data-filter='film-category'>Movie</a>
+                      </li>
+                      <li class="filter-wrap">
+                        <a href="#" class="mega-select__filter" data-filter='actors'>Actors</a>
+                      </li>
+                    </ul>
+            
+                    
+                    
+                  </div>
+                </div>
+              </div>
   <div class="col-sm-12">
       <h2 class="page-heading">Movies</h2>
       
       <!-- Movie preview item -->
       <div *ngFor="let movie of movies"  class="movie movie--preview movie--full release">
-           <div class="col-sm-3 col-md-2 col-lg-2">
+           <div [routerLink] = '' (click)= "getMovieInfo(movie)" class="col-sm-3 col-md-2 col-lg-2">
                   <div class="movie__images">
                       <img alt='' src={{movie.imagePath}}>
                   </div>
           </div>
 
           <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-                  <a href='movie-page-full.html' class="movie__title link--huge">{{movie.title}}</a>
+                  <a [routerLink] = '' (click)= "getMovieInfo(movie)" class="movie__title link--huge">{{movie.title}}</a>
 
                   <p class="movie__time">{{movie.duration}} hrs</p>
 
@@ -55,7 +105,7 @@
     <div *ngFor="let cinema of cinemas"  class="movie movie--preview movie--full release">
 
      <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-             <a href='movie-page-full.html' class="movie__title link--huge">{{cinema.name}}</a>
+             <a [routerLink] = '' (click)= "getCinemaInfo(cinema)" class="movie__title link--huge">{{cinema.name}}</a>
 
              <p class="movie__time">{{cinema.company}}</p>
 

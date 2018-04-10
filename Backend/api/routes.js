@@ -84,7 +84,7 @@ router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name
 router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
 router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
-router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 router.get('/movies/:movie_id',Movie.getMovieInfo);
 

@@ -126,8 +126,12 @@
 
             <div class="datepicker">
               <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
-              <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
+              <input type="date" id="datepicker" [(ngModel)]="date" >
+              
             </div>
+            <div class="movie__btns">
+                    <a class="btn btn-md btn--warning" (click)="getPartiesAtThisDate(date)">Show Parties <span class="hidden-sm">for this movie</span></a>
+              </div>
         </div>
 
         <h2 class="page-heading">Pick time</h2>

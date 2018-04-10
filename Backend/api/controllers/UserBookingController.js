@@ -273,9 +273,17 @@ module.exports.getUpcomingMovies = function(req, res, next){
 module.exports.getBookings = function(req, res, next){
 
         var username = req.params.username;
+        
+        var sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,tickets.time,tickets.hall,tickets.cinema_location,tickets.cinema_name,tickets.price,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id = movies.movie_id WHERE user=?';
 
-        var sqlBookings = 'SELECT reservation_id,seat_number,date_time,hall,cinema_location,cinema_name FROM tickets WHERE user=?';
-
+        if(!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+    
         database.query(sqlBookings,[username], function (error, results) {
             if(error){
                 return next(error);

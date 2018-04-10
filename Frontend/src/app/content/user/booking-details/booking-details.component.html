@@ -13,7 +13,7 @@
             <span class="ticket__item">Ticket number
               <strong class="ticket__number">{{ticket.reservation_id}}</strong>
             </span>
-            <span class="ticket__item ticket__date">{{ticket.date_time}}</span>
+            <span class="ticket__item ticket__date">{{ticket.time}}</span>
 
             <span class="ticket__item">Cinema:
               <span class="ticket__cinema">{{ticket.cinema_name}}</span>
@@ -22,14 +22,14 @@
               <span class="ticket__hall">{{ticket.hall}}</span>
             </span>
             <span class="ticket__item ticket__price">price:
-              <strong class="ticket__cost">$60</strong>
+              <strong class="ticket__cost">{{ticket.price}}</strong>
             </span>
           </div>
 
           <div class="ticket-primery">
             <span class="ticket__item ticket__item--primery ticket__film">Film
               <br>
-              <strong class="ticket__movie">The Fifth Estate (2013)</strong>
+              <strong class="ticket__movie">{{ticket.title}}</strong>
             </span>
             <span class="ticket__item ticket__item--primery">Seat:
               <span class="ticket__place">{{ticket.seat_number}}</span>

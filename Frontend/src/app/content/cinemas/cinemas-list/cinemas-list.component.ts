@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CinemaslistService } from '../../../@services/cinemaslist.service'
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SelectControlValueAccessor } from '@angular/forms';
+
 @Component({
   selector: 'app-cinemas-list',
   templateUrl: './cinemas-list.component.html',
   styleUrls: ['./cinemas-list.component.css']
 })
 export class CinemasListComponent implements OnInit {
-  cinemas;
+  cinemas = [];
   sorting_item;
-  searchValue;
-  
+  searchValue = "All";
+  locations ;
+  is3D = true;
+  is4D = true;
+  temp;
   constructor(public cinemalistService: CinemaslistService,
   public router: Router, public route: ActivatedRoute) { 
 
@@ -21,24 +26,27 @@ export class CinemasListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cinemalistService.getDistinctLocation().subscribe((response) => {
+      this.locations=response;
+      console.log(this.locations);
+    });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       this.cinemas=response;
-     this.filterBy(this.sorting_item,this.searchValue);
-    });
-  }
-  filterBy(sorting_item,searchValue){
-    
-    if(sorting_item == 1){ //Filtering by number of halls
-  this.cinemalistService.filterByNumberOfHalls(searchValue).subscribe((response) => {
-    this.cinemas = response;
-  });}
-    else if(sorting_item == 2){ //Filtering ny location
-      this.cinemalistService.filterByLocation(searchValue).subscribe((response) => {
-        this.cinemas = response; 
-      });
-    }
+      console.log(this.cinemas);
 
+    });
+    console.log(this.searchValue);
+
+  }
   
+filter(){
+  var cinema3d = 0;
+  var cinema4d = 0;
+  if(this.is3D) cinema3d = 1;
+  if(this.is4D) cinema4d = 1;
+  this.cinemalistService.filterByLocation(this.searchValue,cinema3d,cinema4d).subscribe((response) => {
+    this.cinemas = response; 
+  });
 }
 
   cinemanav(cinema) {

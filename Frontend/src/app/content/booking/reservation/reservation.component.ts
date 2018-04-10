@@ -10,8 +10,12 @@ import {CookieService} from "angular2-cookie/core";
 })
 export class ReservationComponent implements OnInit {
 
+  err = false; // err, vis, and show, are boolean variables for html elements with the ngIf model
+  vis = true;
+  show = false;
   reserveData = {};
   reservationType = "";
+  promo = "";
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
@@ -41,27 +45,8 @@ export class ReservationComponent implements OnInit {
       movie: bookingDetails['movie']
     };
 
-/*
-   // For test purposes
-    var tickets = [1, 5, 9],
-      ticketsNum = tickets.length,
-      price = "150",
-      eachPrice = parseInt(price)/ticketsNum;
 
-    this.reserveData = {
-      username: "mai_emad",
-      cinema_name: "Point 90",
-      cinema_location: "New Cairo",
-      date_time: "2018-04-01 10:00:00",
-      hall:  "1",
-      payment: null,                      //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
-      tickets: tickets,                   //Meaning Reserve (Not Paid), Or Buy (Paid)
-      ticketsNum: ticketsNum,
-      price: price,
-      eachPrice: eachPrice,
-      movie: "10"
-    };
-*/
+
 
   }
 
@@ -85,4 +70,20 @@ export class ReservationComponent implements OnInit {
     this.reserveData["payment"] = true;
     this.reservationType = "Purchase";
   }
+
+  usePromo(event): any { //triggered when button to submit promocode is clicked. extracts information required and sentds it in body of request
+     this.bookingService.usePromoCode(this.reserveData['price'], this.promo,
+      this.reserveData['cinema_name'], this.reserveData['cinema_location'])
+      .subscribe((response) => {
+        if(response.error != null){ //If error is returned, display error message by setting it's ngIfs boolean variable to true
+          this.err = true;
+        } else {
+        this.reserveData['price'] = response.data.price; //modify price according to promocode effect
+        var descp = response.data.description;
+        this.show = true; //show message confirming promocode success
+        this.vis = false; //remove promocode input textarea and button
+      }
+     });
+   }
+
 }

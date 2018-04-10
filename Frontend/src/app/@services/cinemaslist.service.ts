@@ -13,13 +13,15 @@ export class CinemaslistService extends HttpService {
    filterByNumberOfHalls(hallNumber){
      return this.get('filterByHall/' + hallNumber);
    }
-   filterByLocation(location){
-    return this.get('filterByLocation/' + location);
+   filterByLocation(location,is3D,is4D){
+    return this.get('filterByLocation/' + location+'/'+ is3D+'/'+is4D);
   }
   getAllCinemas(){
     return this.get('viewCinemas');
   }
-
+  getDistinctLocation(){
+    return this.get('viewCinema/DistinctLocations');
+  }
   
 
 }

@@ -33,12 +33,11 @@ router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 
 
 
-router.get('/filterByLocation/:location', Cinema.filterByLocation);
+router.get('/filterByLocation/:location/:is3D/:is4D', Cinema.filterByLocation);
 router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
 router.get('/viewCinema/:cinema/:loc',Cinema.viewCinema,Cinema.moviesInCinema);
 router.get('/viewCinema/:cinema/:loc/allMovies',Cinema.moviesInCinema);
-
-
+router.get('/viewCinema/DistinctLocations',Cinema.DistinctLocation);
 
 //viewCinemas routes
 router.get('/viewCinemas',Cinema.ViewCinemas);
@@ -60,7 +59,7 @@ router.post('/actors/:actor', Actor.getActors);
 //------------------------MOVIES ROUTES------------------------------
 router.get('/movies/feature',Movie.getMovies);
 
-router.get('/movies/highrate/',Movie.getMoviesHighRatings);
+router.get('/movies/highrate',Movie.getMoviesHighRatings);
 router.get('/movies/lowrate',Movie.getMoviesLowRatings);
 
 router.get('/movies/latest',Movie.getMoviesLastestDate);

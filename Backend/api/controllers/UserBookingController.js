@@ -271,22 +271,30 @@ module.exports.getUpcomingMovies = function(req, res, next){
 };
 
 module.exports.getBookings = function(req, res, next){
-    
+
         var username = req.params.username;
         
-        var sqlBookings = 'SELECT reservation_id,seat_number,date_time,hall,cinema_location,cinema_name FROM tickets WHERE user=?';
+        var sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,tickets.time,tickets.hall,tickets.cinema_location,tickets.cinema_name,tickets.price,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id = movies.movie_id WHERE user=?';
+
+        if(!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
     
         database.query(sqlBookings,[username], function (error, results) {
             if(error){
                 return next(error);
             }
-    
+
             res.status(200).json({
                 err: null,
                 msg: 'Bookings Successfully Retrieved',
                 data: results
             });
-    
+
         });
     };
 
@@ -395,31 +403,26 @@ module.exports.getUpcomingMoviesForCinema = function(req, res, next){
     };
 
 module.exports.usePromoCode = function(req, res, next){
-  var oldPrice = req.body.price;
+  var oldPrice = req.body.price; //Getting the information needed for database queries from the bdy
   var promocode = req.body.code;
   var cinemaName = req.body.name;
   var cinemaLocation = req.body.location;
-  /*var oldPrice = 2000;
-  console.log(oldPrice);
-  var promocode = '1H4H1LS0W';
-  var cinemaName = 'Pharoahs Cinema';
-  var cinemaLocation = 'Al Haram';*/
-  database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',
+  database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?', //Query to the cinema_promocodes relations table to check whether the cinema at hand has the inputted promocode
   [promocode, cinemaName, cinemaLocation], function (error, results, fields) {
     if(error) return next(error);
-    if(results.length == 0){
+    if(results.length == 0){ //If query returns no records, then an entry doesn't exist in the relation table, meaning the cinema doesn't have the promocode
         return res.status(404).send({
           "error": "This cinema does not have this promocode",
           "msg": null,
           "data": null
         });
     }
-    if(results.length !== 1){
+    if(results.length !== 1){ //Since the queried columns makeup the primary key for the table, the result should always equal either 0 or 1.
       return res.status().send("Error in database")
     }
-    database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) {
-    var type = results[0].type;
-    var value = results[0].value;
+    database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) { //Query to retrieve the promocodes details
+    var type = results[0].type; //Type of promocode may be percentage off, monetary amount deduction, or package
+    var value = results[0].value; //Percentage off in case of percentage type, monetary value in case of amount type, and a description in case of package type
     if(type == "percentage") {
       var newPrice = oldPrice - (oldPrice * parseFloat(value)/100);
       return res.status(200).send({
@@ -432,7 +435,7 @@ module.exports.usePromoCode = function(req, res, next){
       });
     } else if(type == "amount") {
       var newPrice = oldPrice - value;
-      if(newPrice < 0) {
+      if(newPrice < 0) { //If deducted amount is greater than original price, then the price will be 0
         newPrice = 0;
         return res.status(200).send({
           "error": null,

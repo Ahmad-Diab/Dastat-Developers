@@ -49,9 +49,9 @@ app.use(
   All requests should have /api before writing the route as a convention for api servers
 */
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(cors());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 
 app.use('/api', router);
 
@@ -76,3 +76,4 @@ app.use(function(req, res) {
 });
 
 app.listen(port, console.log('listening on port: ' + port));
+module.exports=app;

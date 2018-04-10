@@ -392,24 +392,21 @@ describe('Movie',function(){ //This should contain all the tests related to View
 //Michael Khalil & Ibram Medhat
 
 describe('Search',function(){                                   // This should contain all the tests related to Search
-  it('Results are found' , function(done){                      // This is the result message if the test succeeds and the function is done.
-    chai.request("localhost:8000").get("/api/search/something") // This is chai request to the path of the function same as the route.
+  it('No data are found when searching with a keyword that does not exist in the DB' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/somethingThatIsNotInTheDB") // This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
-      res.should.be.json;           // Check if the response of the request is in JSON
+      res.should.have.status(200);                    //  Check if the response of the request has 200 OK status
+      res.should.be.json;                             // Check if the response of the request is in JSON
+      res.body.data.should.have.property('Movies');   // Check that the result data array has property Movies
+      res.body.data.should.have.property('Cinemas');
+      res.body.data.should.have.property('Actors');
+      res.body.data.Movies.length.should.be.eql(0);   // Check that no movie results are found
+      res.body.data.Cinemas.length.should.be.eql(0);
+      res.body.data.Actors.length.should.be.eql(0);
      done();                        // Finishing the function
     });
  });
 });
-
-
-
-
-
-
-
-
-
 
 
 

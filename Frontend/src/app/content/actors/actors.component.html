@@ -1,0 +1,59 @@
+<div class="search-wrapper">
+  <div class="container container--add">
+      <form id='search-form' method='get' class="search">
+          <input type="text" class="search__field" placeholder="Search">
+          <button type='submit' class="btn btn-md btn--danger search__button">search an actor</button>
+      </form>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="container">
+  <div class="col-sm-12">
+      <h2 class="page-heading">Actor info</h2>
+      
+      
+      <!-- Actor preview item -->
+      <div *ngIf="actor" class="acotr actor--preview actor--full release">
+           <div class="col-sm-3 col-md-2 col-lg-2">
+                  <div class="actor__images">
+                      <img alt='' src={{actor.imagePath}}>
+                  </div>
+                
+          </div>
+
+          <div class="col-sm-9 col-md-10 col-lg-10 actor__about">
+                  <a class="actor__title link--huge">{{actor.title}}</a>
+
+                  <p class="actor__time">{{actor.duration}} hrs</p>
+
+               
+                  <p class="actor__option"><strong>Category: </strong><a href="#">{{actor.genre}}</a></p>
+                  <p class="actor__option"><strong>Release date: </strong>{{actor.year}}</p>
+                  <p class="actor__option"><strong>Description: </strong>{{actor.description}}</p>
+                  <p class="actor__option"><strong>Cast: </strong>{{actor.cast}}</p>
+                  <div class="actor__btns">
+                      <a href="#" class="btn btn-md btn--warning">book a ticket <span class="hidden-sm">for this actor</span></a>
+                      <a href="#" class="watchlist">Add to watchlist</a>
+                  </div>
+
+                  <div class="preview-footer">
+                      <div class="actor__rate"><p class="actor__rate-number"><strong> Rating</strong></p> <span class="actor__rating">{{actor.rating}}</span></div>
+                      
+
+                      <a href="#" class="actor__show-btn">Showtime</a>
+                  </div>
+          </div>
+
+          <div class="clearfix"></div>
+          
+
+      </div>
+      <!-- end actor preview item -->
+
+    
+
+
+  </div>
+
+</section>

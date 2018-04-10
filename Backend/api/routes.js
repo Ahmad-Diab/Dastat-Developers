@@ -57,6 +57,8 @@ router.get('/users', User.getUsers);
 router.get('/users/viewMyInfo', User.viewMyInfo);
 //-----------------------ACTOR ROUTES-------------------------------
 router.post('/actors/:actor', Actor.getActors);
+router.get('/actors/:actor_name',Actor.getActors);
+
 
 //------------------------MOVIES ROUTES------------------------------
 router.get('/movies/feature',Movie.getMovies);

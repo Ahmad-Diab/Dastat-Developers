@@ -71,93 +71,93 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 //Joe William
-describe('Movie',function(){
-  it('High Rates movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/highrate")
+describe('Movie',function(){ //This should contain all the tests related to ViewMovies
+  it('High Rates movies are found' , function(done){//This is the message i will get if the test is succeeded and function is done.
+    chai.request("localhost:8000").get("/api/movies/highrate")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Low Rates movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/lowrate")
+  it('Low Rates movies are found' , function(done){//This is the message i will get if the test is succeeded and function is done.
+    chai.request("localhost:8000").get("/api/movies/lowrate")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Latest  movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/latest")
+  it('Latest  movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/latest")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Oldest movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/oldest")
+  it('Oldest movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/oldest")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Action movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Action")
+  it('Action movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Action")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Adventure movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Adventure")
+  it('Adventure movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Adventure")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Comedy movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Comedy")
+  it('Comedy movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Comedy")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Drama movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Drama")
+  it('Drama movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Drama")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Horror movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Horror")
+  it('Horror movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Horror")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
-  it('Thriller movies are found' , function(done){
-    chai.request("localhost:8000").get("/api/movies/Thriller")
+  it('Thriller movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Thriller")//This is chai request to the path of the function same as the route.
     .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-     done();
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
     });
  });
- it('Biography movies are found' , function(done){
-   chai.request("localhost:8000").get("/api/movies/Bio")
+ it('Biography movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+   chai.request("localhost:8000").get("/api/movies/Bio")//This is chai request to the path of the function same as the route.
    .end(function(req,res){
-     res.should.have.status(200);
-     res.should.be.json;
-     done();
+    res.should.have.status(200);//Check if the response of the request has 200 OK status
+    res.should.be.json; // Check if the response of the request is in JSON
+    done();// Finishing the function
     });
   });
 });

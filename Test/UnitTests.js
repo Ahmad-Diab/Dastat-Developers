@@ -391,7 +391,16 @@ describe('Movie',function(){ //This should contain all the tests related to View
 
 //Michael Khalil & Ibram Medhat
 
-
+describe('Search',function(){                                   // This should contain all the tests related to Search
+  it('Results are found' , function(done){                      // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/something") // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
+      res.should.be.json;           // Check if the response of the request is in JSON
+     done();                        // Finishing the function
+    });
+ });
+});
 
 
 

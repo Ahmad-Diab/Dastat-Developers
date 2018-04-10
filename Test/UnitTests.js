@@ -7,13 +7,17 @@
 //Initializing Chai
 
 // FIRST YOU HAVE TO INSTALL MOCHA AS IT'S NOT IN THE package.json ---> npm install -g mocha@2.3.1
-// THEN INSTALL npm install chai@3.2.0 chai-http@1.0.0 --save-dev
+
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../Backend/app');
 var should = chai.should();
 var assert = chai.assert;
 chai.use(chaiHttp);
+
+
+
+
 
 
 //Amir Zaghloul
@@ -161,6 +165,20 @@ describe('Movie',function(){ //This should contain all the tests related to View
     });
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -519,53 +537,7 @@ describe('Movie',function(){ //This should contain all the tests related to View
 
 //Bas Rizk
 
-describe('Booking Tickets', () => {
-        it('it should POST (make Reservations)', (done) => {
-            let bookingDetails = {
-                "username": "mai_emad",
-                "cinema_name": "Point 90",
-                "cinema_location": "New Cairo",
-                "date": "2018-04-0",
-                "time": "10:00:00",
-                "hall": "2",
-                "payment": true,
-                "tickets": [3, 31, 32],
-                "price": 150,
-                "movie": 10,
-                "comment": "abc"
-            };
-            chai.request(server)
-                .post('/api/userBooking/makeReservation')
-                .send(bookingDetails)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    done();
-                });
-        });
 
-    it('it should fail to reserve given null inputs', (done) => {
-        let bookingDetails = {
-            "username": null,
-            "cinema_name": null,
-            "cinema_location": null,
-            "date": "2018-04-0",
-            "time": "10:00:00",
-            "hall": null,
-            "payment": true,
-            "tickets": [3, 31, 32],
-            "price": 150,
-            "movie": 10,
-            "comment": "abc"
-        };
-        chai.request(server)
-            .post('/api/userBooking/makeReservation')
-            .send(bookingDetails)
-            .end((err, res) => {
-                res.should.have.status(422);
-                done();
-            });
-    });
-});
 
 
 
@@ -761,21 +733,21 @@ describe('Booking Tickets', () => {
 
 //Omar El-Dahrawy
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Parties', function() { 
+  it('it should return all upcoming parties for selected movie,cinema,and date',function(done){
+      chai.request("localhost:8000").get("/api/userBooking/getParties").query({ 
+        cinemaName: 'Mayo Movies',
+        movieId: 13,
+        date: '2018-04-12',
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;
+        
+        done();
+      });
+  });
+});
 
 
 
@@ -827,26 +799,27 @@ describe('Booking Tickets', () => {
 
 //Zeyad Yasser & Nayer Ezzat
 
-describe('HOMEPAGE', function(){
-  it('Viewing Featured Movies', function(done){
-    chai.request("localhost:8000").get("/api/getTopMovies")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-      assert.isArray(res.body, 'Cinema');
-      done();
-    });
-  });
-  it('Viewing Currently Showed Movies', function(done){
-    chai.request("localhost:8000").get("/api/viewMovies3")
-    .end(function(req,res){
-      res.should.have.status(200);
-      res.should.be.json;
-      assert.isArray(res.body, 'Cinema');
-      done();
-    });
-  });
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -959,25 +932,16 @@ describe('HOMEPAGE', function(){
 
 
 //Mariam Fawzy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Viewing all cinemas' , function() {
+  it('Should list all cinemas ' , function(done){
+    chai.request("localhost:8000").get("/api/viewCinemas").end(function(req,res){
+      res.should.have.status(200); // check that is found
+      res.should.be.json; // check it is json file
+      assert.isArray(res.body, 'Cinema'); //make sure it is an array of cinemas
+      done();
+    });
+  });
+});
 
 
 

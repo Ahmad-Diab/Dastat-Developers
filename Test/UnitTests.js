@@ -400,18 +400,16 @@ describe('Search',function(){                                   // This should c
      done();                        // Finishing the function
     });
  });
+  it('Cinema was found by its name' , function(done){
+    chai.request("localhost:8000").get("/api/search/Galaxy Cinema")
+    .end(function(req,res){
+      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
+      res.should.be.json;           // Check if the response of the request is in JSON
+     // res.body.should.have.property('name').eql('Galaxy Cinema') ;
+     done();
+    })
+  })
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -643,21 +643,21 @@ describe('Seats', function() { //This should contain all realted Tests
 
 //Omar El-Dahrawy
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Parties', function() { 
+  it('it should return all upcoming parties for selected movie,cinema,and date',function(done){
+      chai.request("localhost:8000").get("/api/userBooking/getParties").query({ 
+        cinemaName: 'Mayo Movies',
+        movieId: 13,
+        date: '2018-04-12',
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;
+        
+        done();
+      });
+  });
+});
 
 
 

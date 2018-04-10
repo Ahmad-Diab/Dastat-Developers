@@ -1,21 +1,28 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<h1 id='user_info_title' class="page-heading">User Profile</h1>
 
-<h1 style="margin: 0">User Profile</h1>
+<hr />
+<div id="user_info" class="" align="center">
 <form>
-    <label>{{user.username}}</label><br />
-
+    <i class="material-icons">account_box</i>
+    <br />
+    <label id="username">{{user.username}}</label><br />
+    <hr id='line'/>
     <label> Email: {{user.email}}</label><br />
-
-    <label> Password: {{user.password}}</label><br />
-
+    
+    <hr id='line'/>
     <label> First Name: {{user.first_name}}</label><br />
-
+    <hr id='line'/>
     <label> Last Name: {{user.last_name}}</label><br />
-    
+    <hr id='line'/>
     <label> Phone number: {{user.phone_number}}</label><br />
-
+    <hr id='line'/>
     <label> Age: {{user.age}}</label><br />
-
+    <hr id='line'/>
     <label> Gender: {{user.gender}}</label><br />
-    
-    
+    <hr id='line'/>
+    <input type="button" value="Previous Reservations" id='edit_button'>
+    <input type="button" value="Edit My Info" id='prev_res_button'>
 </form>
+</div>
+

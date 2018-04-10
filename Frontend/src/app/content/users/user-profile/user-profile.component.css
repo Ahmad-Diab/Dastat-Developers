@@ -1,0 +1,54 @@
+#user_info_title{
+    align-self: center;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+#username{
+    font-size: 50px;
+    font-style: italic;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+#user_info{
+    font-size: 30px;
+}
+#line{
+border-color: #4A4145;
+width: 600px;
+}
+#edit_button{
+    background-color: #F8D776;
+    border: white;
+    border-radius: 10px;
+}
+#prev_res_button{
+    background-color: #F8D776;
+    border: white;
+    border-radius: 10px;
+}
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 200px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }

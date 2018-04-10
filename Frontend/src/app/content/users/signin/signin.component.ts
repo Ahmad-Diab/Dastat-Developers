@@ -3,7 +3,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Router } from '@angular/router';
 import { User } from '../../../@objects/user';
 import { AuthService } from '../../../@services/auth.service';
-
+import {HeaderComponent} from  '../../../shared//layout/header/header.component';
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -14,10 +15,16 @@ export class SigninComponent implements OnInit {
   
   user: User = new User();
   message;
-
-  constructor(public cookie: CookieService, public router: Router, public authService: AuthService) { }
+  loogedin:boolean;
+  constructor(public cookie: CookieService, public router: Router,private location:Location, public authService: AuthService) { }
 
   ngOnInit() {
+    if (this.cookie.get("username")){
+      this.loogedin=true;
+    }
+    else{
+      this.loogedin=false;
+    }
   }
   onLogin(){
     if(!this.user.username){
@@ -37,14 +44,21 @@ export class SigninComponent implements OnInit {
     }
       else{
         this.cookie.put('username',this.user.username);
-        this.message=response.msg;
-
+       // this.message=response.msg;    
+        this.load();
+       
        // this.router.navigate(['']);
     
 
       }
+  
         });
   }
+  load(){
+    location.reload();
+    
+  }
+
   
 
     

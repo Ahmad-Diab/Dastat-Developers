@@ -14,7 +14,7 @@ export class HomepageComponent implements OnInit {
   constructor(public moviesService: MovieslistService ,  private router : Router) { }
 
   ngOnInit() {
-
+    //this.load();
     this.moviesService.getFeaturedMovies().subscribe((response) => { 
       this.movies = response;
       console.log(response);

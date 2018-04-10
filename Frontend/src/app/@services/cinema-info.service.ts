@@ -14,5 +14,7 @@ export class CinemaInfoService extends HttpService {
    getMoviesInCinema(cinemaname,location){
     return this.get('viewCinema/'+cinemaname+'/'+location+'/allMovies');
   }
+  
+  
 
 }

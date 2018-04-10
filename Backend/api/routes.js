@@ -34,10 +34,11 @@ router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 
 
 
-router.get('/filterByLocation/:location', Cinema.filterByLocation);
+router.get('/filterByLocation/:location/:is3D/:is4D', Cinema.filterByLocation);
 router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
 router.get('/viewCinema/:cinema/:loc',Cinema.viewCinema,Cinema.moviesInCinema);
 router.get('/viewCinema/:cinema/:loc/allMovies',Cinema.moviesInCinema);
+router.get('/viewCinema/DistinctLocations',Cinema.DistinctLocation);
 
 
 

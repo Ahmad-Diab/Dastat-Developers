@@ -3180,8 +3180,8 @@ input[type="button"].btn-block {
   padding-bottom: 6px;
 }
 .tags-area--thin {
-  padding-top: 8px;
-  padding-bottom: 1px;
+  padding-top: 12px;
+  padding-bottom: 6px;
   margin-top: 27px;
 }
 .banner-top {
@@ -5412,8 +5412,8 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   position: relative;
   text-align: right;
   padding-right: 20px;
-  width: auto;
-  float: right;
+  width: max-content;
+  float: left;
   display: inline-block;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
@@ -10632,4 +10632,87 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   .post--preview .post__image {
     width: 100%;
   }
+}
+/* The container */
+.Radio-button {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 7px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.Radio-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left:0;
+  height: 19px;
+  width: 19px;
+  background-color: #eee;
+  border-radius: 50%;
+  
+}
+
+/* On mouse-over, add a grey background color */
+.Radio-button:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.Radio-button input:checked ~ .checkmark {
+  background-color: #ffd564;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.Radio-button input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.Radio-button .checkmark:after {
+ top: 5.4px;
+left: 6.3px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: white;
+}
+.floating-box {
+  float: left;
+  width: 40px;
+  height: 15px;
+  margin: 10px;
+}
+.page-heading2 {
+  padding-left: 0px;
+  margin-top: 56px;
+  margin-bottom: 27px;
+  font: 17px 'aleobold', sans-serif,bold;
+  color: #4c4145;
+  text-transform: uppercase;
+  -webkit-background-size: 21px 6px;
+  background-size: 21px 6px;
+  background-position: left center;
+  background-repeat: no-repeat;
 }

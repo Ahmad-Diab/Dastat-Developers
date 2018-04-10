@@ -411,7 +411,7 @@ describe('Search',function(){                                   // This should c
     .end(function(req,res){
       res.should.have.status(200);  //  Check if the response of the request has 200 OK status
       res.should.be.json;           // Check if the response of the request is in JSON
-     // res.body.should.have.property('name').eql('Galaxy Cinema') ;
+      res.body.data.should.have.property('name').eql('Galaxy Cinema') ;
      done();
     })
   })

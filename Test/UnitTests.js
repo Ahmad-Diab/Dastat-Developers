@@ -444,16 +444,6 @@ describe('Search',function(){                                   // This should c
 
 
 
-
-
-
-
-
-
-
-
-
-
 //Hazem
 
 

@@ -24,7 +24,7 @@ module.exports.getCinemasForThatMovie = function(req, res){
     var sql = "SELECT C.* FROM cinemas C INNER JOIN movies_in_cinemas M ON ? WHERE ?";
     var joinCond = {
         'M.cinema_location': 'C.location',
-        'M.cinema_name':'M.name'
+        'M.cinema_name':'M.cinema_name'
     };
     var whereCond = {
         'movie': movie_id

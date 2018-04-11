@@ -13,12 +13,11 @@ import {FormControl} from '@angular/forms';
 export class CinemasListComponent implements OnInit {
   cinemas = [];
   sorting_item;
-  searchValue = "All";
+  searchValue ;
   locations ;
   is3D = true;
   is4D = true;
   temp;
-  city= "city";
   constructor(public cinemalistService: CinemaslistService,
   public router: Router, public route: ActivatedRoute) { 
 
@@ -29,10 +28,12 @@ export class CinemasListComponent implements OnInit {
   }
 
   ngOnInit() {
-   
-    
+
+    this.searchValue = 'All';
+
     this.cinemalistService.getDistinctLocation().subscribe((response) => {
       this.locations=response;
+
       console.log(this.locations);
     });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
@@ -56,9 +57,6 @@ filter(){
 
   cinemanav(cinema) {
     this.router.navigate(['/cinemas', cinema.name, cinema.location]);
-  }
-  hey(){
-      this.city ="";
   }
 
   

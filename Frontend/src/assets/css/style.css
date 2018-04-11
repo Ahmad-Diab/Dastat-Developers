@@ -10765,8 +10765,11 @@ background: white;
 .mat-select-value {
   color:  #fe505a !important;
 }
+.mat-select-arrow {
+  color:  #fe505a !important;
+}
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow{
-  color: #b4b1b2 !important;
+  color: #fe505a !important;
 }
 .mat-checkbox-background, .mat-checkbox-frame {
   border-radius: 100000px !important;

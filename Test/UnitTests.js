@@ -520,24 +520,25 @@ describe('Movie',function(){
 //Bas Rizk
 
 describe('Booking Tickets', () => {
-        it('it should POST (make Reservations)', (done) => {
+        it('it should make Reservations', (done) => {
             let bookingDetails = {
                 "username": "mai_emad",
                 "cinema_name": "Point 90",
                 "cinema_location": "New Cairo",
-                "date": "2018-04-0",
+                "date": "2018-04-01",
                 "time": "10:00:00",
                 "hall": "2",
                 "payment": true,
                 "tickets": [3, 31, 32],
                 "price": 150,
-                "movie": 10,
-                "comment": "abc"
+                "movie": 26,
+                //"comment": "abc"
             };
             chai.request(server)
                 .post('/api/userBooking/makeReservation')
                 .send(bookingDetails)
                 .end((err, res) => {
+                    console.log(res);
                     res.should.have.status(200);
                     done();
                 });
@@ -548,13 +549,13 @@ describe('Booking Tickets', () => {
             "username": null,
             "cinema_name": null,
             "cinema_location": null,
-            "date": "2018-04-0",
+            "date": "2018-04-01",
             "time": "10:00:00",
             "hall": null,
             "payment": true,
             "tickets": [3, 31, 32],
             "price": 150,
-            "movie": 10,
+            "movie": 26,
             "comment": "abc"
         };
         chai.request(server)

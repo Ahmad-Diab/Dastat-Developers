@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
   }
   Book_or_Register(){
     if (this.message2=="Book Ticket"){
-      this.router.navigate(['']);//Booking bage
+      this.router.navigate(['booking/parties']);//Booking bage
     }
     else{
       this.router.navigate(['/register']);

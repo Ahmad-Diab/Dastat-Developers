@@ -56,6 +56,10 @@ export class ReservationComponent implements OnInit {
       this.reserveData['date'], this.reserveData['time'],this.reserveData['hall'], this.reserveData['payment'],
       this.reserveData['tickets'],this.reserveData['price'],this.reserveData['movie'], this.reserveData['comment']
     ).subscribe((response) => {
+      this.cookie.remove('booking');
+      this.cookie.remove('cinema');
+      this.cookie.remove('party');
+      this.cookie.remove('movie');
       event.confirm.resolve(response);
       console.log("onReserve order is met");
     });

@@ -26,6 +26,6 @@ ngOnInit(){
 }
 
 putMovieInCookie(){
-  this.cookie.putObject('movie' , this.movie;
+  this.cookie.putObject('movie' , this.movie);
 }  
 }

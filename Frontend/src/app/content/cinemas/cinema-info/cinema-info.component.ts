@@ -3,6 +3,7 @@ import {CinemaInfoService} from '../../../@services/cinema-info.service';
 import {Router, ActivatedRoute, Params} from '@angular/router'
 import { CinemaslistService } from '../../../@services/cinemaslist.service'
 import { CinemasListComponent } from '../cinemas-list/cinemas-list.component'
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-cinema-info',
@@ -20,7 +21,8 @@ export class CinemaInfoComponent implements OnInit {
 
   constructor(public cinemaSerive: CinemaInfoService,
   public router : Router,
-  public route: ActivatedRoute) {
+  public route: ActivatedRoute,
+  public cookie: CookieService) {
 
     this.route.params.subscribe((params: Params )=> {
       this.name = params['name'];
@@ -37,6 +39,8 @@ export class CinemaInfoComponent implements OnInit {
      
     }
 
+       
+
     
     this.cinemaSerive.getCinemaInfo(data.cinema,data.location).subscribe((response) => {
       this.cinema=response;
@@ -47,6 +51,12 @@ export class CinemaInfoComponent implements OnInit {
     });
 
   }
+
+  GoToReservation(movie){
+    this.cookie.putObject('movie' , movie);
+    console.log(this.cinema);
+  }
+
   filterBy(sorting_item,searchValue){
     if(sorting_item != undefined && searchValue != undefined) this.router.navigate(['cinemas/list',sorting_item,searchValue]);
     else this.router.navigate(['cinemas/list']);

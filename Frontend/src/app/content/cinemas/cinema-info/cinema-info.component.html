@@ -73,8 +73,10 @@
                   <div class="col-sm-6 col-md-5">
                     <div class="movie__images">
                       <span class="movie__rating">{{movie.rating}}</span>
+                      
                       <img alt='' src= {{movie.imagePath}}>
                     </div>
+                    
                   </div>
                   
 
@@ -87,9 +89,15 @@
                       <a href="#">{{movie.genre}}</a>
                    
                     </p>
+                    
+                  </div>
+                  <div class="movie__btns" class="col-sm-7 col-md-7">
+                    <div *ngIf="movie.feature == 2 || movie.feature == 3">
+                        <a href='booking/parties' class="btn btn-md btn--warning" (click)="GoToReservation(movie)">book a ticket <span class="hidden-sm">for this movie</span></a>
+                    </div>
+                        <a href="#" class="watchlist" >Add to watchlist</a>
                   </div>
                   
-
                 </div>
               </div>
 

@@ -21,7 +21,7 @@ module.exports.getCinemasForThatMovie = function(req, res){
         });
     }
 
-    var sql = "SELECT C.* FROM cinemas C INNER JOIN movies_in_cinemas M ON ? WHERE ?";
+    var sql = "SELECT C.* FROM cinemas C , halls H WHERE C.name = H.cinema_name AND C.location = H.cinema_location AND H.movie = ?";
     var joinCond = {
         'M.cinema_location': 'C.location',
         'M.cinema_name':'M.name'
@@ -30,9 +30,27 @@ module.exports.getCinemasForThatMovie = function(req, res){
         'movie': movie_id
     };
     console.log("I am here before looking for cinemas in the db");
-    database.query(sql,[joinCond, whereCond],function (err, result) {
+    database.query(sql,[movie_id],function (err, result) {
         if (err) throw err;
-        return res.send(result);
+        //return res.send(result);
+        if(result.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No cinemas show this movie',
+                data: result
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Cinemas Successfully Retrieved',
+                data: result
+            });
+
+        }
     });
 };
 
@@ -41,27 +59,27 @@ module.exports.getCinemasForThatMovie = function(req, res){
  *  Movie, Cinema, as well as Date (Day).
  * @param req
  * @param res
- * @param next
  */
-module.exports.getParties = function(req, res, next){
+module.exports.getParties = function(req, res){
     //COMPLETED Get parties of movies just chosen according to chosen day
-    //TODO Get parties of movies just chosen according to chosen day
     var cinemaName = req.params.cinemaName,
         movieName = req.params.movieName,
         date = req.params.date,
-        //query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = 'Mayo Movies' AND h.movie = 13 AND DATE(p.date_time) = '2018-4-12'";
-        query = "SELECT h.cinema_name , m.title , h.hall_number , p.date_time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.movie = ? AND DATE(p.date_time) = ?";
+        cinemaLocation = req.params.cinemaLocation;
 
-    database.query(query,[cinemaName,movieName,date],function (error, results, fields) {
-        if(error){
-            return next(error);
-        }
-        if(results.length == 0){
+        
+    var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date , p.time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?";
+    console.log(cinemaName + 'getParties');
+
+    database.query(query,[cinemaName , cinemaLocation ,movieName,date],function (err, result, fields) {
+        if (err) throw err;
+        //return res.send(result);
+        if(result.length == 0){
 
             res.status(200).json({
                 err: null,
-                msg: 'No parties availiable!',
-                data: results
+                msg: 'No parties for this movie at this date',
+                data: result
             });
 
         }
@@ -70,39 +88,35 @@ module.exports.getParties = function(req, res, next){
             res.status(200).json({
                 err: null,
                 msg: 'Parties Successfully Retrieved',
-                data: results
+                data: result
             });
 
         }
-        console.log(results);
       });
 };
+
 
 /**
  * A function to handle making the reservation of (one or more) tickets
  * to a movie in a cinema at the end of the booking process.
- * @param req, required data for processing the request of making the reservation
- * @param res, results of changes on the tickets table in database
- * @param next, next middleware to handle errors
+ * @param req
+ * @param res
+ * @param next
  */
 module.exports.makeReservation = function(req, res, next){
-    // COMPLETED Make a reservation based on all data need for reservation.
-    // TODO User-name validation needs to be done!
+    //COMPLETED Make a reservation based on all data need for reservation.
+    //TODO User-name validation needs to be done!
 
     var username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
-        party_date = req.body['date'],
-        party_time = req.body['time'],
+        party_datetime = req.body['date_time'],
         hall = req.body['hall'],
-        movie = req.body['movie'],
         payment = req.body['payment'],
         tickets = req.body['tickets'],
         tickets_price = req.body['price'],
-        numOfTickets = tickets.length,
-        comment = req.body['comment'];
+        movie = req.body['movie'];
 
-    // Null Checkers
     if(!username) {
         return res.status(422).json({
             err: null,
@@ -110,6 +124,7 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+
     if(!cinema_name || !cinema_location) {
         return res.status(422).json({
             err: null,
@@ -117,20 +132,23 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-    if(!party_date || !party_time) {
+
+    if(!party_datetime) {
         return res.status(422).json({
             err: null,
             msg: 'Party data-time is required.',
             data: null
         });
     }
-    if(!hall || !movie) {
+
+    if(!hall & !movie) {
         return res.status(422).json({
             err: null,
             msg: 'Party hall and movie are required.',
             data: null
         });
     }
+
     if(!tickets || !tickets_price) {
         return res.status(422).json({
             err: null,
@@ -138,59 +156,77 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
-    // Validations of correct types
+
     if(!Validations.isBoolean(payment) ||
-        !Validations.isNumber(hall) ||
-        !Validations.isNumber(tickets_price)) {
+        !Validations.isNumber(hall)) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
             data: null
         });
     }
-    // Verify that movie exists in hall
+
+    /*
     // Verify that hall exists in Cinema, and retrieve movie
-    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
-        [hall, cinema_location, cinema_name],function (error, results) {
+    var hallDetails = {
+        hall_number: hall,
+        cinema_location: cinema_location,
+        cinema_name: cinema_name
+    };
+
+    var movieData = null;
+    database.query('SELECT movie FROM halls WHERE ?',
+        hallDetails, function (error, results) {
         if (error) {
             return next(error);
         }
-        console.log(results);
-        if(!results || !results.length) {
-            return res.status(404).send({
-                err: null,
-                msg: "The assigned hall does not exist.",
-                data: null
-            });
-        }
+        movieData = results;
+    });
+    /*
+    if(movieData || !movieData.length) {
+        return res.status(404).send({
+            err: "The assigned hall does not exist.",
+            msg: null,
+            data: null
+        })
+    }*/
 
-        var values = [];
-        for(var i = 0; i< numOfTickets; i++) {
-            var seatNum = tickets[i];
-            var ticket_details = [username,payment,seatNum,party_date,party_time,hall,cinema_location, cinema_name,
-                tickets_price, movie, comment];
-            values.push(ticket_details);
-        }
+    var success = true;
 
-            var sqlQuery = 'INSERT INTO Tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
+    for( var i = 0; i< tickets.length; i++) {
+        var seatNum = tickets[i];
 
-        database.query(sqlQuery,[values], function (error, results) {
+        //TODO seatNum type validation
+        var ticketDetails = {
+            user: username,
+            payment: payment,
+            seat_number: seatNum,
+            date_time: party_datetime,
+            hall: hall,
+            cinema_location: cinema_location,
+            cinema_name: cinema_name,
+            price: tickets_price,
+            movie_id: movie
+        };
+
+        database.query('INSERT INTO Tickets SET ?', ticketDetails, function (error, results) {
             if (error) {
                 return next(error);
             }
-
-            return res.status(200).json({
-                err: null,
-                msg: 'Booking Request has been completed successfully.',
-                data: results
-            });
-
+            success = true;
         });
-    });
+    }
 
-
+    if(success) {
+        res.status(200).json({
+            err: null,
+            msg: 'Booking Request has been completed successfully.',
+            data: req.body
+        });
+    }
 
 };
+
 
 /**
  *  Get Current Movies..
@@ -231,6 +267,7 @@ module.exports.getCurrentMovies = function(req, res, next){
     });
 };
 
+
 module.exports.getUpcomingMovies = function(req, res, next){
 
     var currentDate = new Date();
@@ -270,31 +307,24 @@ module.exports.getUpcomingMovies = function(req, res, next){
     });
 };
 
-module.exports.getBookings = function(req, res, next){
 
+module.exports.getBookings = function(req, res, next){
+    
         var username = req.params.username;
         
-        var sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,tickets.time,tickets.hall,tickets.cinema_location,tickets.cinema_name,tickets.price,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id = movies.movie_id WHERE user=?';
-
-        if(!username) {
-            return res.status(422).json({
-                err: null,
-                msg: 'Username is required.',
-                data: null
-            });
-        }
+        var sqlBookings = 'SELECT reservation_id,seat_number,date_time,hall,cinema_location,cinema_name FROM tickets WHERE user=?';
     
         database.query(sqlBookings,[username], function (error, results) {
             if(error){
                 return next(error);
             }
-
+    
             res.status(200).json({
                 err: null,
                 msg: 'Bookings Successfully Retrieved',
                 data: results
             });
-
+    
         });
     };
 
@@ -350,7 +380,7 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
     });
   };
 
-module.exports.getUpcomingMoviesForCinema = function(req, res, next){
+  module.exports.getUpcomingMoviesForCinema = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;
     var cinemaLocation = req.params.cinema_location;
@@ -400,29 +430,34 @@ module.exports.getUpcomingMoviesForCinema = function(req, res, next){
         }
 
     });
-    };
+  };
 
 module.exports.usePromoCode = function(req, res, next){
-  var oldPrice = req.body.price; //Getting the information needed for database queries from the bdy
+  var oldPrice = req.body.price;
   var promocode = req.body.code;
   var cinemaName = req.body.name;
   var cinemaLocation = req.body.location;
-  database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?', //Query to the cinema_promocodes relations table to check whether the cinema at hand has the inputted promocode
+  /*var oldPrice = 2000;
+  console.log(oldPrice);
+  var promocode = '1H4H1LS0W';
+  var cinemaName = 'Pharoahs Cinema';
+  var cinemaLocation = 'Al Haram';*/
+  database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',
   [promocode, cinemaName, cinemaLocation], function (error, results, fields) {
     if(error) return next(error);
-    if(results.length == 0){ //If query returns no records, then an entry doesn't exist in the relation table, meaning the cinema doesn't have the promocode
+    if(results.length == 0){
         return res.status(404).send({
           "error": "This cinema does not have this promocode",
           "msg": null,
           "data": null
         });
     }
-    if(results.length !== 1){ //Since the queried columns makeup the primary key for the table, the result should always equal either 0 or 1.
+    if(results.length !== 1){
       return res.status().send("Error in database")
     }
-    database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) { //Query to retrieve the promocodes details
-    var type = results[0].type; //Type of promocode may be percentage off, monetary amount deduction, or package
-    var value = results[0].value; //Percentage off in case of percentage type, monetary value in case of amount type, and a description in case of package type
+    database.query('SELECT promocode, type, value FROM Promocodes WHERE promocode = ?', [promocode], function (error, results, fields) {
+    var type = results[0].type;
+    var value = results[0].value;
     if(type == "percentage") {
       var newPrice = oldPrice - (oldPrice * parseFloat(value)/100);
       return res.status(200).send({
@@ -435,7 +470,7 @@ module.exports.usePromoCode = function(req, res, next){
       });
     } else if(type == "amount") {
       var newPrice = oldPrice - value;
-      if(newPrice < 0) { //If deducted amount is greater than original price, then the price will be 0
+      if(newPrice < 0) {
         newPrice = 0;
         return res.status(200).send({
           "error": null,

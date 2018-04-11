@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieslistService } from '../../../@services/movieslist.service';
 import { SearchService } from '../../../@services/search.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'angular2-cookie/core';
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -10,9 +11,10 @@ import { Router } from '@angular/router';
 export class MoviesListComponent implements OnInit {
   movies=[];
 
-  constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router) { 
+  constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
+  public cookie : CookieService) { 
   }
-
+  
   ngOnInit() {
 
     this.viewMovies();
@@ -20,6 +22,10 @@ export class MoviesListComponent implements OnInit {
     //----- HERE IS THE FUNCTIONS YOU CALL ON CLICK
     //------ DO NOT FORGET TO IMPLEMENT IT FIRST IN THE SERVICES----
   
+GoToReservation(movie){
+
+  this.cookie.putObject('movie' , movie);
+}    
 viewHighRate(){
   this.movieslistService.geHighRateMovies().subscribe((response)=>{
     this.movies=response;

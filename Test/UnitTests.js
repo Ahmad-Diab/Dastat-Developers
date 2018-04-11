@@ -131,7 +131,16 @@ describe('Seats', function() { //This should contain all realted Tests
 
 //Youssef Raphail
 
-
+describe('View All Movies',function(){
+  it('All movies are viewed' , function(done){
+    chai.request("localhost:8000").get("/api/movies/feature")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+     done();
+    });
+    });
+});
 
 
 

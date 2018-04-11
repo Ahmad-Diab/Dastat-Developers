@@ -16,6 +16,7 @@ export class PartiesComponent implements OnInit {
   cinemas=[];
   selectedCinema;
   selectedMovie;
+  selectedParty;
   date;
 
   constructor(public partiesService:PartiesService,
@@ -64,13 +65,38 @@ export class PartiesComponent implements OnInit {
 
   updateMovie(movie){
     this.selectedMovie = movie;
-    this.cookie.putObject('movie' , this.selectedMovie);    
+    // this.cookie.putObject('movie' , this.selectedMovie);    
     this.viewCinemas();
   }
 
   updateCinema(cinema){
     this.selectedCinema = cinema;
-    this.cookie.putObject('cinema' , this.selectedCinema);    
+    // this.cookie.putObject('cinema' , this.selectedCinema);    
+  }
+
+  updateParty(party){
+    this.selectedParty = party;
+  }
+
+  submitParty(){
+
+    this.cookie.putObject('cinema' , this.selectedCinema);  
+    this.cookie.putObject('movie' , this.selectedMovie); 
+    this.cookie.putObject('party' , this.selectedParty); 
+
+    var booking = {
+      username: this.cookie.get('username'),
+      cinema_name: this.selectedCinema.cinema_name,
+      cinema_location: this.selectedCinema.cinema_location,
+      hall_number: this.selectedParty.hall,
+      datetime: this.selectedParty.date,
+      seats: null,
+      eachPrice: this.selectedParty.price,
+      movie: this.selectedMovie.movie_id
+    };
+    this.cookie.putObject('booking', booking);
+
+    // this.router.navigate(['/booking/seating']);    
   }
 
   getPartiesAtThisDate(){

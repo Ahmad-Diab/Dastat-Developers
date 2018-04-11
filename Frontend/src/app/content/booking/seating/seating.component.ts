@@ -19,18 +19,9 @@ export class SeatingComponent implements OnInit {
     public seatingservice: SeatingService) { }
 
   ngOnInit() {
-    var booking = {
-      username: 'mai_emad',
-      cinema_name: 'Point 90',
-      cinema_location: 'New Cairo',
-      hall_number: '1',
-      datetime: '2018-04-01 13:00:00',
-      seats: null,
-      eachPrice: 50,
-      movie: "1"
-    };
+    
 
-    this.cookie.putObject('booking', booking);
+    
 
     var data = this.cookie.getObject('booking');
 

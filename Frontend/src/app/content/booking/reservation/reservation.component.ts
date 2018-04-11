@@ -35,17 +35,17 @@ export class ReservationComponent implements OnInit {
       username: bookingDetails['username'],
       cinema_name: bookingDetails['cinema_name'],
       cinema_location: bookingDetails['cinema_location'],
-      date_time: bookingDetails['datatime'],
+      date: bookingDetails['data'],
+      time: bookingDetails['time'],
       hall: bookingDetails['hall_number'],
       payment: null,                      //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
       tickets: tickets,                   //Meaning Reserve (Not Paid), Or Buy (Paid)
       ticketsNum: ticketsNum,
       price: price,
       eachPrice: eachPrice,
-      movie: bookingDetails['movie']
+      movie: bookingDetails['movie'],
+      comment: null
     };
-
-
 
 
   }
@@ -53,20 +53,20 @@ export class ReservationComponent implements OnInit {
   onReserve(event): void {
     this.bookingService.makeReservation(
       this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
-      this.reserveData['date_time'],this.reserveData['hall'], this.reserveData['payment'],
-      this.reserveData['tickets'],this.reserveData['price'],this.reserveData['movie']
+      this.reserveData['date'], this.reserveData['time'],this.reserveData['hall'], this.reserveData['payment'],
+      this.reserveData['tickets'],this.reserveData['price'],this.reserveData['movie'], this.reserveData['comment']
     ).subscribe((response) => {
       event.confirm.resolve(response);
       console.log("onReserve order is met");
     });
   }
 
-  onUnpaid(event): void{
+  onUnpaid(): void{
     this.reserveData["payment"] = false;
     this.reservationType = "Reserve";
   }
 
-  onPaid(event): void {
+  onPaid(): void {
     this.reserveData["payment"] = true;
     this.reservationType = "Purchase";
   }
@@ -80,6 +80,7 @@ export class ReservationComponent implements OnInit {
         } else {
         this.reserveData['price'] = response.data.price; //modify price according to promocode effect
         var descp = response.data.description;
+        this.reserveData['comment'] = descp;
         this.show = true; //show message confirming promocode success
         this.vis = false; //remove promocode input textarea and button
       }

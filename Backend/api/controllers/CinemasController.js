@@ -10,9 +10,6 @@ module.exports.filterByLocation = function(req, res, next){
     var location = req.params.location;
     var is3D = req.params.is3D;
     var is4D = req.params.is4D;
-    console.log('x' + (is3D == 1));
-    console.log('y ' +(is4D == is3D));
-    console.log('z ' + (location == 'All'));
     if(location == 'All'){
       if(is4D == 1 && is3D == 1){
         database.query('SELECT * FROM cinemas WHERE is3D = ? or is4D = ?',[is3D,is4D], function (error, results, fields) {

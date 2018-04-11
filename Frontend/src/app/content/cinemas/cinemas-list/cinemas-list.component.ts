@@ -17,7 +17,6 @@ export class CinemasListComponent implements OnInit {
   locations ;
   is3D = true;
   is4D = true;
-  temp;
   constructor(public cinemalistService: CinemaslistService,
   public router: Router, public route: ActivatedRoute) { 
 
@@ -33,15 +32,11 @@ export class CinemasListComponent implements OnInit {
 
     this.cinemalistService.getDistinctLocation().subscribe((response) => {
       this.locations=response;
-
-      console.log(this.locations);
     });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       this.cinemas=response;
-      console.log(this.cinemas);
 
     });
-    console.log(this.searchValue);
 
   }
   

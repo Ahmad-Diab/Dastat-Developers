@@ -4,7 +4,7 @@ var router = express.Router();
 //Schema Controllers
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
-var UserBooking = require('./Controllers/UserBookingController');
+var UserBooking = require('./controllers/UserBookingController');
 var Authentication = require('./controllers/Authentication');
 var Search = require('./controllers/SearchController');
 var Movie = require('./controllers/MovieController');
@@ -53,6 +53,8 @@ var Actor = require('./controllers/ActorController');
 router.get('/users', User.getUsers);
 
 router.get('/users/viewMyInfo', User.viewMyInfo);
+
+router.post('/users/editUsers/:username', User.editProfile);
 //-----------------------ACTOR ROUTES-------------------------------
 router.post('/actors/:actor', Actor.getActors);
 

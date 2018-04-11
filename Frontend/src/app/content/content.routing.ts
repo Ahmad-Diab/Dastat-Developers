@@ -16,7 +16,7 @@ import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component';
 import { RegisterComponent } from './users/register/register.component';
 import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cinemas-list-booking.component';
-
+import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 export const ContentRoutes: Routes = [{
   path: '',
   component: HomepageComponent
@@ -25,7 +25,7 @@ export const ContentRoutes: Routes = [{
   component: TimingComponent
 },{
   path: 'booking/cinemas',
-  component: CinemasListBookingComponent  
+  component: CinemasListBookingComponent
 },{
   path: 'booking/seating',
   component: SeatingComponent
@@ -48,6 +48,9 @@ export const ContentRoutes: Routes = [{
   path: 'user/:username',
   component: UserProfileComponent
 },{
+  path:'editProfile/:username',
+  component:EditProfileComponent
+},{
   path: 'cinemas/list',
   component: CinemasListComponent
 },
@@ -68,7 +71,7 @@ export const ContentRoutes: Routes = [{
 {
   path : 'info/:movie_id',
   component : MovieInfoComponent
-},{ 
+},{
   path: 'register',
   component: RegisterComponent
 },{

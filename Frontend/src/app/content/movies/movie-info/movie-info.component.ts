@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieInfoService } from '../../../@services/movie-info.service';
 import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-movie-info',
@@ -9,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MovieInfoComponent implements OnInit {
 movie;
-  constructor(public MovieInfoService: MovieInfoService, private route : ActivatedRoute ) { 
+  constructor(public MovieInfoService: MovieInfoService, private route : ActivatedRoute, 
+  public cookie : CookieService) { 
 
   }
 
@@ -22,4 +24,8 @@ ngOnInit(){
     console.log(response.data[0]);
   });
 }
+
+putMovieInCookie(){
+  this.cookie.putObject('movie' , this.movie;
+}  
 }

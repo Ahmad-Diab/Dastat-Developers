@@ -406,24 +406,30 @@ describe('Search',function(){                                   // This should c
      done();                        // Finishing the function
     });
  });
-  it('Cinema was found by its name' , function(done){
-    chai.request("localhost:8000").get("/api/search/Galaxy Cinema")
+  it('Cinema was found by its name' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/Galaxy Cinema") // This is chai request to the path of the function same as the route.
     .end(function(req,res){
       res.should.have.status(200);  //  Check if the response of the request has 200 OK status
       res.should.be.json;           // Check if the response of the request is in JSON
-      res.body.data.Cinemas.should.have.property('name').eql('Galaxy Cinema') ; //Check if the response cinema name property is the same as the request
+      res.body.data.Cinemas[0].should.have.property('name').eql('Galaxy Cinema') ; //Check if the response cinema name property is the same as the request
      done();
     });
   });
-  it('Movie was found by its name' , function(done){
-    chai.request("localhost:8000").get("/api/search/I Can Only Imagine")
+  it('Movie was found by its name' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/I Can Only Imagine") // This is chai request to the path of the function same as the route.
     .end(function(req,res){
       res.should.have.status(200);  //  Check if the response of the request has 200 OK status
       res.should.be.json;           // Check if the response of the request is in JSON
-      res.body.data.Movies.should.have.property('title').eql('I Can Only Imagine') ; //Check if the response movie title property is the same as the request
+      res.body.data.Movies[0].should.have.property('title').eql('I Can Only Imagine') ; //Check if the response movie title property is the same as the request
      done();
     });
   });
+  it('No search word entered' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request('localhost:8000').get("/api/search/") // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(404); // Check if the response of the request has 404 NOT FOUND status
+    })
+  })
   
 });
 

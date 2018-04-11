@@ -17,18 +17,38 @@
 </section>
 
 <div class="choose-film">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
+    <div class="swiper-container" >
+      <div class="swiper-wrapper" >
           <!--First Slide-->
         <div *ngFor="let movie of movies" >
           <div  class="swiper-slide" *ngIf="movie.feature == 2 || movie.feature == 3" (click)="updateMovie(movie)"> 
                 <div class="film-images">
-                    <img alt='' src={{movie.imagePath}}  height="100" width="200">
+                    <img alt='' src={{movie.imagePath}}>
                 </div>
                 <p class="choose-film__title">{{movie.title}}</p>
           </div>
         </div>
       </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+<h2 class="page-heading heading--outcontainer">Choose a cinema</h2>
+<div class="choose-movie">
+    <div class="swiper-container" >
+      <div class="swiper-wrapper" >
+          <!--First Slide-->
+          <div *ngFor="let cinema of cinemas">
+            <div class="col-xs-6 col-sm-3 cinema-item name">
+                    <div (click)="updateCinema(cinema)" class="cinema">
+                        <a class="cinema__images">
+                            <img alt='' src="assets/images/cinema/cinema2.jpg">
+                        </a>
+                        <a class="cinema-title">{{cinema.name}}</a>
+                    </div>
+            </div>
+          </div>>
+      </div>
+      <div class="swiper-scrollbar"></div>
     </div>
 </div>
 

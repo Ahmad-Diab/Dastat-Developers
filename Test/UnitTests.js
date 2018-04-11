@@ -437,6 +437,7 @@ describe('Search',function(){                                   // This should c
     chai.request('localhost:8000').get("/api/search/") // This is chai request to the path of the function same as the route.
     .end(function(req,res){
       res.should.have.status(404); // Check if the response of the request has 404 NOT FOUND status
+      done();
     })
   })
   

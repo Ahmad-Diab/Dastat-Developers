@@ -20,7 +20,8 @@ export class BookingService extends HttpService {
       'payment': payment,
       'tickets': tickets,
       'price': tickets_price,
-      'movie': movie_id
+      'movie': movie_id,
+      'comment': ""
     });
   }
 

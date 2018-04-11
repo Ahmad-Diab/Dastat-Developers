@@ -54,6 +54,7 @@ module.exports.getCinemasForThatMovie = function(req, res){
     });
 };
 
+
 /**
  *  A function to show parties to ordinary user based on his/her choice of
  *  Movie, Cinema, as well as Date (Day).

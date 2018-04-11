@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CinemaslistService } from '../../../@services/cinemaslist.service'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SelectControlValueAccessor } from '@angular/forms';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-cinemas-list',
@@ -16,6 +18,7 @@ export class CinemasListComponent implements OnInit {
   is3D = true;
   is4D = true;
   temp;
+  city= "city";
   constructor(public cinemalistService: CinemaslistService,
   public router: Router, public route: ActivatedRoute) { 
 
@@ -26,6 +29,8 @@ export class CinemasListComponent implements OnInit {
   }
 
   ngOnInit() {
+   
+    
     this.cinemalistService.getDistinctLocation().subscribe((response) => {
       this.locations=response;
       console.log(this.locations);
@@ -52,5 +57,10 @@ filter(){
   cinemanav(cinema) {
     this.router.navigate(['/cinemas', cinema.name, cinema.location]);
   }
+  hey(){
+      this.city ="";
+  }
+
+  
 
 }

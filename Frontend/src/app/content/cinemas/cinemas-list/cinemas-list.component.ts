@@ -52,6 +52,8 @@ filter(){
   if(this.is4D) cinema4d = 1;
   this.cinemalistService.filterByLocation(this.searchValue,cinema3d,cinema4d).subscribe((response) => {
     this.cinemas = response; 
+    console.log(response);
+
   });
 }
 

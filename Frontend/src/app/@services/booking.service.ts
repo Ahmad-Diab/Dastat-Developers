@@ -9,19 +9,21 @@ export class BookingService extends HttpService {
     super(http);
   }
 
-  makeReservation(username:string, cinema_name:string, cinema_location:string, party_datetime:string,
-                  hall:string, payment:boolean ,tickets, tickets_price: number, movie_id: number) {
+  makeReservation(username:string, cinema_name:string, cinema_location:string, party_date:string,
+                  party_time:string, hall:string, payment:boolean ,tickets,
+                  tickets_price: number, movie_id: number, comment: string) {
     return this.post("userBooking/makeReservation", {
       'username': username,
       'cinema_name': cinema_name,
       'cinema_location': cinema_location,
-      'date_time': party_datetime,
+      'date': party_date,
+      'time': party_time,
       'hall': hall,
       'payment': payment,
       'tickets': tickets,
       'price': tickets_price,
       'movie': movie_id,
-      'comment': ""
+      'comment': comment
     });
   }
 

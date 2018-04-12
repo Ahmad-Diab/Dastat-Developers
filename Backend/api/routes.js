@@ -91,7 +91,8 @@ router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
 router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 router.post('/login', Authentication.authenticate);
-//--------------------------------Search routes---------------------------------------
+router.post('/verify', Authentication.verify);
+//----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 

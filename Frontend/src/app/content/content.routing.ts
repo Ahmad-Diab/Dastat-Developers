@@ -17,6 +17,8 @@ import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component
 import { RegisterComponent } from './users/register/register.component';
 import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cinemas-list-booking.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { VerifyComponent } from './users/verify/verify.component';
+
 export const ContentRoutes: Routes = [{
   path: '',
   component: HomepageComponent
@@ -77,4 +79,7 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'booking/parties',
   component: PartiesComponent
+},{
+  path: 'verify',
+  component: VerifyComponent
 }];

@@ -24,7 +24,7 @@ import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
 import { PartiesService } from './@services/parties.service';
 import { CinemaInfoService } from './@services/cinema-info.service';
-import { ActorsComponent } from './content/actors/actors.component';
+//import { ActorsComponent } from './content/actors/actors.component';
 import { ActorInfoService } from './@services/actor-info.service';
 
 @NgModule({
@@ -33,7 +33,7 @@ import { ActorInfoService } from './@services/actor-info.service';
     HeaderComponent,
     FooterComponent,
     TicketComponent,
-    ActorsComponent,
+   // ActorsComponent,
 
   ],
   imports: [
@@ -45,7 +45,7 @@ import { ActorInfoService } from './@services/actor-info.service';
   providers: [SeatingService, HttpService, MovieslistService,
   CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
     AuthService, AuthGuard, CookieService, UsersService,
-    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService],
+    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService,ActorInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

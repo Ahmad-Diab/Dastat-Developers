@@ -15,7 +15,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component';
 import { RegisterComponent } from './users/register/register.component';
-
+import { ActorsComponent} from './actors/actors.component';
 export const ContentRoutes: Routes = [{
   path: '',
   component: HomepageComponent
@@ -64,7 +64,8 @@ export const ContentRoutes: Routes = [{
 {
   path : 'info/:movie_id',
   component : MovieInfoComponent
-},{ 
+},
+{ 
   path: 'register',
   component: RegisterComponent
 },{

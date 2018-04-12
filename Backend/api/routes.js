@@ -11,6 +11,7 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
+var PromoCodes = require('./controllers/PromocodesController');
 
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -103,6 +104,10 @@ router.post('/register', Authentication.Register);
 
 //SEAT ROUTES
 router.get('/layout/encoding', Seat.getSeats);
+
+//--------------------------------PromoCode routes---------------------------------------
+
+
 
 //exporting routes to the project
 

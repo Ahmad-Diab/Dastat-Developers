@@ -22,6 +22,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 import { PartiesComponent } from './booking/parties/parties.component';
 import { RegisterComponent } from './users/register/register.component';
+import { VerifyComponent } from './users/verify/verify.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import { RegisterComponent } from './users/register/register.component';
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
     FilterCinemaComponent,CinemasListComponent,AboutusComponent,MovieInfoComponent, FilterCinemaComponent, CinemasListComponent,AboutusComponent,
-    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent]
+    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent, VerifyComponent]
 
 })
 

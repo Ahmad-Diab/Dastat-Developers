@@ -15,5 +15,15 @@ export class AuthService {
   register(user:User){
     return this.http.post(environment.api + 'register',user).map(res => res.json());
   }
+  verify(username,token){
+    console.log(username);
+    console.log(token);
+    var x ={
+      username:username,
+      token:token
+    };
+    return this.http.post(environment.api + 'verify',x).map(res => res.json());
+
+  }
 
 }

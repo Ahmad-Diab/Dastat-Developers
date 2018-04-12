@@ -15,6 +15,7 @@ import { SearchComponent } from './search/search.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { MovieInfoComponent } from './movies/movie-info/movie-info.component';
 import { RegisterComponent } from './users/register/register.component';
+import { VerifyComponent } from './users/verify/verify.component';
 
 export const ContentRoutes: Routes = [{
   path: '',
@@ -67,4 +68,7 @@ export const ContentRoutes: Routes = [{
 },{
   path: 'booking/parties',
   component: PartiesComponent
+},{
+  path: 'verify',
+  component: VerifyComponent
 }];

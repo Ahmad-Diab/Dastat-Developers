@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['']);//Booking bage
     }
     else{
-      this.router.navigate(['/Register']);
+      this.router.navigate(['/register']);
       this.ngOnInit();
     }
   }

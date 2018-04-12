@@ -19,7 +19,7 @@ router.get('/users', User.getUsers);
 
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking
-router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
 router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 

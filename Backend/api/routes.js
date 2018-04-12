@@ -11,6 +11,7 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
+var Promocodes = require('./controllers/PromocodesController');
 
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -114,6 +115,13 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
+
+
+
+
+//--------------------------------Promocode routes---------------------------------------
+
+router.get('/promocodes', Promocodes.viewPromocodes)
 
 
 module.exports = router;

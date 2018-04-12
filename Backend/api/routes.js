@@ -106,7 +106,7 @@ router.post('/register', Authentication.Register);
 router.get('/layout/encoding', Seat.getSeats);
 
 //--------------------------------PromoCode routes---------------------------------------
-
+router.get('/PromoCodes', PromoCodes.assignPromoCodeToCinema);
 
 
 //exporting routes to the project

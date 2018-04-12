@@ -105,6 +105,7 @@ router.post('/register', Authentication.Register);
 //SEAT ROUTES
 router.get('/layout/encoding', Seat.getSeats);
 
+
 //exporting routes to the project
 
 
@@ -122,6 +123,8 @@ router.get('/getTopMovies',Search.getTopMovies);
 //--------------------------------Promocode routes---------------------------------------
 
 router.get('/promocodes', Promocodes.viewPromocodes)
+router.get('/PromoCodes', Promocodes.assignPromoCodeToCinema);
+
 
 
 module.exports = router;

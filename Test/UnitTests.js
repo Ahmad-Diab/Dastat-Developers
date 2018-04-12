@@ -90,97 +90,97 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Joe William
-// describe('Movie',function(){ //This should contain all the tests related to ViewMovies
-//   it('High Rates movies are found' , function(done){//This is the message i will get if the test is succeeded and function is done.
-//     chai.request("localhost:8000").get("/api/movies/highrate")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Low Rates movies are found' , function(done){//This is the message i will get if the test is succeeded and function is done.
-//     chai.request("localhost:8000").get("/api/movies/lowrate")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Latest  movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/latest")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Oldest movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/oldest")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Action movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/Action")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Adventure movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/Adventure")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Comedy movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/Comedy")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Drama movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/Drama")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Horror movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/Horror")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//   it('Thriller movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//     chai.request("localhost:8000").get("/api/movies/Thriller")//This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);//Check if the response of the request has 200 OK status
-//       res.should.be.json; // Check if the response of the request is in JSON
-//      done();// Finishing the function
-//     });
-//  });
-//  it('Biography movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
-//    chai.request("localhost:8000").get("/api/movies/Bio")//This is chai request to the path of the function same as the route.
-//    .end(function(req,res){
-//     res.should.have.status(200);//Check if the response of the request has 200 OK status
-//     res.should.be.json; // Check if the response of the request is in JSON
-//     done();// Finishing the function
-//     });
-//   });
-// });
+//Joe William
+describe('Movie',function(){ //This should contain all the tests related to ViewMovies
+  it('High Rates movies are found' , function(done){//This is the message i will get if the test is succeeded and function is done.
+    chai.request("localhost:8000").get("/api/movies/highrate")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Low Rates movies are found' , function(done){//This is the message i will get if the test is succeeded and function is done.
+    chai.request("localhost:8000").get("/api/movies/lowrate")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Latest  movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/latest")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Oldest movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/oldest")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Action movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Action")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Adventure movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Adventure")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Comedy movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Comedy")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Drama movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Drama")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Horror movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Horror")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+  it('Thriller movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+    chai.request("localhost:8000").get("/api/movies/Thriller")//This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);//Check if the response of the request has 200 OK status
+      res.should.be.json; // Check if the response of the request is in JSON
+     done();// Finishing the function
+    });
+ });
+ it('Biography movies are found' , function(done){//This is the message i will get if the test uis succeeded and function is done
+   chai.request("localhost:8000").get("/api/movies/Bio")//This is chai request to the path of the function same as the route.
+   .end(function(req,res){
+    res.should.have.status(200);//Check if the response of the request has 200 OK status
+    res.should.be.json; // Check if the response of the request is in JSON
+    done();// Finishing the function
+    });
+  });
+});
 
 
 
@@ -235,18 +235,18 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Youssef Raphail
+//Youssef Raphail
 
-// describe('View All Movies',function(){
-//   it('All movies are viewed' , function(done){
-//     chai.request("localhost:8000").get("/api/movies/feature")
-//     .end(function(req,res){
-//       res.should.have.status(200); //Make sure that it is found.
-//       res.should.be.json; //Make sure that it is a jason. 
-//      done();
-//     });
-//     });
-// });
+describe('View All Movies',function(){
+  it('All movies are viewed' , function(done){
+    chai.request("localhost:8000").get("/api/movies/feature")
+    .end(function(req,res){
+      res.should.have.status(200); //Make sure that it is found.
+      res.should.be.json; //Make sure that it is a jason. 
+     done();
+    });
+    });
+});
 
 
 
@@ -301,7 +301,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Ahmed Diab
+//Ahmed Diab
 
 
 
@@ -356,7 +356,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Omar Abdelaziz
+//Omar Abdelaziz
 
 
 
@@ -414,50 +414,50 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Michael Khalil & Ibram Medhat
+//Michael Khalil & Ibram Medhat
 
-// describe('Search',function(){                                   // This should contain all the tests related to Search
-//   it('No data are found when searching with a keyword that does not exist in the DB' , function(done){ // This is the result message if the test succeeds and the function is done.
-//     chai.request("localhost:8000").get("/api/search/somethingThatIsNotInTheDB") // This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);                    //  Check if the response of the request has 200 OK status
-//       res.should.be.json;                             // Check if the response of the request is in JSON
-//       res.body.data.should.have.property('Movies');   // Check that the result data array has property Movies
-//       res.body.data.should.have.property('Cinemas');
-//       res.body.data.should.have.property('Actors');
-//       res.body.data.Movies.length.should.be.eql(0);   // Check that no movie results are found
-//       res.body.data.Cinemas.length.should.be.eql(0);
-//       res.body.data.Actors.length.should.be.eql(0);
-//      done();                        // Finishing the function
-//     });
-//  });
-//   it('Cinema was found by its name' , function(done){ // This is the result message if the test succeeds and the function is done.
-//     chai.request("localhost:8000").get("/api/search/Galaxy Cinema") // This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);  //  Check if the response of the request has 200 OK status
-//       res.should.be.json;           // Check if the response of the request is in JSON
-//       res.body.data.Cinemas[0].should.have.property('name').eql('Galaxy Cinema') ; //Check if the response cinema name property is the same as the request
-//      done();
-//     });
-//   });
-//   it('Movie was found by its name' , function(done){ // This is the result message if the test succeeds and the function is done.
-//     chai.request("localhost:8000").get("/api/search/I Can Only Imagine") // This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(200);  //  Check if the response of the request has 200 OK status
-//       res.should.be.json;           // Check if the response of the request is in JSON
-//       res.body.data.Movies[0].should.have.property('title').eql('I Can Only Imagine') ; //Check if the response movie title property is the same as the request
-//      done();
-//     });
-//   });
-//   it('No search word entered' , function(done){ // This is the result message if the test succeeds and the function is done.
-//     chai.request('localhost:8000').get("/api/search/") // This is chai request to the path of the function same as the route.
-//     .end(function(req,res){
-//       res.should.have.status(404); // Check if the response of the request has 404 NOT FOUND status
-//       done();
-//     })
-//   })
+describe('Search',function(){                                   // This should contain all the tests related to Search
+  it('No data are found when searching with a keyword that does not exist in the DB' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/somethingThatIsNotInTheDB") // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);                    //  Check if the response of the request has 200 OK status
+      res.should.be.json;                             // Check if the response of the request is in JSON
+      res.body.data.should.have.property('Movies');   // Check that the result data array has property Movies
+      res.body.data.should.have.property('Cinemas');
+      res.body.data.should.have.property('Actors');
+      res.body.data.Movies.length.should.be.eql(0);   // Check that no movie results are found
+      res.body.data.Cinemas.length.should.be.eql(0);
+      res.body.data.Actors.length.should.be.eql(0);
+     done();                        // Finishing the function
+    });
+ });
+  it('Cinema was found by its name' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/Galaxy Cinema") // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
+      res.should.be.json;           // Check if the response of the request is in JSON
+      res.body.data.Cinemas[0].should.have.property('name').eql('Galaxy Cinema') ; //Check if the response cinema name property is the same as the request
+     done();
+    });
+  });
+  it('Movie was found by its name' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/search/I Can Only Imagine") // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
+      res.should.be.json;           // Check if the response of the request is in JSON
+      res.body.data.Movies[0].should.have.property('title').eql('I Can Only Imagine') ; //Check if the response movie title property is the same as the request
+     done();
+    });
+  });
+  it('No search word entered' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request('localhost:8000').get("/api/search/") // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(404); // Check if the response of the request has 404 NOT FOUND status
+      done();
+    })
+  })
   
-// });
+});
 
 
 
@@ -476,7 +476,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Hazem
+//Hazem
 
 
 
@@ -521,7 +521,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Omar El-Sayed
+//Omar El-Sayed
 
 
 
@@ -567,7 +567,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Bas Rizk
+//Bas Rizk
 
 
 
@@ -640,7 +640,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Steven Nassef
+//Steven Nassef
 
 
 
@@ -701,7 +701,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Youssef Hatem
+//Youssef Hatem
 
 
 
@@ -763,23 +763,23 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Omar El-Dahrawy
+//Omar El-Dahrawy
 
-// describe('Parties', function() { 
-//   it('it should return all upcoming parties for selected movie,cinema,and date',function(done){
-//       chai.request("localhost:8000").get("/api/userBooking/getParties").query({ 
-//         cinemaName: 'Mayo Movies',
-//         movieId: 13,
-//         date: '2018-04-12',
-//       })
-//       .end(function(req,res){
-//         res.should.have.status(200);
-//         res.should.be.json;
+describe('Parties', function() { 
+  it('it should return all upcoming parties for selected movie,cinema,and date',function(done){
+      chai.request("localhost:8000").get("/api/userBooking/getParties").query({ 
+        cinemaName: 'Mayo Movies',
+        movieId: 13,
+        date: '2018-04-12',
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;
         
-//         done();
-//       });
-//   });
-// });
+        done();
+      });
+  });
+});
 
 
 
@@ -829,7 +829,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Zeyad Yasser & Nayer Ezzat
+//Zeyad Yasser & Nayer Ezzat
 
 
 
@@ -896,7 +896,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Abdo Hossam
+//Abdo Hossam
 
 
 
@@ -963,17 +963,17 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Mariam Fawzy
-// describe('Viewing all cinemas' , function() {
-//   it('Should list all cinemas ' , function(done){
-//     chai.request("localhost:8000").get("/api/viewCinemas").end(function(req,res){
-//       res.should.have.status(200); // check that is found
-//       res.should.be.json; // check it is json file
-//       assert.isArray(res.body, 'Cinema'); //make sure it is an array of cinemas
-//       done();
-//     });
-//   });
-// });
+//Mariam Fawzy
+describe('Viewing all cinemas' , function() {
+  it('Should list all cinemas ' , function(done){
+    chai.request("localhost:8000").get("/api/viewCinemas").end(function(req,res){
+      res.should.have.status(200); // check that is found
+      res.should.be.json; // check it is json file
+      assert.isArray(res.body, 'Cinema'); //make sure it is an array of cinemas
+      done();
+    });
+  });
+});
 
 
 
@@ -1019,7 +1019,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Basma Gamal
+//Basma Gamal
 
 
 
@@ -1068,7 +1068,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Mostafa Nasr
+//Mostafa Nasr
 
 
 
@@ -1123,7 +1123,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Mahmoud Khalaf
+//Mahmoud Khalaf
 
 
 
@@ -1187,7 +1187,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Daniel Ashraf
+//Daniel Ashraf
 
 
 
@@ -1253,7 +1253,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //Karim Abdelkader
+//Karim Abdelkader
 
 
 
@@ -1317,7 +1317,7 @@ describe('Seats', function() { //This should contain all realted Tests
 
 
 
-// //George Maged
+//George Maged
 
 
 

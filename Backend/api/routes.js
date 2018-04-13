@@ -18,8 +18,8 @@ let User = require('./controllers/UserController'),
 router.get('/users', User.getUsers);
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
-router.get('/ticket/viewTicketInfo', adminTicket.viewTicketInfo);
-router.get('/ticket/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
+router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
+router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);

@@ -1,0 +1,20 @@
+<!-- Main content -->
+<form  id="login-form" class="login" method='get' novalidate=''>
+  <p  *ngIf="!Verified" class="login__title">Verify Your Account
+      <br>
+  </p>
+  <p  *ngIf="Verified" class="login__title">Done You can login now
+    <br>
+</p>
+       
+  <div *ngIf="!Verified" class="field-wrap">
+      <input [(ngModel)]="username" type='username' placeholder='Username' name='user-name' class="login__input">
+      <input [(ngModel)]="token" type='text' placeholder='token' name='token' class="login__input">
+
+
+      <h6 style="color:red; margin-top: 20px" >{{message}}</h6>
+  </div>
+  <div class="login__control">
+      <button type='button' class="btn btn-md btn--warning btn--wider" (click)="onVerify() ">Verify</button>
+  </div>
+</form>

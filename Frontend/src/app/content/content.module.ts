@@ -23,6 +23,8 @@ import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component
 import { RegisterComponent } from './users/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cinemas-list-booking.component';
+import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
+import { VerifyComponent } from './users/verify/verify.component';
 
 @NgModule({
   imports: [
@@ -35,7 +37,7 @@ import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cine
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
    CinemasListComponent,AboutusComponent,MovieInfoComponent,  CinemaInfoComponent,AboutusComponent,
-    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent, CinemasListBookingComponent]
+    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent, CinemasListBookingComponent, EditProfileComponent, VerifyComponent]
 
 })
 

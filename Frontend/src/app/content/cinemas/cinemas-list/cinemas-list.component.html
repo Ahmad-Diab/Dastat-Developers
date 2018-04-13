@@ -2,10 +2,10 @@
 <div class="search-wrapper">
     <div class="container container--add">
         <form #f="ngForm" id='search-form' method='get' class="search">
-            <input  type="text" class="search__field" placeholder="Search" >          
+            <input #search  type="text" class="search__field" placeholder="Search" >          
            
           
-          <button (click)="filterBy(sorting_item,searchValue)"  class="btn btn-md btn--danger search__button">search cinema</button>
+          <button (click) = "onSearch(search.value)"  class="btn btn-md btn--danger search__button">search cinema</button>
   
             
         </form>

@@ -39,9 +39,10 @@ module.exports.authenticate = function(req, res, next) {
         gender: results[0].gender,
      //   active:results[0].active
       }
+      console.log(results[0].active);
       bcrypt.compare(password, results[0].password, function(err, isMatch){
         if(isMatch){
-          if (results[0].active==true){
+          if (results[0].active){
           var token = jwt.sign(user, config.secret, {
           expiresIn: 604800
           });

@@ -29,13 +29,15 @@ module.exports.viewPromocodes = function(req,res,next){
  * @param res, results of changes on the promocodes_cinemas table in database
  * @param next, next middleware to handle errors
  */
-module.exports.assignPromoCodeToCinema = function(req, res, next){
-    var promoCode = req.body["promocode"];
-    var cinemaName = req.body["cinema_name"];
-    var cinemaLocation = req.body["cinema_location"];
+module.exports.assignPromocodeToCinema = function(req, res, next){
+    var promocode = req.body["promocode"]; //storing the value of column promocode in variable promocode
+    var cinemaName = req.body["cinema_name"]; //storing the value of column cinema_name in variable cinemaName 
+    var cinemaLocation = req.body["cinema_location"]; //storing the value of column cinema_location in variable cinemaLocation  
+
+    //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
     database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promoCode] ,function (error, results, fields) {
-      if(error) return next(error);
-      return res.status(200).json({
+      if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
+      return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
         err: null,
         msg: 'Promocode had been assigned successfully.',
         data: results,

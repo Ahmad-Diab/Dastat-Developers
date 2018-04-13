@@ -7,7 +7,7 @@ module.exports.addMovie = function(req,res,next){
 
     database.query(sql,[values],function(err,results,field){
         if(err) throw err;
-
+        
         res.status(200).json({
             err : null,   
             msg : "Info succussfully retreived",

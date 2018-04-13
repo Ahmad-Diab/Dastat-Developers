@@ -133,8 +133,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 */
 
 
-
-
+router.post('/addMovies',MyMovies.addMovie);
 
 
 

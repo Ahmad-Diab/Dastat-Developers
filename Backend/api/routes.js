@@ -125,6 +125,6 @@ router.get('/getTopMovies',Search.getTopMovies);
 
 //-------------------------------------------Halls Routes-----------------------------
 
-router.get('/admin/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
-
+router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
+router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
 module.exports = router;

@@ -5,12 +5,12 @@ var database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
 /**
- * A function to verify an unpaid ticket
+ * A function to view client's ticket info
  * @param req, reservation_id, and adminUsername
  * @param res, results of changes on the tickets table in database
  * @param next, next middleware to handle errors
  */
-module.exports.verifyUnpaidTicket = function(req, res, next){
+module.exports.viewTicketInfo = function(req, res, next){
     // TODO Check user is admin
 
     let adminUsername = req.body['username'],
@@ -55,7 +55,7 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
  * @param res, results of changes on the tickets table in database
  * @param next, next middleware to handle errors
  */
-module.exports.verifyTicket = function(req, res, next){
+module.exports.verifyUnpaidTicket = function(req, res, next){
     // TODO Check user is admin
 
     let adminUsername = req.body['username'],

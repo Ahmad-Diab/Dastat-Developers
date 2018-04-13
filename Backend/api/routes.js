@@ -1,27 +1,33 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express'),
+    router = express.Router();
 
 //Schema Controllers
-var User = require('./controllers/UserController');
-var Seat = require('./controllers/SeatController');
-var UserBooking = require('./controllers/UserBookingController');
-var Authentication = require('./controllers/Authentication');
-var Search = require('./controllers/SearchController');
-var Movie = require('./controllers/MovieController');
-var Actor = require('./controllers/ActorController');
-var viewCinemas = require('./controllers/CinemasController');
-var Cinema = require('./controllers/CinemasController');
+let User = require('./controllers/UserController'),
+    Seat = require('./controllers/SeatController'),
+    UserBooking = require('./controllers/UserBookingController'),
+    Authentication = require('./controllers/Authentication'),
+    Search = require('./controllers/SearchController'),
+    Movie = require('./controllers/MovieController'),
+    Actor = require('./controllers/ActorController'),
+    Cinema = require('./controllers/CinemasController'),
+    adminTicket = require('./controllers/AdminTicketController');
 
 //please add only routers here, if you need to call a function require its class
-//DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
+//DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
 router.get('/users', User.getUsers);
 
-//---------------------------------------------------User Booking Routes---------------------------------//
+//--------------------------------------------AdminTicket Interactions Routes---------------------------------//
+router.get('/ticket/viewTicketInfo', adminTicket.viewTicketInfo);
+router.get('/ticket/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
+
+//---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
 router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 
+//----------------------------------------------------User Fetching routes------------------------------------//
+router.get('/userBooking/getCinemasForThatMovie/:movie_id', UserBooking.getCinemasForThatMovie);
 router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
 router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
 router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
@@ -32,10 +38,7 @@ router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
 router.get('/viewCinema/:cinema/:loc',Cinema.viewCinema,Cinema.moviesInCinema);
 router.get('/viewCinema/:cinema/:loc/allMovies',Cinema.moviesInCinema);
 router.get('/viewCinema/DistinctLocations',Cinema.DistinctLocation);
-
-
-//please add only routers here, if you need to call a function require its class
-//DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
+router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 //----------------------------------------------------User Info routes----------------------------------------//
 router.get('/users', User.getUsers);
@@ -58,20 +61,6 @@ router.get('/movies/Drama',Movie.getMoviesDrama);
 router.get('/movies/Horror',Movie.getMoviesHorror);
 router.get('/movies/Thriller',Movie.getMoviesThriller);
 router.get('/movies/Bio',Movie.getMoviesBiography);
-
-//----------------------------------------------------User Booking routes------------------------------------//
-router.post('/userBooking/makeReservation',UserBooking.makeReservation);
-router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
-
-//----------------------------------------------------User Fetching routes------------------------------------//
-router.get('/userBooking/getCinemasForThatMovie/:movie_id', UserBooking.getCinemasForThatMovie);
-router.get('/userBooking/getCurrentMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getCurrentMoviesForCinema);
-router.get('/userBooking/getUpcomingMoviesForCinema/:cinema_location/:cinema_name', UserBooking.getUpcomingMoviesForCinema);
-router.get('/userBooking/getCurrentMovies/', UserBooking.getCurrentMovies);
-router.get('/userBooking/getUpcomingMovies/', UserBooking.getUpcomingMovies);
-router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
-router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
-router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 //----------------------------------------------------Authentication routes------------------------------------//
 router.post('/login', Authentication.authenticate);

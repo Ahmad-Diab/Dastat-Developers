@@ -16,6 +16,7 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
+var MyMovies = require('./controllers/MyMoviesController');
 
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -132,9 +133,23 @@ router.get('/getTopMovies',Search.getTopMovies);
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 
+//-------------AS AN ADMIN I CAN ADD MOVIES ----------------
 
 router.post('/addMovies',MyMovies.addMovie);
 
+
+
+//-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
+router.get('/requests/:admin_requested',MyMovies.viewMyRequests);
+
+//-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
+router.get('/requests',MyMovies.viewRequests);
+
+//--------AS AN ADMIN I CAN VIEW ALL MOVIES------------------
+router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
+
+//--------AS AN ADMIN I CAN VIEW A SINGLE MOVIE--------------
+router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
 
 

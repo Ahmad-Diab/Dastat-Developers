@@ -37,7 +37,7 @@ module.exports.assignPromoCodeToCinema = function(req, res, next){
       if(error) return next(error);
       return res.status(200).json({
         err: null,
-        msg: 'Booking Request has been completed successfully.',
+        msg: 'Promocode had been assigned successfully.',
         data: results,
       });
     });

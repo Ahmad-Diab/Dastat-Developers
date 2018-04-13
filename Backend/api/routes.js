@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 //Schema Controllers
+
+//-------- USER ---------
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
 var UserBooking = require('./controllers/UserBookingController');
@@ -11,6 +13,9 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
+
+//----------- Admin ---------------
+var AdminHalls = require('./controllers/AdminHallsController');
 
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -116,5 +121,10 @@ router.get('/viewMovies0',Search.viewMovies0);
 router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
 
+//-----------------------------------------------Admin ROUTES----------------------
+
+//-------------------------------------------Halls Routes-----------------------------
+
+router.get('/admin/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
 
 module.exports = router;

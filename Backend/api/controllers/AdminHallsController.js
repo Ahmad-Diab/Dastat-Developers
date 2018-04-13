@@ -302,8 +302,6 @@ module.exports.deleteMovieFromHall = function(req, res, next){
 
     });
 
-
-
 };
 
 

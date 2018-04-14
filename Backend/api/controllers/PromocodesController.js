@@ -56,7 +56,7 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
       });
     }
     //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
-    database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promoCode] ,function (error, results, fields) {
+    database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promocode] ,function (error, results, fields) {
       if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
       return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
         err: null,

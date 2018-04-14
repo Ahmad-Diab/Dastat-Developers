@@ -96,7 +96,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
-
+router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
 
 
 

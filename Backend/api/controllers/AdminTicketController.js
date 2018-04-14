@@ -118,6 +118,7 @@ module.exports.viewTicketInfo = function(req, res, next){
 
 };
 
+
 /**
  * A function to book a ticket for offline user by an admin user
  * @param req, required data for
@@ -125,7 +126,7 @@ module.exports.viewTicketInfo = function(req, res, next){
  * @param next, next middleware to handle errors
  */
 module.exports.makeReservationByAdmin = function(req, res, next){
-
+    console.log("I am here to test if I am reaching here");
     return require('UserBookingController').makeReservation(req, res, next);
 
 };

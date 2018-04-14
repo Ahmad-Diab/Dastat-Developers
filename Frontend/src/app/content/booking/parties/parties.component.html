@@ -61,6 +61,18 @@
             <strong>Choosen: </strong><span class="choosen-area"></span>
         </div>
 
+        <div *ngFor = "let party of parties ; let i=index">
+            <div *ngIf="i<1">
+                <h2 class="page-heading">Selected Cinema: {{party.cinema_name}}</h2>
+            </div>
+        </div>
+
+        <div *ngFor = "let party of parties ; let i=index">
+            <div *ngIf="i<1">
+                <h2 class="page-heading">Selected Movie: {{party.title}}</h2>
+            </div>
+        </div>
+        
         <h2 class="page-heading">City &amp; Date</h2>
 
         <div class="choose-container choose-container--short">

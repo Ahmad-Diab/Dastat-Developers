@@ -70,12 +70,13 @@ module.exports.getParties = function(req, res){
 
         
     //var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date , p.time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?";
-    var query = 'SELECT * FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
-    +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
+    var query = 'SELECT * FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name JOIN Movies m ON h.movie = m.movie_id'
+    //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
+    +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
 
     console.log(cinemaName + 'getParties');
 
-    database.query(query,[cinemaName , cinemaLocation ,movieName,date],function (err, result, fields) {
+    database.query(query,[cinemaName , cinemaLocation ,movieName, date],function (err, result, fields) {
         if (err) throw err;
         //return res.send(result);
         if(result.length == 0){

@@ -77,7 +77,6 @@ router.get('/viewMovies3',Search.viewMovies3);
 router.get('/viewMovies2',Search.viewMovies2);
 router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
-router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
 
 

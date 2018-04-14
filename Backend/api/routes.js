@@ -100,7 +100,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 */
 
 //-------------AS AN ADMIN I CAN ADD MOVIES ----------------
-router.post('/addMovies',MyMovies.addMovie);
+router.post('/addMovies/:admin_requested',MyMovies.addMovie);
 
 
 
@@ -114,8 +114,6 @@ router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
 
-
-router.post('/requests/:movie_id',MyMovies.EditMyRequests);
 
 
 module.exports = router;

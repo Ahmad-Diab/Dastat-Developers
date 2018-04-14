@@ -75,3 +75,57 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
     })
     
   };
+
+
+  //---------------------------------------------------------------------------------
+  
+  //Add Promocode
+  module.exports.addPromocode = function(req, res, next){
+    var promocode = req.body["promocode"];
+    var type = req.body["type"];
+    var value = req.body["value"];
+
+    //Validations
+    if(!Validations.isString(promocode)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided promocode must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(type)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided type must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(value)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided value must be of type String.',
+        data: null
+      });
+    }
+
+    //Check if the promocode is not added already
+    database.query('SELECT * FROM promocodes WHERE promocode = ? AND type = ? AND value = ?',[promocode,type,value],function(error, results, fields){
+      if(error) return next(error);
+      if(results.length > 0) return res.status(200).json({
+        err : null,
+        msg : 'Promocode already added!',
+        data : null,
+      })
+    
+    //Inserting into promocodes table
+    database.query('INSERT INTO promocodes (promocode,type,value) VALUES(?,?,?)',[promocode,type,value] ,function (error, results, fields) {
+      if(error) return next(error); 
+      return res.status(200).json({ 
+        err: null,
+        msg: 'Promocode had been added successfully.',
+        data: results,
+      });
+    });
+  })
+  
+};

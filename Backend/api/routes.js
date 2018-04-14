@@ -123,7 +123,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 //--------------------------------Promocode routes---------------------------------------
 
 router.get('/promocodes', Promocodes.viewPromocodes)
-router.get('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
+router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
 
 
 

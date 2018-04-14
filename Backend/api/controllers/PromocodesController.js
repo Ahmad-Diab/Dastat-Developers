@@ -55,6 +55,28 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
         data: null
       });
     }
+    //NULL Checker
+    if(!promocode) {
+      return res.status(422).json({
+          err: null,
+          msg: 'promocode is required.',
+          data: null
+      });
+    }
+    if(!cinemaLocation) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Cinema location is required.',
+          data: null
+      });
+    }
+    if(!cinemaName) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Cinema name is required.',
+          data: null
+      });
+    }
     //this query is to handle if promocode user trying to add is already there
     database.query('SELECT * FROM promocodes_cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',[promocode,cinemaName,cinemaLocation],function(error, results, fields){
       if(error) return next(error);

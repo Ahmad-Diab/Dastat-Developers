@@ -1,3 +1,4 @@
+
 let express = require('express'),
     router = express.Router();
 
@@ -10,13 +11,12 @@ let User = require('./controllers/UserController'),
     Movie = require('./controllers/MovieController'),
     Actor = require('./controllers/ActorController'),
     Cinema = require('./controllers/CinemasController'),
-    adminTicket = require('./controllers/AdminTicketController');
+    adminTicket = require('./controllers/AdminTicketController'),
     Admin = require('./controllers/MyAdminsController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
-router.get('/users', User.getUsers);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
@@ -126,5 +126,6 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 
 
+//exporting routes to the project
 
 module.exports = router;

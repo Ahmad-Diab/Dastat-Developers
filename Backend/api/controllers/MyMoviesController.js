@@ -8,7 +8,7 @@ var database = require('../config/db-connection');
 module.exports.addMovie = function(req,res,next){
    var sql = "INSERT INTO Movies VALUES ?"; 
    var values = [];  //TODO HTTP REQUEST FROM FRONT END WITH VALUES OF INSERTION
-
+   var movie_id = req.body.movie_id;
     database.query(sql,[values],function(err,results,field){
         if(err) throw err;
         res.status(200).json({
@@ -80,3 +80,57 @@ module.exports.viewSingleMovie = function(req, res, next){
       });
     });
   }
+
+
+
+
+module.exports.EditMyRequests = function(req,res,next){
+
+    var title = req.body['title'],
+        genre = req.body['genre'];
+/* 
+    if(title == null){
+        return res.status(422).json({
+            err: null,
+            msg: 'title is required.',
+            data: null
+        });
+    }
+    if(genre == null){
+        return res.status(422).json({
+            err: null,
+            msg: 'genre is required.',
+            data: null
+        });
+    } 
+        database.query('SELECT * from movies where status = "PENDING" AND title= ? AND genre = ?'),
+        [title,genre],function(error,results){
+            if(error){
+                return next(error);
+            }
+            console.log(results);
+            if(!results || !results.length) {
+                return res.status(404).send({
+                    err: null,
+                    msg: "The assigned hall does not exist.",
+                    data: null
+                });
+            } */
+        
+            var sqlQuery = 'UPDATE movies SET title=? ,genre= ? where movie_id=? AND status = "PENDING"';
+            
+            database.query(sqlQuery,[title,genre,req.params.movie_id],function(error,results){
+
+                if (error) {
+                    return next(error);
+                }
+
+                return res.status(200).json({
+                    err: null,
+                    msg: 'Booking Request has been completed successfully.',
+                    data: results
+                });
+
+            });
+        
+    }

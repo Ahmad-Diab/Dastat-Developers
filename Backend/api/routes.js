@@ -135,26 +135,22 @@ router.get('/getTopMovies',Search.getTopMovies);
 */
 
 //-------------AS AN ADMIN I CAN ADD MOVIES ----------------
-
 router.post('/addMovies',MyMovies.addMovie);
 
 
 
 //-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
 router.get('/requests/:admin_requested',MyMovies.viewMyRequests);
-
 //-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
 router.get('/requests',MyMovies.viewRequests);
-
 //--------AS AN ADMIN I CAN VIEW ALL MOVIES------------------
 router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
-
 //--------AS AN ADMIN I CAN VIEW A SINGLE MOVIE--------------
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
 
 
-
+router.post('/requests/:movie_id',MyMovies.EditMyRequests);
 
 
 module.exports = router;

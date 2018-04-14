@@ -151,9 +151,17 @@ router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 //--------AS AN ADMIN I CAN VIEW A SINGLE MOVIE--------------
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
+//--------AS AN ADMIN I CAN EDIT MY REQUESTS--------------
+router.post('/requests/:movie_id',MyMovies.EditMyRequests);
 
+//--------AS AN ADMIN I CAN EDIT MOVIES--------------
+router.post('/requests/:movie_id',MyMovies.EditMovies);
 
+//--------AS AN ADMIN I CAN DELETE MY REQUESTS--------------
+router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
 
+//--------AS AN ADMIN I CAN DELETE MOVIES--------------
+router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
 
 
 module.exports = router;

@@ -11,6 +11,7 @@ let User = require('./controllers/UserController'),
     Actor = require('./controllers/ActorController'),
     Cinema = require('./controllers/CinemasController'),
     adminTicket = require('./controllers/AdminTicketController');
+    Admin = require('./controllers/MyAdminsController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -82,6 +83,49 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
+
+
+/***********************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+***************************** ADMIN ROUTES *****************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************/
+
+//------------------------------ MyAdmins routes --------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;

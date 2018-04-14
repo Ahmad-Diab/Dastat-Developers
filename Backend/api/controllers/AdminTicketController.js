@@ -130,3 +130,36 @@ module.exports.makeReservationByAdmin = function(req, res, next){
     return require('UserBookingController').makeReservation(req, res, next);
 
 };
+
+
+/**
+ * A function to cancel a ticket reservation by an admin user
+ * @param req, required data for
+ * @param res, results of changes on the tickets table in database
+ * @param next, next middleware to handle errors
+ */
+module.exports.cancelReservation = function(req, res, next){
+  var id = req.body.id; //reservation_id
+  if (isNaN(id)) return res.status(400).send({ //making sure it is a number, and returning an error if it is not
+    "error": "Entered id not an integer",
+    "msg": null,
+    "data": null
+  });
+  database.query('SELECT * FROM tickets WHERE reservation_id = ?', [id], function(error, results, fields){ //making sure a ticket with this id exists in the database, and returning an error if it does not
+    if(results.length == 0) return res.status(404).send({
+      "error": "Ticket does not exist",
+      "msg": null,
+      "data": null
+    });
+    else {
+    database.query('DELETE FROM tickets WHERE reservation_id = ?', [id], function(error, result){ //deleting the ticket
+      if(error) return next(error);
+      return res.status(200).send({
+        "error": null,
+        "msg": "Deletion Success",
+        "data": null
+      });
+    });
+  }
+  });
+};

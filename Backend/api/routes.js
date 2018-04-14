@@ -97,6 +97,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
+router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
 
 
 

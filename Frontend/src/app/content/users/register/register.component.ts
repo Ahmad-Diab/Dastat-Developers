@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(this.user).subscribe((response)=>{
       if(!response.success){
-      this.message = "username or passsword is incorrect"
+      this.message = response.msg;
   
       return;}
 

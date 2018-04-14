@@ -11,15 +11,12 @@ let User = require('./controllers/UserController'),
     Actor = require('./controllers/ActorController'),
     Cinema = require('./controllers/CinemasController'),
     adminTicket = require('./controllers/AdminTicketController');
+    Admin = require('./controllers/MyAdminsController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
 router.get('/users', User.getUsers);
-
-//--------------------------------------------AdminTicket Interactions Routes---------------------------------//
-router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
-router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
@@ -82,6 +79,52 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
+
+
+/***********************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+***************************** ADMIN ROUTES *****************************
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************/
+
+//------------------------------ MyAdmins routes --------------------------------//
+
+//--------------------------------------------AdminTicket Interactions Routes---------------------------------//
+router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
+router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;

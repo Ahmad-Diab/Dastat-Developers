@@ -55,13 +55,23 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
         data: null
       });
     }
-    //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
-    database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promocode] ,function (error, results, fields) {
-      if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
-      return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
-        err: null,
-        msg: 'Promocode had been assigned successfully.',
-        data: results,
+    //this query is to handle if promocode user trying to add is already there
+    database.query('SELECT * FROM promocodes_cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',[promocode,cinemaName,cinemaLocation],function(error, results, fields){
+      if(error) return next(error);
+      if(results.length > 0) return res.status(200).json({
+        err : null,
+        msg : 'Promocode already added!',
+        data : null,
+      })
+      //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
+      database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promocode] ,function (error, results, fields) {
+        if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
+        return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
+          err: null,
+          msg: 'Promocode had been assigned successfully.',
+          data: results,
+        });
       });
-    });
+    })
+    
   };

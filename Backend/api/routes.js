@@ -18,10 +18,6 @@ let User = require('./controllers/UserController'),
 
 router.get('/users', User.getUsers);
 
-//--------------------------------------------AdminTicket Interactions Routes---------------------------------//
-router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
-router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
-
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
@@ -97,6 +93,9 @@ router.get('/getTopMovies',Search.getTopMovies);
 
 //------------------------------ MyAdmins routes --------------------------------//
 
+//--------------------------------------------AdminTicket Interactions Routes---------------------------------//
+router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
+router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 
 

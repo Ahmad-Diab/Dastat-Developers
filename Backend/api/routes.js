@@ -97,31 +97,18 @@ router.get('/getTopMovies',Search.getTopMovies);
 
 //------------------------------ MyAdmins routes --------------------------------//
 
+router.post('/admin/login', Admin.authenticate);
 
+router.post('/getAdmin', Admin.getAdmin);
 
+router.put('/editBookingUsher', Admin.editBookingUsher);
+router.delete('/deleteBookingUsher', Admin.deleteBookingUsher);
 
+router.put('/editBranchManager', Admin.editBranchManager);
+router.delete('/deleteBranchManager', Admin.deleteBranchManager);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.put('/editCinemaOwner', Admin.editCinemaOwner);
+router.delete('/deleteCinemaOwner', Admin.deleteCinemaOwner);
 
 
 

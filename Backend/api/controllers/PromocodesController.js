@@ -1,5 +1,5 @@
 var database = require('../config/db-connection');
-
+var Validations = require('../utils/validations');
 // Promocodes Controller should be implemented here
 
 

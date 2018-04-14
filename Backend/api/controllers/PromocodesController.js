@@ -1,5 +1,5 @@
 var database = require('../config/db-connection');
-
+var Validations = require('../utils/validations');
 // Promocodes Controller should be implemented here
 
 
@@ -33,16 +33,69 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
     var promocode = req.body["promocode"]; //storing the value of column promocode in variable promocode
     var cinemaName = req.body["cinema_name"]; //storing the value of column cinema_name in variable cinemaName 
     var cinemaLocation = req.body["cinema_location"]; //storing the value of column cinema_location in variable cinemaLocation  
-
-    //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
-    database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promoCode] ,function (error, results, fields) {
-      if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
-      return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
+    //Adding same validity checks to make sure user enter data in right format
+    if(!Validations.isString(promocode)){
+      return res.status(422).json({
         err: null,
-        msg: 'Promocode had been assigned successfully.',
-        data: results,
+        msg: 'Provided promocode must be of type String.',
+        data: null
       });
-    });
+    }
+    if(!Validations.isString(cinemaName)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided cinema name must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(cinemaLocation)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided cinema location must be of type String.',
+        data: null
+      });
+    }
+    //NULL Checker
+    if(!promocode) {
+      return res.status(422).json({
+          err: null,
+          msg: 'promocode is required.',
+          data: null
+      });
+    }
+    if(!cinemaLocation) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Cinema location is required.',
+          data: null
+      });
+    }
+    if(!cinemaName) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Cinema name is required.',
+          data: null
+      });
+    }
+    //this query is to handle if promocode user trying to add is already there
+    database.query('SELECT * FROM promocodes_cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',[promocode,cinemaName,cinemaLocation],function(error, results, fields){
+      if(error) return next(error);
+      if(results.length > 0) return res.status(200).json({
+        err : null,
+        msg : 'Promocode already added!',
+        data : null,
+      })
+      //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
+      database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promocode] ,function (error, results, fields) {
+        if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
+        return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
+          err: null,
+          msg: 'Promocode had been assigned successfully.',
+          data: results,
+        });
+      });
+    })
+    
   };
 
 

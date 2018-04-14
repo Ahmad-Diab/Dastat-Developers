@@ -33,7 +33,28 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
     var promocode = req.body["promocode"]; //storing the value of column promocode in variable promocode
     var cinemaName = req.body["cinema_name"]; //storing the value of column cinema_name in variable cinemaName 
     var cinemaLocation = req.body["cinema_location"]; //storing the value of column cinema_location in variable cinemaLocation  
-
+    //Adding same validity checks to make sure user enter data in right format
+    if(!Validations.isString(promocode)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided promocode must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(cinemaName)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided cinema name must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(cinemaLocation)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided cinema location must be of type String.',
+        data: null
+      });
+    }
     //Inserting into promocodes_cinemas table to complete the assignment of promocode to cinema
     database.query('INSERT INTO promocodes_cinemas (cinema_location,cinema_name,promocode) VALUES(?,?,?)',[cinemaLocation,cinemaName,promoCode] ,function (error, results, fields) {
       if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred

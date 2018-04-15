@@ -111,9 +111,10 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 
-router.get('/promocodes', Promocodes.viewPromocodes)
-router.get('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
-
+router.get('/promocodes', Promocodes.viewPromocodes);
+router.post('/PromoCodes/edit/:promocode', Promocodes.editPromocode);
+router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
+router.post('/PromoCodes/addPromocode', Promocodes.addPromocode);
 
 
 

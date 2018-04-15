@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 module.exports.login = function(req, res, next) {
     console.log("here");
+    console.log(req.body);
     var username = req.body.username;
     var password = req.body.password;
     if(!username){
@@ -49,7 +50,7 @@ module.exports.login = function(req, res, next) {
           }
       
           else {
-            res.status(200).json({
+            res.status(401).json({
               err: null,
               msg: "Wrong Password",
               success: false
@@ -58,7 +59,7 @@ module.exports.login = function(req, res, next) {
         });      
       }
       else {
-        res.status(200).json({
+        res.status(401).json({
           err: null,
           msg: "Wrong User Name",
           success: false

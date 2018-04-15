@@ -25,7 +25,7 @@ router.get('/authtest',Authorization.Verify_User,(req,res)=>{
 });
 
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
-router.get('/users', User.getUsers);
+router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking
@@ -59,7 +59,6 @@ var Actor = require('./controllers/ActorController');
 
 
 //------------------------USERS ROUTES-------------------------------
-router.get('/users', User.getUsers);
 
 router.get('/users/viewMyInfo', User.viewMyInfo);
 //-----------------------ACTOR ROUTES-------------------------------

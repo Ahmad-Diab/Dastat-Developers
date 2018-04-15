@@ -116,7 +116,7 @@ router.get('/promocodes', Promocodes.viewPromocodes);
 router.get('/PromoCodes', Promocodes.assignPromocodeToCinema);
 router.post('/PromoCodes/edit/:promocode', Promocodes.editPromocode);
 router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
-router.post('/PromoCodes/addPromocode', Promocodes.addPromocode);
+router.post('/promocodes/addPromocode', Promocodes.addPromocode);
 
 
 

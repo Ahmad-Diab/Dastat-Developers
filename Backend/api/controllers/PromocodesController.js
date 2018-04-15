@@ -127,11 +127,11 @@ module.exports.editPromocode = function(req,res,next){
   
   //Add Promocode
   module.exports.addPromocode = function(req, res, next){
-    var promocode = req.body["promocode"];
-    var type = req.body["type"];
-    var value = req.body["value"];
+    var promocode = req.body["promocode"];//storing the value of column promocode in variable promocode
+    var type = req.body["type"];//storing the type of promocode in variable type
+    var value = req.body["value"];//storing the value of promocode in variable value
 
-    //Validations
+    //Validations to check that the user entered the right data format
     if(!Validations.isString(promocode)){
       return res.status(422).json({
         err: null,
@@ -154,6 +154,29 @@ module.exports.editPromocode = function(req,res,next){
       });
     }
 
+    //NULL Checker
+    if(!promocode) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Promocode is required.',
+          data: null
+      });
+    }
+    if(!type) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Type is required.',
+          data: null
+      });
+    }
+    if(!value) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Value is required.',
+          data: null
+      });
+    }
+
     //Check if the promocode is not added already
     database.query('SELECT * FROM promocodes WHERE promocode = ? AND type = ? AND value = ?',[promocode,type,value],function(error, results, fields){
       if(error) return next(error);
@@ -165,8 +188,8 @@ module.exports.editPromocode = function(req,res,next){
     
     //Inserting into promocodes table
     database.query('INSERT INTO promocodes (promocode,type,value) VALUES(?,?,?)',[promocode,type,value] ,function (error, results, fields) {
-      if(error) return next(error); 
-      return res.status(200).json({ 
+      if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
+      return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
         err: null,
         msg: 'Promocode had been added successfully.',
         data: results,

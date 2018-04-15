@@ -55,6 +55,28 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
         data: null
       });
     }
+    //NULL Checker
+    if(!promocode) {
+      return res.status(422).json({
+          err: null,
+          msg: 'promocode is required.',
+          data: null
+      });
+    }
+    if(!cinemaLocation) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Cinema location is required.',
+          data: null
+      });
+    }
+    if(!cinemaName) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Cinema name is required.',
+          data: null
+      });
+    }
     //this query is to handle if promocode user trying to add is already there
     database.query('SELECT * FROM promocodes_cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',[promocode,cinemaName,cinemaLocation],function(error, results, fields){
       if(error) return next(error);
@@ -76,6 +98,30 @@ module.exports.assignPromocodeToCinema = function(req, res, next){
     
   };
 
+
+
+/**
+ * A function to handle editing a certain promocode by the app owner
+ * @param req, required data for processing the request of editing a certain promocode
+ * @param res, results of changes on the promocodes table in database
+ * @param next, next middleware to handle errors
+ */
+module.exports.editPromocode = function(req,res,next){
+
+  var promocode = req.params.promocode;//storing the value of column promocode in variable promocode
+  var type = req.body.type;//storing the type of promocode in variable type
+  var value = req.body.value;//storing the value of promocode in variable value
+
+  //Update into promocodes table to complete editing a certain promocode
+  database.query('Update promocodes Set type = ?, value = ? where promocode = ?',[type,value,promocode], function(error, results, fields){
+      if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
+              res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
+                  err : null,   
+                  msg : "Promocode Successfully edited",
+                  data : results
+              });
+  });   
+}
 
   //---------------------------------------------------------------------------------
   

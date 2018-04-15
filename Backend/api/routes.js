@@ -11,9 +11,18 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
-
+var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
+var Authorization = require("./Authorization")
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
+
+router.get('/authtest',Authorization.Verify_User,(req,res)=>{
+    return res.status(200).json({
+        err: null,
+        msg: 'ok',
+        data: null
+      });
+});
 
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.get('/users', User.getUsers);
@@ -90,6 +99,8 @@ router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
+//--------------------------------------Admin login------------------------------------------------------//
+router.post('/adminlogin', AuthenticationAdmin.login);
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 

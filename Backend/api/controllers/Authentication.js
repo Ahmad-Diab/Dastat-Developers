@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var randomstring = require("randomstring");
 const mailer= require("../config/nodemailer");
+
 // Authentication log in
 module.exports.authenticate = function(req, res, next) {
   var username = req.body.username;
@@ -29,10 +30,8 @@ module.exports.authenticate = function(req, res, next) {
     if(results.length > 0) { 
       var user = {
         username: results[0].username,
-        password: results[0].password,
         email: results[0].email,
         phone_number: results[0].phone_number,
-        credit_card: results[0].credit_card,
         first_name: results[0].first_name,
         last_name: results[0].last_name,
         age: results[0].age,
@@ -44,7 +43,7 @@ module.exports.authenticate = function(req, res, next) {
         if(isMatch){
           if (results[0].active){
           var token = jwt.sign(user, config.secret, {
-          expiresIn: 604800
+            expiresIn: '10h'
           });
           res.status(200).json({
             err: null,

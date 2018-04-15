@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `actors`
 --
 
+DROP DATABASE cinema_app;
+
 CREATE TABLE `actors` (
   `name` varchar(115) NOT NULL,
   `age` int(11) DEFAULT NULL,

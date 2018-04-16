@@ -28,13 +28,14 @@ router.get('/authtest',Authorization.Verify_User,(req,res)=>{
       });
 });
 
-router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
-router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
 router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
+
+
 
 //----------------------------------------------------User Fetching routes------------------------------------//
 router.get('/userBooking/getCinemasForThatMovie/:movie_id', UserBooking.getCinemasForThatMovie);
@@ -53,23 +54,15 @@ router.get('/movies/:movie_id',Movie.getMovieInfo);
 //----------------------------------------------------User Info routes----------------------------------------//
 router.get('/users', User.getUsers);
 
-//viewCinemas routes
-router.get('/viewCinemas',Cinema.ViewCinemas);
-var User = require('./controllers/UserController');
-var Movie = require('./controllers/MovieController')
-var UserBooking = require('./controllers/UserBookingController');
-var Actor = require('./controllers/ActorController');
-//please add only routers here, if you need to call a function require its class
-//DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
-
-
 //------------------------USERS ROUTES-------------------------------
-
 router.get('/users/viewMyInfo', User.viewMyInfo);
 router.post('/users/editUsers/:username', User.editProfile);
 
+
+
 //----------------------------------------------------Actor routes--------------------------------------------//
 router.post('/actors/:actor', Actor.getActors);
+
 
 //----------------------------------------------------Movie Getters routes------------------------------------//
 router.get('/movies/feature',Movie.getMovies);
@@ -85,19 +78,17 @@ router.get('/movies/Horror',Movie.getMoviesHorror);
 router.get('/movies/Thriller',Movie.getMoviesThriller);
 router.get('/movies/Bio',Movie.getMoviesBiography);
 
+
 //----------------------------------------------------Authentication routes------------------------------------//
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
-//--------------------------------------Admin login------------------------------------------------------//
-router.post('/adminlogin', AuthenticationAdmin.login);
-//----------------------------------------------------Search routes--------------------------------------------//
-router.get('/search/:searchKeyword', Search.searchByKeyword);
-
-
 router.post('/register', Authentication.Register);
 
+
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
+
+
 
 //----------------------------------------------------Seating routes--------------------------------------------//
 router.get('/layout/encoding', Seat.getSeats);
@@ -122,12 +113,16 @@ router.get('/getTopMovies',Search.getTopMovies);
 ************************************************************************
 ************************************************************************/
 
+//--------------------------------------Admin login------------------------------------------------------//
+router.post('/adminlogin', AuthenticationAdmin.login);
+
 //------------------------------ MyAdmins routes --------------------------------//
+router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
+
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
-
 
 
 

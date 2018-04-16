@@ -9,7 +9,7 @@ var router = express.Router();
 //Schema Controllers
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
-var UserBooking = require('./controllers/UserBookingController');
+var UserBooking = require('./Controllers/UserBookingController');
 var Authentication = require('./controllers/Authentication');
 var Search = require('./controllers/SearchController');
 var Movie = require('./controllers/MovieController');
@@ -17,13 +17,23 @@ var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
 var MyMovies = require('./controllers/MyMoviesController');
+var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
+var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
-
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
-router.get('/users', User.getUsers);
+router.get('/authtest',Authorization.Verify_User,(req,res)=>{
+    return res.status(200).json({
+        err: null,
+        msg: 'ok',
+        data: null
+      });
+});
+
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.get('/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date', UserBooking.getParties);
@@ -46,6 +56,19 @@ router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 //----------------------------------------------------User Info routes----------------------------------------//
 router.get('/users', User.getUsers);
+
+//viewCinemas routes
+router.get('/viewCinemas',Cinema.ViewCinemas);
+var User = require('./controllers/UserController');
+var Movie = require('./controllers/MovieController')
+var UserBooking = require('./controllers/UserBookingController');
+var Actor = require('./controllers/ActorController');
+//please add only routers here, if you need to call a function require its class
+//DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
+
+
+//------------------------USERS ROUTES-------------------------------
+
 router.get('/users/viewMyInfo', User.viewMyInfo);
 router.post('/users/editUsers/:username', User.editProfile);
 
@@ -69,6 +92,12 @@ router.get('/movies/Bio',Movie.getMoviesBiography);
 //----------------------------------------------------Authentication routes------------------------------------//
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
+//--------------------------------------Admin login------------------------------------------------------//
+router.post('/adminlogin', AuthenticationAdmin.login);
+//----------------------------------------------------Search routes--------------------------------------------//
+router.get('/search/:searchKeyword', Search.searchByKeyword);
+
+
 router.post('/register', Authentication.Register);
 
 //----------------------------------------------------Search routes--------------------------------------------//
@@ -84,7 +113,6 @@ router.get('/viewMovies3',Search.viewMovies3);
 router.get('/viewMovies2',Search.viewMovies2);
 router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
-router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
 
 
@@ -155,4 +183,5 @@ router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 
 
+//exporting routes to the project
 

@@ -8,7 +8,7 @@ var database = require('../config/db-connection'),
  * A function to show the halls of the requested cinema
  *
  * @param req, data of a cinema
- * @param res, data of all halls which are available in thisc cinema
+ * @param res, data of all halls which are available in this cinema
  */
 
 module.exports.getHallsForThatCinema = function(req, res){
@@ -303,6 +303,118 @@ module.exports.deleteMovieFromHall = function(req, res, next){
     });
 
 };
+
+
+
+/**
+ * A function to handle assigining a movie to a hall
+ * 
+ * @param req, required data for viewing movies in a hall
+ * @param res, results of all movies in this hall
+ * @param next
+ */
+module.exports.viewMoviesInHall = function(req, res, next){
+    // COMPLETED delete the assigned movie of the requested hall.
+    // COMPLETED User-name validation needs to be done!
+
+    var username = req.body['username'],
+        cinema_name = req.body['cinema_name'],
+        cinema_location = req.body['cinema_location'],
+        hall_number = req.body['hall_number'];
+        
+    // Null Checkers
+    console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number);
+    console.log(req.body);
+
+    if(!username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+    if(!cinema_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema name is required.',
+            data: null
+        });
+    }
+    if(!cinema_location) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema location is required.',
+            data: null
+        });
+    }
+    if(!hall_number) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Hall number is required.',
+            data: null
+        });
+    }
+
+    // Validations of correct types
+    if(!Validations.isNumber(hall_number)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Invalid data types.',
+            data: null
+        });
+    }
+
+    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+
+    database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
+        [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            console.log(results);
+            if(!results || results.length == 0) {
+                return res.status(404).send({
+                    err: null,
+                    msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
+                    data: null
+                });
+            }
+    });
+
+    // Verify that hall exists in Cinema
+    
+    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+        [hall_number, cinema_location, cinema_name],function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            console.log(results);
+            if(!results || !results.length) {
+                return res.status(404).send({
+                    err: null,
+                    msg: "The assigned hall does not exist.",
+                    data: null
+                });
+            }
+    });
+
+
+    var query = 'select * from Movies m , Halls h where h.hall_number = ? AND m.movie_id = h.movie AND h.cinema_name = ? AND h.cinema_location = ?';
+
+    database.query(query,[null, hall_number, cinema_name, cinema_location], function (error, results) {
+        if (error) {
+            return next(error);
+        }
+        return res.status(200).json({
+            err: null,
+            msg: 'Movies in hall '+hall_number+', '+cinema_name+', '+cinema_location+' sucessfully retrieved.'+hall_number,
+            data: results
+        });
+
+    });
+
+};
+
 
 
 

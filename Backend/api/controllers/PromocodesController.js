@@ -207,33 +207,20 @@ module.exports.editPromocode = function(req,res,next){
   //Delete Promocode
   module.exports.deletePromocode = function(req, res, next){
 	  var id=req.params.promocode; //the promocode id sent in the url params
+	  var deleteFromCinemas='DELETE FROM promocodes_cinemas WHERE promocode = ?'; //deleting the promocode from table promocodes_cinemas
+	  var deleteFromPromocode='DELETE FROM promocodes WHERE promocode = ?';      //deleting the promocode from table promocodes
 
-	   //deleting the promocode from table promocodes_cinemas
-	   database.query('DELETE FROM promocodes_cinemas WHERE promocode = ?',[id],
-	   function(error, results, fields){
+	   
+	   database.query(deleteFromCinemas,[id],function(error, results, fields){
 		   if(error) return next(error);
+		   database.query(deleteFromPromocode,[id],function(error, results, fields){
+				if(error) return next(error);
 		   res.status(200).json({
 			   err : null,   
-			   msg : "Promocode: " + id + ' Where Deleted Successfully from Cinemas',
+			   msg : "Promocode: " + id + ' Where Deleted Successfully',
 			   data : null
 		   });
 	   });   
+	});
 
-      //deleting the promocode from table promocodes
-	  database.query('DELETE FROM promocodes WHERE promocode = ?',[id],
-	  function(error, results, fields){
-		  if(error) return next(error);
-		  res.status(200).json({
-			  err : null,   
-			  msg : "Promocode: " + id + ' Where Deleted Successfully',
-			  data : null
-		  });
-	  });   
-
-     
-
-
-
-
-
-  }
+       }

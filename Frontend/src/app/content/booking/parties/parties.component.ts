@@ -38,10 +38,6 @@ export class PartiesComponent implements OnInit {
   // date;
 
   ngOnInit() {
-    var cinemaName = "Mayo Movies",
-        movieName = "13",
-        date = "2018-4-12";
-
     this.viewMovies();
     this.selectedCinema = this.cookie.getObject('cinema');
     this.selectedMovie = this.cookie.getObject('movie');

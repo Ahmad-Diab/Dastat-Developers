@@ -99,7 +99,11 @@ router.get('/getTopMovies',Search.getTopMovies);
 -----------------------------------------------------------------------------------------------------------------------------------
 */
 
-//-------------AS AN ADMIN I CAN ADD MOVIES ----------------
+//-------------AS AN ADMIN I CAN ADD Requests ----------------
+router.post('/addRequests/:admin_requested',MyMovies.addRequests);
+
+//-----------AS AN ADMIN I CAN ADD MOVIES ---------------------
+router.post('/addMovies/:admin_requested',MyMovies.addMovies);
 
 
 //-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------

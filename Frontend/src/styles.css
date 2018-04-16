@@ -1,3 +1,5 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 .hebe.tparrows.tp-rightarrow::before {
 	content: "\E825";
 	font-size: 0;

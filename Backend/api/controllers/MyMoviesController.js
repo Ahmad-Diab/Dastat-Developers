@@ -1,23 +1,80 @@
 var database = require('../config/db-connection');
 
 
+
+
+module.exports.addRequests = function(req,res,next){
+    
+    var
+        title = req.body['title'];
+        console.log(title);
+       
+        duration = req.body['duration'],
+        genre = req.body['genre'],
+        description = req.body['description'],
+        imagePath = req.body['imagePath'],
+        cast = req.body['cast'],
+        year = req.body['year'],
+        feature = req.body['feature'],
+        release_date = req.body['release_date'],
+        rating = req.body['rating'],
+        status = "PENDING"; 
+        
+
+        var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+
+        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.admin_requested],
+        function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            return res.status(200).json({
+                err: null,
+                msg: 'The Request is sent.',
+                data: results
+            });
+        });
+}
+
+////--------------ADD MOVIES----------------
+module.exports.addMovies = function(req,res,next){
+    
+    var
+        title = req.body['title'];
+        console.log(title);
+       
+        duration = req.body['duration'],
+        genre = req.body['genre'],
+        description = req.body['description'],
+        imagePath = req.body['imagePath'],
+        cast = req.body['cast'],
+        year = req.body['year'],
+        feature = req.body['feature'],
+        release_date = req.body['release_date'],
+        rating = req.body['rating'],
+        status = "ACCEPTED"; 
+        
+
+        var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+
+        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.admin_requested],
+        function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            return res.status(200).json({
+                err: null,
+                msg: 'The Movie is inserted in the DataBase!.',
+                data: results
+            });
+        });
+}
+
+
 //Movie Controllers should be implemented here
 //DONT FORGET TO USE MODULE exports
 //DONT FORGET TO ADD IT IN THE ROUTES
 
-module.exports.addMovie = function(req,res,next){
-   var sql = "INSERT INTO Movies VALUES ?"; 
-   var values = [];  //TODO HTTP REQUEST FROM FRONT END WITH VALUES OF INSERTION
-
-    database.query(sql,[values],function(err,results,field){
-        if(err) throw err;
-        res.status(200).json({
-            err : null,   
-            msg : "Info succussfully retreived",
-            data : results
-          });
-    })
-}
 
 
 

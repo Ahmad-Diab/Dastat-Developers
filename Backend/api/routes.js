@@ -3,19 +3,20 @@ let express = require('express'),
     router = express.Router();
 
 //Schema Controllers
-var User = require('./controllers/UserController');
-var Seat = require('./controllers/SeatController');
-var UserBooking = require('./Controllers/UserBookingController');
-var Authentication = require('./controllers/Authentication');
-var Search = require('./controllers/SearchController');
-var Movie = require('./controllers/MovieController');
-var Actor = require('./controllers/ActorController');
-var viewCinemas = require('./controllers/CinemasController');
-var Cinema = require('./controllers/CinemasController');
-var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
-var Authorization = require("./Authorization");
-var adminTicket = require('./controllers/AdminTicketController');
-var Admin = require('./controllers/MyAdminsController');
+
+let User = require('./controllers/UserController'),
+    Seat = require('./controllers/SeatController'),
+    UserBooking = require('./controllers/UserBookingController'),
+    Authentication = require('./controllers/Authentication'),
+    Search = require('./controllers/SearchController'),
+    Movie = require('./controllers/MovieController'),
+    Actor = require('./controllers/ActorController'),
+    Cinema = require('./controllers/CinemasController'),
+    adminTicket = require('./controllers/AdminTicketController'),
+    AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin'),
+    Authorization = require("./Authorization"),
+    Admin = require('./controllers/MyAdminsController');
+
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 

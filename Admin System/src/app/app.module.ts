@@ -21,6 +21,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { HttpService } from './@services/http.service';
 import { AuthService } from './@services/auth.service';
 import { HttpModule } from '@angular/http';
+import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promocodes.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,7 +31,8 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ViewPromocodesComponent
   ],
   imports: [
     BrowserModule,

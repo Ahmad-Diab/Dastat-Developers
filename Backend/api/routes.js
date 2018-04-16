@@ -100,8 +100,6 @@ router.get('/getTopMovies',Search.getTopMovies);
 */
 
 //-------------AS AN ADMIN I CAN ADD MOVIES ----------------
-router.post('/addMovies/:admin_requested',MyMovies.addMovie);
-
 
 
 //-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
@@ -122,7 +120,9 @@ router.post('/requests/:movie_id',MyMovies.EditMovies);
 //--------AS AN ADMIN I CAN DELETE MY REQUESTS--------------
 router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
 
-<<<<<<< HEAD
+//--------AS AN ADMIN I CAN DELETE MOVIES--------------
+router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
+
 module.exports = router;
 
 
@@ -148,10 +148,5 @@ module.exports = router;
 
 
 
-
-=======
-//--------AS AN ADMIN I CAN DELETE MOVIES--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
->>>>>>> 3ee780e9df0e1b70d4d8475cfc5d3f2fcd0373dc
 
 

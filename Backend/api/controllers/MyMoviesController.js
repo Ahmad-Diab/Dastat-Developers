@@ -7,38 +7,6 @@ var database = require('../config/db-connection');
 //DONT FORGET TO USE MODULE exports
 //DONT FORGET TO ADD IT IN THE ROUTES
 
-module.exports.addMovie = function(req,res,next){
-    
-    var movie_id = req.body['movie_id'],
-        title = req.body['title'],
-        duration = req.body['duration'],
-        genre = req.body['genre'],
-        description = req.body['description'],
-        imagePath = req.body['imagePath'],
-        cast = req.body['cast'],
-        year = req.body['year'],
-        feature = req.body['feature'],
-        release_date = req.body['release_date'],
-        rating = req.body['rating'],
-        status = req.body['status'];
-
-        var sqlQuery = 'INSERT INTO movies (movie_id, title, duration, genre, description, imagePath, cast, year, feature, release_date, rating, status, admin_requested) VALUES  movie_id= ?,title= ?, duration= ?, genre= ?, description= ?, imagePath = ?, cast = ?, year= ?, feature= ?, release_date= ?, rating= ?, status= ?, admin_requested = ?';
-
-        database.query(sqlQuery,[movie_id,title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.admin_requested],
-        function (error, results) {
-            if (error) {
-                return next(error);
-            }
-
-            return res.status(200).json({
-                err: null,
-                msg: 'The Movie is inserted in the DataBase!.',
-                data: results
-            });
-
-        });
-
-}
 
 
 
@@ -102,11 +70,6 @@ module.exports.viewSingleMovie = function(req, res, next){
     });
   }
 
-<<<<<<< HEAD
-
-
-
-=======
 // Edit My Requests
 module.exports.EditMyRequests=function(req,res,next){
 
@@ -296,4 +259,3 @@ module.exports.DeleteMovies = function(req, res, next){
       });
     });
   }
->>>>>>> 3ee780e9df0e1b70d4d8475cfc5d3f2fcd0373dc

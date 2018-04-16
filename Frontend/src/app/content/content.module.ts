@@ -22,9 +22,16 @@ import { PartiesComponent } from './booking/parties/parties.component';
 import { CinemaInfoComponent } from './cinemas/cinema-info/cinema-info.component';
 import { RegisterComponent } from './users/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSlideToggleModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cinemas-list-booking.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { VerifyComponent } from './users/verify/verify.component';
+
+
+
 
 @NgModule({
   imports: [
@@ -33,7 +40,14 @@ import { VerifyComponent } from './users/verify/verify.component';
     CommonModule,
     SharedModule,
     FormsModule,
-    RouterModule.forChild(ContentRoutes)
+    RouterModule.forChild(ContentRoutes),
+    MatSlideToggleModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
    CinemasListComponent,AboutusComponent,MovieInfoComponent,  CinemaInfoComponent,AboutusComponent,

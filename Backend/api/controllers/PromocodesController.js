@@ -1,5 +1,7 @@
+
 var database = require('../config/db-connection');
 var Validations = require('../utils/validations');
+
 // Promocodes Controller should be implemented here
 
 
@@ -11,13 +13,14 @@ var Validations = require('../utils/validations');
  * @param {*} next 
  */
 module.exports.viewPromocodes = function(req,res,next){
-    database.query('SELECT * FROM promocodes p INNER JOIN promocodes_cinemas c ON p.promocode = c.promocode', function(error, results, fields){
+	database.query('SELECT * FROM promocodes p INNER JOIN promocodes_cinemas c ON p.promocode = c.promocode',
+	function(error, results, fields){
         if(error) return next(error);
-                res.status(200).json({
-                    err : null,   
-                    msg : "All promocodes are retrieved",
-                    data : results
-                });
+        res.status(200).json({
+            err : null,   
+            msg : "All promocodes are retrieved successfully",
+            data : results
+        });
     });   
 }
 
@@ -139,3 +142,102 @@ module.exports.editPromocode = function(req,res,next){
               });
   });   
 }
+
+  //---------------------------------------------------------------------------------
+  
+  //Add Promocode
+  module.exports.addPromocode = function(req, res, next){
+    var promocode = req.body["promocode"];//storing the value of column promocode in variable promocode
+    var type = req.body["type"];//storing the type of promocode in variable type
+    var value = req.body["value"];//storing the value of promocode in variable value
+
+    //Validations to check that the user entered the right data format
+    if(!Validations.isString(promocode)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided promocode must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(type)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided type must be of type String.',
+        data: null
+      });
+    }
+    if(!Validations.isString(value)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided value must be of type String.',
+        data: null
+      });
+    }
+
+    //NULL Checker
+    if(!promocode) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Promocode is required.',
+          data: null
+      });
+    }
+    if(!type) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Type is required.',
+          data: null
+      });
+    }
+    if(!value) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Value is required.',
+          data: null
+      });
+    }
+
+    //Check if the promocode is not added already
+    database.query('SELECT * FROM promocodes WHERE promocode = ? AND type = ? AND value = ?',[promocode,type,value],function(error, results, fields){
+      if(error) return next(error);
+      if(results.length > 0) return res.status(200).json({
+        err : null,
+        msg : 'Promocode already added!',
+        data : null,
+      })
+    
+    //Inserting into promocodes table
+    database.query('INSERT INTO promocodes (promocode,type,value) VALUES(?,?,?)',[promocode,type,value] ,function (error, results, fields) {
+      if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
+      return res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
+        err: null,
+        msg: 'Promocode had been added successfully.',
+        data: results,
+      });
+    });
+  })
+  
+};
+
+//---------------------------------------------------------------------------------
+  
+  //Delete Promocode
+  module.exports.deletePromocode = function(req, res, next){
+	  var id=req.params.promocode; //the promocode id sent in the url params
+	  var deleteFromCinemas='DELETE FROM promocodes_cinemas WHERE promocode = ?'; //deleting the promocode from table promocodes_cinemas
+	  var deleteFromPromocode='DELETE FROM promocodes WHERE promocode = ?';      //deleting the promocode from table promocodes
+
+	   
+	   database.query(deleteFromCinemas,[id],function(error, results, fields){
+		   if(error) return next(error);
+		   database.query(deleteFromPromocode,[id],function(error, results, fields){
+				if(error) return next(error);
+		   res.status(200).json({
+			   err : null,   
+			   msg : "Promocode: " + id + ' Where Deleted Successfully',
+			   data : null
+		   });
+	   });   
+	});
+
+       }

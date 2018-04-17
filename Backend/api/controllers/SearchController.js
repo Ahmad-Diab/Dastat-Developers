@@ -36,12 +36,7 @@ module.exports.viewMovies = function(req,res,next){
         return res.send(results);
       });
 }
-module.exports.viewCinemas = function(req,res,next){
-    database.query('SELECT * FROM Cinemas', function (error, results, fields) {
-        if(error) return next(error);
-        return res.send(results);
-      });
-}
+
 module.exports.viewMovies3 = function(req,res,next){
     database.query('SELECT * FROM Movies WHERE feature=3', function (error, results, fields) {
         if(error) return next(error);

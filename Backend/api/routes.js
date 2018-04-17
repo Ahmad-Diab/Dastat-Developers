@@ -14,6 +14,8 @@ let User = require('./controllers/UserController'),
     Cinema = require('./controllers/CinemasController'),
     adminTicket = require('./controllers/AdminTicketController'),
     Promocodes = require('./controllers/PromocodesController'),
+    AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin'),
+    Authorization = require("./Authorization"),
     Admin = require('./controllers/MyAdminsController');
 
     
@@ -21,6 +23,16 @@ let User = require('./controllers/UserController'),
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
+router.get('/authtest',Authorization.Verify_User,(req,res)=>{
+    return res.status(200).json({
+        err: null,
+        msg: 'ok',
+        data: null
+      });
+});
+
+router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
+router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
@@ -44,6 +56,19 @@ router.get('/movies/:movie_id',Movie.getMovieInfo);
 
 //----------------------------------------------------User Info routes----------------------------------------//
 router.get('/users', User.getUsers);
+
+//viewCinemas routes
+router.get('/viewCinemas',Cinema.ViewCinemas);
+var User = require('./controllers/UserController');
+var Movie = require('./controllers/MovieController')
+var UserBooking = require('./controllers/UserBookingController');
+var Actor = require('./controllers/ActorController');
+//please add only routers here, if you need to call a function require its class
+//DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
+
+
+//------------------------USERS ROUTES-------------------------------
+
 router.get('/users/viewMyInfo', User.viewMyInfo);
 router.post('/users/editUsers/:username', User.editProfile);
 
@@ -67,6 +92,12 @@ router.get('/movies/Bio',Movie.getMoviesBiography);
 //----------------------------------------------------Authentication routes------------------------------------//
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
+//--------------------------------------Admin login------------------------------------------------------//
+router.post('/adminlogin', AuthenticationAdmin.login);
+//----------------------------------------------------Search routes--------------------------------------------//
+router.get('/search/:searchKeyword', Search.searchByKeyword);
+
+
 router.post('/register', Authentication.Register);
 
 //----------------------------------------------------Search routes--------------------------------------------//
@@ -84,7 +115,6 @@ router.get('/viewMovies3',Search.viewMovies3);
 router.get('/viewMovies2',Search.viewMovies2);
 router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
-router.get('/viewCinemas',Search.viewCinemas);
 router.get('/getTopMovies',Search.getTopMovies);
 
 
@@ -114,9 +144,10 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 router.get('/promocodes', Promocodes.viewPromocodes);
 router.get('/PromoCodes', Promocodes.assignPromocodeToCinema);
-router.post('/promoCodes/edit/:promocode', Promocodes.editPromocode);
+router.post('/promocodes/edit/:promocode', Promocodes.editPromocode);
 router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
-
+router.post('/promocodes/addPromocode', Promocodes.addPromocode);
+router.post('/promocodes/deletePromocode/:promocode', Promocodes.deletePromocode);
 
 
 

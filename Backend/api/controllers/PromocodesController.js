@@ -112,6 +112,23 @@ module.exports.editPromocode = function(req,res,next){
   var type = req.body.type;//storing the type of promocode in variable type
   var value = req.body.value;//storing the value of promocode in variable value
 
+    //Adding somme validity checks to make sure user enter data in right format
+    if(!Validations.isString(type)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided promocode type must be of type String.',
+        data: null
+      });
+    }
+
+    if(!Validations.isString(value)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided promocode value must be of type String.',
+        data: null
+      });
+    }
+
   //Update into promocodes table to complete editing a certain promocode
   database.query('Update promocodes Set type = ?, value = ? where promocode = ?',[type,value,promocode], function(error, results, fields){
       if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred

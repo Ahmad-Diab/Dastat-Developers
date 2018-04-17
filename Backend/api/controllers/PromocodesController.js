@@ -132,8 +132,8 @@ module.exports.editPromocode = function(req,res,next){
       });
     }
 
-  //Update into promocodes table to complete editing a certain promocode
-  database.query('Update promocodes Set type = ?, value = ? where promocode = ?',[type,value,promocode], function(error, results, fields){
+ 	 //Update into promocodes table to complete editing a certain promocode
+ 	 database.query('Update promocodes Set type = ?, value = ? where promocode = ?',[type,value,promocode], function(error, results, fields){
       if(error) return next(error); //security check outputing 404 NOT FOUND if an error occurred
               res.status(200).json({ //returning a status 200 OK to acknowledge the user of successfull process
                   err : null,   

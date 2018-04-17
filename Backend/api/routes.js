@@ -19,6 +19,7 @@ var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
+var Promocodes = require('./controllers/PromocodesController');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!

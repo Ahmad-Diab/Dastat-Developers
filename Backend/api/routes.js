@@ -16,16 +16,20 @@ var Authorization = require("./Authorization")
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
 
-router.get('/authtest',Authorization.Verify_User,(req,res)=>{
+router.get('/authtest',Authorization.Verify("1111"),(req,res)=>{
     return res.status(200).json({
         err: null,
         msg: 'ok',
         data: null
       });
 });
-
+function HasRole(role) {
+    return function(req, res, next) {
+     next();
+    }
+  }
 router.get('/userBooking/getParties/:cinemaName/:movieName/:date', UserBooking.getParties);
-router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
+router.get('/users',User.getUsers);
 
 //-------------------------------User Booking Routes---------------------------------
 //TODO Authentication before booking

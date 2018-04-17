@@ -154,8 +154,6 @@ router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
 //--------AS AN ADMIN I CAN DELETE MOVIES--------------
 router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
 
-module.exports = router;
-
 
 //--------AS AN ADMIN I CAN View A SINGLE MOVIE REQUEST--------------
 
@@ -168,6 +166,7 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 
+module.exports = router;
 
 
 

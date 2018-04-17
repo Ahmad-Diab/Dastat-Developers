@@ -22,6 +22,7 @@ import { HttpService } from './@services/http.service';
 import { AuthService } from './@services/auth.service';
 import { HttpModule } from '@angular/http';
 import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promocodes.component';
+import { PromocodesService } from './@services/promocodes.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -52,7 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
-  providers: [AuthGuard, CookieService, HttpService, AuthService],
+  providers: [AuthGuard, CookieService, HttpService, AuthService, PromocodesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -190,7 +190,7 @@ router.post('/promocodes/edit/:promocode', Promocodes.editPromocode);
 router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Promocodes.addPromocode);
 router.post('/promocodes/deletePromocode/:promocode', Promocodes.deletePromocode);
-
+router.get('/promocodes/viewPromocodesAndCinemas',Promocodes.viewPromocodesAndCinemas);
 
 
 

@@ -4,12 +4,12 @@
   </div>
   <div class="card-body">
     <select class="form-control">
-      <option>Cinema Select</option>
+      <option *ngFor = "let promocode of promocodes">{{ promocode.cinema_name }}</option>
     </select><br/>
     <select class="form-control">
-      <option>Promocodes</option>
+      <option *ngFor = "let promocode of promocodes">{{ promocode.promocode }}</option>
     </select><br/>
-    <button type="button" class="btn btn-success mr-1 mb-1">Success</button>
+    <button type="button" class="btn btn-success mr-1 mb-1">Assign</button>
   </div>
 </div>
 

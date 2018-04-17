@@ -59,10 +59,6 @@ router.get('/users', User.getUsers);
 
 //viewCinemas routes
 router.get('/viewCinemas',Cinema.ViewCinemas);
-var User = require('./controllers/UserController');
-var Movie = require('./controllers/MovieController')
-var UserBooking = require('./controllers/UserBookingController');
-var Actor = require('./controllers/ActorController');
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -143,7 +139,6 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 //--------------------------------Promocode routes------------------------------------------------------------//
 
 router.get('/promocodes', Promocodes.viewPromocodes);
-router.get('/PromoCodes', Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/edit/:promocode', Promocodes.editPromocode);
 router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Promocodes.addPromocode);

@@ -1,22 +1,26 @@
+/*
+          -------------------------------ADMIN SYSTEM ROUTES ARE DOWN BELOW----------------------------------------------
+ */
 
-let express = require('express'),
-    router = express.Router();
+
+var express = require('express');
+var router = express.Router();
 
 //Schema Controllers
-
-let User = require('./controllers/UserController'),
-    Seat = require('./controllers/SeatController'),
-    UserBooking = require('./controllers/UserBookingController'),
-    Authentication = require('./controllers/Authentication'),
-    Search = require('./controllers/SearchController'),
-    Movie = require('./controllers/MovieController'),
-    Actor = require('./controllers/ActorController'),
-    Cinema = require('./controllers/CinemasController'),
-    adminTicket = require('./controllers/AdminTicketController'),
-    AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin'),
-    Authorization = require("./Authorization"),
-    Admin = require('./controllers/MyAdminsController');
-
+var User = require('./controllers/UserController');
+var Seat = require('./controllers/SeatController');
+var UserBooking = require('./Controllers/UserBookingController');
+var Authentication = require('./controllers/Authentication');
+var Search = require('./controllers/SearchController');
+var Movie = require('./controllers/MovieController');
+var Actor = require('./controllers/ActorController');
+var viewCinemas = require('./controllers/CinemasController');
+var Cinema = require('./controllers/CinemasController');
+var MyMovies = require('./controllers/MyMoviesController');
+var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
+var Authorization = require("./Authorization");
+var adminTicket = require('./controllers/AdminTicketController');
+var Admin = require('./controllers/MyAdminsController');
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -103,15 +107,19 @@ router.get('/viewMovies0',Search.viewMovies0);
 router.get('/getTopMovies',Search.getTopMovies);
 
 
-/***********************************************************************
-************************************************************************
-************************************************************************
-************************************************************************
-***************************** ADMIN ROUTES *****************************
-************************************************************************
-************************************************************************
-************************************************************************
-************************************************************************/
+
+
+
+/* 
+-----------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
+---------------------                                                        ------------------------------------------------------
+---------------------        A D M I N. S Y S T E M. R O U T E S . JS        ------------------------------------------------------
+---------------------                                                        ------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
+*/
+
 
 //--------------------------------------Admin login------------------------------------------------------//
 router.post('/adminlogin', AuthenticationAdmin.login);
@@ -125,20 +133,44 @@ router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 
+//-------------AS AN ADMIN I CAN ADD Requests ----------------
+router.post('/addRequests/:admin_requested',MyMovies.addRequests);
+
+//-----------AS AN ADMIN I CAN ADD MOVIES ---------------------
+router.post('/addMovies/:admin_requested',MyMovies.addMovies);
+
+//-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
+router.get('/requests/:admin_requested',MyMovies.viewMyRequests);
+//-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
+router.get('/requests',MyMovies.viewRequests);
+//--------AS AN ADMIN I CAN VIEW ALL MOVIES------------------
+router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
+//--------AS AN ADMIN I CAN VIEW A SINGLE MOVIE--------------
+router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
+
+//--------AS AN ADMIN I CAN EDIT MY REQUESTS--------------
+router.post('/requests/:movie_id',MyMovies.EditMyRequests);
+
+//--------AS AN ADMIN I CAN EDIT MOVIES--------------
+router.post('/requests/:movie_id',MyMovies.EditMovies);
+
+//--------AS AN ADMIN I CAN DELETE MY REQUESTS--------------
+router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
+
+//--------AS AN ADMIN I CAN DELETE MOVIES--------------
+router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
 
 
 
+//--------AS AN ADMIN I CAN View A SINGLE MOVIE REQUEST--------------
 
+router.get('/viewMovieRequest/:movie_id',MyMovies.ViewMovieRequest);
 
+//--------AS AN ADMIN I CAN REJECT A SINGLE MOVIE REQUEST--------------
+router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 
-
-
-
-
-
-
-
-
+//--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
+router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 
 
@@ -153,5 +185,7 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 
 //exporting routes to the project
+
+
 
 module.exports = router;

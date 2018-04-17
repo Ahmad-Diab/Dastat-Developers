@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PromocodesService } from '../../@services/promocodes.service';
 
 @Component({
   selector: 'app-view-promocodes',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPromocodesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public promocodesService: PromocodesService) { }
 
   ngOnInit() {
   }

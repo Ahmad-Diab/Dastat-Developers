@@ -16,8 +16,11 @@ export class PromocodesService extends HttpService {
     * (Promocode, type, value, cinema name that the promocode is used in, cinema location)
     * @returns Array of JSON objects of promocodes
     */
-   getPromocodes(){
+  getPromocodes(){
     return this.get('promocodes');
+  }
+  getPromocodesAndCinemas(){
+    return this.get('promocodes/viewPromocodesAndCinemas')
   }
 
 }

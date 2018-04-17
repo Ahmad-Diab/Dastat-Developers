@@ -11,4 +11,13 @@ export class PromocodesService extends HttpService {
     super(cookie, http);
    }
 
+   /**
+    * Sends get request to get the promocodes data:
+    * (Promocode, type, value, cinema name that the promocode is used in, cinema location)
+    * @returns Array of JSON objects of promocodes
+    */
+   getPromocodes(){
+    return this.get('promocodes');
+  }
+
 }

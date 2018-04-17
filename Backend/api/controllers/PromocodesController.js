@@ -116,6 +116,14 @@ module.exports.editPromocode = function(req,res,next){
   var value = req.body.value;//storing the value of promocode in variable value
 
     //Adding somme validity checks to make sure user enter data in right format
+    if(!Validations.isString(promocode)){
+      return res.status(422).json({
+        err: null,
+        msg: 'Provided promocode must be of type String.',
+        data: null
+      });
+    }
+    
     if(!Validations.isString(type)){
       return res.status(422).json({
         err: null,
@@ -129,6 +137,27 @@ module.exports.editPromocode = function(req,res,next){
         err: null,
         msg: 'Provided promocode value must be of type String.',
         data: null
+      });
+    }
+    if(!promocode) {
+      return res.status(422).json({
+          err: null,
+          msg: 'promocode is required.',
+          data: null
+      });
+    }
+    if(!type) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Type is required.',
+          data: null
+      });
+    }
+    if(!value) {
+      return res.status(422).json({
+          err: null,
+          msg: 'Value is required.',
+          data: null
       });
     }
 

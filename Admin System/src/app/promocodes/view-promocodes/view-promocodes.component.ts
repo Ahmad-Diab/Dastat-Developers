@@ -16,11 +16,12 @@ export class ViewPromocodesComponent implements OnInit {
 
   ngOnInit() {
 
-    //  Get the promocodes data in prmocodes array
+    //  Get the promocodes data in promocodes array
     this.promocodesService.getPromocodes().subscribe((response) => {
       this.promocodes = response.data;
       if(this.promocodes.length === 0)  this.existPromocodes = "No Promocodes exist"
       else  this.existPromocodes = ""
+    // Get the distinct values of promocodes and cinemas to choose from in assigning promocodes to cinemas  
     this.promocodesService.getPromocodesAndCinemas().subscribe((response) =>{
       this.promocodesToShow = response.data.promocodeResults;
       this.cinemasToShow = response.data.cinemaResults;

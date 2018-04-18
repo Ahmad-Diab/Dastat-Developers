@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     let cookie: CookieService = new CookieService;
     var auth = <Auth>(cookie.getObject('auth'));
 
-    if (auth.token == undefined) {
+    if (typeof auth === "undefined" || auth.token == undefined) {
         this.router.navigate ( [ '/authentication/signin'  ] );
         return false;
     }else {
@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
   canActivateChild() {
     let cookie: CookieService = new CookieService;
     var auth = <Auth>(cookie.getObject('auth'));
-    if (auth.token == undefined) {
+    if (typeof auth === "undefined" || auth.token == undefined) {
         this.router.navigate ( [ '/authentication/signin'  ] );
         return false;
     }else {

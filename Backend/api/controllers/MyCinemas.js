@@ -68,3 +68,12 @@ var database = require('../config/db-connection');
 
 
 ////////////////////////////////////////////// DELETE ALL CINEMAS MODULES //////////////////////////////////////////////
+
+module.exports.deleteCinemaForAdmin = function(req, res, next){
+    var cinema = req.params.cinema;
+    var owner = req.params.owner;
+    database.query('DELETE FROM TABLE admins_cinemas WHERE admin = ? AND cinema_name = ?', [owner, cinema], function(error, results, fields){
+        if(error) return next(error);
+        return res.send(results);
+    } );
+}

@@ -130,7 +130,7 @@ router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
-router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
+router.patch('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
 

@@ -15,9 +15,11 @@
     Assign promocode to cinema
   </div>
   <div class="card-body">
+    <strong style="margin-top: 1px">Choose a promocode</strong>
     <select class="form-control" [(ngModel)]="promocodeValue">
         <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
     </select><br/>
+    <strong style="margin-top: 1px">Choose a cinema</strong>
     <select class="form-control" [(ngModel)]="cinemaValue" >
       <option *ngFor = "let cinema of cinemasToShow" value="{{cinema.name}},{{cinema.location}}"   >{{ cinema.name }} , {{ cinema.location }}</option>
     </select><br/>

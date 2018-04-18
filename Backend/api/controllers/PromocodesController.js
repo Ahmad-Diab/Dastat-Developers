@@ -47,14 +47,14 @@ module.exports.viewPromocodes = function(req,res,next){
   if(!Validations.isString(cinemaName)){
     return res.status(200).json({
       err: null,
-      msg: 'Cinema name is required.',
+      msg: 'Cinema info is required.',
       data: null
     });
   }
   if(!Validations.isString(cinemaLocation)){
     return res.status(200).json({
       err: null,
-      msg: 'Cinema location is required.',
+      msg: 'Cinema info is required.',
       data: null
     });
   }
@@ -69,14 +69,14 @@ module.exports.viewPromocodes = function(req,res,next){
   if(!cinemaLocation) {
     return res.status(200).json({
         err: null,
-        msg: 'Cinema location is required.',
+        msg: 'Cinema info is required.',
         data: null
     });
   }
   if(!cinemaName) {
     return res.status(200).json({
         err: null,
-        msg: 'Cinema name is required.',
+        msg: 'Cinema info is required.',
         data: null
     });
   }

@@ -37,9 +37,9 @@ export class ViewPromocodesComponent implements OnInit {
     });
 
   }
+  
   assignPromocodeToCinema(){
     this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
-
     })
   }
 

@@ -17,6 +17,7 @@ export class ViewPromocodesComponent implements OnInit {
   cinemasToShow = [] //array of cinemas to choose between for assigning promocode to cinema
   promocodeValue;
   cinemaValue;
+  promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -40,6 +41,10 @@ export class ViewPromocodesComponent implements OnInit {
     this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
 
     })
+  }
+
+  togglePromocodeActions() {
+    this.promocodeActions = !this.promocodeActions
   }
 
 }

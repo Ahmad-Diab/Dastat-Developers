@@ -1,4 +1,9 @@
-<div class="card">
+<button type="button" class="btn btn-success mr-1 mb-1" (click) = "togglePromocodeActions()" *ngIf = "!promocodeActions">Show Actions</button>
+<button type="button" class="btn btn-danger mr-1 mb-1" (click) = "togglePromocodeActions()" *ngIf = "promocodeActions">Hide Actions</button>
+
+
+
+<div class="card" *ngIf = "promocodeActions">
   <div class="card-header">
     Assign promocode to cinema
   </div>
@@ -13,6 +18,28 @@
     <br/>
   </div>
 </div>
+
+<!--  Start Of Adding A Promocode -->
+<div class="card" *ngIf = "promocodeActions">
+  <div class="card-header">
+    Add new promocode
+  </div>
+  <div class="card-body">
+  
+    <h5 style="margin-top: 1px">Promocode</h5>          
+    <input id="input1" type="text" class="form-control mb-3">
+
+    <h5 style="margin-top: 10px">Type</h5>    
+    <input id="input1" type="text" class="form-control mb-3"> 
+  
+    <h5 style="margin-top: 10px">Value</h5>    
+    <input id="input1" type="text" class="form-control mb-3"> 
+  
+    <button type="button" class="btn btn-success mr-1 mb-1">Add</button>
+  </div>
+</div>
+<!--  End Of Adding A Promocode -->
+  
 
 <!--  Start of View Promocodes card -->
 <div class="card">
@@ -82,24 +109,3 @@
   {{ existPromocodes }}
 </div>
 <!--  End of View Promocodes card -->
-
-<!--  Start Of Adding A Promocode -->
-<div class="card">
-  <div class="card-header">
-    Add new promocode
-  </div>
-  <div class="card-body">
-
-    <h5 style="margin-top: 1px">Promocode</h5>          
-    <input id="input1" type="text" class="form-control mb-3">
-
-    <h5 style="margin-top: 10px">Type</h5>    
-    <input id="input1" type="text" class="form-control mb-3"> 
-
-    <h5 style="margin-top: 10px">Value</h5>    
-    <input id="input1" type="text" class="form-control mb-3"> 
-
-    <button type="button" class="btn btn-success mr-1 mb-1">Add</button>
-  </div>
-</div>
-<!--  End Of Adding A Promocode -->

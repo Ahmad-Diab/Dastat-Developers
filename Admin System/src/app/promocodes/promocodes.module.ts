@@ -4,11 +4,14 @@ import { CommonModule } from '@angular/common';
 
 import { PromocodesRoutes } from './promocodes.routing';
 import { ViewPromocodesComponent } from './view-promocodes/view-promocodes.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(PromocodesRoutes)
+    RouterModule.forChild(PromocodesRoutes),
+    FormsModule
   ],
   declarations: [ViewPromocodesComponent]
 })

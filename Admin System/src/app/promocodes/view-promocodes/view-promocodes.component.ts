@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PromocodesService } from '../../@services/promocodes.service';
+import { FormControl} from '@angular/forms';
+import { SelectControlValueAccessor } from '@angular/forms';
+
 
 @Component({
   selector: 'app-view-promocodes',
@@ -12,6 +15,8 @@ export class ViewPromocodesComponent implements OnInit {
   existPromocodes = ""  // String that when there are no promocodes, assigned to a message stating that for the admin
   promocodesToShow = [] //array of unique promocodes to choose from for assigning  promocode to cinema
   cinemasToShow = [] //array of cinemas to choose between for assigning promocode to cinema
+  promocodeValue;
+  cinemaValue;
   promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
 
   constructor(public promocodesService: PromocodesService) { }
@@ -31,6 +36,11 @@ export class ViewPromocodesComponent implements OnInit {
       this.cinemasToShow = response.data.cinemaResults;
     });
 
+  }
+  assignPromocodeToCinema(){
+    this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
+
+    })
   }
 
   togglePromocodeActions() {

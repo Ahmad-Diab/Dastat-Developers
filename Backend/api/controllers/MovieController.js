@@ -20,7 +20,7 @@ module.exports.getMovieInfo = function(req, res, next){
 
 module.exports.getMovies = function(req,res,next){
 
-    database.query('SELECT * from movies ORDER BY feature desc',
+    database.query('SELECT * from movies where status ="ACCEPTED" ORDER BY feature desc',
    
 function(error,results,fields){
     if(error) return next(error);
@@ -39,7 +39,7 @@ function(error,results,fields){
 
 module.exports.getMoviesHighRatings = function(req,res,next){
 
-    database.query('SELECT * from movies ORDER BY rating desc',
+    database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating desc',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -55,7 +55,7 @@ function(error,results,fields){
 
 module.exports.getMoviesLowRatings = function(req,res,next){
 
-    database.query('SELECT * from movies ORDER BY rating asc',
+    database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating asc',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -77,7 +77,7 @@ function(error,results,fields){
 
 module.exports.getMoviesLastestDate = function(req,res,next){
 
-    database.query('Select * FROM movies ORDER BY year desc',
+    database.query('Select * FROM movies where status ="ACCEPTED" ORDER BY year desc',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -93,7 +93,7 @@ function(error,results,fields){
 
 module.exports.getMoviesOldesttDate = function(req,res,next){
 
-    database.query('Select * FROM movies ORDER BY year asc',
+    database.query('Select * FROM movies where status ="ACCEPTED"  ORDER BY year asc',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -110,7 +110,7 @@ function(error,results,fields){
 //--View Biography Movies
 module.exports.getMoviesBiography = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Biography" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED"  ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -125,7 +125,7 @@ function(error,results,fields){
 //--View Thriller Movies
 module.exports.getMoviesThriller = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Thriller" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -140,7 +140,7 @@ function(error,results,fields){
 //--View Drama Movies
 module.exports.getMoviesDrama = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Drama" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -155,7 +155,7 @@ function(error,results,fields){
 //--View Adventure Movies
 module.exports.getMoviesAdventure = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Adventure" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -170,7 +170,7 @@ function(error,results,fields){
 //--View Horror Movies
 module.exports.getMoviesHorror = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Horror" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -184,7 +184,7 @@ function(error,results,fields){
 //--View Action Movies
 module.exports.getMoviesAction = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Action" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
@@ -198,7 +198,7 @@ function(error,results,fields){
 //--View Comedy Movies
 module.exports.getMoviesComedy = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Comedy" ORDER BY rating desc ',
+    database.query('Select * FROM movies where genre="Comedy"  AND  status ="ACCEPTED" ORDER BY rating desc ',
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){

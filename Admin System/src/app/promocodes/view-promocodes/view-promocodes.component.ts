@@ -37,12 +37,16 @@ export class ViewPromocodesComponent implements OnInit {
     });
 
   }
-  
+
   assignPromocodeToCinema(){
     this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
     })
   }
 
+  /**
+   * toggles between showing and hiding the promocodes actions by changing the var that the actions visibility depend on
+   * Actions are: assign promocode to cinema, Add promocode, edit promocode
+   */
   togglePromocodeActions() {
     this.promocodeActions = !this.promocodeActions
   }

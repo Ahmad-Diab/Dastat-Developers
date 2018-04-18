@@ -46,12 +46,19 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
         if (error) {
             return next(error);
         }
-
-        res.status(200).json({
-            err: null,
-            msg: 'Ticket has been verified successfully.',
-            data: results
-        });
+        if (results.changedRows) {
+            res.status(200).json({
+                err: null,
+                msg: 'Ticket has been verified successfully.',
+                data: results
+            });
+        } else {
+            res.status(404).json({
+                err: null,
+                msg: 'There is no ticket with this reservation_id.',
+                data: null
+            });
+        }
 
     });
 

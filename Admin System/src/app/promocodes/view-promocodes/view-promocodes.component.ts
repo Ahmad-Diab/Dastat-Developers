@@ -59,4 +59,13 @@ export class ViewPromocodesComponent implements OnInit {
     this.promocodeActions = !this.promocodeActions
   }
 
+
+  delete(promocode: any){
+    console.log(promocode.promocode);
+    this.promocodesService.deletePromocode(promocode.promocode).subscribe((response) =>{
+      this.responseStatus = response.msg;
+     })
+     this.ngOnInit();
+}
+
 }

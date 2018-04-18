@@ -33,4 +33,11 @@ export class PromocodesService extends HttpService {
     })
   }
 
+  deletePromocode(promocode: string){
+    return this.post('/promocodes/deletePromocode/'+promocode)
+  }
+
+
+
+
 }

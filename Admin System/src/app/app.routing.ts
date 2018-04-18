@@ -58,6 +58,9 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'docs',
     loadChildren: './docs/docs.module#DocsModule'
+  },{
+    path: 'adminBooking',
+    loadChildren: './admin-booking/admin-booking.module#AdminBookingModule'
   }]
 }, {
   path: '',

@@ -21,6 +21,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { HttpService } from './@services/http.service';
 import { AuthService } from './@services/auth.service';
 import { HttpModule } from '@angular/http';
+import {AdminTicketService} from "./@services/admin-ticket.service";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,7 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
-  providers: [AuthGuard, CookieService, HttpService, AuthService],
+  providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

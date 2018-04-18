@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {Http} from "@angular/http";
+import {CookieService} from "angular2-cookie/core";
 
 @Injectable()
 export class AdminTicketService extends HttpService {
 
-  constructor(public cookie, public http:Http) {
+  constructor(public cookie: CookieService, public http:Http) {
     super(cookie, http);
   }
 
@@ -37,6 +38,7 @@ export class AdminTicketService extends HttpService {
   }
 
   verifyUnpaidTicket(adminUsername:String, reservation_id:String) {
+    //TODO this need to be patch method instead
     return this.post('/tickets/verifyUnpaidTicket',{
       'adminUsername': adminUsername,
       'reservation_id': reservation_id

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
-import { MakeReservationComponent} from "../admin-booking/make-reservation/make-reservation.component";
-import { VerifyTicketComponent} from "../admin-booking/verify-ticket/verify-ticket.component";
+import { MakeReservationComponent} from "./make-reservation/make-reservation.component";
+import { VerifyTicketComponent} from "./verify-ticket/verify-ticket.component";
 
 export const AdminBookingRoutes: Routes = [
   {

@@ -12,6 +12,8 @@ export class ViewPromocodesComponent implements OnInit {
   existPromocodes = ""  // String that when there are no promocodes, assigned to a message stating that for the admin
   promocodesToShow = [] //array of unique promocodes to choose from for assigning  promocode to cinema
   cinemasToShow = [] //array of cinemas to choose between for assigning promocode to cinema
+  promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
+
   constructor(public promocodesService: PromocodesService) { }
 
   ngOnInit() {
@@ -29,6 +31,10 @@ export class ViewPromocodesComponent implements OnInit {
       this.cinemasToShow = response.data.cinemaResults;
     });
 
+  }
+
+  togglePromocodeActions() {
+    this.promocodeActions = !this.promocodeActions
   }
 
 }

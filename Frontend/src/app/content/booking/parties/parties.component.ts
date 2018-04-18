@@ -41,7 +41,6 @@ export class PartiesComponent implements OnInit {
     this.viewMovies();
     this.selectedCinema = this.cookie.getObject('cinema');
     this.selectedMovie = this.cookie.getObject('movie');
-    
 
     
   }

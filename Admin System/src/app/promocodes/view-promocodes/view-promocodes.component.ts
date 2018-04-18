@@ -15,9 +15,10 @@ export class ViewPromocodesComponent implements OnInit {
   existPromocodes = ""  // String that when there are no promocodes, assigned to a message stating that for the admin
   promocodesToShow = [] //array of unique promocodes to choose from for assigning  promocode to cinema
   cinemasToShow = [] //array of cinemas to choose between for assigning promocode to cinema
-  promocodeValue;
-  cinemaValue;
+  promocodeValue =  ""; //variable for ngModel
+  cinemaValue = ""; //variable for ngModel
   promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
+  responseStatus = "";
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -38,8 +39,15 @@ export class ViewPromocodesComponent implements OnInit {
 
   }
 
+    // Inserting values from the ngModel into the service 
   assignPromocodeToCinema(){
+    if(this.cinemaValue === ""){
+      this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue,this.cinemaValue).subscribe((response) =>{
+        this.responseStatus = response.msg;
+      })      
+    }
     this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
+      this.responseStatus = response.msg;
     })
   }
 

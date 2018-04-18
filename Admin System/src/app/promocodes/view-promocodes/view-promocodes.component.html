@@ -9,13 +9,14 @@
 
 <div class="card-body" *ngIf = "promocodeActions">
 
+<!-- Start Of Assign Promocode -->
 <div class="card">
   <div class="card-header">
     Assign promocode to cinema
   </div>
   <div class="card-body">
     <select class="form-control" [(ngModel)]="promocodeValue">
-      <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
+        <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
     </select><br/>
     <select class="form-control" [(ngModel)]="cinemaValue" >
       <option *ngFor = "let cinema of cinemasToShow" value="{{cinema.name}},{{cinema.location}}"   >{{ cinema.name }} , {{ cinema.location }}</option>
@@ -23,7 +24,10 @@
     <button (click)="assignPromocodeToCinema()" type="button" class="btn btn-success mr-1 mb-1">Assign</button>
     <br/>
   </div>
+  {{ responseStatus }}
+
 </div>
+<!-- End Of Assign Promocode -->
 
 <!--  Start Of Adding A Promocode -->
 <div class="card">

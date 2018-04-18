@@ -317,10 +317,10 @@ module.exports.viewMoviesInHall = function(req, res, next){
     // COMPLETED delete the assigned movie of the requested hall.
     // COMPLETED User-name validation needs to be done!
 
-    var username = req.body['username'],
-        cinema_name = req.body['cinema_name'],
-        cinema_location = req.body['cinema_location'],
-        hall_number = req.body['hall_number'];
+    var username = req.params.username,
+        cinema_name = req.params.cinema_name,
+        cinema_location = req.params.cinema_location,
+        hall_number = req.params.hall_number;
         
     // Null Checkers
     console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number);

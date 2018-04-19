@@ -130,7 +130,7 @@ module.exports.viewPromocodes = function(req,res,next){
  */
 module.exports.editPromocode = function(req,res,next){
 
-  var promocode = req.params.promocode;//storing the value of column promocode in variable promocode
+  var promocode = req.body.promocode;//storing the value of column promocode in variable promocode
   var type = req.body.type;//storing the type of promocode in variable type
   var value = req.body.value;//storing the value of promocode in variable value
 

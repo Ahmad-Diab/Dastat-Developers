@@ -31,7 +31,11 @@ export class PromocodesService extends HttpService {
    * @param value 
    */
   editPromocode(promocode: string, type: string, value: string){
-    return this.post('promocodes/edit/'+promocode)
+    return this.post('promocodes/edit',{
+      "promocode": promocode,
+      "type": type,
+      "value": value
+    })
   }
   assignPromocodeToCinema(promocode : string,cinemaName : string,cinemaLocation : string){
     return this.post('promocodes/assignPromocodes',{

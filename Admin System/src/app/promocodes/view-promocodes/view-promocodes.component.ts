@@ -22,6 +22,7 @@ export class ViewPromocodesComponent implements OnInit {
   promocodeValueToEdit= "";//variable for ngModel
   promocodeTypeEdited= "";//variable for ngModel
   promocodeValueEdited= "";//variable for ngModel
+  editResponseStatus= ""; 
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -73,8 +74,8 @@ export class ViewPromocodesComponent implements OnInit {
 
   editPromocode(){
     this.promocodesService.editPromocode(this.promocodeValueToEdit,this.promocodeTypeEdited,this.promocodeValueEdited).subscribe((response) =>{
-      this.responseStatus= response.msg;
-  })
-  this.ngOnInit();
-}
+      this.editResponseStatus= response.msg;
+    })
+    this.ngOnInit();
+  }
 }

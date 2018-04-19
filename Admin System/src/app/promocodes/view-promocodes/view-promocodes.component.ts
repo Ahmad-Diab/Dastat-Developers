@@ -67,5 +67,10 @@ export class ViewPromocodesComponent implements OnInit {
      })
      this.ngOnInit();
 }
+AddPromocode(promocode:string ,value:string ,type:string) {
+  this.promocodesService.AddPromocodes(promocode,value,type).subscribe((response) =>{
+    this.responseStatus = response.msg;
+  })
+}
 
 }

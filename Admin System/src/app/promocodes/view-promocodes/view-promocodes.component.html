@@ -60,7 +60,7 @@
   <div class="card-body">
   
     <h5 style="margin-top: 1px">Promocode</h5>          
-    <select class="form-control" [(ngModel)]="promocodeValue">
+    <select class="form-control" [(ngModel)]="promocodeValueToedit">
       <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
     </select><br/>
 

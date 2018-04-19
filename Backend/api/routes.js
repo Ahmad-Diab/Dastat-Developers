@@ -7,6 +7,8 @@ var express = require('express');
 var router = express.Router();
 
 //Schema Controllers
+
+//-------- USER ---------
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
 var UserBooking = require('./Controllers/UserBookingController');
@@ -16,6 +18,10 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
+
+//----------- Admin ---------------
+var AdminHalls = require('./controllers/AdminHallsController');
+
 var MyMovies = require('./controllers/MyMoviesController');
 var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
@@ -108,7 +114,14 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/getTopMovies',Search.getTopMovies);
 
+//-----------------------------------------------Admin ROUTES----------------------
 
+//-------------------------------------------Halls Routes-----------------------------
+
+router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
+router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
+router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
+router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_location/:hall_number', AdminHalls.viewMoviesInHall);
 
 
 

@@ -49,15 +49,20 @@ export class ViewPromocodesComponent implements OnInit {
   }
 
     // Inserting values from the ngModel into the service 
-  assignPromocodeToCinema(){
+  assignPromocodeToCinema(promocode : string,cinema : string){
+    this.promocodeValue = promocode;
+    this.cinemaValue = cinema;
     if(this.cinemaValue === ""){
       this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue,this.cinemaValue).subscribe((response) =>{
         this.responseStatus = response.msg;
       })      
     }
-    this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
-      this.responseStatus = response.msg;
-    })
+    else{
+      this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
+        this.responseStatus = response.msg;
+      });
+    }  
+    this.ngOnInit();
   }
 
   delete(promocode: any){

@@ -14,6 +14,7 @@ export class AdminTicketService extends HttpService {
                   party_time:string, hall:string, payment:boolean ,tickets,
                   tickets_price: number, movie_id: number, comment: string) {
     let cinema_username = cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
+
     return this.post("/tickets/makeReservationAsAdmin", {
       'username': cinema_username,
       'cinema_name': cinema_name,
@@ -39,8 +40,8 @@ export class AdminTicketService extends HttpService {
 
   verifyUnpaidTicket(adminUsername:String, reservation_id:String) {
     //TODO this need to be patch method instead
-    return this.post('/tickets/verifyUnpaidTicket',{
-      'adminUsername': adminUsername,
+    return this.patch('/tickets/verifyUnpaidTicket',{
+      'username': adminUsername,
       'reservation_id': reservation_id
     });
   }

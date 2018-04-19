@@ -26,7 +26,7 @@ export class VerifyTicketComponent implements OnInit {
       this.ticketView = response.data;
     });
 
-    
+
   }
 
 }

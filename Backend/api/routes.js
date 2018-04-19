@@ -96,7 +96,9 @@ router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Seating routes--------------------------------------------//
 router.get('/layout/encoding', Seat.getSeats);
-
+router.post('/layout/add', Seat.addLayout);
+router.post('/layout/update', Seat.updateLayout);
+router.post('/layout/delete', Seat.deleteLayout);
 //----------------------------------------------------Viewing routes--------------------------------------------//
 router.get('/viewCinemas',Cinema.ViewCinemas);
 router.get('/viewMovies',Search.viewMovies);

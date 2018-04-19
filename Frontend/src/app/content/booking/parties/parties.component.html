@@ -12,9 +12,20 @@
         <div class="order-step-area">
             <div class="order-step first--step">1. What &amp; Where &amp; When</div>
         </div>
-
-    <h2 class="page-heading heading--outcontainer">Choose a movie</h2>
-</section>
+        <!--Dsiplay selected movie title-->
+        <div>
+            <h2 class="page-heading"><b>Selected Movie: {{selectedMovie.title}}</b></h2>
+        </div>
+        
+          <!--Check if the user already selected a movie to display correct message-->
+        <div *ngIf = "!selectedMovie">
+            <h2 class="page-heading heading--outcontainer">Choose a movie</h2>
+        </div>
+        
+        <div *ngIf = "selectedMovie">
+            <h2 class="page-heading heading--outcontainer">Choose another movie</h2>
+        </div>
+    
 
     <div class="choose-film">
         <div class="swiper-container" >
@@ -31,9 +42,22 @@
         </div>
         <div class="swiper-scrollbar"></div>
         </div>
+
     </div>
+
 <section class="container">
-    <h2 class="page-heading heading--outcontainer">Choose a cinema</h2>
+     <!--Dsiplay selected cinema name-->
+        <div >
+            <h2 class="page-heading"><b>Selected Cinema: {{selectedCinema.name}}</b></h2>
+        </div>
+    <!--Check if the user already selected a cinema to display correct message-->
+    <div *ngIf = "!selectedCinema">
+        <h2 class="page-heading heading--outcontainer">Choose a cinema</h2>
+    </div>
+    
+    <div *ngIf = "selectedCinema">
+        <h2 class="page-heading heading--outcontainer">Choose another cinema</h2>
+    </div>
 
     <div class="choose-movie">
         <div class="swiper-container" >
@@ -53,27 +77,23 @@
         <div class="swiper-scrollbar"></div>
         </div>
     </div>
+
+   
 </section>
+
 
 <section class="container">
     <div class="col-sm-12">
         <div class="choose-indector choose-indector--film">
             <strong>Choosen: </strong><span class="choosen-area"></span>
         </div>
-
-        <div *ngFor = "let party of parties ; let i=index">
-            <div *ngIf="i<1">
-                <h2 class="page-heading">Selected Cinema: {{party.cinema_name}}</h2>
+            <!--Dsiplay selected party time-->
+            <div>
+                <h2 class="page-heading"><b>Selected Party: {{selectedParty.date}}</b></h2>
             </div>
-        </div>
 
-        <div *ngFor = "let party of parties ; let i=index">
-            <div *ngIf="i<1">
-                <h2 class="page-heading">Selected Movie: {{party.title}}</h2>
-            </div>
-        </div>
         
-        <h2 class="page-heading">Date</h2>
+        <h2 class="page-heading">Choose a date</h2>
 
         <div class="choose-container choose-container--short">
 

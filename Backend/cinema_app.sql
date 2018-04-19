@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
@@ -28,7 +28,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `actors`
 --
 
-DROP DATABASE cinema_app;
 
 CREATE TABLE `actors` (
   `name` varchar(115) NOT NULL,

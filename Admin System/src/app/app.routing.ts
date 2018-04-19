@@ -6,7 +6,7 @@ import { AuthGuard } from './@guards/auth.guard';
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
-  canActivate: [AuthGuard],
+  //canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
@@ -58,7 +58,10 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'docs',
     loadChildren: './docs/docs.module#DocsModule'
-  }]
+  },{ 
+    path: 'movies',
+    loadChildren: './movies/movies.module#MoviesModule'
+}]
 }, {
   path: '',
   component: AuthLayoutComponent,

@@ -24,8 +24,15 @@ export class PromocodesService extends HttpService {
     return this.get('promocodes/viewPromocodesAndCinemas')
   }
 
-  editPromocode(){
-    return this.post('promocodes/edit/:promocode')
+  /**
+   * Sends post request to update a promocode:
+   * (Promocode, promocode type, promocode value)
+   * @param promocode 
+   * @param type 
+   * @param value 
+   */
+  editPromocode(promocode: string, type: string, value: string){
+    return this.post('promocodes/edit/'+promocode)
   }
 
   assignPromocodeToCinema(promocode : string,cinemaName : string,cinemaLocation : string){
@@ -43,7 +50,7 @@ export class PromocodesService extends HttpService {
       "value":value
     })
   }
-  
+
   deletePromocode(promocode: string){
     return this.post('/promocodes/deletePromocode/'+promocode)
   }

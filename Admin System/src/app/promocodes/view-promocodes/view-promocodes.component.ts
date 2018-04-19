@@ -19,7 +19,9 @@ export class ViewPromocodesComponent implements OnInit {
   cinemaValue = ""; //variable for ngModel
   promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
   responseStatus = "";
-  promocodeValueToedit= "";//variable for ngModel
+  promocodeValueToEdit= "";//variable for ngModel
+  promocodeTypeEdited= "";//variable for ngModel
+  promocodeValueEdited= "";//variable for ngModel
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -69,4 +71,10 @@ export class ViewPromocodesComponent implements OnInit {
      this.ngOnInit();
 }
 
+  editPromocode(){
+    this.promocodesService.editPromocode(this.promocodeValueToEdit,this.promocodeTypeEdited,this.promocodeValueEdited).subscribe((response) =>{
+      this.responseStatus= response.msg;
+  })
+  this.ngOnInit();
+}
 }

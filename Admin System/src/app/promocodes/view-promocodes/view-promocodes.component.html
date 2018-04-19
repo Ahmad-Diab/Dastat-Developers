@@ -41,15 +41,15 @@
       <div class="card-body">
       
         <h5 style="margin-top: 1px">Promocode</h5>          
-        <input id="input1" type="text" class="form-control mb-3">
+        <input #promocode  id="input1" type="text" class="form-control mb-3">
 
         <h5 style="margin-top: 10px">Type</h5>    
-        <input id="input1" type="text" class="form-control mb-3"> 
+        <input #type id="input1" type="text" class="form-control mb-3"> 
       
         <h5 style="margin-top: 10px">Value</h5>    
-        <input id="input1" type="text" class="form-control mb-3"> 
+        <input #value id="input1" type="text" class="form-control mb-3"> 
       
-        <button type="button" class="btn btn-success mr-1 mb-1">Add</button>
+        <button (click)={AddPromocode(promocode,type,value)} type="button" class="btn btn-success mr-1 mb-1">Add</button>
       </div>
     </div>
   <!--  End Of Adding A Promocode -->

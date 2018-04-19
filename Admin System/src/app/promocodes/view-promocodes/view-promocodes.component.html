@@ -49,8 +49,9 @@
         <h5 style="margin-top: 10px">Value</h5>    
         <input #value id="input1" type="text" class="form-control mb-3"> 
       
-        <button (click)="AddPromocode(promocode.value,type.value,value.value)" type="button" class="btn btn-success mr-1 mb-1">Add</button>
+        <button (click)="addPromocode(promocode.value,type.value,value.value)" type="button" class="btn btn-success mr-1 mb-1">Add</button>
       </div>
+      {{ addResponseStatus }}
     </div>
   <!--  End Of Adding A Promocode -->
 

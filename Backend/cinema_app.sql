@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2018 at 07:15 PM
--- Server version: 10.1.24-MariaDB
--- PHP Version: 7.1.6
+-- Generation Time: Apr 13, 2018 at 09:12 PM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `actors`
 --
+
+DROP DATABASE cinema_app;
 
 CREATE TABLE `actors` (
   `name` varchar(115) NOT NULL,
@@ -169,12 +171,12 @@ CREATE TABLE `cinemas` (
 --
 
 INSERT INTO `cinemas` (`location`, `address`, `name`, `number_of_halls`, `is3D`, `is4D`, `company`, `imagePath`, `imagePath2`) VALUES
-('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, b'1111111111111111111111111111111', b'1111111111111111111111111111111', 'Rainassance', 'https://image.ibb.co/dYho2H/mayo.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
-('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, b'1111111111111111111111111111111', b'1111111111111111111111111111111', 'Egyptian Producers', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
-('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, b'1111111111111111111111111111111', b'1111111111111111111111111111111', 'Rainassance', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg'),
-('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, b'1111111111111111111111111111111', b'1111111111111111111111111111111', 'Galaxco', 'https://image.ibb.co/joHz9x/galaxy_cinema.png', 'https://image.ibb.co/eUxo2H/cinema1.jpg'),
-('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, b'1111111111111111111111111111111', b'1111111111111111111111111111111', 'Galaxco', 'https://image.ibb.co/kjqK9x/point90.png', 'https://image.ibb.co/iLePbc/cinema2.jpg'),
-('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, b'1111111111111111111111111111111', b'1111111111111111111111111111111', 'Rainassance', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg');
+('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/dYho2H/mayo.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
+('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, b'1', b'1', 'Egyptian Producers', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
+('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg'),
+('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, b'1', b'1', 'Galaxco', 'https://image.ibb.co/joHz9x/galaxy_cinema.png', 'https://image.ibb.co/eUxo2H/cinema1.jpg'),
+('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, b'1', b'1', 'Galaxco', 'https://image.ibb.co/kjqK9x/point90.png', 'https://image.ibb.co/iLePbc/cinema2.jpg'),
+('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg');
 
 -- --------------------------------------------------------
 
@@ -268,44 +270,50 @@ CREATE TABLE `movies` (
   `feature` int(11) DEFAULT NULL,
   `release_date` datetime DEFAULT NULL,
   `rating` float DEFAULT NULL,
-  `status` varchar(20) DEFAULT 'PENDING'
+  `status` varchar(20) DEFAULT 'PENDING',
+  `admin_requested` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `movies`
 --
 
-INSERT INTO `movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `imagePath`, `cast`, `year`, `feature`, `release_date`, `rating`, `status`) VALUES
-(1, 'Ready Player One', '02:20:00', 'Action', 'When the creator of a virtual reality world called the OASIS dies, he releases a video in which he challenges all OASIS users to find his Easter Egg, which will give the finder his fortune.', 'https://image.ibb.co/gVP1un/ready_Player_One.jpg', 'Tye Sheridan, Olivia Cooke, Ben Mendelsohn', 2018, 3, '2018-03-18 00:00:00', 8, 'PENDING'),
-(2, 'I Can Only Imagine', '01:50:00', 'Drama', 'The inspiring and unknown true story behind MercyMes beloved, chart topping song that brings ultimate hope to so many is a gripping reminder of the power of true forgiveness.', 'https://image.ibb.co/g20Njn/ICan_Only_Imagine.jpg', 'Dennis Quaid, J. Michael Finley, Brody Rose', 2018, 3, '2018-03-15 00:00:00', 7.6, 'PENDING'),
-(3, 'Tomb Raider', '01:58:00', 'Action', 'Lara Croft, the fiercely independent daughter of a missing adventurer, must push herself beyond her limits when she finds herself on the island where her father disappeared.', 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg', 'Alicia Vikander, Dominic West, Walton Goggins', 2018, 3, '2018-03-07 00:00:00', 6.8, 'PENDING'),
-(4, 'Love, Simon', '01:50:00', 'Comedy', 'Simon Spier keeps a huge secret from his family, his friends, and all of his classmates: he is gay. When that secret is threatened, Simon must face everyone and come to terms with his identity.', 'https://image.ibb.co/fVygc7/Love_Simon.jpg', 'Nick Robinson, Jennifer Garner, Josh Duhamel', 2018, 3, '2018-03-16 00:00:00', 8.1, 'PENDING'),
-(5, 'Pacific Rim Uprising', '01:51:00', 'Action', 'Jake Pentecost, son of Stacker Pentecost, reunites with Mako Mori to lead a new generation of Jaeger pilots, including rival Lambert and 15-year-old hacker Amara, against a new Kaiju threat.', 'https://image.ibb.co/fYSzx7/Pacific_Rim.jpg', 'John Boyega, Scott Eastwood, Cailee Spaeny', 2018, 3, '2018-03-21 00:00:00', 6, 'PENDING'),
-(6, 'Tyler Perrys Acrimony', '02:00:00', 'Thriller', 'A faithful wife, tired of standing by her devious husband, is enraged when it becomes clear she has been betrayed.', 'https://image.ibb.co/cHDvpn/Tyler_Perrys_Acrimony.jpg', 'Taraji P. Henson, Lyriq Bent, Crystle Stewar', 2018, 3, '2018-03-30 00:00:00', 4.6, 'PENDING'),
-(7, 'Midnight Sun', '01:31:00', 'Drama', 'A 17-year-old girl suffers from a condition that prevents her from being out in the sunlight.', 'https://image.ibb.co/eB19FS/Midnight_Sun.jpg', 'Bella Thorne, Patrick Schwarzenegger, Rob Riggle', 2018, 3, '2018-03-22 00:00:00', 6.1, 'PENDING'),
-(8, 'Unsane', '01:38:00', 'Horror', 'A young woman is involuntarily committed to a mental institution, where she is confronted by her greatest fear--but is it real or a product of her delusion?', 'https://image.ibb.co/c1xVpn/Unsane.jpg', 'Claire Foy, Joshua Leonard, Jay Pharoah', 2018, 3, '2018-03-21 00:00:00', 6.8, 'PENDING'),
-(9, 'God is not Dead: A Light in Darkness', '02:00:00', 'Drama', 'Pastor Dave responds to the unimaginable tragedy of having his church, located on the grounds of the local university, burned down.', 'https://image.ibb.co/nR94FS/God_Is_Not_Dead_A_Light_In_Darkness.jpg', 'David A.R. White, John Corbett, Shane Harper', 2018, 3, '2018-03-30 00:00:00', 2.5, 'PENDING'),
-(10, 'Paul, Apostle of Christ', '01:48:00', 'Drama', 'The story covers Paul going from the most infamous persecutor of Christians to Jesus Christs most influential apostle.', 'https://image.ibb.co/dgU1Un/poly.jpg', 'Jim Caviezel, James Faulkner, Olivier Martinez', 2018, 3, '2018-03-23 00:00:00', 7, 'PENDING'),
-(11, 'The Hurricane Heist', '01:43:00', 'Thriller', 'Thieves attempt a massive heist against the U.S. Treasury as a Category 5 hurricane approaches one of its Mint facilities.', 'https://image.ibb.co/ezJLN7/HURRICANEHEIST_QUAD_preview_600x450.jpg', 'Toby Kebbell, Maggie Grace, Ryan Kwanten', 2018, 3, '2018-03-09 00:00:00', 4.9, 'PENDING'),
-(12, 'The Strangers: Prey at Night', '01:25:00', 'Horror', 'A family of four staying at a secluded mobile home park for the night are stalked and then hunted by three masked psychopaths.', 'https://image.ibb.co/kkBA5S/strangerset1.jpg', 'Christina Hendricks, Bailee Madison, Martin Henderson', 2018, 3, '2018-03-09 00:00:00', 5.8, 'PENDING'),
-(13, 'Sherlock Gnomes', '01:26:00', 'Animation', 'Garden gnomes, Gnomeo & Juliet, recruit renowned detective Sherlock Gnomes to investigate the mysterious disappearance of other garden ornaments.', 'https://image.ibb.co/fMgos7/index.jpg', 'Kelly Asbury, Mary J. Blige, Emily Blunt', 2018, 3, '2018-03-23 00:00:00', 4.8, 'PENDING'),
-(14, 'A Wrinkle in Time', '01:49:00', 'Adventure', 'After the disappearance of her scientist father, three peculiar beings send Meg, her brother, and her friend to space in order to find him. ', 'https://image.ibb.co/gjGA5S/index.jpg', 'Storm Reid, Oprah Winfrey, Reese Witherspoon', 2018, 3, '2018-03-09 00:00:00', 4.2, 'PENDING'),
-(15, 'Birthmarked', '01:30:00', 'Comedy', 'Two scientists raise 3 children contrarily to their genetic tendencies to prove the ultimate power of nurture over nature. ', 'https://image.ibb.co/eyrren/birth_Marked.jpg', 'Matthew Goode, Toni Collette, Fionnula Flanagan', 2018, 3, '2018-03-30 00:00:00', 5.5, 'PENDING'),
-(16, 'Detroit', '02:33:00', 'Crime', 'Fact-based drama set during the 1967 Detroit riots in which a group of rogue police officers respond to a complaint with retribution rather than justice on their minds.', 'https://image.ibb.co/kDagC7/indexx.jpg', 'John Boyega, Anthony Mackie, Algee Smith', 2017, 0, '2017-08-04 00:00:00', 7.4, 'PENDING'),
-(17, 'Logan', '02:33:00', 'Action', 'In the near future, a weary Logan cares for an ailing Professor X,somewhere on the Mexican border.However, Logans attempts to hide from the world, and his legacy,are upended when a young mutant arrives, pursued by dark forces', 'https://image.ibb.co/icxBC7/170244.jpg', 'Hugh Jackman, Patrick Stewart, Dafne Keen', 2017, 0, '2017-03-03 00:00:00', 8.1, 'PENDING'),
-(18, 'Dunkirk', '01:46:00', 'Action', 'Allied soldiers from Belgium, the British Empire and France are surrounded by the German Army, and evacuated during a fierce battle in World War II.', 'https://image.ibb.co/ggHNKn/Christopher_Segunda_Guerra_Mundial_Dunkerque_MEDIMA20170718_0058_31.jpg', 'Fionn Whitehead, Barry Keoghan, Mark Rylance', 2017, 0, '2017-07-21 00:00:00', 8, 'PENDING'),
-(19, 'Getout', '01:44:00', 'Horror', 'A young African-American visits his white girlfriends parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.', 'https://image.ibb.co/gJUrC7/indeex.jpg', 'Daniel Kaluuya, Allison Williams, Bradley Whitford', 2017, 0, '2017-02-24 00:00:00', 7.7, 'PENDING'),
-(20, 'The post', '01:56:00', 'Biography', 'A cover-up that spanned four U.S. Presidents pushed the countrys first female newspaperpublisher and a hard-driving editor to join an unprecedented battle between the press and the government.', 'https://image.ibb.co/dE9f5S/indyex.jpg', 'Meryl Streep, Tom Hanks, Sarah Paulson ', 2017, 0, '2017-01-12 00:00:00', 7.3, 'PENDING'),
-(21, 'Acts of Violence', '01:25:00', 'Action', 'When his fiancee is kidnapped by human traffickers, Roman (Ashton Holmes) and his ex-military brothers set out to track her down and save her before it is too late.', 'https://image.ibb.co/cbSYQS/indeyyx.jpg', 'Bruce Willis, Cole Hauser, Shawn Ashmore ', 2018, 1, '2018-01-12 00:00:00', 5, 'PENDING'),
-(22, 'Forever My Girl', '01:48:00', 'Drama', 'After being gone for a decade a country star returns home to the love he left behind.', 'https://image.ibb.co/jPDq5S/FOREVER_MY_GIRL_1024x576.jpg', 'Alex Roe, Jessica Rothe, John Benjamin Hickey ', 2018, 1, '2018-01-19 00:00:00', 6.1, 'PENDING'),
-(23, '12 Strong', '02:10:00', 'Action', '12 Strong tells the story of the first Special Forces team deployed to Afghanistan after 9/11; under the leadership of a new captain, the team must work with an Afghan warlord to take down for the Taliban.', 'https://image.ibb.co/hm7iQS/12_Strong_2018_movie_poster.jpg', 'Chris Hemsworth, Michael Shannon, Michael Peña  ', 2018, 1, '2018-01-19 00:00:00', 7, 'PENDING'),
-(24, 'Maze Runner: The Death Cure', '02:21:00', 'Action', 'Young hero Thomas embarks on a mission to find a cure for a deadly disease known as the \"Flare\".', 'https://image.ibb.co/dpgMC7/indyeuyx.jpg', 'Dylan O Brien, Ki Hong Lee, Kaya Scodelario   ', 2018, 1, '2018-01-19 00:00:00', 7, 'PENDING'),
-(25, 'Den of Thieves', '02:20:00', 'Action', 'A gritty crime saga which follows the lives of an elite unit of the LA County Sheriff s Dept. and the state s most successful bank robbery crew as the outlaws plan a seemingly impossible heist on the Federal Reserve Bank.', 'https://image.ibb.co/d53q5S/denofthievesheader.jpg', 'Gerard Butler, Pablo Schreiber, O Shea Jackson Jr.', 2018, 1, '2018-01-19 00:00:00', 7.1, 'PENDING'),
-(26, 'Black Panther', '02:14:00', 'Action', 'T Challa, the King of Wakanda, rises to the throne in the isolated, technologically advanced African nation, but his claim is challenged by a vengeful outsider who was a childhood victim of T Challa s father s mistake.', 'https://image.ibb.co/cOmos7/pt_blackpanther_characterposter_panther_123cbd2f.jpg', 'Chadwick Boseman, Michael B. Jordan, Lupita Nyong', 2018, 2, '2018-02-16 00:00:00', 7.8, 'PENDING'),
-(27, 'Peter Rabbit', '01:35:00', 'Animation', 'Feature adaptation of Beatrix Potters classic tale of a rebellious rabbit trying to sneak into a farmers vegetable garden.', 'https://image.ibb.co/m4Xpzn/inoidex.jpg', 'James Corden, Fayssal Bazzi, Domhnall Gleeson', 2018, 2, '2018-02-09 00:00:00', 6.5, 'PENDING'),
-(28, 'Game Night', '01:40:00', 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'PENDING'),
-(29, 'Annihilation', '01:55:00', 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'PENDING'),
-(30, 'Every Day', '01:37:00', 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'PENDING');
+INSERT INTO `movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `imagePath`, `cast`, `year`, `feature`, `release_date`, `rating`, `status`, `admin_requested`) VALUES
+(1, 'Ready Player One', '02:20:00', 'Action', 'When the creator of a virtual reality world called the OASIS dies, he releases a video in which he challenges all OASIS users to find his Easter Egg, which will give the finder his fortune.', 'https://image.ibb.co/gVP1un/ready_Player_One.jpg', 'Tye Sheridan, Olivia Cooke, Ben Mendelsohn', 2018, 3, '2018-03-18 00:00:00', 8, 'ACCEPTED', NULL),
+(2, 'I Can Only Imagine', '01:50:00', 'Drama', 'The inspiring and unknown true story behind MercyMes beloved, chart topping song that brings ultimate hope to so many is a gripping reminder of the power of true forgiveness.', 'https://image.ibb.co/g20Njn/ICan_Only_Imagine.jpg', 'Dennis Quaid, J. Michael Finley, Brody Rose', 2018, 3, '2018-03-15 00:00:00', 7.6, 'ACCEPTED', NULL),
+(3, 'Tomb Raider', '01:58:00', 'Action', 'Lara Croft, the fiercely independent daughter of a missing adventurer, must push herself beyond her limits when she finds herself on the island where her father disappeared.', 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg', 'Alicia Vikander, Dominic West, Walton Goggins', 2018, 3, '2018-03-07 00:00:00', 6.8, 'ACCEPTED', NULL),
+(4, 'Love, Simon', '01:50:00', 'Comedy', 'Simon Spier keeps a huge secret from his family, his friends, and all of his classmates: he is gay. When that secret is threatened, Simon must face everyone and come to terms with his identity.', 'https://image.ibb.co/fVygc7/Love_Simon.jpg', 'Nick Robinson, Jennifer Garner, Josh Duhamel', 2018, 3, '2018-03-16 00:00:00', 8.1, 'ACCEPTED', NULL),
+(5, 'Pacific Rim Uprising', '01:51:00', 'Action', 'Jake Pentecost, son of Stacker Pentecost, reunites with Mako Mori to lead a new generation of Jaeger pilots, including rival Lambert and 15-year-old hacker Amara, against a new Kaiju threat.', 'https://image.ibb.co/fYSzx7/Pacific_Rim.jpg', 'John Boyega, Scott Eastwood, Cailee Spaeny', 2018, 3, '2018-03-21 00:00:00', 6, 'ACCEPTED', NULL),
+(6, 'Tyler Perrys Acrimony', '02:00:00', 'Thriller', 'A faithful wife, tired of standing by her devious husband, is enraged when it becomes clear she has been betrayed.', 'https://image.ibb.co/cHDvpn/Tyler_Perrys_Acrimony.jpg', 'Taraji P. Henson, Lyriq Bent, Crystle Stewar', 2018, 3, '2018-03-30 00:00:00', 4.6, 'ACCEPTED', NULL),
+(7, 'Midnight Sun', '01:31:00', 'Drama', 'A 17-year-old girl suffers from a condition that prevents her from being out in the sunlight.', 'https://image.ibb.co/eB19FS/Midnight_Sun.jpg', 'Bella Thorne, Patrick Schwarzenegger, Rob Riggle', 2018, 3, '2018-03-22 00:00:00', 6.1, 'ACCEPTED', NULL),
+(8, 'Unsane', '01:38:00', 'Horror', 'A young woman is involuntarily committed to a mental institution, where she is confronted by her greatest fear--but is it real or a product of her delusion?', 'https://image.ibb.co/c1xVpn/Unsane.jpg', 'Claire Foy, Joshua Leonard, Jay Pharoah', 2018, 3, '2018-03-21 00:00:00', 6.8, 'ACCEPTED', NULL),
+(9, 'God is not Dead: A Light in Darkness', '02:00:00', 'Drama', 'Pastor Dave responds to the unimaginable tragedy of having his church, located on the grounds of the local university, burned down.', 'https://image.ibb.co/nR94FS/God_Is_Not_Dead_A_Light_In_Darkness.jpg', 'David A.R. White, John Corbett, Shane Harper', 2018, 3, '2018-03-30 00:00:00', 2.5, 'ACCEPTED', NULL),
+(10, 'Paul, Apostle of Christ', '01:48:00', 'Drama', 'The story covers Paul going from the most infamous persecutor of Christians to Jesus Christs most influential apostle.', 'https://image.ibb.co/dgU1Un/poly.jpg', 'Jim Caviezel, James Faulkner, Olivier Martinez', 2018, 3, '2018-03-23 00:00:00', 7, 'ACCEPTED', NULL),
+(11, 'The Hurricane Heist', '01:43:00', 'Thriller', 'Thieves attempt a massive heist against the U.S. Treasury as a Category 5 hurricane approaches one of its Mint facilities.', 'https://image.ibb.co/ezJLN7/HURRICANEHEIST_QUAD_preview_600x450.jpg', 'Toby Kebbell, Maggie Grace, Ryan Kwanten', 2018, 3, '2018-03-09 00:00:00', 4.9, 'ACCEPTED', NULL),
+(12, 'The Strangers: Prey at Night', '01:25:00', 'Horror', 'A family of four staying at a secluded mobile home park for the night are stalked and then hunted by three masked psychopaths.', 'https://image.ibb.co/kkBA5S/strangerset1.jpg', 'Christina Hendricks, Bailee Madison, Martin Henderson', 2018, 3, '2018-03-09 00:00:00', 5.8, 'ACCEPTED', NULL),
+(13, 'Sherlock Gnomes', '01:26:00', 'Animation', 'Garden gnomes, Gnomeo & Juliet, recruit renowned detective Sherlock Gnomes to investigate the mysterious disappearance of other garden ornaments.', 'https://image.ibb.co/fMgos7/index.jpg', 'Kelly Asbury, Mary J. Blige, Emily Blunt', 2018, 3, '2018-03-23 00:00:00', 4.8, 'ACCEPTED', NULL),
+(14, 'A Wrinkle in Time', '01:49:00', 'Adventure', 'After the disappearance of her scientist father, three peculiar beings send Meg, her brother, and her friend to space in order to find him. ', 'https://image.ibb.co/gjGA5S/index.jpg', 'Storm Reid, Oprah Winfrey, Reese Witherspoon', 2018, 3, '2018-03-09 00:00:00', 4.2, 'ACCEPTED', NULL),
+(15, 'Birthmarked', '01:30:00', 'Comedy', 'Two scientists raise 3 children contrarily to their genetic tendencies to prove the ultimate power of nurture over nature. ', 'https://image.ibb.co/eyrren/birth_Marked.jpg', 'Matthew Goode, Toni Collette, Fionnula Flanagan', 2018, 3, '2018-03-30 00:00:00', 5.5, 'ACCEPTED', NULL),
+(16, 'Detroit', '02:33:00', 'Crime', 'Fact-based drama set during the 1967 Detroit riots in which a group of rogue police officers respond to a complaint with retribution rather than justice on their minds.', 'https://image.ibb.co/kDagC7/indexx.jpg', 'John Boyega, Anthony Mackie, Algee Smith', 2017, 0, '2017-08-04 00:00:00', 7.4, 'ACCEPTED', NULL),
+(17, 'Logan', '02:33:00', 'Action', 'In the near future, a weary Logan cares for an ailing Professor X,somewhere on the Mexican border.However, Logans attempts to hide from the world, and his legacy,are upended when a young mutant arrives, pursued by dark forces', 'https://image.ibb.co/icxBC7/170244.jpg', 'Hugh Jackman, Patrick Stewart, Dafne Keen', 2017, 0, '2017-03-03 00:00:00', 8.1, 'ACCEPTED', NULL),
+(18, 'Dunkirk', '01:46:00', 'Action', 'Allied soldiers from Belgium, the British Empire and France are surrounded by the German Army, and evacuated during a fierce battle in World War II.', 'https://image.ibb.co/ggHNKn/Christopher_Segunda_Guerra_Mundial_Dunkerque_MEDIMA20170718_0058_31.jpg', 'Fionn Whitehead, Barry Keoghan, Mark Rylance', 2017, 0, '2017-07-21 00:00:00', 8, 'ACCEPTED', NULL),
+(19, 'Getout', '01:44:00', 'Horror', 'A young African-American visits his white girlfriends parents for the weekend, where his simmering uneasiness about their reception of him eventually reaches a boiling point.', 'https://image.ibb.co/gJUrC7/indeex.jpg', 'Daniel Kaluuya, Allison Williams, Bradley Whitford', 2017, 0, '2017-02-24 00:00:00', 7.7, 'ACCEPTED', NULL),
+(20, 'The post', '01:56:00', 'Biography', 'A cover-up that spanned four U.S. Presidents pushed the countrys first female newspaperpublisher and a hard-driving editor to join an unprecedented battle between the press and the government.', 'https://image.ibb.co/dE9f5S/indyex.jpg', 'Meryl Streep, Tom Hanks, Sarah Paulson ', 2017, 0, '2017-01-12 00:00:00', 7.3, 'ACCEPTED', NULL),
+(21, 'Acts of Violence', '01:25:00', 'Action', 'When his fiancee is kidnapped by human traffickers, Roman (Ashton Holmes) and his ex-military brothers set out to track her down and save her before it is too late.', 'https://image.ibb.co/cbSYQS/indeyyx.jpg', 'Bruce Willis, Cole Hauser, Shawn Ashmore ', 2018, 1, '2018-01-12 00:00:00', 5, 'ACCEPTED', NULL),
+(22, 'Forever My Girl', '01:48:00', 'Drama', 'After being gone for a decade a country star returns home to the love he left behind.', 'https://image.ibb.co/jPDq5S/FOREVER_MY_GIRL_1024x576.jpg', 'Alex Roe, Jessica Rothe, John Benjamin Hickey ', 2018, 1, '2018-01-19 00:00:00', 6.1, 'ACCEPTED', NULL),
+(23, '12 Strong', '02:10:00', 'Action', '12 Strong tells the story of the first Special Forces team deployed to Afghanistan after 9/11; under the leadership of a new captain, the team must work with an Afghan warlord to take down for the Taliban.', 'https://image.ibb.co/hm7iQS/12_Strong_2018_movie_poster.jpg', 'Chris Hemsworth, Michael Shannon, Michael Peña  ', 2018, 1, '2018-01-19 00:00:00', 7, 'ACCEPTED', NULL),
+(24, 'Maze Runner: The Death Cure', '02:21:00', 'Action', 'Young hero Thomas embarks on a mission to find a cure for a deadly disease known as the \"Flare\".', 'https://image.ibb.co/dpgMC7/indyeuyx.jpg', 'Dylan O Brien, Ki Hong Lee, Kaya Scodelario   ', 2018, 1, '2018-01-19 00:00:00', 7, 'ACCEPTED', NULL),
+(25, 'Den of Thieves', '02:20:00', 'Action', 'A gritty crime saga which follows the lives of an elite unit of the LA County Sheriff s Dept. and the state s most successful bank robbery crew as the outlaws plan a seemingly impossible heist on the Federal Reserve Bank.', 'https://image.ibb.co/d53q5S/denofthievesheader.jpg', 'Gerard Butler, Pablo Schreiber, O Shea Jackson Jr.', 2018, 1, '2018-01-19 00:00:00', 7.1, 'ACCEPTED', NULL),
+(26, 'Black Panther', '02:14:00', 'Action', 'T Challa, the King of Wakanda, rises to the throne in the isolated, technologically advanced African nation, but his claim is challenged by a vengeful outsider who was a childhood victim of T Challa s father s mistake.', 'https://image.ibb.co/cOmos7/pt_blackpanther_characterposter_panther_123cbd2f.jpg', 'Chadwick Boseman, Michael B. Jordan, Lupita Nyong', 2018, 2, '2018-02-16 00:00:00', 7.8, 'ACCEPTED', NULL),
+(27, 'Peter Rabbit', '01:35:00', 'Animation', 'Feature adaptation of Beatrix Potters classic tale of a rebellious rabbit trying to sneak into a farmers vegetable garden.', 'https://image.ibb.co/m4Xpzn/inoidex.jpg', 'James Corden, Fayssal Bazzi, Domhnall Gleeson', 2018, 2, '2018-02-09 00:00:00', 6.5, 'ACCEPTED', NULL),
+(28, 'Game Night', '01:40:00', 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'ACCEPTED', NULL),
+(29, 'Annihilation', '01:55:00', 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'ACCEPTED', NULL),
+(30, 'Every Day', '01:37:00', 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'ACCEPTED', NULL),
+(31, 'Ibrahim Labyad', '02:37:00', 'Action', 'Witnessing the Killing of his father as a kid, Ibraheim is dragged to the criminal underworld of Egypt. While making a name for himself, his plans meets Abdul-Malek Zarzur, the crime lord of the town.', 'https://image.ibb.co/hqBDWn/ibrahim.jpg', 'Ahmed el-Sakka,  Hend Sabry,  Amr Waked', 2009, 2, '2009-02-23 00:00:00', 7.4, 'PENDING', 'Amir_Karara'),
+(32, 'Masgoon Transit ', '03:37:00', 'Thriller', 'A professional thief was caught in the act of stealing and killing a security guard. ', 'https://image.ibb.co/ibZdxS/masgon.jpg', ' Ahmed Ezz,  Nour El-Sherif,  Salah Abdulla', 2008, 2, '2008-02-23 00:00:00', 6.3, 'PENDING', 'Amir_Karara'),
+(33, 'X-Large', '01:37:00', 'Comedy', 'Majdi is a young man who lives alone because of his obesity which kept him away from his friends. He gets into many situations that makes him uncomfortable, so he decides to ask his uncle for help.', 'https://image.ibb.co/fkVkcS/x.jpg', 'Ahmed Helmy,  Donia Samir Ghanem,  Emmy Samir Ghanem', 2011, 2, '2011-02-23 00:00:00', 7.3, 'PENDING', 'Andrew_Shady'),
+(34, 'Welad el-Amm ', '02:00:00', 'Drama', 'An Egyptian woman discovers that her husband is in fact a Jewish Mossad agent working for Israel. ', 'https://image.ibb.co/bZz0Bn/wlad.jpg', 'Kareem Abdel-Aziz,  Sherif Mounir,  Mona Zaki', 2009, 2, '2009-09-23 00:00:00', 7.4, 'PENDING', 'Andrew_Shady'),
+(35, ' Fasel wa Naood', '04:00:00', 'Comedy', 'The film story revolves around a taxi driver who has a son and a friend. His sons grandfather is fighting for the custody of the young boy after the death of his mother.', 'https://image.ibb.co/enK0Bn/fasl.jpg', 'Karim Abdel Aziz,  Dina Fuad,  Ahmed Rateb', 2012, 2, '2009-02-23 00:00:00', 6.5, 'PENDING', 'Israa_Yasser');
 
 -- --------------------------------------------------------
 
@@ -589,21 +597,21 @@ CREATE TABLE `tickets` (
 --
 
 INSERT INTO `tickets` (`reservation_id`, `payment`, `seat_number`, `date`, `time`, `hall`, `cinema_location`, `cinema_name`, `user`, `movie_id`, `price`, `comment`) VALUES
-(2, b'1111111111111111111111111111111', '2D', '2018-04-01', '10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 10, 50, ''),
-(3, b'1111111111111111111111111111111', '1B', '2018-04-01', '10:00:00', 2, 'New Cairo', 'Point 90', 'Mostafa_Fathy', 11, 50, ''),
-(4, b'1111111111111111111111111111111', '3C', '2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 19, 50, ''),
-(5, b'1111111111111111111111111111111', '1A', '2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 'Nour_Gaber', 14, 50, ''),
-(6, b'1111111111111111111111111111111', '2F', '2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 'Omar_Mehrez', 16, 50, ''),
-(7, b'1111111111111111111111111111111', '1D', '2018-04-10', '13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Hamza_Namira', 19, 50, ''),
-(14, b'1111111111111111111111111111111', '10D', '2018-04-10', '19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed', 1, 50, ''),
-(18, b'1111111111111111111111111111111', '4F', '2018-04-14', '16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed', 9, 50, ''),
-(20, b'1111111111111111111111111111111', '2C', '2018-04-10', '16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Mai_Emad', 8, 50, ''),
-(21, b'1111111111111111111111111111111', '5B', '2018-04-11', '16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Lola_Wael', 7, 50, ''),
-(22, b'1111111111111111111111111111111', '6D', '2018-04-11', '16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 6, 50, ''),
-(23, b'1111111111111111111111111111111', '3A', '2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 5, 50, ''),
-(24, b'1111111111111111111111111111111', '4B', '2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4, 50, ''),
-(25, b'1111111111111111111111111111111', '2A', '2018-04-10', '13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3, 50, ''),
-(30, b'1111111111111111111111111111111', '4B', '2018-04-14', '19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50, '');
+(2, b'1', '2D', '2018-04-01', '10:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 10, 50, ''),
+(3, b'1', '1B', '2018-04-01', '10:00:00', 2, 'New Cairo', 'Point 90', 'Mostafa_Fathy', 11, 50, ''),
+(4, b'1', '3C', '2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 'Anas_Mohamed', 19, 50, ''),
+(5, b'1', '1A', '2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 'Nour_Gaber', 14, 50, ''),
+(6, b'1', '2F', '2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 'Omar_Mehrez', 16, 50, ''),
+(7, b'1', '1D', '2018-04-10', '13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 'Hamza_Namira', 19, 50, ''),
+(14, b'1', '10D', '2018-04-10', '19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 'Anas_Mohamed', 1, 50, ''),
+(18, b'1', '4F', '2018-04-14', '16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 'Anas_Mohamed', 9, 50, ''),
+(20, b'1', '2C', '2018-04-10', '16:00:00', 1, '9th of Mayo', 'Mayo Movies', 'Mai_Emad', 8, 50, ''),
+(21, b'1', '5B', '2018-04-11', '16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Lola_Wael', 7, 50, ''),
+(22, b'1', '6D', '2018-04-11', '16:00:00', 2, '9th of Mayo', 'Mayo Movies', 'Anas_Mohamed', 6, 50, ''),
+(23, b'1', '3A', '2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 5, 50, ''),
+(24, b'1', '4B', '2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4, 50, ''),
+(25, b'1', '2A', '2018-04-10', '13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3, 50, ''),
+(30, b'1', '4B', '2018-04-14', '19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50, '');
 
 -- --------------------------------------------------------
 
@@ -696,7 +704,8 @@ ALTER TABLE `layout`
 -- Indexes for table `movies`
 --
 ALTER TABLE `movies`
-  ADD PRIMARY KEY (`movie_id`);
+  ADD PRIMARY KEY (`movie_id`),
+  ADD KEY `admin_requested` (`admin_requested`);
 
 --
 -- Indexes for table `movies_in_cinemas`
@@ -752,16 +761,19 @@ ALTER TABLE `users`
 --
 ALTER TABLE `layout`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
   MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
 -- Constraints for dumped tables
 --
@@ -787,6 +799,12 @@ ALTER TABLE `halls`
   ADD CONSTRAINT `Halls_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Halls_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Halls_ibfk_3` FOREIGN KEY (`layout`) REFERENCES `layout` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `movies`
+--
+ALTER TABLE `movies`
+  ADD CONSTRAINT `movies_ibfk_1` FOREIGN KEY (`admin_requested`) REFERENCES `admins_cinemas` (`admin`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `movies_in_cinemas`

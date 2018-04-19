@@ -18,7 +18,7 @@ module.exports.addSeats = function(req, res, next){
     encoded: req.body.encoding,
     name: req.body.name
   }  
-  database.query('INSERT INTO layout VALUES ?', layout,function (error, layout, fields){
+  database.query('INSERT INTO layout SET ?', layout,function (error, layout, fields){
       if(error) return next(error);
       console.log("Layout Added Successfully");
       console.log("layout");

@@ -30,8 +30,32 @@ var database = require('../config/db-connection');
 
 
 ////////////////////////////////////////////// ADD ALL CINEMAS MODULES //////////////////////////////////////////////
+module.exports.addCinema = function(req,res,next){
 
+    var 
+        location = req.body['location'],
+        address = req.body['address'],
+        name = req.body['name'],
+        number_of_halls = req.body['number_of_halls'],
+        is3D = req.body['is3D'],
+        is4D = req.body['is4D'],
+        company = req.body['company'],
+        imagePath = req.body['imagePath'],
+        imagePath2 = req.body['imagePath2'];
 
+    var query = 'INSERT INTO cinemas (location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2) VALUES (?,?,?,?,?,?,?,?,?)';
+
+    database.query(query,[location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2],function(error, results, fields){
+        if(error){
+            return next(error);  
+        } 
+        return res.status(200).json({
+            err: null,
+            msg: 'The cinema is added successfully.',
+            data: results
+        });
+    });
+}
 
 
 

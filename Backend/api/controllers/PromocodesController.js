@@ -38,45 +38,45 @@ module.exports.viewPromocodes = function(req,res,next){
   var cinemaLocation = req.body["cinema_location"]; //storing the value of column cinema_location in variable cinemaLocation  
   //Adding same validity checks to make sure user enter data in right format
   if(!Validations.isString(promocode)){
-    return res.status(422).json({
+    return res.status(200).json({
       err: null,
-      msg: 'Provided promocode must be of type String.',
+      msg: 'promocode is required.',
       data: null
     });
   }
   if(!Validations.isString(cinemaName)){
-    return res.status(422).json({
+    return res.status(200).json({
       err: null,
-      msg: 'Provided cinema name must be of type String.',
+      msg: 'Cinema info is required.',
       data: null
     });
   }
   if(!Validations.isString(cinemaLocation)){
-    return res.status(422).json({
+    return res.status(200).json({
       err: null,
-      msg: 'Provided cinema location must be of type String.',
+      msg: 'Cinema info is required.',
       data: null
     });
   }
   //NULL Checker
   if(!promocode) {
-    return res.status(422).json({
+    return res.status(200).json({
         err: null,
         msg: 'promocode is required.',
         data: null
     });
   }
   if(!cinemaLocation) {
-    return res.status(422).json({
+    return res.status(200).json({
         err: null,
-        msg: 'Cinema location is required.',
+        msg: 'Cinema info is required.',
         data: null
     });
   }
   if(!cinemaName) {
-    return res.status(422).json({
+    return res.status(200).json({
         err: null,
-        msg: 'Cinema name is required.',
+        msg: 'Cinema info is required.',
         data: null
     });
   }
@@ -116,6 +116,7 @@ module.exports.viewPromocodes = function(req,res,next){
       });
     });
   });
+
   
 };
 

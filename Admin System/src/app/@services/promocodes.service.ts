@@ -22,12 +22,27 @@ export class PromocodesService extends HttpService {
   getPromocodesAndCinemas(){
     return this.get('promocodes/viewPromocodesAndCinemas')
   }
+  editPromocode(){
+    return this.post('promocodes/edit/:promocode')
+  }
+  assignPromocodeToCinema(promocode : string,cinemaName : string,cinemaLocation : string){
+    return this.post('promocodes/assignPromocodes',{
+      "promocode":promocode,
+      "cinema_location":cinemaLocation,
+      "cinema_name":cinemaName
+    })
+  }
   AddPromocodes(promocode:string,type:string,value:string){
     return this.post('promocodes/addPromocode',{
       "promocode":promocode,
       "type":type,
       "value":value
     })
-
   }
+  
+  deletePromocode(promocode: string){
+    return this.post('/promocodes/deletePromocode/'+promocode)
+  }
+
+ 
 }

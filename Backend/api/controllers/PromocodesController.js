@@ -291,7 +291,7 @@ module.exports.editPromocode = function(req,res,next){
        }
   //helper method for assignPromocodeToCinema to get all promocodes and cinemas     
   module.exports.viewPromocodesAndCinemas = function(req, res, next){
-    database.query('SELECT promocode FROM promocodes',function(error, promocodeResults, fields){
+    database.query('SELECT promocode, type, value FROM promocodes',function(error, promocodeResults, fields){
       if(error) return next(error);
       database.query('SELECT name , location FROM cinemas',function(error, cinemaResults, fields){
         if(error) return next(error);

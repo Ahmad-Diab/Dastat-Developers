@@ -11,21 +11,27 @@ import { SelectControlValueAccessor } from '@angular/forms';
 })
 export class ViewPromocodesComponent implements OnInit {
 
-  promocodes = []   // array of promocodes, promocode has promocode data and in which cinema
-  existPromocodesAssigned = ""  // String, that when there are no promocodes assigned to a cineama, has message stating that for the admin
-  existPromocodes = ""  // String, that when there are no promocodes, has message stating that for the admin
-  promocodesToShow = [] //array of unique promocodes to choose from for assigning  promocode to cinema
-  cinemasToShow = [] //array of cinemas to choose between for assigning promocode to cinema
-  promocodeValue =  ""; //variable for ngModel
-  cinemaValue = ""; //variable for ngModel
-  promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
-  responseStatus = "";
-  promocodeValueToEdit= "";//variable for ngModel
-  promocodeTypeEdited= "";//variable for ngModel
-  promocodeValueEdited= "";//variable for ngModel
+  promocodes = []               //  array of promocodes, promocode has promocode data and in which cinema
+  promocodesToShow = []         //  array of unique promocodes to choose from for assigning  promocode to cinema
+  cinemasToShow = []            //  array of cinemas to choose between for assigning promocode to cinema
+
+  promocodeValue =  "";         //  variable for holding the promocode value when assigning a promocode to cinema
+  cinemaValue = "";             //  variable for holding the cinema value when assigning a promocode to cinema
+
+  promocodeValueToEdit= "";     //  promocode to be edited
+  promocodeTypeEdited= "";      //  variable for ngModel for promocode type for edit
+  promocodeValueEdited= "";     //  variable for ngModel for promocode value for edit
+
+  existPromocodesAssigned = ""  //  String, that when there are no promocodes assigned to a cineama, has message stating that for the admin
+  existPromocodes = ""          //  String, that when there are no promocodes, has message stating that for the admin
+  assignResponseStatus = "";    //  message for user when assigning promocode to cinema
   editResponseStatus= ""; 
   addResponseStatus= "";
-  assignedPromocodeView = true // controls which view is displayed. either view of promocodes or view of promocodes in which cinemas
+  deleteResponseStatus = "";    //  var that contains the message to the user upon deletion
+
+  promocodeActions = false      //  boolean for showing/hiding actions like assign, add, edit
+  assignedPromocodeView = true  //  controls which view is displayed. either view of promocodes or view of promocodes in which cinemas
+
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -44,7 +50,10 @@ export class ViewPromocodesComponent implements OnInit {
       this.cinemasToShow = response.data.cinemaResults;
       if(this.promocodesToShow.length === 0)  this.existPromocodes = "No Promocodes exist"
       else  this.existPromocodes = ""
+      this.getPromocodeAttributes(this.promocodesToShow[0].promocode);
     });
+
+
 
   }
 
@@ -54,21 +63,22 @@ export class ViewPromocodesComponent implements OnInit {
     this.cinemaValue = cinema;
     if(this.cinemaValue === ""){
       this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue,this.cinemaValue).subscribe((response) =>{
-        this.responseStatus = response.msg;
+        this.assignResponseStatus = response.msg;
+        this.ngOnInit();
       })      
     }
     else{
       this.promocodesService.assignPromocodeToCinema(this.promocodeValue,this.cinemaValue.split(",")[0],this.cinemaValue.split(",")[1]).subscribe((response) =>{
-        this.responseStatus = response.msg;
+        this.assignResponseStatus = response.msg;
+        this.ngOnInit();
       });
     }  
-    this.ngOnInit();
   }
 
   delete(promocode: any){
     console.log(promocode.promocode);
     this.promocodesService.deletePromocode(promocode.promocode).subscribe((response) =>{
-      this.responseStatus = response.msg;
+      this.deleteResponseStatus = response.msg;
       this.ngOnInit();
     })
   }
@@ -87,4 +97,14 @@ export class ViewPromocodesComponent implements OnInit {
       this.ngOnInit();
     })
   }
+
+  //  get specific promocode
+  getPromocodeAttributes(promocodeValue: string) {
+    this.promocodeValueToEdit = promocodeValue;
+    this.promocodesService.getPromocodeAttr(this.promocodeValueToEdit).subscribe((response) =>{
+      this.promocodeTypeEdited = response.data[0].type;
+      this.promocodeValueEdited = response.data[0].value;
+    })
+  }
+
 }

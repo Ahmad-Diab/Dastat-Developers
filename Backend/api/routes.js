@@ -187,10 +187,11 @@ router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 router.get('/promocodes', Promocodes.viewPromocodes);
 router.post('/promocodes/edit', Promocodes.editPromocode);
+router.get('/promocodes/viewPromocodesAndCinemas',Promocodes.viewPromocodesAndCinemas);
+router.get('/promocodes/:promocode', Promocodes.getPromocode);
 router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Promocodes.addPromocode);
 router.post('/promocodes/deletePromocode/:promocode', Promocodes.deletePromocode);
-router.get('/promocodes/viewPromocodesAndCinemas',Promocodes.viewPromocodesAndCinemas);
 
 
 

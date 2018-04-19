@@ -6,7 +6,7 @@ var Validations = require('../utils/validations');
 
 
 /**
- * Retrieves the promocode with its type, amount, and in which cinema
+ * Retrieves the promocode with its type, value, and in which cinema
  * 
  * @param {*} req 
  * @param {*} res Contains the property data that consist of the promocode results
@@ -19,6 +19,25 @@ module.exports.viewPromocodes = function(req,res,next){
         res.status(200).json({
             err : null,   
             msg : "All promocodes are retrieved successfully",
+            data : results
+        });
+    });   
+}
+
+/**
+ * Retrieves the promocode with its type and value
+ * 
+ * @param {*} req 
+ * @param {*} res Contains the property data that consist of the promocode needed
+ * @param {*} next 
+ */
+module.exports.getPromocode = function(req,res,next){
+	database.query('SELECT * FROM promocodes p WHERE p.promocode = ?', [req.params.promocode],
+	function(error, results, fields){
+        if(error) return next(error);
+        res.status(200).json({
+            err : null,   
+            msg : "The promocode is retrieved successfully",
             data : results
         });
     });   

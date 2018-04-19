@@ -143,16 +143,16 @@ router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
 //--------AS AN ADMIN I CAN EDIT MY REQUESTS--------------
-router.post('/requests/:movie_id',MyMovies.EditMyRequests);
+router.post('/requests/edit/:movie_id',MyMovies.EditMyRequests);
 
 //--------AS AN ADMIN I CAN EDIT MOVIES--------------
-router.post('/requests/:movie_id',MyMovies.EditMovies);
+router.post('/movie/:movie_id',MyMovies.EditMovies);
 
 //--------AS AN ADMIN I CAN DELETE MY REQUESTS--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
+router.post('/requests/delete/:movie_id',MyMovies.DeleteMyRequests);
 
 //--------AS AN ADMIN I CAN DELETE MOVIES--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
+router.post('/movie/delete/:movie_id',MyMovies.DeleteMovies);
 
 
 //--------AS AN ADMIN I CAN View A SINGLE MOVIE REQUEST--------------

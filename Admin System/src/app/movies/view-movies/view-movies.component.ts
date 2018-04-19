@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MoviesService } from '../../@services/movies.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { throttle } from '@swimlane/ngx-charts/release/utils';
 
 @Component({
   selector: 'app-view-movies',
@@ -8,9 +11,35 @@ import { Router } from '@angular/router';
 })
 export class ViewMoviesComponent implements OnInit {
 
-  constructor() { }
+  responeStatus="";
+  moviesAction= false
+  movies=[];
+
+  constructor(public movieServices: MoviesService,private router:Router,public cookie:CookieService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+        this.movieServices.viewAllMovies().subscribe((response)=>{
+        this.movies = response;
+        console.log(response);
+      });
+  }
+  toogleMovie(){
+    this.moviesAction = !this.moviesAction;
+  }
+  deleteMovie(movie_id: number){
+    this.movieServices.deleteMovie(movie_id).subscribe((response)=>{
+        this.responeStatus="Successfully deleted";
+    });
+    this.ngOnInit();
+  }
+   addMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+    year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string){
+
+      this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested).subscribe((response)=>{
+        this.responeStatus="Added"
+      });
+      this.ngOnInit();   
   }
 
 }

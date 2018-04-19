@@ -31,7 +31,7 @@ module.exports.getHallsForThatCinema = function(req, res){
         });
     }
 
-    var sql = "SELECT h.* FROM cinemas c , halls h WHERE c.name = h.cinema_name AND c.location = h.cinema_location AND c.name = ? AND c.location = ?";
+    var sql = "SELECT h.* , m.* FROM movies m , cinemas c , halls h WHERE c.name = h.cinema_name AND m.movie_id = h.movie AND c.location = h.cinema_location AND c.name = ? AND c.location = ?";
 
     database.query(sql,[cinema_name , cinema_location],function (err, result) {
         if (err) throw err;

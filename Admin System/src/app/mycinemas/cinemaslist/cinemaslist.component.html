@@ -1,0 +1,33 @@
+All Cinemas
+<div  class="card-body">
+  <div  class="table-responsive">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>location</th>
+          <th>Address</th>
+          <th>number of halls</th>
+          <th>is3D</th>
+          <th>is4D</th>
+          <th>company</th>
+          <th>imagePath </th>
+          <th>imagePath2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let cinema of cinemas" >
+          <td>{{cinema.name}}</td>
+          <td>{{cinema.location}}</td>
+          <td>{{cinema.address}}</td>
+          <td>{{cinema.number_of_halls}}</td>
+          <td>{{cinema.is3D.data[0]}}</td>
+          <td>{{cinema.is4D.data[0]}}</td>
+          <td>{{cinema.company}}</td>
+          <td><a href="{{cinema.imagePath}}">{{cinema.imagePath}}</a></td>
+          <td><a href="{{cinema.imagePath2}}">{{cinema.imagePath2}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

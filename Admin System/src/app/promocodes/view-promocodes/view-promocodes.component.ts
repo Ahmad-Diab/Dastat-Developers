@@ -19,6 +19,10 @@ export class ViewPromocodesComponent implements OnInit {
   cinemaValue = ""; //variable for ngModel
   promocodeActions = false    // boolean for showing/hiding actions like assign, add, edit
   responseStatus = "";
+  promocodeValueToEdit= "";//variable for ngModel
+  promocodeTypeEdited= "";//variable for ngModel
+  promocodeValueEdited= "";//variable for ngModel
+  editResponseStatus= ""; 
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -50,7 +54,7 @@ export class ViewPromocodesComponent implements OnInit {
       this.responseStatus = response.msg;
     })
   }
-
+  
   /**
    * toggles between showing and hiding the promocodes actions by changing the var that the actions visibility depend on
    * Actions are: assign promocode to cinema, Add promocode, edit promocode
@@ -73,4 +77,10 @@ AddPromocode(promocode:string ,value:string ,type:string) {
   })
 }
 
+  editPromocode(){
+    this.promocodesService.editPromocode(this.promocodeValueToEdit,this.promocodeTypeEdited,this.promocodeValueEdited).subscribe((response) =>{
+      this.editResponseStatus= response.msg;
+    })
+    this.ngOnInit();
+  }
 }

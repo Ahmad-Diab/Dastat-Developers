@@ -11,20 +11,34 @@ export class PromocodesService extends HttpService {
     super(cookie, http);
    }
 
-   /**
-    * Sends get request to get the promocodes data:
-    * (Promocode, type, value, cinema name that the promocode is used in, cinema location)
-    * @returns Array of JSON objects of promocodes
-    */
+  /**
+  * Sends get request to get the promocodes data:
+  * (Promocode, type, value, cinema name that the promocode is used in, cinema location)
+  * @returns Array of JSON objects of promocodes
+  */
   getPromocodes(){
     return this.get('promocodes');
   }
+  
   getPromocodesAndCinemas(){
     return this.get('promocodes/viewPromocodesAndCinemas')
   }
-  editPromocode(){
-    return this.post('promocodes/edit/:promocode')
+
+  /**
+   * Sends post request to update a promocode:
+   * (Promocode, promocode type, promocode value)
+   * @param promocode 
+   * @param type 
+   * @param value 
+   */
+  editPromocode(promocode: string, type: string, value: string){
+    return this.post('promocodes/edit',{
+      "promocode": promocode,
+      "type": type,
+      "value": value
+    })
   }
+
   assignPromocodeToCinema(promocode : string,cinemaName : string,cinemaLocation : string){
     return this.post('promocodes/assignPromocodes',{
       "promocode":promocode,
@@ -32,6 +46,7 @@ export class PromocodesService extends HttpService {
       "cinema_name":cinemaName
     })
   }
+
   AddPromocodes(promocode:string,type:string,value:string){
     return this.post('promocodes/addPromocode',{
       "promocode":promocode,
@@ -39,7 +54,7 @@ export class PromocodesService extends HttpService {
       "value":value
     })
   }
-  
+
   deletePromocode(promocode: string){
     return this.post('/promocodes/deletePromocode/'+promocode)
   }

@@ -31,7 +31,7 @@ export class AdminTicketService extends HttpService {
 
   viewTicketInfo(adminUsername:String, reservation_id:String) {
     return this.get('/tickets/viewTicketInfo',{ headers: {
-        'adminUsername': adminUsername,
+        'username': adminUsername,
         'reservation_id': reservation_id
     }
     });

@@ -101,7 +101,7 @@ module.exports.viewTicketInfo = function(req, res, next){
         });
     }
 
-    let sqlQuery = "SELECT * FROM Tickets WHERE reservation_id = ?;";
+    let sqlQuery = "SELECT * FROM Tickets T INNER JOIN Movies M ON  T.movie_id = M.movie_id WHERE T.reservation_id = ?;";
 
     database.query(sqlQuery,reservation_id, function (error, results) {
         if (error) {
@@ -111,13 +111,13 @@ module.exports.viewTicketInfo = function(req, res, next){
             res.status(200).json({
                 err: null,
                 msg: 'Tickets data retrieved successfully.',
-                data: results
+                data: results[0]
             });
         else
             res.status(404).json({
                 err: null,
                 msg: 'Tickets data not found.',
-                data: results
+                data: null
             });
 
     });

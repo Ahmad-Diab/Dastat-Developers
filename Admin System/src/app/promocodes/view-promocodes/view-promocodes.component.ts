@@ -30,4 +30,12 @@ export class ViewPromocodesComponent implements OnInit {
 
   }
 
+  AddPromocode(promocode:string, type:string, value:string) {
+
+    this.promocodesService.AddPromocodes(promocode,type,value).subscribe((response) => {
+      
+    });
+  
+  }
+
 }

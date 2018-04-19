@@ -22,5 +22,12 @@ export class PromocodesService extends HttpService {
   getPromocodesAndCinemas(){
     return this.get('promocodes/viewPromocodesAndCinemas')
   }
+  AddPromocodes(promocode:string,type:string,value:string){
+    return this.post('promocodes/addPromocode',{
+      "promocode":promocode,
+      "type":type,
+      "value":value
+    })
 
+  }
 }

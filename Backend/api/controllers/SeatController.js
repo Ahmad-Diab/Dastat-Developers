@@ -12,7 +12,7 @@ module.exports.getSeats = function(req, res, next){
 }
 
 //TODO:: CRUD Operations for layout table.
-module.exports.addSeats = function(req, res, next){
+module.exports.addLayout = function(req, res, next){
   var layout={
     id: req.body.id,
     encoded: req.body.encoding,
@@ -26,7 +26,7 @@ module.exports.addSeats = function(req, res, next){
 }
 
 
-module.exports.updateSeats = function(req, res, next){  
+module.exports.updateLayout = function(req, res, next){  
   database.query('UPDATE layout SET encoded = ?, name = ? where id = ? ',[req.body.encoding, req.body.name, req.body.id], function (error, layout, fields){
       if(error) return next(error);
       console.log("Layout Updated Successfully");
@@ -35,7 +35,7 @@ module.exports.updateSeats = function(req, res, next){
 }
 
 
-module.exports.addSeats = function(req, res, next){
+module.exports.deleteLayout = function(req, res, next){
   database.query('DELETE FROM layout where id = ?', req.body.id, function (error, layout, fields){
       if(error) return next(error);
       console.log("Layout Deleted Successfully");

@@ -34,26 +34,41 @@ export class VerifyTicketComponent implements OnInit {
     console.log(this.reservation_id);
 
     if (this.reservation_id) {
-      this.adminTicketService.viewTicketInfo('some admin', this.reservation_id)
-        .subscribe((res) => {
-          //TODO check response status
-          if (!res.err && res.data) {
-            this.ticketView = res.data;
-            this.ticketIsLoaded = true;
-            if(this.ticketView.payment.data[0]) {
-              this.ticketVerified = true;
-              this.btn_verifyTicket = 'Verified';
+      try {
+        this.adminTicketService.viewTicketInfo('some admin', this.reservation_id)
+          .subscribe((res) => {
+            //TODO check response status
+            if (!res.err && res.data) {
+              this.ticketView = res.data;
+              this.ticketIsLoaded = true;
+              if (this.ticketView.payment.data[0]) {
+                this.ticketVerified = true;
+                this.btn_verifyTicket = 'Verified';
+              } else {
+                this.ticketVerified = false;
+                this.btn_verifyTicket = 'Verify Ticket';
+              }
             } else {
+              this.ticketIsLoaded = false;
               this.ticketVerified = false;
               this.btn_verifyTicket = 'Verify Ticket';
             }
-          } else {
-            this.ticketIsLoaded = false;
-            this.ticketVerified = false;
-            this.btn_verifyTicket = 'Verify Ticket';
-          }
-        });
+          });
+      } finally {
+        this.ticketIsLoaded = false;
+        this.ticketVerified = true;
+        this.btn_verifyTicket = 'Verify Ticket';
+      }
+
       console.log(this.ticketView);
+    } else {
+      this.ticketView = null;
+    }
+
+    if(!this.ticketView) {
+      this.ticketIsLoaded = false;
+      this.ticketVerified = true;
+      this.btn_verifyTicket = 'Verify Ticket';
     }
   }
 

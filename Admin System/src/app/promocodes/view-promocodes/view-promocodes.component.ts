@@ -23,6 +23,7 @@ export class ViewPromocodesComponent implements OnInit {
   promocodeTypeEdited= "";//variable for ngModel
   promocodeValueEdited= "";//variable for ngModel
   editResponseStatus= ""; 
+  addResponseStatus= ""; 
 
   constructor(public promocodesService: PromocodesService) { }
 
@@ -68,19 +69,19 @@ export class ViewPromocodesComponent implements OnInit {
     this.promocodeActions = !this.promocodeActions
   }
 
-
   delete(promocode: any){
     console.log(promocode.promocode);
     this.promocodesService.deletePromocode(promocode.promocode).subscribe((response) =>{
       this.responseStatus = response.msg;
      })
      this.ngOnInit();
-}
-AddPromocode(promocode:string ,value:string ,type:string) {
-  this.promocodesService.AddPromocodes(promocode,value,type).subscribe((response) =>{
-    this.responseStatus = response.msg;
-  })
-}
+  }
+
+  addPromocode(promocode:string ,value:string ,type:string) {
+    this.promocodesService.addPromocodes(promocode,value,type).subscribe((response) =>{
+      this.addResponseStatus = response.msg;
+    })
+  }
 
   editPromocode(){
     this.promocodesService.editPromocode(this.promocodeValueToEdit,this.promocodeTypeEdited,this.promocodeValueEdited).subscribe((response) =>{

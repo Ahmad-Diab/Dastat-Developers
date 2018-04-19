@@ -47,7 +47,7 @@ export class PromocodesService extends HttpService {
     })
   }
 
-  AddPromocodes(promocode:string,type:string,value:string){
+  addPromocodes(promocode:string,type:string,value:string){
     return this.post('promocodes/addPromocode',{
       "promocode":promocode,
       "type":type,

@@ -148,24 +148,3 @@
   {{ existPromocodes }}
 </div>
 <!--  End of View Promocodes card -->
-
-<!--  Start Of Adding A Promocode -->
-<div class="card">
-  <div class="card-header">
-    Add new promocode
-  </div>
-  <div class="card-body">
-
-    <h5 style="margin-top: 1px">Promocode</h5>          
-    <input #promocode id="input1" type="text" class="form-control mb-3">
-
-    <h5 style="margin-top: 10px">Type</h5>    
-    <input #type id="input1" type="text" class="form-control mb-3"> 
-
-    <h5 style="margin-top: 10px">Value</h5>    
-    <input #value id="input1" type="text" class="form-control mb-3"> 
-
-    <button (click)="AddPromocode(promocode.value,type.value,value.value)" type ="button" class="btn btn-success mr-1 mb-1">Add</button>
-  </div>
-</div>
-<!--  End Of Adding A Promocode -->

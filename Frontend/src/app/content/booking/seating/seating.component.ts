@@ -19,9 +19,9 @@ export class SeatingComponent implements OnInit {
     public seatingservice: SeatingService) { }
 
   ngOnInit() {
-    
 
-    
+
+
 
     var data = this.cookie.getObject('booking');
 
@@ -42,20 +42,20 @@ export class SeatingComponent implements OnInit {
   }
 
   booked(seat: string) {
-    for(var i = 0; i < this.seats.length; i++)
-      if(this.seats[i].seat_number == seat)
+    for (var i = 0; i < this.seats.length; i++)
+      if (this.seats[i].seat_number == seat)
         return true;
     return false;
   }
 
   select(seat: string) {
-    for(var i = 0; i < this.seats.length; i++)
-      if(this.seats[i].seat_number.includes(seat))
+    for (var i = 0; i < this.seats.length; i++)
+      if (this.seats[i].seat_number.includes(seat))
         return;
 
-    if(this.selected.includes(seat)){
+    if (this.selected.includes(seat)) {
       var index = this.selected.indexOf(seat);
-      this.selected.splice( index, 1 );
+      this.selected.splice(index, 1);
     }
     else
       this.selected.push(seat);

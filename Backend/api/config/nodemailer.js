@@ -1,20 +1,41 @@
-var  hbs = require('nodemailer-express-handlebars'),
-  email = process.env.MAILER_EMAIL_ID || 'auth_email_address@gmail.com',
-  pass = process.env.MAILER_PASSWORD || 'auth_email_pass'
-  nodemailer = require('nodemailer');
-
-var smtpTransport = nodemailer.createTransport({
-  service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
+var nodemailer = require('nodemailer');
+var user = 'dastat.developers@gmail.com';
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
   auth: {
-    user: email,
-    pass: pass
+    user: 'dastat.developers@gmail.com',
+    pass: 'dastatt12'
   }
 });
-
+const mailOptions = {
+  from: 'dastat.developers@gmail.com', // sender address
+  to: 'mnmostafa.nasr@gmail.com', // list of receivers
+  subject: 'Subject of your email', // Subject line
+  html: '<p>Your html here</p>'// plain text body
+};
+module.exports={
+  sendmail(to,html){
+    transporter.sendMail({
+      from: 'dastat.developers@gmail.com',
+      to: to,
+      subject: 'Subject of your email',
+      html: html
+    },function(error, info){
+      if (error) {
+        console.log("error");
+        console.log("hhhhhhhh"+error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  
+  }
+  };
+  /*
 var handlebarsOptions = {
   viewEngine: 'handlebars',
   viewPath: path.resolve('./api/templates/'),
   extName: '.html'
 };
-
-smtpTransport.use('compile', hbs(handlebarsOptions));
+*/
+//smtpTransport.use('compile', hbs(handlebarsOptions));

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CinemaslistService } from '../../../@services/cinemaslist.service'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SelectControlValueAccessor } from '@angular/forms';
+import { SearchService } from '../../../@services/search.service';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-cinemas-list',
@@ -11,13 +14,12 @@ import { SelectControlValueAccessor } from '@angular/forms';
 export class CinemasListComponent implements OnInit {
   cinemas = [];
   sorting_item;
-  searchValue = "All";
+  searchValue ;
   locations ;
   is3D = true;
   is4D = true;
-  temp;
   constructor(public cinemalistService: CinemaslistService,
-  public router: Router, public route: ActivatedRoute) { 
+  public router: Router, public route: ActivatedRoute , public searchService : SearchService) { 
 
     this.route.params.subscribe((params: Params )=> {
       this.sorting_item = params['sorting_item'];
@@ -25,17 +27,23 @@ export class CinemasListComponent implements OnInit {
     });
   }
 
+  onSearch(searchKey : String = '') {
+    console.log(searchKey);
+    this.searchService.getSearchResult(searchKey).subscribe((response) => {
+      this.cinemas = response.data.Cinemas;
+    });
+  }
   ngOnInit() {
+
+    this.searchValue = 'All';
+
     this.cinemalistService.getDistinctLocation().subscribe((response) => {
       this.locations=response;
-      console.log(this.locations);
     });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       this.cinemas=response;
-      console.log(this.cinemas);
 
     });
-    console.log(this.searchValue);
 
   }
   
@@ -46,11 +54,15 @@ filter(){
   if(this.is4D) cinema4d = 1;
   this.cinemalistService.filterByLocation(this.searchValue,cinema3d,cinema4d).subscribe((response) => {
     this.cinemas = response; 
+    console.log(response);
+
   });
 }
 
   cinemanav(cinema) {
     this.router.navigate(['/cinemas', cinema.name, cinema.location]);
   }
+
+  
 
 }

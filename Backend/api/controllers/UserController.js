@@ -24,7 +24,20 @@ module.exports.getUsers = function(req, res, next){
   });
 }
 
+module.exports.editProfile = function(req, res, next){
+     var username = req.params.username;
+     var email = req.body.email;
+     var first_name = req.body.first_name;
+     var last_name = req.body.last_name;
+     var phone_number = req.body.phone_number;
+     var age = req.body.age;
+
+     database.query('UPDATE Users SET email = ?, first_name = ?, last_name = ?, phone_number = ?, age = ? where username = ?' ,[email,first_name,last_name,phone_number,age,username], function(err, results, fields) {
+       if(err) return next(err);
+       return res.send(results);
+         });
+}
+
 module.exports.test = function(req, res, next) {
   console.log(req.body);
 }
-

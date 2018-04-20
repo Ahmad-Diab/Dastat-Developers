@@ -20,7 +20,7 @@ export class HallsService extends HttpService{
   }
 
   getMoviesForCinema(cinema_name , cinema_location){
-    return this.get('/admin/getCurrentMoviesForCinema/'+cinema_location+'/'+cinema_name);
+    return this.get('/userBooking/getCurrentMoviesForCinema/'+cinema_location+'/'+cinema_name);
   }
 
   deleteMovieFromHall(data){

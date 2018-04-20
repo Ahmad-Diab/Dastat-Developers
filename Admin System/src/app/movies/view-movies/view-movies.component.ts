@@ -44,7 +44,7 @@ addMovie(title: string, duration: number, genre: string, description: string,ima
         this.responeStatus="Added";
         this.ngOnInit();
       });  
-     
-  }
+}
+
 
 }

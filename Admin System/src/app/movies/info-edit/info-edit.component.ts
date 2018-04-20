@@ -27,6 +27,15 @@ export class InfoEditComponent implements OnInit {
     this.movieEdit = !this.movieEdit;
   }
 
+  //---------EDIT A MOVIE----------------
+editMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string,movie_id){
+
+      this.MoviesService.editMovie(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested,movie_id).subscribe((response)=>{
+          this.ngOnInit();
+        });  
+  }
+
   putMovieInCookie(){
     this.cookie.putObject('movie' , this.movie);
   } 

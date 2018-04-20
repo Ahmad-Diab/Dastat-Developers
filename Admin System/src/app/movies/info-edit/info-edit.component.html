@@ -42,7 +42,7 @@
             <div class="row text-center">
               <div class="col">
                 <h2 class="mt-0">Duration</h2>
-                <p>{{movie.duration}}</p>
+                <p>{{movie.duration}} hrs</p>
               </div>
               <div class="col">
                 <h2 class="mt-0">Category</h2>
@@ -115,8 +115,8 @@
             
                       <h5 style="margin-top: 10px">Admin</h5>    
                       <input #adminrequested id="input1" type="text" class="form-control mb-3">
-                      
-                      <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="addMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,adminrequested.value)" > Let's go bitch</button>
+
+                      <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="editMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,adminrequested.value,movie.movie_id)" > Let's go bitch</button>
                      
                     </div>
                 </div>

@@ -147,7 +147,7 @@ module.exports.EditMyRequests=function(req,res,next){
         duration = req.body['duration'],
         genre = req.body['genre'],
         description = req.body['description'],
-        imagePath = req.body['imagepath'],
+        imagePath = req.body['imagePath'],
         cast = req.body.cast['cast'],
         year = req.body['year'],
         feature = req.body['feature'],
@@ -242,7 +242,7 @@ module.exports.EditMovies=function(req,res,next){
         duration = req.body['duration'],
         genre = req.body['genre'],
         description = req.body['description'],
-        imagePath = req.body['imagepath'],
+        imagePath = req.body['imagePath'],
         cast = req.body.cast['cast'],
         year = req.body['year'],
         feature = req.body['feature'],
@@ -259,7 +259,7 @@ module.exports.EditMovies=function(req,res,next){
             oldTitle= results[0].title,
             oldDuration = results[0].duration,
             oldDescribtion = results[0].description,
-            oldImagePath = results[0].imagepath,
+            oldImagePath = results[0].imagePath,
             oldCast = results[0].cast,
             oldYear = results[0].year,
             oldFeature =results[0].feature,
@@ -302,7 +302,7 @@ module.exports.EditMovies=function(req,res,next){
              }
 
 
-             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
+             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE  movies.movie_id = ?';
              database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.movie_id],
              function(error,results){
                  if(error){
@@ -354,7 +354,7 @@ module.exports.DeleteMovies = function(req, res, next){
     oldTitle= results[0].title,
     oldDuration = results[0].duration,
     oldDescribtion = results[0].description,
-    oldImagePath = results[0].imagepath,
+    oldImagePath = results[0].imagePath,
     oldCast = results[0].cast,
     oldYear = results[0].year,
     oldFeature =results[0].feature,
@@ -394,7 +394,7 @@ module.exports.DeleteMovies = function(req, res, next){
     oldTitle= results[0].title,
     oldDuration = results[0].duration,
     oldDescribtion = results[0].description,
-    oldImagePath = results[0].imagepath,
+    oldImagePath = results[0].imagePath,
     oldCast = results[0].cast,
     oldYear = results[0].year,
     oldFeature =results[0].feature,

@@ -49,7 +49,24 @@ getMovieInfo(movie_id: string){
   return this.get('/viewMovie/'+ movie_id);
 }
 
+//---------EDIT A MOVIE--------------------------------
+editMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string, movie_id:string ){
 
+    return this.post('/movie/edit/'+ movie_id,{
+      "title": title,
+      "duration":duration,
+      "genre":genre,
+      "description":description,
+      "imagePath":imagePath,
+      "cast":cast,
+      "year":year,
+      "feature":feature,
+      "release_date":release_date,
+      "status":status,
+      "admin_requested":admin_requested
+    });
+  }
 
 
 

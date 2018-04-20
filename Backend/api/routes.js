@@ -131,8 +131,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 router.post('/addRequests/:admin_requested',MyMovies.addRequests);
 
 //-----------AS AN ADMIN I CAN ADD MOVIES ---------------------
-router.post('/addMovies/:admin_requested',MyMovies.addMovies);
-
+router.post('/addMovies',MyMovies.addMovies);
 
 //-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
 router.get('/requests/:admin_requested',MyMovies.viewMyRequests);
@@ -144,18 +143,16 @@ router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
 //--------AS AN ADMIN I CAN EDIT MY REQUESTS--------------
-router.post('/requests/:movie_id',MyMovies.EditMyRequests);
+router.post('/requests/edit/:movie_id',MyMovies.EditMyRequests);
 
 //--------AS AN ADMIN I CAN EDIT MOVIES--------------
-router.post('/requests/:movie_id',MyMovies.EditMovies);
+router.post('/movie/edit/:movie_id',MyMovies.EditMovies);
 
 //--------AS AN ADMIN I CAN DELETE MY REQUESTS--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
+router.post('/requests/delete/:movie_id',MyMovies.DeleteMyRequests);
 
 //--------AS AN ADMIN I CAN DELETE MOVIES--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
-
-module.exports = router;
+router.post('/movie/delete/:movie_id',MyMovies.DeleteMovies);
 
 
 //--------AS AN ADMIN I CAN View A SINGLE MOVIE REQUEST--------------
@@ -169,6 +166,7 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 
+module.exports = router;
 
 
 

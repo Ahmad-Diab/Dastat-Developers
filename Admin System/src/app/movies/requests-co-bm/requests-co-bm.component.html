@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header"><h2 class="mt-0">Movie Requests</h2>
+    </div>
+    <div class="card-body">
+      <p>Here is al your requests details, you can add,edit or delete them.</p>
+    </div>
+  
+    <div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th>Request ID</th>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th>Image Path</th>
+            <th>Cast</th>
+            <th>Year</th>
+            <th>Feature</th>
+            <th>Release Date</th>
+            <th>Rating</th>
+            <th>Status</th>
+            <th>Admin Requested</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies" >
+            <td>
+                <img alt='' src={{movie.imagePath}}  alt="Card image cap" class="img-fluid">
+            </td>
+            <td>
+              <a href="#" class="d-block text-capitalize">{{user.name.title}} {{user.name.first}} {{user.name.last}}</a>
+              <small>{{user.login.username}}</small>
+            </td>
+            <td>{{ user.registered | date:'yMMMd' }}</td>
+            <td>
+                <span class="badge badge-default text-uppercase">{{user.location.city}}</span>
+            </td>
+            <td>
+                <a href="#">{{user.email}}</a>
+            </td>
+            <td>{{user.cell}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

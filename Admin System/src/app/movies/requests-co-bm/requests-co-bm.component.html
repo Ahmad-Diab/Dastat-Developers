@@ -4,6 +4,13 @@
     <div class="card-body">
       <p>Here is al your requests details, you can add,edit or delete them.</p>
     </div>
+    <div class="card-body">   
+      <div class="card">           
+        <h5 style="margin-top: 2px">Add your name</h5>          
+        <input #admin id="input2" type="text" class="form-control mb-3">
+      </div>
+      <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button"(click)="viewReq(admin.value)"  >Show my requests</button>
+      </div>
   
     <div class="table-responsive">
       <table class="table align-middle mb-0">
@@ -27,21 +34,48 @@
         </thead>
         <tbody>
           <tr *ngFor="let movie of movies" >
+              <td>
+                      
+              </td>
             <td>
-                <img alt='' src={{movie.imagePath}}  alt="Card image cap" class="img-fluid">
+                <p style="margin-top: 2px">{{movie.movie_id}}</p>      
             </td>
             <td>
-              <a href="#" class="d-block text-capitalize">{{user.name.title}} {{user.name.first}} {{user.name.last}}</a>
-              <small>{{user.login.username}}</small>
-            </td>
-            <td>{{ user.registered | date:'yMMMd' }}</td>
-            <td>
-                <span class="badge badge-default text-uppercase">{{user.location.city}}</span>
+                <p style="margin-top: 2px">{{movie.title}}</p>
             </td>
             <td>
-                <a href="#">{{user.email}}</a>
+                <p style="margin-top: 2px">{{movie.duration}}</p>
             </td>
-            <td>{{user.cell}}</td>
+            <td>
+                <p style="margin-top: 2px">{{movie.genre}}</p>
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.description}}</p>
+            </td>
+            <td>
+                <img src="{{movie.imagePath}}" class="avatar-md rounded" alt="Card image cap">
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.cast}}</p>      
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.year}}</p>      
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.featuer}}</p>      
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.release_date}}</p>      
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.rating}}</p>      
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.status}}</p>      
+            </td>
+            <td>
+                <p style="margin-top: 2px">{{movie.admin_requested}}</p>      
+            </td>
           </tr>
         </tbody>
       </table>

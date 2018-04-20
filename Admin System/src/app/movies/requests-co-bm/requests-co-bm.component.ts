@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MoviesService } from '../../@services/movies.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Component({
   selector: 'app-requests-co-bm',
@@ -8,9 +10,20 @@ import { Router } from '@angular/router';
 })
 export class RequestsCoBmComponent implements OnInit {
 
-  constructor() { }
+  movies=[];
+  admin_req;
+
+  constructor(public movieServices: MoviesService,private router:Router,public cookie:CookieService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+  }
+
+  viewReq(admin_requested: string){
+    this.movieServices.viewRequests(admin_requested).subscribe((response)=>{
+      this.movies=response;
+      console.log(response.data[0]);
+    
+  });
   }
 
 }

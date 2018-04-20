@@ -68,6 +68,12 @@ editMovie(title: string, duration: number, genre: string, description: string,im
     });
   }
 
+  //------VIEW MY REQUESTS------------------- 
+  viewRequests(admin_requested: string){
+    return this.get('requests/'+admin_requested);
+  }
+
+
 
 
 

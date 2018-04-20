@@ -31,7 +31,7 @@ module.exports.getHallsForThatCinema = function(req, res){
         });
     }
 
-    var sql = "SELECT h.* FROM cinemas c , halls h WHERE c.name = h.cinema_name AND c.location = h.cinema_location AND c.name = ? AND c.location = ?";
+    var sql = 'SELECT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
 
     database.query(sql,[cinema_name , cinema_location],function (err, result) {
         if (err) throw err;
@@ -477,7 +477,7 @@ module.exports.viewCinemasForAdminUser = function(req, res, next){
 
 };
 
-module.exports.getCurrentMoviesForCinema = function(req, res, next){
+module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;
     var cinemaLocation = req.params.cinema_location;
@@ -499,7 +499,7 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
         });
     }
 
-    var sqlSelection = 'SELECT m.* FROM movies m , halls h WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
+    var sqlSelection = 'SELECT m.* FROM movies m , movies_in_cinemas h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
 
     database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
         if(error){

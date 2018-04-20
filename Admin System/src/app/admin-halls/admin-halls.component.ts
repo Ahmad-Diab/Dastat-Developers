@@ -26,7 +26,7 @@ export class AdminHallsComponent implements OnInit {
 
 
   //==========FOR TEST===============
-  username = "Laila_Khaled";
+  username = "cinema";
   password = "lailalaila123";
   //=================================  
 
@@ -48,40 +48,64 @@ export class AdminHallsComponent implements OnInit {
 
   getHalls(){
     
-    console.log(this.selectedCinema);   
+   //console.log(this.selectedCinema);   
     
     this.getMovies();
     
     this.hallService.getHallsForCinema(this.selectedCinema).subscribe((response) => {
       this.halls = response.data;
       console.log(response.data);
-      console.log(this.halls);
+      //console.log(this.halls);
     });
-    console.log(this.editMode);
+    //console.log(this.editMode);
     
   }
 
   getMovies(){
-    this.hallService.getMoviesForCinema(this.selectedCinema.cinema_name , this.selectedCinema.cinema_location).subscribe((response) => {
+    this.hallService.getAlltMoviesInCinemaForAdmin(this.selectedCinema.cinema_name , this.selectedCinema.cinema_location).subscribe((response) => {
       this.selectedCinemaMovies = response.data;
-      console.log(response.data);
-      console.log(this.halls);
+      //console.log(response.data);
+      //console.log(this.halls);
     });
   }
 
   deleteMovieFromHall(){
+
+    //console.log(this.selectedCinema);
     var data = {
+
       username: this.cookie.get('username'),
-      cinema_name: this.selectedCinema.name,
-      cinema_location: this.selectedCinema.location,
+      cinema_name: this.selectedCinema.cinema_name,
+      cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,
       movie_id: this.selectedHall.movie
-
+      
     }
+    //console.log(data);
     this.hallService.deleteMovieFromHall(data).subscribe((response) => {
-      console.log(response);
+      //console.log(response);
       this.getHalls();
     });
+  }
+
+  assignMovieToHall(){
+
+    //console.log(this.selectedCinema);
+    var data = {
+      username: this.cookie.get('username'),
+      cinema_name: this.selectedCinema.cinema_name,
+      cinema_location: this.selectedCinema.cinema_location,
+      hall_number: this.selectedHall.hall_number,
+      movie_id: this.selectedMovie.movie_id
+    }
+
+    //console.log(data);
+    this.hallService.assignMovieToHall(data).subscribe((response) => {
+      //console.log(response);
+      this.getHalls();
+    });
+
+    this.selectedHall = null;
   }
 
 

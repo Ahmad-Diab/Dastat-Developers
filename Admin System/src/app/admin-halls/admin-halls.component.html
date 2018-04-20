@@ -25,6 +25,10 @@
             <th>
               Hall Number
             </th>
+
+            <th>
+              Movie
+            </th>
            
             <th>
               Movie ID
@@ -42,13 +46,22 @@
             </td>
 
             <td *ngIf="hall.movie != null && selectedHall != hall" class="align-middle">
+              {{hall.title}}
+            </td>
+
+            <td *ngIf="hall.movie != null && selectedHall != hall" class="align-middle">
               {{hall.movie}}
             </td>
+
             <td *ngIf="hall.movie == null && selectedHall != hall" class="align-middle">
                 N/A
             </td>
 
-            <td *ngIf="hall.movie != null && editMode && selectedHall == hall" class="align-middle">
+            <td *ngIf="hall.movie == null && selectedHall != hall" class="align-middle">
+              N/A
+            </td>
+
+            <td *ngIf="editMode && selectedHall == hall" class="align-middle">
                 <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
                       <div *ngIf="selectedMovie != null">
@@ -63,22 +76,37 @@
                   </div>
             </td>
 
+            <td *ngIf="editMode && selectedHall == hall" class="align-middle">
+              <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
+                    <div *ngIf="selectedMovie != null">
+                        {{selectedMovie.movie_id}}
+                    </div>
+                  </button>
+                  <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <div *ngFor ="let movie of selectedCinemaMovies">
+                      <button class="dropdown-item" (click)="selectedMovie = movie">{{movie.movie_id}}</button>
+                    </div>
+                  </div>
+                </div>
+          </td>
+
             <td *ngIf="hall.movie != null && selectedHall != hall && !editMode"  class="align-middle">
                 <button type="button" class="btn btn-outline-primary mr-1 mb-1" (click)="editMode = true; selectedHall = hall">Edit</button>
                 <button type="button" class="btn btn-outline-danger mr-1 mb-1" (click)="open(content); selectedHall = hall">Delete</button>
             </td>
 
             <td *ngIf="hall.movie == null && selectedHall != hall && !editMode"  class="align-middle">
-                <button type="button" class="btn btn-outline-success mr-1 mb-1">Assign</button>
+                <button type="button" class="btn btn-outline-success mr-1 mb-1" (click)="editMode = true; selectedHall = hall" >Assign</button>
             </td>
 
 
-            <td *ngIf="selectedHall != hall && editMode"  class="align-middle">
+            <td *ngIf="editMode"  class="align-middle">
                 <p></p>
             </td>
 
-            <td *ngIf="hall.movie != null && selectedHall == hall && editMode"  class="align-middle">
-                <button type="button" class="btn btn-outline-success mr-1 mb-1"  (click)="editMode = false; selectedHall = hall">Confirm</button>
+            <td *ngIf="selectedHall == hall && editMode"  class="align-middle">
+                <button type="button" class="btn btn-outline-success mr-1 mb-1"  (click)="editMode = false; selectedHall = hall ;assignMovieToHall()">Confirm</button>
                 <button type="button" class="btn btn-outline-danger mr-1 mb-1"  (click)="editMode = false; selectedHall = null">Cancel</button>
             </td>
           </tr>

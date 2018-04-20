@@ -22,6 +22,8 @@ var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
 var AddCinema = require('./controllers/MyCinemas');
+var editCinema = require('./controllers/MyCinemas');
+
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -210,6 +212,7 @@ module.exports = router;
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 //As an Admin i can add cinema 
 router.post('/addCinema', AddCinema.addCinema);
+router.post('Cinemas/editCinema/:location/:name', editCinema.editCinema);
 
 
 

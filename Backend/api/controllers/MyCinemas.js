@@ -74,15 +74,19 @@ module.exports.addCinema = function(req,res,next){
 
 ////////////////////////////////////////////// EDIT ALL CINEMAS MODULES //////////////////////////////////////////////
 
+module.exports.editCinema = function(req, res, next){
+    var location = req.params.location;
+    var name = req.params.name;
+    var address = req.body.address;
+    var number_of_halls = req.body.number_of_halls;
+    var company = req.body.company;
+    var image_path = req.body.age;
 
-
-
-
-
-
-
-
-
+    database.query('UPDATE cinemas SET address = ?, number_of_halls = ?, company = ? , image_path = ? where location = ? and name = ? ' ,[address,number_of_halls,company,location,name], function(err, results, fields) {
+      if(err) return next(err);
+      return res.send(results);
+        });
+}
 
 
 

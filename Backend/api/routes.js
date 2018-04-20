@@ -138,8 +138,9 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 
 router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
 router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
-router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
+router.post('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
 router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_location/:hall_number', AdminHalls.viewMoviesInHall);
+router.get('/admin/adminHalls/viewCinemasForAdminUser/:username', AdminHalls.viewCinemasForAdminUser);
 
 
 

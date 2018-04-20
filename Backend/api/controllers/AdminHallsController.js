@@ -31,7 +31,7 @@ module.exports.getHallsForThatCinema = function(req, res){
         });
     }
 
-    var sql = "SELECT h.* , m.* FROM movies m , cinemas c , halls h WHERE c.name = h.cinema_name AND m.movie_id = h.movie AND c.location = h.cinema_location AND c.name = ? AND c.location = ?";
+    var sql = "SELECT h.* FROM cinemas c , halls h WHERE c.name = h.cinema_name AND c.location = h.cinema_location AND c.name = ? AND c.location = ?";
 
     database.query(sql,[cinema_name , cinema_location],function (err, result) {
         if (err) throw err;
@@ -411,6 +411,68 @@ module.exports.viewMoviesInHall = function(req, res, next){
             data: results
         });
 
+    });
+
+};
+
+
+/**
+ * A function to return the cinemas that this user related to
+ * 
+ * @param req, required data for viewing cinemas for that user
+ * @param res, results of all cinemas that user works in
+ * @param next
+ */
+module.exports.viewCinemasForAdminUser = function(req, res, next){
+    
+    var username = req.params.username;
+        
+    // Null Checkers
+    console.log(username);
+    console.log(req.body);
+
+    if(!username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+   
+  
+    // Validations of correct types
+    if(!Validations.isString(username)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Invalid data types.',
+            data: null
+        });
+    }
+
+    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+
+    database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
+        [username],function (error, result) {
+            if (error) throw error;
+            //return res.send(result);
+            if(result.length == 0){
+    
+                res.status(200).json({
+                    err: null,
+                    msg: 'You are not assigned to any cinema',
+                    data: result
+                });
+    
+            }
+            else{
+    
+                res.status(200).json({
+                    err: null,
+                    msg: 'Cinemas Successfully Retrieved',
+                    data: result
+                });
+    
+            }
     });
 
 };

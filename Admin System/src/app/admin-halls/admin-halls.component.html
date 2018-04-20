@@ -6,12 +6,12 @@
     <div ngbDropdown class="d-inline-block">
       <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
         <div *ngIf="selectedCinema != null">
-            {{selectedCinema.name}}   {{selectedCinema.location}}
+            {{selectedCinema.cinema_name}}   {{selectedCinema.cinema_location}}
         </div>
       </button>
       <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <div *ngFor ="let cinema of cinemas">
-          <button class="dropdown-item" (click)="setCinema(cinema)">{{cinema.name}} {{cinema.location}}</button>
+          <button class="dropdown-item" (click)="selectedCinema = cinema; getHalls()">{{cinema.cinema_name}} {{cinema.cinema_location}}</button>
         </div>
       </div>
     </div>
@@ -25,9 +25,7 @@
             <th>
               Hall Number
             </th>
-            <th>
-              Movie
-            </th>
+           
             <th>
               Movie ID
             </th>
@@ -41,11 +39,21 @@
             <td>
               {{hall.hall_number}}
             </td>
-            <td class="align-middle">
-              {{hall.title}}
+
+            <td *ngIf="hall.movie != null" class="align-middle">
+              {{hall.movie}}
             </td>
-            <td class="align-middle">
-              {{hall.movie_id}}
+            <td *ngIf="hall.movie == null" class="align-middle">
+                N/A
+            </td>
+
+            <td *ngIf="hall.movie != null"  class="align-middle">
+                <button type="button" class="btn btn-outline-primary mr-1 mb-1">Edit</button>
+                <button type="button" class="btn btn-outline-danger mr-1 mb-1"  (click)="open(content); selectedHall = hall">Delete</button>
+            </td>
+
+            <td *ngIf="hall.movie == null"  class="align-middle">
+                <button type="button" class="btn btn-outline-success mr-1 mb-1">Assign</button>
             </td>
           </tr>
         
@@ -55,4 +63,25 @@
   </div>
 </div>
 
- 
+<ng-template ngbModalContainer></ng-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete the assigned movie of this hall ?&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <span>
+      <button type="button" class="btn btn-secondary" (click)="c('Delete')">Delete</button>
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </span>
+    
+  </div>
+
+     
+    
+</ng-template>

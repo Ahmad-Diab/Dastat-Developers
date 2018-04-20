@@ -205,8 +205,6 @@ module.exports.EditMyRequests=function(req,res,next){
              if(status==null){
                  status = oldStatus
              }
-
-
              var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
              database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.movie_id],
              function(error,results){

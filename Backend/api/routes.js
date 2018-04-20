@@ -189,6 +189,8 @@ router.get('/promocodes', Promocodes.viewPromocodes);
 router.post('/promocodes/edit', Promocodes.editPromocode);
 router.get('/promocodes/viewPromocodesAndCinemas',Promocodes.viewPromocodesAndCinemas);
 router.get('/promocodes/:promocode', Promocodes.getPromocode);
+router.get('/promocodes/filter/promocode/:promocode', Promocodes.filterPromocode);
+router.get('/promocodes/filter/cinema/:cinema', Promocodes.filterCinema);
 router.post('/promocodes/assignPromocodes', Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Promocodes.addPromocode);
 router.post('/promocodes/deletePromocode/:promocode', Promocodes.deletePromocode);

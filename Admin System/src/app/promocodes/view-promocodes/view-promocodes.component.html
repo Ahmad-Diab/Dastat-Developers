@@ -28,7 +28,7 @@
         <button (click)="assignPromocodeToCinema(Input1.value,Input2.value)" type="button" class="btn btn-success mr-1 mb-1">Assign</button>
         <br/>
       </div>
-      {{ responseStatus }}
+      {{ assignResponseStatus }}
 
     </div>
     <!-- End Of Assign Promocode -->
@@ -93,8 +93,16 @@
       <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
     </div>
   </div>
+
+  <div class="col-2"  style = "text-align:right" >
+    <input #promocodeFilter type="text" class="form-control" placeholder="filter by promocode" (keyup) = "filterPromocode(promocodeFilter.value)">
+  </div>
+  <div id="filterRight" class="col-2">
+    <input #cinemaFilter type="text" class="form-control" placeholder="filter by cinema" *ngIf = "assignedPromocodeView" (keyup) = "filterCinema(cinemaFilter.value)">
+  </div>
   
   <div class="card-body" *ngIf = "assignedPromocodeView">
+
     <div class="table-responsive">
       <table class="table mb-0">
 
@@ -124,7 +132,7 @@
 
         <!--  Table Body  -->
         <tbody>
-          <tr *ngFor = "let promocode of promocodes">
+          <tr *ngFor = "let promocode of promocodesWithCinema">
             <td>
               {{ promocode.promocode }}
             </td>
@@ -175,7 +183,7 @@
       
         <!--  Table Body  -->
         <tbody>
-          <tr *ngFor = "let promocode of promocodesToShow">
+          <tr *ngFor = "let promocode of promocodes">
             <td>
               {{ promocode.promocode }}
             </td>

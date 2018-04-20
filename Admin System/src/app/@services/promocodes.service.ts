@@ -25,9 +25,25 @@ export class PromocodesService extends HttpService {
   * (Promocode, type, value)
   * @returns Array of JSON object of promocode
   */
- getPromocodeAttr(promocodeValue: string){
-  return this.get('promocodes/' + promocodeValue);
-}
+  getPromocodeAttr(promocodeValue: string){
+    return this.get('promocodes/' + promocodeValue);
+  }
+
+  /**
+  * GET request to get promocodes with certain code from database
+  * @returns Array of JSON object of promocode
+  */
+  filterPromocode(promocodeValue: string){
+    return this.get('promocodes/filter/promocode/' + promocodeValue);
+  }
+
+  /**
+  * GET request to get promocodes with certain cinema from database
+  * @returns Array of JSON object of promocode
+  */
+  filterCinema(cinema: string){
+    return this.get('promocodes/filter/cinema/' + cinema);
+  }
   
   getPromocodesAndCinemas(){
     return this.get('promocodes/viewPromocodesAndCinemas')

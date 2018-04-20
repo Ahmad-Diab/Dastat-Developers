@@ -11,7 +11,8 @@ import { SelectControlValueAccessor } from '@angular/forms';
 })
 export class ViewPromocodesComponent implements OnInit {
 
-  promocodes = []               //  array of promocodes, promocode has promocode data and in which cinema
+  promocodes = []               //  array of promocodes to be displayed, promocode has promocode data
+  promocodesWithCinema = []     //  array of promocodes to be displayed in table, promocode has promocode data and in which cinema
   promocodesToShow = []         //  array of unique promocodes to choose from for assigning  promocode to cinema
   cinemasToShow = []            //  array of cinemas to choose between for assigning promocode to cinema
 
@@ -37,12 +38,7 @@ export class ViewPromocodesComponent implements OnInit {
 
   ngOnInit() {
 
-    //  Get the promocodes data in promocodes array
-    this.promocodesService.getPromocodes().subscribe((response) => {
-      this.promocodes = response.data;
-      if(this.promocodes.length === 0)  this.existPromocodesAssigned = "No Promocodes are assigned to cinema"
-      else  this.existPromocodesAssigned = ""
-    });
+    this.getPromocodes();
 
     // Get the distinct values of promocodes and cinemas to choose from in assigning promocodes to cinemas  
     this.promocodesService.getPromocodesAndCinemas().subscribe((response) =>{
@@ -51,6 +47,7 @@ export class ViewPromocodesComponent implements OnInit {
       if(this.promocodesToShow.length === 0)  this.existPromocodes = "No Promocodes exist"
       else  this.existPromocodes = ""
       this.getPromocodeAttributes(this.promocodesToShow[0].promocode);
+      this.promocodes = this.promocodesToShow
     });
 
 
@@ -105,6 +102,49 @@ export class ViewPromocodesComponent implements OnInit {
       this.promocodeTypeEdited = response.data[0].type;
       this.promocodeValueEdited = response.data[0].value;
     })
+  }
+
+  /**
+   * Filters promocodes by cinemas if the filter is not empty
+   * @param cinema is used for filtering promocodes
+   */
+  filterCinema(cinema: string) {
+    if(cinema == "") {
+      this.getPromocodes();
+    }
+    else {
+      this.promocodesService.filterCinema(cinema).subscribe((response) => {
+        this.promocodesWithCinema = response.data;
+      })
+    }
+  }
+
+  /**
+   * Filters promocodes by cinemas if the filter is not empty
+   * @param cinema is used for filtering promocodes
+   */
+  filterPromocode(promocode: string) {
+    if(promocode == "") {
+      this.getPromocodes();
+      this.promocodes = this.promocodesToShow;
+    }
+    else {
+      this.promocodesService.filterPromocode(promocode).subscribe((response) => {
+        this.promocodesWithCinema = response.data.promocodesWithCinema;
+        this.promocodes = response.data.promocodes;
+      })
+    }
+  }
+
+  /**
+   * Get the promocodes data in the needed arrays (promocodes, promocodesWithCinema)
+   */
+  getPromocodes() {
+    this.promocodesService.getPromocodes().subscribe((response) => {
+      this.promocodesWithCinema = response.data;
+      if(this.promocodesWithCinema.length === 0)  this.existPromocodesAssigned = "No Promocodes are assigned to cinema"
+      else  this.existPromocodesAssigned = ""
+    });
   }
 
 }

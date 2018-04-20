@@ -21,7 +21,7 @@ module.exports.viewPromocodes = function(req,res,next){
             msg : "All promocodes are retrieved successfully",
             data : results
         });
-    });   
+  });   
 }
 
 /**
@@ -40,7 +40,52 @@ module.exports.getPromocode = function(req,res,next){
             msg : "The promocode is retrieved successfully",
             data : results
         });
-    });   
+  });   
+}
+
+/**
+ * Retrieves the promocodes filtered by certain promocode
+ * 
+ * @param {*} req 
+ * @param {*} res Contains the property data that consist of the promocodes needed
+ * @param {*} next 
+ */
+module.exports.filterPromocode = function(req,res,next){
+  var promocode = '%' + req.params.promocode + '%';
+	database.query('SELECT * FROM promocodes p INNER JOIN promocodes_cinemas c ON p.promocode = c.promocode WHERE p.promocode LIKE ?', [promocode],
+	function(error, results1, fields){
+        if(error) return next(error);
+        database.query('SELECT * FROM promocodes p WHERE p.promocode LIKE ?', [promocode],
+        function(error, results2, fields){
+          if(error) return next(error);  
+          res.status(200).json({
+            err : null,   
+            msg : "The promocode is retrieved successfully",
+            data : {"promocodes": results2,"promocodesWithCinema": results1}
+          });
+        });
+  });   
+}
+
+/**
+ * Retrieves the promocode filtered by certain cinema
+ * 
+ * @param {*} req 
+ * @param {*} res Contains the property data that consist of the promocodes needed
+ * @param {*} next 
+ */
+module.exports.filterCinema = function(req,res,next){
+  console.log("ok");
+  var promocode = '%' + req.params.cinema + '%';
+	database.query('SELECT * FROM promocodes p INNER JOIN promocodes_cinemas c ON p.promocode = c.promocode WHERE c.cinema_name LIKE ?', [promocode],
+	function(error, results, fields){
+        if(error) return next(error);  
+        res.status(200).json({
+          err : null,   
+          msg : "The promocode is retrieved successfully",
+          data : results
+        });
+  });   
 }
 
 

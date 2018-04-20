@@ -16,6 +16,6 @@ export class EditCinemaService extends HttpService {
     'number_of_halls': number_of_halls,
     'company': company ,
     'imagePath' : imagePath 
-    });
+    }); 
   }}
 

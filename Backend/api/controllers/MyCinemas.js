@@ -83,7 +83,7 @@ module.exports.editCinema = function(req, res, next){
     var image_path = req.body.age;
 
     database.query('UPDATE cinemas SET address = ?, number_of_halls = ?, company = ? , image_path = ? where location = ? and name = ? ' ,[address,number_of_halls,company,location,name], function(err, results, fields) {
-      if(err) return next(err);
+      if(err) return next(err); 
       return res.send(results);
         });
 }

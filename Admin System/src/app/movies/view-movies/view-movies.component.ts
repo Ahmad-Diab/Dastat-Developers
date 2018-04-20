@@ -44,6 +44,7 @@ addMovie(title: string, duration: number, genre: string, description: string,ima
         this.responeStatus="Added";
         this.ngOnInit();
       });  
+      
 }
 getMovieInfo(movie){
     this.router.navigate(['movies/info-edit/',movie.movie_id]);

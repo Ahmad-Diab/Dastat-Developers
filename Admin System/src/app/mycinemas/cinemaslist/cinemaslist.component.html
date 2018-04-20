@@ -1,5 +1,84 @@
 All Cinemas
 <div  class="card-body">
+    <div>
+        <button type="button" class="btn btn-success mr-1 mb-1" (click) = "toggleAddAction()" *ngIf = "!AddAction">Add Cinema</button>
+        <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "toggleAddAction()" *ngIf = "AddAction">Done Adding Cinema</button>
+      </div>
+      <div *ngIf = "AddAction" class="card">
+          <div class="card-header">
+            Add new Cinema
+    </div>
+    <div class="card-body">
+        <strong style="font-size:20px">name</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">location</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">Address</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">number of halls</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">is3D</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">is4Da</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">company</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">imagePath</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">imagePath2</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <button  type="button" class="btn btn-success mr-1 mb-1">Add</button>
+        </div>
+      </div>
+      <div>
+          <button type="button" class="btn btn-success mr-1 mb-1" (click) = "toggleUpdateAction()" *ngIf = "!UpdateAction">Update Cinema</button>
+          <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "toggleUpdateAction()" *ngIf = "UpdateAction">Done Updating Cinema</button>
+        </div>
+      <div *ngIf = "UpdateAction" class="card">
+        <div class="card-header">
+            Update Cinema
+    </div>
+   
+    <div class="card-body">
+        <strong style="font-size:20px">name</strong>
+        <input id="input1" type="text"  [(ngModel)]="clickedcinema.name"  class="form-control mb-3">
+        <strong style="font-size:20px">location</strong>
+        <input id="input1" type="text"  [(ngModel)]="clickedcinema.location"  class="form-control mb-3">
+    </div>
+    <div class="card-header">
+        To have new Values
+    </div>
+    <div class="card-body">
+        <strong style="font-size:20px">name</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">location</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">Address</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">number of halls</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">is3D</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">is4Da</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">company</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">imagePath</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <strong style="font-size:20px">imagePath2</strong>
+        <input id="input1" type="text" class="form-control mb-3">
+        <button  type="button" class="btn btn-success mr-1 mb-1">Update</button>
+        </div>
+      </div>
+      <div  class="card">
+      <div class="card-header">
+          Search For a cinema
+      </div>
+      <div class="card-body">
+          <strong style="font-size:20px">Search key</strong>
+          <input id="input1" type="text" #search class="form-control mb-3">  <button (click) = "onSearch(search.value)"  type="button" class="btn btn-success mr-1 mb-1">Search</button>
+     </div>
+    </div>
   <div  class="table-responsive">
     <table class="table mb-0">
       <thead>
@@ -17,7 +96,7 @@ All Cinemas
       </thead>
       <tbody>
         <tr  *ngFor="let cinema of cinemas" >
-          <td>{{cinema.name}}</td>
+          <td><a (click) = "setupdateinputs(cinema)">{{cinema.name}}</a></td>
           <td>{{cinema.location}}</td>
           <td>{{cinema.address}}</td>
           <td>{{cinema.number_of_halls}}</td>

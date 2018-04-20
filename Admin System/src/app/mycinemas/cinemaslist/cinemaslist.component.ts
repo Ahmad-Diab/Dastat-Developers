@@ -13,9 +13,12 @@ import {FormControl} from '@angular/forms';
 })
 export class CinemaslistComponent implements OnInit {
     cinemas = [];
+    clickedcinema="";
     sorting_item;
     searchValue ;
     locations ;
+    AddAction;
+    UpdateAction;
     is3D = true;
     is4D = true;
     constructor(public cinemalistService: CinemaslistService,
@@ -64,7 +67,15 @@ export class CinemaslistComponent implements OnInit {
       this.router.navigate(['/cinemas', cinema.name, cinema.location]);
     }
   
-    
+    toggleAddAction(){
+    this.AddAction=!this.AddAction;
+    }
+    toggleUpdateAction(){
+      this.UpdateAction=!this.UpdateAction;
+      }
+    setupdateinputs(Cinema:any){
+      this.clickedcinema=Cinema;
+    }
   
   }
   

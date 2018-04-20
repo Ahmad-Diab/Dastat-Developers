@@ -61,7 +61,7 @@
 <div class="row">
    
     <div class="media-grid col-lg-3 col-sm-6" *ngFor="let movie of movies">
-      <figure>
+        <div [routerLink] = '' (click)=getMovieInfo(movie) >    <figure>
         <img src={{movie.imagePath}} alt="Card image cap" class="img-fluid" />
         <figcaption>
           <h5 class="media-title fw-300">{{movie.title}} </h5>
@@ -71,6 +71,7 @@
           </p>
         </figcaption>     
       </figure>
+    </div>
     </div>
     {{responseStatus}}
   </div>

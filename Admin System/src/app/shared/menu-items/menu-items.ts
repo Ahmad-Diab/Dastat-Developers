@@ -426,6 +426,12 @@ const MENUITEMS =
     name: 'DOCS',
     type: 'link',
     icon: 'basic-sheet-txt'
+  },
+  {
+    state: 'promocodes',
+    name: 'promocodes',
+    type: 'link',
+    icon: 'ecommerce-gift'
   }
 ];
 

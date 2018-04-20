@@ -360,13 +360,13 @@ module.exports.DeleteMovies = function(req, res, next){
     oldFeature =results[0].feature,
     oldReleaseDate= results[0].release_date,
     oldRating = results[0].rating;
-
+    oldStatus = results[0].status;
    
      
      
-       var  status = 'REJECTED';
+       var  status = "REJECTED";
      
-
+if(oldStatus == "PENDING"){
 
      var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
      database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
@@ -379,7 +379,14 @@ module.exports.DeleteMovies = function(req, res, next){
              msg: 'Request Rejected',
              data:results
          });
-        });
+        });}
+        else{
+            return res.status(200).json({
+                err: null,
+                msg: 'This Movie Request is Not Pending',
+                data:results
+            });
+        }
     });
     }
 
@@ -400,13 +407,14 @@ module.exports.DeleteMovies = function(req, res, next){
     oldFeature =results[0].feature,
     oldReleaseDate= results[0].release_date,
     oldRating = results[0].rating;
-
+    oldStatus = results[0].status;
    
      
      
        var  status = 'ACCEPTED';
      
 
+       if(oldStatus == "PENDING"){
 
      var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
      database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
@@ -419,6 +427,13 @@ module.exports.DeleteMovies = function(req, res, next){
              msg: 'Request Accepted',
              data:results
          });
-        });
+        });}
+        else{
+            return res.status(200).json({
+                err: null,
+                msg: 'This Movie Request is Not Pending',
+                data:results
+            });
+        }
     });
     }

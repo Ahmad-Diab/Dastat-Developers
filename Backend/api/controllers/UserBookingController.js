@@ -1,7 +1,7 @@
 /**
  * A Controller, having the functions to handle ordinary user booking process.
  */
-var database = require('../config/db-connection'),
+let database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
 /**
@@ -11,7 +11,7 @@ var database = require('../config/db-connection'),
  * @param res, data of all cinemas which have the movie available
  */
 module.exports.getCinemasForThatMovie = function(req, res){
-    var movie_id = req.params['movie_id'];
+    let movie_id = req.params['movie_id'];
 
     if(!movie_id) {
         return res.status(422).json({
@@ -21,15 +21,8 @@ module.exports.getCinemasForThatMovie = function(req, res){
         });
     }
 
-    var sql = "SELECT C.* FROM cinemas C , halls H WHERE C.name = H.cinema_name AND C.location = H.cinema_location AND H.movie = ?";
-    var joinCond = {
-        'M.cinema_location': 'C.location',
-        'M.cinema_name':'M.name'
-    };
-    var whereCond = {
-        'movie': movie_id
-    };
-    console.log("I am here before looking for cinemas in the db");
+    let sql = "SELECT C.* FROM cinemas C , halls H WHERE C.name = H.cinema_name AND C.location = H.cinema_location AND H.movie = ?";
+
     database.query(sql,[movie_id],function (err, result) {
         if (err) throw err;
         //return res.send(result);
@@ -62,33 +55,66 @@ module.exports.getCinemasForThatMovie = function(req, res){
  * @param res
  */
 module.exports.getParties = function(req, res){
-    //COMPLETED Get parties of movies just chosen according to chosen day
-    var cinemaName = req.params.cinemaName,
-        movieName = req.params.movieName,
-        date = req.params.date,
-        cinemaLocation = req.params.cinemaLocation;
+    let cinemaName = req.params['cinemaName'],
+        movieName = req.params['movieName'],
+        date = req.params['date'],
+        cinemaLocation = req.params['cinemaLocation'];
 
-        
-    //var query = "SELECT h.cinema_name , m.title,h.hall_number , p.date , p.time , h.number_of_seats FROM Halls h JOIN Parties p ON h.hall_number = p.hall JOIN Movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?";
-    var query = 'SELECT h.cinema_location, h.cinema_name, h.hall_number, h.type, h.number_of_seats, h.movie, p.date_time, m.title, DATE_FORMAT(p.date_time, "%H:%i") AS time FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name JOIN Movies m ON h.movie = m.movie_id'
+    console.log(cinemaName + " : cinemaName");
+    console.log(movieName + " : movieName");
+    console.log(date + " : date");
+    console.log(cinemaLocation + " : cinemaLocation");
+
+    if(!cinemaName || !cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema data is required.',
+            data: null
+        });
+    }
+
+    if(!date) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Party data is required.',
+            data: null
+        });
+    }
+
+    // Validations of correct types
+    if(!Validations.isString(cinemaName) ||
+        !Validations.isString(cinemaLocation) ||
+        !Validations.isNumber(movieName)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Provided data must be in valid types.',
+            data: null
+        });
+    }
+
+    console.log('data passed all validations');
+    //let query = 'SELECT h.cinema_location, h.cinema_name, h.hall_number, h.type, h.number_of_seats, h.movie, p.date_time, m.title, DATE_FORMAT(p.date_time, "%H:%i") AS time FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name JOIN Movies m ON h.movie = m.movie_id'
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
-    +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
+    //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
+
+    let query = 'SELECT * FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
+    +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?';
+    //AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
 
     console.log(cinemaName + 'getParties');
 
-    database.query(query,[cinemaName , cinemaLocation ,movieName, date],function (err, result, fields) {
-        if (err) throw err;
-        //return res.send(result);
-        if(result.length == 0){
+    database.query(query,[cinemaName , cinemaLocation ,movieName, date],function (err, result) {
 
+        if (err) throw err;
+
+        if(!result.length){
             res.status(200).json({
                 err: null,
                 msg: 'No parties for this movie at this date',
-                data: result
+                data: null  // null instead of result
             });
 
-        }
-        else{
+        } else {
 
             res.status(200).json({
                 err: null,
@@ -112,7 +138,7 @@ module.exports.makeReservation = function(req, res, next){
     // COMPLETED Make a reservation based on all data need for reservation.
     // TODO User-name validation needs to be done!
 
-    var username = req.body['username'],
+    let username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
         party_date = req.body['date'],

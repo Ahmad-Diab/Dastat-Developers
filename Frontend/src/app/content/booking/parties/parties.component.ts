@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PartiesService } from '../../../@services/parties.service';
 import { MovieslistService } from '../../../@services/movieslist.service';
-import {Router, ActivatedRoute, Params} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
 import { CookieService } from 'angular2-cookie/core';
 import { BookingService } from '../../../@services/booking.service';
 
@@ -28,18 +28,17 @@ export class PartiesComponent implements OnInit {
     public bookingService: BookingService) { }
 
   ngOnInit() {
-    this.viewMovies();
+
     this.selectedCinema = this.cookie.getObject('cinema');
     this.selectedMovie = this.cookie.getObject('movie');
-    //console.log(this.movies);
+    this.viewMovies();
+    if(this.selectedMovie)
+      this.viewCinemas();
   }
 
   viewMovies(){
     this.movieslistService.getMovies().subscribe((response)=>{
       this.movies=response;
-      console.log("these are the movies: ");
-      console.log(response);
-
     });
   }
 
@@ -52,8 +51,11 @@ export class PartiesComponent implements OnInit {
 
   updateMovie(movie){
     this.selectedMovie = movie;
-    // this.cookie.putObject('movie' , this.selectedMovie);
+    this.cookie.putObject('movie' , this.selectedMovie);
     this.viewCinemas();
+    this.selectedCinema = null;
+    this.selectedParty = null;
+    this.parties = null;
   }
 
   updateCinema(cinema){
@@ -71,7 +73,7 @@ export class PartiesComponent implements OnInit {
     this.cookie.putObject('movie' , this.selectedMovie);
     this.cookie.putObject('party' , this.selectedParty);
 
-    var booking = {
+    let booking = {
       username: this.cookie.get('username'),
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,

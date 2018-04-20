@@ -17,6 +17,7 @@
         <thead>
           <tr>
             <th>&nbsp;</th>
+            <th>Action</th>
             <th>Request ID</th>
             <th>Title</th>
             <th>Duration</th>
@@ -35,7 +36,17 @@
         <tbody>
           <tr *ngFor="let movie of movies" >
               <td>
-                      
+                  <button _ngcontent-c32="" class="btn btn-success btn-icon loading-demo mr-1 mb-1" type="button">
+                      <i _ngcontent-c32="" class="icon icon-gear"></i>
+                      <span _ngcontent-c32="">Edit Request</span>
+                    </button>
+                  <button _ngcontent-c32="" class="btn btn-danger btn-icon mr-1 mb-1" type="button">
+                      <i _ngcontent-c32="" class="icon icon-close"></i>
+                      <span _ngcontent-c32="">Delete Request</span>
+                    </button>
+              </td>
+              <td>
+                
               </td>
             <td>
                 <p style="margin-top: 2px">{{movie.movie_id}}</p>      

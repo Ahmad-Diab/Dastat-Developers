@@ -477,6 +477,56 @@ module.exports.viewCinemasForAdminUser = function(req, res, next){
 
 };
 
+module.exports.getCurrentMoviesForCinema = function(req, res, next){
+
+    var cinemaName = req.params.cinema_name;
+    var cinemaLocation = req.params.cinema_location;
+    var currentDate = new Date();
+
+    if(!cinemaName) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Name is required.',
+            data: null
+        });
+    }
+
+    if(!cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
+
+    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id';
+
+    database.query(sqlSelection, [cinemaName , cinemaLocation , currentDate], function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No current movies Availiable.',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
+
+    });
+  };
 
 
 

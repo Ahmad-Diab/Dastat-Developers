@@ -141,7 +141,7 @@ router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall
 router.post('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
 router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_location/:hall_number', AdminHalls.viewMoviesInHall);
 router.get('/admin/adminHalls/viewCinemasForAdminUser/:username', AdminHalls.viewCinemasForAdminUser);
-
+router.get('/admin/getCurrentMoviesForCinema/:cinema_location/:cinema_name', AdminHalls.getCurrentMoviesForCinema);
 
 
 //-------------AS AN ADMIN I CAN ADD Requests ----------------

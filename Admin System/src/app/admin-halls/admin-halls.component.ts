@@ -15,7 +15,13 @@ export class AdminHallsComponent implements OnInit {
   
   halls=[];
   cinemas=[];
+  selectedCinemaMovies=[];
 
+  selectedMovie;
+  selectedCinema;
+  selectedHall;
+
+  editMode: boolean;
   closeResult: string;
 
 
@@ -24,8 +30,7 @@ export class AdminHallsComponent implements OnInit {
   password = "lailalaila123";
   //=================================  
 
-  selectedCinema;
-  selectedHall;
+  
 
   ngOnInit() {
 
@@ -33,6 +38,7 @@ export class AdminHallsComponent implements OnInit {
     this.cookie.put('username', this.username);
   //=======FOR TEST======
 
+    this.editMode = false;
     this.hallService.getCinemasForAdminUser(this.cookie.get('username')).subscribe((response) => {
       this.cinemas = response.data;
       console.log(this.cinemas);
@@ -42,13 +48,25 @@ export class AdminHallsComponent implements OnInit {
 
   getHalls(){
     
-    console.log(this.selectedCinema);
+    console.log(this.selectedCinema);   
+    
+    this.getMovies();
+    
     this.hallService.getHallsForCinema(this.selectedCinema).subscribe((response) => {
       this.halls = response.data;
       console.log(response.data);
       console.log(this.halls);
     });
+    console.log(this.editMode);
     
+  }
+
+  getMovies(){
+    this.hallService.getMoviesForCinema(this.selectedCinema.cinema_name , this.selectedCinema.cinema_location).subscribe((response) => {
+      this.selectedCinemaMovies = response.data;
+      console.log(response.data);
+      console.log(this.halls);
+    });
   }
 
   deleteMovieFromHall(){

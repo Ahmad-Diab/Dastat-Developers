@@ -61,9 +61,9 @@ module.exports.addMovies = function(req,res,next){
         status = "ACCEPTED"; 
         
 
-        var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+        var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status)  VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
-        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.admin_requested],
+        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status],
         function (error, results) {
             if (error) {
                 return next(error);

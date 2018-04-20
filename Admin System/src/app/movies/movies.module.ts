@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequestsCoBmComponent } from './requests-co-bm/requests-co-bm.component';
 import { RequestsAoComponent } from './requests-ao/requests-ao.component';
 import { ViewMoviesComponent } from './view-movies/view-movies.component';
+import { InfoEditComponent } from './info-edit/info-edit.component';
+
 
 @NgModule({
   imports: [
@@ -14,6 +16,6 @@ import { ViewMoviesComponent } from './view-movies/view-movies.component';
     RouterModule.forChild(MoviesRouting),
      FormsModule
   ],
-  declarations: [RequestsCoBmComponent, RequestsAoComponent, ViewMoviesComponent]
+  declarations: [RequestsCoBmComponent, RequestsAoComponent, ViewMoviesComponent, InfoEditComponent]
 })
 export class MoviesModule { }

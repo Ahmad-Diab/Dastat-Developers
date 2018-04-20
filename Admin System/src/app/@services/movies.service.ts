@@ -16,14 +16,15 @@ export class MoviesService extends HttpService {
     * @returns Array of JSON objects of MyMovies data
     */
 
-    viewAllMovies(){
+    //----------VIEW ALL MOVIES---------------
+viewAllMovies(){
       return this.get('viewMovie/viewAllMovies');
     }
 
-    addMoviess(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-      year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
-
-        return this.post('addMovies/:admin_requested',{
+    //----------ADD A MOVIE------------------
+addMoviess(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+   year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
+        return this.post('addMovies',{
           "title": title,
           "duration":duration,
           "genre":genre,
@@ -35,11 +36,27 @@ export class MoviesService extends HttpService {
           "release_date":release_date,
           "status":status,
           "admin_requested":admin_requested
-        })
+        });
     } 
 
-
-    deleteMovie(movie_id:number){
+//--------------------DELETE A MOVIE----------------
+deleteMovie(movie_id:number){
       return this.post('/movie/delete/'+ movie_id);
-        }
 }
+
+//------VIEW A MOVIE INFORMATION --------------------------
+getMovieInfo(movie_id: string){
+  return this.get('/viewMovie/'+ movie_id);
+}
+
+
+
+
+
+
+
+
+}
+
+
+

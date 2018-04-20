@@ -1,0 +1,125 @@
+<div class="wrapper">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+
+              <div *ngIf="movie" class="movie movie--preview movie--full release">
+                  <div class="row">
+                      <figure>
+                            <img alt='' src={{movie.imagePath}}  alt="Card image cap" class="img-fluid">
+                            <figcaption>  
+
+                                <div class="card-body">
+                                    <p class="ff-headers text-uppercase mb-3"><b>Title</b></p>
+                                    <h2 class="mt-0">{{movie.title}}</h2>
+                                  </div>
+                             
+                              </figcaption>
+                              
+
+                         </figure> 
+                        </div>
+                       
+                     
+                    </div>
+                  </div>
+              
+                         
+                        </div>
+                        
+                     
+                      
+                    </div>
+
+
+                <!-- <h4 class="ma-0"><span class="fw-400">Gerald</span> <b>Morris</b></h4>
+                <small>gerald@morris.com</small> -->
+               
+          <div class="card-body">
+            <div class="row text-center">
+              <div class="col">
+                <h2 class="mt-0">Duration</h2>
+                <p>{{movie.duration}}</p>
+              </div>
+              <div class="col">
+                <h2 class="mt-0">Category</h2>
+                <p>{{movie.genre}}</p>
+              </div>
+              <div class="col">
+                <h2 class="mt-0">Release date</h2>
+                <p>{{movie.year}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="ff-headers text-uppercase mb-3"><strong>Cast</strong></p>
+            <p><strong>{{movie.cast}}</strong></p>
+          </div>
+          <div class="card-body">
+              <p class="ff-headers text-uppercase mb-3"><strong>Description</strong></p>
+              <p><strong>{{movie.description}}</strong></p>
+            </div>
+        </div>
+      </div>
+
+<!-- EDIT THE MOVIE -->
+
+      <div class="col-sm-8">
+          <div>
+              <button type="button" class="btn-lg btn-primary mr-1 mb-1" (click) = "toogleEdit()" *ngIf = "!movieEdit">Edit Movie</button>
+              <button type="button" class="btn-lg btn-danger mr-1 mb-1" (click) = "toogleEdit()" *ngIf = "movieEdit">Cancel</button>
+            </div>
+            <div class="card-body" *ngIf="movieEdit">
+
+                <div class="card">
+                    <div class="card-header">
+                     Add the following properties
+                    </div>
+                    <div class="card-body">
+                  
+                      <h5 style="margin-top: 1px">Title</h5>          
+                      <input #title id="input1" type="text" class="form-control mb-3">
+                  
+                      <h5 style="margin-top: 10px">Duration</h5>    
+                      <input #duration id="input1" type="text" class="form-control mb-3"> 
+
+                      <h5 style="margin-top: 10px">Genre</h5>    
+                      <input #genre id="input1" type="text" class="form-control mb-3"> 
+            
+                      <h5 style="margin-top: 10px">Description</h5>    
+                      <input #description id="input1" type="text" class="form-control mb-3"> 
+            
+                      <h5 style="margin-top: 10px">Image Path</h5>    
+                      <input #imagePath id="input1" type="text" class="form-control mb-3"> 
+            
+                      <h5 style="margin-top: 10px">Cast</h5>    
+                      <input #cast id="input1" type="text" class="form-control mb-3"> 
+            
+                      <h5 style="margin-top: 10px">Year</h5>    
+                      <input #year id="input1" type="text" class="form-control mb-3"> 
+            
+                      <h5 style="margin-top: 10px">Feature</h5>    
+                      <input #feature id="input1" type="text" class="form-control mb-3"> 
+            
+                      <h5 style="margin-top: 10px">Release Date</h5>    
+                      <input #releasedate id="input1" type="text" class="form-control mb-3">
+                      
+                      <h5 style="margin-top: 10px">Rating</h5>    
+                      <input #rating id="input1" type="text" class="form-control mb-3">
+            
+                      <h5 style="margin-top: 10px">Status</h5>    
+                      <input #status id="input1" type="text" class="form-control mb-3">
+            
+                      <h5 style="margin-top: 10px">Admin</h5>    
+                      <input #adminrequested id="input1" type="text" class="form-control mb-3">
+            
+                      <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="addMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,adminrequested.value)" > Let's go bitch</button>
+                     
+                    </div>
+                </div>
+      </div>
+    </div>
+  </div>

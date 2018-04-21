@@ -29,6 +29,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CinemasListBookingComponent } from './cinemas/cinemas-list-booking/cinemas-list-booking.component';
 import { EditProfileComponent } from './users/edit-profile/edit-profile.component';
 import { VerifyComponent } from './users/verify/verify.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
@@ -47,7 +50,8 @@ import { VerifyComponent } from './users/verify/verify.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    
+    MatButtonToggleModule,
+    MatExpansionModule,
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
    CinemasListComponent,AboutusComponent,MovieInfoComponent,  CinemaInfoComponent,AboutusComponent,

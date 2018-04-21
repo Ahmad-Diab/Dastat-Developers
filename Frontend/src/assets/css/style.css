@@ -10741,6 +10741,7 @@ background: white;
 }
 .mat-option {
   color: #b4b1b2;
+  text-align: center   !important;
   font-family: 'Roboto', sans-serif;
 }
 .mat-form-field-underline {
@@ -10788,4 +10789,51 @@ background: white;
 .mat-checkbox-inner-container {
   height: 17px !important;
   width: 17px !important;
+}
+.mat-button-toggle-checked {
+  
+   
+    background-image: url(../images/components/bg-time-hover1.png) !important;
+    background-position: center;
+
+    background-repeat: no-repeat;
+    -webkit-background-size: 64px 34px;
+    background-size: 64px 34px;
+    
+  
+}
+.mat-button-toggle-group, .mat-button-toggle-standalone {
+  box-shadow: none !important;
+  margin: -10px !important;
+  
+}
+
+.mat-button-toggle {
+  color: rgb(0, 0, 0);
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  font-size: 12px;
+  background-image: url(../images/components/bg-time1.png) ;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: 64px 34px;
+  background-size: 64px 34px;
+  margin: 5px 16px 3px 0;
+  cursor: zoom-in !important;
+  
+}
+.mat-button-toggle-label-content {
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  line-height: 36px;
+  padding: 0px 9px !important;
+  cursor: pointer;
+
+  border: 1px solid #ffffff;
+
 }

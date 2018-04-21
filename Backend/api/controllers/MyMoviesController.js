@@ -87,7 +87,7 @@ module.exports.viewMyRequests =function(req,res,next){
 function(error,results,fields){
     if(error) return next(error);
     if(results.length == 0){
-        return res.send("No Requested Movies found");
+        return res.send("No Requested Movies here okk");
     }
     else{
         return res.send(results);
@@ -101,7 +101,7 @@ function(error,results,fields){
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
-        return res.send("No Requested Movies found!");
+        return res.send("No Requested Movies nooooo!");
     }
     else{
         return res.send(results);

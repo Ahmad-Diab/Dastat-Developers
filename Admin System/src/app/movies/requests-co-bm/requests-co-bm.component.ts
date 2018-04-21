@@ -12,10 +12,13 @@ export class RequestsCoBmComponent implements OnInit {
 
   movies=[];
   admin_req;
+  responeStatus='';
+  moviesAction= false
 
   constructor(public movieServices: MoviesService,private router:Router,public cookie:CookieService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
   }
 
   viewReq(admin_requested: string){
@@ -25,5 +28,11 @@ export class RequestsCoBmComponent implements OnInit {
     
   });
   }
+
+
+toogleMovie(){
+  this.moviesAction = !this.moviesAction;
+}
+
 
 }

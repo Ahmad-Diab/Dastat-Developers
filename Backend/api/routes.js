@@ -133,10 +133,11 @@ router.post('/addRequests/:admin_requested',MyMovies.addRequests);
 //-----------AS AN ADMIN I CAN ADD MOVIES ---------------------
 router.post('/addMovies',MyMovies.addMovies);
 
+//-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
+router.get('/requests/AllSHOW',MyMovies.viewRequests);
 //-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
 router.get('/requests/:admin_requested',MyMovies.viewMyRequests);
-//-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
-router.get('/requests',MyMovies.viewRequests);
+
 //--------AS AN ADMIN I CAN VIEW ALL MOVIES------------------
 router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 //--------AS AN ADMIN I CAN VIEW A SINGLE MOVIE--------------

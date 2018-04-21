@@ -75,8 +75,8 @@ export class PartiesComponent implements OnInit {
 
     let booking = {
       username: this.cookie.get('username'),
-      cinema_name: this.selectedCinema.cinema_name,
-      cinema_location: this.selectedCinema.cinema_location,
+      cinema_name: this.selectedCinema.name,
+      cinema_location: this.selectedCinema.location,
       hall_number: this.selectedParty.hall,
       datetime: this.selectedParty.date,
       seats: null,

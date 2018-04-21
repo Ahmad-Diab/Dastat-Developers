@@ -73,6 +73,35 @@ editMovie(title: string, duration: number, genre: string, description: string,im
     return this.get('requests/'+admin_requested);
   }
 
+  deleteRequest(movie_id:number){
+    return this.post('requests/delete/'+movie_id);
+  }
+  addRequest(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+    year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
+         return this.post('addRequests/'+ admin_requested,{
+           "title": title,
+           "duration":duration,
+           "genre":genre,
+           "description":description,
+           "imagePath":imagePath,
+           "cast":cast,
+           "year":year,
+           "feature":feature,
+           "release_date":release_date,
+           "status":status,
+           "admin_requested":admin_requested
+       });
+  } 
+
+  viewALlRequests(){
+    return this.get('requests/AllSHOW');
+  }
+  rejectRequest(movie_id:number){
+    return this.post('RejectMovieRequest/' + movie_id);
+  }
+  acceptRequest(movie_id:number){
+    return this.post('AcceptMovieRequest/'+movie_id);
+  }
 
 
 

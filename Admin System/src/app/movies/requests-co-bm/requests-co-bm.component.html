@@ -12,8 +12,8 @@
       <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button"(click)="viewReq(admin.value)"  >Show my requests</button>
 
       <div>
-          <button type="button" class="btn-lg btn-primary mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "!moviesAction">Add Movie</button>
-          <button type="button" class="btn-lg btn-danger mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "moviesAction">Hide Actions</button>
+          <button type="button" class="btn-lg btn-primary mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "!moviesAction">Add Request</button>
+          <button type="button" class="btn-lg btn-danger mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "moviesAction">Cancel</button>
         </div>
       </div>
 
@@ -143,7 +143,7 @@
               <input #status id="input1" type="text" class="form-control mb-3">
 
 
-              <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="addReq(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,admin.value)" > Let's go bitch</button>
+              <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="addReq(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,admin.value)" > Submit</button>
           
 </div>    
   </div>

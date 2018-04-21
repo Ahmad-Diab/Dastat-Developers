@@ -73,7 +73,7 @@
                 <span *ngFor="let one of temp.row">
                   <span *ngIf="one == 'offset'" id="empty-seat">none</span>
                   <span (click)="select(one.seat.number)">
-                      <span  *ngIf="one.seat" [ngClass]="{'sits-state--not': booked(one.seat.number)}" class="sits__place sits-price--cheap" [attr.data-place]='one.seat.number' data-price='10'>{{one.seat.number}}</span>
+                      <span  *ngIf="one.seat" [ngClass]="{'sits-state--not': booked(one.seat.number),'sits-state--your' : isSelected(one.seat.number)}" class="sits__place sits-price--cheap" [attr.data-place]='one.seat.number' data-price='10'>{{one.seat.number}}</span>
                   </span>
                 </span>
               </div>
@@ -85,10 +85,11 @@
 
             <aside class="sits__checked">
               <div class="checked-place">
-
+                 <span *ngFor="let seat of selected" class="choosen-place {{seat}}">    
+                </span>
               </div>
               <div class="checked-result">
-                $0
+                ${{total_money}}
               </div>
             </aside>
           </div>

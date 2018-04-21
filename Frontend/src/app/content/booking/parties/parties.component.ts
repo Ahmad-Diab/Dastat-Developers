@@ -81,11 +81,13 @@ export class PartiesComponent implements OnInit {
       cinema_name: this.selectedCinema.name,
       cinema_location: this.selectedCinema.location,
       hall_number: this.selectedParty.hall,
-      datetime: this.selectedParty.date,
+      date: this.date,
+      time: this.selectedParty.time,
       seats: null,
       eachPrice: this.selectedParty.price,
       movie: this.selectedMovie.movie_id
     };
+    
     this.cookie.putObject('booking', booking);
 
     // this.router.navigate(['/booking/seating']);

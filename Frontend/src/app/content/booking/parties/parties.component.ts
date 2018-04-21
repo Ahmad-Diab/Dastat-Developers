@@ -17,8 +17,11 @@ export class PartiesComponent implements OnInit {
   cinemas=[];
   selectedCinema;
   selectedMovie;
-  selectedParty;
+  selectedParty ;
   date;
+  flagD;
+  flagC;
+  flagM;
 
   constructor(public partiesService:PartiesService,
     public router : Router,
@@ -89,9 +92,16 @@ export class PartiesComponent implements OnInit {
   }
 
   getPartiesAtThisDate(){
+    if(this.flagD == this.date && this.flagM == this.selectedMovie && this.flagC == this.selectedCinema){
+      return;
+    }
+    
     this.partiesService.getParties(this.selectedCinema.location ,this.selectedCinema.name , this.selectedMovie.movie_id , this.date).subscribe((response) =>{
       this.parties = response.data;
       //console.log(response.data);
+      this.flagD = this.date;
+      this.flagM = this.selectedMovie ;
+      this.flagC = this.selectedCinema;
 
     });
   }

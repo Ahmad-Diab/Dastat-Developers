@@ -161,10 +161,10 @@ router.post('/movie/delete/:movie_id',MyMovies.DeleteMovies);
 router.get('/viewMovieRequest/:movie_id',MyMovies.ViewMovieRequest);
 
 //--------AS AN ADMIN I CAN REJECT A SINGLE MOVIE REQUEST--------------
-router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
+router.post('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
-router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
+router.post('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 
 module.exports = router;

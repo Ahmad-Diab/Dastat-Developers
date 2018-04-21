@@ -42,6 +42,18 @@ getMovieInfo(movie){
 toogleMovie(){
   this.moviesAction = !this.moviesAction;
 }
+// ADD A REQUEST
+
+
+addReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string){
+
+     this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested).subscribe((response)=>{
+       this.responeStatus="Added";
+       this.ngOnInit();
+     });  
+     
+}
 
 
 }

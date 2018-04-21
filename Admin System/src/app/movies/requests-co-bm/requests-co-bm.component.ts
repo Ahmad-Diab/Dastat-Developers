@@ -29,28 +29,10 @@ export class RequestsCoBmComponent implements OnInit {
   });
   }
 
-  deleteReq(movie_id: number){
-    this.movieServices.deleteRequest(movie_id).subscribe((response)=>{
-        this.responeStatus="Successfully deleted";
-    });
-}
-
-getMovieInfo(movie){
-  this.router.navigate(['movies/info-edit/',movie.movie_id]);
-}
 
 toogleMovie(){
   this.moviesAction = !this.moviesAction;
 }
 
 
-addReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string){
-
-     this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested).subscribe((response)=>{
-       this.responeStatus="Added";
-       this.ngOnInit();
-     });  
-     
-}
 }

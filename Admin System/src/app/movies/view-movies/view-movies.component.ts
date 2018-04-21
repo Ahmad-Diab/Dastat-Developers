@@ -30,25 +30,6 @@ export class ViewMoviesComponent implements OnInit {
 toogleMovie(){
     this.moviesAction = !this.moviesAction;
 }
-//-------------DELETE A MOVIE-----------------
-deleteMovie(movie_id: number){
-    this.movieServices.deleteMovie(movie_id).subscribe((response)=>{
-        this.responeStatus="Successfully deleted";
-    });
-}
-///----------ADD A MOVIE--------------------------
-addMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-   year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string){
-
-      this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested).subscribe((response)=>{
-        this.responeStatus="Added";
-        this.ngOnInit();
-      });  
-      
-}
-getMovieInfo(movie){
-    this.router.navigate(['movies/info-edit/',movie.movie_id]);
-  }
 
 
 }

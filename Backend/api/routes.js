@@ -21,6 +21,7 @@ var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
+var MyCinemas = require('./controllers/MyCinemas');
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -209,6 +210,8 @@ module.exports = router;
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 
 
+// ------------- As an Admin I can Delete a Cinema ----------------
+router.get('/mycinemas/delete/:cinema/:owner',MyCinemas.deleteCinemaForAdmin);
 
 
 

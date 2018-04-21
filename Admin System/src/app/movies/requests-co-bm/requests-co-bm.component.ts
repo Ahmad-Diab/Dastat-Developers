@@ -29,6 +29,15 @@ export class RequestsCoBmComponent implements OnInit {
   });
   }
 
+  deleteReq(movie_id: number){
+    this.movieServices.deleteRequest(movie_id).subscribe((response)=>{
+        this.responeStatus="Successfully deleted";
+    });
+}
+
+getMovieInfo(movie){
+  this.router.navigate(['movies/info-edit/',movie.movie_id]);
+}
 
 toogleMovie(){
   this.moviesAction = !this.moviesAction;

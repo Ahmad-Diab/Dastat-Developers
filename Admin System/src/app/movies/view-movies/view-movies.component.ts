@@ -31,5 +31,16 @@ toogleMovie(){
     this.moviesAction = !this.moviesAction;
 }
 
+//-------------EDIT A MOVIE-----------------
+getMovieInfo(movie){
+  this.router.navigate(['movies/info-edit/',movie.movie_id]);
+}
+
+//-------------DELETE A MOVIE-----------------
+deleteMovie(movie_id: number){
+  this.movieServices.deleteMovie(movie_id).subscribe((response)=>{
+      this.responeStatus="Successfully deleted";
+  });
+}
 
 }

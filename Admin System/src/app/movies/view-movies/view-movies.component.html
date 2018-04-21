@@ -1,0 +1,77 @@
+<div class="card-header">
+    <div>
+      <button type="button" class="btn-lg btn-primary mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "!moviesAction">Add Movie</button>
+      <button type="button" class="btn-lg btn-danger mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "moviesAction">Hide Actions</button>
+    </div>
+  </div>
+
+
+<div class="card-body" *ngIf="moviesAction">
+
+    <div class="card">
+        <div class="card-header">
+          Add new Movie
+        </div>
+        <div class="card-body">
+      
+          <h5 style="margin-top: 1px">Title</h5>          
+          <input #title id="input1" type="text" class="form-control mb-3">
+      
+          <h5 style="margin-top: 10px">Duration</h5>    
+          <input #duration id="input1" type="text" class="form-control mb-3"> 
+          
+          <h5 style="margin-top: 10px">Genre</h5>    
+          <input #genre id="input1" type="text" class="form-control mb-3"> 
+
+          <h5 style="margin-top: 10px">Description</h5>    
+          <input #description id="input1" type="text" class="form-control mb-3"> 
+
+          <h5 style="margin-top: 10px">Image Path</h5>    
+          <input #imagePath id="input1" type="text" class="form-control mb-3"> 
+
+          <h5 style="margin-top: 10px">Cast</h5>    
+          <input #cast id="input1" type="text" class="form-control mb-3"> 
+
+          <h5 style="margin-top: 10px">Year</h5>    
+          <input #year id="input1" type="text" class="form-control mb-3"> 
+
+          <h5 style="margin-top: 10px">Feature</h5>    
+          <input #feature id="input1" type="text" class="form-control mb-3"> 
+
+          <h5 style="margin-top: 10px">Release Date</h5>    
+          <input #releasedate id="input1" type="text" class="form-control mb-3">
+          
+          <h5 style="margin-top: 10px">Rating</h5>    
+          <input #rating id="input1" type="text" class="form-control mb-3">
+
+          <h5 style="margin-top: 10px">Status</h5>    
+          <input #status id="input1" type="text" class="form-control mb-3">
+
+          <h5 style="margin-top: 10px">Admin</h5>    
+          <input #adminrequested id="input1" type="text" class="form-control mb-3">
+
+          <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="addMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,adminrequested.value)" > Let's go bitch</button>
+          
+        </div>
+      </div>
+
+</div>
+
+
+<div class="row">
+   
+    <div class="media-grid col-lg-3 col-sm-6" *ngFor="let movie of movies">
+        <div [routerLink] = '' (click)=getMovieInfo(movie) >    <figure>
+        <img src={{movie.imagePath}} alt="Card image cap" class="img-fluid" />
+        <figcaption>
+          <h5 class="media-title fw-300">{{movie.title}} </h5>
+          <p>
+            <a href="movies/view-movies" placement="left" ngbTooltip="Delete"><i class="icon icon-basic-server-download" (click)="deleteMovie(movie.movie_id)"></i></a>
+           
+          </p>
+        </figcaption>     
+      </figure>
+    </div>
+    </div>
+    {{responseStatus}}
+  </div>

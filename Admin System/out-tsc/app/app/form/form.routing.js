@@ -1,0 +1,49 @@
+import { BasicComponent } from './basic/basic.component';
+import { MasksComponent } from './masks/masks.component';
+import { EditorComponent } from './editor/editor.component';
+import { ValidationComponent } from './validation/validation.component';
+import { UploadComponent } from './upload/upload.component';
+import { FormTreeComponent } from './tree/tree.component';
+export var FormRoutes = [
+    {
+        path: '',
+        children: [{
+                path: 'basic',
+                component: BasicComponent,
+                data: {
+                    heading: 'Basic forms'
+                }
+            }, {
+                path: 'masks',
+                component: MasksComponent,
+                data: {
+                    heading: 'Masks'
+                }
+            }, {
+                path: 'editor',
+                component: EditorComponent,
+                data: {
+                    heading: 'Editor'
+                }
+            }, {
+                path: 'validation',
+                component: ValidationComponent,
+                data: {
+                    heading: 'Validation'
+                }
+            }, {
+                path: 'upload',
+                component: UploadComponent,
+                data: {
+                    heading: 'Upload'
+                }
+            }, {
+                path: 'tree',
+                component: FormTreeComponent,
+                data: {
+                    heading: 'Tree'
+                }
+            }]
+    }
+];
+//# sourceMappingURL=form.routing.js.map

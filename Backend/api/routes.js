@@ -21,11 +21,13 @@ var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
-var MyCinemas = require('./controllers/MyCinemas');
+var AddCinema = require('./controllers/MyCinemas');
+var editCinema = require('./controllers/MyCinemas');
+
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
-router.get('/authtest',Authorization.Verify_User,(req,res)=>{
+router.get('/authtest',Authorization.Verify("1000"),(req,res)=>{
     return res.status(200).json({
         err: null,
         msg: 'ok',
@@ -54,7 +56,7 @@ router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
 router.get('/viewCinema/:cinema/:loc',Cinema.viewCinema,Cinema.moviesInCinema);
 router.get('/viewCinema/:cinema/:loc/allMovies',Cinema.moviesInCinema);
 router.get('/viewCinema/DistinctLocations',Cinema.DistinctLocation);
-router.get('/movies/:movie_id',Movie.getMovieInfo);
+router.get('/movies/id/:movie_id',Movie.getMovieInfo);
 
 //----------------------------------------------------User Info routes----------------------------------------//
 router.get('/users', User.getUsers);
@@ -126,7 +128,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 router.post('/adminlogin', AuthenticationAdmin.login);
 
 //------------------------------ MyAdmins routes --------------------------------//
-router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
+router.get('/users', User.getUsers);
 
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
@@ -208,7 +210,12 @@ module.exports = router;
 
 
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
+//As an Admin i can add cinema 
 
+router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
+router.get('/adminviewCinemas',Cinema.ViewCinemas);
+router.post('/addCinema', AddCinema.addCinema);
+router.post('Cinemas/editCinema/:location/:name', editCinema.editCinema); 
 
 // ------------- As an Admin I can Delete a Cinema ----------------
 router.get('/mycinemas/delete/:cinema/:owner',MyCinemas.deleteCinemaForAdmin);

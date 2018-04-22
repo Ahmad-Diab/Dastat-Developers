@@ -30,4 +30,8 @@ export class HallsService extends HttpService{
   assignMovieToHall(data){
     return this.post('/admin/adminHalls/assignMovieToHall' , data);
   }
+
+  viewMoviesInHalls(username,cinema_name,cinema_location){
+    return this.get('/admin/adminHalls/viewMoviesInHalls/'+username+'/'+cinema_name+'/'+cinema_location);
+  }
 }

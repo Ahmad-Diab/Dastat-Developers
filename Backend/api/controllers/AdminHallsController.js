@@ -313,7 +313,7 @@ module.exports.deleteMovieFromHall = function(req, res, next){
  * @param res, results of all movies in this hall
  * @param next
  */
-module.exports.viewMoviesInHall = function(req, res, next){
+module.exports.viewMoviesInHalls = function(req, res, next){
     // COMPLETED delete the assigned movie of the requested hall.
     // COMPLETED User-name validation needs to be done!
 

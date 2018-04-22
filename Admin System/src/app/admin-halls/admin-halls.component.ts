@@ -16,6 +16,7 @@ export class AdminHallsComponent implements OnInit {
   halls=[];
   cinemas=[];
   selectedCinemaMovies=[];
+  selectedCinemaHallsMovies=[];
 
   selectedMovie;
   selectedCinema;
@@ -108,8 +109,18 @@ export class AdminHallsComponent implements OnInit {
     this.selectedHall = null;
   }
 
+  viewMoviesInHalls(){
+    var data = {
+      username: this.cookie.get('username'),
+      cinema_name: this.selectedCinema.cinema_name,
+      cinema_location: this.selectedCinema.cinema_location
+    }
+    this.hallService.viewMoviesInHalls(this.username , this.selectedCinema.cinema_name , this.selectedCinema.cinema_location).subscribe((response)=>{
+      this.selectedCinemaHallsMovies = response.data;
+      console.log(response.data);
+    });
 
-
+  }
 
 
   open(content) {

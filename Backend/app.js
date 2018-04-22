@@ -8,7 +8,7 @@ var express = require('express'),
     config = require('./api/config/config'),
     app = express();
 
-var port = 8000;
+var port = process.env.PORT || 8000;
 
 // Set the secret of the app that will be used in authentication
 app.set('secret', config.secret);

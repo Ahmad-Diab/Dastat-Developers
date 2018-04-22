@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="order-step-area">
-    <div class="order-step first--step order-step--disable ">1. What &amp; Where &amp; When</div>
+    <div class="order-step first--step order-step--disable ">1. What  Where  When</div>
     <div class="order-step second--step order-step--disable">2. Choose a sit</div>
     <div class="order-step third--step">3. Check out</div>
   </div>
@@ -20,17 +20,21 @@
     <div class="checkout-wrapper">
       <h2 class="page-heading">price</h2>
       <ul class="book-result">
-        <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{reserveData['ticketsNum']}}</span></li>
-        <li class="book-result__item">One item price: <span class="book-result__count booking-price">{{reserveData['eachPrice']}}</span></li>
-        <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{reserveData['price']}}</span></li>
+        <li class="book-result__item">Tickets: <span class="book-result__count booking-ticket">{{reserveData['ticketsNum']}}$</span></li>
+        <li class="book-result__item">One item price: <span class="book-result__count booking-price">{{reserveData['eachPrice']}}$</span></li>
+        <li class="book-result__item">Total: <span class="book-result__count booking-cost">{{reserveData['price']}}$</span></li>
       </ul>
-      <input type="text" width="80px" placeholder="Enter promocode here" *ngIf="vis"  [(ngModel)]="promo" #ctrl="ngModel" required/>{{promo}}
-      <button *ngIf="vis" (click)="usePromo($event)">Submit</button>
-      <div *ngIf="show">Promocode Successfully used</div>
-      <div *ngIf="err">Error 404: Promocode not found in this cinema</div>
 
     </div>
-
+    <div class="checkout-wrapper">
+        <h2 class="page-heading">promocode</h2>
+       
+            <input [(ngModel)]="promo" type="text" placeholder="Enter promocode here" *ngIf="vis"#ctrl="ngModel" required/>
+            <button *ngIf="vis" (click)="usePromo($event)" class="btn btn-md btn--warning search__button">Submit</button>      
+        <div *ngIf="show">Promocode Successfully used</div>
+        <div *ngIf="err">Error 404: Promocode not found in this cinema</div>
+  
+      </div>
     <div class="order">
       <a href="/user/bookings" class="btn btn-md btn--warning btn--wide" (click)="onReserve($event)">{{reservationType}}</a>
 

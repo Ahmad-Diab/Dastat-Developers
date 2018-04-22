@@ -16,6 +16,7 @@ export class ReservationComponent implements OnInit {
   reserveData = {};
   reservationType = "";
   promo = "";
+  searchValue;
 
   constructor(public bookingService: BookingService, public cookie: CookieService) { }
   ngOnInit() {
@@ -51,6 +52,7 @@ export class ReservationComponent implements OnInit {
   }
 
   onReserve(event): void {
+    event = this.searchValue
     this.bookingService.makeReservation(
       this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
       this.reserveData['date'], this.reserveData['time'],this.reserveData['hall'], this.reserveData['payment'],
@@ -76,7 +78,7 @@ export class ReservationComponent implements OnInit {
   }
 
   usePromo(event): any { //triggered when button to submit promocode is clicked. extracts information required and sentds it in body of request
-     this.bookingService.usePromoCode(this.reserveData['price'], this.promo,
+    this.bookingService.usePromoCode(this.reserveData['price'], this.promo,
       this.reserveData['cinema_name'], this.reserveData['cinema_location'])
       .subscribe((response) => {
         if(response.error != null){ //If error is returned, display error message by setting it's ngIfs boolean variable to true

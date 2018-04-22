@@ -203,8 +203,6 @@ describe('Movie',function(){
 
 //Youssef Raphail
 
-
-
 describe('View All Movies',function(){
   it('All movies are viewed' , function(done){
     chai.request("localhost:8000").get("/api/movies/feature")

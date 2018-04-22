@@ -99,7 +99,7 @@ module.exports.getParties = function(req, res){
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
 
-    let query = 'SELECT * FROM halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
+    let query = 'SELECT * FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
     +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?';
     //AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
 
@@ -233,7 +233,7 @@ module.exports.makeReservation = function(req, res, next){
                 values.push(ticket_details);
             }
 
-            let sqlQuery = 'INSERT INTO Tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
+            let sqlQuery = 'INSERT INTO tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
 
             database.query(sqlQuery,[values], function (error, results) {
                 if (error) {

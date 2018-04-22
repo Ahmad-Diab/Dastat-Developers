@@ -14,4 +14,8 @@ export class HallService extends HttpService{
     saveLayout(data) {
       return this.post_auth('layout/add', data);
     } 
+
+    users() {
+      return this.get_auth('users');
+    }
 }

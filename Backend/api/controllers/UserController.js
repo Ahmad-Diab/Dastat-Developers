@@ -14,7 +14,7 @@ module.exports.viewMyInfo = function(req, res, next){
 }
 
 module.exports.getUsers = function(req, res, next){
-  console.log(req.body);
+  console.log(req.headers);
   database.query('SELECT * FROM users', function (error, results, fields) {
     if(error){
       console.log("gfh");

@@ -16,6 +16,8 @@ module.exports.getSeats = function (req, res, next) {
 
 //TODO:: CRUD Operations for layout table.
 module.exports.addLayout = function (req, res, next) {
+  console.log(req.headers);
+
   var layout = {
     encoded: req.body.encoding,
     name: req.body.name

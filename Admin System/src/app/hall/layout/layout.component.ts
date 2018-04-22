@@ -27,6 +27,7 @@ export class LayoutComponent implements OnInit {
   constructor(public hallService: HallService) { }
 
   ngOnInit() {
+    this.hallService.users().subscribe();
   }
 
   arraySize() {

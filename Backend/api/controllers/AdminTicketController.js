@@ -94,7 +94,7 @@ module.exports.viewTicketInfo = function(req, res, next){
         });
     }
 
-    let sqlQuery = "SELECT * FROM Tickets WHERE reservation_id = ?;";
+    let sqlQuery = "SELECT * FROM tickets WHERE reservation_id = ?;";
 
     database.query(sqlQuery,reservation_id, function (error, results) {
         if (error) {

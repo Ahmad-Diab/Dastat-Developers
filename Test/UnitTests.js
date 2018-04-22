@@ -164,6 +164,53 @@ describe('Movie',function(){
 
 
 
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------  
+
+describe('View Admin Requests',function(){
+  it('Admin can view all his requests if there was any',function(done){
+    chai.request("localhost:8000").get("/api/requests/Israa_Yasser")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
+describe('View All Movies Requests',function(){
+  it('App Owner can view all the movies requests sent if there were any',function(done){
+    chai.request("localhost:8000").get('/api/requests/AllSHOW')
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
+describe('View All Movies Of the Database played in all cinema theaters',function(){
+  it('App Owner can view all the movies in the database',function(done){
+    chai.request("localhost:8000").get('/api/viewMovie/viewAllMovies')
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
+
+describe('View the information of a single movie in cinema',function(){
+  it('App Owner can view the information of any movie',function(done){
+    chai.request("localhost:8000").get('/api/viewMovie/:movie_id')
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
 
 
 
@@ -216,10 +263,7 @@ describe('View All Movies',function(){
 
 
 
-
-
-
-
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
 
 
 
@@ -275,6 +319,7 @@ describe('View All Movies',function(){
 
 
 
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
 
 
 
@@ -324,6 +369,8 @@ describe('View All Movies',function(){
 //Omar Abdelaziz
 
 
+
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
 describe('Movie Requests',function(){
   it('Movie should not be Accepted because it is not pending' , function(done){
 
@@ -337,7 +384,7 @@ describe('Movie Requests',function(){
 
  it('Movie should be Accepted' , function(done){
 
-  chai.request("localhost:8000").get("/api/AcceptMovieRequest/16")
+  chai.request("localhost:8000").post("/api/AcceptMovieRequest/16")
   .end(function(req,res){
     res.should.have.json.status(200);
     res.should.be.json;
@@ -357,7 +404,7 @@ it('Movie should not be Rejected because it is not pending' , function(done){
 
 it('Movie should be Reject' , function(done){
 
-chai.request("localhost:8000").get("/api/RejectMovieRequest/17")
+chai.request("localhost:8000").post("/api/RejectMovieRequest/17")
 .end(function(req,res){
   res.should.have.json.status(200);
   res.should.be.json;

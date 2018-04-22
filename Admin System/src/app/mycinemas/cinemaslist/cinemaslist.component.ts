@@ -76,6 +76,10 @@ export class CinemaslistComponent implements OnInit {
     setupdateinputs(Cinema:any){
       this.clickedcinema=Cinema;
     }
+
+    AddCinenma(){
+      this.cinemalistService.addCinema();
+    }
   
   }
   

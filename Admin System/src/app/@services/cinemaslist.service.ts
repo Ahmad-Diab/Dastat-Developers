@@ -23,6 +23,9 @@ export class CinemaslistService extends HttpService {
   getDistinctLocation(){
     return this.get('viewCinema/DistinctLocations');
   }
+  addCinema(){
+    return this.post('/addCinema');
+  }
   
 
 }

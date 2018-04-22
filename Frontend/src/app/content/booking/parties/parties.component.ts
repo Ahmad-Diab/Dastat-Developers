@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PartiesService } from '../../../@services/parties.service';
 import { MovieslistService } from '../../../@services/movieslist.service';
-import {Router, ActivatedRoute, Params} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
 import { CookieService } from 'angular2-cookie/core';
 import { BookingService } from '../../../@services/booking.service';
 
@@ -10,6 +10,7 @@ import { BookingService } from '../../../@services/booking.service';
   templateUrl: './parties.component.html',
   styleUrls: ['./parties.component.css']
 })
+
 export class PartiesComponent implements OnInit {
   parties=[];
   movies=[];
@@ -24,50 +25,42 @@ export class PartiesComponent implements OnInit {
     public route: ActivatedRoute,
     public cookie : CookieService,
     public movieslistService: MovieslistService,
-    public bookingService: BookingService) { 
-
-  //   this.route.params.subscribe((params: Params )=> {
-  //   this.cinemaName = params['name'];
-  //   this.movieName = params['location'];
-  //   this.date = params['date'];
-  // });
-}
-
-  // cinemaName;
-  // movieName;
-  // date;
+    public bookingService: BookingService) { }
 
   ngOnInit() {
-    this.viewMovies();
+
     this.selectedCinema = this.cookie.getObject('cinema');
     this.selectedMovie = this.cookie.getObject('movie');
-    
-
-    
+    this.viewMovies();
+    if(this.selectedMovie)
+      this.viewCinemas();
   }
+
   viewMovies(){
     this.movieslistService.getMovies().subscribe((response)=>{
       this.movies=response;
-      console.log(response);
-      
     });
   }
+
   viewCinemas(){
     this.bookingService.getMoviesForThisCinema(this.selectedMovie.movie_id).subscribe((response) => {
       this.cinemas=response.data;
-      console.log(this.cinemas);
+      //console.log(this.cinemas);
     });
   }
 
   updateMovie(movie){
     this.selectedMovie = movie;
-    // this.cookie.putObject('movie' , this.selectedMovie);    
+    this.cookie.putObject('movie' , this.selectedMovie);
     this.viewCinemas();
+    this.selectedCinema = null;
+    this.selectedParty = null;
+    this.parties = null;
   }
 
   updateCinema(cinema){
     this.selectedCinema = cinema;
-    // this.cookie.putObject('cinema' , this.selectedCinema);    
+    // this.cookie.putObject('cinema' , this.selectedCinema);
   }
 
   updateParty(party){
@@ -76,11 +69,11 @@ export class PartiesComponent implements OnInit {
 
   submitParty(){
 
-    this.cookie.putObject('cinema' , this.selectedCinema);  
-    this.cookie.putObject('movie' , this.selectedMovie); 
-    this.cookie.putObject('party' , this.selectedParty); 
+    this.cookie.putObject('cinema' , this.selectedCinema);
+    this.cookie.putObject('movie' , this.selectedMovie);
+    this.cookie.putObject('party' , this.selectedParty);
 
-    var booking = {
+    let booking = {
       username: this.cookie.get('username'),
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
@@ -92,16 +85,16 @@ export class PartiesComponent implements OnInit {
     };
     this.cookie.putObject('booking', booking);
 
-    // this.router.navigate(['/booking/seating']);    
+    // this.router.navigate(['/booking/seating']);
   }
 
   getPartiesAtThisDate(){
     this.partiesService.getParties(this.selectedCinema.location ,this.selectedCinema.name , this.selectedMovie.movie_id , this.date).subscribe((response) =>{
       this.parties = response.data;
-      console.log(response.data);
+      //console.log(response.data);
 
     });
   }
-  
+
 
 }

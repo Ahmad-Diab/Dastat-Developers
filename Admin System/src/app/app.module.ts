@@ -23,7 +23,6 @@ import { AuthService } from './@services/auth.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { SearchService } from './@services/search.service';
 import { HttpModule } from '@angular/http';
-import { CinemaslistComponent } from './mycinemas/cinemaslist/cinemaslist.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,7 +33,6 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    CinemaslistComponent
   ],
   imports: [
     BrowserModule,

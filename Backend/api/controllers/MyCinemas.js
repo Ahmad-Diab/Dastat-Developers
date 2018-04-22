@@ -32,17 +32,20 @@ var database = require('../config/db-connection');
 ////////////////////////////////////////////// ADD ALL CINEMAS MODULES //////////////////////////////////////////////
 module.exports.addCinema = function(req,res,next){
 
-    var 
-        location = req.body['location'],
-        address = req.body['address'],
-        name = req.body['name'],
-        number_of_halls = req.body['number_of_halls'],
-        is3D = req.body['is3D'],
-        is4D = req.body['is4D'],
-        company = req.body['company'],
-        imagePath = req.body['imagePath'],
-        imagePath2 = req.body['imagePath2'];
+    console.log('sssss');
+    console.log(req.body[0]);
 
+    var 
+        location = req.body[1],
+        address = req.body[2],
+        name = req.body[0],
+        number_of_halls = req.body[3],
+        is3D = req.body[4],
+        is4D = req.body[5],
+        company = req.body[6],
+        imagePath = req.body[7],
+        imagePath2 = req.body[8];
+   
     var query = 'INSERT INTO cinemas (location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2) VALUES (?,?,?,?,?,?,?,?,?)';
 
     database.query(query,[location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2],function(error, results, fields){
@@ -79,10 +82,13 @@ module.exports.editCinema = function(req, res, next){
     var name = req.params.name;
     var address = req.body.address;
     var number_of_halls = req.body.number_of_halls;
+    var is3D=req.body.is3D;
+    var is4D=req.body.is4D;
     var company = req.body.company;
-    var image_path = req.body.age;
+    var image_path = req.body.image_path;
+    var imagePath2=req.body.imagePath2;
 
-    database.query('UPDATE cinemas SET address = ?, number_of_halls = ?, company = ? , image_path = ? where location = ? and name = ? ' ,[address,number_of_halls,company,location,name], function(err, results, fields) {
+    database.query('UPDATE cinemas SET address = ?, number_of_halls = ?, is3D = ? , is4D = ? , company = ? , image_path = ?, image_path2 = ? where location = ? and name = ? ' ,[address,number_of_halls,is3D ,is4D, company,image_path,image_path2, location,name], function(err, results, fields) {
       if(err) return next(err); 
       return res.send(results);
         });
@@ -100,8 +106,13 @@ module.exports.editCinema = function(req, res, next){
 module.exports.deleteCinemaForAdmin = function(req, res, next){
     var cinema = req.params.cinema;
     var owner = req.params.owner;
-    database.query('DELETE FROM TABLE admins_cinemas WHERE admin = ? AND cinema_name = ?', [owner, cinema], function(error, results, fields){
+    database.query('DELETE FROM admins_cinemas WHERE admins_cinemas.admin = ? AND admins_cinemas.cinema_name = ?', [owner, cinema], function(error, results, fields){
         if(error) return next(error);
-        return res.send(results);
+        // console.log("HERE!");
+        res.status(200).json({
+            err : null,   
+            msg : "Deleted Sucessfully!",
+            data : results
+          });
     } );
 }

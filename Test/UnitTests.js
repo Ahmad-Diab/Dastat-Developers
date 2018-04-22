@@ -316,6 +316,61 @@ describe('Movie',function(){
 //Omar Abdelaziz
 
 
+describe('Movie Requests',function(){
+  it('Movie should not be Accepted because it is not pending' , function(done){
+
+    chai.request("localhost:8000").get("/api/AcceptMovieRequest/2")
+    .end(function(req,res){
+      res.should.have.json.status(404);
+      res.should.be.json;
+     done();
+   });
+ });
+
+ it('Movie should be Accepted' , function(done){
+
+  chai.request("localhost:8000").get("/api/AcceptMovieRequest/16")
+  .end(function(req,res){
+    res.should.have.json.status(200);
+    res.should.be.json;
+   done();
+ });
+});
+
+it('Movie should not be Rejected because it is not pending' , function(done){
+
+  chai.request("localhost:8000").get("/api/RejectMovieRequest/2")
+  .end(function(req,res){
+    res.should.have.json.status(404);
+    res.should.be.json;
+   done();
+ });
+});
+
+it('Movie should be Reject' , function(done){
+
+chai.request("localhost:8000").get("/api/RejectMovieRequest/17")
+.end(function(req,res){
+  res.should.have.json.status(200);
+  res.should.be.json;
+ done();
+});
+});
+
+it('Movie Request Shown' , function(done){
+
+  chai.request("localhost:8000").get("/api/ViewMovieRequest/4")
+  .end(function(req,res){
+    res.should.have.json.status(200);
+    res.should.be.json;
+   done();
+  });
+  });
+
+});
+
+
+
 
 
 

@@ -345,39 +345,94 @@ module.exports.DeleteMovies = function(req, res, next){
 
   //Reject a single Request
   module.exports.RejectMovieRequest = function(req, res, next){
+    database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
+        if(err) return next(err);
+    var 
+  
+    oldGenre = results[0].genre,
+    oldTitle= results[0].title,
+    oldDuration = results[0].duration,
+    oldDescribtion = results[0].description,
+    oldImagePath = results[0].imagePath,
+    oldCast = results[0].cast,
+    oldYear = results[0].year,
+    oldFeature =results[0].feature,
+    oldReleaseDate= results[0].release_date,
+    oldRating = results[0].rating;
+    oldStatus = results[0].status;
    
+     
+     
        var  status = "REJECTED";
      
+if(oldStatus == "PENDING"){
 
-
-     var sqlQuery = 'UPDATE movies SET status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
-     database.query(sqlQuery,[status,req.params.movie_id],
+     var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
+     database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
      function(error,results){
-         
+         if(error){
+             return next(error);
+         }
          return res.status(200).json({
              err: null,
              msg: 'Request Rejected',
              data:results
          });
-        
+        });}
+        else{
+            return res.status(404).json({
+                err: null,
+                msg: 'This Movie Request is Not Pending',
+                data:results
+            });
+        }
     });
     }
 
 
     //Accept a single Request
-  module.exports.AcceptMovieRequest = function(req, res, next){
-  
-       var  status = 'ACCEPTED';
-     var sqlQuery = 'UPDATE movies SET status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
-     database.query(sqlQuery,[status,req.params.movie_id],
-     function(error,results){
-         if(error){
-             return next(error);
+    module.exports.AcceptMovieRequest = function(req, res, next){
+        database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
+            if(err) return next(err);
+        var 
+      
+        oldGenre = results[0].genre,
+        oldTitle= results[0].title,
+        oldDuration = results[0].duration,
+        oldDescribtion = results[0].description,
+        oldImagePath = results[0].imagePath,
+        oldCast = results[0].cast,
+        oldYear = results[0].year,
+        oldFeature =results[0].feature,
+        oldReleaseDate= results[0].release_date,
+        oldRating = results[0].rating;
+        oldStatus = results[0].status;
+       
+         
+         
+           var  status = 'ACCEPTED';
+         
+    
+           if(oldStatus == "PENDING"){
+    
+         var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
+         database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
+         function(error,results){
+             if(error){
+                 return next(error);
+             }
+             return res.status(200).json({
+                 err: null,
+                 msg: 'Request Accepted',
+                 data:results
+             });
+            });}
+            else{
+                return res.status(404).json({
+                    err: null,
+                    msg: 'This Movie Request is Not Pending',
+                    data:results
+                });
             }
-         return res.status(200).json({
-             err: null,
-             msg: 'Request Accepted',
-             data:results
-         });
         });
-    }
+        }

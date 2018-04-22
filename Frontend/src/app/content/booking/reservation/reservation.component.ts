@@ -68,7 +68,7 @@ export class ReservationComponent implements OnInit {
       this.cookie.remove('party');
       this.cookie.remove('movie');
       //event.confirm.resolve(response);
-      console.log("onReserve order is met");
+      console.log(response);
     });
   }
 

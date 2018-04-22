@@ -1,4 +1,5 @@
-var database = require('../config/db-connection');
+var database = require('../config/db-connection'),
+Validations = require('../utils/validations');
 
 
 /**
@@ -53,67 +54,67 @@ module.exports.getHallsForThatCinema = function(req, res){
     });
 };
 
-
 /**
-* A function to return the cinemas that this user related to
-* 
-* @param req, required data for viewing cinemas for that user
-* @param res, results of all cinemas that user works in
-* @param next
-*/
+ * A function to return the cinemas that this user related to
+ * 
+ * @param req, required data for viewing cinemas for that user
+ * @param res, results of all cinemas that user works in
+ * @param next
+ */
 module.exports.viewCinemasForAdminUser = function(req, res, next){
-   
-   var username = req.params.username;
-       
-   // Null Checkers
-   console.log(username);
-   console.log(req.body);
+    
+    var username = req.params.username;
+        
+    // Null Checkers
+    console.log(username);
+    console.log(req.body);
 
-   if(!username) {
-       return res.status(422).json({
-           err: null,
-           msg: 'Username is required.',
-           data: null
-       });
-   }
+    if(!username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+   
   
- 
-   // Validations of correct types
-   if(!Validations.isString(username)) {
-       return res.status(422).json({
-           err: null,
-           msg: 'Invalid data types.',
-           data: null
-       });
-   }
+    // Validations of correct types
+    if(!Validations.isString(username)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Invalid data types.',
+            data: null
+        });
+    }
 
-   //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
 
-   database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
-       [username],function (error, result) {
-           if (error) throw error;
-           //return res.send(result);
-           if(result.length == 0){
-   
-               res.status(200).json({
-                   err: null,
-                   msg: 'You are not assigned to any cinema',
-                   data: result
-               });
-   
-           }
-           else{
-   
-               res.status(200).json({
-                   err: null,
-                   msg: 'Cinemas Successfully Retrieved',
-                   data: result
-               });
-   
-           }
-   });
+    database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
+        [username],function (error, result) {
+            if (error) throw error;
+            //return res.send(result);
+            if(result.length == 0){
+    
+                res.status(200).json({
+                    err: null,
+                    msg: 'You are not assigned to any cinema',
+                    data: result
+                });
+    
+            }
+            else{
+    
+                res.status(200).json({
+                    err: null,
+                    msg: 'Cinemas Successfully Retrieved',
+                    data: result
+                });
+    
+            }
+    });
 
 };
+
 
 
 module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){

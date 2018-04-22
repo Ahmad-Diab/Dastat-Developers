@@ -139,7 +139,7 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
 router.post('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
 router.post('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
-router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_location/:hall_number', AdminHalls.viewMoviesInHall);
+router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_location/', AdminHalls.viewMoviesInHall);
 router.get('/admin/adminHalls/viewCinemasForAdminUser/:username', AdminHalls.viewCinemasForAdminUser);
 router.get('/admin/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name', AdminHalls.getAlltMoviesInCinemaForAdmin);
 

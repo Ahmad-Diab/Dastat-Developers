@@ -319,11 +319,10 @@ module.exports.viewMoviesInHall = function(req, res, next){
 
     var username = req.params.username,
         cinema_name = req.params.cinema_name,
-        cinema_location = req.params.cinema_location,
-        hall_number = req.params.hall_number;
+        cinema_location = req.params.cinema_location;
         
     // Null Checkers
-    console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number);
+    console.log(username+" "+cinema_name+" "+cinema_location);
     console.log(req.body);
 
     if(!username) {
@@ -347,19 +346,19 @@ module.exports.viewMoviesInHall = function(req, res, next){
             data: null
         });
     }
-    if(!hall_number) {
+
+    // Validations of correct types
+    if(!Validations.isString(cinema_name)) {
         return res.status(422).json({
             err: null,
-            msg: 'Hall number is required.',
+            msg: 'Cinema name data type invalid.',
             data: null
         });
     }
-
-    // Validations of correct types
-    if(!Validations.isNumber(hall_number)) {
+    if(!Validations.isString(cinema_location)) {
         return res.status(422).json({
             err: null,
-            msg: 'Invalid data types.',
+            msg: 'Cinema location data type invalid.',
             data: null
         });
     }
@@ -381,33 +380,15 @@ module.exports.viewMoviesInHall = function(req, res, next){
             }
     });
 
-    // Verify that hall exists in Cinema
-    
-    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
-        [hall_number, cinema_location, cinema_name],function (error, results) {
-            if (error) {
-                return next(error);
-            }
-            console.log(results);
-            if(!results || !results.length) {
-                return res.status(404).send({
-                    err: null,
-                    msg: "The assigned hall does not exist.",
-                    data: null
-                });
-            }
-    });
+    var query = 'select * from Movies m Join Halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
 
-
-    var query = 'select * from Movies m , Halls h where h.hall_number = ? AND m.movie_id = h.movie AND h.cinema_name = ? AND h.cinema_location = ?';
-
-    database.query(query,[null, hall_number, cinema_name, cinema_location], function (error, results) {
+    database.query(query,[ cinema_name, cinema_location], function (error, results) {
         if (error) {
             return next(error);
         }
         return res.status(200).json({
             err: null,
-            msg: 'Movies in hall '+hall_number+', '+cinema_name+', '+cinema_location+' sucessfully retrieved.'+hall_number,
+            msg: 'Movies in halls of cinema '+cinema_name+', '+cinema_location+' sucessfully retrieved.',
             data: results
         });
 

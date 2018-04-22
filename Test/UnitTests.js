@@ -384,7 +384,7 @@ describe('Movie Requests',function(){
 
  it('Movie should be Accepted' , function(done){
 
-  chai.request("localhost:8000").post("/api/AcceptMovieRequest/16")
+  chai.request("localhost:8000").get("/api/AcceptMovieRequest/16")
   .end(function(req,res){
     res.should.have.json.status(200);
     res.should.be.json;
@@ -404,7 +404,7 @@ it('Movie should not be Rejected because it is not pending' , function(done){
 
 it('Movie should be Reject' , function(done){
 
-chai.request("localhost:8000").post("/api/RejectMovieRequest/17")
+chai.request("localhost:8000").get("/api/RejectMovieRequest/17")
 .end(function(req,res){
   res.should.have.json.status(200);
   res.should.be.json;

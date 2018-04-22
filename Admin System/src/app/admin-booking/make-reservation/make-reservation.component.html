@@ -1,3 +1,72 @@
 <p>
-  make-reservation works!
+  make-reservation under construction!
 </p>
+
+<div class="ticket-view" style="text-align: center">
+  <div class="ticket">
+    <div class="ticket-position">
+
+      <div class="ticket__indecator indecator--pre">
+        <div class="indecator-text pre--text">NEW TICKET</div>
+      </div>
+
+      <div class="ticket__inner">
+        <div class="ticket-secondary">
+
+          <span class="ticket__item">Reservation ID:
+            <strong class="ticket__number">"New Ticket"</strong>
+          </span>
+
+          <span class="ticket__item">
+            Date:
+            <input type="date" class="form-control" placeholder="Select Date">
+            <!--
+            <strong hidden="{{!reserveData.date}}" class="ticket__date">{{(reserveData.date) ? (reserveData.date | date:'yyyy-MM-dd'): "N/A"}}</strong>
+            <strong class="ticket__time">{{(reserveData.time) ? reserveData.time : "N/A"}}</strong>
+            -->
+          </span>
+
+          <span class="ticket__item">Hall:
+            <strong class="ticket__hall">{{(reserveData.hall) ? reserveData.hall : "N/A"}}</strong>
+          </span>
+
+          <span class="ticket__item ticket__price">Price:
+            <strong class="ticket__cost">{{(reserveData.price) ? reserveData.price : "N/A"}}</strong>
+          </span>
+        </div>
+
+        <div class="ticket-primery">
+          <span class="ticket__item ticket__item--primery ticket__film">
+            Movie
+            <input ng-options="movie.title for movie in moviesList" class="form-control" placeholder="Select Movie">
+            <!--
+            <strong class="ticket__movie">{{(reserveData.movie.title) ? reserveData.movie.title : "N/A"}}</strong>
+            -->
+          </span>
+
+        </div>
+      </div>
+
+      <div class="ticket__indecator indecator--post">
+        <div class="indecator-text post--text">NEW TICKET</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center">
+
+    <button type="button" class="btn btn btn-outline-primary btn-lg btn-icon loading-demo mr-5 mb-lg-1 "
+            [disabled]="ticketIsLoaded" (click)="makeReservation()">
+
+      <i class="icon icon-basic-bookmark"></i>
+      <span style="align-self: center">{{btn_verifyTicket}}</span>
+    </button>
+
+  </div>
+
+</div>
+
+
+
+
+

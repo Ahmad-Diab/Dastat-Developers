@@ -8,7 +8,7 @@ var router = express.Router();
 //Schema Controllers
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
-var UserBooking = require('./Controllers/UserBookingController');
+var UserBooking = require('./controllers/UserBookingController');
 var Authentication = require('./controllers/Authentication');
 var Search = require('./controllers/SearchController');
 var Movie = require('./controllers/MovieController');
@@ -24,7 +24,7 @@ var Promocodes = require('./controllers/PromocodesController');
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
-router.get('/authtest',Authorization.Verify_User,(req,res)=>{
+router.get('/authtest',Authorization.Verify("1000"),(req,res)=>{
     return res.status(200).json({
         err: null,
         msg: 'ok',
@@ -128,7 +128,7 @@ router.get('/getTopMovies',Search.getTopMovies);
 router.post('/adminlogin', AuthenticationAdmin.login);
 
 //------------------------------ MyAdmins routes --------------------------------//
-router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
+router.get('/users', User.getUsers);
 
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//

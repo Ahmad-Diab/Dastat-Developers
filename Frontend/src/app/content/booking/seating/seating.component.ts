@@ -48,13 +48,7 @@ export class SeatingComponent implements OnInit {
         return true;
     return false;
   }
-  isSelected(seat){
-    for(var i=0; i<this.selected.length;i++){
-      if(this.selected[i]==seat)
-        return true;
-    }
-    return false;
-  }
+  
   select(seat: string) {
     for(var i = 0; i < this.seats.length; i++)
       if(this.seats[i].seat_number.includes(seat))

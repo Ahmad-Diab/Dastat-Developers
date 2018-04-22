@@ -176,8 +176,9 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
-router.get('/MoviesInHalls/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
-
+router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
+router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
+router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
 
 
 

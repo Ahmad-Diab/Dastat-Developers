@@ -18,7 +18,6 @@ export class MoviesInHallsComponent implements OnInit {
     cinemas=[];
     selectedCinemaMovies=[];
   
-    selectedMovie;
     selectedCinema;
   
     editMode: boolean;
@@ -44,15 +43,11 @@ export class MoviesInHallsComponent implements OnInit {
     }
 
     getHalls(){
-  
-       
        this.getMovies();
-       
        this.MoviesInHallsService.getHallsForCinema(this.selectedCinema).subscribe((response) => {
          this.halls = response.data;
          console.log(response.data);
        });
-       
        
      }
    

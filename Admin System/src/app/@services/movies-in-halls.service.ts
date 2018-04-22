@@ -12,14 +12,14 @@ export class MoviesInHallsService extends HttpService{
     }
 
   getHallsForCinema(cinema){
-    return this.get('/admin/adminHalls/getHallsForThatCinema/'+cinema.cinema_name+'/'+cinema.cinema_location);
+    return this.get('/MoviesInHalls/getHallsForThatCinema/'+cinema.cinema_name+'/'+cinema.cinema_location);
   }
 
   getCinemasForAdminUser(username){
-    return this.get('/admin/adminHalls/viewCinemasForAdminUser/'+username);
+    return this.get('/MoviesInHalls/viewCinemasForAdminUser/'+username);
   }
 
   getAlltMoviesInCinemaForAdmin(cinema_name , cinema_location){
-    return this.get('/admin/getAlltMoviesInCinemaForAdmin/'+cinema_location+'/'+cinema_name);
+    return this.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/'+cinema_location+'/'+cinema_name);
   }
 }

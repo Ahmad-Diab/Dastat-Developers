@@ -1,149 +1,224 @@
 <div class="card">
-    <div class="card-header"><h2 class="mt-0">Movie Requests</h2>
+    <div class="card-header">
+        <h2 class="mt-0">
+            <span class="fw-400">
+                <b>Movie Request</b>
+            </span>
+        </h2>
+
     </div>
     <div class="card-body">
-      <p>Here is al your requests details, you can add,edit or delete them.</p>
-    </div>
-    <div class="card-body">   
-      <div class="card">           
-        <h5 style="margin-top: 2px">Add your name</h5>          
-        <input #admin id="input2" type="text" class="form-control mb-3">
-      </div>
-      <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button"(click)="viewReq(admin.value)"  >Show my requests</button>
-
-      <div>
-          <button type="button" class="btn-lg btn-primary mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "!moviesAction">Add Request</button>
-          <button type="button" class="btn-lg btn-danger mr-1 mb-1" (click) = "toogleMovie()" *ngIf = "moviesAction">Cancel</button>
-        </div>
-      </div>
-
-     
-         
-   
-      
-  
-    <div class="table-responsive">
-      <table class="table align-middle mb-0">
-        <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>Action</th>
-            <th>Request ID</th>
-            <th>Title</th>
-            <th>Duration</th>
-            <th>Genre</th>
-            <th>Description</th>
-            <th>Image Path</th>
-            <th>Cast</th>
-            <th>Year</th>
-            <th>Feature</th>
-            <th>Release Date</th>
-            <th>Rating</th>
-            <th>Status</th>
-            <th>Admin Requested</th>
-          </tr>
-        </thead>  
-        <tbody>
-          <tr *ngFor="let movie of movies" >
-              <td>
-                  <button _ngcontent-c32="" class="btn btn-success btn-icon loading-demo mr-1 mb-1" type="button" (click)="getMovieInfo(movie)">
-                      <i _ngcontent-c32="" class="icon icon-gear"></i>
-                      <span _ngcontent-c32="">Edit Request</span>
-                    </button>
-                  <button _ngcontent-c32="" class="btn btn-danger btn-icon mr-1 mb-1" type="button" (click)="deleteReq(movie.movie_id)">
-                      <i _ngcontent-c32="" class="icon icon-close"></i>
-                      <span _ngcontent-c32="">Delete Request</span>
-                    </button>
-              </td>
-              <td>
-                
-              </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.movie_id}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.title}}</p>
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.duration}}</p>
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.genre}}</p>
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.description}}</p>
-            </td>
-            <td>
-                <img src="{{movie.imagePath}}" class="avatar-md rounded" alt="Card image cap">
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.cast}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.year}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.featuer}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.release_date}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.rating}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.status}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.admin_requested}}</p>      
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="card-body" *ngIf="moviesAction">
-
-        <div class="card">
-            <div class="card-header">
-              Add your Movie Request here  
+        <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-1 col-form-label">
+                <b>Username</b>
+            </label>
+            <div _ngcontent-c37="" class="col-11">
+                <input #admin id="input2" type="text" class="form-control mb-3" placeholder="Enter Username">
             </div>
-            <div class="card-body">
-          
-              <h5 style="margin-top: 1px">Title</h5>          
-              <input #title id="input1" type="text" class="form-control mb-3">
-          
-              <h5 style="margin-top: 10px">Duration</h5>    
-              <input #duration id="input1" type="text" class="form-control mb-3"> 
-              
-              <h5 style="margin-top: 10px">Genre</h5>    
-              <input #genre id="input1" type="text" class="form-control mb-3"> 
-    
-              <h5 style="margin-top: 10px">Description</h5>    
-              <input #description id="input1" type="text" class="form-control mb-3"> 
-    
-              <h5 style="margin-top: 10px">Image Path</h5>    
-              <input #imagePath id="input1" type="text" class="form-control mb-3"> 
-    
-              <h5 style="margin-top: 10px">Cast</h5>    
-              <input #cast id="input1" type="text" class="form-control mb-3"> 
-    
-              <h5 style="margin-top: 10px">Year</h5>    
-              <input #year id="input1" type="text" class="form-control mb-3"> 
-    
-              <h5 style="margin-top: 10px">Feature</h5>    
-              <input #feature id="input1" type="text" class="form-control mb-3"> 
-    
-              <h5 style="margin-top: 10px">Release Date</h5>    
-              <input #releasedate id="input1" type="text" class="form-control mb-3">
-              <h5 style="margin-top: 10px">Rating</h5>    
-              <input #rating id="input1" type="text" class="form-control mb-3">
+        </div>
+    </div>
+    <div>
+        <button _ngcontent-c21="" class="btn btn-outline-success mr-1 mb-1" type="button" (click)="viewReq(admin.value)">Show my requests</button>
+    </div>
 
-              <h5 style="margin-top: 10px">Status</h5>    
-              <input #status id="input1" type="text" class="form-control mb-3">
+    <div>
+        <button type="button" class="btn btn-outline-primary mr-1 mb-1" (click)="toogleMovie()" *ngIf="!moviesAction">Add Request</button>
+        <button type="button" class="btn btn-outline-danger mr-1 mb-1" (click)="toogleMovie()" *ngIf="moviesAction">Cancel</button>
+    </div>
+</div>
 
 
-              <button _ngcontent-c21="" class="btn-lg btn-outline-success mr-1 mb-1" type="button" (click)="addReq(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,admin.value)" > Submit</button>
-          
-</div>    
-  </div>
+
+
+
+
+<div class="table-responsive">
+    <table class="table align-middle mb-0">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Action</th>
+                <th>Request ID</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Genre</th>
+                <th>Description</th>
+                <th>Image Path</th>
+                <th>Cast</th>
+                <th>Year</th>
+                <th>Feature</th>
+                <th>Release Date</th>
+                <th>Rating</th>
+                <th>Status</th>
+                <!-- <th>Admin Requested</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let movie of movies">
+                <td>
+                    <button _ngcontent-c32="" class="btn btn-outline-primary mr-1 mb-1" type="button" (click)="getMovieInfo(movie)">
+                        <span _ngcontent-c32="">Edit Request</span>
+                    </button>
+                    <button _ngcontent-c32="" class="btn btn-outline-danger mr-1 mb-1" type="button" (click)="deleteReq(movie.movie_id)" href="movies/requests-co-bm">
+                        <span _ngcontent-c32="">Delete Request</span>
+                    </button>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.movie_id}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.title}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.duration}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.genre}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.description}}</p>
+                </td>
+                <td>
+                    <img src="{{movie.imagePath}}" class="avatar-md rounded" alt="Card image cap">
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.cast}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.year}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.featuer}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.release_date}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.rating}}</p>
+                </td>
+                <td>
+                    <p style="margin-top: 2px">{{movie.status}}</p>
+                </td>
+                <!-- <td>
+                    <p style="margin-top: 2px">{{movie.admin_requested}}</p>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card-body" *ngIf="moviesAction">
+
+    <div class="card">
+        <div class="card-header">
+            Add your Movie Request here
+        </div>
+        <div class="card-body">
+
+            <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Title</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #title id="input1" type="text" class="form-control mb-3" placeholder="Title">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Duration</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #duration id="input1" type="text" class="form-control mb-3" placeholder="Duration">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Genre</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #genre id="input1" type="text" class="form-control mb-3" placeholder="Genre">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Description</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #description id="input1" type="text" class="form-control mb-3" placeholder="Description">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Image Path</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #imagePath id="input1" type="text" class="form-control mb-3" placeholder="Image Path">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Cast</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #cast id="input1" type="text" class="form-control mb-3" placeholder="Cast">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Year</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #year id="input1" type="text" class="form-control mb-3" placeholder="Year">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Feature</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #feature id="input1" type="text" class="form-control mb-3" placeholder="Feature">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Release Date</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #releasedate id="input1" id="example-date-input" type="date" class="form-control mb-3" placeholder="Release Date">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Rating</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #rating id="input1" type="text" class="form-control mb-3" placeholder="Rating">
+                </div>
+              </div>
+        
+              <div _ngcontent-c37="" class="form-group row">
+                <label _ngcontent-c37="" class="col-1 col-form-label">
+                  <b>Status</b>
+                </label>
+                <div _ngcontent-c37="" class="col-11">
+                  <input #status id="input1" type="text" class="form-control mb-3" placeholder="Status">
+                </div>
+              </div>        
+
+            <button _ngcontent-c21="" class="btn btn-outline-success mr-1 mb-1" type="button" (click)="addReq(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,admin.value)">
+                Submit</button>
+
+        </div>
+    </div>

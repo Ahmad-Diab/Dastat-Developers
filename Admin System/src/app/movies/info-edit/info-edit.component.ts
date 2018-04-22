@@ -11,7 +11,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 export class InfoEditComponent implements OnInit {
   movie;
   movieEdit= false
-
+  
   constructor(public MoviesService: MoviesService,private route : ActivatedRoute, 
     public cookie : CookieService ) { }
 

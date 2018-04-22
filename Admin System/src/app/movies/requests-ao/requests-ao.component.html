@@ -1,95 +1,96 @@
 <div class="card">
-    <div class="card-header"><h2 class="mt-0">Movie Requests</h2>
+    <div class="card-header">
+        <h2 class="mt-0">Movie Requests</h2>
     </div>
     <div class="card-body">
-      <p>All Movies Requests.</p>
+        <p>All Movies Requests.</p>
     </div>
-  
 
-     
-         
-   
-      
-  
+
+
+
+
+
+
     <div class="table-responsive">
-      <table class="table align-middle mb-0">
-        <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>Action</th>
-            <th>Request ID</th>
-            <th>Title</th>
-            <th>Duration</th>
-            <th>Genre</th>
-            <th>Description</th>
-            <th>Image Path</th>
-            <th>Cast</th>
-            <th>Year</th>
-            <th>Feature</th>
-            <th>Release Date</th>
-            <th>Rating</th>
-            <th>Status</th>
-            <th>Admin Requested</th>
-          </tr>
-        </thead>  
-        <tbody>
-          <tr *ngFor="let movie of movies" >
-              <td>
-                  <button _ngcontent-c32="" class="btn btn-success btn-icon loading-demo mr-1 mb-1" type="button" (click)="acceptReq(movie.movie_id)" >
-                      <i _ngcontent-c32="" class="icon icon-gear"></i>
-                      <span _ngcontent-c32="">Accept Request</span>
-                    </button>
-                  <button _ngcontent-c32="" class="btn btn-danger btn-icon mr-1 mb-1" type="button" (click)="rejectReq(movie.movie_id)" >
-                      <i _ngcontent-c32="" class="icon icon-close"></i>
-                      <span _ngcontent-c32="">Reject Request</span>
-                    </button>
-              </td> 
-              <td>
-                
-              </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.movie_id}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.title}}</p>
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.duration}}</p>
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.genre}}</p>
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.description}}</p>
-            </td>
-            <td>
-                <img src="{{movie.imagePath}}" class="avatar-md rounded" alt="Card image cap">
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.cast}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.year}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.featuer}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.release_date}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.rating}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.status}}</p>      
-            </td>
-            <td>
-                <p style="margin-top: 2px">{{movie.admin_requested}}</p>      
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Action</th>
+                    <th>Request ID</th>
+                    <th>Title</th>
+                    <th>Duration</th>
+                    <th>Genre</th>
+                    <th>Description</th>
+                    <th>Image Path</th>
+                    <th>Cast</th>
+                    <th>Year</th>
+                    <th>Feature</th>
+                    <th>Release Date</th>
+                    <th>Rating</th>
+                    <th>Status</th>
+                    <th>Admin Requested</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let movie of movies">
+                    <td>
+                        <button _ngcontent-c32="" class="btn btn-success btn-icon loading-demo mr-1 mb-1" type="button" (click)="acceptReq(movie.movie_id)">
+                            <i _ngcontent-c32="" class="icon icon-gear"></i>
+                            <span _ngcontent-c32="">Accept Request</span>
+                        </button>
+                        <button _ngcontent-c32="" class="btn btn-danger btn-icon mr-1 mb-1" type="button" (click)="rejectReq(movie.movie_id)">
+                            <i _ngcontent-c32="" class="icon icon-close"></i>
+                            <span _ngcontent-c32="">Reject Request</span>
+                        </button>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.movie_id}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.title}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.duration}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.genre}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.description}}</p>
+                    </td>
+                    <td>
+                        <img src="{{movie.imagePath}}" class="avatar-md rounded" alt="Card image cap">
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.cast}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.year}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.featuer}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.release_date}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.rating}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.status}}</p>
+                    </td>
+                    <td>
+                        <p style="margin-top: 2px">{{movie.admin_requested}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-   
-  </div>
+
+</div>

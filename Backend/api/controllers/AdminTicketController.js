@@ -40,7 +40,7 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
         });
     }
 
-    let sqlQuery = "UPDATE Tickets SET payment = 1 WHERE reservation_id = ?;";
+    let sqlQuery = "UPDATE tickets SET payment = 1 WHERE reservation_id = ?;";
 
     database.query(sqlQuery,reservation_id, function (error, results) {
         if (error) {

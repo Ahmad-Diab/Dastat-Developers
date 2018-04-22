@@ -3,11 +3,11 @@ var config = require('./config');
 
 //mysql connection
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : '192.185.128.96',
   port     : '3306',
-  user     : 'root',
-  password : '',
-  database : config.database
+  user     : 'gastscou_george',
+  password : 'something',
+  database: config.database
 });
 
 connection.connect(function(err) {

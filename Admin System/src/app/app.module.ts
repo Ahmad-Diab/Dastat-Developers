@@ -22,6 +22,7 @@ import { HttpService } from './@services/http.service';
 import { AuthService } from './@services/auth.service';
 import { HttpModule } from '@angular/http';
 import {AdminTicketService} from "./@services/admin-ticket.service";
+import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,7 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    MoviesInHallsComponent
   ],
   imports: [
     BrowserModule,

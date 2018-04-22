@@ -21,6 +21,7 @@ var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
+var MoviesInHalls = require('./controllers/MoviesInHallsController');
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -174,8 +175,8 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
-
-
+//--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
+router.get('/MoviesInHalls/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
 
 
 

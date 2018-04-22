@@ -205,6 +205,16 @@ describe('Movie',function(){
 
 
 
+describe('View All Movies',function(){
+  it('All movies are viewed' , function(done){
+    chai.request("localhost:8000").get("/api/movies/feature")
+    .end(function(req,res){
+      res.should.have.status(200); //Make sure that it is found.
+      res.should.be.json; //Make sure that it is a jason. 
+     done();
+    });
+    });
+});
 
 
 

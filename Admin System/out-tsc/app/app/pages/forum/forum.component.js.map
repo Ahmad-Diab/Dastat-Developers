@@ -1,0 +1,1 @@
+{"version":3,"file":"forum.component.js","sourceRoot":"","sources":["../../../../../src/app/pages/forum/forum.component.ts"],"names":[],"mappings":";;;;;;AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,eAAe,CAAC;AAO1C;IAAA;IACA,CAAC;IADY,cAAc;QAL1B,SAAS,CAAC;YACT,QAAQ,EAAE,WAAW;YACrB,WAAW,EAAE,wBAAwB;YACrC,SAAS,EAAE,CAAC,wBAAwB,CAAC;SACtC,CAAC;OACW,cAAc,CAC1B;IAAD,qBAAC;CAAA,AADD,IACC;SADY,cAAc"}

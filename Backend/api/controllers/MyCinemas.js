@@ -32,17 +32,20 @@ var database = require('../config/db-connection');
 ////////////////////////////////////////////// ADD ALL CINEMAS MODULES //////////////////////////////////////////////
 module.exports.addCinema = function(req,res,next){
 
-    var 
-        location = req.body['location'],
-        address = req.body['address'],
-        name = req.body['name'],
-        number_of_halls = req.body['number_of_halls'],
-        is3D = req.body['is3D'],
-        is4D = req.body['is4D'],
-        company = req.body['company'],
-        imagePath = req.body['imagePath'],
-        imagePath2 = req.body['imagePath2'];
+    console.log('sssss');
+    console.log(req.body[0]);
 
+    var 
+        location = req.body[1],
+        address = req.body[2],
+        name = req.body[0],
+        number_of_halls = req.body[3],
+        is3D = req.body[4],
+        is4D = req.body[5],
+        company = req.body[6],
+        imagePath = req.body[7],
+        imagePath2 = req.body[8];
+   
     var query = 'INSERT INTO cinemas (location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2) VALUES (?,?,?,?,?,?,?,?,?)';
 
     database.query(query,[location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2],function(error, results, fields){
@@ -139,8 +142,13 @@ module.exports.editCinema = function(req, res, next){
 module.exports.deleteCinemaForAdmin = function(req, res, next){
     var cinema = req.params.cinema;
     var owner = req.params.owner;
-    database.query('DELETE FROM TABLE admins_cinemas WHERE admin = ? AND cinema_name = ?', [owner, cinema], function(error, results, fields){
+    database.query('DELETE FROM admins_cinemas WHERE admins_cinemas.admin = ? AND admins_cinemas.cinema_name = ?', [owner, cinema], function(error, results, fields){
         if(error) return next(error);
-        return res.send(results);
+        // console.log("HERE!");
+        res.status(200).json({
+            err : null,   
+            msg : "Deleted Sucessfully!",
+            data : results
+          });
     } );
 }

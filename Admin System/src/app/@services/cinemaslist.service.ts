@@ -18,13 +18,18 @@ export class CinemaslistService extends HttpService {
     return this.get('filterByLocation/' + location+'/'+ is3D+'/'+is4D);
   }
   getAllCinemas(){
-    return this.get('viewCinemas');
+    return this.get('adminviewCinemas');
   }
   getDistinctLocation(){
     return this.get('viewCinema/DistinctLocations');
   }
   editCinema(cinema) {
     return this.http.patch('Cinemas/editCinema', cinema); 
+  addCinema(addedCinema:any){
+    console.log(addedCinema[0])
+    return this.post('addCinema',addedCinema);
+  }
+  
 
   }
 }

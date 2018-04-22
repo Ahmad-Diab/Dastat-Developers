@@ -15,6 +15,8 @@ export class ReservationComponent implements OnInit {
   show = false;
   reserveData = {};
   reservationType = "";
+  btn_purchaseClass;
+  btn_reserveClass;
   promo = "";
   searchValue;
 
@@ -22,6 +24,9 @@ export class ReservationComponent implements OnInit {
   ngOnInit() {
 
     this.reservationType = "reserve";
+    this.btn_purchaseClass = "order__control-btn";
+    this.btn_reserveClass = "order__control-btn active";
+
 
     let bookingDetails = this.cookie.getObject('booking');
 
@@ -36,10 +41,10 @@ export class ReservationComponent implements OnInit {
       username: bookingDetails['username'],
       cinema_name: bookingDetails['cinema_name'],
       cinema_location: bookingDetails['cinema_location'],
-      date: bookingDetails['data'],
+      date: bookingDetails['date'],
       time: bookingDetails['time'],
       hall: bookingDetails['hall_number'],
-      payment: null,                      //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
+      payment: false,                     //TO BE ADDED ONCE SUBMIT, DEPENDS ON WHICH BUTTON
       tickets: tickets,                   //Meaning Reserve (Not Paid), Or Buy (Paid)
       ticketsNum: ticketsNum,
       price: price,
@@ -52,7 +57,7 @@ export class ReservationComponent implements OnInit {
   }
 
   onReserve(event): void {
-    event = this.searchValue
+    event = this.searchValue;
     this.bookingService.makeReservation(
       this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
       this.reserveData['date'], this.reserveData['time'],this.reserveData['hall'], this.reserveData['payment'],
@@ -62,7 +67,7 @@ export class ReservationComponent implements OnInit {
       this.cookie.remove('cinema');
       this.cookie.remove('party');
       this.cookie.remove('movie');
-      event.confirm.resolve(response);
+      //event.confirm.resolve(response);
       console.log("onReserve order is met");
     });
   }
@@ -70,11 +75,15 @@ export class ReservationComponent implements OnInit {
   onUnpaid(): void{
     this.reserveData["payment"] = false;
     this.reservationType = "Reserve";
+    this.btn_purchaseClass = "order__control-btn";
+    this.btn_reserveClass = "order__control-btn active";
   }
 
   onPaid(): void {
     this.reserveData["payment"] = true;
     this.reservationType = "Purchase";
+    this.btn_purchaseClass = "order__control-btn active";
+    this.btn_reserveClass = "order__control-btn";
   }
 
   usePromo(event): any { //triggered when button to submit promocode is clicked. extracts information required and sentds it in body of request
@@ -85,8 +94,7 @@ export class ReservationComponent implements OnInit {
           this.err = true;
         } else {
         this.reserveData['price'] = response.data.price; //modify price according to promocode effect
-        var descp = response.data.description;
-        this.reserveData['comment'] = descp;
+        this.reserveData['comment'] = response.data.description;
         this.show = true; //show message confirming promocode success
         this.vis = false; //remove promocode input textarea and button
       }

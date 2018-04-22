@@ -77,18 +77,54 @@ module.exports.addCinema = function(req,res,next){
 module.exports.editCinema = function(req, res, next){
     var location = req.params.location;
     var name = req.params.name;
+    database.query('select * from cinemas where location = ? AND name = ? ',[location,name], function(err, results, fields) {
+    if(err) return next(err);
+    console.log(results[0].imagePath2, name);
+
+
     var address = req.body.address;
     var number_of_halls = req.body.number_of_halls;
     var is3D=req.body.is3D;
     var is4D=req.body.is4D;
     var company = req.body.company;
     var image_path = req.body.image_path;
-    var imagePath2=req.body.imagePath2;
+    var image_Path2=req.body.image_Path2;
+    console.log(req.body.image_path,image_Path2);
+    
 
-    database.query('UPDATE cinemas SET address = ?, number_of_halls = ?, is3D = ? , is4D = ? , company = ? , image_path = ?, image_path2 = ? where location = ? and name = ? ' ,[address,number_of_halls,is3D ,is4D, company,image_path,image_path2, location,name], function(err, results, fields) {
-      if(err) return next(err); 
-      return res.send(results);
-        });
+    if(!address){
+      address=results.address;
+    }
+    if(!number_of_halls){
+        number_of_halls=results[0].number_of_halls;
+      }
+    if(!is3D){
+        is3D=results[0].is3D;
+      }
+      if(!is4D){
+        is4D=results[0].is4D;
+      }
+
+      if(!company){
+        company=results[0].company;
+      }
+      if(!image_path){
+        image_path=results[0].imagePath;
+      }
+      if(image_Path2='undefined'){
+        image_Path2=results[0].imagePath2;
+      }
+      console.log(image_Path2);
+      database.query('UPDATE cinemas SET address = ?, number_of_halls = ?, is3D = ? , is4D = ? , company = ? , imagePath = ?, imagePath2 = ? where location = ? and name = ? ' ,[address,number_of_halls,is3D ,is4D, company,image_path,image_path2, location,name], function(err, results, fields) {
+        if(err) return next(err); 
+        return res.send(results);
+          });
+    });
+    
+    
+    
+  
+   
 }
 
 

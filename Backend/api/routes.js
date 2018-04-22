@@ -212,7 +212,7 @@ module.exports = router;
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 //As an Admin i can add cinema 
 router.post('/addCinema', AddCinema.addCinema);
-router.post('Cinemas/editCinema/:location/:name', editCinema.editCinema); 
+router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, editCinema.editCinema); 
 
 
 

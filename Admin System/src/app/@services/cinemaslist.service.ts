@@ -23,6 +23,8 @@ export class CinemaslistService extends HttpService {
   getDistinctLocation(){
     return this.get('viewCinema/DistinctLocations');
   }
-  
+  editCinema(cinema) {
+    return this.http.patch('Cinemas/editCinema', cinema); 
 
+  }
 }

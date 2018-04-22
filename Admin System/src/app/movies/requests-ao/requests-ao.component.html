@@ -36,12 +36,10 @@
             <tbody>
                 <tr *ngFor="let movie of movies">
                     <td>
-                        <button _ngcontent-c32="" class="btn btn-success btn-icon loading-demo mr-1 mb-1" type="button" (click)="acceptReq(movie.movie_id)">
-                            <i _ngcontent-c32="" class="icon icon-gear"></i>
+                        <button _ngcontent-c32="" class="btn btn-outline-success mr-1 mb-1" type="button" (click)="acceptReq(movie.movie_id)">
                             <span _ngcontent-c32="">Accept Request</span>
                         </button>
-                        <button _ngcontent-c32="" class="btn btn-danger btn-icon mr-1 mb-1" type="button" (click)="rejectReq(movie.movie_id)">
-                            <i _ngcontent-c32="" class="icon icon-close"></i>
+                        <button _ngcontent-c32="" class="btn btn-outline-danger mr-1 mb-1" type="button" (click)="rejectReq(movie.movie_id)">
                             <span _ngcontent-c32="">Reject Request</span>
                         </button>
                     </td>

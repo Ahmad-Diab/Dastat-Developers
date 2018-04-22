@@ -31,6 +31,10 @@ import { EditProfileComponent } from './users/edit-profile/edit-profile.componen
 import { VerifyComponent } from './users/verify/verify.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/';
+import {MatInputModule} from '@angular/material';
+
 
 
 
@@ -52,10 +56,14 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCheckboxModule,
     MatButtonToggleModule,
     MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   declarations: [HomepageComponent, TimingComponent, SeatingComponent, PaymentComponent, MoviesListComponent, BookingDetailsComponent, ReservationComponent,
    CinemasListComponent,AboutusComponent,MovieInfoComponent,  CinemaInfoComponent,AboutusComponent,
-    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent, CinemasListBookingComponent, EditProfileComponent, VerifyComponent]
+    MovieInfoComponent, SigninComponent, UserProfileComponent, SearchComponent, AboutusComponent, PartiesComponent,RegisterComponent, CinemasListBookingComponent, EditProfileComponent, VerifyComponent],
+    
 
 })
 

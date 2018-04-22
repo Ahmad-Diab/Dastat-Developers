@@ -10730,11 +10730,12 @@ background: white;
 
 } 
 .mat-form-field{
-  color: #ffffff   !important;
-  text-decoration-color: ivory !important;
-  position: relative   !important;
   text-align: center   !important;
   width:130px !important;
+}
+.mf1{
+  color: #ffffff   !important;
+  
 }
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #b4b1b2;
@@ -10795,7 +10796,6 @@ background: white;
    
     background-image: url(../images/components/bg-time-hover1.png) !important;
     background-position: center;
-
     background-repeat: no-repeat;
     -webkit-background-size: 64px 34px;
     background-size: 64px 34px;
@@ -10822,6 +10822,13 @@ background: white;
   margin: 5px 16px 3px 0;
   cursor: zoom-in !important;
   
+}
+.mat-button-toggle:hover {
+  background-image: url(../images/components/bg-time-hover1.png) !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 64px 34px;
+  background-size: 64px 34px;
 }
 .mat-button-toggle-label-content {
 

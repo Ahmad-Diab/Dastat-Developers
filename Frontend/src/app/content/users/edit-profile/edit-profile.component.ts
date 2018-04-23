@@ -39,6 +39,18 @@ export class EditProfileComponent implements OnInit {
     if(email == ""){
       email = this.user.email;
     }
+    if(first_name == ""){
+      first_name = this.user.first_name;
+    }
+    if(last_name == ""){
+      last_name = this.user.last_name;
+    }
+    if(phone_number == 0){
+      phone_number = this.user.phone_number;
+    }
+    if(age == 0){
+      age = this.user.age;
+    }
         this.usersService.editProfile(email, first_name,last_name,phone_number,age,this.username).subscribe((response)=>{
   
             this.ngOnInit();

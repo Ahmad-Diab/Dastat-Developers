@@ -451,6 +451,15 @@ const MENUITEMS =
   }
 ];
 
+if (1) {
+  MENUITEMS.push({
+    state: 'promocodes',
+    name: 'promocodes',
+    type: 'link',
+    icon: 'ecommerce-gift'
+  });
+}
+
 @Injectable()
 export class MenuItems {
   getAll(): Menu[] {

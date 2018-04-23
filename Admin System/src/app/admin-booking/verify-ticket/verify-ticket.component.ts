@@ -88,7 +88,7 @@ export class VerifyTicketComponent implements OnInit {
     console.log(this.reservation_id);
     console.log(this.ticketView.payment.data[0]);
     if (this.ticketView && !this.ticketView.payment.data[0]) {
-      this.adminTicketService.verifyUnpaidTicket('some admin', this.ticketView.reservation_id)
+      this.adminTicketService.verifyUnpaidTicket(this.adminUsername, this.ticketView.reservation_id)
         .subscribe((res) => {
           if(res.data) {
             this.ticketVerified = true;

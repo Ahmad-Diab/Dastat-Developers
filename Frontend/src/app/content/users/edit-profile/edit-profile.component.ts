@@ -13,6 +13,7 @@ export class EditProfileComponent implements OnInit {
 
   user: User;
   username: string;
+  message;
   
 
   constructor(public usersService : UsersService,
@@ -40,6 +41,37 @@ export class EditProfileComponent implements OnInit {
             this.ngOnInit();
   
           });  
+
+          if (!this.user.username){
+            this.message="please Enter a Username";
+            return;
+          }
+          if(!this.user.password){
+            this.message = "please enter a password"
+            return;
+          }
+      
+          if(!this.user.email){
+            this.message = "please enter an Email"
+            return;
+          }   
+          if(!this.user.first_name){
+            this.message = "please enter your First name"
+            return;
+          }
+          if(!this.user.last_name){
+            this.message = "please enter your last name"
+            return;
+          }
+      
+          if(!this.user.gender){
+            this.message = "please enter your Gender"
+            return;
+          }
+          if(!this.user.age){
+            this.message = "please enter your age"
+            return;
+          }
   
     }
 

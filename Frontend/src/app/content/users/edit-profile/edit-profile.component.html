@@ -2,25 +2,26 @@
 <h1 id='user_info_title' class="page-heading">Edit Profile</h1>
 
 <hr />
-<div id="user_info" class="" align="center">
+<div id="user_info" class="editProfile" align="center">
 <form name = "edit">
     <i class="material-icons">account_box</i>
     <br />
     <label> Email </label><br />
-    <input #email type="email"name = "email" ng-model="inputText" placeholder="{{user.email}}" />
+    <input #email type="email"name = "email" ng-model="user.email" placeholder="{{user.email}}" />
     <hr id='line'/>
     <label> First Name </label><br />
-    <input #first type="text" ng-model="inputText" placeholder="{{user.first_name}}" />
+    <input #first type="text" ng-model="user.first_name" placeholder="{{user.first_name}}" />
     <hr id='line'/>
     <label> Last Name </label><br />
-    <input #last type="text" ng-model="inputText" placeholder="{{user.last_name}}" />
+    <input #last type="text" ng-model="user.last_name" placeholder="{{user.last_name}}" />
     <hr id='line'/>
     <label> Phone number </label><br />
-    <input #phone type="text" ng-model="inputText" placeholder="{{user.phone_number}}" />
+    <input #phone type="text" ng-model="user.phone_number" placeholder="{{user.phone_number}}" />
     <hr id='line'/>
     <label> Age </label><br />
-    <input #age type="text" ng-model="inputText" placeholder="{{user.age}}" />
+    <input #age type="text" ng-model="user.age" placeholder="{{user.age}}" />
     <hr id='line'/>
+    <h6 style="color:red; margin-top: 20px">{{message}}</h6>
     <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="onEdit(email.value,first.value,last.value,phone.value,age.value)"> Submit</button>
 </form>
 </div>

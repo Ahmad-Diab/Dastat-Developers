@@ -13,7 +13,7 @@ import {FormControl} from '@angular/forms';
 export class AdmincinemasComponent implements OnInit {
 
   cinemas = [];
-  clickedcinema="";
+  clickedcinema;
   sorting_item;
   searchValue ;
   locations ;
@@ -51,7 +51,7 @@ export class AdmincinemasComponent implements OnInit {
     });
 
   }
-  
+
 filter(){
   var cinema3d = 0;
   var cinema4d = 0;
@@ -71,12 +71,16 @@ filter(){
   toggleAddAction(){
   this.AddAction=!this.AddAction;
   }
+
   toggleUpdateAction(){
     this.UpdateAction=!this.UpdateAction;
     }
+
   setupdateinputs(Cinema:any){
     this.clickedcinema=Cinema;
+      console.log(Cinema);
   }
+
   AddCinema(){
     for(var i = 0;i <8 ; i++){
       if(this.AddedCinema[i] == undefined){
@@ -87,6 +91,14 @@ filter(){
     console.log(this.AddedCinema[0])
     this.cinemalistService.addCinema(this.AddedCinema).subscribe((response) => {  
     });
+    // this.ngOnInit();
+  }
+
+
+  deleteCinema(){
+    this.cinemalistService.deleteCinema(this.clickedcinema.name, this.clickedcinema.location).subscribe((Response) =>{
+    });
+    this.ngOnInit();
   }
 
 }

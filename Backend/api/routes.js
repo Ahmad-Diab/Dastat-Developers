@@ -218,7 +218,7 @@ router.post('/addCinema', AddCinema.addCinema);
 router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, editCinema.editCinema); 
 
 // ------------- As an Admin I can Delete a Cinema ----------------
-router.get('/mycinemas/delete/:cinema/:owner',editCinema.deleteCinemaForAdmin);
+router.get('/mycinemas/delete/:name/:location',editCinema.deleteCinemaForAdmin);
 
 
 

@@ -11,10 +11,10 @@ export class CinemaslistService extends HttpService {
           super(cookie, http);
         }
 
-   filterByNumberOfHalls(hallNumber){
-     return this.get('filterByHall/' + hallNumber);
-   }
-   filterByLocation(location,is3D,is4D){
+  filterByNumberOfHalls(hallNumber){
+    return this.get('filterByHall/' + hallNumber);
+  }
+  filterByLocation(location,is3D,is4D){
     return this.get('filterByLocation/' + location+'/'+ is3D+'/'+is4D);
   }
   getAllCinemas(){
@@ -25,11 +25,15 @@ export class CinemaslistService extends HttpService {
   }
   editCinema(cinema) {
     return this.http.patch('Cinemas/editCinema', cinema); 
-  addCinema(addedCinema:any){
-    console.log(addedCinema[0])
-    return this.post('addCinema',addedCinema);
   }
   
-
+  addCinema(addedCinema:any){
+  console.log(addedCinema[0]);
+  return this.post('addCinema',addedCinema);
   }
+
+  deleteCinema(name: any, location: any){
+    return this.get('mycinemas/delete/' +  name + '/' + location);
+  }
+
 }

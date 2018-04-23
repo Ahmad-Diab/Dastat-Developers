@@ -9,7 +9,7 @@ var jwt = require('jsonwebtoken');
 //DONT FORGET TO ADD IT IN THE ROUTES
 
 //------------------------- Admin Login -----------------------------------
-
+/*
 module.exports.authenticate = function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
@@ -82,7 +82,7 @@ module.exports.authenticate = function(req, res, next) {
     }
     });
 }
-
+*/
 //------------------------- View all admins -------------------------------
 
 
@@ -111,22 +111,28 @@ module.exports.authenticate = function(req, res, next) {
 
 
 
-
-//------------------------- Show Admins working in a certain Cinema -------------------------------
-
-module.exports.getAdmin = function(req, res, next){
-    var cinema_name = req.body.cinema_name;
-    var query = "select DISTINCT cinema_name, username, email, type, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND cinema_name = ?";
-    database.query(query, [cinema_name], function(err, results, fiels) {
+module.exports.viewAdmins = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username";
+    database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);
         return res.send(results);
     });
 }
 
+//------------------------- Show Admins working in a certain Cinema -------------------------------
 
-
-
+module.exports.getAdmin = function(req, res, next){
+ //   var cinemaName = req.params['cinemaName'];
+    var cinemaName = req.body.cinemaName;
+    console.log(req);
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND cinemaName LIKE ?";
+    database.query(query, '%'+[cinemaName]+'%', function(err, results, fiels) {
+        if(err) return next(err);
+        //console.log(results);
+        return res.send(results);
+    });
+}
 
 //------------------------- View all Users -------------------------------
 
@@ -205,26 +211,27 @@ module.exports.getAdmin = function(req, res, next){
 
 
 
-
-
-
-
-
-
-
 //------------------------- Edit Booking ushers -------------------------------
 
+module.exports.getBookingUshers = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 module.exports.editBookingUsher = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Booking Usher"';
     database.query(user, [username], function(err, results, fiels) {
-        console.log("tested");
+        //console.log("tested");
         if(err) return next(err);
         if(results.length > 0){
             var email = req.body.email;
             var salary = req.body.salary;
             var type = req.body.type;
-            var phone_number = req.body.phone_number;
+            var phoneNumber = req.body.phoneNumber;
             if(!email){
                 email = results[0].email;
             }
@@ -234,15 +241,15 @@ module.exports.editBookingUsher = function(req, res, next){
             if(!type){
                 type = results[0].type;
             }
-            if(!phone_number){
-                phone_number = results[0].phone_number;
+            if(!phoneNumber){
+                phoneNumber = results[0].phoneNumber;
             }
-            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Booking Usher"';
-            database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
+            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phoneNumber = ? where username = ? AND type = "Booking Usher"';
+            database.query(query, [email, salary, type, phoneNumber, username], function(err, results, fiels) {
             if(err) return next(err);
             return res.send(results);
-            });  
-        }      
+            });
+        }
         else {
             res.status(200).json({
             err: null,
@@ -338,6 +345,15 @@ module.exports.deleteBookingUsher = function(req, res, next){
 
 //------------------------- Edit Branch managers -------------------------------
 
+module.exports.getBranchManagers = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+
 module.exports.editBranchManager = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Branch Manager"';
@@ -348,7 +364,7 @@ module.exports.editBranchManager = function(req, res, next){
             var email = req.body.email;
             var salary = req.body.salary;
             var type = req.body.type;
-            var phone_number = req.body.phone_number;
+            var phoneNumber = req.body.phoneNumber;
             if(!email){
                 email = results[0].email;
             }
@@ -358,11 +374,11 @@ module.exports.editBranchManager = function(req, res, next){
             if(!type){
                 type = results[0].type;
             }
-            if(!phone_number){
-                phone_number = results[0].phone_number;
+            if(!phoneNumber){
+                phoneNumber = results[0].phoneNumber;
             }
-            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Branch Manager"';
-            database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
+            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phoneNumber = ? where username = ? AND type = "Branch Manager"';
+            database.query(query, [email, salary, type, phoneNumber, username], function(err, results, fiels) {
             if(err) return next(err);
             return res.send(results);
             });  
@@ -464,6 +480,15 @@ module.exports.deleteBranchManager = function(req, res, next){
 
 //------------------------- Edit Cinema owners -------------------------------
 
+module.exports.getCinemaOwners = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+
 module.exports.editCinemaOwner = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Cinema Owner"';
@@ -473,7 +498,7 @@ module.exports.editCinemaOwner = function(req, res, next){
             var email = req.body.email;
             var salary = req.body.salary;
             var type = req.body.type;
-            var phone_number = req.body.phone_number;
+            var phoneNumber = req.body.phoneNumber;
             if(!email){
                 email = results[0].email;
             }
@@ -483,11 +508,11 @@ module.exports.editCinemaOwner = function(req, res, next){
             if(!type){
                 type = results[0].type;
             }
-            if(!phone_number){
-                phone_number = results[0].phone_number;
+            if(!phoneNumber){
+                phoneNumber = results[0].phoneNumber;
             }
-            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Cinema Owner"';
-            database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
+            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phoneNumber = ? where username = ? AND type = "Cinema Owner"';
+            database.query(query, [email, salary, type, phoneNumber, username], function(err, results, fiels) {
             if(err) return next(err);
             return res.send(results);
             });  

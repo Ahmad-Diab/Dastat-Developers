@@ -9,7 +9,7 @@
   [rows]="rows">
   <ngx-datatable-column name="Cinema Name">
     <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      {{value}}
+      {{row.cinema_name}}
     </ng-template>
   </ngx-datatable-column>
   <ngx-datatable-column name="Username">
@@ -18,7 +18,7 @@
         title="Double Click To Delete This Record"
         (dblclick)="deleteRow($event, 'username', value, row)"
         >
-        {{value}}
+        {{row.username}}
       </span>
     </ng-template>
   </ngx-datatable-column>
@@ -28,7 +28,7 @@
         title="Double Click To Edit"
         (dblclick)="editing[row.$$index + '-email'] = true"
         *ngIf="!editing[row.$$index + '-email']">
-        {{value}}
+        {{row.email}}
       </span>
       <input
         autofocus
@@ -45,7 +45,7 @@
         title="Double Click To Edit"
         (dblclick)="editing[row.$$index + '-type'] = true"
         *ngIf="!editing[row.$$index + '-type']">
-        {{value}}
+        {{row.type}}
       </span>
       <select
         *ngIf="editing[row.$$index + '-type']"
@@ -65,7 +65,7 @@
         title="Double Click To Edit"
         (dblclick)="editing[row.$$index + '-salary'] = true"
         *ngIf="!editing[row.$$index + '-salary']">
-        {{value}}
+        {{row.salary}}
       </span>
       <input
         autofocus
@@ -78,26 +78,26 @@
   </ngx-datatable-column>
   <ngx-datatable-column name="First Name">
     <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      {{value}}
+      {{row.first_name}}
     </ng-template>
   </ngx-datatable-column>
   <ngx-datatable-column name="Last Name">
     <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      {{value}}
+      {{row.last_name}}
     </ng-template>
   </ngx-datatable-column>
   <ngx-datatable-column name="Phone Number">
     <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
       <span
         title="Double Click To Edit"
-        (dblclick)="editing[row.$$index + '-phoneNumber'] = true"
-        *ngIf="!editing[row.$$index + '-phoneNumber']">
-        {{value}}
+        (dblclick)="editing[row.$$index + '-phone_number'] = true"
+        *ngIf="!editing[row.$$index + '-phone_number']">
+        {{row.phone_number}}
       </span>
       <input
         autofocus
-        (blur)="updateValue($event, 'phoneNumber', value, row)"
-        *ngIf="editing[row.$$index + '-phoneNumber']"
+        (blur)="updateValue($event, 'phone_number', value, row)"
+        *ngIf="editing[row.$$index + '-phone_number']"
         type="text"
         [value]="value"
       />
@@ -105,7 +105,7 @@
   </ngx-datatable-column>
   <ngx-datatable-column name="Gender">
     <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-      {{value}}
+      {{row.gender}}
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>

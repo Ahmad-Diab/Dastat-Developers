@@ -128,16 +128,20 @@ router.post('/adminlogin', AuthenticationAdmin.login);
 router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
 //router.post('/admin/login', Admin.authenticate);
+router.post('/addBookingUsher', Admin.deleteBookingUsher);
 
 router.get('/getBookingUshers', Admin.getBookingUshers);
+router.post('/getBookingUsher', Admin.getBookingUsher);
 router.post('/editBookingUsher', Admin.editBookingUsher);
 router.post('/deleteBookingUsher', Admin.deleteBookingUsher);
 
 router.get('/getBranchManagers', Admin.getBranchManagers);
+router.post('/getBranchManager', Admin.getBranchManager);
 router.post('/editBranchManager', Admin.editBranchManager);
 router.post('/deleteBranchManager', Admin.deleteBranchManager);
 
 router.get('/getCinemaOwners', Admin.getCinemaOwners);
+router.post('/getCinemaOwner', Admin.getCinemaOwner);
 router.post('/editCinemaOwner', Admin.editCinemaOwner);
 router.post('/deleteCinemaOwner', Admin.deleteCinemaOwner);
 

@@ -11,7 +11,7 @@ import { AdminService } from '../../@services/adminService.service';
 })
 export class CinemaOwnerComponent implements OnInit {
 
-  cinemaName: string;
+  cinema_name: string;
   editing = {};
   rows = [];
 
@@ -46,9 +46,9 @@ export class CinemaOwnerComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value;
     var data = {
-      cinemaName: val
+      cinema_name: val
     }
-    this.adminService.getAdmin(data).subscribe((response)=>{
+    this.adminService.getCinemaOwner(data).subscribe((response)=>{
       this.rows=response;
     });
   }

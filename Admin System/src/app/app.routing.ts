@@ -7,17 +7,17 @@ import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.compon
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
-  //canActivate: [AuthGuard],
+  canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   }, {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
-  },{
+  }/*,{
     path: 'MoviesInHalls',
     component: MoviesInHallsComponent
-  }, {
+  }*/, {
     path: 'components',
     loadChildren: './components/components.module#ComponentsModule'
   }, {

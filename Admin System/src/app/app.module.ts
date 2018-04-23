@@ -38,7 +38,6 @@ export function createTranslateLoader(http: HttpClient) {
     MoviesInHallsComponent
   ],
   imports: [
-    AdminBookingModule,
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,

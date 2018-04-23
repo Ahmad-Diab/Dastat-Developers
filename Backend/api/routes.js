@@ -7,6 +7,8 @@ var express = require('express');
 var router = express.Router();
 
 //Schema Controllers
+
+//-------- USER ---------
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
 var UserBooking = require('./controllers/UserBookingController');
@@ -22,6 +24,11 @@ var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
 var MoviesInHalls = require('./controllers/MoviesInHallsController');
+
+
+//----------- Admin ---------------
+var AdminHalls = require('./controllers/AdminHallsController');
+
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -107,8 +114,13 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/getTopMovies',Search.getTopMovies);
 
+//-----------------------------------------------Admin ROUTES----------------------
 
+//-------------------------------------------Halls Routes-----------------------------
 
+router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
+router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
+router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
 
 
 /* 
@@ -180,16 +192,5 @@ router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinem
 router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
 router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
 
-
-
-
-
-
-
-
-
 //exporting routes to the project
-
-
-
 module.exports = router;

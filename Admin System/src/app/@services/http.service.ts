@@ -28,6 +28,12 @@ export class HttpService {
     return this.http.post(environment.api + route, data, {headers: headers}).pipe(map(res => res.json()));
   }
 
+  patch_auth(route, data?) {
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.patch(environment.api + route, data, {headers: headers}).pipe(map(res => res.json()));
+  }
+
   get(route, data?) {
     return this.http.get(environment.api + route, data).pipe(map(res => res.json()));
   }

@@ -145,10 +145,10 @@ router.get('/users', User.getUsers);
 
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
-router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
-router.patch('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
-router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
-router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
+router.get('/tickets/viewTicketInfo', Authorization.Verify('1111'), adminTicket.viewTicketInfo);
+router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminTicket.verifyUnpaidTicket);
+router.get('/tickets/viewPartiesForThatMovie', Authorization.Verify('1111'), adminTicket.viewPartiesOfThatMovie);
+router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
 
 
@@ -197,13 +197,6 @@ router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinem
 router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
 router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
 
-
-
-
-
-
-
-
 //--------------------------------Promocode routes------------------------------------------------------------//
 
 router.get('/promocodes', Authorization.Verify('1000'),Promocodes.viewPromocodes);
@@ -215,7 +208,6 @@ router.get('/promocodes/filter/cinema/:cinema' ,  Authorization.Verify('1000') ,
 router.post('/promocodes/assignPromocodes', Authorization.Verify('1000') , Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Authorization.Verify('1000') , Promocodes.addPromocode);
 router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000') , Promocodes.deletePromocode);
-
 
 //exporting routes to the project
 module.exports = router;

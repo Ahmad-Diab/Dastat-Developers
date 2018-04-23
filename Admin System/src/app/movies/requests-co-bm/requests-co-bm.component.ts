@@ -22,7 +22,6 @@ export class RequestsCoBmComponent implements OnInit {
   ngOnInit() {
 
   }
-
   viewReq(auth){
     let cookie: CookieService = new CookieService;
     auth = <Auth>(cookie.getObject('auth'));
@@ -30,8 +29,7 @@ export class RequestsCoBmComponent implements OnInit {
     this.movieServices.viewRequests(auth.username).subscribe((response)=>{
       this.movies=response;
       console.log(response.data[0]);
-      console.log("A7a i was here");
-      console.log(auth);
+     
     
   });
   }

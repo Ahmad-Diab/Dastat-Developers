@@ -60,10 +60,12 @@ module.exports.getParties = function(req, res){
         date = req.params['date'],
         cinemaLocation = req.params['cinemaLocation'];
 
+    /*
     console.log(cinemaName + " : cinemaName");
     console.log(movieName + " : movieName");
     console.log(date + " : date");
     console.log(cinemaLocation + " : cinemaLocation");
+    */
 
     if(!cinemaName || !cinemaLocation) {
         return res.status(422).json({
@@ -97,7 +99,7 @@ module.exports.getParties = function(req, res){
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
 
-    let query = 'SELECT * FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
+    let query = 'SELECT * FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
     +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?';
     //AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
 
@@ -135,8 +137,6 @@ module.exports.getParties = function(req, res){
  * @param next, next middleware to handle errors
  */
 module.exports.makeReservation = function(req, res, next){
-    // COMPLETED Make a reservation based on all data need for reservation.
-    // TODO User-name validation needs to be done!
 
     let username = req.body['username'],
         cinema_name = req.body['cinema_name'],
@@ -151,6 +151,7 @@ module.exports.makeReservation = function(req, res, next){
         numOfTickets = tickets.length,
         comment = req.body['comment'];
 
+    console.log(req.body);
     // Null Checkers
     if(!username) {
         return res.status(422).json({
@@ -159,6 +160,7 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+    console.log('passed user check');
     if(!cinema_name || !cinema_location) {
         return res.status(422).json({
             err: null,
@@ -166,6 +168,7 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+    console.log('passed party cinema check');
     if(!party_date || !party_time) {
         return res.status(422).json({
             err: null,
@@ -173,6 +176,8 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+
+    console.log('passed party check');
     if(!hall || !movie) {
         return res.status(422).json({
             err: null,
@@ -180,6 +185,8 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+
+    console.log('passed hall & movie check');
     if(!tickets || !tickets_price) {
         return res.status(422).json({
             err: null,
@@ -187,21 +194,26 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+    console.log('passed tickets check');
     // Validations of correct types
     if(!Validations.isBoolean(payment) ||
         !Validations.isNumber(hall) ||
         !Validations.isNumber(tickets_price)) {
+
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
             data: null
         });
     }
+
+    console.log('passed validations check');
     // Verify that movie exists in hall
     // Verify that hall exists in Cinema, and retrieve movie
-    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+    database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall, cinema_location, cinema_name],function (error, results) {
             if (error) {
+                console.log('error selecting from halls the movie');
                 return next(error);
             }
             console.log(results);
@@ -213,15 +225,15 @@ module.exports.makeReservation = function(req, res, next){
                 });
             }
 
-            var values = [];
-            for(var i = 0; i< numOfTickets; i++) {
-                var seatNum = tickets[i];
-                var ticket_details = [username,payment,seatNum,party_date,party_time,hall,cinema_location, cinema_name,
+            let values = [];
+            for(let i = 0; i< numOfTickets; i++) {
+                let seatNum = tickets[i];
+                let ticket_details = [username,payment,seatNum,party_date,party_time,hall,cinema_location, cinema_name,
                     tickets_price, movie, comment];
                 values.push(ticket_details);
             }
 
-            var sqlQuery = 'INSERT INTO Tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
+            let sqlQuery = 'INSERT INTO tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
 
             database.query(sqlQuery,[values], function (error, results) {
                 if (error) {
@@ -237,8 +249,6 @@ module.exports.makeReservation = function(req, res, next){
             });
         });
 
-
-
 };
 
 
@@ -252,7 +262,7 @@ module.exports.getCurrentMovies = function(req, res, next){
 
     var currentDate = new Date();
 
-    var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date <= ?';
+    var sqlSelectionFromMovies = 'SELECT * FROM movies WHERE release_date <= ?';
 
     database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
         if(error){
@@ -286,7 +296,7 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
     var currentDate = new Date();
 
-    var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date > ?';
+    var sqlSelectionFromMovies = 'SELECT * FROM movies WHERE release_date > ?';
 
     database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
         if(error){
@@ -326,7 +336,7 @@ module.exports.getBookings = function(req, res, next){
     
         var username = req.params.username;
         
-        var sqlBookings = 'SELECT reservation_id,seat_number,date_time,hall,cinema_location,cinema_name FROM tickets WHERE user=?';
+        var sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';
     
         database.query(sqlBookings,[username], function (error, results) {
             if(error){

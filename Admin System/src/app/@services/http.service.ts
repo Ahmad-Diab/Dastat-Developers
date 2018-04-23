@@ -19,13 +19,13 @@ export class HttpService {
   get_auth(route, data?) {    
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.get(environment.api + route, {headers: headers}).pipe(map(res => res.json()));
+    return this.http.get(environment.api + route, {headers: headers, body: data}).pipe(map(res => res.json()));
   }
 
   post_auth(route, data?) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.post(environment.api + route, {headers: headers}, data).pipe(map(res => res.json()));
+    return this.http.post(environment.api + route, data, {headers: headers}).pipe(map(res => res.json()));
   }
 
   get(route, data?) {

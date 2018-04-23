@@ -25,11 +25,12 @@ export class CinemaslistService extends HttpService {
   }
   editCinema(cinema) {
     return this.http.patch('Cinemas/editCinema', cinema); 
+  }
+
   addCinema(addedCinema:any){
     console.log(addedCinema[0])
     return this.post('addCinema',addedCinema);
   }
   
 
-  }
 }

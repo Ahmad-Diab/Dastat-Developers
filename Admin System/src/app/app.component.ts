@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Auth } from './@guards/auth.guard';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Component({
   selector: 'app-root',

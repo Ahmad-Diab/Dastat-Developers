@@ -137,8 +137,8 @@ router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 //-------------------------------------------Halls Routes-----------------------------
 
 router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
-router.post('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
-router.post('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
+router.post('/admin/adminHalls/assignMovieToHall', Authorization.Verify('1101') ,AdminHalls.assignMovieToHall);
+router.post('/admin/adminHalls/deleteMovieFromHall', Authorization.Verify('1101') , AdminHalls.deleteMovieFromHall);
 router.get('/admin/adminHalls/viewMoviesInHalls/:username/:cinema_name/:cinema_location', AdminHalls.viewMoviesInHalls);
 router.get('/admin/adminHalls/viewCinemasForAdminUser/:username', AdminHalls.viewCinemasForAdminUser);
 router.get('/admin/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name', AdminHalls.getAlltMoviesInCinemaForAdmin);

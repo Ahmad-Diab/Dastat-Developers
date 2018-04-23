@@ -75,12 +75,14 @@ export class AdminHallsComponent implements OnInit {
     //console.log(this.selectedCinema);
     var data = {
 
-      username: this.cookie.get('username'),
+      headers:{
+        'authorization':this.cookie.get('username')
+      },
+
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,
-      movie_id: this.selectedHall.movie
-      
+      movie_id: this.selectedHall.movie      
     }
     //console.log(data);
     this.hallService.deleteMovieFromHall(data).subscribe((response) => {
@@ -93,7 +95,11 @@ export class AdminHallsComponent implements OnInit {
 
     //console.log(this.selectedCinema);
     var data = {
-      username: this.cookie.get('username'),
+
+      headers:{
+        'authorization':this.cookie.get('username')
+      },
+      
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,

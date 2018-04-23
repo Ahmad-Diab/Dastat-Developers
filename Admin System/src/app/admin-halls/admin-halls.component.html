@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    Halls
+    Select Cinema
   </div>
   <div class="card-body">
     <div ngbDropdown class="d-inline-block">
@@ -16,7 +16,12 @@
       </div>
     </div>
   </div>
+</div>
 
+<div class="card">
+    <div class="card-header">
+        Halls
+    </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table mb-0">
@@ -101,7 +106,7 @@
             </td>
 
 
-            <td *ngIf="editMode"  class="align-middle">
+            <td *ngIf="editMode && hall != selectedHall"  class="align-middle">
                 <p></p>
             </td>
 

@@ -73,7 +73,7 @@ module.exports.assignMovieToHall = function(req, res, next){
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
         hall_number = req.body['hall_number'],
-        movie_id = req.body['movie_id'];
+        movie_id = req.headers['username'];
         
     // Null Checkers
     console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number+" "+movie_id)

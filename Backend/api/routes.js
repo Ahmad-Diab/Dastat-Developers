@@ -202,7 +202,7 @@ router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 //-------HALLS CRUD OPERATIONS ROUTES---------//
 router.get("/halls/all", Halls.getAllHalls);
-router.get("/halls/vies", Halls.getHall);
+router.get("/halls/view", Halls.getHall);
 router.post("/halls/add", Halls.addHall);
 router.post("/halls/update", Halls.updateHall);
 router.post("/halls/deleteHall", Halls.deleteHall);

@@ -40,7 +40,7 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
         });
     }
 
-    let sqlQuery = "UPDATE Tickets SET payment = 1 WHERE reservation_id = ?;";
+    let sqlQuery = "UPDATE tickets SET payment = 1 WHERE reservation_id = ?;";
 
     database.query(sqlQuery,reservation_id, function (error, results) {
         if (error) {
@@ -101,7 +101,7 @@ module.exports.viewTicketInfo = function(req, res, next){
         });
     }
 
-    let sqlQuery = "SELECT * FROM Tickets T INNER JOIN Movies M ON  T.movie_id = M.movie_id WHERE T.reservation_id = ?;";
+    let sqlQuery = "SELECT * FROM tickets T INNER JOIN movies M ON  T.movie_id = M.movie_id WHERE T.reservation_id = ?;";
 
     database.query(sqlQuery,reservation_id, function (error, results) {
         if (error) {

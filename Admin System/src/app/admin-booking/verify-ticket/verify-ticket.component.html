@@ -1,0 +1,71 @@
+<input type="number" class="form-control form-control-lg mb-3" placeholder="Type Reservation-ID" required
+       (keyup)='getTicket($event)'>
+
+<div class="ticket-view" style="text-align: center">
+  <div class="ticket">
+    <div class="ticket-position">
+
+      <div class="ticket__indecator indecator--pre">
+        <div class="indecator-text pre--text">CORRESPONDING TICKET</div>
+      </div>
+
+      <div class="ticket__inner">
+        <div class="ticket-secondary">
+          <span class="ticket__item">Reservation ID:
+            <strong class="ticket__number">{{(ticketIsLoaded) ? ticketView.reservation_id : "N/A"}}</strong>
+          </span>
+
+          <span class="ticket__item">
+            <strong class="ticket__date">{{(ticketIsLoaded) ? (ticketView.date | date:'yyyy-MM-dd'): "N/A"}}</strong>
+            <strong class="ticket__time">{{(ticketIsLoaded) ? ticketView.time : "N/A"}}</strong>
+          </span>
+
+          <span class="ticket__item">Cinema:
+            <strong class="ticket__cinema">{{(ticketIsLoaded) ? ticketView.cinema_name : "N/A"}}</strong>
+          </span>
+          <span class="ticket__item">Hall:
+            <strong class="ticket__hall">{{(ticketIsLoaded) ? ticketView.hall : "N/A"}}</strong>
+          </span>
+          <span class="ticket__item ticket__price">price:
+            <strong class="ticket__cost">{{(ticketIsLoaded) ? ticketView.price : "N/A"}}</strong>
+          </span>
+        </div>
+
+        <div class="ticket-primery">
+          <span class="ticket__item ticket__item--primery ticket__film">Movie
+            <br>
+            <strong class="ticket__movie">{{(ticketIsLoaded) ? ticketView.title : "N/A"}}</strong>
+          </span>
+          <span class="ticket__item ticket__item--primery">Seat:
+            <span class="ticket__place">{{(ticketIsLoaded) ? ticketView.seat_number : "N/A"}}</span>
+          </span>
+          <span class="ticket_item">Package:
+            <span class="ticket_item">{{(ticketIsLoaded && ticketView.length > 0) ? ticketView.comment: "N/A"}}</span>
+          </span>
+
+        </div>
+      </div>
+
+      <div class="ticket__indecator indecator--post">
+        <div class="indecator-text post--text">ONLINE TICKET</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center">
+
+    <button type="button" class="btn btn btn-outline-primary btn-lg btn-icon loading-demo mr-5 mb-lg-1 "
+            [disabled]="ticketVerified" (click)="verifyTicket()">
+
+      <i class="icon icon-basic-bookmark"></i>
+      <span style="align-self: center">{{btn_verifyTicket}}</span>
+    </button>
+
+  </div>
+
+</div>
+
+
+
+
+

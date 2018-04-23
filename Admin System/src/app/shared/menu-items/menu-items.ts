@@ -20,12 +20,34 @@ export interface Menu {
   children?: ChildrenItems[];
 }
 
-const MENUITEMS = 
+const MENUITEMS =
   [{
     state: '/',
     name: 'HOME',
     type: 'link',
     icon: 'basic-accelerator'
+  },
+  {
+    state: 'adminBooking',
+    name: 'Tickets',
+    type: 'sub',
+    icon: 'basic-webpage-multiple',
+    badge: [
+      {
+        type: 'success',
+        value: '2'
+      }
+    ],
+    children: [
+      {
+        state: 'makeReservation',
+        name: 'MakeReservation'
+      },
+      {
+        state: 'verifyTicket',
+        name: 'Verify or Cancel'
+      }
+    ]
   },
   {
     state: 'email',
@@ -428,6 +450,15 @@ const MENUITEMS =
     icon: 'basic-sheet-txt'
   }
 ];
+
+if (1) {
+  MENUITEMS.push({
+    state: 'promocodes',
+    name: 'promocodes',
+    type: 'link',
+    icon: 'ecommerce-gift'
+  });
+}
 
 @Injectable()
 export class MenuItems {

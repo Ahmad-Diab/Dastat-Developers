@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuard } from './@guards/auth.guard';
+import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
+
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
@@ -12,6 +14,9 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
+  },{
+    path: 'MoviesInHalls',
+    component: MoviesInHallsComponent
   }, {
     path: 'components',
     loadChildren: './components/components.module#ComponentsModule'
@@ -60,6 +65,12 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'docs',
     loadChildren: './docs/docs.module#DocsModule'
+  },{
+    path: 'adminBooking',
+    loadChildren: './admin-booking/admin-booking.module#AdminBookingModule'
+  }, {
+    path: 'promocodes',
+    loadChildren: './promocodes/promocodes.module#PromocodesModule'
   }]
 }, {
   path: '',

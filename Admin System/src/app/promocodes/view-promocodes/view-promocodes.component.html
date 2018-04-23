@@ -90,19 +90,17 @@
 <div class="card">
   
   <div class="card-header">
-    <div>
-      <button type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
-      <button type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
-      <button type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
-      <button type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
+    <div style="align-self: center; width: 100%">
+      <button style="align-self: left; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
+      <button style="align-self: left; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
+      <button style="align-self: right; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
+      <button style="align-self: right; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
     </div>
   </div>
 
-  <div class="col-2"  style = "text-align:right" >
-    <input #promocodeFilter type="text" class="form-control" placeholder="filter by promocode" (keyup) = "filterPromocode(promocodeFilter.value)">
-  </div>
-  <div id="filterRight" class="col-2">
-    <input #cinemaFilter type="text" class="form-control" placeholder="filter by cinema" *ngIf = "assignedPromocodeView" (keyup) = "filterCinema(cinemaFilter.value)">
+  <div style="align-self: center; width: 97%;">
+    <input #promocodeFilter style="align-self: left; width: 49%; display: inline-block" type="text" class="form-control" placeholder="filter by promocode" (keyup) = "filterPromocode(promocodeFilter.value)">
+    <input #cinemaFilter style="align-self: right; width: 48%; display: inline-block" type="text" class="form-control" placeholder="filter by cinema" *ngIf = "assignedPromocodeView" (keyup) = "filterCinema(cinemaFilter.value)">
   </div>
   
   <div class="card-body" *ngIf = "assignedPromocodeView">

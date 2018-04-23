@@ -155,8 +155,12 @@ module.exports.viewPartiesOfThatMovie = function(req, res){
  */
 module.exports.viewTicketInfo = function(req, res, next){
     // TODO Check user is admin
+    let tokenHeader = req.headers['authorization'],
+        tokenHeaderSplited = tokenHeader.split(' '),
+        token = tokenHeaderSplited[1];
 
-    let adminUsername = req.headers['username'],
+    console.log(token);
+    let adminUsername = token.username,
         reservation_id = req.headers['reservation_id'];
 
     // Null Checkers

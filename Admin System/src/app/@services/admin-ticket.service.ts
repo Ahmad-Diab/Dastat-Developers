@@ -32,6 +32,7 @@ export class AdminTicketService extends HttpService {
   }
 
   viewTicketInfo(adminUsername:String, reservation_id:String) {
+    console.log(adminUsername);
     return this.get_auth('tickets/viewTicketInfo',{ headers: {
         'username': adminUsername,
         'reservation_id': reservation_id

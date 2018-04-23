@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminTicketService} from "../../@services/admin-ticket.service";
 import {CookieService} from "angular2-cookie/core";
+import {Auth} from "../../@guards/auth.guard";
 
 @Component({
   selector: 'app-make-reservation',
@@ -28,7 +29,8 @@ export class MakeReservationComponent implements OnInit {
   constructor(public adminTicketService: AdminTicketService, public cookie: CookieService) { }
 
   ngOnInit() {
-    this.adminUsername = 'app'; // TODO this.cookie.get('adminUsername');
+    let auth = <Auth>(this.cookie.getObject('auth'));
+    this.adminUsername = auth.username;
     this.loadMovies();
 
     this.reserveData = {

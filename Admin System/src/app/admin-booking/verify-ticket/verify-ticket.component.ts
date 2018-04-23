@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminTicketService} from "../../@services/admin-ticket.service";
 import {CookieService} from "angular2-cookie/core";
+import {Auth} from "../../@guards/auth.guard";
 
 @Component({
   selector: 'app-verify-ticket',
@@ -11,7 +12,7 @@ export class VerifyTicketComponent implements OnInit {
 
   reservation_id = null;
   ticketView = null;
-  adminUsername = this.cookie.get("adminUsername");
+  adminUsername = 'app';
   ticketIsLoaded = false;
   error = null;
 
@@ -21,6 +22,9 @@ export class VerifyTicketComponent implements OnInit {
   constructor(public adminTicketService: AdminTicketService, public cookie: CookieService) { }
 
   ngOnInit() {
+
+    let auth = <Auth>(this.cookie.getObject('auth'));
+    this.adminUsername = auth.username;
     if(!this.cookie.get("reservation_id")) {
       this.reservation_id = this.cookie.get('reservation_id');
       this.ticketView = this.cookie.get('ticketView');
@@ -32,6 +36,7 @@ export class VerifyTicketComponent implements OnInit {
   getTicket(event) {
     this.reservation_id = event.target.value;
     console.log(this.reservation_id);
+    console.log("Admin:" + this.adminUsername);
 
     if (this.reservation_id) {
       try {
@@ -60,7 +65,7 @@ export class VerifyTicketComponent implements OnInit {
         this.btn_verifyTicket = 'Verify Ticket';
       }
 
-      console.log(this.ticketView);
+      console.log('ticket view: ' + this.ticketView);
     } else {
       this.ticketView = null;
     }

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuard } from './@guards/auth.guard';
+import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
 
 export const AppRoutes: Routes = [{
   path: '',
@@ -13,6 +14,9 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
+  },{
+    path: 'MoviesInHalls',
+    component: MoviesInHallsComponent
   }, {
     path: 'components',
     loadChildren: './components/components.module#ComponentsModule'
@@ -40,7 +44,10 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'pages',
     loadChildren: './pages/pages.module#PagesModule'
-  }, {
+  },{
+    path: 'mycinemas',
+    loadChildren: './mycinemas/mycinemas.module#MycinemasModule'
+  },{
     path: 'taskboard',
     loadChildren: './taskboard/taskboard.module#TaskboardModule'
   }, {
@@ -61,6 +68,12 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'hall',
     loadChildren: './hall/hall.module#HallModule'
+  },{
+    path: 'adminBooking',
+    loadChildren: './admin-booking/admin-booking.module#AdminBookingModule'
+  }, {
+    path: 'promocodes',
+    loadChildren: './promocodes/promocodes.module#PromocodesModule'
   }]
 }, {
   path: '',
@@ -78,5 +91,5 @@ export const AppRoutes: Routes = [{
 }, {
   path: '**',
   redirectTo: 'error/404'
-}];
+}]
 

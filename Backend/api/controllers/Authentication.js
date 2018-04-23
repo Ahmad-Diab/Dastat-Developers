@@ -45,12 +45,15 @@ module.exports.authenticate = function (req, res, next) {
             var token = jwt.sign(user, config.secret, {
               expiresIn: '10h'
             });
+
+            console.log("testing");
             res.status(200).json({
               err: null,
               msg: "Logged in successfully",
               token: 'JWT' + token,
               data: token,
-              success: true
+              success: true,
+              username: token.username
             });
           } else {
             res.status(200).json({

@@ -8,7 +8,7 @@ var express = require('express'),
     config = require('./api/config/config'),
     app = express();
 
-var port = 8000;
+var port = process.env.PORT || 8000;
 
 // Set the secret of the app that will be used in authentication
 app.set('secret', config.secret);
@@ -67,9 +67,9 @@ app.use(function(err, req, res, next) {
 });
 
 // 404 error handler
-app.use(function(req, res) {
+app.use(function(err, req, res) {
     res.status(404).json({
-        err: null,
+        err: err,
         msg: '404 Not Found',
         data: null
     });

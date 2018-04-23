@@ -1,23 +1,31 @@
 var mysql = require('mysql');
 var config = require('./config');
 
-//mysql connection
-var connection = mysql.createConnection({
-  host     : '192.185.128.96',
-  port     : '3306',
-  user     : 'gastscou_george',
-  password : 'something',
-  database: config.database
+var connection = mysql.createPool(config.database);
+connection.getConnection(function() {
+  console.log('successfully connected to the database');
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
+function handleDisconnect(conn) {
+  conn.on('error', function(err) {
+    if (!err.fatal) {
+      return;
+    }
 
-  console.log('successfully connected to the database on port: ' + connection.config.port + ' on thread ' + connection.threadId);
-});
+    if (err.code !== 'PROTOCOL_CONNECTION_LOST') {
+      console.log(err.code);
+      throw err;
+    }
+
+    console.log('Re-connecting lost connection: ' + err.stack);
+    connection.getConnection(function() {
+      console.log('successfully connected to the database');
+    });
+    handleDisconnect(connection);
+  });
+}
+
+handleDisconnect(connection);
 
 //exporting database connection to the project
 module.exports = connection;

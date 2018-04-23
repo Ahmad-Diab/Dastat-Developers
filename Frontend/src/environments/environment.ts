@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  api: 'http://localhost:8000/api/',
+  api: 'https://cinema-app-backend.herokuapp.com/api/',  
+  //api: 'http://localhost:8000/api/',
   production: false
 };

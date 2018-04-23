@@ -103,12 +103,10 @@
               <span>Signout</span>
             </a>
           </div>
-          <div ngbDropdown class="d-inline-block">
+          <div  ngbDropdown class="d-inline-block">
               <button class="btn btn-outline-primary" (click)='getmycinemas()' id="dropdownMenu1" ngbDropdownToggle>My Cinemas</button>
               <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <button class="dropdown-item">Action - 1</button>
-                <button class="dropdown-item">Another Action</button>
-                <button class="dropdown-item">Something else is here</button>
+                <button *ngFor="let cinema of cinemas" value ={{cinema.name}} class="dropdown-item">{{cinema.name}}</button>
               </div>
             </div>
         </li> 

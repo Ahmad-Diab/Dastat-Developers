@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../@services/auth.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Auth } from '../../@guards/auth.guard';
+import { CinemaslistService } from '../../@services/cinemaslist.service'
+
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -41,6 +43,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   _autoCollapseWidth = 991;
   width = window.innerWidth;
   username: string;
+  type;
+  cinemas;
 
   @ViewChild('sidebar') sidebar;
 
@@ -53,6 +57,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     private titleService: Title,
     private zone: NgZone,
     private authService: AuthService,
+    public cinemaservicelist:CinemaslistService,
     private cookie: CookieService) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
@@ -60,10 +65,24 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+   
     
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
+    this.authService.getmytype(this.username).subscribe((response) => {  
+      console.log("wow")
+      this.type =response.data[0].type;
+      console.log(this.type);
+
+      if(this.type == 'App Owner'){
+        this.cinemaservicelist.getAllCinemas().subscribe((response) => {  
+          console.log(response);
+          this.cinemas =response;
+      });
     
+      }
+  });
+  
     if (this.isOver()) {
       this._mode = 'over';
       this.isOpened = false;

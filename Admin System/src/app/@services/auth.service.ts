@@ -18,4 +18,9 @@ export class AuthService extends HttpService{
      console.log("sdsds");
      return this.get('getmycinemas/'+username);
    }
+   getmytype(username){
+    console.log("sdsds");
+    return this.get('getmytype/'+username);
+  }
+   
 }

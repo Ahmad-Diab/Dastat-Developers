@@ -78,6 +78,24 @@ module.exports.getmycinemas = function(req,res,next){
     });
 
 }
+module.exports.getmytype = function(req,res,next){
+
+    username = req.params.username;
+      
+    var query = 'SELECT type from admins where username = ?';
+
+    database.query(query,[username],function(error, results, fields){
+        if(error){
+            return next(error);  
+        } 
+        return res.status(200).json({
+            err: null,
+            msg: 'Done',
+            data: results
+        });
+    });
+
+}
 
 
 

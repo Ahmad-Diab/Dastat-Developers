@@ -3,24 +3,24 @@
 
 <hr />
 <div id="user_info" class="" align="center">
-<form>
+<form name = "edit">
     <i class="material-icons">account_box</i>
     <br />
     <label> Email </label><br />
-    <input type="text" ng-model="inputText" placeholder="{{user.email}}" />
+    <input #email type="email"name = "email" ng-model="inputText" placeholder="{{user.email}}" />
     <hr id='line'/>
     <label> First Name </label><br />
-    <input type="text" ng-model="inputText" placeholder="{{user.first_name}}" />
+    <input #first type="text" ng-model="inputText" placeholder="{{user.first_name}}" />
     <hr id='line'/>
     <label> Last Name </label><br />
-    <input type="text" ng-model="inputText" placeholder="{{user.last_name}}" />
+    <input #last type="text" ng-model="inputText" placeholder="{{user.last_name}}" />
     <hr id='line'/>
     <label> Phone number </label><br />
-    <input type="text" ng-model="inputText" placeholder="{{user.phone_number}}" />
+    <input #phone type="text" ng-model="inputText" placeholder="{{user.phone_number}}" />
     <hr id='line'/>
     <label> Age </label><br />
-    <input type="text" ng-model="inputText" placeholder="{{user.age}}" />
+    <input #age type="text" ng-model="inputText" placeholder="{{user.age}}" />
     <hr id='line'/>
-    <button (click) = "onEdit(username.value)" type='submit' class="btn btn-md btn--danger search__button">Submit</button>
+    <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="onEdit(email.value,first.value,last.value,phone.value,age.value)"> Submit</button>
 </form>
 </div>

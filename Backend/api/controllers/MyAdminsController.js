@@ -85,6 +85,14 @@ module.exports.authenticate = function(req, res, next) {
 */
 //------------------------- View all admins -------------------------------
 
+module.exports.getAdmins = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 
 
@@ -164,45 +172,16 @@ module.exports.getAdmin = function(req, res, next){
 
 //------------------------- View all Booking ushers -------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.viewBookingUshers = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 //------------------------- Add Booking ushers -------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -289,56 +268,17 @@ module.exports.deleteBookingUsher = function(req, res, next){
 
 //------------------------- View all Branch managers -------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.viewBranchManagers = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 
 //------------------------- Add Branch managers -------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -453,30 +393,14 @@ module.exports.deleteBranchManager = function(req, res, next){
 //------------------------- Add Cinema owners -------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.viewCinemaOwners = function(req, res, next){
+    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 //------------------------- Edit Cinema owners -------------------------------
 

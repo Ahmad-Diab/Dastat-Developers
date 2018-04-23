@@ -13,6 +13,7 @@ export class EditProfileComponent implements OnInit {
 
   user: User;
   username: string;
+  
 
   constructor(public usersService : UsersService,
   public route: ActivatedRoute) {
@@ -31,13 +32,16 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  // onEdit(username : String = ''){
-
-  //   this.usersService.editProile(username).subscribe((response) => {
-  //     //event.confirm.resolve(response);
-  //     console.log("onReserve order is met");
-  //   });
-  // }
+  //--------------- edit profile mail, first & last name, phone, age using username as id----------------
+  onEdit(email: string, first_name: string, last_name: string, phone_number: number, age: number){
+  
+        this.usersService.editProfile(email, first_name,last_name,phone_number,age,this.username).subscribe((response)=>{
+  
+            this.ngOnInit();
+  
+          });  
+  
+    }
 
 
 

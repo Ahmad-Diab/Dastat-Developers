@@ -390,7 +390,57 @@ describe('Edit a specific movie',function(){
 //---------------------A D M I N.. U N I T.. T E S T S--------------------------------
 
 
+describe('Add a request',function(){
+  it('CO/BM can add a request',(done)=> {
+    let requestDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/addRequests/andrew_shady")
+    .send(requestDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
+describe('Add a movie',function(){
+  it('CO/BM can add a movie',(done)=> {
+    let requestDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/addMovies")
+    .send(requestDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
 
 

@@ -14,10 +14,10 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
-  }/*,{
+  },{
     path: 'MoviesInHalls',
     component: MoviesInHallsComponent
-  }*/, {
+  }, {
     path: 'components',
     loadChildren: './components/components.module#ComponentsModule'
   }, {

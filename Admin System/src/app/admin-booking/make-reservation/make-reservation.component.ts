@@ -42,7 +42,13 @@ export class MakeReservationComponent implements OnInit {
   }
 
   loadMovies() {
-    //TODO get all movies in halls, using steven's function in the backend
+    //TODO get all movies in halls, using steven's function in the backend\
+    this.moviesList = [{
+      title : 'MOVIE_1',
+    },{
+      title : 'MOVIE_2'
+    }];
+    this.selectedMovie = 'MOVIE_1';
   }
 
   selectMovie(event) {

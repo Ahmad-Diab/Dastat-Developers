@@ -23,6 +23,9 @@ export class AdminService extends HttpService {
     getBookingUshers(){
       return this.get('/getBookingUshers');
     }
+    getBookingUsher(data){
+      return this.post('/getBookingUsher');
+    }
     editBookingUsher(data){
       return this.post('/editBookingUsher', data);
     }
@@ -32,6 +35,9 @@ export class AdminService extends HttpService {
     //----------------Branch Manager-------------------
     getBranchManagers(){
       return this.get('/getBranchManagers');
+    }
+    getBranchManager(data){
+      return this.post('/getBranchManager', data);
     }
     editBranchManager(data){
       return this.post('editBranchManager', data);
@@ -43,6 +49,9 @@ export class AdminService extends HttpService {
     //----------------Cinema Owner---------------------
     getCinemaOwners(){
       return this.get('/getCinemaOwners');
+    }
+    getCinemaOwner(data){
+      return this.post('/getCinemaOwner', data);
     }
     editCinemaOwner(data){
       return this.post('editCinemaOwner', data);

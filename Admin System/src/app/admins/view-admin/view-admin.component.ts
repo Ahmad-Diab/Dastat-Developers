@@ -11,13 +11,13 @@ import { AdminService } from '../../@services/adminService.service';
 })
 export class ViewAdminComponent implements OnInit {
 
-  cinemaName: string;
+  cinema_name: string;
 
   rows = [];
   temp = [];
-
+/*
   columns = [
-    { name: 'Cinema Name' },
+    { name: 'cinema_name' },
     { name: 'Username' },
     { name: 'Email' },
     { name: 'Type' },
@@ -27,6 +27,7 @@ export class ViewAdminComponent implements OnInit {
     { name: 'Phone Number' },
     { name: 'Gender' },
   ];
+  */
   constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute) { }
 
   ngOnInit() {
@@ -39,11 +40,11 @@ export class ViewAdminComponent implements OnInit {
   updateFilter(event) {
     const val = event.target.value;
     var data = {
-      cinemaName: val
+      cinema_name: val
     }
     //console.log(val);
     this.adminService.getAdmin(data).subscribe((response)=>{
-      this.rows=response;
+      this.rows = response;
       //console.log(response);
     });
   }

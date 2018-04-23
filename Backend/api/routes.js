@@ -197,10 +197,9 @@ router.post('/RejectMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovie
 router.post('/AcceptMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovies.AcceptMovieRequest);
 
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
-router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
-router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
-router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
-router.get('/MoviesInHalls/getFinalOutput/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getFinalOutput);
+router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name',MoviesInHalls.cinemaMovies);
+router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location' , MoviesInHalls.cinemaHalls);
+router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getMovieAndHallData);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 

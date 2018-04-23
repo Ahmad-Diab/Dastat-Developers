@@ -2,13 +2,74 @@ var database = require('../config/db-connection'),
 Validations = require('../utils/validations');
 
 
+module.exports.getMovieAndHallData = function(req, res, next){
+
+    var cinemaName = req.params.cinema_name;
+    var cinemaLocation = req.params.cinema_location;
+    var movieID = req.params.movie_id;
+
+    if(!cinemaName) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema name is required.',
+            data: null
+        });
+    }
+
+    if(!cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema location is required.',
+            data: null
+        });
+    }
+
+    if(!movieID) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Movie ID is required.',
+            data: null
+        });
+    }
+
+    database.query('SELECT * FROM movies m, halls h where m.movie_id = ? AND h.movie = ? AND h.cinema_name = ? AND h.cinema_location = ?', [movieID, movieID, cinemaName , cinemaLocation], function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No current movies Availiable.',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
+
+    });
+  };
+
+
+
+
+
 /**
- * A function to show the halls of the requested cinema
+ * Method gets halls for specified cinema
  *
  * @param req, data of a cinema
- * @param res, data of all halls which are available in this cinema
+ * @param res, data of cinema  halls
  */
-module.exports.getHallsForThatCinema = function(req, res){
+module.exports.cinemaHalls = function(req, res){
     var cinema_name = req.params['cinema_name'];
     var cinema_location = req.params['cinema_location'];
 
@@ -28,93 +89,29 @@ module.exports.getHallsForThatCinema = function(req, res){
         });
     }
 
-    var sql = 'SELECT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
-
-    database.query(sql,[cinema_name , cinema_location],function (err, result) {
+    database.query('SELECT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?',[cinema_name , cinema_location],function (err, result) {
         if (err) throw err;
         if(result.length == 0){
-
             res.status(200).json({
                 err: null,
-                msg: 'No halls in this cinema',
+                msg: 'Cinema has no halls',
                 data: result
             });
-
         }
+
         else{
-
             res.status(200).json({
                 err: null,
-                msg: 'Halls Successfully Retrieved',
+                msg: 'Halls successfully retrieved',
                 data: result
             });
-
         }
     });
 };
 
-/**
- * A function to return the cinemas that this user related to
- * 
- * @param req, required data for viewing cinemas for that user
- * @param res, results of all cinemas that user works in
- * @param next
- */
-module.exports.viewCinemasForAdminUser = function(req, res, next){
-    
-    var username = req.params.username;
-        
-    // Null Checkers
-    console.log(username);
-    console.log(req.body);
-
-    if(!username) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required.',
-            data: null
-        });
-    }
-   
-  
-    // Validations of correct types
-    if(!Validations.isString(username)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Invalid data types.',
-            data: null
-        });
-    }
 
 
-    database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
-        [username],function (error, result) {
-            if (error) throw error;
-            if(result.length == 0){
-    
-                res.status(200).json({
-                    err: null,
-                    msg: 'You are not assigned to any cinema',
-                    data: result
-                });
-    
-            }
-            else{
-    
-                res.status(200).json({
-                    err: null,
-                    msg: 'Cinemas Successfully Retrieved',
-                    data: result
-                });
-    
-            }
-    });
-
-};
-
-
-
-module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
+module.exports.cinemaMovies = function(req, res, next){
 
     var cinemaName = req.params.cinema_name;
     var cinemaLocation = req.params.cinema_location;
@@ -122,7 +119,7 @@ module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
     if(!cinemaName) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema Name is required.',
+            msg: 'Cinema name is required.',
             data: null
         });
     }
@@ -130,14 +127,12 @@ module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
     if(!cinemaLocation) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema Location is required.',
+            msg: 'Cinema location is required.',
             data: null
         });
     }
 
-    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
-
-    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
+    database.query('SELECT * FROM movies m , movies_in_cinemas h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id', [cinemaName , cinemaLocation], function (error, results) {
         if(error){
             return next(error);
         }
@@ -146,7 +141,7 @@ module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
 
             res.status(200).json({
                 err: null,
-                msg: 'No current movies Availiable.',
+                msg: 'No movies availiable in cinema',
                 data: results
             });
 
@@ -155,7 +150,7 @@ module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
 
             res.status(200).json({
                 err: null,
-                msg: 'Movies Successfully Retrieved',
+                msg: 'Movies successfully retrieved',
                 data: results
             });
 
@@ -164,63 +159,4 @@ module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
     });
   };
 
-
-
-module.exports.getFinalOutput = function(req, res, next){
-
-    var cinemaName = req.params.cinema_name;
-    var cinemaLocation = req.params.cinema_location;
-    var movieID = req.params.movie_id;
-
-    if(!cinemaName) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema Name is required.',
-            data: null
-        });
-    }
-
-    if(!cinemaLocation) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema Location is required.',
-            data: null
-        });
-    }
-
-    if(!movieID) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Movie ID is required.',
-            data: null
-        });
-    }
-    var sqlSelection = 'SELECT * FROM movies m, halls h where m.movie_id = ? AND h.movie = ? AND h.cinema_name = ? AND h.cinema_location = ?';
-
-    database.query(sqlSelection, [movieID, movieID, cinemaName , cinemaLocation], function (error, results) {
-        if(error){
-            return next(error);
-        }
-
-        if(results.length == 0){
-
-            res.status(200).json({
-                err: null,
-                msg: 'No current movies Availiable.',
-                data: results
-            });
-
-        }
-        else{
-
-            res.status(200).json({
-                err: null,
-                msg: 'Movies Successfully Retrieved',
-                data: results
-            });
-
-        }
-
-    });
-  };
 

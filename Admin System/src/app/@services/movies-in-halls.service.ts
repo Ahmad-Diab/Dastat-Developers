@@ -11,16 +11,12 @@ export class MoviesInHallsService extends HttpService{
       super(cookie, http);
     }
 
-  getHallsForCinema(cinema_name,cinema_location){
-    return this.get('/MoviesInHalls/getHallsForThatCinema/'+cinema_name+'/'+cinema_location);
+  cinemaHalls(cinema_name,cinema_location){
+    return this.get('/MoviesInHalls/cinemaHalls/'+cinema_name+'/'+cinema_location);
   }
 
-  getCinemasForAdminUser(username){
-    return this.get('/MoviesInHalls/viewCinemasForAdminUser/'+username);
-  }
-
-  getAlltMoviesInCinemaForAdmin(cinema_location,cinema_name){
-    return this.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/'+cinema_location+'/'+cinema_name);
+  cinemaMovies(cinema_location,cinema_name){
+    return this.get('/MoviesInHalls/cinemaMovies/'+cinema_location+'/'+cinema_name);
   }
 
   getMovieDetails(movie_id,cinema_name,cinema_location){

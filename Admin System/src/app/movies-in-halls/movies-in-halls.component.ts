@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesInHallsService } from '../@services/movies-in-halls.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Component({
@@ -16,36 +16,32 @@ export class MoviesInHallsComponent implements OnInit {
     public router : Router,
     public cookie :CookieService) { }
     
-    halls=[];
-    selectedCinemaMovies=[];
-    cinemas=[];
     movie = [];
+    halls = [];
+    CinemaMovies = [];
 
     selectedCinema;
     selectedMovie;
   
-    editMode: boolean;
-    closeResult: string;
   
-  
-    //==========FOR TEST===============
+    //testing
     cinema_name = "Mayo Movies";
     cinema_location = "9th of Mayo";
     username = "cinema";
     password = "lailalaila123";
-    //=================================  
+ 
     
   ngOnInit() {
 
-    //======FOR TEST=======
+
       this.cookie.put('username', this.username);
       this.cookie.put('cinema_name', this.cinema_name);
       this.cookie.put('cinema_location', this.cinema_location);
-    //=======FOR TEST======
-      this.MoviesInHallsService.getAlltMoviesInCinemaForAdmin(this.cookie.get('cinema_name') , this.cookie.get('cinema_location')).subscribe((response) => {
-        this.selectedCinemaMovies = response.data;
+
+      this.MoviesInHallsService.cinemaMovies(this.cookie.get('cinema_name') , this.cookie.get('cinema_location')).subscribe((response) => {
+        this.CinemaMovies = response.data;
       });
-      this.MoviesInHallsService.getHallsForCinema(this.cookie.get('cinema_name') , this.cookie.get('cinema_location')).subscribe((response) => {
+      this.MoviesInHallsService.cinemaHalls(this.cookie.get('cinema_name') , this.cookie.get('cinema_location')).subscribe((response) => {
         this.halls = response.data;
         console.log(response.data);
       });

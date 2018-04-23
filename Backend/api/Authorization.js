@@ -45,9 +45,13 @@ module.exports.Verify_User = function (req, res, next) {
     }
 
 };
-// Admin authorization
-module.exports.Verify_Cinema_Owner = function (req, res, next) {
 
+
+//[App Owner][Cinema Owner][Booking Usher][Branch Manager]
+module.exports.Verify = function (data) {
+    return function(req, res, next) {
+    var allowed = data.split('');
+    console.log(req.headers);
     var tokenHeader = req.headers['authorization'];
     if (typeof tokenHeader !== 'undefined') {
         var tokenheadersplited = tokenHeader.split(' ');
@@ -63,187 +67,46 @@ module.exports.Verify_Cinema_Owner = function (req, res, next) {
                 console.log(authData.username);
                 var query = 'SELECT * FROM admins WHERE username = ?';
                 database.query(query, [authData.username], function (err, results, fields) {
-                    if (err) return next(err);
-                    if (results.length == 1) {
-                        if (results[0].type == "Cinema Owner") {
-                            next();
-                        } else {
-                            return res.status(401).json({
-                                err: null,
-                                msg: 'You Are Not a Cinema Owner',
-                                data: null
-                            });
-                        }
-
-                    } else {
+                    var can=false;
+                if (results.length == 1) {
+                    console.log(results[0].type);
+                    if (allowed[0]==("1")&&results[0].type==("App Owner")){//that the allowed may be App Owner
+                       can = true;          
+                    }
+                    else if (allowed[1]==("1")&&results[0].type==("Cinema Owner")){//that the allowed may be Cinema Owner
+                        can = true;    
+                    }
+                    else if (allowed[2]==("1")&&results[0].type==("Booking Usher")){//that the allowed may be Booking Usher
+                        can = true;    
+                    }
+                    else if (allowed[3]==("1")&&results[0].type==("Branch Manager")){//that the allowed may be Branch Manager
+                        can = true;    
+                    }
+                    if (can){
+                        console.log("You can Access");
+                        next();
+                    }
+                    else{
                         return res.status(401).json({
                             err: null,
-                            msg: 'You Are Not a Cinema Owner',
+                            msg: "You can't Access that function",
                             data: null
-                        });
+                        }); 
                     }
+                }else{
+                    return res.status(401).json({
+                        err: null,
+                        msg: 'You are not an admin',
+                        data: null
+                    });
+                }
                 });
-            }
-
-        });
-    } else {
+            }  });
+    }else{
         return res.status(401).json({
             err: null,
-            msg: 'The Request dont have a header authorization',
+            msg: "The header don't have authorization variable",
             data: null
         });
-    }
-
-};
-//Branch Manager
-module.exports.Verify_Branch_Manager = function (req, res, next) {
-
-    var tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
-        var tokenheadersplited = tokenHeader.split(' ');
-        var token = tokenheadersplited[1];
-        var decoded = jwt.verify(token, config.secret, (err, authData) => {
-            if (err) {
-                return res.status(401).json({
-                    err: null,
-                    msg: 'there is no token like that',
-                    data: null
-                });
-            } else {
-                console.log(authData.username);
-                var query = 'SELECT * FROM admins WHERE username = ?';
-                database.query(query, [authData.username], function (err, results, fields) {
-                    if (err) return next(err);
-                    if (results.length == 1) {
-                        if (results[0].type == "Branch Manager") {
-                            next();
-                        } else {
-                            return res.status(401).json({
-                                err: null,
-                                msg: 'You Are Not a Branch Manager',
-                                data: null
-                            });
-                        }
-
-                    } else {
-                        return res.status(401).json({
-                            err: null,
-                            msg: 'You Are Not a Branch Manager',
-                            data: null
-                        });
-                    }
-                });
-            }
-
-        });
-    } else {
-        return res.status(401).json({
-            err: null,
-            msg: 'The Request dont have a header authorization',
-            data: null
-        });
-    }
-
-};
-//Booking Usher
-module.exports.Verify_Booking_Usher = function (req, res, next) {
-
-    var tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
-        var tokenheadersplited = tokenHeader.split(' ');
-        var token = tokenheadersplited[1];
-        var decoded = jwt.verify(token, config.secret, (err, authData) => {
-            if (err) {
-                return res.status(401).json({
-                    err: null,
-                    msg: 'there is no token like that',
-                    data: null
-                });
-            } else {
-                console.log(authData.username);
-                var query = 'SELECT * FROM admins WHERE username = ?';
-                database.query(query, [authData.username], function (err, results, fields) {
-                    if (err) return next(err);
-                    if (results.length == 1) {
-                        if (results[0].type == "Booking Usher") {
-                            next();
-                        } else {
-                            return res.status(401).json({
-                                err: null,
-                                msg: 'You Are Not a Booking Usher',
-                                data: null
-                            });
-                        }
-
-                    } else {
-                        return res.status(401).json({
-                            err: null,
-                            msg: 'You Are Not a Booking Usher',
-                            data: null
-                        });
-                    }
-                });
-            }
-
-        });
-    } else {
-        return res.status(401).json({
-            err: null,
-            msg: 'The Request dont have a header authorization',
-            data: null
-        });
-    }
-
-};
-
-//App Owner
-module.exports.Verify_App_Owner = function (req, res, next) {
-
-    var tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
-        var tokenheadersplited = tokenHeader.split(' ');
-        var token = tokenheadersplited[1];
-        var decoded = jwt.verify(token, config.secret, (err, authData) => {
-            if (err) {
-                return res.status(401).json({
-                    err: null,
-                    msg: 'there is no token like that',
-                    data: null
-                });
-            } else {
-                console.log(authData.username);
-                var query = 'SELECT * FROM admins WHERE username = ?';
-                database.query(query, [authData.username], function (err, results, fields) {
-                    if (err) return next(err);
-                    if (results.length == 1) {
-                        if (results[0].type == "App Owner") {
-                            next();
-                        } else {
-                            return res.status(401).json({
-                                err: null,
-                                msg: 'You Are Not a App Owner',
-                                data: null
-                            });
-                        }
-
-                    } else {
-                        return res.status(401).json({
-                            err: null,
-                            msg: 'You Are Not a App Owner',
-                            data: null
-                        });
-                    }
-                });
-            }
-
-        });
-
-    } else {
-        return res.status(401).json({
-            err: null,
-            msg: 'The Request dont have a header authorization',
-            data: null
-        });
-    }
-
-};
+    } }
+}

@@ -1,0 +1,102 @@
+<p>
+  make-reservation under construction!
+</p>
+
+<div class="ticket-view" style=" align-self: center; margin: 0 auto;">
+  <div class="ticket">
+    <div class="ticket-position">
+
+      <div class="ticket__indecator indecator--pre">
+        <div class="indecator-text pre--text">NEW TICKET</div>
+      </div>
+
+      <div class="ticket__inner">
+
+        <div class="ticket-secondary" >
+          <span class="ticket__item">Reservation ID:
+            <strong class="ticket__number">"New Ticket"</strong>
+          </span>
+
+          <!-- ----------DATE & TIME OF TICKET---------- -->
+          <div class="ticket__date" >
+
+            <span class="btn-group">
+
+              <span class="btn-group " ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button [disabled]="!selectedPartyDate" class="btn btn-outline-danger" ngbDropdownToggle>
+                  {{(selectedPartyDate)? (selectedPartyDate | date:'yyyy-MM-dd'): "N/A"}}
+                </button>
+                <span class="dropdown-menu" ngbDropdownMenu>
+                  <span  *ngFor="let date of partiesDatesList">
+                    <button class="dropdown-item" (click)="selectPartyDate(date)">{{date| date:'yyyy-MM-dd'}}</button>
+                  </span>
+                </span>
+              </span>
+
+              <span class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button [disabled]="!selectedPartyTime" class="btn btn-outline-success" ngbDropdownToggle>
+                  {{(selectedPartyTime)? selectedPartyTime : "N/A" }}
+                </button>
+                <span class="dropdown-menu" ngbDropdownMenu>
+                  <span *ngFor="let time of partiesTimesList">
+                    <button class="dropdown-item" (click)="selectPartyTime(time)">{{time}}</button>
+                  </span>
+                </span>
+              </span>
+
+            </span>
+
+          </div>
+        </div>
+
+        <!-- ----------MOVIE AND HALL OF TICKET---------- -->
+        <div class="ticket-primery">
+          <div ngbDropdown class=" ticket__item ticket__item--primery ticket__film" style="align-self: center; width: 100%">
+            Movie
+            <button class="btn btn-outline-primary form-control" ngbDropdownToggle>
+              <label>
+                {{(selectedMovie)? selectedMovie.title : "N/A"}}
+              </label>
+            </button>
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownBasic1">
+              <div *ngFor="let movie of moviesList">
+                <button class="dropdown-item" (click)="selectMovie(movie)">{{movie.title}}</button>
+              </div>
+            </div>
+          </div>
+
+          <span class="ticket__item ticket__item--primery">Hall:
+             <strong class="ticket__hall">
+               {{(selectedHall) ? selectedHall: "N/A"}}
+             </strong>
+          </span>
+        </div>
+      </div>
+
+      <div class="ticket__indecator indecator--post">
+        <div class="indecator-text post--text">NEW TICKET</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<br>
+<div style="align-content: center; clear: none; width: 50%; margin: 0 auto;">
+
+  <div class="form-control" style="float: inherit">
+    <h1 class="ticket__cost">Price: {{(totalPrice) ? totalPrice : "N/A"}}</h1>
+  </div>
+  <br>
+  <div style="margin: 0 auto;float: inherit">
+    <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 "
+            [disabled]="ticketIsLoaded" (click)="makeReservation()">
+      Make the Reservation
+    </button>
+  </div>
+
+</div>
+
+
+
+

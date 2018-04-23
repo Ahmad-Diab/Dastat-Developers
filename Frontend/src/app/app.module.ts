@@ -17,13 +17,14 @@ import {BookingService} from "./@services/booking.service";
 import {CookieService} from "angular2-cookie/core";
 import { AuthService } from './@services/auth.service';
 import { AuthGuard } from './@guards/auth.guard';
-import { User } from './@objects/User';
+import { User } from './@objects/user';
 import { UsersService } from './@services/users.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
 import { PartiesService } from './@services/parties.service';
 import { CinemaInfoService } from './@services/cinema-info.service';
+import {HttpModule} from "@angular/http";
 
 
 @NgModule({

@@ -63,17 +63,21 @@
       <div class="card-body">
       
         <strong style="margin-top: 1px">Choose a promocode</strong>          
-        <select #select class="form-control" (change) = "getPromocodeAttributes($event.target.value)">
+        <select #selectPromocode class="form-control" (change) = "getPromocodeAttributes($event.target.value)">
           <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
         </select><br/>
 
-        <strong style="margin-top: 1px">Type</strong>    
-        <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeTypeEdited"> 
-      
+        <strong style="margin-top: 1px">Choose a type</strong>    
+        <select #selectType class="form-control">
+          <option value= 'amount' >AMOUNT</option>
+          <option value= 'percentage' >PERCENTAGE</option>
+          <option value= 'package' >PACKAGE</option>
+        </select><br/>
+
         <strong style="margin-top: 1px">Value</strong>    
         <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeValueEdited"> 
       
-        <button type="button" class="btn btn-info mr-1 mb-1"  (click)="editPromocode(select.value)" >Edit</button>
+        <button type="button" class="btn btn-info mr-1 mb-1"  (click)="editPromocode(selectPromocode.value, selectType.value)" >Edit</button>
       </div>
       {{editResponseStatus}}
     </div>

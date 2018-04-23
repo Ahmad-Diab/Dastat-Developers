@@ -17,107 +17,107 @@ chai.use(chaiHttp);
 
 
 //Amir Zaghloul
-describe('Layouts', function() { //This should contain all Tests for Layouts
+// describe('Layouts', function() { //This should contain all Tests for Layouts
     
     
-    it('should All layouts on /layout/all GET',function(done){
-        chai.request("localhost:8000").get("/api/layout/all")
-        .end(function(req,res){
-            res.should.have.status(200); //response status should be 200 aka found
-            res.should.be.json;
-            assert.notEqual(res.body, [], "response is not empty");
-            done();
-        });
-    });
+//     it('should All layouts on /layout/all GET',function(done){
+//         chai.request("localhost:8000").get("/api/layout/all")
+//         .end(function(req,res){
+//             res.should.have.status(200); //response status should be 200 aka found
+//             res.should.be.json;
+//             assert.notEqual(res.body, [], "response is not empty");
+//             done();
+//         });
+//     });
     
 
-    it('should All layouts on /layout/all GET',function(done){
-        chai.request("localhost:8000").get("/api/layout/all")
-        .end(function(req,res){
-            res.should.have.status(200); //response status should be 200 aka found
-            res.should.be.json;
-            assert.equal(res.body, "[]", "response is empty");
-            done();
-        });
-    });
+//     it('should All layouts on /layout/all GET',function(done){
+//         chai.request("localhost:8000").get("/api/layout/all")
+//         .end(function(req,res){
+//             res.should.have.status(200); //response status should be 200 aka found
+//             res.should.be.json;
+//             assert.equal(res.body, "[]", "response is empty");
+//             done();
+//         });
+//     });
 
 
-    it('should get a certain layout on /layout/view GET',function(done){
-        chai.request("localhost:8000").get("/api/layout/1")
-        .end(function(req,res){
-            res.should.have.status(200); //response status should be 200 aka found
-            res.should.be.json;
-            assert.equal(res.body[0].encoded, '[{"margin":false,"row":["offset","offset","offset",{"seat":{"number":"A4"}},{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},"offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},{"seat":{"number":"B4"}},{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},{"seat":{"number":"B11"}},{"seat":{"number":"B12"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},{"seat":{"number":"C4"}},{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},{"seat":{"number":"C11"}},{"seat":{"number":"C12"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},{"seat":{"number":"D4"}},{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},{"seat":{"number":"D11"}},{"seat":{"number":"D12"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},{"seat":{"number":"E4"}},{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},{"seat":{"number":"E11"}},{"seat":{"number":"E12"}}]},{"margin":false,"row":["offset",{"seat":{"number":"F2"}},{"seat":{"number":"F3"}},{"seat":{"number":"F4"}},{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},{"seat":{"number":"F11"}},"offset"]},{"margin":false,"row":["offset","offset",{"seat":{"number":"G3"}},{"seat":{"number":"G4"}},{"seat":{"number":"G5"}},{"seat":{"number":"G6"}},{"seat":{"number":"G7"}},{"seat":{"number":"G8"}},{"seat":{"number":"G9"}},{"seat":{"number":"G10"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset",{"seat":{"number":"H10"}},{"seat":{"number":"H11"}},{"seat":{"number":"H12"}}]},{"margin":false,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset",{"seat":{"number":"I10"}},{"seat":{"number":"I11"}},{"seat":{"number":"I12"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset","offset","offset","offset","offset","offset",{"seat":{"number":"J10"}},{"seat":{"number":"J11"}},{"seat":{"number":"J12"}}]}]'," The Encoded Value should be similar")  
-            done();
-        });
-    });
+//     it('should get a certain layout on /layout/view GET',function(done){
+//         chai.request("localhost:8000").get("/api/layout/1")
+//         .end(function(req,res){
+//             res.should.have.status(200); //response status should be 200 aka found
+//             res.should.be.json;
+//             assert.equal(res.body[0].encoded, '[{"margin":false,"row":["offset","offset","offset",{"seat":{"number":"A4"}},{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},"offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},{"seat":{"number":"B4"}},{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},{"seat":{"number":"B11"}},{"seat":{"number":"B12"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},{"seat":{"number":"C4"}},{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},{"seat":{"number":"C11"}},{"seat":{"number":"C12"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},{"seat":{"number":"D4"}},{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},{"seat":{"number":"D11"}},{"seat":{"number":"D12"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},{"seat":{"number":"E4"}},{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},{"seat":{"number":"E11"}},{"seat":{"number":"E12"}}]},{"margin":false,"row":["offset",{"seat":{"number":"F2"}},{"seat":{"number":"F3"}},{"seat":{"number":"F4"}},{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},{"seat":{"number":"F11"}},"offset"]},{"margin":false,"row":["offset","offset",{"seat":{"number":"G3"}},{"seat":{"number":"G4"}},{"seat":{"number":"G5"}},{"seat":{"number":"G6"}},{"seat":{"number":"G7"}},{"seat":{"number":"G8"}},{"seat":{"number":"G9"}},{"seat":{"number":"G10"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset",{"seat":{"number":"H10"}},{"seat":{"number":"H11"}},{"seat":{"number":"H12"}}]},{"margin":false,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset",{"seat":{"number":"I10"}},{"seat":{"number":"I11"}},{"seat":{"number":"I12"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset","offset","offset","offset","offset","offset",{"seat":{"number":"J10"}},{"seat":{"number":"J11"}},{"seat":{"number":"J12"}}]}]'," The Encoded Value should be similar")  
+//             done();
+//         });
+//     });
 
 
-    it('should get a certain layout on /layout/:id GET',function(done){
-        chai.request("localhost:8000").get("/api/layout/1")
-        .end(function(req,res){
-            res.should.have.status(200); //response status should be 200 aka found
-            res.should.be.json;
-            assert.equal(res.body[0].encoded, '[]'," The Encoded Value should be similar")  
-            done();
-        });
-    });
+//     it('should get a certain layout on /layout/:id GET',function(done){
+//         chai.request("localhost:8000").get("/api/layout/1")
+//         .end(function(req,res){
+//             res.should.have.status(200); //response status should be 200 aka found
+//             res.should.be.json;
+//             assert.equal(res.body[0].encoded, '[]'," The Encoded Value should be similar")  
+//             done();
+//         });
+//     });
 
 
-    it('should add a new layout on /layout/add POST',function(done){ //Just a Custom message to know describe what is the expected output
-        chai.request("localhost:8000").post("/api/layout/add").send({
-         id:20,
-         encoding: '[{"margin":false,"row":["offset","offset","offset","offset",{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},{"seat":{"number":"A10"}},"offset","offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},"offset",{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},"offset",{"seat":{"number":"B12"}},{"seat":{"number":"B13"}},{"seat":{"number":"B14"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},"offset",{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},"offset",{"seat":{"number":"C12"}},{"seat":{"number":"C13"}},{"seat":{"number":"C14"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},"offset",{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},"offset",{"seat":{"number":"D12"}},{"seat":{"number":"D13"}},{"seat":{"number":"D14"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},"offset",{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},"offset",{"seat":{"number":"E12"}},{"seat":{"number":"E13"}},{"seat":{"number":"E14"}}]},{"margin":true,"row":["offset","offset",{"seat":{"number":"F3"}},"offset",{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},"offset",{"seat":{"number":"F12"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"G1"}},{"seat":{"number":"G2"}},{"seat":{"number":"G3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"G12"}},{"seat":{"number":"G13"}},{"seat":{"number":"G14"}}]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"H12"}},{"seat":{"number":"H13"}},{"seat":{"number":"H14"}}]},{"margin":true,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"I12"}},{"seat":{"number":"I13"}},{"seat":{"number":"I14"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset",{"seat":{"number":"J5"}},{"seat":{"number":"J6"}},{"seat":{"number":"J7"}},{"seat":{"number":"J8"}},{"seat":{"number":"J9"}},{"seat":{"number":"J10"}},"offset",{"seat":{"number":"J12"}},{"seat":{"number":"J13"}},{"seat":{"number":"J14"}}]},{"margin":false,"row":[{"seat":{"number":"K1"}},{"seat":{"number":"K2"}},{"seat":{"number":"K3"}},"offset",{"seat":{"number":"K5"}},{"seat":{"number":"K6"}},{"seat":{"number":"K7"}},{"seat":{"number":"K8"}},{"seat":{"number":"K9"}},{"seat":{"number":"K10"}},"offset",{"seat":{"number":"K12"}},{"seat":{"number":"K13"}},{"seat":{"number":"K14"}}]}]',
-         name:'E'
-        })
-        .end(function(req,res){
-          res.should.have.status(200); //response status should be 200 aka found
-          res.should.be.json; //response type should be json
-          done();
-        });
-    });
+//     it('should add a new layout on /layout/add POST',function(done){ //Just a Custom message to know describe what is the expected output
+//         chai.request("localhost:8000").post("/api/layout/add").send({
+//          id:20,
+//          encoding: '[{"margin":false,"row":["offset","offset","offset","offset",{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},{"seat":{"number":"A10"}},"offset","offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},"offset",{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},"offset",{"seat":{"number":"B12"}},{"seat":{"number":"B13"}},{"seat":{"number":"B14"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},"offset",{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},"offset",{"seat":{"number":"C12"}},{"seat":{"number":"C13"}},{"seat":{"number":"C14"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},"offset",{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},"offset",{"seat":{"number":"D12"}},{"seat":{"number":"D13"}},{"seat":{"number":"D14"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},"offset",{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},"offset",{"seat":{"number":"E12"}},{"seat":{"number":"E13"}},{"seat":{"number":"E14"}}]},{"margin":true,"row":["offset","offset",{"seat":{"number":"F3"}},"offset",{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},"offset",{"seat":{"number":"F12"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"G1"}},{"seat":{"number":"G2"}},{"seat":{"number":"G3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"G12"}},{"seat":{"number":"G13"}},{"seat":{"number":"G14"}}]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"H12"}},{"seat":{"number":"H13"}},{"seat":{"number":"H14"}}]},{"margin":true,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"I12"}},{"seat":{"number":"I13"}},{"seat":{"number":"I14"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset",{"seat":{"number":"J5"}},{"seat":{"number":"J6"}},{"seat":{"number":"J7"}},{"seat":{"number":"J8"}},{"seat":{"number":"J9"}},{"seat":{"number":"J10"}},"offset",{"seat":{"number":"J12"}},{"seat":{"number":"J13"}},{"seat":{"number":"J14"}}]},{"margin":false,"row":[{"seat":{"number":"K1"}},{"seat":{"number":"K2"}},{"seat":{"number":"K3"}},"offset",{"seat":{"number":"K5"}},{"seat":{"number":"K6"}},{"seat":{"number":"K7"}},{"seat":{"number":"K8"}},{"seat":{"number":"K9"}},{"seat":{"number":"K10"}},"offset",{"seat":{"number":"K12"}},{"seat":{"number":"K13"}},{"seat":{"number":"K14"}}]}]',
+//          name:'E'
+//         })
+//         .end(function(req,res){
+//           res.should.have.status(200); //response status should be 200 aka found
+//           res.should.be.json; //response type should be json
+//           done();
+//         });
+//     });
 
-    it('should add a new layout on /layout/add POST',function(done){ //Just a Custom message to know describe what is the expected output
-        chai.request("localhost:8000").post("/api/layout/add").send({
-           encoding: '[{"margin":false,"row":["offset","offset","offset","offset",{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},{"seat":{"number":"A10"}},"offset","offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},"offset",{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},"offset",{"seat":{"number":"B12"}},{"seat":{"number":"B13"}},{"seat":{"number":"B14"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},"offset",{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},"offset",{"seat":{"number":"C12"}},{"seat":{"number":"C13"}},{"seat":{"number":"C14"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},"offset",{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},"offset",{"seat":{"number":"D12"}},{"seat":{"number":"D13"}},{"seat":{"number":"D14"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},"offset",{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},"offset",{"seat":{"number":"E12"}},{"seat":{"number":"E13"}},{"seat":{"number":"E14"}}]},{"margin":true,"row":["offset","offset",{"seat":{"number":"F3"}},"offset",{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},"offset",{"seat":{"number":"F12"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"G1"}},{"seat":{"number":"G2"}},{"seat":{"number":"G3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"G12"}},{"seat":{"number":"G13"}},{"seat":{"number":"G14"}}]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"H12"}},{"seat":{"number":"H13"}},{"seat":{"number":"H14"}}]},{"margin":true,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"I12"}},{"seat":{"number":"I13"}},{"seat":{"number":"I14"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset",{"seat":{"number":"J5"}},{"seat":{"number":"J6"}},{"seat":{"number":"J7"}},{"seat":{"number":"J8"}},{"seat":{"number":"J9"}},{"seat":{"number":"J10"}},"offset",{"seat":{"number":"J12"}},{"seat":{"number":"J13"}},{"seat":{"number":"J14"}}]},{"margin":false,"row":[{"seat":{"number":"K1"}},{"seat":{"number":"K2"}},{"seat":{"number":"K3"}},"offset",{"seat":{"number":"K5"}},{"seat":{"number":"K6"}},{"seat":{"number":"K7"}},{"seat":{"number":"K8"}},{"seat":{"number":"K9"}},{"seat":{"number":"K10"}},"offset",{"seat":{"number":"K12"}},{"seat":{"number":"K13"}},{"seat":{"number":"K14"}}]}]',
-           name:'E'
-        })
-        .end(function(req,res){
-          res.should.have.status(200); //response status should be 200 aka found
-          res.should.be.json; //response type should be json
-          done();
-        });
-    });
+//     it('should add a new layout on /layout/add POST',function(done){ //Just a Custom message to know describe what is the expected output
+//         chai.request("localhost:8000").post("/api/layout/add").send({
+//            encoding: '[{"margin":false,"row":["offset","offset","offset","offset",{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},{"seat":{"number":"A10"}},"offset","offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},"offset",{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},"offset",{"seat":{"number":"B12"}},{"seat":{"number":"B13"}},{"seat":{"number":"B14"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},"offset",{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},"offset",{"seat":{"number":"C12"}},{"seat":{"number":"C13"}},{"seat":{"number":"C14"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},"offset",{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},"offset",{"seat":{"number":"D12"}},{"seat":{"number":"D13"}},{"seat":{"number":"D14"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},"offset",{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},"offset",{"seat":{"number":"E12"}},{"seat":{"number":"E13"}},{"seat":{"number":"E14"}}]},{"margin":true,"row":["offset","offset",{"seat":{"number":"F3"}},"offset",{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},"offset",{"seat":{"number":"F12"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"G1"}},{"seat":{"number":"G2"}},{"seat":{"number":"G3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"G12"}},{"seat":{"number":"G13"}},{"seat":{"number":"G14"}}]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"H12"}},{"seat":{"number":"H13"}},{"seat":{"number":"H14"}}]},{"margin":true,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"I12"}},{"seat":{"number":"I13"}},{"seat":{"number":"I14"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset",{"seat":{"number":"J5"}},{"seat":{"number":"J6"}},{"seat":{"number":"J7"}},{"seat":{"number":"J8"}},{"seat":{"number":"J9"}},{"seat":{"number":"J10"}},"offset",{"seat":{"number":"J12"}},{"seat":{"number":"J13"}},{"seat":{"number":"J14"}}]},{"margin":false,"row":[{"seat":{"number":"K1"}},{"seat":{"number":"K2"}},{"seat":{"number":"K3"}},"offset",{"seat":{"number":"K5"}},{"seat":{"number":"K6"}},{"seat":{"number":"K7"}},{"seat":{"number":"K8"}},{"seat":{"number":"K9"}},{"seat":{"number":"K10"}},"offset",{"seat":{"number":"K12"}},{"seat":{"number":"K13"}},{"seat":{"number":"K14"}}]}]',
+//            name:'E'
+//         })
+//         .end(function(req,res){
+//           res.should.have.status(200); //response status should be 200 aka found
+//           res.should.be.json; //response type should be json
+//           done();
+//         });
+//     });
 
 
-    it('should update an existing layout on /layout/update POST',function(done){ //Just a Custom message to know describe what is the expected output
-        chai.request("localhost:8000").post("/api/layout/update").send({
-           id:12,
-           encoding: '[{"margin":false,"row":["offset","offset","offset","offset",{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},{"seat":{"number":"A10"}},"offset","offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},"offset",{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},"offset",{"seat":{"number":"B12"}},{"seat":{"number":"B13"}},{"seat":{"number":"B14"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},"offset",{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},"offset",{"seat":{"number":"C12"}},{"seat":{"number":"C13"}},{"seat":{"number":"C14"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},"offset",{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},"offset",{"seat":{"number":"D12"}},{"seat":{"number":"D13"}},{"seat":{"number":"D14"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},"offset",{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},"offset",{"seat":{"number":"E12"}},{"seat":{"number":"E13"}},{"seat":{"number":"E14"}}]},{"margin":true,"row":["offset","offset",{"seat":{"number":"F3"}},"offset",{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},"offset",{"seat":{"number":"F12"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"G1"}},{"seat":{"number":"G2"}},{"seat":{"number":"G3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"G12"}},{"seat":{"number":"G13"}},{"seat":{"number":"G14"}}]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"H12"}},{"seat":{"number":"H13"}},{"seat":{"number":"H14"}}]},{"margin":true,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"I12"}},{"seat":{"number":"I13"}},{"seat":{"number":"I14"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset",{"seat":{"number":"J5"}},{"seat":{"number":"J6"}},{"seat":{"number":"J7"}},{"seat":{"number":"J8"}},{"seat":{"number":"J9"}},{"seat":{"number":"J10"}},"offset",{"seat":{"number":"J12"}},{"seat":{"number":"J13"}},{"seat":{"number":"J14"}}]},{"margin":false,"row":[{"seat":{"number":"K1"}},{"seat":{"number":"K2"}},{"seat":{"number":"K3"}},"offset",{"seat":{"number":"K5"}},{"seat":{"number":"K6"}},{"seat":{"number":"K7"}},{"seat":{"number":"K8"}},{"seat":{"number":"K9"}},{"seat":{"number":"K10"}},"offset",{"seat":{"number":"K12"}},{"seat":{"number":"K13"}},{"seat":{"number":"K14"}}]}]',
-           name:'M'
-        })
-        .end(function(req,res){
-          res.should.have.status(200); //response status should be 200 aka found
-          res.should.be.json; //response type should be json
-          done();
-        });
-    });
+//     it('should update an existing layout on /layout/update POST',function(done){ //Just a Custom message to know describe what is the expected output
+//         chai.request("localhost:8000").post("/api/layout/update").send({
+//            id:12,
+//            encoding: '[{"margin":false,"row":["offset","offset","offset","offset",{"seat":{"number":"A5"}},{"seat":{"number":"A6"}},{"seat":{"number":"A7"}},{"seat":{"number":"A8"}},{"seat":{"number":"A9"}},{"seat":{"number":"A10"}},"offset","offset","offset","offset"]},{"margin":false,"row":[{"seat":{"number":"B1"}},{"seat":{"number":"B2"}},{"seat":{"number":"B3"}},"offset",{"seat":{"number":"B5"}},{"seat":{"number":"B6"}},{"seat":{"number":"B7"}},{"seat":{"number":"B8"}},{"seat":{"number":"B9"}},{"seat":{"number":"B10"}},"offset",{"seat":{"number":"B12"}},{"seat":{"number":"B13"}},{"seat":{"number":"B14"}}]},{"margin":false,"row":[{"seat":{"number":"C1"}},{"seat":{"number":"C2"}},{"seat":{"number":"C3"}},"offset",{"seat":{"number":"C5"}},{"seat":{"number":"C6"}},{"seat":{"number":"C7"}},{"seat":{"number":"C8"}},{"seat":{"number":"C9"}},{"seat":{"number":"C10"}},"offset",{"seat":{"number":"C12"}},{"seat":{"number":"C13"}},{"seat":{"number":"C14"}}]},{"margin":false,"row":[{"seat":{"number":"D1"}},{"seat":{"number":"D2"}},{"seat":{"number":"D3"}},"offset",{"seat":{"number":"D5"}},{"seat":{"number":"D6"}},{"seat":{"number":"D7"}},{"seat":{"number":"D8"}},{"seat":{"number":"D9"}},{"seat":{"number":"D10"}},"offset",{"seat":{"number":"D12"}},{"seat":{"number":"D13"}},{"seat":{"number":"D14"}}]},{"margin":false,"row":[{"seat":{"number":"E1"}},{"seat":{"number":"E2"}},{"seat":{"number":"E3"}},"offset",{"seat":{"number":"E5"}},{"seat":{"number":"E6"}},{"seat":{"number":"E7"}},{"seat":{"number":"E8"}},{"seat":{"number":"E9"}},{"seat":{"number":"E10"}},"offset",{"seat":{"number":"E12"}},{"seat":{"number":"E13"}},{"seat":{"number":"E14"}}]},{"margin":true,"row":["offset","offset",{"seat":{"number":"F3"}},"offset",{"seat":{"number":"F5"}},{"seat":{"number":"F6"}},{"seat":{"number":"F7"}},{"seat":{"number":"F8"}},{"seat":{"number":"F9"}},{"seat":{"number":"F10"}},"offset",{"seat":{"number":"F12"}},"offset","offset"]},{"margin":false,"row":[{"seat":{"number":"G1"}},{"seat":{"number":"G2"}},{"seat":{"number":"G3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"G12"}},{"seat":{"number":"G13"}},{"seat":{"number":"G14"}}]},{"margin":false,"row":[{"seat":{"number":"H1"}},{"seat":{"number":"H2"}},{"seat":{"number":"H3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"H12"}},{"seat":{"number":"H13"}},{"seat":{"number":"H14"}}]},{"margin":true,"row":[{"seat":{"number":"I1"}},{"seat":{"number":"I2"}},{"seat":{"number":"I3"}},"offset","offset","offset","offset","offset","offset","offset","offset",{"seat":{"number":"I12"}},{"seat":{"number":"I13"}},{"seat":{"number":"I14"}}]},{"margin":false,"row":[{"seat":{"number":"J1"}},{"seat":{"number":"J2"}},{"seat":{"number":"J3"}},"offset",{"seat":{"number":"J5"}},{"seat":{"number":"J6"}},{"seat":{"number":"J7"}},{"seat":{"number":"J8"}},{"seat":{"number":"J9"}},{"seat":{"number":"J10"}},"offset",{"seat":{"number":"J12"}},{"seat":{"number":"J13"}},{"seat":{"number":"J14"}}]},{"margin":false,"row":[{"seat":{"number":"K1"}},{"seat":{"number":"K2"}},{"seat":{"number":"K3"}},"offset",{"seat":{"number":"K5"}},{"seat":{"number":"K6"}},{"seat":{"number":"K7"}},{"seat":{"number":"K8"}},{"seat":{"number":"K9"}},{"seat":{"number":"K10"}},"offset",{"seat":{"number":"K12"}},{"seat":{"number":"K13"}},{"seat":{"number":"K14"}}]}]',
+//            name:'M'
+//         })
+//         .end(function(req,res){
+//           res.should.have.status(200); //response status should be 200 aka found
+//           res.should.be.json; //response type should be json
+//           done();
+//         });
+//     });
 
-    it('should delete an existing layout on /layout/delete POST',function(done){ //Just a Custom message to know describe what is the expected output
-        chai.request("localhost:8000").post("/api/layout/delete").send({
-           id:5
-        })
-        .end(function(req,res){
-          res.should.have.status(200); //response status should be 200 aka found
-          res.should.be.json; //response type should be json
-          done();
-        });
-    });
-});
+//     it('should delete an existing layout on /layout/delete POST',function(done){ //Just a Custom message to know describe what is the expected output
+//         chai.request("localhost:8000").post("/api/layout/delete").send({
+//            id:5
+//         })
+//         .end(function(req,res){
+//           res.should.have.status(200); //response status should be 200 aka found
+//           res.should.be.json; //response type should be json
+//           done();
+//         });
+//     });
+// });
 
 describe('Layouts', function() {
-    it('should get All halls on /layout/all GET',function(done){
-        chai.request("localhost:8000").get("/api/layout/all")
+    it('should get All halls on /halls/all GET',function(done){
+        chai.request("localhost:8000").get("/api/halls/all")
         .end(function(req,res){
             res.should.have.status(200); //response status should be 200 aka found
             res.should.be.json;
@@ -125,6 +125,38 @@ describe('Layouts', function() {
             done();
         });
     });
+
+
+    it('should get a certain halls on /halls/view GET',function(done){
+        chai.request("localhost:8000").get("/api/halls/view").send({
+            cinema_location: "New Cairo",
+            cinema_name : "Point 90",
+            hall_number : 1
+        })
+        .end(function(req,res){
+            res.should.have.status(200); //response status should be 200 aka found
+            res.should.be.json;
+            assert.notEqual(res.body, [], "response is not empty");
+            done();
+        });
+    });
+
+    it('should add a new layout on /layout/add POST',function(done){ //Just a Custom message to know describe what is the expected output
+                chai.request("localhost:8000").post("/api/halls/add").send({
+                    cinema_location : "New Cairo",
+                    cinema_name : "Point 90",
+                    hall_number : 5,
+                    type : "VIP",
+                    layout : 4,
+                    number_of_seats : 50,
+                    movie: null
+                })
+                .end(function(req,res){
+                  res.should.have.status(200); //response status should be 200 aka found
+                  res.should.be.json; //response type should be json
+                  done();
+                });
+            });
 });
 
 

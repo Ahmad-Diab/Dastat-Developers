@@ -35,7 +35,7 @@ module.exports.addHall = function(req, res, next){
       }
 
       database.query('INSERT INTO halls SET ?', hall, function(error, hall, fields){
-          if(err) return next(error);
+          if(error) return next(error);
           res.status(200).json({
             msg: 'Hall Added Successfully',
           });

@@ -14,49 +14,49 @@ export class AdminService extends HttpService {
 
     getAdmin(data){
       console.log(data);
-      return this.post('/getAdmin', data);
+      return this.post_auth('/getAdmin', data);
     }
     getAdmins(){
-      return this.get('/getAdmins');
+      return this.get_auth('/getAdmins');
     } 
    //----------------Booking Usher---------------------    
     getBookingUshers(){
-      return this.get('/getBookingUshers');
+      return this.get_auth('/getBookingUshers');
     }
     getBookingUsher(data){
-      return this.post('/getBookingUsher');
+      return this.post_auth('/getBookingUsher');
     }
     editBookingUsher(data){
-      return this.post('/editBookingUsher', data);
+      return this.post_auth('/editBookingUsher', data);
     }
     deleteBookingUsher(data){
-      return this.post('/deleteBookingUsher', data);
+      return this.post_auth('/deleteBookingUsher', data);
     }
     //----------------Branch Manager-------------------
     getBranchManagers(){
-      return this.get('/getBranchManagers');
+      return this.get_auth('/getBranchManagers');
     }
     getBranchManager(data){
-      return this.post('/getBranchManager', data);
+      return this.post_auth('/getBranchManager', data);
     }
     editBranchManager(data){
-      return this.post('editBranchManager', data);
+      return this.post_auth('editBranchManager', data);
     }
     deleteBranchManager(data){
-      return this.post('/deleteBranchManager',data);
+      return this.post_auth('/deleteBranchManager',data);
     }
 
     //----------------Cinema Owner---------------------
     getCinemaOwners(){
-      return this.get('/getCinemaOwners');
+      return this.get_auth('/getCinemaOwners');
     }
     getCinemaOwner(data){
-      return this.post('/getCinemaOwner', data);
+      return this.post_auth('/getCinemaOwner', data);
     }
     editCinemaOwner(data){
-      return this.post('editCinemaOwner', data);
+      return this.post_auth('editCinemaOwner', data);
     }
     deleteCinemaOwner(data){
-      return this.post('/deleteCinemaOwner',data);
+      return this.post_auth('/deleteCinemaOwner',data);
     } 
 }

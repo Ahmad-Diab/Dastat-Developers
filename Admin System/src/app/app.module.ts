@@ -64,7 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
-  CinemaslistService, SearchService, PromocodesService,MoviesService],
+  CinemaslistService, SearchService, PromocodesService,MoviesService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -264,12 +264,80 @@ describe('View All Movies',function(){
 
 
 //---------------------A D M I N.. U N I T.. T E S T S--------------------------------
+describe('Delete a specific request',function(){
+  it('CO/BM can delete their own requests',function(done){
+    chai.request("localhost:8000").post("/api/requests/delete/31")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
 
+describe('Edit a specific request',function(){
+  it('CO/BM can edit their own requests',(done)=> {
+    let requestDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/requests/edit/32")
+    .send(requestDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
+describe('Delete a specific movie',function(){
+  it('AO can delete a movie',function(done){
+    chai.request("localhost:8000").post("/api/movie/delete/33")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
-
-
+describe('Edit a specific movie',function(){
+  it('Ao can edit a movie',(done)=> {
+    let movieDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/requests/edit/34")
+    .send(movieDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
 
 

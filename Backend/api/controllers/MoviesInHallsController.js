@@ -32,7 +32,6 @@ module.exports.getHallsForThatCinema = function(req, res){
 
     database.query(sql,[cinema_name , cinema_location],function (err, result) {
         if (err) throw err;
-        //return res.send(result);
         if(result.length == 0){
 
             res.status(200).json({
@@ -87,12 +86,10 @@ module.exports.viewCinemasForAdminUser = function(req, res, next){
         });
     }
 
-    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
 
     database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
         [username],function (error, result) {
             if (error) throw error;
-            //return res.send(result);
             if(result.length == 0){
     
                 res.status(200).json({

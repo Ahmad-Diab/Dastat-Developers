@@ -19,15 +19,16 @@ var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
 var MyMovies = require('./controllers/MyMoviesController');
+
+//----------- Admin ---------------
 var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
 var MoviesInHalls = require('./controllers/MoviesInHallsController');
-
-
-//----------- Admin ---------------
 var AdminHalls = require('./controllers/AdminHallsController');
+var AddCinema = require('./controllers/MyCinemas');
+var editCinema = require('./controllers/MyCinemas');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -142,10 +143,10 @@ router.get('/users', User.getUsers);
 
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
-router.get('/tickets/viewTicketInfo', Authorization.Verify(1111), adminTicket.viewTicketInfo);
-router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify(1111), adminTicket.verifyUnpaidTicket);
-router.get('/tickets/viewPartiesForThatMovie', Authorization.Verify(1111), adminTicket.viewPartiesOfThatMovie);
-router.post('/tickets/makeReservationAsAdmin', Authorization.Verify(1111), UserBooking.makeReservation);
+router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
+router.patch('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
+router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
+router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
 
 
@@ -195,3 +196,37 @@ router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' 
 
 //exporting routes to the project
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////// ADMIN ROUTES ////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
+//As an Admin i can add cinema 
+
+router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
+router.get('/adminviewCinemas',Cinema.ViewCinemas);
+router.post('/addCinema', AddCinema.addCinema);
+router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, editCinema.editCinema); 
+
+// ------------- As an Admin I can Delete a Cinema ----------------
+router.get('/mycinemas/delete/:cinema/:owner',editCinema.deleteCinemaForAdmin);
+
+
+
+
+
+
+

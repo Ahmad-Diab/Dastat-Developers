@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../@services/auth.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { Auth } from '../../@guards/auth.guard';
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -38,6 +40,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   _mode = this.mode;
   _autoCollapseWidth = 991;
   width = window.innerWidth;
+  username: string;
 
   @ViewChild('sidebar') sidebar;
 
@@ -49,13 +52,18 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     private modalService: NgbModal,
     private titleService: Title,
     private zone: NgZone,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private cookie: CookieService) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
   }
 
   ngOnInit(): void {
+
+    var auth = <Auth>(this.cookie.getObject('auth'));
+    this.username = auth.username;
+    
     if (this.isOver()) {
       this._mode = 'over';
       this.isOpened = false;
@@ -110,5 +118,15 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
   openSearch(search) {
     this.modalService.open(search, { windowClass: 'search', backdrop: false });
+  }
+
+  logout() {
+    var auth: Auth = {
+      token: undefined,
+      username: undefined
+    }
+
+    this.cookie.putObject('auth', auth);
+    this.router.navigate(['/authentication/signin']);
   }
 }

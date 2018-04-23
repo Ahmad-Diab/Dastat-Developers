@@ -44,7 +44,10 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'pages',
     loadChildren: './pages/pages.module#PagesModule'
-  }, {
+  },{
+    path: 'mycinemas',
+    loadChildren: './mycinemas/mycinemas.module#MycinemasModule'
+  },{
     path: 'taskboard',
     loadChildren: './taskboard/taskboard.module#TaskboardModule'
   }, {
@@ -82,5 +85,5 @@ export const AppRoutes: Routes = [{
 }, {
   path: '**',
   redirectTo: 'error/404'
-}];
+}]
 

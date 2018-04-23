@@ -11,7 +11,7 @@
       </button>
       <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <div *ngFor ="let cinema of cinemas">
-          <button class="dropdown-item" (click)="selectedCinema = cinema; getHalls()">{{cinema.cinema_name}} {{cinema.cinema_location}}</button>
+          <button class="dropdown-item" (click)="editMode = false; selectedHall = false; selectedCinema = cinema; getHalls()">{{cinema.cinema_name}} {{cinema.cinema_location}}</button>
         </div>
       </div>
     </div>

@@ -15,6 +15,21 @@ module.exports.getSeats = function (req, res, next) {
 }
 
 //TODO:: CRUD Operations for layout table.
+module.exports.distinctLocations =  function(req,res,next)
+{
+  database.query('SELECT DISTINCT location FROM cinemas', function(error, locations, fields){
+    if(error) return next(error);
+    res.send(locations);
+  })
+}
+
+module.exports.getCinemaName =  function(req,res,next)
+{
+  database.query('SELECT * FROM cinemas where cinema_location = ?',req.body.cinema_location,function(error, cinemas, fields){
+    if(error) return next(error);
+    res.send(cinemas);
+  })
+}
 
 module.exports.getLayout = function(req,res,next)
 {

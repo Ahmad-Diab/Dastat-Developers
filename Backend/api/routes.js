@@ -206,6 +206,8 @@ router.get("/halls/view", Halls.getHall);
 router.post("/halls/add", Halls.addHall);
 router.post("/halls/update", Halls.updateHall);
 router.post("/halls/deleteHall", Halls.deleteHall);
+router.get("/cinema/location/min", Seat.distinctLocations);
+router.get("/cinema/names/min", Seat.getCinemaName);
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
 router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
 router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);

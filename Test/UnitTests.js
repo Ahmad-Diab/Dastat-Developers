@@ -116,7 +116,15 @@ describe('Layouts', function() { //This should contain all Tests for Layouts
 });
 
 describe('Layouts', function() {
-    
+    it('should get All halls on /layout/all GET',function(done){
+        chai.request("localhost:8000").get("/api/layout/all")
+        .end(function(req,res){
+            res.should.have.status(200); //response status should be 200 aka found
+            res.should.be.json;
+            assert.notEqual(res.body, [], "response is not empty");
+            done();
+        });
+    });
 });
 
 

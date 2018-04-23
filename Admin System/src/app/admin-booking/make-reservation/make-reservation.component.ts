@@ -53,7 +53,7 @@ export class MakeReservationComponent implements OnInit {
   loadMovies() {
     //TODO get all movies in halls, using steven's function in the backend, coming from another page
 
-    /*
+
     this.moviesList = [{
       cinema_location : 'Mokattam',
       cinema_name : 'Cinema Mawlana',
@@ -85,7 +85,7 @@ export class MakeReservationComponent implements OnInit {
     this.selectedHall = this.moviesList[0].hall_number;
     this.loadParties();
 
-    */
+/*
 
     this.MoviesInHallsService.getAlltMoviesInCinemaForAdmin(this.cookie.get('cinema_name') , this.cookie.get('cinema_location'))
       .subscribe((response) => {
@@ -99,10 +99,10 @@ export class MakeReservationComponent implements OnInit {
           console.log('cookie has no movies');
           this.selectedMovie = this.moviesList[0];
         }
-        this.selectedHall = this.selectedMovie.hall_number;
+        this.selectedHall = this.selectedMovie.hall;
         this.loadParties();
       });
-
+*/
   }
 
   selectMovie(movie) {

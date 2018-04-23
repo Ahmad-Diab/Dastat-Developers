@@ -12,17 +12,23 @@ export class MakeReservationComponent implements OnInit {
   adminUsername = null;
   reserveData = null;
   ticketIsLoaded = false;
+  //TODO set ticketIsLoaded to true after all information are gathered,
+  //TODO so then it can give ability to make the reservation
 
   moviesList = null; selectedMovie = null; selectedHall = null;
+  partiesBigList = null;
   partiesDatesList = null; selectedPartyDate = null;
   partiesTimesList = null; selectedPartyTime = null;
+
+  selectedTickets = []; //TODO set the array of tickets
+  totalPrice = null; // TODO set this with tickets
 
   error = null;
 
   constructor(public adminTicketService: AdminTicketService, public cookie: CookieService) { }
 
   ngOnInit() {
-    this.adminUsername = this.cookie.get('adminUsername');
+    this.adminUsername = 'app'; // TODO this.cookie.get('adminUsername');
     this.loadMovies();
 
     this.reserveData = {
@@ -42,54 +48,85 @@ export class MakeReservationComponent implements OnInit {
   }
 
   loadMovies() {
-    //TODO get all movies in halls, using steven's function in the backend\
+    //TODO get all movies in halls, using steven's function in the backend, coming from another page
     this.moviesList = [{
-      title : 'MOVIE_1',
-      hall : '12'
+      cinema_location : 'Mokattam',
+      cinema_name : 'Cinema Mawlana',
+      hall_number : 1,
+      type: 'VIP',
+      layout: 1,
+      number_of_seats : 80,
+      movie_id : 5,
+      title : 'Pacific Rim Uprising',
+      imagePath : 'https://image.ibb.co/fYSzx7/Pacific_Rim.jpg'
     },{
-      title : 'MOVIE_2',
-      hall : '15'
+      cinema_location : 'New Cairo',
+      cinema_name : 'Point 90',
+      hall_number : 1,
+      type: 'VIP',
+      layout: 1,
+      number_of_seats : 50,
+      movie_id : 4,
+      title : 'Love, Simon',
+      imagePath : 'https://image.ibb.co/fVygc7/Love_Simon.jpg'
     }];
-    this.selectedMovie = this.moviesList[0].title;
+    this.selectedMovie = this.moviesList[0];
     this.selectedHall = this.moviesList[0].hall;
-    this.loadPartiesDates();
+    this.loadParties();
   }
 
   selectMovie(movie) {
     this.selectedMovie = movie.title;
-    this.reserveData.movie = this.selectedMovie['movie_id'];
-    this.reserveData.hall = this.selectedMovie['hall_number'];
-    this.loadPartiesDates();
+    this.loadParties();
   }
 
-  loadPartiesDates() {
-    this.partiesDatesList = [
-      '09-10-2018',
-      '04-01-2018',
-      '05-11-2018'
-    ];
+  loadParties() {
+    this.adminTicketService.viewPartiesOfThatMovie(
+      this.adminUsername, this.selectedMovie.cinema_name,
+      this.selectedMovie.cinema_location, this.selectedMovie.movie_id
+    ).subscribe((response) => {
+      this.partiesBigList = response.data[0];
+      console.log(response);
+    });
+    if(this.partiesBigList.size) {
+      console.log('parties should be loaded');
+      this.takeOnlyDatesInPartiesDateList();
+    }
+    console.log(this.partiesBigList.size);
+  }
+
+  takeOnlyDatesInPartiesDateList() {
+    console.log(this.partiesBigList.length);
+    for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
+      if(!this.partiesDatesList.contains(this.partiesBigList[partyNum].date))
+        this.partiesDatesList.push(this.partiesBigList[partyNum].date);
+    }
+    console.log(this.partiesDatesList);
     this.selectedPartyDate = this.partiesDatesList[0];
     this.loadPartiesTimes();
   }
 
   selectPartyDate(date) {
     this.selectedPartyDate = date;
-    this.reserveData.date = this.selectedPartyDate;
+    //this.reserveData.date = this.selectedPartyDate;
     this.loadPartiesTimes();
   }
 
   loadPartiesTimes() {
-    this.partiesTimesList = [
-      '10:00am',
-      '11:12pm',
-      '12:00pm'
-    ];
+
+    for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
+      let party = this.partiesBigList[partyNum];
+      if(this.selectedPartyDate = party.date)
+        this.partiesTimesList.push(party.time);
+    }
+
     this.selectedPartyTime = this.partiesTimesList[0];
+
   }
 
   selectPartyTime(time) {
     this.selectedPartyTime = time;
-    this.reserveData.time = this.selectedPartyTime;
+    //this.reserveData.time = this.selectedPartyTime;
     this.loadSeatLayout();
   }
 
@@ -98,6 +135,28 @@ export class MakeReservationComponent implements OnInit {
   }
 
   makeReservation() {
+    //ONLY FOR TEST: TODO Delete
+    this.reserveData.cinema_name = this.selectedMovie.cinema_name;
+    this.reserveData.cinema_location = this.selectedMovie.cinema_location;
+    //END TEST PIECE OF CODE
+
+    this.reserveData.date = this.selectedPartyDate;
+    this.reserveData.time = this.selectedPartyTime;
+    this.reserveData.hall = this.selectedHall;
+    // TODO set tickets array of seats to the selected
+    this.reserveData.tickets = ['c1', 'b2'];
+    // TODO set th price of tickets to the total price
+    this.reserveData.price = 100;
+    this.reserveData.movie = this.selectedMovie.movie_id;
+
+    this.adminTicketService.makeReservationByAdmin(
+      this.reserveData.cinema_name, this.reserveData.cinema_location, this.reserveData.date,
+      this.reserveData.time, this.reserveData.hall, this.reserveData.tickets,
+      this.reserveData.price, this.reserveData.movie_id
+    ).subscribe((response) => {
+      //event.confirm.resolve(response);
+      console.log(response);
+    });
 
   }
 

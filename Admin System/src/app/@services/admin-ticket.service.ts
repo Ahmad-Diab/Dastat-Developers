@@ -11,9 +11,10 @@ export class AdminTicketService extends HttpService {
   }
 
   makeReservationByAdmin(cinema_name:string, cinema_location:string, party_date:string,
-                  party_time:string, hall:string, payment:boolean ,tickets,
-                  tickets_price: number, movie_id: number, comment: string) {
-    let cinema_username = cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
+                  party_time:string, hall:string, tickets,
+                  tickets_price: number, movie_id: number) {
+
+    let cinema_username = 'mai_emad'; // TODO cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
 
     return this.post("/tickets/makeReservationAsAdmin", {
       'username': cinema_username,
@@ -22,11 +23,11 @@ export class AdminTicketService extends HttpService {
       'date': party_date,
       'time': party_time,
       'hall': hall,
-      'payment': payment,
+      'payment': true,
       'tickets': tickets,
       'price': tickets_price,
       'movie': movie_id,
-      'comment': comment
+      'comment': "OFFLINE TICKET"
     });
   }
 
@@ -39,10 +40,18 @@ export class AdminTicketService extends HttpService {
   }
 
   verifyUnpaidTicket(adminUsername:String, reservation_id:String) {
-    //TODO this need to be patch method instead
     return this.patch('/tickets/verifyUnpaidTicket',{
       'username': adminUsername,
       'reservation_id': reservation_id
     });
+  }
+
+  viewPartiesOfThatMovie(admin_username: String, cinema_name:String, cinema_location:String, movie_id: Number) {
+    return this.get('/tickets/viewPartiesForThatMovie', { headers: {
+        'username' : admin_username,
+        'cinema_name' : cinema_name,
+        'cinema_location' : cinema_location,
+        'movie_id' : movie_id
+      }});
   }
 }

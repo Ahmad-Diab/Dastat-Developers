@@ -54,8 +54,8 @@
           <div ngbDropdown class=" ticket__item ticket__item--primery ticket__film" style="align-self: center; width: 100%">
             Movie
             <button class="btn btn-outline-primary form-control" ngbDropdownToggle>
-              <label *ngIf="selectedMovie != null">
-                {{selectedMovie}}
+              <label>
+                {{(selectedMovie)? selectedMovie : "N/A"}}
               </label>
             </button>
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownBasic1">
@@ -67,7 +67,7 @@
 
           <span class="ticket__item ticket__item--primery">Hall:
              <strong class="ticket__hall">
-               {{(reserveData.hall) ? reserveData.hall : "N/A"}}
+               {{(selectedHall) ? selectedHall: "N/A"}}
              </strong>
           </span>
         </div>
@@ -84,7 +84,7 @@
   <div class="ticket__indecator">
     <span class="form-control">
       <h1 class="">Price:</h1>
-      <strong class="ticket__cost">{{(reserveData.price) ? reserveData.price : "N/A"}}</strong>
+      <strong class="ticket__cost">{{(totalPrice) ? totalPrice : "N/A"}}</strong>
     </span>
   </div>
 

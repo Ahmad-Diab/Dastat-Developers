@@ -60,13 +60,6 @@ module.exports.getParties = function(req, res){
         date = req.params['date'],
         cinemaLocation = req.params['cinemaLocation'];
 
-    /*
-    console.log(cinemaName + " : cinemaName");
-    console.log(movieName + " : movieName");
-    console.log(date + " : date");
-    console.log(cinemaLocation + " : cinemaLocation");
-    */
-
     if(!cinemaName || !cinemaLocation) {
         return res.status(422).json({
             err: null,
@@ -110,7 +103,7 @@ module.exports.getParties = function(req, res){
         if (err) throw err;
 
         if(!result.length){
-            res.status(200).json({
+            res.status(404).json({
                 err: null,
                 msg: 'No parties for this movie at this date',
                 data: null  // null instead of result

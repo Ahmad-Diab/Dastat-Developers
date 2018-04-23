@@ -137,7 +137,7 @@ router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFro
 //--------------------------------------Admin login------------------------------------------------------//
 router.post('/adminlogin', AuthenticationAdmin.login);
 
-//------------------------------ MyAdmins routes --------------------------------//
+//------------------------------ MyAdmins routes ----------------------------------//
 router.get('/users', User.getUsers);
 
 
@@ -146,6 +146,7 @@ router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.patch('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
 router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
+router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
 
 
 //-------------AS AN ADMIN I CAN ADD Requests ----------------

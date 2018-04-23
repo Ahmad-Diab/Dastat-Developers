@@ -233,7 +233,8 @@ module.exports.makeReservationByAdmin = function(req, res, next){
  * @param next, next middleware to handle errors
  */
 module.exports.cancelReservation = function(req, res, next){
-  var id = req.body.id; //reservation_id
+  let id = req.headers['id']; //reservation_id
+  console.log(id);
   if (isNaN(id)) return res.status(400).send({ //making sure it is a number, and returning an error if it is not
     "error": "Entered id not an integer",
     "msg": null,

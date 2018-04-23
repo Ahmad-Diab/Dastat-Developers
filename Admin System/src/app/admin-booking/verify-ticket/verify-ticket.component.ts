@@ -17,6 +17,7 @@ export class VerifyTicketComponent implements OnInit {
   error = null;
 
   ticketVerified = true;
+  ticketCancelled = true;
   btn_verifyTicket = 'Verify Ticket';
 
   constructor(public adminTicketService: AdminTicketService, public cookie: CookieService) { }
@@ -48,20 +49,24 @@ export class VerifyTicketComponent implements OnInit {
               this.ticketIsLoaded = true;
               if (this.ticketView.payment.data[0]) {
                 this.ticketVerified = true;
+                this.ticketCancelled = false;
                 this.btn_verifyTicket = 'Verified';
               } else {
                 this.ticketVerified = false;
+                this.ticketCancelled = false;
                 this.btn_verifyTicket = 'Verify Ticket';
               }
             } else {
               this.ticketIsLoaded = false;
               this.ticketVerified = false;
+              this.ticketCancelled = false;
               this.btn_verifyTicket = 'Verify Ticket';
             }
           });
       } finally {
         this.ticketIsLoaded = false;
         this.ticketVerified = true;
+        this.ticketCancelled = true;
         this.btn_verifyTicket = 'Verify Ticket';
       }
 
@@ -73,6 +78,7 @@ export class VerifyTicketComponent implements OnInit {
     if(!this.ticketView) {
       this.ticketIsLoaded = false;
       this.ticketVerified = true;
+      this.ticketCancelled = true;
       this.btn_verifyTicket = 'Verify Ticket';
     }
   }
@@ -93,6 +99,15 @@ export class VerifyTicketComponent implements OnInit {
 
   }
 
+
+  cancelTicket(event) { //trigerred when cancel ticket button is clicked
+      this.adminTicketService.cancelReservation(this.reservation_id).subscribe((response) => { //calls cancel reservation and passes res id to it
+        if(response.error == null) { //if no error and deletion is successfull
+          this.ticketCancelled = true; //cancel ticket button gets disabled
+          this.ticketIsLoaded = false; //ticket information is no longer loaded
+        }
+      });
+    }
 
 
 }

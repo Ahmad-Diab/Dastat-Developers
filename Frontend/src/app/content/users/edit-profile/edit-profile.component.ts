@@ -36,13 +36,16 @@ export class EditProfileComponent implements OnInit {
   //--------------- edit profile mail, first & last name, phone, age using username as id----------------
   onEdit(email: string, first_name: string, last_name: string, phone_number: number, age: number){
   
+    if(email == ""){
+      email = this.user.email;
+    }
         this.usersService.editProfile(email, first_name,last_name,phone_number,age,this.username).subscribe((response)=>{
   
             this.ngOnInit();
   
           });  
 
-          if (!this.user.username){
+          if (!this.username){
             this.message="please Enter a Username";
             return;
           }

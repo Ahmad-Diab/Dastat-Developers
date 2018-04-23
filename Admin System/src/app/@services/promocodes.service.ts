@@ -17,7 +17,7 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON objects of promocodes
   */
   getPromocodes(){
-    return this.get('promocodes');
+    return this.get('promocodes', { headers: {'authorization': 'Token 1000' } });
   }
 
   /**
@@ -26,7 +26,7 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON object of promocode
   */
   getPromocodeAttr(promocodeValue: string){
-    return this.get('promocodes/' + promocodeValue);
+    return this.get('promocodes/' + promocodeValue, { headers: {'authorization': 'Token 1000' } });
   }
 
   /**
@@ -34,7 +34,7 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON object of promocode
   */
   filterPromocode(promocodeValue: string){
-    return this.get('promocodes/filter/promocode/' + promocodeValue);
+    return this.get('promocodes/filter/promocode/' + promocodeValue, { headers: {'authorization': 'Token 1000' } });
   }
 
   /**
@@ -42,11 +42,11 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON object of promocode
   */
   filterCinema(cinema: string){
-    return this.get('promocodes/filter/cinema/' + cinema);
+    return this.get('promocodes/filter/cinema/' + cinema, { headers: {'authorization': 'Token 1000' } });
   }
   
   getPromocodesAndCinemas(){
-    return this.get('promocodes/viewPromocodesAndCinemas')
+    return this.get('promocodes/viewPromocodesAndCinemas', { headers: {'authorization': 'Token 1000' } })
   }
 
   /**
@@ -60,7 +60,8 @@ export class PromocodesService extends HttpService {
     return this.post('promocodes/edit',{
       "promocode": promocode,
       "type": type,
-      "value": value
+      "value": value,
+      headers: {'authorization': 'Token 1000' }
     })
   }
 
@@ -68,7 +69,8 @@ export class PromocodesService extends HttpService {
     return this.post('promocodes/assignPromocodes',{
       "promocode":promocode,
       "cinema_location":cinemaLocation,
-      "cinema_name":cinemaName
+      "cinema_name":cinemaName,
+      headers: {'authorization': 'Token 1000' }
     })
   }
 
@@ -76,12 +78,13 @@ export class PromocodesService extends HttpService {
     return this.post('promocodes/addPromocode',{
       "promocode":promocode,
       "type":type,
-      "value":value
+      "value":value,
+      headers: {'authorization': 'Token 1000' }
     })
   }
 
   deletePromocode(promocode: string){
-    return this.post('/promocodes/deletePromocode/'+promocode)
+    return this.post('/promocodes/deletePromocode/'+promocode, { headers: {'authorization': 'Token 1000' } })
   }
 
  

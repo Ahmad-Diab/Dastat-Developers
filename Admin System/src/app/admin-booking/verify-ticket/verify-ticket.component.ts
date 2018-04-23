@@ -40,7 +40,7 @@ export class VerifyTicketComponent implements OnInit {
 
     if (this.reservation_id) {
       try {
-        this.adminTicketService.viewTicketInfo('some admin', this.reservation_id)
+        this.adminTicketService.viewTicketInfo(this.adminUsername, this.reservation_id)
           .subscribe((res) => {
             //TODO check response status
             if (!res.err && res.data) {

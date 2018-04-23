@@ -60,13 +60,6 @@ module.exports.getParties = function(req, res){
         date = req.params['date'],
         cinemaLocation = req.params['cinemaLocation'];
 
-    /*
-    console.log(cinemaName + " : cinemaName");
-    console.log(movieName + " : movieName");
-    console.log(date + " : date");
-    console.log(cinemaLocation + " : cinemaLocation");
-    */
-
     if(!cinemaName || !cinemaLocation) {
         return res.status(422).json({
             err: null,
@@ -110,7 +103,7 @@ module.exports.getParties = function(req, res){
         if (err) throw err;
 
         if(!result.length){
-            res.status(200).json({
+            res.status(404).json({
                 err: null,
                 msg: 'No parties for this movie at this date',
                 data: null  // null instead of result
@@ -160,6 +153,7 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+
     console.log('passed user check');
     if(!cinema_name || !cinema_location) {
         return res.status(422).json({
@@ -178,6 +172,7 @@ module.exports.makeReservation = function(req, res, next){
     }
 
     console.log('passed party check');
+
     if(!hall || !movie) {
         return res.status(422).json({
             err: null,
@@ -216,7 +211,7 @@ module.exports.makeReservation = function(req, res, next){
                 console.log('error selecting from halls the movie');
                 return next(error);
             }
-            console.log(results);
+            //console.log(results);
             if(!results || !results.length) {
                 return res.status(404).send({
                     err: null,
@@ -240,7 +235,7 @@ module.exports.makeReservation = function(req, res, next){
                     return next(error);
                 }
 
-                return res.status(200).json({
+                res.status(200).json({
                     err: null,
                     msg: 'Booking Request has been completed successfully.',
                     data: results

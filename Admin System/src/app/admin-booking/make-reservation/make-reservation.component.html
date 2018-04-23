@@ -2,7 +2,7 @@
   make-reservation under construction!
 </p>
 
-<div class="ticket-view" style="text-align: center">
+<div class="ticket-view" style=" align-self: center; margin: 0 auto;">
   <div class="ticket">
     <div class="ticket-position">
 
@@ -24,11 +24,11 @@
 
               <span class="btn-group " ngbDropdown role="group" aria-label="Button group with nested dropdown">
                 <button [disabled]="!selectedPartyDate" class="btn btn-outline-danger" ngbDropdownToggle>
-                  {{(selectedPartyDate)? selectedPartyDate : "N/A" }}
+                  {{(selectedPartyDate)? (selectedPartyDate | date:'yyyy-MM-dd'): "N/A"}}
                 </button>
                 <span class="dropdown-menu" ngbDropdownMenu>
                   <span  *ngFor="let date of partiesDatesList">
-                    <button class="dropdown-item" (click)="selectPartyDate(date)">{{date}}</button>
+                    <button class="dropdown-item" (click)="selectPartyDate(date)">{{date| date:'yyyy-MM-dd'}}</button>
                   </span>
                 </span>
               </span>
@@ -54,8 +54,8 @@
           <div ngbDropdown class=" ticket__item ticket__item--primery ticket__film" style="align-self: center; width: 100%">
             Movie
             <button class="btn btn-outline-primary form-control" ngbDropdownToggle>
-              <label *ngIf="selectedMovie != null">
-                {{selectedMovie}}
+              <label>
+                {{(selectedMovie)? selectedMovie.title : "N/A"}}
               </label>
             </button>
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownBasic1">
@@ -67,7 +67,7 @@
 
           <span class="ticket__item ticket__item--primery">Hall:
              <strong class="ticket__hall">
-               {{(reserveData.hall) ? reserveData.hall : "N/A"}}
+               {{(selectedHall) ? selectedHall: "N/A"}}
              </strong>
           </span>
         </div>
@@ -79,24 +79,23 @@
     </div>
   </div>
 
+</div>
 
-  <br>
-  <div class="ticket__indecator">
-    <span class="form-control">
-      <h1 class="">Price:</h1>
-      <strong class="ticket__cost">{{(reserveData.price) ? reserveData.price : "N/A"}}</strong>
-    </span>
+<br>
+<div style="align-content: center; clear: none; width: 50%; margin: 0 auto;">
+
+  <div class="form-control" style="float: inherit">
+    <h1 class="ticket__cost">Price: {{(totalPrice) ? totalPrice : "N/A"}}</h1>
   </div>
-
-  <div style="text-align: center">
+  <br>
+  <div style="margin: 0 auto;float: inherit">
     <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 "
             [disabled]="ticketIsLoaded" (click)="makeReservation()">
-      <span style="text-align: center">Make the Reservation</span>
+      Make the Reservation
     </button>
   </div>
 
 </div>
-
 
 
 

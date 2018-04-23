@@ -63,6 +63,89 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
     });
 
 };
+/**
+ * Function to return all parties in all halls for a movie
+ * @param req
+ * @param res
+ * @returns {*}
+ */
+module.exports.viewPartiesOfThatMovie = function(req, res){
+
+    let admin_username = req.headers['username'],
+        cinema_name = req.headers['cinema_name'],
+        cinema_location = req.headers['cinema_location'],
+        movie_id = req.headers['movie_id'];
+
+    // Null Checkers
+    console.log('I am in viewParties');
+    if(!admin_username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Admin username is required.',
+            data: null
+        });
+    }
+
+    if(!cinema_name || !cinema_location) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema data is required.',
+            data: null
+        });
+    }
+
+    if(!movie_id) {
+        return res.status(422).json({
+            err: null,
+            msg: 'movie_id is required',
+            data: null
+        });
+    }
+
+    console.log('I passed all null checkers');
+
+    // Validations of correct types
+    if(!Validations.isString(cinema_name) ||
+        !Validations.isString(cinema_location) ||
+        !Validations.isNumber(movie_id)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Provided data must be in valid types.',
+            data: null
+        });
+    }
+
+    console.log('I passed all validations');
+
+    let query = 'SELECT * FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
+        +' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ?';
+
+    database.query(query,[cinema_name , cinema_location ,movie_id],function (err, result) {
+
+        console.log("query is executed");
+        if (err) throw err;
+
+        console.log("no errors in query");
+        if(!result.length){
+
+            res.status(404).json({
+                err: null,
+                msg: 'No parties for this movie',
+                data: null
+            });
+
+        } else {
+
+            res.status(200).json({
+                err: null,
+                msg: 'Parties Successfully Retrieved',
+                data: result
+            });
+
+        }
+    });
+
+};
 
 /**
  * A function to view client's ticket info
@@ -72,8 +155,12 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
  */
 module.exports.viewTicketInfo = function(req, res, next){
     // TODO Check user is admin
+    let tokenHeader = req.headers['authorization'],
+        tokenHeaderSplited = tokenHeader.split(' '),
+        token = tokenHeaderSplited[1];
 
-    let adminUsername = req.headers['username'],
+    console.log(token);
+    let adminUsername = token.username,
         reservation_id = req.headers['reservation_id'];
 
     // Null Checkers

@@ -6,5 +6,12 @@ module.exports = {
     user     : 'gastscou_george',
     password : 'something',
     database : 'gastscou_cinema_app'
-  }
+  },
+  database_prod: {
+    host     : 'localhost',
+    port     : '3306',
+    user     : 'root',
+    password : '',
+    database : 'cinema_app'
+  } 
 };

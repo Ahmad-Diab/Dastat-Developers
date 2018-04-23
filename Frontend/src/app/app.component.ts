@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
+import { CookieService } from 'angular2-cookie/core';
 
 
 @Component({

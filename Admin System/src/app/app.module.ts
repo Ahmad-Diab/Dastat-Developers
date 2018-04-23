@@ -24,6 +24,7 @@ import { HttpModule } from '@angular/http';
 import {AdminTicketService} from "./@services/admin-ticket.service";
 import { MoviesInHallsService } from "./@services/movies-in-halls.service";
 import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
+import { AdminBookingModule} from "./admin-booking/admin-booking.module";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
     MoviesInHallsComponent
   ],
   imports: [
+    AdminBookingModule,
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,

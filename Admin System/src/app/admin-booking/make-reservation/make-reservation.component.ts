@@ -13,7 +13,7 @@ export class MakeReservationComponent implements OnInit {
   reserveData = null;
   ticketIsLoaded = false;
 
-  moviesList = null; selectedMovie = null;
+  moviesList = null; selectedMovie = null; selectedHall = null;
   partiesDatesList = null; selectedPartyDate = null;
   partiesTimesList = null; selectedPartyTime = null;
 
@@ -45,35 +45,50 @@ export class MakeReservationComponent implements OnInit {
     //TODO get all movies in halls, using steven's function in the backend\
     this.moviesList = [{
       title : 'MOVIE_1',
+      hall : '12'
     },{
-      title : 'MOVIE_2'
+      title : 'MOVIE_2',
+      hall : '15'
     }];
-    this.selectedMovie = 'MOVIE_1';
+    this.selectedMovie = this.moviesList[0].title;
+    this.selectedHall = this.moviesList[0].hall;
+    this.loadPartiesDates();
   }
 
-  selectMovie(event) {
-    this.selectedMovie = event.target.value;
+  selectMovie(movie) {
+    this.selectedMovie = movie.title;
     this.reserveData.movie = this.selectedMovie['movie_id'];
     this.reserveData.hall = this.selectedMovie['hall_number'];
     this.loadPartiesDates();
   }
 
   loadPartiesDates() {
-
+    this.partiesDatesList = [
+      '09-10-2018',
+      '04-01-2018',
+      '05-11-2018'
+    ];
+    this.selectedPartyDate = this.partiesDatesList[0];
+    this.loadPartiesTimes();
   }
 
-  selectPartyDate(event) {
-    this.selectedPartyDate = event.target.value;
+  selectPartyDate(date) {
+    this.selectedPartyDate = date;
     this.reserveData.date = this.selectedPartyDate;
     this.loadPartiesTimes();
   }
 
   loadPartiesTimes() {
-
+    this.partiesTimesList = [
+      '10:00am',
+      '11:12pm',
+      '12:00pm'
+    ];
+    this.selectedPartyTime = this.partiesTimesList[0];
   }
 
-  selectPartyTime(event) {
-    this.selectedPartyTime = event.target.value;
+  selectPartyTime(time) {
+    this.selectedPartyTime = time;
     this.reserveData.time = this.selectedPartyTime;
     this.loadSeatLayout();
   }

@@ -5,13 +5,16 @@ import { MakeReservationComponent } from './make-reservation/make-reservation.co
 import { VerifyTicketComponent } from './verify-ticket/verify-ticket.component';
 import {AdminBookingRoutes} from "./admin-booking.routing";
 import {RouterModule} from "@angular/router";
+import {AppComponent} from "../app.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   imports: [
     CommonModule,
     //AdminBookingRoutingModule,
-    RouterModule.forChild(AdminBookingRoutes)
-  ],
-  declarations: [MakeReservationComponent, VerifyTicketComponent]
+    RouterModule.forChild(AdminBookingRoutes),
+    NgbModule
+],
+  declarations: [MakeReservationComponent, VerifyTicketComponent],
 })
 export class AdminBookingModule { }

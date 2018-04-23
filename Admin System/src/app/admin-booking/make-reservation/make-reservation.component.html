@@ -1,25 +1,6 @@
 <p>
   make-reservation under construction!
 </p>
-<div class="card">
-  <div class="card-header">
-    Halls
-  </div>
-  <div class="card-body">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
-        <div *ngIf="selectedMovie != null">
-          {{selectedMovie}}
-        </div>
-      </button>
-      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <div *ngFor ="let movie of moviesList">
-          <button class="dropdown-item" (click)="selectedMovie = movie.title">{{movie.title}}</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="ticket-view" style="text-align: center">
   <div class="ticket">
@@ -30,42 +11,66 @@
       </div>
 
       <div class="ticket__inner">
-        <div class="ticket-secondary">
 
+        <div class="ticket-secondary" >
           <span class="ticket__item">Reservation ID:
             <strong class="ticket__number">"New Ticket"</strong>
           </span>
 
-          <span class="ticket__item">
-            Date:
-            <input type="date" class="form-control" placeholder="Select Date">
-            <!--
-            <strong hidden="{{!reserveData.date}}" class="ticket__date">{{(reserveData.date) ? (reserveData.date | date:'yyyy-MM-dd'): "N/A"}}</strong>
-            <strong class="ticket__time">{{(reserveData.time) ? reserveData.time : "N/A"}}</strong>
-            -->
-          </span>
+          <!-- ----------DATE & TIME OF TICKET---------- -->
+          <div class="ticket__date" >
 
-          <span class="ticket__item">Hall:
-            <strong class="ticket__hall">{{(reserveData.hall) ? reserveData.hall : "N/A"}}</strong>
-          </span>
+            <span class="btn-group">
 
-          <span class="ticket__item ticket__price">Price:
-            <strong class="ticket__cost">{{(reserveData.price) ? reserveData.price : "N/A"}}</strong>
-          </span>
+              <span class="btn-group " ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button [disabled]="!selectedPartyDate" class="btn btn-outline-danger" ngbDropdownToggle>
+                  {{(selectedPartyDate)? selectedPartyDate : "N/A" }}
+                </button>
+                <span class="dropdown-menu" ngbDropdownMenu>
+                  <span  *ngFor="let date of partiesDatesList">
+                    <button class="dropdown-item" (click)="selectPartyDate(date)">{{date}}</button>
+                  </span>
+                </span>
+              </span>
+
+              <span class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button [disabled]="!selectedPartyTime" class="btn btn-outline-success" ngbDropdownToggle>
+                  {{(selectedPartyTime)? selectedPartyTime : "N/A" }}
+                </button>
+                <span class="dropdown-menu" ngbDropdownMenu>
+                  <span *ngFor="let time of partiesTimesList">
+                    <button class="dropdown-item" (click)="selectPartyTime(time)">{{time}}</button>
+                  </span>
+                </span>
+              </span>
+
+            </span>
+
+          </div>
         </div>
 
+        <!-- ----------MOVIE AND HALL OF TICKET---------- -->
         <div class="ticket-primery">
-          <span class="ticket__item ticket__item--primery ticket__film">
+          <div ngbDropdown class=" ticket__item ticket__item--primery ticket__film" style="align-self: center; width: 100%">
             Movie
-            <input ng-options="movie.title for movie in moviesList" class="form-control" placeholder="Select Movie">
-            <!--
-            <strong class="ticket__movie">{{(reserveData.movie.title) ? reserveData.movie.title : "N/A"}}</strong>
-            -->
+            <button class="btn btn-outline-primary form-control" ngbDropdownToggle>
+              <label *ngIf="selectedMovie != null">
+                {{selectedMovie}}
+              </label>
+            </button>
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownBasic1">
+              <div *ngFor="let movie of moviesList">
+                <button class="dropdown-item" (click)="selectMovie(movie)">{{movie.title}}</button>
+              </div>
+            </div>
+          </div>
+
+          <span class="ticket__item ticket__item--primery">Hall:
+             <strong class="ticket__hall">
+               {{(reserveData.hall) ? reserveData.hall : "N/A"}}
+             </strong>
           </span>
-
         </div>
-
-
       </div>
 
       <div class="ticket__indecator indecator--post">
@@ -74,15 +79,20 @@
     </div>
   </div>
 
+
+  <br>
+  <div class="ticket__indecator">
+    <span class="form-control">
+      <h1 class="">Price:</h1>
+      <strong class="ticket__cost">{{(reserveData.price) ? reserveData.price : "N/A"}}</strong>
+    </span>
+  </div>
+
   <div style="text-align: center">
-
-    <button type="button" class="btn btn btn-outline-primary btn-lg btn-icon loading-demo mr-5 mb-lg-1 "
+    <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 "
             [disabled]="ticketIsLoaded" (click)="makeReservation()">
-
-      <i class="icon icon-basic-bookmark"></i>
-      <span style="align-self: center">{{btn_verifyTicket}}</span>
+      <span style="text-align: center">Make the Reservation</span>
     </button>
-
   </div>
 
 </div>

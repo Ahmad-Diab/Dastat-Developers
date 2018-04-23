@@ -60,7 +60,7 @@ router.get('/users', User.getUsers);
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users/viewMyInfo', User.viewMyInfo);
-router.post('/users/editUsers/:username', User.editProfile);
+router.post('/users/editProfile/:username', User.editProfile);
 
 
 
@@ -130,22 +130,26 @@ router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 //router.post('/admin/login', Admin.authenticate);
 router.post('/addBookingUsher', Admin.deleteBookingUsher);
 
+router.get('/viewBookingUshers', Admin.viewBookingUshers);
 router.get('/getBookingUshers', Admin.getBookingUshers);
 router.post('/getBookingUsher', Admin.getBookingUsher);
 router.post('/editBookingUsher', Admin.editBookingUsher);
 router.post('/deleteBookingUsher', Admin.deleteBookingUsher);
 
+router.get('/viewBranchManagers', Admin.viewBranchManagers);
 router.get('/getBranchManagers', Admin.getBranchManagers);
 router.post('/getBranchManager', Admin.getBranchManager);
 router.post('/editBranchManager', Admin.editBranchManager);
 router.post('/deleteBranchManager', Admin.deleteBranchManager);
 
+router.get('/viewCinemaOwners', Admin.viewCinemaOwners);
 router.get('/getCinemaOwners', Admin.getCinemaOwners);
 router.post('/getCinemaOwner', Admin.getCinemaOwner);
 router.post('/editCinemaOwner', Admin.editCinemaOwner);
 router.post('/deleteCinemaOwner', Admin.deleteCinemaOwner);
 
 router.post('/getAdmin', Admin.getAdmin);
+router.get('/viewAdmins', Admin.getAdmins);
 router.get('/getAdmins', Admin.viewAdmins);
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);

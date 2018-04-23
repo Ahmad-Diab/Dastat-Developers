@@ -19,7 +19,7 @@ export class MoviesInHallsComponent implements OnInit {
     halls=[];
     selectedCinemaMovies=[];
     cinemas=[];
-    final = [];
+    movie = [];
 
     selectedCinema;
     selectedMovie;
@@ -52,14 +52,14 @@ export class MoviesInHallsComponent implements OnInit {
       
     }
 
-    finalize(){
-      this.MoviesInHallsService.getfinal(this.selectedMovie, this.cookie.get('cinema_name') , this.cookie.get('cinema_location')).subscribe((response) => {
-        this.final = response.data;
+    submitMovie(){
+      this.MoviesInHallsService.getMovieDetails(this.selectedMovie, this.cookie.get('cinema_name') , this.cookie.get('cinema_location')).subscribe((response) => {
+        this.movie = response.data;
       });
-      this.cookie.putObject('movie' , this.final);
-      console.log(this.final);
+      this.cookie.putObject('movie' , this.movie);
+      console.log(this.movie);
   
-      this.router.navigate(['/booking/seating']);
+      this.router.navigate(['/AdminBooking/makeReservation']);
     }
   
 

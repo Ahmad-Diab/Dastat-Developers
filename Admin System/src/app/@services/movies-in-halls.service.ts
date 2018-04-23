@@ -23,7 +23,7 @@ export class MoviesInHallsService extends HttpService{
     return this.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/'+cinema_location+'/'+cinema_name);
   }
 
-  getfinal(movie_id,cinema_name,cinema_location){
+  getMovieDetails(movie_id,cinema_name,cinema_location){
     return this.get('/MoviesInHalls/getFinalOutput/'+movie_id+'/'+movie_id+'/'+cinema_name+'/'+cinema_location);
   }
 }

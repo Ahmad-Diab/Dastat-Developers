@@ -187,7 +187,7 @@ router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 router.get('/promocodes', Authorization.Verify('1000'),Promocodes.viewPromocodes);
 router.post('/promocodes/edit', Authorization.Verify('1000'), Promocodes.editPromocode);
-router.get('/promocodes/viewPromocodesAndCinemas',Promocodes.viewPromocodesAndCinemas);
+router.get('/promocodes/viewPromocodesAndCinemas', Authorization.Verify('1000'),Promocodes.viewPromocodesAndCinemas);
 router.get('/promocodes/:promocode', Authorization.Verify('1000'),Promocodes.getPromocode);
 router.get('/promocodes/filter/promocode/:promocode', Authorization.Verify('1000'), Promocodes.filterPromocode);
 router.get('/promocodes/filter/cinema/:cinema' ,  Authorization.Verify('1000') , Promocodes.filterCinema);

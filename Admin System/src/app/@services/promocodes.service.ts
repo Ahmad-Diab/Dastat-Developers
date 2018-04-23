@@ -17,7 +17,7 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON objects of promocodes
   */
   getPromocodes(){
-    return this.get('promocodes', { headers: {'authorization': 'Token 1000' } });
+    return this.get_auth('promocodes');
   }
 
   /**
@@ -26,7 +26,7 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON object of promocode
   */
   getPromocodeAttr(promocodeValue: string){
-    return this.get('promocodes/' + promocodeValue, { headers: {'authorization': 'Token 1000' } });
+    return this.get_auth('promocodes/' + promocodeValue);
   }
 
   /**
@@ -34,7 +34,7 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON object of promocode
   */
   filterPromocode(promocodeValue: string){
-    return this.get('promocodes/filter/promocode/' + promocodeValue, { headers: {'authorization': 'Token 1000' } });
+    return this.get_auth('promocodes/filter/promocode/' + promocodeValue);
   }
 
   /**
@@ -42,11 +42,11 @@ export class PromocodesService extends HttpService {
   * @returns Array of JSON object of promocode
   */
   filterCinema(cinema: string){
-    return this.get('promocodes/filter/cinema/' + cinema, { headers: {'authorization': 'Token 1000' } });
+    return this.get_auth('promocodes/filter/cinema/' + cinema);
   }
   
   getPromocodesAndCinemas(){
-    return this.get('promocodes/viewPromocodesAndCinemas', { headers: {'authorization': 'Token 1000' } })
+    return this.get_auth('promocodes/viewPromocodesAndCinemas')
   }
 
   /**
@@ -57,34 +57,31 @@ export class PromocodesService extends HttpService {
    * @param value 
    */
   editPromocode(promocode: string, type: string, value: string){
-    return this.post('promocodes/edit',{
+    return this.post_auth('promocodes/edit',{
       "promocode": promocode,
       "type": type,
-      "value": value,
-      headers: {'authorization': 'Token 1000' }
+      "value": value
     })
   }
 
   assignPromocodeToCinema(promocode : string,cinemaName : string,cinemaLocation : string){
-    return this.post('promocodes/assignPromocodes',{
+    return this.post_auth('promocodes/assignPromocodes',{
       "promocode":promocode,
       "cinema_location":cinemaLocation,
-      "cinema_name":cinemaName,
-      headers: {'authorization': 'Token 1000' }
+      "cinema_name":cinemaName
     })
   }
 
   addPromocodes(promocode:string,type:string,value:string){
-    return this.post('promocodes/addPromocode',{
+    return this.post_auth('promocodes/addPromocode',{
       "promocode":promocode,
       "type":type,
-      "value":value,
-      headers: {'authorization': 'Token 1000' }
+      "value":value
     })
   }
 
   deletePromocode(promocode: string){
-    return this.post('/promocodes/deletePromocode/'+promocode, { headers: {'authorization': 'Token 1000' } })
+    return this.post_auth('/promocodes/deletePromocode/'+promocode)
   }
 
  

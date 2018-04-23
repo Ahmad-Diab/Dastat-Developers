@@ -426,14 +426,17 @@ const MENUITEMS =
     name: 'DOCS',
     type: 'link',
     icon: 'basic-sheet-txt'
-  },
-  {
+  }
+];
+
+if (1) {
+  MENUITEMS.push({
     state: 'promocodes',
     name: 'promocodes',
     type: 'link',
     icon: 'ecommerce-gift'
-  }
-];
+  });
+}
 
 @Injectable()
 export class MenuItems {

@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div _ngcontent-c22="" class="card">
+      <img _ngcontent-c22="" alt="Card image cap" class="card-img-top img-fluid" src="{{movie.imagePath}}">
+      <div _ngcontent-c22="" class="card-body">
+        <h5 _ngcontent-c22="" class="card-title">
+          <h4 class="ma-0">
+            <span class="fw-400"></span>
+            <b>{{movie.title}}</b>
+          </h4>
+
+        </h5>
+        <p _ngcontent-c22="" class="card-text">
+          <a class="mt-1 d-block">
+            <b>Description:</b> {{movie.description}} </a>
+          <a class="mt-1 d-block">
+            <b>Cast:</b> {{movie.cast}} </a>
+          <a class="mt-1 d-block">
+            <b>Category:</b> {{movie.genre}} </a>
+          <a class="mt-1 d-block">
+            <b>Duration:</b> {{movie.duration}} hours</a>
+          <a class="mt-1 d-block">
+            <b>Release Date:</b> {{movie.release_date}} </a>
+
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div>
+      <button type="button" class="btn btn-outline-primary mr-1 mb-1" (click)="toogleEdit()" *ngIf="!movieEdit">Edit</button>
+      <button type="button" class="btn btn-outline-danger mr-1 mb-1" (click)="toogleEdit()" *ngIf="movieEdit">Cancel</button>
+    </div>
+    <div class="card-body" *ngIf="movieEdit">
+
+      <div class="card">
+        <div class="card-header">
+          Add the following properties
+        </div>
+        <div class="card-body">
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col9-form-label">
+              <b>Title</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #title id="input1" type="text" [(ngModel)]="movie.title" class="form-control mb-3" placeholder="Title">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Duration</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #duration id="input1" type="text" [(ngModel)]="movie.duration" class="form-control mb-3" placeholder="Duration">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Genre</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #genre id="input1" type="text" [(ngModel)]="movie.genre" class="form-control mb-3" placeholder="Genre">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Description</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #description id="input1" type="text" [(ngModel)]="movie.description" class="form-control mb-3" placeholder="Description">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Image Path</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #imagePath id="input1" type="text" [(ngModel)]="movie.imagePath" class="form-control mb-3" placeholder="Image Path">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Cast</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #cast id="input1" type="text" [(ngModel)]="movie.cast" class="form-control mb-3" placeholder="Cast">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Year</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #year id="input1" type="text" [(ngModel)]="movie.year" class="form-control mb-3" placeholder="Year">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Feature</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #feature id="input1" type="text" [(ngModel)]="movie.feature" class="form-control mb-3" placeholder="Feature">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Release Date</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #releasedate id="input1" type="text" [(ngModel)]="movie.release_date" class="form-control mb-3" placeholder="Release Date">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Rating</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #rating id="input1" type="text" [(ngModel)]="movie.rating" class="form-control mb-3" placeholder="Rating">
+            </div>
+          </div>
+
+          <div _ngcontent-c37="" class="form-group row">
+            <label _ngcontent-c37="" class="col-2 col-form-label">
+              <b>Status</b>
+            </label>
+            <div _ngcontent-c37="" class="col-10">
+              <input #status id="input1" type="text" [(ngModel)]="movie.status" class="form-control mb-3" placeholder="Status">
+            </div>
+          </div>
+
+         
+          <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="editMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,username,movie.movie_id)"
+            href="movies/info-edit"> Submit</button>
+
+        </div>
+      </div>
+    </div>
+  </div>

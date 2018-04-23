@@ -19,7 +19,12 @@ var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
+<<<<<<< HEAD
 var Promocodes = require('./controllers/PromocodesController');
+=======
+var AddCinema = require('./controllers/MyCinemas');
+var editCinema = require('./controllers/MyCinemas');
+>>>>>>> master
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -211,3 +216,37 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////// ADMIN ROUTES ////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
+//As an Admin i can add cinema 
+
+router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
+router.get('/adminviewCinemas',Cinema.ViewCinemas);
+router.post('/addCinema', AddCinema.addCinema);
+router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, editCinema.editCinema); 
+
+// ------------- As an Admin I can Delete a Cinema ----------------
+router.get('/mycinemas/delete/:cinema/:owner',editCinema.deleteCinemaForAdmin);
+
+
+
+
+
+
+

@@ -1,1 +1,0 @@
-{"version":3,"file":"email.routing.js","sourceRoot":"","sources":["../../../../src/app/email/email.routing.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,cAAc,EAAE,MAAM,mBAAmB,CAAC;AAEnD,MAAM,CAAC,IAAM,WAAW,GAAW,CAAC;QAClC,IAAI,EAAE,EAAE;QACR,SAAS,EAAE,cAAc;QACzB,IAAI,EAAE;YACJ,OAAO,EAAE,OAAO;YAChB,YAAY,EAAE,IAAI;SACnB;KACF,CAAC,CAAC"}

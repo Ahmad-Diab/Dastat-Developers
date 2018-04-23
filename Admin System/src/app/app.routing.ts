@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuard } from './@guards/auth.guard';
-
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
@@ -40,7 +39,10 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'pages',
     loadChildren: './pages/pages.module#PagesModule'
-  }, {
+  },{
+    path: 'mycinemas',
+    loadChildren: './mycinemas/mycinemas.module#MycinemasModule'
+  },{
     path: 'taskboard',
     loadChildren: './taskboard/taskboard.module#TaskboardModule'
   }, {
@@ -78,5 +80,5 @@ export const AppRoutes: Routes = [{
 }, {
   path: '**',
   redirectTo: 'error/404'
-}];
+}]
 

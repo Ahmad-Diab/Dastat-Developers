@@ -1,1 +1,0 @@
-{"version":3,"file":"taskboard.routing.js","sourceRoot":"","sources":["../../../../src/app/taskboard/taskboard.routing.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,kBAAkB,EAAE,MAAM,uBAAuB,CAAC;AAE3D,MAAM,CAAC,IAAM,eAAe,GAAW,CAAC;QACtC,IAAI,EAAE,EAAE;QACR,SAAS,EAAE,kBAAkB;QAC7B,IAAI,EAAE;YACJ,OAAO,EAAE,WAAW;YACpB,YAAY,EAAE,IAAI;SACnB;KACF,CAAC,CAAC"}

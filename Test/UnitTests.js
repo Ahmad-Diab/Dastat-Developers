@@ -480,6 +480,26 @@ describe('Search',function(){                                   // This should c
 
 
 
+describe('View_Movie_Info' , function() {
+  it('Should display movie Info Ready Player One /movies/:movie_id  GET' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/movies/1")   // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
+      res.should.be.json;          // Check if the response of the request is in JSON
+      res.body.data[0].should.have.property('title').eql('Ready Player One'); //check title
+      done();
+  });
+ });
+  it('Should display movie Info I can only Imagin /movies/:movie_id  GET' , function(done){ // This is the result message if the test succeeds and the function is done.
+    chai.request("localhost:8000").get("/api/movies/2")   // This is chai request to the path of the function same as the route.
+    .end(function(req,res){
+      res.should.have.status(200);  //  Check if the response of the request has 200 OK status
+       res.should.be.json;          // Check if the response of the request is in JSON
+       res.body.data[0].should.have.property('title').eql('I Can Only Imagine'); //check title
+      done();
+  });
+ });
+});
 
 
 

@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var config = require('./config');
 
+
 //mysql connection
 var connection = mysql.createConnection({
   host     : 'localhost',

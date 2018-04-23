@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../../@services/movies.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { Auth } from '../../@guards/auth.guard';
 
 @Component({
   selector: 'app-requests-co-bm',
@@ -14,6 +15,7 @@ export class RequestsCoBmComponent implements OnInit {
   admin_req;
   responeStatus='';
   moviesAction= false
+  
 
   constructor(public movieServices: MoviesService,private router:Router,public cookie:CookieService, private route: ActivatedRoute) { }
 
@@ -21,10 +23,15 @@ export class RequestsCoBmComponent implements OnInit {
 
   }
 
-  viewReq(admin_requested: string){
-    this.movieServices.viewRequests(admin_requested).subscribe((response)=>{
+  viewReq(auth){
+    let cookie: CookieService = new CookieService;
+    auth = <Auth>(cookie.getObject('auth'));
+    console.log(auth);
+    this.movieServices.viewRequests(auth.username).subscribe((response)=>{
       this.movies=response;
       console.log(response.data[0]);
+      console.log("A7a i was here");
+      console.log(auth);
     
   });
   }

@@ -24,6 +24,7 @@ import { MovieInfoService } from './@services/movie-info.service';
 import { SearchService } from './@services/search.service';
 import { PartiesService } from './@services/parties.service';
 import { CinemaInfoService } from './@services/cinema-info.service';
+import {HttpModule} from "@angular/http";
 
 
 @NgModule({

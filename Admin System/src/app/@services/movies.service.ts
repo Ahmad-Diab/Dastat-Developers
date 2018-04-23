@@ -24,7 +24,7 @@ viewAllMovies(){
     //----------ADD A MOVIE------------------
 addMoviess(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
    year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
-        return this.post('addMovies',{
+        return this.post_auth('addMovies',{
           "title": title,
           "duration":duration,
           "genre":genre,
@@ -41,7 +41,7 @@ addMoviess(title: string, duration: number, genre: string, description: string,i
 
 //--------------------DELETE A MOVIE----------------
 deleteMovie(movie_id:number){
-      return this.post('/movie/delete/'+ movie_id);
+      return this.post_auth('/movie/delete/'+ movie_id);
 }
 
 //------VIEW A MOVIE INFORMATION --------------------------
@@ -53,7 +53,7 @@ getMovieInfo(movie_id: string){
 editMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
   year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string, movie_id:string ){
 
-    return this.post('/movie/edit/'+ movie_id,{
+    return this.get_auth('/movie/edit/'+ movie_id,{
       "title": title,
       "duration":duration,
       "genre":genre,
@@ -70,15 +70,15 @@ editMovie(title: string, duration: number, genre: string, description: string,im
 
   //------VIEW MY REQUESTS------------------- 
   viewRequests(admin_requested: string){
-    return this.get('requests/'+admin_requested);
+    return this.get_auth('requests/'+admin_requested);
   }
 
   deleteRequest(movie_id:number){
-    return this.post('requests/delete/'+movie_id);
+    return this.post_auth('requests/delete/'+movie_id);
   }
   addRequest(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
     year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
-         return this.post('addRequests/'+ admin_requested,{
+         return this.post_auth('addRequests/'+ admin_requested,{
            "title": title,
            "duration":duration,
            "genre":genre,
@@ -94,13 +94,13 @@ editMovie(title: string, duration: number, genre: string, description: string,im
   } 
 
   viewALlRequests(){
-    return this.get('requests/AllSHOW');
+    return this.get_auth('requests/AllSHOW');
   }
   rejectRequest(movie_id:number){
-    return this.post('RejectMovieRequest/' + movie_id);
+    return this.post_auth('RejectMovieRequest/' + movie_id);
   }
   acceptRequest(movie_id:number){
-    return this.post('AcceptMovieRequest/'+movie_id);
+    return this.post_auth('AcceptMovieRequest/'+movie_id);
   }
 
 

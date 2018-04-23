@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../@services/user.service';
+import { CookieService } from 'angular2-cookie/core';
+
+
 
 @Component({
   selector: 'app-booking-details',
@@ -8,11 +11,15 @@ import { UserService } from '../../../@services/user.service';
 })
 export class BookingDetailsComponent implements OnInit {
   tickets=[];
+  usersame;
+  
 
-  constructor(public userService:UserService) { }
+  constructor(public userService:UserService, public cookie : CookieService,) { }
+
 
   ngOnInit() {
-    this.userService.getBookingDetails("Hamza_Namira").subscribe((response) => {
+    this.usersame=this.cookie.get('username');
+    this.userService.getBookingDetails(this.usersame).subscribe((response) => {
       this.tickets=response.data;
       console.log(this.tickets);
       

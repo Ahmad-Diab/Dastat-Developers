@@ -18,6 +18,7 @@ var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var viewCinemas = require('./controllers/CinemasController');
 var Cinema = require('./controllers/CinemasController');
+var Halls = require('./controllers/HallsController');
 
 //----------- Admin ---------------
 var AdminHalls = require('./controllers/AdminHallsController');
@@ -102,9 +103,11 @@ router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Seating routes--------------------------------------------//
 router.get('/layout/encoding', Seat.getSeats);
+router.get('/layout/all', Seat.getAllLayouts);
 router.post('/layout/add', Seat.addLayout);
 router.post('/layout/update', Seat.updateLayout);
 router.post('/layout/delete', Seat.deleteLayout);
+router.get('/layout/:id', Seat.getLayout);
 //----------------------------------------------------Viewing routes--------------------------------------------//
 router.get('/viewCinemas',Cinema.ViewCinemas);
 router.get('/viewMovies',Search.viewMovies);
@@ -187,7 +190,11 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
-
+//-------HALLS CRUD OPERATIONS ROUTES---------//
+router.get("/halls", Halls.getHalls);
+router.post("/halls/add", Halls.addHall);
+router.post("/halls/update", Halls.updateHall);
+router.post("/halls/deleteHall", Halls.deleteHall);
 
 
 

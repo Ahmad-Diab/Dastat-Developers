@@ -15,6 +15,22 @@ module.exports.getSeats = function (req, res, next) {
 }
 
 //TODO:: CRUD Operations for layout table.
+module.exports.getLayout = function(req,res,next)
+{
+  database.query('SELECT * FROM layout where id = ?',req.params.id,function(error, layout, fields){
+    if(error) return next(error);
+    res.send(layout);
+  })
+}
+
+module.exports.getAllLayouts = function(req,res,next)
+{
+  database.query('SELECT * FROM layout',req.params.id,function(error, layout, fields){
+    if(error) return next(error);
+    res.send(layout);
+  })
+}
+
 module.exports.addLayout = function (req, res, next) {
   console.log(req.headers);
 
@@ -34,8 +50,9 @@ module.exports.addLayout = function (req, res, next) {
 module.exports.updateLayout = function (req, res, next) {
   database.query('UPDATE layout SET encoded = ?, name = ? where id = ? ', [req.body.encoding, req.body.name, req.body.id], function (error, layout, fields) {
     if (error) return next(error);
-    console.log("Layout Updated Successfully");
-    console.log("layout");
+    res.status(200).json({
+      msg: 'Layout Updated Successfully',
+    });
   });
 }
 
@@ -43,7 +60,8 @@ module.exports.updateLayout = function (req, res, next) {
 module.exports.deleteLayout = function (req, res, next) {
   database.query('DELETE FROM layout where id = ?', req.body.id, function (error, layout, fields) {
     if (error) return next(error);
-    console.log("Layout Deleted Successfully");
-    console.log("layout");
+    res.status(200).json({
+      msg: 'Layout Deleted Successfully',
+    });
   });
 }

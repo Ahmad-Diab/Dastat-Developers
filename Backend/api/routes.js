@@ -196,6 +196,7 @@ router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
 router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
 router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
+router.get('/MoviesInHalls/getFinalOutput/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getFinalOutput);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 

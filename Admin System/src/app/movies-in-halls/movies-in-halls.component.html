@@ -1,26 +1,7 @@
-<div class="card">
-  <div class="card-header">
-    Choose a cinema:
-  </div>
-  <div class="card-body">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
-        <div *ngIf="selectedCinema != null">
-            {{selectedCinema.cinema_name}}   {{selectedCinema.cinema_location}}
-        </div>
-      </button>
-      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <div *ngFor ="let cinema of cinemas">
-          <button class="dropdown-item" (click)="selectedCinema = cinema; getHalls()">{{cinema.cinema_name}} {{cinema.cinema_location}}</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <div class="row">
-  <div class="media-grid col-lg-3 col-sm-6" *ngFor="let hall of halls">
+  <div class="media-grid col-lg-3 col-sm-6" *ngFor="let hall of halls"  (click)="selectedMovie = hall.movie; finalize()">
     <figure>
       <img src="{{hall.imagePath}}" alt="Card image cap" class="img-fluid" />
       <figcaption>

@@ -29,6 +29,8 @@ import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.compon
 import { AdminBookingModule} from "./admin-booking/admin-booking.module";
 import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promocodes.component';
 import { PromocodesService } from './@services/promocodes.service';
+import { MoviesService } from './@services/movies.service';
+
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -62,7 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
-  CinemaslistService, SearchService, PromocodesService],
+  CinemaslistService, SearchService, PromocodesService,MoviesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

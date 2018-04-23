@@ -63,17 +63,21 @@
       <div class="card-body">
       
         <strong style="margin-top: 1px">Choose a promocode</strong>          
-        <select #select class="form-control" (change) = "getPromocodeAttributes($event.target.value)">
+        <select #selectPromocode class="form-control" (change) = "getPromocodeAttributes($event.target.value)">
           <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
         </select><br/>
 
-        <strong style="margin-top: 1px">Type</strong>    
-        <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeTypeEdited"> 
-      
+        <strong style="margin-top: 1px">Choose a type</strong>    
+        <select #selectType class="form-control">
+          <option value= 'amount' >AMOUNT</option>
+          <option value= 'percentage' >PERCENTAGE</option>
+          <option value= 'package' >PACKAGE</option>
+        </select><br/>
+
         <strong style="margin-top: 1px">Value</strong>    
         <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeValueEdited"> 
       
-        <button type="button" class="btn btn-info mr-1 mb-1"  (click)="editPromocode(select.value)" >Edit</button>
+        <button type="button" class="btn btn-info mr-1 mb-1"  (click)="editPromocode(selectPromocode.value, selectType.value)" >Edit</button>
       </div>
       {{editResponseStatus}}
     </div>
@@ -86,19 +90,17 @@
 <div class="card">
   
   <div class="card-header">
-    <div>
-      <button type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
-      <button type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
-      <button type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
-      <button type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
+    <div style="align-self: center; width: 100%">
+      <button style="align-self: left; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
+      <button style="align-self: left; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
+      <button style="align-self: right; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
+      <button style="align-self: right; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
     </div>
   </div>
 
-  <div class="col-2"  style = "text-align:right" >
-    <input #promocodeFilter type="text" class="form-control" placeholder="filter by promocode" (keyup) = "filterPromocode(promocodeFilter.value)">
-  </div>
-  <div id="filterRight" class="col-2">
-    <input #cinemaFilter type="text" class="form-control" placeholder="filter by cinema" *ngIf = "assignedPromocodeView" (keyup) = "filterCinema(cinemaFilter.value)">
+  <div style="align-self: center; width: 97%;">
+    <input #promocodeFilter style="align-self: left; width: 49%; display: inline-block" type="text" class="form-control" placeholder="filter by promocode" (keyup) = "filterPromocode(promocodeFilter.value)">
+    <input #cinemaFilter style="align-self: right; width: 48%; display: inline-block" type="text" class="form-control" placeholder="filter by cinema" *ngIf = "assignedPromocodeView" (keyup) = "filterCinema(cinemaFilter.value)">
   </div>
   
   <div class="card-body" *ngIf = "assignedPromocodeView">

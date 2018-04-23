@@ -146,23 +146,27 @@ router.get('/users', User.getUsers);
 
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
-router.patch('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);
+router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminTicket.verifyUnpaidTicket);
 router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
-router.post('/tickets/makeReservationAsAdmin', UserBooking.makeReservation);
+router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
 
 
+
+
+
+//[App Owner][Cinema Owner][Booking Usher][Branch Manager]
+
 //-------------AS AN ADMIN I CAN ADD Requests ----------------
-router.post('/addRequests/:admin_requested',MyMovies.addRequests);
+router.post('/addRequests/:admin_requested',Authorization.Verify("0101"),MyMovies.addRequests);
 
 //-----------AS AN ADMIN I CAN ADD MOVIES ---------------------
-router.post('/addMovies/:admin_requested',MyMovies.addMovies);
-
-//-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
-router.get('/requests/:admin_requested',MyMovies.viewMyRequests);
+router.post('/addMovies',Authorization.Verify("1000"),MyMovies.addMovies);
 
 //-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
-router.get('/requests',MyMovies.viewRequests);
+router.get('/requests/AllSHOW',Authorization.Verify("1000"),MyMovies.viewRequests);
+//-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
+router.get('/requests/:admin_requested',Authorization.Verify("0101"),MyMovies.viewMyRequests);
 
 //--------AS AN ADMIN I CAN VIEW ALL MOVIES------------------
 router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
@@ -171,38 +175,32 @@ router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 
 //--------AS AN ADMIN I CAN EDIT MY REQUESTS--------------
-router.post('/requests/:movie_id',MyMovies.EditMyRequests);
+router.post('/requests/edit/:movie_id',Authorization.Verify("0101"),MyMovies.EditMyRequests);
 
 //--------AS AN ADMIN I CAN EDIT MOVIES--------------
-router.post('/requests/:movie_id',MyMovies.EditMovies);
+router.post('/movie/edit/:movie_id',Authorization.Verify("1000"),MyMovies.EditMovies);
 
 //--------AS AN ADMIN I CAN DELETE MY REQUESTS--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMyRequests);
+router.post('/requests/delete/:movie_id',Authorization.Verify("0101"),MyMovies.DeleteMyRequests);
 
 //--------AS AN ADMIN I CAN DELETE MOVIES--------------
-router.delete('/requests/:movie_id',MyMovies.DeleteMovies);
+router.post('/movie/delete/:movie_id',Authorization.Verify("1000"),MyMovies.DeleteMovies);
 
 //--------AS AN ADMIN I CAN View A SINGLE MOVIE REQUEST--------------
 
 router.get('/viewMovieRequest/:movie_id',MyMovies.ViewMovieRequest);
 
 //--------AS AN ADMIN I CAN REJECT A SINGLE MOVIE REQUEST--------------
-router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
+router.post('/RejectMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovies.RejectMovieRequest);
 
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
-router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
+router.post('/AcceptMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovies.AcceptMovieRequest);
 
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
 router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
 router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
 router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
-
-
-
-
-
-
-
+router.get('/MoviesInHalls/getFinalOutput/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getFinalOutput);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 
@@ -255,3 +253,5 @@ router.get('/mycinemas/delete/:cinema/:owner',editCinema.deleteCinemaForAdmin);
 
 
 
+//exporting routes to the project
+module.exports = router;

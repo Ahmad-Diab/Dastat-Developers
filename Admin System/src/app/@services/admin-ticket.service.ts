@@ -14,7 +14,7 @@ export class AdminTicketService extends HttpService {
                   party_time:string, hall:string, tickets,
                   tickets_price: number, movie_id: number) {
 
-    let cinema_username = 'mai_emad'; // TODO cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
+    let cinema_username = 'Mai_Emad'; // TODO cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
 
     return this.post("/tickets/makeReservationAsAdmin", {
       'username': cinema_username,

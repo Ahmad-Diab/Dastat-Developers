@@ -70,8 +70,9 @@ export class MakeReservationComponent implements OnInit {
       title : 'Tomb Raider',
       imagePath : 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg'
     }];
+    this.moviesList.sort();
     this.selectedMovie = this.moviesList[0];
-    this.selectedHall = this.moviesList[0].hall;
+    this.selectedHall = this.moviesList[0].hall_number;
     this.loadParties();
   }
 
@@ -82,6 +83,7 @@ export class MakeReservationComponent implements OnInit {
   }
 
   loadParties() {
+    this.partiesBigList = [];
     console.log("load parties data");
     this.adminTicketService.viewPartiesOfThatMovie(
       this.adminUsername, this.selectedMovie.cinema_name,
@@ -99,16 +101,13 @@ export class MakeReservationComponent implements OnInit {
   }
 
   takeOnlyDatesInPartiesDateList() {
-    console.log(this.partiesBigList.length);
+    this.partiesDatesList = [];
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
       let party = this.partiesBigList[partyNum];
-      console.log(party.date);
-
       if(party.date && !this.partiesDatesList.includes(party.date))
         this.partiesDatesList.push(party.date);
     }
-    console.log("dates");
-    console.log(this.partiesDatesList);
+    this.partiesDatesList.sort();
     this.selectedPartyDate = this.partiesDatesList[0];
     console.log("takeOnlyDates done");
     this.loadPartiesTimes();
@@ -121,7 +120,7 @@ export class MakeReservationComponent implements OnInit {
   }
 
   loadPartiesTimes() {
-
+    this.partiesTimesList = [];
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
       let party = this.partiesBigList[partyNum];
       if(this.selectedPartyDate = party.date)
@@ -160,7 +159,7 @@ export class MakeReservationComponent implements OnInit {
     this.adminTicketService.makeReservationByAdmin(
       this.reserveData.cinema_name, this.reserveData.cinema_location, this.reserveData.date,
       this.reserveData.time, this.reserveData.hall, this.reserveData.tickets,
-      this.reserveData.price, this.reserveData.movie_id
+      this.reserveData.price, this.reserveData.movie
     ).subscribe((response) => {
       //event.confirm.resolve(response);
       console.log(response);

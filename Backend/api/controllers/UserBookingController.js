@@ -153,6 +153,7 @@ module.exports.makeReservation = function(req, res, next){
             data: null
         });
     }
+
     console.log('passed user check');
     if(!cinema_name || !cinema_location) {
         return res.status(422).json({
@@ -171,6 +172,7 @@ module.exports.makeReservation = function(req, res, next){
     }
 
     console.log('passed party check');
+
     if(!hall || !movie) {
         return res.status(422).json({
             err: null,
@@ -209,7 +211,7 @@ module.exports.makeReservation = function(req, res, next){
                 console.log('error selecting from halls the movie');
                 return next(error);
             }
-            console.log(results);
+            //console.log(results);
             if(!results || !results.length) {
                 return res.status(404).send({
                     err: null,
@@ -233,7 +235,7 @@ module.exports.makeReservation = function(req, res, next){
                     return next(error);
                 }
 
-                return res.status(200).json({
+                res.status(200).json({
                     err: null,
                     msg: 'Booking Request has been completed successfully.',
                     data: results

@@ -1,31 +1,31 @@
 var mysql = require('mysql');
 var config = require('./config');
 
-var connection;
- 
-function handleDisconnect() {
-  connection = mysql.createConnection(config.database);
-  connection.connect(function(err) {              // The server is either down
-    if(err) {                                     // or restarting (takes a while sometimes).
-      console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-    }                                     // to avoid a hot loop, and to allow our node script to
-  });                                     // process asynchronous requests in the meantime.
-                                          // If you're also serving http, display a 503 error.
-  connection.on('error', function(err) {
-    console.log('db error');
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
-      console.log('gracefull shutdown and re-connect');
-      handleDisconnect();                         // lost due to either server restart, or a
-    } else {                                      // connnection idle timeout (the wait_timeout
-      throw err;                                  // server variable configures this)
-    }
-  });
+var connection = mysql.createPool(config.database);
+connection.getConnection(function() {
+  console.log('successfully connected to the database');
+});
 
-  console.log('successfully connected to the database on port: ' + connection.config.port + ' on thread ' + connection.threadId);
+function handleDisconnect(conn) {
+  conn.on('error', function(err) {
+    if (!err.fatal) {
+      return;
+    }
+
+    if (err.code !== 'PROTOCOL_CONNECTION_LOST') {
+      console.log(err.code);
+      throw err;
+    }
+
+    console.log('Re-connecting lost connection: ' + err.stack);
+    connection.getConnection(function() {
+      console.log('successfully connected to the database');
+    });
+    handleDisconnect(connection);
+  });
 }
 
-handleDisconnect();
+handleDisconnect(connection);
 
 //exporting database connection to the project
 module.exports = connection;

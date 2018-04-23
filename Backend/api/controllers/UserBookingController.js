@@ -262,7 +262,7 @@ module.exports.getCurrentMovies = function(req, res, next){
 
     var currentDate = new Date();
 
-    var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date <= ?';
+    var sqlSelectionFromMovies = 'SELECT * FROM movies WHERE release_date <= ?';
 
     database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
         if(error){
@@ -296,7 +296,7 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
     var currentDate = new Date();
 
-    var sqlSelectionFromMovies = 'SELECT * FROM Movies WHERE release_date > ?';
+    var sqlSelectionFromMovies = 'SELECT * FROM movies WHERE release_date > ?';
 
     database.query(sqlSelectionFromMovies,[currentDate], function (error, results) {
         if(error){

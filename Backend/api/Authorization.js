@@ -6,7 +6,7 @@ var database = require('./config/db-connection');
 //user authorization
 module.exports.Verify_User = function (req, res, next) {
 
-    console.log(req.headers['authorization']);
+    //console.log(req.headers['authorization']);
     var tokenHeader = req.headers['authorization'];
     if (typeof tokenHeader !== 'undefined') {
         var tokenheadersplited = tokenHeader.split(' ');

@@ -5,7 +5,6 @@
 
 var express = require('express');
 var router = express.Router();
-
 //Schema Controllers
 var User = require('./controllers/UserController');
 var Seat = require('./controllers/SeatController');
@@ -124,33 +123,34 @@ router.get('/getTopMovies',Search.getTopMovies);
 //--------------------------------------Admin login------------------------------------------------------//
 router.post('/adminlogin', AuthenticationAdmin.login);
 
+//router.post('/admin/login', Admin.authenticate);
+
 //------------------------------ MyAdmins routes --------------------------------//
 router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
-//router.post('/admin/login', Admin.authenticate);
-router.post('/addBookingUsher', Admin.deleteBookingUsher);
+router.post('/addBookingUsher',  Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
-router.get('/viewBookingUshers', Admin.viewBookingUshers);
-router.get('/getBookingUshers', Admin.getBookingUshers);
-router.post('/getBookingUsher', Admin.getBookingUsher);
-router.post('/editBookingUsher', Admin.editBookingUsher);
-router.post('/deleteBookingUsher', Admin.deleteBookingUsher);
+router.get('/viewBookingUshers', Authorization.Verify('0101'), Admin.viewBookingUshers);
+router.get('/getBookingUshers', Authorization.Verify('0101'), Admin.getBookingUshers);
+router.post('/getBookingUsher', Authorization.Verify('0101'), Admin.getBookingUsher);
+router.post('/editBookingUsher', Authorization.Verify('1101'), Admin.editBookingUsher);
+router.post('/deleteBookingUsher', Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
-router.get('/viewBranchManagers', Admin.viewBranchManagers);
-router.get('/getBranchManagers', Admin.getBranchManagers);
-router.post('/getBranchManager', Admin.getBranchManager);
-router.post('/editBranchManager', Admin.editBranchManager);
-router.post('/deleteBranchManager', Admin.deleteBranchManager);
+router.get('/viewBranchManagers', Authorization.Verify('1100'), Admin.viewBranchManagers);
+router.get('/getBranchManagers', Authorization.Verify('1100'), Admin.getBranchManagers);
+router.post('/getBranchManager', Authorization.Verify('1100'), Admin.getBranchManager);
+router.post('/editBranchManager', Authorization.Verify('1100'), Admin.editBranchManager);
+router.post('/deleteBranchManager', Authorization.Verify('1100'), Admin.deleteBranchManager);
 
-router.get('/viewCinemaOwners', Admin.viewCinemaOwners);
-router.get('/getCinemaOwners', Admin.getCinemaOwners);
-router.post('/getCinemaOwner', Admin.getCinemaOwner);
-router.post('/editCinemaOwner', Admin.editCinemaOwner);
-router.post('/deleteCinemaOwner', Admin.deleteCinemaOwner);
+router.get('/viewCinemaOwners', Authorization.Verify('1000'), Admin.viewCinemaOwners);
+router.get('/getCinemaOwners', Authorization.Verify('1000'), Admin.getCinemaOwners);
+router.post('/getCinemaOwner', Authorization.Verify('1000'), Admin.getCinemaOwner);
+router.post('/editCinemaOwner', Authorization.Verify('1000'), Admin.editCinemaOwner);
+router.post('/deleteCinemaOwner', Authorization.Verify('1000'), Admin.deleteCinemaOwner);
 
-router.post('/getAdmin', Admin.getAdmin);
-router.get('/viewAdmins', Admin.getAdmins);
-router.get('/getAdmins', Admin.viewAdmins);
+router.post('/getAdmin', Authorization.Verify('0101'), Admin.getAdmin);
+router.get('/viewAdmins', Authorization.Verify('1000'), Admin.getAdmins);
+router.get('/getAdmins', Authorization.Verify('1000'), Admin.viewAdmins);
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.post('/tickets/verifyUnpaidTicket', adminTicket.verifyUnpaidTicket);

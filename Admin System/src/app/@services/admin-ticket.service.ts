@@ -16,7 +16,7 @@ export class AdminTicketService extends HttpService {
 
     let cinema_username = 'Mai_Emad'; // TODO cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
 
-    return this.post("/tickets/makeReservationAsAdmin", {
+    return this.post_auth("tickets/makeReservationAsAdmin", {
       'username': cinema_username,
       'cinema_name': cinema_name,
       'cinema_location': cinema_location,
@@ -32,7 +32,7 @@ export class AdminTicketService extends HttpService {
   }
 
   viewTicketInfo(adminUsername:String, reservation_id:String) {
-    return this.get('/tickets/viewTicketInfo',{ headers: {
+    return this.get_auth('tickets/viewTicketInfo',{ headers: {
         'username': adminUsername,
         'reservation_id': reservation_id
     }
@@ -40,14 +40,14 @@ export class AdminTicketService extends HttpService {
   }
 
   verifyUnpaidTicket(adminUsername:String, reservation_id:String) {
-    return this.patch('/tickets/verifyUnpaidTicket',{
+    return this.patch_auth('tickets/verifyUnpaidTicket',{
       'username': adminUsername,
       'reservation_id': reservation_id
     });
   }
 
   viewPartiesOfThatMovie(admin_username: String, cinema_name:String, cinema_location:String, movie_id: Number) {
-    return this.get('/tickets/viewPartiesForThatMovie', { headers: {
+    return this.get_auth('tickets/viewPartiesForThatMovie', { headers: {
         'username' : admin_username,
         'cinema_name' : cinema_name,
         'cinema_location' : cinema_location,

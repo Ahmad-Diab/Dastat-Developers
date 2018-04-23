@@ -40,12 +40,14 @@ module.exports.login = function(req, res, next) {
             var token = jwt.sign(user, config.secret, {
               expiresIn: '10d'
             });
+            console.log(token.username);
             res.status(200).json({
               err: null,
               msg: "Logged in successfully",
               token: 'JWT' + token,
               data: token,
-              success: true
+              success: true,
+              username: user.username
             });
           }
       

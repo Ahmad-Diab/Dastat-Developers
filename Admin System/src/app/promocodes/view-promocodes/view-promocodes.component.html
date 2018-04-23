@@ -1,0 +1,213 @@
+
+<!--  Start of Promocodes Actions card  -->
+<div class="card">
+  
+  <div class="card-header">
+    <div>
+      <button type="button" class="btn btn-success mr-1 mb-1" (click) = "promocodeActions = !promocodeActions" *ngIf = "!promocodeActions">Show Actions</button>
+      <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "promocodeActions = !promocodeActions" *ngIf = "promocodeActions">Hide Actions</button>
+    </div>
+  </div>
+
+  <div class="card-body" *ngIf = "promocodeActions">
+
+  <!-- Start Of Assign Promocode -->
+    <div class="card">
+      <div class="card-header">
+        Assign promocode to cinema
+      </div>
+      <div class="card-body">
+        <strong style="margin-top: 1px">Choose a promocode</strong>
+        <select class="form-control" #Input1>
+            <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
+        </select><br/>
+        <strong style="margin-top: 1px">Choose a cinema</strong>
+        <select class="form-control" #Input2>
+          <option *ngFor = "let cinema of cinemasToShow" value="{{cinema.name}},{{cinema.location}}"   >{{ cinema.name }} , {{ cinema.location }}</option>
+        </select><br/>
+        <button (click)="assignPromocodeToCinema(Input1.value,Input2.value)" type="button" class="btn btn-success mr-1 mb-1">Assign</button>
+        <br/>
+      </div>
+      {{ assignResponseStatus }}
+
+    </div>
+    <!-- End Of Assign Promocode -->
+
+    <!--  Start Of Adding A Promocode -->
+    <div class="card">
+      <div class="card-header">
+        Add new promocode
+      </div>
+      <div class="card-body">
+      
+        <strong style="margin-top: 1px">Promocode</strong>          
+        <input #promocode  id="input1" type="text" class="form-control mb-3">
+
+        <strong style="margin-top: 1px">Type</strong>    
+        <input #type id="input1" type="text" class="form-control mb-3"> 
+      
+        <strong style="margin-top: 1px">Value</strong>    
+        <input #value id="input1" type="text" class="form-control mb-3"> 
+      
+        <button (click)="addPromocode(promocode.value,type.value,value.value)" type="button" class="btn btn-success mr-1 mb-1">Add</button>
+      </div>
+      {{ addResponseStatus }}
+    </div>
+  <!--  End Of Adding A Promocode -->
+
+  <!--  Start Of Editing A Promocode -->
+    <div class="card">
+      <div class="card-header">
+        Edit promocode
+      </div>
+      <div class="card-body">
+      
+        <strong style="margin-top: 1px">Choose a promocode</strong>          
+        <select #select class="form-control" (change) = "getPromocodeAttributes($event.target.value)">
+          <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
+        </select><br/>
+
+        <strong style="margin-top: 1px">Type</strong>    
+        <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeTypeEdited"> 
+      
+        <strong style="margin-top: 1px">Value</strong>    
+        <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeValueEdited"> 
+      
+        <button type="button" class="btn btn-info mr-1 mb-1"  (click)="editPromocode(select.value)" >Edit</button>
+      </div>
+      {{editResponseStatus}}
+    </div>
+    <!--  End Of Editing A Promocode -->
+  </div>
+</div>
+<!--  End of Promocodes Actions card  -->
+
+<!--  Start of View Promocodes card -->
+<div class="card">
+  
+  <div class="card-header">
+    <div>
+      <button type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
+      <button type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
+      <button type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
+      <button type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
+    </div>
+  </div>
+
+  <div class="col-2"  style = "text-align:right" >
+    <input #promocodeFilter type="text" class="form-control" placeholder="filter by promocode" (keyup) = "filterPromocode(promocodeFilter.value)">
+  </div>
+  <div id="filterRight" class="col-2">
+    <input #cinemaFilter type="text" class="form-control" placeholder="filter by cinema" *ngIf = "assignedPromocodeView" (keyup) = "filterCinema(cinemaFilter.value)">
+  </div>
+  
+  <div class="card-body" *ngIf = "assignedPromocodeView">
+
+    <div class="table-responsive">
+      <table class="table mb-0">
+
+        <!--  Table Header -->
+        <thead>
+          <tr>
+            <th>
+              Promocode
+            </th>
+            <th>
+              Type
+            </th>
+            <th>
+              Value
+            </th>
+            <th>
+              Cinema name
+            </th>
+            <th>
+              Location
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <!--  Table Body  -->
+        <tbody>
+          <tr *ngFor = "let promocode of promocodesWithCinema">
+            <td>
+              {{ promocode.promocode }}
+            </td>
+            <td>
+              {{ promocode.type }}
+            </td>
+            <td>
+              {{ promocode.value }}
+            </td>
+            <td>
+              {{ promocode.cinema_name }}
+            </td>
+            <td>
+              {{ promocode.cinema_location }}
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="delete(promocode)">
+                <div class="icon icon-basic-trashcan"></div>
+              </button>
+            </td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card-body" *ngIf = "!assignedPromocodeView">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        
+        <!--  Table Header -->
+        <thead>
+          <tr>
+            <th>
+              Promocode
+            </th>
+            <th>
+              Type
+            </th>
+            <th>
+              Value
+            </th>
+            <th>
+              Actions
+            </th>
+            </tr>
+        </thead>
+      
+        <!--  Table Body  -->
+        <tbody>
+          <tr *ngFor = "let promocode of promocodes">
+            <td>
+              {{ promocode.promocode }}
+            </td>
+            <td>
+              {{ promocode.type }}
+            </td>
+            <td>
+              {{ promocode.value }}
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="delete(promocode)">
+                <div class="icon icon-basic-trashcan"></div>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf = "assignedPromocodeView">
+    {{ existPromocodesAssigned }}
+  </div>
+  <div *ngIf = "!assignedPromocodeView">
+    {{ existPromocodes }}
+  </div>
+</div>
+<!--  End of View Promocodes card -->

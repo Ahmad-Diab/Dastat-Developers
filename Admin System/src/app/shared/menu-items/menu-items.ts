@@ -21,7 +21,7 @@ export interface Menu {
 }
 
 const MENUITEMS =
-  [{
+ /** [{
     state: '/',
     name: 'HOME',
     type: 'link',
@@ -450,6 +450,8 @@ const MENUITEMS =
     icon: 'basic-sheet-txt'
   }
 ];
+**/
+[]
 
 if (1) {
   MENUITEMS.push({
@@ -459,7 +461,38 @@ if (1) {
     icon: 'ecommerce-gift'
   });
 }
-
+if (1) {
+  MENUITEMS.push({
+    state: 'My Halls',
+    name: 'My Halls',
+    type: 'link',
+    icon: 'basic-world'
+  });
+}
+if (1) {
+  MENUITEMS.push({
+    state: 'mycinemas',
+    name: 'My Cinemas',
+    type: 'link',
+    icon: 'basic-video'
+  });
+}
+if (1) {
+  MENUITEMS.push({
+    state: 'My Movies',
+    name: 'My Movies',
+    type: 'link',
+    icon: 'music-fastforward-button'
+  });
+}
+if (1) {
+  MENUITEMS.push({
+    state: 'My Admins',
+    name: 'My Admins',
+    type: 'link',
+    icon: 'software-pen'
+  });
+}
 @Injectable()
 export class MenuItems {
   getAll(): Menu[] {

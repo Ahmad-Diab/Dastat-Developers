@@ -218,6 +218,8 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 
 
 //exporting routes to the project
+router.get('/getmycinemas/:username',editCinema.getmycinemas);
+
 module.exports = router;
 
 

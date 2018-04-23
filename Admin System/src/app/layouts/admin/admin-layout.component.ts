@@ -60,7 +60,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
     
@@ -129,4 +129,10 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
   }
+  getmycinemas(){
+    this.authService.getmycinemas(this.username).subscribe((response) => {  
+      console.log(response);
+  });
+}
+  
 }

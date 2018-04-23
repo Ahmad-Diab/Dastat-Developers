@@ -30,6 +30,7 @@ import { AdminBookingModule} from "./admin-booking/admin-booking.module";
 import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promocodes.component';
 import { PromocodesService } from './@services/promocodes.service';
 
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

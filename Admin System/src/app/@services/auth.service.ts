@@ -14,4 +14,8 @@ export class AuthService extends HttpService{
    login(data) { 
       return this.post('adminlogin', data);
    }
+   getmycinemas(username){
+     console.log("sdsds");
+     return this.get('getmycinemas/'+username);
+   }
 }

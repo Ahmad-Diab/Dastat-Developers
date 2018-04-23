@@ -108,6 +108,7 @@ router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Seating routes--------------------------------------------//
 router.get('/layout/encoding', Seat.getSeats);
+router.get('/layout/minified', Seat.minifiedLayout);
 router.get('/layout/all', Seat.getAllLayouts);
 router.post('/layout/add', Seat.addLayout);
 router.post('/layout/update', Seat.updateLayout);
@@ -200,7 +201,8 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
 //-------HALLS CRUD OPERATIONS ROUTES---------//
-router.get("/halls", Halls.getHalls);
+router.get("/halls/all", Halls.getAllHalls);
+router.get("/halls/vies", Halls.getHall);
 router.post("/halls/add", Halls.addHall);
 router.post("/halls/update", Halls.updateHall);
 router.post("/halls/deleteHall", Halls.deleteHall);

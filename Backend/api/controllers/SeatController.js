@@ -15,9 +15,18 @@ module.exports.getSeats = function (req, res, next) {
 }
 
 //TODO:: CRUD Operations for layout table.
+
 module.exports.getLayout = function(req,res,next)
 {
   database.query('SELECT * FROM layout where id = ?',req.params.id,function(error, layout, fields){
+    if(error) return next(error);
+    res.send(layout);
+  })
+}
+
+module.exports.minifiedLayout = function(req,res,next)
+{
+  database.query('SELECT id, name FROM layout',function(error, layout, fields){
     if(error) return next(error);
     res.send(layout);
   })

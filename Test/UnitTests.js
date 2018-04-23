@@ -17,7 +17,7 @@ chai.use(chaiHttp);
 
 
 //Amir Zaghloul
-describe('Seats', function() { //This should contain all realted Tests
+describe('Layouts', function() { //This should contain all Tests for Layouts
     
     
     it('should All layouts on /layout/all GET',function(done){
@@ -102,7 +102,7 @@ describe('Seats', function() { //This should contain all realted Tests
           done();
         });
     });
-    
+
     it('should delete an existing layout on /layout/delete POST',function(done){ //Just a Custom message to know describe what is the expected output
         chai.request("localhost:8000").post("/api/layout/delete").send({
            id:5
@@ -115,7 +115,9 @@ describe('Seats', function() { //This should contain all realted Tests
     });
 });
 
-
+describe('Layouts', function() {
+    
+});
 
 
 

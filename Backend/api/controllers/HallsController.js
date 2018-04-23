@@ -1,11 +1,28 @@
 var database = require('../config/db-connection');
 
-module.exports.getHalls = function(req, res, next){
+
+
+module.exports.getAllHalls = function(req, res, next){
     database.query("SELECT h.*,l.name as layout_name FROM `halls` h inner join `layout` l on h.layout = l.id ", function(error, hall, field){
         if(error) return next(error);
         return res.send(hall);
     });
 }
+
+module.exports.getHall = function(req, res, next){
+  database.query("SELECT h.*,l.name as layout_name FROM `halls` h inner join `layout` l on h.layout = l.id where h.cinema_location = ? AND h.cinema_name = ? AND h.hall_number = ?", [req.body.cinema_location, req.body.cinema_location, req.body.hall_number],function(error, hall, field){
+      if(error) return next(error);
+      return res.send(hall);
+  });
+}
+
+module.exports.getHalls = function(req, res, next){
+  database.query("SELECT h.*,l.name as layout_name FROM `halls` h inner join `layout` l on h.layout = l.id ", function(error, hall, field){
+      if(error) return next(error);
+      return res.send(hall);
+  });
+}
+
 
 module.exports.addHall = function(req, res, next){
     var hall = {

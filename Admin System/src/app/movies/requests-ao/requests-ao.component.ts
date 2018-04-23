@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../../@services/movies.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { Auth } from '../../@guards/auth.guard';
 @Component({
   selector: 'app-requests-ao',
   templateUrl: './requests-ao.component.html',
@@ -14,6 +15,7 @@ export class RequestsAoComponent implements OnInit {
   admin_req;
   responeStatus='';
   moviesAction= false
+  username:string
 
   constructor(public movieServices: MoviesService,private router:Router,public cookie:CookieService, private route: ActivatedRoute) { }
 
@@ -22,6 +24,8 @@ export class RequestsAoComponent implements OnInit {
     this.movieServices.viewALlRequests().subscribe((response)=>{
       this.movies = response;
       console.log(response);
+      var auth = <Auth>(this.cookie.getObject('auth'));
+      this.username = auth.username;
     });
   }
 

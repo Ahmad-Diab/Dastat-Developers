@@ -21,6 +21,9 @@ var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
 var Admin = require('./controllers/MyAdminsController');
+var AddCinema = require('./controllers/MyCinemas');
+var editCinema = require('./controllers/MyCinemas');
+
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
 
@@ -147,7 +150,7 @@ router.post('/addMovies',Authorization.Verify("1000"),MyMovies.addMovies);
 //-----------AS AN ADMIN I CAN VIEW ALL REQUESTS------------
 router.get('/requests/AllSHOW',Authorization.Verify("1000"),MyMovies.viewRequests);
 //-----------AS AN ADMIN I CAN VIEW MY REQUESTS------------
-router.get('/requests/:admin_requested',Authorization.Verify("1111"),MyMovies.viewMyRequests);
+router.get('/requests/:admin_requested',Authorization.Verify("0101"),MyMovies.viewMyRequests);
 
 //--------AS AN ADMIN I CAN VIEW ALL MOVIES------------------
 router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
@@ -194,3 +197,37 @@ module.exports = router;
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////// ADMIN ROUTES ////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
+//As an Admin i can add cinema 
+
+router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
+router.get('/adminviewCinemas',Cinema.ViewCinemas);
+router.post('/addCinema', AddCinema.addCinema);
+router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, editCinema.editCinema); 
+
+// ------------- As an Admin I can Delete a Cinema ----------------
+router.get('/mycinemas/delete/:cinema/:owner',editCinema.deleteCinemaForAdmin);
+
+
+
+
+
+
+

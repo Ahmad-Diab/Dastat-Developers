@@ -15,25 +15,26 @@ export class RequestsCoBmComponent implements OnInit {
   admin_req;
   responeStatus='';
   moviesAction= false
+   username: string;
   
 
   constructor(public movieServices: MoviesService,private router:Router,public cookie:CookieService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-  }
-  viewReq(auth){
-    let cookie: CookieService = new CookieService;
-    auth = <Auth>(cookie.getObject('auth'));
-    console.log(auth);
-    this.movieServices.viewRequests(auth.username).subscribe((response)=>{
-      this.movies=response;
-      console.log(response.data[0]);
-     
+    var auth = <Auth>(this.cookie.getObject('auth'));
+    this.username = auth.username;
     
-  });
-  }
+    console.log(this.username);
+    this.movieServices.viewRequests(this.username).subscribe((response)=>{
+       this.movies=response;
+      console.log(this.username);
+      //console.log(response.data[0]);
+    });
+    
 
+
+  }
   deleteReq(movie_id: number){
     this.movieServices.deleteRequest(movie_id).subscribe((response)=>{
         this.responeStatus="Successfully deleted";
@@ -41,19 +42,20 @@ export class RequestsCoBmComponent implements OnInit {
 }
 
 getMovieInfo(movie){
-  this.router.navigate(['movies/info-edit/',movie.movie_id]);
+  this.router.navigate(['movies/edit-req/',movie.movie_id]);
 }
 
 toogleMovie(){
   this.moviesAction = !this.moviesAction;
 }
+
 // ADD A REQUEST
 
 
 addReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string){
+  year: number, feature: number, release_date:Date,rating: number,status: string,username: string){
 
-     this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested).subscribe((response)=>{
+     this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username).subscribe((response)=>{
        this.responeStatus="Added";
        this.ngOnInit();
      });  

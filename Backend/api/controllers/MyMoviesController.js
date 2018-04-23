@@ -13,11 +13,6 @@ module.exports.addRequests = function(req,res,next){
     
     var
         title = req.body['title'];
-        var tokenHeader = req.headers['authorization'];
-        var tokenheadersplited = tokenHeader.split(' ');
-        var token = tokenheadersplited[1];
-        var admin_requested = token.username;
-       
         duration = req.body['duration'],
         genre = req.body['genre'],
         description = req.body['description'],
@@ -32,7 +27,7 @@ module.exports.addRequests = function(req,res,next){
 
         var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
 
-        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested],
+        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.admin_requested],
         function (error, results) {
             if (error) {
                 return next(error);
@@ -86,13 +81,8 @@ module.exports.addMovies = function(req,res,next){
 ///VIEW ALL OF MY REQUESTS
 module.exports.viewMyRequests =function(req,res,next){
 
-    var tokenHeader = req.headers['authorization'];
-    var tokenheadersplited = tokenHeader.split(' ');
-    var token = tokenheadersplited[1];
-    var admin_requested = token.username;
-   
     
-    database.query('Select * FROM movies where status = "PENDING" and movies.admin_requested = ?', [admin_requested],
+database.query('Select * FROM movies where status = "PENDING" and movies.admin_requested = ?', [req.params.admin_requested],
 function(error,results,fields){
     if(error) return next(error);
     if(results.length == 0){

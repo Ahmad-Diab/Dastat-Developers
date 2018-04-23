@@ -5,15 +5,15 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Auth } from '../../@guards/auth.guard';
 
 @Component({
-  selector: 'app-info-edit',
-  templateUrl: './info-edit.component.html',
-  styleUrls: ['./info-edit.component.scss']
+  selector: 'app-edit-req',
+  templateUrl: './edit-req.component.html',
+  styleUrls: ['./edit-req.component.scss']
 })
-export class InfoEditComponent implements OnInit {
+export class EditReqComponent implements OnInit {
   movie;
   movieEdit= false
   username: string;
-  
+  statusPend :'PENDING'
   constructor(public MoviesService: MoviesService,private route : ActivatedRoute, 
     public cookie : CookieService ) { }
 
@@ -27,15 +27,17 @@ export class InfoEditComponent implements OnInit {
     this.username = auth.username;
     });
   }
+
   toogleEdit(){
     this.movieEdit = !this.movieEdit;
   }
 
-  //---------EDIT A MOVIE----------------
-editMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
+
+    //---------EDIT A REQUESR----------------
+editReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
   year: number, feature: number, release_date:Date,rating: number,status: string,username: string,movie_id: string){ 
 
-      this.MoviesService.editMovie(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username,movie_id).subscribe((response)=>{
+      this.MoviesService.editRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username,movie_id).subscribe((response)=>{
           this.ngOnInit();
         });  
   }
@@ -44,4 +46,8 @@ editMovie(title: string, duration: number, genre: string, description: string,im
     this.cookie.putObject('movie' , this.movie);
   } 
 
-}
+
+
+
+  }
+

@@ -9,6 +9,7 @@ import { RequestsAoComponent } from './requests-ao/requests-ao.component';
 import { ViewMoviesComponent } from './view-movies/view-movies.component';
 import { InfoEditComponent } from './info-edit/info-edit.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditReqComponent } from './edit-req/edit-req.component';
 
 
 
@@ -19,6 +20,6 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
      FormsModule,
      NgbTooltipModule
   ],
-  declarations: [RequestsCoBmComponent, RequestsAoComponent, ViewMoviesComponent, InfoEditComponent]
+  declarations: [RequestsCoBmComponent, RequestsAoComponent, ViewMoviesComponent, InfoEditComponent, EditReqComponent]
 })
 export class MoviesModule { }

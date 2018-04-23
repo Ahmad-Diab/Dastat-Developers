@@ -5,7 +5,7 @@ var database = require('../config/db-connection');
 
 module.exports.viewMyInfo = function(req, res, next){
   var username = req.query.username;
-  var query = "SELECT * FROM Users WHERE username = ?";
+  var query = "SELECT * FROM users WHERE username = ?";
   database.query(query,[username],function (error,results, fields) {
     if(error) return next(error);
     console.log(results);
@@ -31,7 +31,7 @@ module.exports.editProfile = function(req, res, next){
      var phone_number = req.body.phone_number;
      var age = req.body.age;
 
-     database.query('UPDATE Users SET email = ?, first_name = ?, last_name = ?, phone_number = ?, age = ? where username = ?' ,[email,first_name,last_name,phone_number,age,username], function(err, results, fields) {
+     database.query('UPDATE users SET email = ?, first_name = ?, last_name = ?, phone_number = ?, age = ? where username = ?' ,[email,first_name,last_name,phone_number,age,username], function(err, results, fields) {
        if(err) return next(err);
        return res.send(results);
          });

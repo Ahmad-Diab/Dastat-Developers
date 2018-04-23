@@ -1,0 +1,77 @@
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+<div class="form-group card">
+  <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Halls
+    <button type="button" (click)="addCompany()" class="btn btn-success mr-1 ml-auto">Add Hall</button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>
+              Cinema Name
+            </th>
+            <th>
+              Cinema Location
+            </th>
+            <th>
+              Hall Number
+            </th>
+            <th>
+              Type
+            </th>
+            <th>
+              Layout
+            </th>
+            <th>
+              Movie
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let hall of halls |filter:term">
+            <td>
+              {{hall.cinema_name}}
+            </td>
+            <td>
+              {{hall.cinema_location}}
+            </td>
+            <td>
+             {{hall.hall_number}}
+            </td>
+            <td>
+              <b>{{hall.type}}</b>
+            </td>
+            <td>
+              {{hall.layout}}
+            </td>
+            <td>
+              {{hall.movie}}
+            </td>
+            <td>
+              <div id="actions">
+                <a (click)="editHall(hall)">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a (click)="deleteHall(hall)">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

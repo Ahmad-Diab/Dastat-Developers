@@ -10730,17 +10730,19 @@ background: white;
 
 } 
 .mat-form-field{
-  color: #ffffff   !important;
-  text-decoration-color: ivory !important;
-  position: relative   !important;
   text-align: center   !important;
   width:130px !important;
+}
+.mf1{
+  color: #ffffff   !important;
+  
 }
 .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
   color: #b4b1b2;
 }
 .mat-option {
   color: #b4b1b2;
+  text-align: center   !important;
   font-family: 'Roboto', sans-serif;
 }
 .mat-form-field-underline {
@@ -10788,4 +10790,77 @@ background: white;
 .mat-checkbox-inner-container {
   height: 17px !important;
   width: 17px !important;
+}
+.mat-button-toggle-checked {
+  
+   
+    background-image: url(../images/components/bg-time-hover1.png) !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: 64px 34px;
+    background-size: 64px 34px;
+    
+  
+}
+.mat-button-toggle-group, .mat-button-toggle-standalone {
+  box-shadow: none !important;
+  margin: -10px !important;
+  
+}
+
+.mat-button-toggle {
+  color: rgb(0, 0, 0);
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  font-size: 12px;
+  background-image: url(../images/components/bg-time1.png) ;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: 64px 34px;
+  background-size: 64px 34px;
+  margin: 5px 16px 3px 0;
+  cursor: zoom-in !important;
+  
+}
+.mat-button-toggle:hover {
+  background-image: url(../images/components/bg-time-hover1.png) !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 64px 34px;
+  background-size: 64px 34px;
+}
+.mat-button-toggle-label-content {
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  line-height: 36px;
+  padding: 0px 9px !important;
+  cursor: pointer;
+
+  border: 1px solid #ffffff;
+
+}
+input[type=text], select {
+  width: 50%;
+  padding: 7.9px 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

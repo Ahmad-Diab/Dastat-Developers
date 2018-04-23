@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { HallsComponent } from './halls/halls.component';
 
 export const HallRoutes: Routes = [
     {
@@ -10,6 +11,12 @@ export const HallRoutes: Routes = [
             data: {
                 heading: 'Layout'
             }
+        },{
+            path: 'all',
+            component: HallsComponent,
+            data: {
+                heading: 'Halls'
+            }
         }]
-    }
+    } ,
 ];

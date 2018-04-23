@@ -14,6 +14,7 @@ export class SeatingComponent implements OnInit {
   layout: any;
   seats: any;
   selected = [];
+  total_money = 0;
 
   constructor(public cookie: CookieService,
     public seatingservice: SeatingService) { }
@@ -47,7 +48,7 @@ export class SeatingComponent implements OnInit {
         return true;
     return false;
   }
-
+  
   select(seat: string) {
     for (var i = 0; i < this.seats.length; i++)
       if (this.seats[i].seat_number.includes(seat))
@@ -57,9 +58,10 @@ export class SeatingComponent implements OnInit {
       var index = this.selected.indexOf(seat);
       this.selected.splice(index, 1);
     }
-    else
+    else{
       this.selected.push(seat);
-
+      this.total_money+=10;
+    }
     console.log(this.selected);
   }
 

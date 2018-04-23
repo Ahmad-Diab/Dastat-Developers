@@ -87,8 +87,9 @@ export class ViewPromocodesComponent implements OnInit {
     })
   }
 
-  editPromocode(promocodeValue: string){
+  editPromocode(promocodeValue: string, promocodeType){
     this.promocodeValueToEdit = promocodeValue;
+    this.promocodeTypeEdited = promocodeType;
     this.promocodesService.editPromocode(this.promocodeValueToEdit,this.promocodeTypeEdited,this.promocodeValueEdited).subscribe((response) =>{
       this.editResponseStatus= response.msg;
       this.ngOnInit();

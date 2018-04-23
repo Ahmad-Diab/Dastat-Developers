@@ -86,7 +86,7 @@ module.exports.authenticate = function(req, res, next) {
 //------------------------- View all admins -------------------------------
 
 module.exports.getAdmins = function(req, res, next){
-    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username";
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
     database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);
@@ -172,7 +172,7 @@ module.exports.getAdmin = function(req, res, next){
 //------------------------- View all Booking ushers -------------------------------
 
 module.exports.viewBookingUshers = function(req, res, next){
-    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
     database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);
@@ -332,7 +332,7 @@ module.exports.deleteBookingUsher = function(req, res, next){
 //------------------------- View all Branch managers -------------------------------
 
 module.exports.viewBranchManagers = function(req, res, next){
-    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
     database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);
@@ -466,7 +466,7 @@ module.exports.deleteBranchManager = function(req, res, next){
 
 
 module.exports.viewCinemaOwners = function(req, res, next){
-    var query = "select DISTINCT cinemaName, username, email, type, salary, firstName, lastName, phoneNumber, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, lastName, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
     database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);

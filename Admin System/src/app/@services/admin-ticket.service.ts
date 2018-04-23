@@ -45,4 +45,11 @@ export class AdminTicketService extends HttpService {
       'reservation_id': reservation_id
     });
   }
+
+  cancelReservation(reservation_id: number) {
+    return this.delete('/tickets/cancelReservation', { headers: { //calls cancel reservation delete method to backend and gives it the tickets reservation id
+      'id': reservation_id
+    }
+    });
+  }
 }

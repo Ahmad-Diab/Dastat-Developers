@@ -39,4 +39,8 @@ export class HttpService {
   patch(route, data?) {
     return this.http.patch(environment.api + route, data).pipe(map(res => res.json()));
   }
+
+  delete(route, data?) {
+    return this.http.delete(environment.api + route, data).pipe(map(res => res.json()));
+  }
 }

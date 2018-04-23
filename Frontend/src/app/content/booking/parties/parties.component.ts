@@ -4,11 +4,20 @@ import { MovieslistService } from '../../../@services/movieslist.service';
 import {Router, ActivatedRoute} from '@angular/router'
 import { CookieService } from 'angular2-cookie/core';
 import { BookingService } from '../../../@services/booking.service';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import * as _moment from 'moment';
+
+
 
 @Component({
   selector: 'app-parties',
   templateUrl: './parties.component.html',
-  styleUrls: ['./parties.component.css']
+  styleUrls: ['./parties.component.css'],
+  providers: [
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 
 export class PartiesComponent implements OnInit {
@@ -17,8 +26,12 @@ export class PartiesComponent implements OnInit {
   cinemas=[];
   selectedCinema;
   selectedMovie;
-  selectedParty;
+  selectedParty ;
   date;
+  flagD;
+  flagC;
+  flagM;
+  dateTemp;
 
   constructor(public partiesService:PartiesService,
     public router : Router,
@@ -75,23 +88,33 @@ export class PartiesComponent implements OnInit {
 
     let booking = {
       username: this.cookie.get('username'),
-      cinema_name: this.selectedCinema.cinema_name,
-      cinema_location: this.selectedCinema.cinema_location,
+      cinema_name: this.selectedCinema.name,
+      cinema_location: this.selectedCinema.location,
       hall_number: this.selectedParty.hall,
-      datetime: this.selectedParty.date,
+      date: this.date,
+      time: this.selectedParty.time,
       seats: null,
       eachPrice: this.selectedParty.price,
       movie: this.selectedMovie.movie_id
     };
+    
     this.cookie.putObject('booking', booking);
 
     // this.router.navigate(['/booking/seating']);
   }
 
   getPartiesAtThisDate(){
+    this.date = this.dateTemp._i.year+'-'+(this.dateTemp._i.month+1)+'-'+this.dateTemp._i.date;
+    if(this.flagD == this.date && this.flagM == this.selectedMovie && this.flagC == this.selectedCinema){
+      return;
+    }
+    console.log(this.date);
     this.partiesService.getParties(this.selectedCinema.location ,this.selectedCinema.name , this.selectedMovie.movie_id , this.date).subscribe((response) =>{
       this.parties = response.data;
       //console.log(response.data);
+      this.flagD = this.date;
+      this.flagM = this.selectedMovie ;
+      this.flagC = this.selectedCinema;
 
     });
   }

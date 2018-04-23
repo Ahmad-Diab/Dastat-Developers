@@ -15,10 +15,10 @@ export class MakeReservationComponent implements OnInit {
   //TODO set ticketIsLoaded to true after all information are gathered,
   //TODO so then it can give ability to make the reservation
 
-  moviesList = null; selectedMovie = null; selectedHall = null;
-  partiesBigList = null;
-  partiesDatesList = null; selectedPartyDate = null;
-  partiesTimesList = null; selectedPartyTime = null;
+  moviesList = []; selectedMovie = null; selectedHall = null;
+  partiesBigList = [];
+  partiesDatesList = []; selectedPartyDate = null;
+  partiesTimesList = []; selectedPartyTime = null;
 
   selectedTickets = []; //TODO set the array of tickets
   totalPrice = null; // TODO set this with tickets
@@ -66,9 +66,9 @@ export class MakeReservationComponent implements OnInit {
       type: 'VIP',
       layout: 1,
       number_of_seats : 50,
-      movie_id : 4,
-      title : 'Love, Simon',
-      imagePath : 'https://image.ibb.co/fVygc7/Love_Simon.jpg'
+      movie_id : 3,
+      title : 'Tomb Raider',
+      imagePath : 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg'
     }];
     this.selectedMovie = this.moviesList[0];
     this.selectedHall = this.moviesList[0].hall;
@@ -76,33 +76,41 @@ export class MakeReservationComponent implements OnInit {
   }
 
   selectMovie(movie) {
-    this.selectedMovie = movie.title;
+    console.log(movie);
+    this.selectedMovie = movie;
     this.loadParties();
   }
 
   loadParties() {
+    console.log("load parties data");
     this.adminTicketService.viewPartiesOfThatMovie(
       this.adminUsername, this.selectedMovie.cinema_name,
       this.selectedMovie.cinema_location, this.selectedMovie.movie_id
     ).subscribe((response) => {
-      this.partiesBigList = response.data[0];
-      console.log(response);
+      this.partiesBigList = response.data;
+
+      if(this.partiesBigList && this.partiesBigList.length) {
+        console.log('parties should be loaded');
+        this.takeOnlyDatesInPartiesDateList();
+      }
+      console.log('Parties Big List :' + this.partiesBigList);
     });
-    if(this.partiesBigList.size) {
-      console.log('parties should be loaded');
-      this.takeOnlyDatesInPartiesDateList();
-    }
-    console.log(this.partiesBigList.size);
+
   }
 
   takeOnlyDatesInPartiesDateList() {
     console.log(this.partiesBigList.length);
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
-      if(!this.partiesDatesList.contains(this.partiesBigList[partyNum].date))
-        this.partiesDatesList.push(this.partiesBigList[partyNum].date);
+      let party = this.partiesBigList[partyNum];
+      console.log(party.date);
+
+      if(party.date && !this.partiesDatesList.includes(party.date))
+        this.partiesDatesList.push(party.date);
     }
+    console.log("dates");
     console.log(this.partiesDatesList);
     this.selectedPartyDate = this.partiesDatesList[0];
+    console.log("takeOnlyDates done");
     this.loadPartiesTimes();
   }
 

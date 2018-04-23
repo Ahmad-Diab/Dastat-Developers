@@ -55,7 +55,7 @@
             Movie
             <button class="btn btn-outline-primary form-control" ngbDropdownToggle>
               <label>
-                {{(selectedMovie)? selectedMovie : "N/A"}}
+                {{(selectedMovie)? selectedMovie.title : "N/A"}}
               </label>
             </button>
             <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownBasic1">

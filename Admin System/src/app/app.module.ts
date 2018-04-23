@@ -22,6 +22,7 @@ import { HttpService } from './@services/http.service';
 import { AuthService } from './@services/auth.service';
 import { HttpModule } from '@angular/http';
 import {AdminTicketService} from "./@services/admin-ticket.service";
+import { MoviesInHallsService } from "./@services/movies-in-halls.service";
 import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -54,7 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
-  providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService],
+  providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

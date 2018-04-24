@@ -144,7 +144,7 @@ module.exports.makeReservation = function(req, res, next){
         numOfTickets = tickets.length,
         comment = req.body['comment'];
 
-    console.log(req.body);
+    //console.log(req.body);
     // Null Checkers
     if(!username) {
         return res.status(422).json({

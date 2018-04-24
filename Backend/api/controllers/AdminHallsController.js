@@ -271,7 +271,7 @@ module.exports.deleteMovieFromHall = function(req, res, next){
 */
     // Verify that hall exists in Cinema
     
-    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+    database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall_number, cinema_location, cinema_name],function (error, results) {
             if (error) {
                 return next(error);

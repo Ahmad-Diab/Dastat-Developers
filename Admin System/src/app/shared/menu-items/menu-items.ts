@@ -32,7 +32,7 @@ const MENUITEMS =
     state: 'adminBooking',
     name: 'Tickets',
     type: 'sub',
-    icon: 'basic-webpage-multiple',
+    icon: 'ecommerce-ticket',
     children: [
       {
         state: 'makeReservation',
@@ -69,7 +69,7 @@ export class MenuItems {
         state: 'movies',
         name: 'My Movies',
         type: 'sub',
-        icon: 'basic-webpage-multiple',
+        icon: 'basic-photo',
         children: [
           {
             state: 'requests-ao',
@@ -78,11 +78,30 @@ export class MenuItems {
           {
             state: 'view-movies',
             name: 'View Movies'
+          }    
+        ] 
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'cinemaowner',
+            name: 'Cinema owners'
+          },
+          {
+            state: 'branchmanager',
+            name: 'Branch managers'
+          },
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
           }
-     
-         
         ]
-      })
+      }
+    )
     }
 
      //Cinema Owner
@@ -93,13 +112,29 @@ export class MenuItems {
         state: 'movies',
         name: 'My Movies',
         type: 'sub',
-        icon: 'basic-webpage-multiple',
+        icon: 'basic-photo',
         children: [
           {
             state: 'requests-ao',
             name: 'Requests'
           }
          ]
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'branchmanager',
+            name: 'Branch managers'
+          },
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
+          }
+        ]
       })
     }
 
@@ -112,13 +147,25 @@ export class MenuItems {
         state: 'movies',
         name: 'My Movies',
         type: 'sub',
-        icon: 'basic-webpage-multiple',
+        icon: 'basic-photo',
         children: [
           {
             state: 'requests-ao',
             name: 'Requests'
           }
          ]
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
+          }
+        ]
       })
     }
 

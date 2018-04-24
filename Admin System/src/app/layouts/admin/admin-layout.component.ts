@@ -65,6 +65,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
+    this.menuItems.getAll();
+
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
 

@@ -15,6 +15,11 @@ var Search = require('./controllers/SearchController');
 var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var Cinema = require('./controllers/CinemasController');
+
+//----------- Admin ---------------
+var AdminHalls = require('./controllers/AdminHallsController');
+
+var MyMovies = require('./controllers/MyMoviesController');
 var MyMovies = require('./controllers/MyMoviesController');
 
 //----------- Admin ---------------
@@ -115,15 +120,6 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/getTopMovies',Search.getTopMovies);
 
-//-----------------------------------------------Admin ROUTES----------------------
-
-//-------------------------------------------Halls Routes-----------------------------
-
-router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
-router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
-router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
-
-
 /* 
 -----------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -173,6 +169,15 @@ router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminT
 router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
 router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
+
+//-------------------------------------------Halls Routes-----------------------------
+
+router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
+router.post('/admin/adminHalls/assignMovieToHall', Authorization.Verify('1101') ,AdminHalls.assignMovieToHall);
+router.post('/admin/adminHalls/deleteMovieFromHall', Authorization.Verify('1101') , AdminHalls.deleteMovieFromHall);
+router.get('/admin/adminHalls/viewMoviesInHalls/:username/:cinema_name/:cinema_location', AdminHalls.viewMoviesInHalls);
+router.get('/admin/adminHalls/viewCinemasForAdminUser/:username', AdminHalls.viewCinemasForAdminUser);
+router.get('/admin/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name', AdminHalls.getAlltMoviesInCinemaForAdmin);
 
 
 

@@ -2,20 +2,20 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthGuard } from './@guards/auth.guard';
+import { AdminHallsComponent } from './admin-halls/admin-halls.component';
 import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
 
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
-  canActivate: [AuthGuard],
+  //canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
-  }, {    
-    path: 'admins',
-    loadChildren: './admins/admins.module#AdminsModule'
-  },
-  {
+  },{
+    path: 'halls',
+    component: AdminHallsComponent
+  },{
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
   },{
@@ -92,12 +92,8 @@ export const AppRoutes: Routes = [{
     path: 'landing',
     loadChildren: './landing/landing.module#LandingModule'
   }]
-},
-{
+}, {
   path: '**',
   redirectTo: 'error/404'
-}
-
-];
-
+}]
 

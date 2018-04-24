@@ -1,7 +1,7 @@
 
 
 <div class="row">
-  <div class="media-grid col-lg-3 col-sm-6" *ngFor="let hall of halls"  (click)="selectedMovie = hall.movie; finalize()">
+  <div class="media-grid col-lg-3 col-sm-6" *ngFor="let hall of halls"  (click)="selectedMovie = hall.movie; submitMovie()">
     <figure>
       <img src="{{hall.imagePath}}" alt="Card image cap" class="img-fluid" />
       <figcaption>

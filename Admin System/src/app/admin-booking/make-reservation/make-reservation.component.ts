@@ -12,7 +12,7 @@ import {MoviesInHallsService} from "../../@services/movies-in-halls.service";
 export class MakeReservationComponent implements OnInit {
 
   adminUsername = null;
-  reserveData = null;
+  reserveData;
   ticketIsLoaded = false;
   //TODO set ticketIsLoaded to true after all information are gathered,
   //TODO so then it can give ability to make the reservation
@@ -36,8 +36,8 @@ export class MakeReservationComponent implements OnInit {
 
     this.reserveData = {
       username: 'mai_emad', // TODO To be changed
-      cinema_name: this.cookie.get('cinema_name'),
-      cinema_location: this.cookie.get('cinema_location'),
+      cinema_name: 'Mokattam',
+      cinema_location: 'Mawlana', // TODO to be changed (get from cookie)
       date: null,
       time: null,
       hall: null,
@@ -48,11 +48,14 @@ export class MakeReservationComponent implements OnInit {
       eachPrice: null,
       movie: null
     };
+
+    console.log("ONITTTTT" +this.reserveData.cinema_location);
   }
 
   loadMovies() {
     //TODO get all movies in halls, using steven's function in the backend, coming from another page
 
+    /*
 
     this.moviesList = [{
       cinema_location : 'Mokattam',
@@ -75,39 +78,25 @@ export class MakeReservationComponent implements OnInit {
       title : 'Tomb Raider',
       imagePath : 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg'
     }];
-
-    console.log('selected movie from cookie is: ' + this.selectedMovie);
-    if(!this.selectedMovie) {
-      //In case nothing found in cookie
-      console.log('cookie has no movies');
-      this.selectedMovie = this.moviesList[0];
-    }
-    this.selectedHall = this.moviesList[0].hall_number;
-    this.loadParties();
-
-/*
-
-    this.MoviesInHallsService.getAlltMoviesInCinemaForAdmin(this.cookie.get('cinema_name') , this.cookie.get('cinema_location'))
-      .subscribe((response) => {
-        this.moviesList = response.data;
-        this.moviesList.sort();
-        this.selectedMovie = this.cookie.get('movie');
-        console.log('selected movie from cookie is: ' + this.selectedMovie);
-
-        if(!this.selectedMovie) {
-          //In case nothing found in cookie
-          console.log('cookie has no movies');
-          this.selectedMovie = this.moviesList[0];
-        }
-        this.selectedHall = this.selectedMovie.hall;
-        this.loadParties();
-      });
-*/
+  */
+   
+    this.adminTicketService.getMoviesInHallsForCinemaForAdmin(this.adminUsername , 'Cinema Mawlana',
+    'Mokattam').subscribe((response) => {
+         this.moviesList = response.data;
+         console.log(response.data);
+         console.log(this.moviesList);
+         this.moviesList.sort();
+         this.selectedMovie = this.moviesList[0];
+         this.selectedHall = this.moviesList[0].hall_number;
+         this.loadParties();
+       })     
+    
   }
 
   selectMovie(movie) {
     console.log(movie);
     this.selectedMovie = movie;
+    this.selectedHall = this.selectedMovie.hall_number;
     this.loadParties();
   }
 

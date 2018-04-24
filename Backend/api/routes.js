@@ -120,6 +120,17 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/getTopMovies',Search.getTopMovies);
 
+
+//-----------------------------------------------Admin ROUTES----------------------
+
+//-------------------------------------------Halls Routes-----------------------------
+
+router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
+router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
+router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
+router.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin/' , AdminHalls.getMoviesInHallsForCinemaForAdmin);
+
+
 /* 
 -----------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -225,10 +236,9 @@ router.post('/RejectMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovie
 router.post('/AcceptMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovies.AcceptMovieRequest);
 
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
-router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
-router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
-router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
-router.get('/MoviesInHalls/getFinalOutput/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getFinalOutput);
+router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name',MoviesInHalls.cinemaMovies);
+router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location' , MoviesInHalls.cinemaHalls);
+router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getMovieAndHallData);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 

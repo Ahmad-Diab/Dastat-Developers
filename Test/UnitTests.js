@@ -989,62 +989,62 @@ describe('Using Promocode', () =>{
 
 
 //Omar El-Dahrawy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+describe('Parties', function() { 
+  it('it should return all upcoming parties for selected movie,cinema,and date',function(done){
+      chai.request("localhost:8000").get("/api/userBooking/getParties/:cinemaLocation/:cinemaName/:movieName/:date").query({ 
+        cinemaName: 'Mayo Movies',
+        cinemaLocation: "9th of Mayo",
+        movieName: 3,
+        date: '2018-04-01',
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;w
+        done();
+      });
+  });
+});
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
+describe('Movie and Hall data', function() { 
+  it('it should return all data about selected movie and hall in selected cinema',function(done){
+      chai.request("localhost:8000").get("/api/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location").query({ 
+        movie_id: 3,
+        cinema_name: 'Mayo Movies',
+        cinnema_location: "9th of Mayo",
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;
+        done();
+      });
+  });
+});
+describe('Halls in cinema', function() { 
+  it('it should return all halls in selected cinema',function(done){
+      chai.request("localhost:8000").get("/api/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location").query({ 
+        cinemaName: 'Mayo Movies',
+        cinnemaLocation: "9th of Mayo",
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;
+        done();
+      });
+  });
+});
+describe('Movies in cinema', function() { 
+  it('it should return all movies in selected cinema',function(done){
+      chai.request("localhost:8000").get("/api/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name").query({ 
+        cinemaName: 'Mayo Movies',
+        cinnemaLocation: "9th of Mayo",
+      })
+      .end(function(req,res){
+        res.should.have.status(200);
+        res.should.be.json;
+        done();
+      });
+  });
+});
 
 
 

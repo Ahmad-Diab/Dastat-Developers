@@ -54,4 +54,17 @@ export class AdminTicketService extends HttpService {
         'movie_id' : movie_id
       }});
   }
+
+  //-----halls---
+  getMoviesInHallsForCinemaForAdmin(admin_username:String ,cinema_name:String, cinema_location:String) {
+    return this.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin',{ headers: {
+        'username' : admin_username,
+        'cinema_name': cinema_name,
+        'cinema_location': cinema_location
+    }
+    });
+  }
 }
+
+
+

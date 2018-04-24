@@ -121,6 +121,8 @@ router.get('/getTopMovies',Search.getTopMovies);
 router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
 router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
 router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
+router.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin/' , AdminHalls.getMoviesInHallsForCinemaForAdmin);
+
 
 
 /* 

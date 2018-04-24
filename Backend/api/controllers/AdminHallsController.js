@@ -304,5 +304,57 @@ module.exports.deleteMovieFromHall = function(req, res, next){
 
 };
 
+module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
+
+    var cinemaName = req.headers.cinema_name;
+    var cinemaLocation = req.headers.cinema_location;
+    console.log("GETMOVIES ADMIN HALLS "+cinemaLocation +" "+cinemaName)
+    if(!cinemaName) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Name is required.',
+            data: null
+        });
+    }
+
+    if(!cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
+
+    var sqlSelection = 'SELECT * FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
+
+    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
+
+        
+        if(error){
+            return next(error);
+        }
+        
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No current movies Availiable.',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
+
+    });
+  };
+
 
 

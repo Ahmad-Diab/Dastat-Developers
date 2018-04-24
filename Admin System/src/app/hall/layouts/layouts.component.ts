@@ -13,7 +13,7 @@ export class LayoutsComponent implements OnInit {
   layouts: Layout[];
   alert: Alert = new Alert();
 
-  constructor(public hallService: HallService) { }
+  constructor(public hallService: HallService,) { }
 
   ngOnInit() {
     this.hallService.getMinifiedLayouts().subscribe((response) => {

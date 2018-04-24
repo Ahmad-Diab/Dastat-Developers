@@ -1,5 +1,6 @@
 export class Layout {
-    id: number;
+    id: string;
     encoded: string;
     name: string;
+    array;
 }

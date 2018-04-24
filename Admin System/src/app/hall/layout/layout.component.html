@@ -1,17 +1,17 @@
-<div class="card">
+<div *ngIf="layout" class="card">
   <div class="card-header">
     Layout
   </div>
   <div class="card-body">
-    <div *ngIf="layout" [@fadeInOut] class="form-group">
+    <div *ngIf="layout.array" [@fadeInOut] class="form-group">
       <label for="example-number-input" class="col-2 col-form-label">Name</label>
       <div class="col-10">
-        <input id="name" class="form-control" type="text" [(ngModel)]="name">
+        <input id="name" class="form-control" type="text" [(ngModel)]="layout.name">
       </div>
       <button class="btn btn-success" (click)="submit()">Save</button>
     </div>
 
-    <div *ngIf="!layout" [@fadeInOut] class="form-group">
+    <div *ngIf="!layout.array" [@fadeInOut] class="form-group">
       <label for="example-number-input" class="col-2 col-form-label">Width</label>
       <div class="col-10">
         <input class="form-control" type="number" [(ngModel)]="width">
@@ -25,15 +25,15 @@
       <button class="btn btn-success" (click)="arraySize()">Render View</button>
     </div>
 
-    <div *ngIf="layout" [@fadeInOut] id="layout">
-      <div class="row" *ngFor="let row of layout; let i = index">
+    <div *ngIf="layout.array" [@fadeInOut] id="layout">
+      <div class="row" *ngFor="let row of layout.array; let i = index">
         <button class="btn primary mr-1 mb-1" (click)="toggleRow(i)">{{letter(i)}}</button>
         <div *ngFor="let seat of row; let j = index">
-          <button class="btn mr-1 mb-1" [ngClass]="{'btn-secondary': !layout[i][j], 'btn-success': layout[i][j]}" (click)="toggle(i,j)"></button>
+          <button class="btn mr-1 mb-1" [ngClass]="{'btn-secondary': !layout.array[i][j], 'btn-success': layout.array[i][j]}" (click)="toggle(i,j)"></button>
         </div>
       </div>
       <div id="numbers" class="row">
-        <div *ngFor="let number of layout[0]; let i = index">
+        <div *ngFor="let number of layout.array[0]; let i = index">
           <button class="btn primary mr-1 mb-1" (click)="toggleColumn(i)">{{i+1}}</button>
         </div>
       </div>

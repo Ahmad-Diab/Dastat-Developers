@@ -15,39 +15,40 @@ export class HallService extends HttpService{
       return this.post_auth('layout/add', data);
     } 
 
-    users() {
-      return this.get_auth('users');
-    }
-
     getHalls() {
-      return this.get_auth('/halls/all'); 
+      return this.get_auth('halls/all'); 
     }
 
     deleteHall(data) {
-      return this.post_auth('/halls/deleteHall', data);
+      return this.post_auth('halls/deleteHall', data);
     }
 
     addHall(data) {
-      return this.post_auth('/halls/add', data);
+      return this.post_auth('halls/add', data);
     }
 
     getCinemaLocations() {
-      return this.get_auth('/cinema/location/min');
+      return this.get_auth('cinema/location/min');
     } 
 
     getCinemasInLocation(data) {
-      return this.get_auth('/cinema/names/min', data);
+      return this.get_auth('cinema/names/min', data);
     }
 
     getMinifiedLayouts() {
-      return this.get_auth('/layout/minified');
+      return this.get_auth('layout/minified');
     } 
 
     editHall(data) {
-      return this.post_auth('/halls/update', data);
+      return this.post_auth('halls/update', data);
     }
 
     deleteLayout(data) {
-      return this.post_auth('/layout/delete', data);
+      return this.post_auth('layout/delete', data);
+    }
+
+    getLayout(data) {
+      var url = 'layout/' + data
+      return this.get_auth(url);
     }
 }

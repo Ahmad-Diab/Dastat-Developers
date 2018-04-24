@@ -157,53 +157,7 @@ module.exports.EditMyRequests=function(req,res,next){
         database.query('Select * FROM movies where status = "PENDING" AND movies.movie_id = ?', [req.params.movie_id],function(err,results){
             if(err) return next(err);
 
-            // var 
-  
-            // oldGenre = results[0].genre,
-            // oldTitle= results[0].title,
-            // oldDuration = results[0].duration,
-            // oldDescribtion = results[0].description,
-            // oldImagePath = results[0].imagepath,
-            // oldCast = results[0].cast,
-            // oldYear = results[0].year,
-            // oldFeature =results[0].feature,
-            // oldReleaseDate= results[0].release_date,
-            // oldRating = results[0].rating,
-            // oldStatus = results[0].status;
-
-            // if(title == null){
-            //     title = oldTitle;
-            //  }
-            //  if(genre == null){
-            //      genre= oldGenre;
-            //  } 
-            //  if(duration==null){
-            //      duration = oldDuration;
-            //  }
-            //  if(description==null){
-            //      description=oldDescribtion;
-            //  }
-            //  if(imagePath==null){
-            //      imagePath=oldImagePath;
-            //  }
-            //  if(cast==null){
-            //      cast = oldCast;
-            //  }
-            //  if(year==null){
-            //      year=oldYear;
-            //  }
-            //  if(feature == null){
-            //      feature=oldFeature;
-            //  }
-            //  if(release_date==null){
-            //      release_date ==oldReleaseDate;
-            //  }
-            //  if(rating==null){
-            //      rating = oldRating;
-            //  }
-            //  if(status==null){
-            //      status = oldStatus
-            //  }
+            
              var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
              database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.movie_id],
              function(error,results){
@@ -251,54 +205,7 @@ module.exports.EditMovies=function(req,res,next){
         database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
             if(err) return next(err);
 
-            // var 
-  
-            // oldGenre = results[0].genre,
-            // oldTitle= results[0].title,
-            // oldDuration = results[0].duration,
-            // oldDescribtion = results[0].description,
-            // oldImagePath = results[0].imagePath,
-            // oldCast = results[0].cast,
-            // oldYear = results[0].year,
-            // oldFeature =results[0].feature,
-            // oldReleaseDate= results[0].release_date,
-            // oldRating = results[0].rating,
-            // oldStatus = results[0].status;
-
-            // if(title == null){
-            //     title = oldTitle;
-            //  }
-            //  if(genre == null){
-            //      genre= oldGenre;
-            //  } 
-            //  if(duration==null){
-            //      duration = oldDuration;
-            //  }
-            //  if(description==null){
-            //      description=oldDescribtion;
-            //  }
-            //  if(imagePath==null){
-            //      imagePath=oldImagePath;
-            //  }
-            //  if(cast==null){
-            //      cast = oldCast;
-            //  }
-            //  if(year==null){
-            //      year=oldYear;
-            //  }
-            //  if(feature == null){
-            //      feature=oldFeature;
-            //  }
-            //  if(release_date==null){
-            //      release_date ==oldReleaseDate;
-            //  }
-            //  if(rating==null){
-            //      rating = oldRating;
-            //  }
-            //  if(status==null){
-            //      status = oldStatus
-            //  }
-
+           
 
              var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?,admin_requested=?  WHERE  movies.movie_id = ?';
              database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested,req.params.movie_id],

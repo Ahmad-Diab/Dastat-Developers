@@ -24,10 +24,12 @@ export class RequestsCoBmComponent implements OnInit {
 
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
-
+    
+    console.log(this.username);
     this.movieServices.viewRequests(this.username).subscribe((response)=>{
        this.movies=response;
-   
+      console.log(this.username);
+      console.log(response.data[0]);
     });
     
 
@@ -48,7 +50,6 @@ toogleMovie(){
 }
 
 // ADD A REQUEST
-
 
 addReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
   year: number, feature: number, release_date:Date,rating: number,status: string,username: string){

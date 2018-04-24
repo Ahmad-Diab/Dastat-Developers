@@ -100,8 +100,12 @@ export class MenuItems {
             name: 'Booking Ushers'
           }
         ]
-      }
-    )
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
+      })
     }
 
      //Cinema Owner
@@ -135,6 +139,11 @@ export class MenuItems {
             name: 'Booking Ushers'
           }
         ]
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
       })
     }
 
@@ -166,6 +175,11 @@ export class MenuItems {
             name: 'Booking Ushers'
           }
         ]
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
       })
     }
 

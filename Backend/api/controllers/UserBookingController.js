@@ -369,10 +369,9 @@ module.exports.getCurrentMoviesForCinema = function(req, res, next){
         });
     }
 
-    var sqlSelection = 'SELECT * FROM movies m , movies_in_cinemas mc  WHERE mc.cinema_name = ? AND mc.cinema_location = ? AND mc.movie = m.movie_id'+
-    'AND m.release_date <= ?';
+    var sqlSelection = 'SELECT m.* FROM movies m , halls h WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
 
-    database.query(sqlSelection, [cinemaName , cinemaLocation , currentDate], function (error, results) {
+    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
         if(error){
             return next(error);
         }

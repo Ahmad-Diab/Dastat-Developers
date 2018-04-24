@@ -32,7 +32,7 @@ const MENUITEMS =
     state: 'adminBooking',
     name: 'Tickets',
     type: 'sub',
-    icon: 'basic-webpage-multiple',
+    icon: 'ecommerce-ticket',
     children: [
       {
         state: 'makeReservation',
@@ -69,7 +69,7 @@ export class MenuItems {
         state: 'movies',
         name: 'My Movies',
         type: 'sub',
-        icon: 'basic-webpage-multiple',
+        icon: 'basic-photo',
         children: [
           {
             state: 'requests-ao',
@@ -78,15 +78,40 @@ export class MenuItems {
           {
             state: 'view-movies',
             name: 'View Movies'
+          }    
+        ] 
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'cinemaowner',
+            name: 'Cinema owners'
+          },
+          {
+            state: 'branchmanager',
+            name: 'Branch managers'
+          },
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
           }
-     
-         
         ]
       },{
+<<<<<<< HEAD
+        state: 'mycinemas',
+        name: 'My Cinemas',
+        type: 'link',
+        icon: 'basic-webpage-multiple'
+=======
         state: 'halls',
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
+>>>>>>> 62bd4ddf9bd2f5c00395edb809fd28c9fadd7067
       })
     }
 
@@ -98,18 +123,42 @@ export class MenuItems {
         state: 'movies',
         name: 'My Movies',
         type: 'sub',
-        icon: 'basic-webpage-multiple',
+        icon: 'basic-photo',
         children: [
           {
-            state: 'requests-ao',
+            state: 'requests-co-bm',
             name: 'Requests'
           }
          ]
+<<<<<<< HEAD
+      },{
+        state: 'mycinemas',
+        name: 'My Cinemas',
+        type: 'link',
+        icon: 'basic-webpage-multiple'
+=======
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'branchmanager',
+            name: 'Branch managers'
+          },
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
+          }
+        ]
       },{
         state: 'halls',
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
+>>>>>>> 62bd4ddf9bd2f5c00395edb809fd28c9fadd7067
       })
     }
 
@@ -122,13 +171,25 @@ export class MenuItems {
         state: 'movies',
         name: 'My Movies',
         type: 'sub',
-        icon: 'basic-webpage-multiple',
+        icon: 'basic-photo',
         children: [
           {
-            state: 'requests-ao',
+            state: 'requests-co-bm',
             name: 'Requests'
           }
          ]
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
+          }
+        ]
       },{
         state: 'halls',
         name: 'halls',

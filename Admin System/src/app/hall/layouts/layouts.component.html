@@ -1,0 +1,51 @@
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+<div *ngIf="alert.active">
+  <ngb-alert [type]="alert.type" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+</div>
+
+<div class="form-group card">
+  <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Layouts
+    <button type="button" [routerLink]="['/hall/layout/add']" class="btn btn-success mr-1 ml-auto">Add Layout</button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>
+              Name
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let layout of layouts |filter:term">
+            <td>
+              {{layout.name}}
+            </td>
+            <td>
+              <div id="actions">
+                <a (click)="editLayout(layout)">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a (click)="deleteLayout(layout)">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

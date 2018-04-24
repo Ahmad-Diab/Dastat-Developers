@@ -72,6 +72,9 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'docs',
     loadChildren: './docs/docs.module#DocsModule'
+  }, {
+    path: 'hall',
+    loadChildren: './hall/hall.module#HallModule'
   },{
     path: 'adminBooking',
     loadChildren: './admin-booking/admin-booking.module#AdminBookingModule'

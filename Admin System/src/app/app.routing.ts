@@ -1,16 +1,22 @@
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-import { AuthGuard } from './@guards/auth.guard';
+// import { AuthGuard } from './@guards/auth.guard';
+
 
 export const AppRoutes: Routes = [{
   path: '',
-  component: AdminLayoutComponent,
-  canActivate: [AuthGuard],
+  component: AdminLayoutComponent, 
+  // canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
-  }, {
+  },
+  { 
+    path: 'admin',
+    loadChildren: './add-new-admin/add-new-admin.module#AddNewAdminModule'
+  }, 
+  {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
   }, {
@@ -50,16 +56,12 @@ export const AppRoutes: Routes = [{
     path: 'media',
     loadChildren: './media/media.module#MediaModule'
   }, {
-    path: 'widgets',
-    loadChildren: './widgets/widgets.module#WidgetsModule'
-  }, {
     path: 'social',
     loadChildren: './social/social.module#SocialModule'
-  }, {
-    path: 'docs',
-    loadChildren: './docs/docs.module#DocsModule'
   }]
-}, {
+},
+
+{
   path: '',
   component: AuthLayoutComponent,
   children: [{

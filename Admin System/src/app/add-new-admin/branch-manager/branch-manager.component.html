@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <b>Add Branch Manager</b>
+          </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+              <label for="InputUsername">Username</label>
+              <input #username type="text" class="form-control" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">Password</label>
+                <input #password type="password" class="form-control" placeholder="Enter Password">
+              </div>
+            <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input #email type="email" class="form-control" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+              <label for="InputSalary">Salary</label>
+              <input #salary type="number" class="form-control" placeholder="Enter Salary">
+            </div>
+          <div class="form-group">
+              <label for="AdminType">Type : <b>Branch Manager</b></label>
+            </div>
+            <div class="form-group">
+                <label for="InputFirstName">First Name</label>
+                <input #firstName type="text" class="form-control" placeholder="Enter First Name">
+              </div>
+              <div class="form-group">
+                  <label for="InputLastName">Last Name</label>
+                  <input #lastName type="text" class="form-control" placeholder="Enter Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="InputPhoneNumber">Phone Number</label>
+                    <input #phoneNumber class="form-control" type="number"  placeholder="Enter Phone Number" id="example-tel-input">
+                  </div>
+          <div class="form-group">
+            <label for="GenderSelect">Gender</label>
+            <input #gender type="text" class="form-control" placeholder="Enter Gender">
+            <!-- <select class="form-control" [value] = "gender" (input)="update($event.target.value)" id="GenderSelect">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select> -->
+          </div>
+          <div class="form-group">
+              <label for="CinemaName">Cinema Name</label>
+              <input #cinemaName class="form-control" type="text" placeholder="Enter Cinema Name" id="example-tel-input">
+            </div>
+          <button type="button" (click)="addBM(username.value,password.value,email.value,salary.value,firstName.value,lastName.value,phoneNumber.value,gender.value,cinemaName.value)" class="btn btn-primary">Add Branch Manager</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -172,11 +172,36 @@ router.get('/RejectMovieRequest/:movie_id',MyMovies.RejectMovieRequest);
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
 router.get('/AcceptMovieRequest/:movie_id',MyMovies.AcceptMovieRequest);
 
+//------------------------------ MyAdmins routes --------------------------------//
+
+router.post('/admin/login', Admin.authenticate);
+
+router.get('/getAllUsers',Authorization.Verify("1000"),Admin.getAllUsers)
+router.post('/getAdmin', Authorization.Verify("0101"),Admin.getAdmin);
+
+router.put('/editBookingUsher', Authorization.Verify("1101"),Admin.editBookingUsher);
+router.delete('/deleteBookingUsher', Authorization.Verify("1101"),Admin.deleteBookingUsher);
+router.post('/addBookingUsher', 
+Authorization.Verify("1101"),
+Admin.addBookingUsher);
+
+router.put('/editBranchManager', Authorization.Verify("1100"),Admin.editBranchManager);
+router.delete('/deleteBranchManager',
+ Authorization.Verify("1100"),Admin.deleteBranchManager);
+router.post('/addBranchManager',
+Authorization.Verify("1100"),
+Admin.addBranchManager);
+
+
+router.put('/editCinemaOwner',Authorization.Verify("1000") ,Admin.editCinemaOwner);
+router.delete('/deleteCinemaOwner', Authorization.Verify("1000"),Admin.deleteCinemaOwner);
+router.post('/addCinemaOwner',
+Authorization.Verify("1000"),
+Admin.addCinemaOwner);
 
 
 
-
-
+// router.get('/viewAllCinemas',Admin.ViewCinemas);
 
 
 

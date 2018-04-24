@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+          <b>Add Booking Usher</b>
+          </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+              <label for="InputUsername">Username</label>
+              <input #username type="text" class="form-control" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">Password</label>
+                <input #password type="password" class="form-control" placeholder="Enter Password">
+              </div>
+            <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input #email type="email" class="form-control" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+              <label for="InputSalary">Salary</label>
+              <input #salary type="number" class="form-control" placeholder="Enter Salary">
+            </div>
+          <div class="form-group">
+              <label for="AdminType">Type : <b>Booking Usher</b></label>
+            </div>
+            <div class="form-group">
+                <label for="InputFirstName">First Name</label>
+                <input #firstName type="text" class="form-control" placeholder="Enter First Name">
+              </div>
+              <div class="form-group">
+                  <label for="InputLastName">Last Name</label>
+                  <input #lastName type="text" class="form-control" placeholder="Enter Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="InputPhoneNumber">Phone Number</label>
+                    <input #phoneNumber class="form-control" type="number"  placeholder="Enter Phone Number" id="example-tel-input">
+                  </div>
+          <div class="form-group">
+            <label for="GenderSelect">Select Gender</label>
+            <!-- <input #gender type="text" class="form-control" placeholder="Enter Gender"> -->
+            <select #gender class="form-control" id="GenderSelect">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <label for="CinemaName">Cinema Name</label>
+              <input #cinemaName class="form-control" type="text" placeholder="Enter Cinema Name" id="example-tel-input">
+              <!-- <select #gender class="form-control" id="GenderSelect">
+                  <option *ngFor="let cinema of cinemas" value="{{cinema.name}} , {{cinema.location}}">{{ cinema.name }} , {{ cinema.location }}<</option>
+              </select> -->
+            </div>
+          <button type="button" (click)="addBU(username.value,password.value,email.value,salary.value,firstName.value,lastName.value,phoneNumber.value,gender.value,cinemaName.value)" class="btn btn-primary">Add Booking Usher</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

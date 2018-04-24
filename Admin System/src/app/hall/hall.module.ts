@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HallsComponent } from './halls/halls.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LayoutsComponent } from './layouts/layouts.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule
   ],
-  declarations: [LayoutComponent, HallsComponent,]
+  declarations: [LayoutComponent, HallsComponent, LayoutsComponent,]
 })
 export class HallModule { }

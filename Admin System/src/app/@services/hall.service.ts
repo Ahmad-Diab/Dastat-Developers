@@ -46,4 +46,8 @@ export class HallService extends HttpService{
     editHall(data) {
       return this.post_auth('/halls/update', data);
     }
+
+    deleteLayout(data) {
+      return this.post_auth('/layout/delete', data);
+    }
 }

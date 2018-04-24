@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { HallsComponent } from './halls/halls.component';
+import { LayoutsComponent } from './layouts/layouts.component';
 
 export const HallRoutes: Routes = [
     {
@@ -16,6 +17,12 @@ export const HallRoutes: Routes = [
             component: HallsComponent,
             data: {
                 heading: 'Halls'
+            }
+        },{
+            path: 'layouts',
+            component: LayoutsComponent,
+            data: {
+                heading: 'Layouts'
             }
         }]
     } ,

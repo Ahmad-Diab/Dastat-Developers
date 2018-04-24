@@ -150,7 +150,7 @@ module.exports.filterCinema = function(req,res,next){
     if(results.length == 0) return res.status(200).json({
       err : null,
       msg : 'Promocode you are trying to add not found',
-      data : null,
+      data : results,
     })
     //this query is to handle if cinema user entered not found in the database
     database.query('SELECT * FROM cinemas WHERE location = ? AND name = ?',[cinemaLocation,cinemaName],function(error, results, fields){

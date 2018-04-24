@@ -206,7 +206,7 @@ router.get('/promocodes/viewPromocodesAndCinemas', Authorization.Verify('1000'),
 router.get('/promocodes/:promocode', Authorization.Verify('1000'),Promocodes.getPromocode);
 router.get('/promocodes/filter/promocode/:promocode', Authorization.Verify('1000'), Promocodes.filterPromocode);
 router.get('/promocodes/filter/cinema/:cinema' ,  Authorization.Verify('1000') , Promocodes.filterCinema);
-router.post('/promocodes/assignPromocodes', Authorization.Verify('1000') , Promocodes.assignPromocodeToCinema);
+router.post('/promocodes/assignPromocodes' , Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Authorization.Verify('1000') , Promocodes.addPromocode);
 router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000') , Promocodes.deletePromocode);
 

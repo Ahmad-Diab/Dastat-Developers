@@ -1,0 +1,156 @@
+<div class="card">
+  <div class="card-header">
+    Select Cinema
+  </div>
+  <div class="card-body">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
+        <div *ngIf="selectedCinema != null">
+            {{selectedCinema.cinema_name}}   {{selectedCinema.cinema_location}}
+        </div>
+      </button>
+      <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <div *ngFor ="let cinema of cinemas">
+          <button class="dropdown-item" (click)="editMode = false; selectedHall = false; selectedCinema = cinema; getHalls()">{{cinema.cinema_name}} {{cinema.cinema_location}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Halls
+    </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>
+              Hall Number
+            </th>
+
+            <th>
+              Movie
+            </th>
+           
+            <th>
+              Movie ID
+            </th>
+
+            <th>
+              Options
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hall of halls">
+            <td>
+              {{hall.hall_number}}
+            </td>
+
+            <td *ngIf="hall.movie != null && selectedHall != hall" class="align-middle">
+              {{hall.title}}
+            </td>
+
+            <td *ngIf="hall.movie != null && selectedHall != hall" class="align-middle">
+              {{hall.movie}}
+            </td>
+
+            <td *ngIf="hall.movie == null && selectedHall != hall" class="align-middle">
+                N/A
+            </td>
+
+            <td *ngIf="hall.movie == null && selectedHall != hall" class="align-middle">
+              N/A
+            </td>
+
+            <td *ngIf="editMode && selectedHall == hall" class="align-middle">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
+                      <div *ngIf="selectedMovie != null">
+                          {{selectedMovie.title}}
+                      </div>
+                    </button>
+                    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <div *ngFor ="let movie of selectedCinemaMovies">
+                        <button class="dropdown-item" (click)="selectedMovie = movie">{{movie.title}}</button>
+                      </div>
+                    </div>
+                  </div>
+            </td>
+
+            <td *ngIf="editMode && selectedHall == hall" class="align-middle">
+              <div ngbDropdown class="d-inline-block">
+                  <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
+                    <div *ngIf="selectedMovie != null">
+                        {{selectedMovie.movie_id}}
+                    </div>
+                  </button>
+                  <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <div *ngFor ="let movie of selectedCinemaMovies">
+                      <button class="dropdown-item" (click)="selectedMovie = movie">{{movie.movie_id}}</button>
+                    </div>
+                  </div>
+                </div>
+          </td>
+
+            <td *ngIf="hall.movie != null && selectedHall != hall && !editMode"  class="align-middle">
+                <button type="button" class="btn btn-outline-primary mr-1 mb-1" (click)="editMode = true; selectedHall = hall">Edit</button>
+                <button type="button" class="btn btn-outline-danger mr-1 mb-1" (click)="open(content); selectedHall = hall">Delete</button>
+            </td>
+
+            <td *ngIf="hall.movie == null && selectedHall != hall && !editMode"  class="align-middle">
+                <button type="button" class="btn btn-outline-success mr-1 mb-1" (click)="editMode = true; selectedHall = hall" >Assign</button>
+            </td>
+
+
+            <td *ngIf="editMode && hall != selectedHall"  class="align-middle">
+                <p></p>
+            </td>
+
+            <td *ngIf="selectedHall == hall && editMode"  class="align-middle">
+                <button type="button" class="btn btn-outline-success mr-1 mb-1"  (click)="editMode = false; selectedHall = hall ;assignMovieToHall()">Confirm</button>
+                <button type="button" class="btn btn-outline-danger mr-1 mb-1"  (click)="editMode = false; selectedHall = null">Cancel</button>
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template ngbModalContainer></ng-template>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete the assigned movie of this hall ?&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <span>
+      <button type="button" class="btn btn-secondary" (click)="c('Delete')">Delete</button>
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </span>
+    
+  </div>
+</ng-template>
+
+<ngb-alert *ngIf="successMessage != null" [dismissible]="false">
+  <strong></strong> {{successMessage}}
+</ngb-alert>
+
+<ngb-alert *ngIf="warningMessage != null" [dismissible]="false">
+  <strong></strong> {{warningMessage}}
+</ngb-alert>
+
+<ngb-alert  *ngIf="errorMessage != null" [dismissible]="false">
+  <strong></strong> {{errorMessage}}
+</ngb-alert>
+   

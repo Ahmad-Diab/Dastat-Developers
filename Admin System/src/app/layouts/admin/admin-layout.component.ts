@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../@services/auth.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Auth } from '../../@guards/auth.guard';
+import { PromocodesService } from '../../@services/promocodes.service';
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -41,6 +42,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   _autoCollapseWidth = 991;
   width = window.innerWidth;
   username: string;
+  cinemas = [];
+  isAppOwner = false;
 
   @ViewChild('sidebar') sidebar;
 
@@ -53,7 +56,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     private titleService: Title,
     private zone: NgZone,
     private authService: AuthService,
-    private cookie: CookieService) {
+    private cookie: CookieService,
+    private promocodesService: PromocodesService) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
@@ -61,8 +65,24 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
 
+    this.menuItems.getAll();
+
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
+
+    var type = this.cookie.getObject('auth')['type'];
+    if(type === 'App Owner') {
+      this.isAppOwner = true;
+    }
+
+    this.promocodesService.getPromocodesAndCinemas().subscribe((response) =>{
+      this.cinemas = response.data.cinemaResults;
+      var cinemaName = this.cinemas[0].name;
+      var cinemaLocation = this.cinemas[0].location;
+      var cinemaNameLocation = cinemaName + ',' + cinemaLocation;
+      this.cookie.putObject('cinema', cinemaNameLocation);
+      console.log(this.cookie.getObject('cinema'));
+    });
     
     if (this.isOver()) {
       this._mode = 'over';
@@ -129,4 +149,10 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
   }
+
+  getChosenCinema(cinema: string) {
+    this.cookie.putObject('cinema', cinema);
+    console.log(this.cookie.getObject('cinema'));
+  }
+
 }

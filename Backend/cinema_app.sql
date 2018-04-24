@@ -1,15 +1,18 @@
--- phpMyAdmin SQL Dump
+<<<<<<< HEAD
+﻿-- phpMyAdmin SQL Dump
 -- version 4.7.9
+=======
+-- phpMyAdmin SQL Dump
+-- version 4.6.6deb5
+>>>>>>> master
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 13, 2018 at 09:12 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Host: localhost:3306
+-- Generation Time: Apr 19, 2018 at 07:36 PM
+-- Server version: 5.7.21-0ubuntu0.17.10.1
+-- PHP Version: 7.1.15-0ubuntu0.17.10.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,8 +31,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `actors`
 --
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
 
+>>>>>>> master
 CREATE TABLE `actors` (
   `name` varchar(115) NOT NULL,
   `age` int(11) DEFAULT NULL,
@@ -57,29 +66,18 @@ INSERT INTO `actors` (`name`, `age`, `birth_date`, `gender`, `bio`, `imagePath`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `actors_movies`
---
-
-CREATE TABLE `actors_movies` (
-  `actor` varchar(115) NOT NULL,
-  `movie` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
   `username` varchar(15) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(110) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
-  `first_name` varchar(15) NOT NULL,
-  `last_name` varchar(15) NOT NULL,
-  `phone_number` int(11) DEFAULT NULL,
+  `firstName` varchar(15) NOT NULL,
+  `lastName` varchar(15) NOT NULL,
+  `phoneNumber` int(11) DEFAULT NULL,
   `gender` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,12 +85,11 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `first_name`, `last_name`, `phone_number`, `gender`) VALUES
-('Amir_Karara', 'miko333', 'amir.karara@gmail.com', 60000, 'Cinema Owner', 'Amir', 'Karara', 7776644, 'male'),
-('Andrew_Shady', 'geeksF0rGeeks', 'masterOfSwift@icloud.com', 4600, 'Booking Usher', 'Andrew', 'Shady', 32332999, 'male'),
-('Israa_Yasser', 'yy22mm44', 'f0rtnite017@microsoft.com', 12000, 'Branch Manager', 'Israa', 'Yasser', 2030355152, 'female'),
-('Laila_Khaled', 'lailalaila123', 'lailakhalaed@gmail.com', 10000, 'App Owner', 'Laila', 'Khaled', 1111020666, 'female'),
-('Yehia_Gamal', 'qwertYehia', 'yehia.gamal@yahoo.com', 50000, 'Admin User', 'Yehia', 'Gamal', 1223378907, 'male');
+INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `firstName`, `lastName`, `phoneNumber`, `gender`) VALUES
+('app', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'app@cinema-app.com', 200, 'App Owner', 'Amir', 'Zhagloul', 1818191918, 'female'),
+('booking', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking@cinema-app.com', 300, 'Booking Usher', 'Mostafa', 'Nasr', 1828282908, 'male'),
+('branch', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'branch@cinema-app.com', 200, 'Branch Manager', 'George', 'Maged', 1063961597, 'male'),
+('cinema', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'cinema@cinema-app.com', 200, 'Cinema Owner', 'Omar', 'El Sayed', 1228383990, 'male');
 
 -- --------------------------------------------------------
 
@@ -103,50 +100,19 @@ INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `first_
 CREATE TABLE `admins_cinemas` (
   `admin` varchar(20) DEFAULT NULL,
   `cinema_location` varchar(100) DEFAULT NULL,
-  `cinema_name` varchar(200) DEFAULT NULL
+  `cinemaName` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admins_cinemas`
 --
 
-INSERT INTO `admins_cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
-('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
-('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
-('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
-('Amir_Karara', 'Old Cairo', 'El Zaaeem El Cinema'),
-('Amir_Karara', 'New Cairo', 'Point 90'),
-('Amir_Karara', 'Al Haram', 'Pharoahs Cinema'),
-('Amir_Karara', 'New Cairo', 'Galaxy Cinema'),
-('Amir_Karara', 'Mokattam', 'Cinema Mawlana'),
-('Amir_Karara', '9th of Mayo', 'Mayo Movies'),
-('Amir_Karara', 'Old Cairo', 'El Zaaeem El Cinema'),
-('Amir_Karara', 'New Cairo', 'Point 90'),
-('Amir_Karara', 'Al Haram', 'Pharoahs Cinema'),
-('Andrew_Shady', 'New Cairo', 'Galaxy Cinema'),
-('Andrew_Shady', 'Mokattam', 'Cinema Mawlana'),
-('Andrew_Shady', '9th of Mayo', 'Mayo Movies'),
-('Andrew_Shady', 'Old Cairo', 'El Zaaeem El Cinema'),
-('Andrew_Shady', 'New Cairo', 'Point 90'),
-('Andrew_Shady', 'Al Haram', 'Pharoahs Cinema'),
-('Israa_Yasser', 'New Cairo', 'Galaxy Cinema'),
-('Israa_Yasser', 'Mokattam', 'Cinema Mawlana'),
-('Israa_Yasser', '9th of Mayo', 'Mayo Movies'),
-('Israa_Yasser', 'Old Cairo', 'El Zaaeem El Cinema'),
-('Israa_Yasser', 'New Cairo', 'Point 90'),
-('Israa_Yasser', 'Al Haram', 'Pharoahs Cinema'),
-('Laila_Khaled', 'New Cairo', 'Galaxy Cinema'),
-('Laila_Khaled', 'Mokattam', 'Cinema Mawlana'),
-('Laila_Khaled', '9th of Mayo', 'Mayo Movies'),
-('Laila_Khaled', 'Old Cairo', 'El Zaaeem El Cinema'),
-('Laila_Khaled', 'New Cairo', 'Point 90'),
-('Laila_Khaled', 'Al Haram', 'Pharoahs Cinema'),
-('Yehia_Gamal', 'New Cairo', 'Galaxy Cinema'),
-('Yehia_Gamal', 'Mokattam', 'Cinema Mawlana'),
-('Yehia_Gamal', '9th of Mayo', 'Mayo Movies'),
-('Yehia_Gamal', 'Old Cairo', 'El Zaaeem El Cinema'),
-('Yehia_Gamal', 'New Cairo', 'Point 90'),
-('Yehia_Gamal', 'Al Haram', 'Pharoahs Cinema');
+INSERT INTO `admins_cinemas` (`admin`, `cinema_location`, `cinemaName`) VALUES
+('cinema', '9th of Mayo', 'Mayo Movies'),
+('cinema', 'Old Cairo', 'El Zaaeem El Cinema'),
+('cinema', 'Mokattam', 'Cinema Mawlana'),
+('booking', 'Mokattam', 'Cinema Mawlana'),
+('branch', 'Mokattam', 'Cinema Mawlana');
 
 -- --------------------------------------------------------
 
@@ -172,11 +138,11 @@ CREATE TABLE `cinemas` (
 
 INSERT INTO `cinemas` (`location`, `address`, `name`, `number_of_halls`, `is3D`, `is4D`, `company`, `imagePath`, `imagePath2`) VALUES
 ('9th of Mayo', '90 Taha Hussien St', 'Mayo Movies', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/dYho2H/mayo.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
-('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, b'1', b'1', 'Egyptian Producers', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
-('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg'),
+('Al Haram', '3rd Pyramids Square', 'Pharoahs Cinema', 4, b'1', b'1', 'Egyptian Producers', 'https://image.ibb.co/mjrF47/cinema5.jpg', 'https://image.ibb.co/nr5ahH/cinema3.jpg'),
+('Mokattam', '7071, Street 9', 'Cinema Mawlana', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/mjrF47/cinema5.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg'),
 ('New Cairo', '70th Cairo Festival Square', 'Galaxy Cinema', 8, b'1', b'1', 'Galaxco', 'https://image.ibb.co/joHz9x/galaxy_cinema.png', 'https://image.ibb.co/eUxo2H/cinema1.jpg'),
 ('New Cairo', '100 Street 90, 5th Settlement', 'Point 90', 3, b'1', b'1', 'Galaxco', 'https://image.ibb.co/kjqK9x/point90.png', 'https://image.ibb.co/iLePbc/cinema2.jpg'),
-('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/fnrsUx/Renaissance.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg');
+('Old Cairo', '3 Metropolis, Street 30', 'El Zaaeem El Cinema', 5, b'1', b'1', 'Rainassance', 'https://image.ibb.co/mjrF47/cinema5.jpg', 'https://image.ibb.co/mRgRpx/cinema4.jpg');
 
 -- --------------------------------------------------------
 
@@ -309,11 +275,26 @@ INSERT INTO `movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `
 (28, 'Game Night', '01:40:00', 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'ACCEPTED', NULL),
 (29, 'Annihilation', '01:55:00', 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'ACCEPTED', NULL),
 (30, 'Every Day', '01:37:00', 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'ACCEPTED', NULL),
-(31, 'Ibrahim Labyad', '02:37:00', 'Action', 'Witnessing the Killing of his father as a kid, Ibraheim is dragged to the criminal underworld of Egypt. While making a name for himself, his plans meets Abdul-Malek Zarzur, the crime lord of the town.', 'https://image.ibb.co/hqBDWn/ibrahim.jpg', 'Ahmed el-Sakka,  Hend Sabry,  Amr Waked', 2009, 2, '2009-02-23 00:00:00', 7.4, 'PENDING', 'Amir_Karara'),
-(32, 'Masgoon Transit ', '03:37:00', 'Thriller', 'A professional thief was caught in the act of stealing and killing a security guard. ', 'https://image.ibb.co/ibZdxS/masgon.jpg', ' Ahmed Ezz,  Nour El-Sherif,  Salah Abdulla', 2008, 2, '2008-02-23 00:00:00', 6.3, 'PENDING', 'Amir_Karara'),
-(33, 'X-Large', '01:37:00', 'Comedy', 'Majdi is a young man who lives alone because of his obesity which kept him away from his friends. He gets into many situations that makes him uncomfortable, so he decides to ask his uncle for help.', 'https://image.ibb.co/fkVkcS/x.jpg', 'Ahmed Helmy,  Donia Samir Ghanem,  Emmy Samir Ghanem', 2011, 2, '2011-02-23 00:00:00', 7.3, 'PENDING', 'Andrew_Shady'),
-(34, 'Welad el-Amm ', '02:00:00', 'Drama', 'An Egyptian woman discovers that her husband is in fact a Jewish Mossad agent working for Israel. ', 'https://image.ibb.co/bZz0Bn/wlad.jpg', 'Kareem Abdel-Aziz,  Sherif Mounir,  Mona Zaki', 2009, 2, '2009-09-23 00:00:00', 7.4, 'PENDING', 'Andrew_Shady'),
-(35, ' Fasel wa Naood', '04:00:00', 'Comedy', 'The film story revolves around a taxi driver who has a son and a friend. His sons grandfather is fighting for the custody of the young boy after the death of his mother.', 'https://image.ibb.co/enK0Bn/fasl.jpg', 'Karim Abdel Aziz,  Dina Fuad,  Ahmed Rateb', 2012, 2, '2009-02-23 00:00:00', 6.5, 'PENDING', 'Israa_Yasser');
+(31, NULL, '02:37:00', 'att', 'Witnessing the Killing of his father as a kid, Ibraheim is dragged to the criminal underworld of Egypt. While making a name for himself, his plans meets Abdul-Malek Zarzur, the crime lord of the town.', 'https://image.ibb.co/hqBDWn/ibrahim.jpg', 'Ahmed el-Sakka,  Hend Sabry,  Amr Waked', 2009, 2, '2009-02-23 00:00:00', 7.4, 'PENDING', 'Amir_Karara'),
+(32, 'last goodbye', NULL, 'Cry', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Amir_Karara'),
+(33, 'last goodbye', NULL, 'Cry', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Andrew_Shady'),
+(34, 'last goodbye', '02:00:00', 'Cry', 'An Egyptian woman discovers that her husband is in fact a Jewish Mossad agent working for Israel. ', NULL, 'Kareem Abdel-Aziz,  Sherif Mounir,  Mona Zaki', 2009, 2, NULL, 7.4, 'PENDING', 'Andrew_Shady'),
+(35, ' Fasel wa Naood', '04:00:00', 'Comedy', 'The film story revolves around a taxi driver who has a son and a friend. His sons grandfather is fighting for the custody of the young boy after the death of his mother.', 'https://image.ibb.co/enK0Bn/fasl.jpg', 'Karim Abdel Aziz,  Dina Fuad,  Ahmed Rateb', 2012, 2, '2009-02-23 00:00:00', 6.5, 'PENDING', 'Israa_Yasser'),
+(39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(40, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(41, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(42, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(43, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(45, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(46, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
+(47, 'the jos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', 'Israa_Yasser'),
+(48, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'ACCEPTED', 'Israa_Yasser'),
+(49, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser'),
+(50, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser'),
+(51, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser'),
+(52, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'ACCEPTED', 'Israa_Yasser'),
+(53, 'the dibo', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser');
 
 -- --------------------------------------------------------
 
@@ -559,16 +540,16 @@ CREATE TABLE `promocodes_cinemas` (
 
 INSERT INTO `promocodes_cinemas` (`cinema_location`, `cinema_name`, `promocode`) VALUES
 ('9th of Mayo', 'Mayo Movies', '1H4H1LS0W'),
-('9th of Mayo', 'Mayo Movies', '1M2NN4N22'),
 ('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
-('Al Haram', 'Pharoahs Cinema', '1M2NN4N22'),
 ('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
-('Mokattam', 'Cinema Mawlana', '1M2NN4N22'),
 ('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
-('New Cairo', 'Galaxy Cinema', '1M2NN4N22'),
 ('New Cairo', 'Point 90', '1H4H1LS0W'),
-('New Cairo', 'Point 90', '1M2NN4N22'),
 ('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
+('9th of Mayo', 'Mayo Movies', '1M2NN4N22'),
+('Al Haram', 'Pharoahs Cinema', '1M2NN4N22'),
+('Mokattam', 'Cinema Mawlana', '1M2NN4N22'),
+('New Cairo', 'Galaxy Cinema', '1M2NN4N22'),
+('New Cairo', 'Point 90', '1M2NN4N22'),
 ('Old Cairo', 'El Zaaeem El Cinema', '1M2NN4N22');
 
 -- --------------------------------------------------------
@@ -628,26 +609,29 @@ CREATE TABLE `users` (
   `first_name` varchar(115) NOT NULL,
   `last_name` varchar(115) NOT NULL,
   `age` int(11) NOT NULL,
-  `gender` varchar(20) NOT NULL
+  `gender` varchar(20) NOT NULL,
+  `active` bit(1) NOT NULL,
+  `active_code` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `password`, `email`, `phone_number`, `credit_card`, `first_name`, `last_name`, `age`, `gender`) VALUES
-('Anas_Mohamed', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'anasmohamed@gmail.com', 1511123623, '5332662665265921', 'Anas', 'Mohamed', 24, 'male'),
-('Farida_Omar', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'faridaomar@yahool.com', 1012100252, '5332225826245445', 'Farida', 'Omar', 31, 'Female'),
-('Hamza_Namira', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'hamzanamira@gmail.com', 1000000588, '5338224448618485', 'Hamza', 'Namira', 37, 'male'),
-('Lola_Wael', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'lulu97@gmail.com', 2033344999, '868955550011', 'Lola', 'Khalid', 21, 'female'),
-('Mai_Emad', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'maiemad@gmail.com', 1000595987, '5332265526295266', 'Mai', 'Emad', 26, 'Female'),
-('Mariam_Medhat', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'mariam.medhat@gmail.com', 1226655695, '5333269565956210', 'Mariam', 'Medhat', 26, 'female'),
-('Moahmed_Ehab', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'mohamedEhab@gmail.com', 1055215558, '533249998528520', 'Mohamed', 'Ehab', 28, 'male'),
-('Mostafa_Fathy', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'm.fathy@gmail.com', 1111897676, '5338224662239266', 'Mostafa', 'Fathy', 29, 'male'),
-('Nour_Gaber', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'nour.gaber@icloud.com', 555333221, '667944252201008', 'Nour', 'Gaber', 38, 'female'),
-('omar1', '$2a$10$6OfCOPN8Zq.yjOcXgR32LeS25y5SPCFoPm6GwcJ.aGSS2goVbMd0C', 'oa@gmail.com', NULL, '1381293789172', 'omar', 'el sayed', 21, 'male'),
-('Omar_Gamal', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'omargamal@gmail.com', 1000285558, '5332249758558562', 'Omar', 'Gamal', 31, 'male'),
-('Omar_Mehrez', '$2a$10$CYgTewnBCdxH/tRR9f8hKei/Umbn.g7SxSmddAvW1PcuqxpSHG4Pm', 'omar.moaz@gmail.com', 2121255589, '5111773865203300', 'Omar', 'Mehrez', 33, 'male');
+INSERT INTO `users` (`username`, `password`, `email`, `phone_number`, `credit_card`, `first_name`, `last_name`, `age`, `gender`, `active`, `active_code`) VALUES
+('amir', '$2a$10$Yp5Wv0R9sBPyUlaS0pY0VefrJRrOTHOieoBswWYe4tPSZRA1C.VL2', 'amir.kararaaa@gmail.com', 12344455, '1231231312', 'amir', 'karara', 21, 'male', b'1', ''),
+('Anas_Mohamed', 'anasanas123', 'anasmohamed@gmail.com', 1511123623, '5332662665265921', 'Anas', 'Mohamed', 24, 'male', b'1', ''),
+('Farida_Omar', 'farida123456', 'faridaomar@yahool.com', 1012100252, '5332225826245445', 'Farida', 'Omar', 31, 'Female', b'1', ''),
+('karim', '$2a$10$M1bzU518ETQYUdnkAyKmy.YasH/96vJvS8.QADL/aBDpDkv/eATcS', 'karim.shibl97@gmail.com', 123213, '12312312', 'karim', 'shibl', 21, 'male', b'1', ''),
+('Lola_Wael', 'ttfr542', 'lulu97@gmail.com', 2033344999, '868955550011', 'Lola', 'Khalid', 21, 'female', b'1', ''),
+('Mai_Emad', 'mimo987', 'maiemad@gmail.com', 1000595987, '5332265526295266', 'Mai', 'Emad', 26, 'Female', b'1', ''),
+('Mariam_Medhat', 'mariam456456', 'mariam.medhat@gmail.com', 1226655695, '5333269565956210', 'Mariam', 'Medhat', 26, 'female', b'1', ''),
+('Moahmed_Ehab', 'Ehab1234', 'mohamedEhab@gmail.com', 1055215558, '533249998528520', 'Mohamed', 'Ehab', 28, 'male', b'1', ''),
+('Mostafa_Fathy', 'mf147258369', 'm.fathy@gmail.com', 1111897676, '5338224662239266', 'Mostafa', 'Fathy', 29, 'male', b'1', ''),
+('nasr', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'mnmostafa.nasr@gmail.com', 1288975483, '121212', 'mostafa', 'nasr', 21, 'male', b'1', ''),
+('noda', '$2a$10$Hm/0Nnsy8W0gAqkdIQzX.eHHoqBVP7ukrYQ1bF7MtjSrMhpeiFLES', 'amir.karareeeaaa@gmail.com', 12344455, '1231231312', 'amir', 'karara', 21, 'male', b'1', 'LhWjV9bxzXfaq4R3VtyDdbJvDhWF9i4j'),
+('Omar_Gamal', 'omarrrr789', 'omargamal@gmail.com', 1000285558, '5332249758558562', 'Omar', 'Gamal', 31, 'male', b'1', ''),
+('Omar_Mehrez', '0mar2O15', 'omar.moaz@gmail.com', 2121255589, '5111773865203300', 'Omar', 'Mehrez', 33, 'male', b'1', '');
 
 --
 -- Indexes for dumped tables
@@ -658,13 +642,6 @@ INSERT INTO `users` (`username`, `password`, `email`, `phone_number`, `credit_ca
 --
 ALTER TABLE `actors`
   ADD PRIMARY KEY (`name`);
-
---
--- Indexes for table `actors_movies`
---
-ALTER TABLE `actors_movies`
-  ADD PRIMARY KEY (`actor`,`movie`),
-  ADD KEY `movie` (`movie`);
 
 --
 -- Indexes for table `admins`
@@ -761,29 +738,19 @@ ALTER TABLE `users`
 --
 ALTER TABLE `layout`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
   MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `actors_movies`
---
-ALTER TABLE `actors_movies`
-  ADD CONSTRAINT `Actors_Movies_ibfk_1` FOREIGN KEY (`actor`) REFERENCES `actors` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Actors_Movies_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `admins_cinemas`
@@ -793,47 +760,11 @@ ALTER TABLE `admins_cinemas`
   ADD CONSTRAINT `Admins_Cinemas_ibfk_2` FOREIGN KEY (`admin`) REFERENCES `admins` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `halls`
---
-ALTER TABLE `halls`
-  ADD CONSTRAINT `Halls_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Halls_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Halls_ibfk_3` FOREIGN KEY (`layout`) REFERENCES `layout` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `movies`
---
-ALTER TABLE `movies`
-  ADD CONSTRAINT `movies_ibfk_1` FOREIGN KEY (`admin_requested`) REFERENCES `admins_cinemas` (`admin`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `movies_in_cinemas`
 --
 ALTER TABLE `movies_in_cinemas`
   ADD CONSTRAINT `Movies_in_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Movies_in_Cinemas_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `parties`
---
-ALTER TABLE `parties`
-  ADD CONSTRAINT `Parties_ibfk_1` FOREIGN KEY (`hall`,`cinema_name`,`cinema_location`) REFERENCES `halls` (`hall_number`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `promocodes_cinemas`
---
-ALTER TABLE `promocodes_cinemas`
-  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`),
-  ADD CONSTRAINT `Promocodes_Cinemas_ibfk_2` FOREIGN KEY (`promocode`) REFERENCES `promocodes` (`promocode`);
-
---
--- Constraints for table `tickets`
---
-ALTER TABLE `tickets`
-  ADD CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`hall`,`cinema_name`,`cinema_location`) REFERENCES `parties` (`hall`, `cinema_name`, `cinema_location`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Tickets_ibfk_3` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -4,7 +4,6 @@
     
 var express = require('express');
 var router = express.Router();
-
 //Schema Controllers
 
 //-------- USER ---------
@@ -16,6 +15,11 @@ var Search = require('./controllers/SearchController');
 var Movie = require('./controllers/MovieController');
 var Actor = require('./controllers/ActorController');
 var Cinema = require('./controllers/CinemasController');
+
+//----------- Admin ---------------
+var AdminHalls = require('./controllers/AdminHallsController');
+
+var MyMovies = require('./controllers/MyMoviesController');
 var MyMovies = require('./controllers/MyMoviesController');
 
 //----------- Admin ---------------
@@ -26,8 +30,7 @@ var Admin = require('./controllers/MyAdminsController');
 var MoviesInHalls = require('./controllers/MoviesInHallsController');
 var AdminHalls = require('./controllers/AdminHallsController');
 var Promocodes = require('./controllers/PromocodesController');
-var AddCinema = require('./controllers/MyCinemas');
-var editCinema = require('./controllers/MyCinemas');
+var MyCinemas = require('./controllers/MyCinemas');
 
 //please add only routers here, if you need to call a function require its class
 //DONT IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -69,7 +72,7 @@ router.get('/users', User.getUsers);
 
 //------------------------USERS ROUTES-------------------------------
 router.get('/users/viewMyInfo', User.viewMyInfo);
-router.post('/users/editUsers/:username', User.editProfile);
+router.post('/users/editProfile/:username', User.editProfile);
 
 
 
@@ -117,6 +120,7 @@ router.get('/viewMovies1',Search.viewMovies1);
 router.get('/viewMovies0',Search.viewMovies0);
 router.get('/getTopMovies',Search.getTopMovies);
 
+
 //-----------------------------------------------Admin ROUTES----------------------
 
 //-------------------------------------------Halls Routes-----------------------------
@@ -125,7 +129,6 @@ router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_locatio
 router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
 router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
 router.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin/' , AdminHalls.getMoviesInHallsForCinemaForAdmin);
-
 
 
 /* 
@@ -142,16 +145,50 @@ router.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin/' , AdminHalls.g
 //--------------------------------------Admin login------------------------------------------------------//
 router.post('/adminlogin', AuthenticationAdmin.login);
 
+//router.post('/admin/login', Admin.authenticate);
+
+//------------------------------ MyAdmins routes --------------------------------//
+//router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 //------------------------------ MyAdmins routes ----------------------------------//
-router.get('/users', User.getUsers);
 
+router.post('/addBookingUsher',  Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
+router.get('/viewBookingUshers', Authorization.Verify('0101'), Admin.viewBookingUshers);
+router.get('/getBookingUshers', Authorization.Verify('0101'), Admin.getBookingUshers);
+router.post('/getBookingUsher', Authorization.Verify('0101'), Admin.getBookingUsher);
+router.post('/editBookingUsher', Authorization.Verify('1101'), Admin.editBookingUsher);
+router.post('/deleteBookingUsher', Authorization.Verify('1101'), Admin.deleteBookingUsher);
+
+router.get('/viewBranchManagers', Authorization.Verify('1100'), Admin.viewBranchManagers);
+router.get('/getBranchManagers', Authorization.Verify('1100'), Admin.getBranchManagers);
+router.post('/getBranchManager', Authorization.Verify('1100'), Admin.getBranchManager);
+router.post('/editBranchManager', Authorization.Verify('1100'), Admin.editBranchManager);
+router.post('/deleteBranchManager', Authorization.Verify('1100'), Admin.deleteBranchManager);
+
+router.get('/viewCinemaOwners', Authorization.Verify('1000'), Admin.viewCinemaOwners);
+router.get('/getCinemaOwners', Authorization.Verify('1000'), Admin.getCinemaOwners);
+router.post('/getCinemaOwner', Authorization.Verify('1000'), Admin.getCinemaOwner);
+router.post('/editCinemaOwner', Authorization.Verify('1000'), Admin.editCinemaOwner);
+router.post('/deleteCinemaOwner', Authorization.Verify('1000'), Admin.deleteCinemaOwner);
+
+router.post('/getAdmin', Authorization.Verify('0101'), Admin.getAdmin);
+router.get('/viewAdmins', Authorization.Verify('1000'), Admin.getAdmins);
+router.get('/getAdmins', Authorization.Verify('1000'), Admin.viewAdmins);
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminTicket.verifyUnpaidTicket);
 router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
 router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
+
+//-------------------------------------------Halls Routes-----------------------------
+
+router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
+router.post('/admin/adminHalls/assignMovieToHall', Authorization.Verify('1101') ,AdminHalls.assignMovieToHall);
+router.post('/admin/adminHalls/deleteMovieFromHall', Authorization.Verify('1101') , AdminHalls.deleteMovieFromHall);
+router.get('/admin/adminHalls/viewMoviesInHalls/:username/:cinema_name/:cinema_location', AdminHalls.viewMoviesInHalls);
+router.get('/admin/adminHalls/viewCinemasForAdminUser/:username', AdminHalls.viewCinemasForAdminUser);
+router.get('/admin/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name', AdminHalls.getAlltMoviesInCinemaForAdmin);
 
 
 
@@ -207,7 +244,7 @@ router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/
 
 router.get('/promocodes', Authorization.Verify('1000'),Promocodes.viewPromocodes);
 router.post('/promocodes/edit', Authorization.Verify('1000'), Promocodes.editPromocode);
-router.get('/promocodes/viewPromocodesAndCinemas', Authorization.Verify('1000'),Promocodes.viewPromocodesAndCinemas);
+router.get('/promocodes/viewPromocodesAndCinemas', Authorization.Verify('1111'),Promocodes.viewPromocodesAndCinemas);
 router.get('/promocodes/:promocode', Authorization.Verify('1000'),Promocodes.getPromocode);
 router.get('/promocodes/filter/promocode/:promocode', Authorization.Verify('1000'), Promocodes.filterPromocode);
 router.get('/promocodes/filter/cinema/:cinema' ,  Authorization.Verify('1000') , Promocodes.filterCinema);
@@ -235,13 +272,14 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 //As an Admin i can add cinema 
 
-router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
-router.get('/adminviewCinemas',Cinema.ViewCinemas);
-router.post('/addCinema', AddCinema.addCinema);
-router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, editCinema.editCinema); 
+router.get('/adminsearch/:searchKeyword',Authorization.Verify("1100") ,Search.searchByKeyword);
+router.get('/adminviewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
+router.post('/addCinema',Authorization.Verify("1100") , MyCinemas.addCinema);
+router.post('/Cinemas/editCinema/:location/:name',Authorization.Verify("1100") , MyCinemas.editCinema); 
+router.get('/mycinemas/delete/:location/:name',Authorization.Verify("1100") ,MyCinemas.deleteCinemaForAdmin);
 
 // ------------- As an Admin I can Delete a Cinema ----------------
-router.get('/mycinemas/delete/:cinema/:owner',editCinema.deleteCinemaForAdmin);
+
 
 
 

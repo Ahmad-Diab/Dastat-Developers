@@ -14,49 +14,49 @@ export class AdminService extends HttpService {
 
     getAdmin(data){
       console.log(data);
-      return this.post_auth('/getAdmin', data);
+      return this.post_auth('getAdmin', data);
     }
     getAdmins(){
-      return this.get_auth('/getAdmins');
+      return this.get_auth('getAdmins');
     } 
    //----------------Booking Usher---------------------    
     getBookingUshers(){
-      return this.get_auth('/getBookingUshers');
+      return this.get_auth('getBookingUshers');
     }
     getBookingUsher(data){
-      return this.post_auth('/getBookingUsher');
+      return this.post_auth('getBookingUsher');
     }
     editBookingUsher(data){
-      return this.post_auth('/editBookingUsher', data);
+      return this.post_auth('editBookingUsher', data);
     }
     deleteBookingUsher(data){
-      return this.post_auth('/deleteBookingUsher', data);
+      return this.post_auth('deleteBookingUsher', data);
     }
     //----------------Branch Manager-------------------
     getBranchManagers(){
-      return this.get_auth('/getBranchManagers');
+      return this.get_auth('getBranchManagers');
     }
     getBranchManager(data){
-      return this.post_auth('/getBranchManager', data);
+      return this.post_auth('getBranchManager', data);
     }
     editBranchManager(data){
       return this.post_auth('editBranchManager', data);
     }
     deleteBranchManager(data){
-      return this.post_auth('/deleteBranchManager',data);
+      return this.post_auth('deleteBranchManager',data);
     }
 
     //----------------Cinema Owner---------------------
     getCinemaOwners(){
-      return this.get_auth('/getCinemaOwners');
+      return this.get_auth('getCinemaOwners');
     }
     getCinemaOwner(data){
-      return this.post_auth('/getCinemaOwner', data);
+      return this.post_auth('getCinemaOwner', data);
     }
     editCinemaOwner(data){
       return this.post_auth('editCinemaOwner', data);
     }
     deleteCinemaOwner(data){
-      return this.post_auth('/deleteCinemaOwner',data);
+      return this.post_auth('deleteCinemaOwner',data);
     } 
 }

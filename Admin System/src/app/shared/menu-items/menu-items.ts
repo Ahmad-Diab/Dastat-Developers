@@ -115,7 +115,7 @@ export class MenuItems {
         icon: 'basic-photo',
         children: [
           {
-            state: 'requests-ao',
+            state: 'requests-co-bm',
             name: 'Requests'
           }
          ]
@@ -150,7 +150,7 @@ export class MenuItems {
         icon: 'basic-photo',
         children: [
           {
-            state: 'requests-ao',
+            state: 'requests-co-bm',
             name: 'Requests'
           }
          ]

@@ -140,7 +140,17 @@
     </span>
     
   </div>
-
-     
-    
 </ng-template>
+
+<ngb-alert *ngIf="successMessage != null" [dismissible]="false">
+  <strong></strong> {{successMessage}}
+</ngb-alert>
+
+<ngb-alert *ngIf="warningMessage != null" [dismissible]="false">
+  <strong></strong> {{warningMessage}}
+</ngb-alert>
+
+<ngb-alert  *ngIf="errorMessage != null" [dismissible]="false">
+  <strong></strong> {{errorMessage}}
+</ngb-alert>
+   

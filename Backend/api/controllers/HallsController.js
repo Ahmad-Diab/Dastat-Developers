@@ -28,12 +28,13 @@ module.exports.addHall = function(req, res, next){
     var hall = {
         cinema_location : req.body.cinema_location,
         cinema_name     : req.body.cinema_name,
+        hall_number     : req.body.hall_number,
         type            : req.body.type,
         layout          : req.body.layout,
         number_of_seats : req.body.number_of_seats,
         movie : null
       }
-
+      console.log(hall);
       database.query('INSERT INTO halls SET ?', hall, function(error, hall, fields){
           if(error) return next(error);
           res.status(200).json({

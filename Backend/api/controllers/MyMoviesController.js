@@ -13,8 +13,6 @@ module.exports.addRequests = function(req,res,next){
     
     var
         title = req.body['title'];
-        console.log(title);
-       
         duration = req.body['duration'],
         genre = req.body['genre'],
         description = req.body['description'],
@@ -61,9 +59,9 @@ module.exports.addMovies = function(req,res,next){
         status = "ACCEPTED"; 
         
 
-        var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+        var sqlQuery = 'INSERT INTO movies (title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status)  VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
-        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.admin_requested],
+        database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status],
         function (error, results) {
             if (error) {
                 return next(error);
@@ -82,12 +80,13 @@ module.exports.addMovies = function(req,res,next){
 
 ///VIEW ALL OF MY REQUESTS
 module.exports.viewMyRequests =function(req,res,next){
+
     
-    database.query('Select * FROM movies where status = "PENDING" and movies.admin_requested = ?', [req.params.admin_requested],
+database.query('Select * FROM movies where status = "PENDING" and movies.admin_requested = ?', [req.params.admin_requested],
 function(error,results,fields){
     if(error) return next(error);
     if(results.length == 0){
-        return res.send("No Requested Movies found");
+        return res.send("No Requested Movies here okk");
     }
     else{
         return res.send(results);
@@ -101,7 +100,7 @@ function(error,results,fields){
 function(error,results,fields){
     if(error) return next(error);
     if(results.length ==0){
-        return res.send("No Requested Movies found!");
+        return res.send("No Requested Movies nooooo!");
     }
     else{
         return res.send(results);
@@ -147,7 +146,7 @@ module.exports.EditMyRequests=function(req,res,next){
         duration = req.body['duration'],
         genre = req.body['genre'],
         description = req.body['description'],
-        imagePath = req.body['imagepath'],
+        imagePath = req.body['imagePath'],
         cast = req.body.cast['cast'],
         year = req.body['year'],
         feature = req.body['feature'],
@@ -158,55 +157,53 @@ module.exports.EditMyRequests=function(req,res,next){
         database.query('Select * FROM movies where status = "PENDING" AND movies.movie_id = ?', [req.params.movie_id],function(err,results){
             if(err) return next(err);
 
-            var 
+            // var 
   
-            oldGenre = results[0].genre,
-            oldTitle= results[0].title,
-            oldDuration = results[0].duration,
-            oldDescribtion = results[0].description,
-            oldImagePath = results[0].imagepath,
-            oldCast = results[0].cast,
-            oldYear = results[0].year,
-            oldFeature =results[0].feature,
-            oldReleaseDate= results[0].release_date,
-            oldRating = results[0].rating,
-            oldStatus = results[0].status;
+            // oldGenre = results[0].genre,
+            // oldTitle= results[0].title,
+            // oldDuration = results[0].duration,
+            // oldDescribtion = results[0].description,
+            // oldImagePath = results[0].imagepath,
+            // oldCast = results[0].cast,
+            // oldYear = results[0].year,
+            // oldFeature =results[0].feature,
+            // oldReleaseDate= results[0].release_date,
+            // oldRating = results[0].rating,
+            // oldStatus = results[0].status;
 
-            if(title == null){
-                title = oldTitle;
-             }
-             if(genre == null){
-                 genre= oldGenre;
-             } 
-             if(duration==null){
-                 duration = oldDuration;
-             }
-             if(description==null){
-                 description=oldDescribtion;
-             }
-             if(imagePath==null){
-                 imagePath=oldImagePath;
-             }
-             if(cast==null){
-                 cast = oldCast;
-             }
-             if(year==null){
-                 year=oldYear;
-             }
-             if(feature == null){
-                 feature=oldFeature;
-             }
-             if(release_date==null){
-                 release_date ==oldReleaseDate;
-             }
-             if(rating==null){
-                 rating = oldRating;
-             }
-             if(status==null){
-                 status = oldStatus
-             }
-
-
+            // if(title == null){
+            //     title = oldTitle;
+            //  }
+            //  if(genre == null){
+            //      genre= oldGenre;
+            //  } 
+            //  if(duration==null){
+            //      duration = oldDuration;
+            //  }
+            //  if(description==null){
+            //      description=oldDescribtion;
+            //  }
+            //  if(imagePath==null){
+            //      imagePath=oldImagePath;
+            //  }
+            //  if(cast==null){
+            //      cast = oldCast;
+            //  }
+            //  if(year==null){
+            //      year=oldYear;
+            //  }
+            //  if(feature == null){
+            //      feature=oldFeature;
+            //  }
+            //  if(release_date==null){
+            //      release_date ==oldReleaseDate;
+            //  }
+            //  if(rating==null){
+            //      rating = oldRating;
+            //  }
+            //  if(status==null){
+            //      status = oldStatus
+            //  }
              var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
              database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.movie_id],
              function(error,results){
@@ -242,68 +239,69 @@ module.exports.EditMovies=function(req,res,next){
         duration = req.body['duration'],
         genre = req.body['genre'],
         description = req.body['description'],
-        imagePath = req.body['imagepath'],
+        imagePath = req.body['imagePath'],
         cast = req.body.cast['cast'],
         year = req.body['year'],
         feature = req.body['feature'],
         release_date = req.body['release_date'],
         rating = req.body['rating'],
         status = req.body['status'];
+        admin_requested = req.body['admin_requested'];
 
         database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
             if(err) return next(err);
 
-            var 
+            // var 
   
-            oldGenre = results[0].genre,
-            oldTitle= results[0].title,
-            oldDuration = results[0].duration,
-            oldDescribtion = results[0].description,
-            oldImagePath = results[0].imagepath,
-            oldCast = results[0].cast,
-            oldYear = results[0].year,
-            oldFeature =results[0].feature,
-            oldReleaseDate= results[0].release_date,
-            oldRating = results[0].rating,
-            oldStatus = results[0].status;
+            // oldGenre = results[0].genre,
+            // oldTitle= results[0].title,
+            // oldDuration = results[0].duration,
+            // oldDescribtion = results[0].description,
+            // oldImagePath = results[0].imagePath,
+            // oldCast = results[0].cast,
+            // oldYear = results[0].year,
+            // oldFeature =results[0].feature,
+            // oldReleaseDate= results[0].release_date,
+            // oldRating = results[0].rating,
+            // oldStatus = results[0].status;
 
-            if(title == null){
-                title = oldTitle;
-             }
-             if(genre == null){
-                 genre= oldGenre;
-             } 
-             if(duration==null){
-                 duration = oldDuration;
-             }
-             if(description==null){
-                 description=oldDescribtion;
-             }
-             if(imagePath==null){
-                 imagePath=oldImagePath;
-             }
-             if(cast==null){
-                 cast = oldCast;
-             }
-             if(year==null){
-                 year=oldYear;
-             }
-             if(feature == null){
-                 feature=oldFeature;
-             }
-             if(release_date==null){
-                 release_date ==oldReleaseDate;
-             }
-             if(rating==null){
-                 rating = oldRating;
-             }
-             if(status==null){
-                 status = oldStatus
-             }
+            // if(title == null){
+            //     title = oldTitle;
+            //  }
+            //  if(genre == null){
+            //      genre= oldGenre;
+            //  } 
+            //  if(duration==null){
+            //      duration = oldDuration;
+            //  }
+            //  if(description==null){
+            //      description=oldDescribtion;
+            //  }
+            //  if(imagePath==null){
+            //      imagePath=oldImagePath;
+            //  }
+            //  if(cast==null){
+            //      cast = oldCast;
+            //  }
+            //  if(year==null){
+            //      year=oldYear;
+            //  }
+            //  if(feature == null){
+            //      feature=oldFeature;
+            //  }
+            //  if(release_date==null){
+            //      release_date ==oldReleaseDate;
+            //  }
+            //  if(rating==null){
+            //      rating = oldRating;
+            //  }
+            //  if(status==null){
+            //      status = oldStatus
+            //  }
 
 
-             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
-             database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.movie_id],
+             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?,admin_requested=?  WHERE  movies.movie_id = ?';
+             database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested,req.params.movie_id],
              function(error,results){
                  if(error){
                      return next(error);
@@ -354,19 +352,19 @@ module.exports.DeleteMovies = function(req, res, next){
     oldTitle= results[0].title,
     oldDuration = results[0].duration,
     oldDescribtion = results[0].description,
-    oldImagePath = results[0].imagepath,
+    oldImagePath = results[0].imagePath,
     oldCast = results[0].cast,
     oldYear = results[0].year,
     oldFeature =results[0].feature,
     oldReleaseDate= results[0].release_date,
     oldRating = results[0].rating;
-
+    oldStatus = results[0].status;
    
      
      
-       var  status = 'REJECTED';
+       var  status = "REJECTED";
      
-
+if(oldStatus == "PENDING"){
 
      var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
      database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
@@ -379,46 +377,61 @@ module.exports.DeleteMovies = function(req, res, next){
              msg: 'Request Rejected',
              data:results
          });
-        });
+        });}
+        else{
+            return res.status(404).json({
+                err: null,
+                msg: 'This Movie Request is Not Pending',
+                data:results
+            });
+        }
     });
     }
 
 
     //Accept a single Request
-  module.exports.AcceptMovieRequest = function(req, res, next){
-    database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
-        if(err) return next(err);
-    var 
-  
-    oldGenre = results[0].genre,
-    oldTitle= results[0].title,
-    oldDuration = results[0].duration,
-    oldDescribtion = results[0].description,
-    oldImagePath = results[0].imagepath,
-    oldCast = results[0].cast,
-    oldYear = results[0].year,
-    oldFeature =results[0].feature,
-    oldReleaseDate= results[0].release_date,
-    oldRating = results[0].rating;
-
-   
-     
-     
-       var  status = 'ACCEPTED';
-     
-
-
-     var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
-     database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
-     function(error,results){
-         if(error){
-             return next(error);
-         }
-         return res.status(200).json({
-             err: null,
-             msg: 'Request Accepted',
-             data:results
-         });
+    module.exports.AcceptMovieRequest = function(req, res, next){
+        database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
+            if(err) return next(err);
+        var 
+      
+        oldGenre = results[0].genre,
+        oldTitle= results[0].title,
+        oldDuration = results[0].duration,
+        oldDescribtion = results[0].description,
+        oldImagePath = results[0].imagePath,
+        oldCast = results[0].cast,
+        oldYear = results[0].year,
+        oldFeature =results[0].feature,
+        oldReleaseDate= results[0].release_date,
+        oldRating = results[0].rating;
+        oldStatus = results[0].status;
+       
+         
+         
+           var  status = 'ACCEPTED';
+         
+    
+           if(oldStatus == "PENDING"){
+    
+         var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
+         database.query(sqlQuery,[oldTitle,oldDuration,oldGenre,oldDescribtion,oldImagePath,oldCast,oldYear,oldFeature,oldReleaseDate,oldRating,status,req.params.movie_id],
+         function(error,results){
+             if(error){
+                 return next(error);
+             }
+             return res.status(200).json({
+                 err: null,
+                 msg: 'Request Accepted',
+                 data:results
+             });
+            });}
+            else{
+                return res.status(404).json({
+                    err: null,
+                    msg: 'This Movie Request is Not Pending',
+                    data:results
+                });
+            }
         });
-    });
-    }
+        }

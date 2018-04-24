@@ -328,22 +328,22 @@ module.exports.getUpcomingMovies = function(req, res, next){
 
 
 module.exports.getBookings = function(req, res, next){
-    
+
         var username = req.params.username;
-        
+
         var sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';
-    
+
         database.query(sqlBookings,[username], function (error, results) {
             if(error){
                 return next(error);
             }
-    
+
             res.status(200).json({
                 err: null,
                 msg: 'Bookings Successfully Retrieved',
                 data: results
             });
-    
+
         });
     };
 
@@ -456,11 +456,6 @@ module.exports.usePromoCode = function(req, res, next){
   var promocode = req.body.code;
   var cinemaName = req.body.name;
   var cinemaLocation = req.body.location;
-  /*var oldPrice = 2000;
-  console.log(oldPrice);
-  var promocode = '1H4H1LS0W';
-  var cinemaName = 'Pharoahs Cinema';
-  var cinemaLocation = 'Al Haram';*/
   database.query('SELECT promocode FROM Promocodes_Cinemas WHERE promocode = ? AND cinema_name = ? AND cinema_location = ?',
   [promocode, cinemaName, cinemaLocation], function (error, results, fields) {
     if(error) return next(error);

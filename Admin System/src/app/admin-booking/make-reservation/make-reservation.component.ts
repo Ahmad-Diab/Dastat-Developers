@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminTicketService} from "../../@services/admin-ticket.service";
 import {CookieService} from "angular2-cookie/core";
+import {Auth} from "../../@guards/auth.guard";
+import {MoviesInHallsService} from "../../@services/movies-in-halls.service";
 
 @Component({
   selector: 'app-make-reservation',
@@ -25,10 +27,11 @@ export class MakeReservationComponent implements OnInit {
 
   error = null;
 
-  constructor(public adminTicketService: AdminTicketService, public cookie: CookieService) { }
+  constructor(public adminTicketService: AdminTicketService, public MoviesInHallsService: MoviesInHallsService, public cookie: CookieService) { }
 
   ngOnInit() {
-    this.adminUsername = 'app'; // TODO this.cookie.get('adminUsername');
+    let auth = <Auth>(this.cookie.getObject('auth'));
+    this.adminUsername = auth.username;
     this.loadMovies();
 
     this.reserveData = {
@@ -53,6 +56,7 @@ export class MakeReservationComponent implements OnInit {
     //TODO get all movies in halls, using steven's function in the backend, coming from another page
 
     /*
+
     this.moviesList = [{
       cinema_location : 'Mokattam',
       cinema_name : 'Cinema Mawlana',

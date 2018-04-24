@@ -61,11 +61,13 @@
       <span style="align-self: center">{{btn_verifyTicket}}</span>
     </button>
 
+    <button type="button" class="btn btn btn-outline-primary btn-lg btn-icon loading-demo mr-5 mb-lg-1 "
+            [disabled]="ticketCancelled" (click)="cancelTicket($event)">
+
+      <i class="icon icon-basic-bookmark"></i>
+      <span style="align-self: center">Cancel Ticket</span>
+    </button>
+
   </div>
 
 </div>
-
-
-
-
-

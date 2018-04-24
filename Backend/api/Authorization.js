@@ -45,10 +45,13 @@ module.exports.Verify_User = function (req, res, next) {
     }
 
 };
+
+
 //[App Owner][Cinema Owner][Booking Usher][Branch Manager]
 module.exports.Verify = function (data) {
     return function(req, res, next) {
     var allowed = data.split('');
+    console.log(req.headers);
     var tokenHeader = req.headers['authorization'];
     if (typeof tokenHeader !== 'undefined') {
         var tokenheadersplited = tokenHeader.split(' ');

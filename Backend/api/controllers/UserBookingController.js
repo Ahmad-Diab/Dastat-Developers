@@ -212,7 +212,7 @@ module.exports.makeReservation = function(req, res, next){
                 return next(error);
             }
             //console.log(results);
-            if(!results || !results.length) {
+            if(!results || !results.length || results[0].movie !== movie) {
                 return res.status(404).send({
                     err: null,
                     msg: "The assigned hall does not exist.",

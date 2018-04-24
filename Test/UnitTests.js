@@ -795,6 +795,54 @@ describe('Booking Tickets', () => {
                 done();
             });
     });
+
+    it('it should fail, as given movie does not exist in given hall', (done) => {
+        let bookingDetails = {
+            "username": "mai_emad",
+            "cinema_name": "Point 90",
+            "cinema_location": "New Cairo",
+            "date": "2018-04-10",
+            "time": "13:00:00",
+            "hall": "1",        
+            "payment": false,
+            "tickets": [3, 31, 32],
+            "price": 150,
+            "movie": 10,            //NOT ATTACHED MOVIE WITH THE HALL
+            "comment": "abc"
+        };
+        chai.request(server)
+            .post('/api/userBooking/makeReservation')
+            .send(bookingDetails)
+            .end((err, res) => {
+                //console.log(res);
+                res.should.have.status(404);
+                done();
+            });
+    });
+
+    it('it should fail, as no hall exist with this number', (done) => {
+        let bookingDetails = {
+            "username": "mai_emad",
+            "cinema_name": "Point 90",
+            "cinema_location": "New Cairo",
+            "date": "2018-04-10",
+            "time": "13:00:00",
+            "hall": "10",               // NON EXISTING HALL
+            "payment": false,
+            "tickets": [3, 31, 32],
+            "price": 150,
+            "movie": 4,
+            "comment": "abc"
+        };
+        chai.request(server)
+            .post('/api/userBooking/makeReservation')
+            .send(bookingDetails)
+            .end((err, res) => {
+                //console.log(res);
+                res.should.have.status(404);
+                done();
+            });
+    });
 });
 
 

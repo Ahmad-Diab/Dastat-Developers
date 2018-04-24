@@ -82,6 +82,11 @@ export class MenuItems {
      
          
         ]
+      },{
+        state: 'mycinemas',
+        name: 'My Cinemas',
+        type: 'link',
+        icon: 'basic-webpage-multiple'
       })
     }
 
@@ -96,10 +101,15 @@ export class MenuItems {
         icon: 'basic-webpage-multiple',
         children: [
           {
-            state: 'requests-ao',
+            state: 'requests-co-bm',
             name: 'Requests'
           }
          ]
+      },{
+        state: 'mycinemas',
+        name: 'My Cinemas',
+        type: 'link',
+        icon: 'basic-webpage-multiple'
       })
     }
 
@@ -115,7 +125,7 @@ export class MenuItems {
         icon: 'basic-webpage-multiple',
         children: [
           {
-            state: 'requests-ao',
+            state: 'requests-co-bm',
             name: 'Requests'
           }
          ]

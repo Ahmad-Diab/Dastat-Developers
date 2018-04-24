@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminTicketService} from "../../@services/admin-ticket.service";
 import {CookieService} from "angular2-cookie/core";
 import {Auth} from "../../@guards/auth.guard";
+import {MoviesInHallsService} from "../../@services/movies-in-halls.service";
 
 @Component({
   selector: 'app-make-reservation',
@@ -26,7 +27,7 @@ export class MakeReservationComponent implements OnInit {
 
   error = null;
 
-  constructor(public adminTicketService: AdminTicketService, public cookie: CookieService) { }
+  constructor(public adminTicketService: AdminTicketService, public MoviesInHallsService: MoviesInHallsService, public cookie: CookieService) { }
 
   ngOnInit() {
     let auth = <Auth>(this.cookie.getObject('auth'));
@@ -51,6 +52,8 @@ export class MakeReservationComponent implements OnInit {
 
   loadMovies() {
     //TODO get all movies in halls, using steven's function in the backend, coming from another page
+
+
     this.moviesList = [{
       cinema_location : 'Mokattam',
       cinema_name : 'Cinema Mawlana',
@@ -72,10 +75,34 @@ export class MakeReservationComponent implements OnInit {
       title : 'Tomb Raider',
       imagePath : 'https://image.ibb.co/gq0SH7/Tomb_Raider.jpg'
     }];
-    this.moviesList.sort();
-    this.selectedMovie = this.moviesList[0];
+
+    console.log('selected movie from cookie is: ' + this.selectedMovie);
+    if(!this.selectedMovie) {
+      //In case nothing found in cookie
+      console.log('cookie has no movies');
+      this.selectedMovie = this.moviesList[0];
+    }
     this.selectedHall = this.moviesList[0].hall_number;
     this.loadParties();
+
+/*
+
+    this.MoviesInHallsService.getAlltMoviesInCinemaForAdmin(this.cookie.get('cinema_name') , this.cookie.get('cinema_location'))
+      .subscribe((response) => {
+        this.moviesList = response.data;
+        this.moviesList.sort();
+        this.selectedMovie = this.cookie.get('movie');
+        console.log('selected movie from cookie is: ' + this.selectedMovie);
+
+        if(!this.selectedMovie) {
+          //In case nothing found in cookie
+          console.log('cookie has no movies');
+          this.selectedMovie = this.moviesList[0];
+        }
+        this.selectedHall = this.selectedMovie.hall;
+        this.loadParties();
+      });
+*/
   }
 
   selectMovie(movie) {

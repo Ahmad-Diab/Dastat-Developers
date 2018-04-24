@@ -12,7 +12,7 @@ export class MoviesListComponent implements OnInit {
   movies=[];
 
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
-  public cookie : CookieService) { 
+  public cookie : CookieService,) { 
   }
   
   ngOnInit() {

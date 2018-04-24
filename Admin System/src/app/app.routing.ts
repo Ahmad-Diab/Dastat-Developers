@@ -7,7 +7,7 @@ import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.compon
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
-  canActivate: [AuthGuard],
+  //canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
@@ -71,7 +71,10 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'promocodes',
     loadChildren: './promocodes/promocodes.module#PromocodesModule'
-  }]
+  },{ 
+    path: 'movies',
+    loadChildren: './movies/movies.module#MoviesModule'
+}]
 }, {
   path: '',
   component: AuthLayoutComponent,

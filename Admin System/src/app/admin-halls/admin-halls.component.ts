@@ -27,7 +27,7 @@ export class AdminHallsComponent implements OnInit {
 
 
   //==========FOR TEST===============
-  username = "cinema";
+  username;
   password = "lailalaila123";
   //=================================  
 
@@ -35,10 +35,9 @@ export class AdminHallsComponent implements OnInit {
 
   ngOnInit() {
 
-  //======FOR TEST=======
-    this.cookie.put('username', this.username);
-  //=======FOR TEST======
-
+    var auth = this.cookie.getObject('auth')
+    this.username = auth['username'];
+    console.log(this.username);
     this.editMode = false;
     this.hallService.getCinemasForAdminUser(this.cookie.get('username')).subscribe((response) => {
       this.cinemas = response.data;

@@ -82,6 +82,11 @@ export class MenuItems {
      
          
         ]
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
       })
     }
 
@@ -100,6 +105,11 @@ export class MenuItems {
             name: 'Requests'
           }
          ]
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
       })
     }
 
@@ -119,6 +129,11 @@ export class MenuItems {
             name: 'Requests'
           }
          ]
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
       })
     }
 

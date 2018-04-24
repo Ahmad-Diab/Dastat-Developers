@@ -43,8 +43,12 @@
         <strong style="margin-top: 1px">Promocode</strong>          
         <input #promocode  id="input1" type="text" class="form-control mb-3">
 
-        <strong style="margin-top: 1px">Type</strong>    
-        <input #type id="input1" type="text" class="form-control mb-3"> 
+        <strong style="margin-top: 1px">Choose a type</strong>    
+        <select #type class="form-control">
+          <option value= 'amount' >AMOUNT</option>
+          <option value= 'percentage' >PERCENTAGE</option>
+          <option value= 'package' >PACKAGE</option>
+        </select><br/>
       
         <strong style="margin-top: 1px">Value</strong>    
         <input #value id="input1" type="text" class="form-control mb-3"> 

@@ -30,6 +30,7 @@ import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.compon
 import { AdminBookingModule} from "./admin-booking/admin-booking.module";
 import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promocodes.component';
 import { PromocodesService } from './@services/promocodes.service';
+import { ModalHall } from './hall/modals/hall.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,7 +41,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    MoviesInHallsComponent
+    MoviesInHallsComponent,
+    ModalHall
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
   CinemaslistService, SearchService, PromocodesService, HallService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalHall]
 })
 export class AppModule { }

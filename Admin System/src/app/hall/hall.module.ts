@@ -6,13 +6,15 @@ import { HallRoutes } from './hall.routing';
 import { FormsModule } from '@angular/forms';
 import { HallsComponent } from './halls/halls.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     Ng2SearchPipeModule,
     RouterModule.forChild(HallRoutes),
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   declarations: [LayoutComponent, HallsComponent,]
 })

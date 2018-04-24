@@ -18,4 +18,16 @@ export class HallService extends HttpService{
     users() {
       return this.get_auth('users');
     }
+
+    getHalls() {
+      return this.get_auth('/halls/all'); 
+    }
+
+    deleteHall(data) {
+      return this.post_auth('/halls/deleteHall', data);
+    }
+
+    addHall(data) {
+      return this.post_auth('/halls/add', data);
+    }
 }

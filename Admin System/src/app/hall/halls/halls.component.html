@@ -1,5 +1,9 @@
 <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
+<div *ngIf="alert.active">
+  <ngb-alert [type]="alert.type" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+</div>
+
 <div class="form-group card">
   <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
 </div>
@@ -7,7 +11,7 @@
 <div class="card">
   <div class="card-header">
     Halls
-    <button type="button" (click)="addCompany()" class="btn btn-success mr-1 ml-auto">Add Hall</button>
+    <button type="button" (click)="addHall()" class="btn btn-success mr-1 ml-auto">Add Hall</button>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -30,9 +34,6 @@
               Layout
             </th>
             <th>
-              Movie
-            </th>
-            <th>
               Actions
             </th>
           </tr>
@@ -53,10 +54,7 @@
               <b>{{hall.type}}</b>
             </td>
             <td>
-              {{hall.layout}}
-            </td>
-            <td>
-              {{hall.movie}}
+              {{hall.layout_name}}
             </td>
             <td>
               <div id="actions">

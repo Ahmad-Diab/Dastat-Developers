@@ -25,6 +25,9 @@ export class AdminHallsComponent implements OnInit {
   editMode: boolean;
   closeResult: string;
 
+  errorMessage: string;
+  successMessage: string;
+  warningMessage: string;
 
   //==========FOR TEST===============
   username;
@@ -39,9 +42,15 @@ export class AdminHallsComponent implements OnInit {
     this.username = auth['username'];
     console.log(this.username);
     this.editMode = false;
-    this.hallService.getCinemasForAdminUser(this.cookie.get('username')).subscribe((response) => {
+    this.hallService.getCinemasForAdminUser(this.username).subscribe((response) => {
       this.cinemas = response.data;
-      console.log(this.cinemas);
+
+      if(response.err == null && response.data == [])
+        this.warningMessage = response.msg;
+      else if(response.err == null && response.data != [])
+        this.successMessage = response.msg;
+      else 
+        this.errorMessage = response.msg;
     })
 
   }
@@ -54,6 +63,14 @@ export class AdminHallsComponent implements OnInit {
     
     this.hallService.getHallsForCinema(this.selectedCinema).subscribe((response) => {
       this.halls = response.data;
+      
+      if(response.err == null && response.data == [])
+        this.warningMessage = response.msg;
+      else if(response.err == null && response.data != [])
+        this.successMessage = response.msg;
+      else 
+        this.errorMessage = response.msg;
+
       console.log(response.data);
       //console.log(this.halls);
     });
@@ -64,6 +81,14 @@ export class AdminHallsComponent implements OnInit {
   getMovies(){
     this.hallService.getAlltMoviesInCinemaForAdmin(this.selectedCinema.cinema_name , this.selectedCinema.cinema_location).subscribe((response) => {
       this.selectedCinemaMovies = response.data;
+
+      if(response.err == null && response.data == [])
+        this.warningMessage = response.msg;
+      else if(response.err == null && response.data != [])
+        this.successMessage = response.msg;
+      else 
+        this.errorMessage = response.msg;
+
       //console.log(response.data);
       //console.log(this.halls);
     });
@@ -74,7 +99,7 @@ export class AdminHallsComponent implements OnInit {
     //console.log(this.selectedCinema);
     var data = {
 
-      username: this.cookie.get('username'),
+      username: this.username,
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,
@@ -83,6 +108,14 @@ export class AdminHallsComponent implements OnInit {
     //console.log(data);
     this.hallService.deleteMovieFromHall(data).subscribe((response) => {
       //console.log(response);
+
+      if(response.err == null && response.data == [])
+        this.warningMessage = response.msg;
+      else if(response.err == null && response.data != [])
+        this.successMessage = response.msg;
+      else 
+        this.errorMessage = response.msg;
+
       this.getHalls();
     });
   }
@@ -92,7 +125,7 @@ export class AdminHallsComponent implements OnInit {
     //console.log(this.selectedCinema);
     var data = {
 
-      username: this.cookie.get('username'),
+      username: this.username,
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,
@@ -102,6 +135,14 @@ export class AdminHallsComponent implements OnInit {
     //console.log(data);
     this.hallService.assignMovieToHall(data).subscribe((response) => {
       //console.log(response);
+
+      if(response.err == null && response.data == [])
+        this.warningMessage = response.msg;
+      else if(response.err == null && response.data != [])
+        this.successMessage = response.msg;
+      else 
+        this.errorMessage = response.msg;
+
       this.getHalls();
     });
 
@@ -110,12 +151,20 @@ export class AdminHallsComponent implements OnInit {
 
   viewMoviesInHalls(){
     var data = {
-      username: this.cookie.get('username'),
+      username: this.username,
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location
     }
     this.hallService.viewMoviesInHalls(this.username , this.selectedCinema.cinema_name , this.selectedCinema.cinema_location).subscribe((response)=>{
       this.selectedCinemaHallsMovies = response.data;
+
+      if(response.err == null && response.data == [])
+        this.warningMessage = response.msg;
+      else if(response.err == null && response.data != [])
+        this.successMessage = response.msg;
+      else 
+        this.errorMessage = response.msg;
+        
       console.log(response.data);
     });
 

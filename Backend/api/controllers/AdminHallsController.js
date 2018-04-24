@@ -436,6 +436,7 @@ module.exports.viewCinemasForAdminUser = function(req, res, next){
         [username],function (error, result) {
             if (error) throw error;
             //return res.send(result);
+            console.log(result);
             if(result.length == 0){
     
                 res.status(200).json({

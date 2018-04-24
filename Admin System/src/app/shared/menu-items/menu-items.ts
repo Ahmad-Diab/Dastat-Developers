@@ -105,8 +105,7 @@ export class MenuItems {
         name: 'My Cinemas',
         type: 'link',
         icon: 'basic-webpage-multiple'
-      },
-      {
+      },{
         state: 'halls',
         name: 'halls',
         type: 'link',

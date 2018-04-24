@@ -8,13 +8,16 @@ import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.compon
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
-  //canActivate: [AuthGuard],
+  canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },{
     path: 'halls',
     component: AdminHallsComponent
+  },{
+    path: 'admins',
+    loadChildren: './admins/admins.module#AdminsModule'
   },{
     path: 'email',
     loadChildren: './email/email.module#EmailModule'

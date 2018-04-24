@@ -11,18 +11,18 @@ export class CinemaslistService extends HttpService {
           super(cookie, http);
         }
 
-   filterByNumberOfHalls(hallNumber){
-     return this.get('filterByHall/' + hallNumber);
-   }
-   filterByLocation(location,is3D,is4D){
-    return this.get('filterByLocation/' + location+'/'+ is3D+'/'+is4D);
-  }
   getAllCinemas(){
-    return this.get('adminviewCinemas');
+    return this.get_auth('adminviewCinemas');
   }
-  getDistinctLocation(){
-    return this.get('viewCinema/DistinctLocations');
+  Update(key1: String,key2: String,cinema){
+    console.log(cinema);
+    return this.post_auth('/Cinemas/editCinema/'+key1+'/'+key2,{body:cinema});
   }
-  
-
+  delete(key1: String,key2: String){
+    return this.get_auth('/mycinemas/delete/'+key1+'/'+key2);
+  }
+  addCinema(addedCinema:any){
+    console.log(addedCinema[0]);
+    return this.post_auth('addCinema',{body:addedCinema});
+  }
 }

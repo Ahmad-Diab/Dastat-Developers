@@ -20,9 +20,20 @@ import { AuthGuard } from './@guards/auth.guard';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { HttpService } from './@services/http.service';
 import { AuthService } from './@services/auth.service';
+import { CinemaslistService } from './@services/cinemaslist.service';
+import { SearchService } from './@services/search.service';
 import { HttpModule } from '@angular/http';
 import { AdminHallsComponent } from './admin-halls/admin-halls.component';
 import { HallsService } from './@services/halls.service';
+import { AdminService } from './@services/adminService.service';
+import {AdminTicketService} from "./@services/admin-ticket.service";
+import { MoviesInHallsService } from "./@services/movies-in-halls.service";
+import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
+import { AdminBookingModule} from "./admin-booking/admin-booking.module";
+import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promocodes.component';
+import { PromocodesService } from './@services/promocodes.service';
+import { MoviesService } from './@services/movies.service';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +44,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    AdminHallsComponent
+    AdminHallsComponent,
+    MoviesInHallsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +66,8 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
-  providers: [AuthGuard, CookieService, HttpService, AuthService , HallsService],
+  providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
+  CinemaslistService, SearchService, PromocodesService,MoviesService, HallsService ,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

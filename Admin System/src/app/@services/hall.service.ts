@@ -30,4 +30,20 @@ export class HallService extends HttpService{
     addHall(data) {
       return this.post_auth('/halls/add', data);
     }
+
+    getCinemaLocations() {
+      return this.get_auth('/cinema/location/min');
+    } 
+
+    getCinemasInLocation(data) {
+      return this.get_auth('/cinema/names/min', data);
+    }
+
+    getMinifiedLayouts() {
+      return this.get_auth('/layout/minified');
+    } 
+
+    editHall(data) {
+      return this.post_auth('/halls/update', data);
+    }
 }

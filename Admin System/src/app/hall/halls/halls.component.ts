@@ -25,7 +25,12 @@ export class HallsComponent implements OnInit {
   }
 
   editHall(hall: Hall) {
-
+    const modalRef = this.modalService.open(ModalHall);
+    modalRef.componentInstance.hall = hall;
+    modalRef.result.then((result) => {
+      this.alert = result;
+      this.ngOnInit();
+    });
   } 
 
   addHall() {

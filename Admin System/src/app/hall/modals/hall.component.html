@@ -13,7 +13,7 @@
       <div class="col-10">
         <select (change)="getCinemaNames($event)" class="form-control input" [(ngModel)]="hall.cinema_location" required>
           <option value="0" disabled selected>Select a Location</option>
-          <option *ngFor="let location of locations" [value]="location">{{location}}</option>
+          <option *ngFor="let location of locations" [value]="location.location">{{location.location}}</option>
         </select>
       </div>
     </div>
@@ -21,9 +21,12 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Cinema Names</label>
       <div class="col-10">
-        <select class="form-control input" [(ngModel)]="hall.cinema_name" required>
+
+        <input *ngIf="hall.cinema_location == 0" disabled class="form-control input" value="Please select a Location">
+
+        <select *ngIf="hall.cinema_location != 0" class="form-control input" [(ngModel)]="hall.cinema_name" required>
           <option value="0" disabled selected>Select a Cinema</option>
-          <option *ngFor="let name of names" [value]="name">{{name}}</option>
+          <option *ngFor="let name of names" [value]="name.name">{{name.name}}</option>
         </select>
       </div>
     </div>

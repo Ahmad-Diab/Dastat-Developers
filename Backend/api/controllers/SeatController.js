@@ -25,7 +25,7 @@ module.exports.distinctLocations =  function(req,res,next)
 
 module.exports.getCinemaName =  function(req,res,next)
 {
-  database.query('SELECT * FROM cinemas where cinema_location = ?',req.body.cinema_location,function(error, cinemas, fields){
+  database.query('SELECT name FROM cinemas where location = ?', [req.query.cinema_location] ,function(error, cinemas, fields){
     if(error) return next(error);
     res.send(cinemas);
   })

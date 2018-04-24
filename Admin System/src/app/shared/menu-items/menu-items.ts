@@ -101,17 +101,15 @@ export class MenuItems {
           }
         ]
       },{
-<<<<<<< HEAD
         state: 'mycinemas',
         name: 'My Cinemas',
         type: 'link',
         icon: 'basic-webpage-multiple'
-=======
+      },{
         state: 'halls',
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
->>>>>>> 62bd4ddf9bd2f5c00395edb809fd28c9fadd7067
       })
     }
 
@@ -130,13 +128,11 @@ export class MenuItems {
             name: 'Requests'
           }
          ]
-<<<<<<< HEAD
       },{
         state: 'mycinemas',
         name: 'My Cinemas',
         type: 'link',
         icon: 'basic-webpage-multiple'
-=======
       },
       {
         state: 'admins',
@@ -158,7 +154,6 @@ export class MenuItems {
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
->>>>>>> 62bd4ddf9bd2f5c00395edb809fd28c9fadd7067
       })
     }
 

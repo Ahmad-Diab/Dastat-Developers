@@ -8,7 +8,7 @@ var database = require('../config/db-connection'),
  * A function to show the halls of the requested cinema
  *
  * @param req, data of a cinema
- * @param res, data of all halls which are available in thisc cinema
+ * @param res, data of all halls which are available in this cinema
  */
 
 module.exports.getHallsForThatCinema = function(req, res){
@@ -31,7 +31,7 @@ module.exports.getHallsForThatCinema = function(req, res){
         });
     }
 
-    var sql = "SELECT h.* FROM cinemas c , halls h WHERE c.name = h.cinema_name AND c.location = h.cinema_location AND c.name = ? AND c.location = ?";
+    var sql = 'SELECT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
 
     database.query(sql,[cinema_name , cinema_location],function (err, result) {
         if (err) throw err;
@@ -147,7 +147,7 @@ module.exports.assignMovieToHall = function(req, res, next){
 
     // Verify that hall exists in Cinema
     
-    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+    database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall_number, cinema_location, cinema_name],function (error, results) {
             if (error) {
                 return next(error);
@@ -303,6 +303,211 @@ module.exports.deleteMovieFromHall = function(req, res, next){
     });
 
 };
+
+
+
+/**
+ * A function to handle assigining a movie to a hall
+ * 
+ * @param req, required data for viewing movies in a hall
+ * @param res, results of all movies in this hall
+ * @param next
+ */
+module.exports.viewMoviesInHalls = function(req, res, next){
+    // COMPLETED delete the assigned movie of the requested hall.
+    // COMPLETED User-name validation needs to be done!
+
+    var username = req.params.username,
+        cinema_name = req.params.cinema_name,
+        cinema_location = req.params.cinema_location;
+        
+    // Null Checkers
+    console.log(username+" "+cinema_name+" "+cinema_location);
+    console.log(req.body);
+
+    if(!username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+    if(!cinema_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema name is required.',
+            data: null
+        });
+    }
+    if(!cinema_location) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema location is required.',
+            data: null
+        });
+    }
+
+    // Validations of correct types
+    if(!Validations.isString(cinema_name)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema name data type invalid.',
+            data: null
+        });
+    }
+    if(!Validations.isString(cinema_location)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema location data type invalid.',
+            data: null
+        });
+    }
+
+    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+
+    database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
+        [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            console.log(results);
+            if(!results || results.length == 0) {
+                return res.status(404).send({
+                    err: null,
+                    msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
+                    data: null
+                });
+            }
+    });
+
+    var query = 'select * from movies m Join Halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
+
+    database.query(query,[ cinema_name, cinema_location], function (error, results) {
+        if (error) {
+            return next(error);
+        }
+        return res.status(200).json({
+            err: null,
+            msg: 'Movies in halls of cinema '+cinema_name+', '+cinema_location+' sucessfully retrieved.',
+            data: results
+        });
+
+    });
+
+};
+
+
+/**
+ * A function to return the cinemas that this user related to
+ * 
+ * @param req, required data for viewing cinemas for that user
+ * @param res, results of all cinemas that user works in
+ * @param next
+ */
+module.exports.viewCinemasForAdminUser = function(req, res, next){
+    
+    var username = req.params.username;
+        
+    // Null Checkers
+    console.log(username);
+    console.log(req.body);
+
+    if(!username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+   
+  
+    // Validations of correct types
+    if(!Validations.isString(username)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Invalid data types.',
+            data: null
+        });
+    }
+
+    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+
+    database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
+        [username],function (error, result) {
+            if (error) throw error;
+            //return res.send(result);
+            if(result.length == 0){
+    
+                res.status(200).json({
+                    err: null,
+                    msg: 'You are not assigned to any cinema',
+                    data: result
+                });
+    
+            }
+            else{
+    
+                res.status(200).json({
+                    err: null,
+                    msg: 'Cinemas Successfully Retrieved',
+                    data: result
+                });
+    
+            }
+    });
+
+};
+
+module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
+
+    var cinemaName = req.params.cinema_name;
+    var cinemaLocation = req.params.cinema_location;
+    var currentDate = new Date();
+
+    if(!cinemaName) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Name is required.',
+            data: null
+        });
+    }
+
+    if(!cinemaLocation) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
+
+    var sqlSelection = 'SELECT m.* FROM movies m , movies_in_cinemas h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
+
+    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
+        if(error){
+            return next(error);
+        }
+
+        if(results.length == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No current movies Availiable.',
+                data: results
+            });
+
+        }
+        else{
+
+            res.status(200).json({
+                err: null,
+                msg: 'Movies Successfully Retrieved',
+                data: results
+            });
+
+        }
+
+    });
+  };
 
 
 

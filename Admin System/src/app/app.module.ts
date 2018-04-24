@@ -23,6 +23,8 @@ import { AuthService } from './@services/auth.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { SearchService } from './@services/search.service';
 import { HttpModule } from '@angular/http';
+import { AdminHallsComponent } from './admin-halls/admin-halls.component';
+import { HallsService } from './@services/halls.service';
 import { AdminService } from './@services/adminService.service';
 import {AdminTicketService} from "./@services/admin-ticket.service";
 import { MoviesInHallsService } from "./@services/movies-in-halls.service";
@@ -42,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    AdminHallsComponent,
     MoviesInHallsComponent
   ],
   imports: [
@@ -64,7 +67,7 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
-  CinemaslistService, SearchService, PromocodesService,MoviesService, AdminService],
+  CinemaslistService, SearchService, PromocodesService,MoviesService, HallsService ,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

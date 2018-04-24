@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+﻿-- phpMyAdmin SQL Dump
+-- version 4.7.9
+=======
 -- phpMyAdmin SQL Dump
 -- version 4.6.6deb5
+>>>>>>> master
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
@@ -28,6 +33,9 @@ SET time_zone = "+00:00";
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> master
 
 
 >>>>>>> master

@@ -21,6 +21,7 @@ module.exports.login = function(req, res, next) {
         data: null
       });
     }
+    console.log(username);
     var query = 'SELECT * FROM admins WHERE username = ?';
     database.query(query,[username], function(err, results, fields) {
       if(err) return next(err);

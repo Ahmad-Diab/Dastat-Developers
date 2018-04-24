@@ -155,10 +155,6 @@ module.exports.viewPartiesOfThatMovie = function(req, res){
  */
 module.exports.viewTicketInfo = function(req, res, next){
 
-    console.log('to viewTicketInfo');
-    console.log("username: " + req.headers['username']);
-    console.log('username')
-    console.log(reservation_id);
     let adminUsername = req.headers['username'],
         reservation_id = req.headers['reservation_id'];
     console.log(adminUsername);

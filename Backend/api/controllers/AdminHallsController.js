@@ -73,7 +73,7 @@ module.exports.assignMovieToHall = function(req, res, next){
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
         hall_number = req.body['hall_number'],
-        movie_id = req.headers['username'];
+        movie_id = req.body['movie_id'];
         
     // Null Checkers
     console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number+" "+movie_id)
@@ -147,7 +147,7 @@ module.exports.assignMovieToHall = function(req, res, next){
 
     // Verify that hall exists in Cinema
     
-    database.query('SELECT movie FROM Halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+    database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall_number, cinema_location, cinema_name],function (error, results) {
             if (error) {
                 return next(error);
@@ -380,7 +380,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             }
     });
 
-    var query = 'select * from Movies m Join Halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
+    var query = 'select * from movies m Join Halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
 
     database.query(query,[ cinema_name, cinema_location], function (error, results) {
         if (error) {

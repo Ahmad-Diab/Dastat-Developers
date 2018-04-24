@@ -75,10 +75,7 @@ export class AdminHallsComponent implements OnInit {
     //console.log(this.selectedCinema);
     var data = {
 
-      headers:{
-        'authorization':this.cookie.get('username')
-      },
-
+      username: this.cookie.get('username'),
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,
@@ -96,10 +93,7 @@ export class AdminHallsComponent implements OnInit {
     //console.log(this.selectedCinema);
     var data = {
 
-      headers:{
-        'authorization':this.cookie.get('username')
-      },
-      
+      username: this.cookie.get('username'),
       cinema_name: this.selectedCinema.cinema_name,
       cinema_location: this.selectedCinema.cinema_location,
       hall_number: this.selectedHall.hall_number,

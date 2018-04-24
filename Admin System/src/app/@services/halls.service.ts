@@ -24,11 +24,11 @@ export class HallsService extends HttpService{
   }
 
   deleteMovieFromHall(data){
-    return this.post('/admin/adminHalls/deleteMovieFromHall' , data);
+    return this.post_auth('/admin/adminHalls/deleteMovieFromHall' , data);
   }
 
   assignMovieToHall(data){
-    return this.post('/admin/adminHalls/assignMovieToHall' , data);
+    return this.post_auth('/admin/adminHalls/assignMovieToHall' , data);
   }
 
   viewMoviesInHalls(username,cinema_name,cinema_location){

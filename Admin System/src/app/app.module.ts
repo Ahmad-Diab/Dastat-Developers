@@ -23,9 +23,7 @@ import { AuthService } from './@services/auth.service';
 import { CinemaslistService } from './@services/cinemaslist.service';
 import { SearchService } from './@services/search.service';
 import { HttpModule } from '@angular/http';
-<<<<<<< HEAD
 import { AddAdminService } from './@services/add-admin.service';
-=======
 import { AdminService } from './@services/adminService.service';
 import {AdminTicketService} from "./@services/admin-ticket.service";
 import { MoviesInHallsService } from "./@services/movies-in-halls.service";
@@ -36,7 +34,6 @@ import { PromocodesService } from './@services/promocodes.service';
 import { MoviesService } from './@services/movies.service';
 
 
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -46,11 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-<<<<<<< HEAD
 
-=======
     MoviesInHallsComponent
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
   ],
   imports: [
     BrowserModule,
@@ -71,12 +65,8 @@ export function createTranslateLoader(http: HttpClient) {
     SidebarModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
-<<<<<<< HEAD
-  providers: [AuthGuard, CookieService, HttpService, AuthService, AddAdminService],
-=======
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
-  CinemaslistService, SearchService, PromocodesService,MoviesService, AdminService],
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
+  CinemaslistService, SearchService, PromocodesService,MoviesService, AdminService, AddAdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

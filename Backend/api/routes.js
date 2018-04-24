@@ -220,43 +220,31 @@ router.post('/RejectMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovie
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
 router.post('/AcceptMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovies.AcceptMovieRequest);
 
-<<<<<<< HEAD
 //------------------------------ MyAdmins routes --------------------------------//
 
-router.post('/admin/login', Admin.authenticate);
+//router.post('/admin/login', Admin.authenticate);
 
 router.get('/getAllUsers',Authorization.Verify("1000"),Admin.getAllUsers)
-router.post('/getAdmin', Authorization.Verify("0101"),Admin.getAdmin);
+//router.post('/getAdmin', Authorization.Verify("0101"),Admin.getAdmin);
 
-router.put('/editBookingUsher', Authorization.Verify("1101"),Admin.editBookingUsher);
-router.delete('/deleteBookingUsher', Authorization.Verify("1101"),Admin.deleteBookingUsher);
-router.post('/addBookingUsher', 
-Authorization.Verify("1101"),
-Admin.addBookingUsher);
+//router.put('/editBookingUsher', Authorization.Verify("1101"),Admin.editBookingUsher);
+//router.delete('/deleteBookingUsher', Authorization.Verify("1101"),Admin.deleteBookingUsher);
+router.post('/addBookingUsher', Authorization.Verify("1101"), Admin.addBookingUsher);
 
-router.put('/editBranchManager', Authorization.Verify("1100"),Admin.editBranchManager);
-router.delete('/deleteBranchManager',
- Authorization.Verify("1100"),Admin.deleteBranchManager);
-router.post('/addBranchManager',
-Authorization.Verify("1100"),
-Admin.addBranchManager);
-=======
+//router.put('/editBranchManager', Authorization.Verify("1100"),Admin.editBranchManager);
+//router.delete('/deleteBranchManager', Authorization.Verify("1100"),Admin.deleteBranchManager);
+router.post('/addBranchManager', Authorization.Verify("1100"), Admin.addBranchManager);
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
 router.get('/MoviesInHalls/getAlltMoviesInCinemaForAdmin/:cinema_location/:cinema_name',MoviesInHalls.getAlltMoviesInCinemaForAdmin);
 router.get('/MoviesInHalls/viewCinemasForAdminUser/:username', MoviesInHalls.viewCinemasForAdminUser);
 router.get('/MoviesInHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , MoviesInHalls.getHallsForThatCinema);
 router.get('/MoviesInHalls/getFinalOutput/:movie_id/:movie_id/:cinema_name/:cinema_location' , MoviesInHalls.getFinalOutput);
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 
-<<<<<<< HEAD
-router.put('/editCinemaOwner',Authorization.Verify("1000") ,Admin.editCinemaOwner);
-router.delete('/deleteCinemaOwner', Authorization.Verify("1000"),Admin.deleteCinemaOwner);
-router.post('/addCinemaOwner',
-Authorization.Verify("1000"),
-Admin.addCinemaOwner);
-=======
+//router.put('/editCinemaOwner',Authorization.Verify("1000") ,Admin.editCinemaOwner);
+//router.delete('/deleteCinemaOwner', Authorization.Verify("1000"),Admin.deleteCinemaOwner);
+router.post('/addCinemaOwner', Authorization.Verify("1000"), Admin.addCinemaOwner);
 router.get('/promocodes', Authorization.Verify('1000'),Promocodes.viewPromocodes);
 router.post('/promocodes/edit', Authorization.Verify('1000'), Promocodes.editPromocode);
 router.get('/promocodes/viewPromocodesAndCinemas', Authorization.Verify('1000'),Promocodes.viewPromocodesAndCinemas);
@@ -266,7 +254,6 @@ router.get('/promocodes/filter/cinema/:cinema' ,  Authorization.Verify('1000') ,
 router.post('/promocodes/assignPromocodes', Authorization.Verify('1000') , Promocodes.assignPromocodeToCinema);
 router.post('/promocodes/addPromocode', Authorization.Verify('1000') , Promocodes.addPromocode);
 router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000') , Promocodes.deletePromocode);
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
 
 
 

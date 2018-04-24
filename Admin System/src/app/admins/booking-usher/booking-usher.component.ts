@@ -10,12 +10,17 @@ import { AdminService } from '../../@services/adminService.service';
 })
 export class BookingUsher implements OnInit {
   cinema_name: string;
+  //uname: string;
 
   editing = {};
   rows = [];
 
   constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute) { }
   ngOnInit() {
+    /*var data = {
+      uname: this.cookie.getObject('auth')['username']
+    }
+    console.log(data);*/
     this.adminService.getBookingUshers().subscribe((response)=>{
       this.rows = response;
     });
@@ -23,7 +28,7 @@ export class BookingUsher implements OnInit {
   updateValue(event, cell, cellValue, row) {
     var data = {
       "username":row.username,
-      [cell]:event.target.value
+      [cell]:event.target.value,
     }
     console.log(data);
     this.adminService.editBookingUsher(data).subscribe((response)=>{

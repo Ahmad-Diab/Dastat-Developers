@@ -1,33 +1,20 @@
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-<<<<<<< HEAD
-// import { AuthGuard } from './@guards/auth.guard';
-
-=======
 import { AuthGuard } from './@guards/auth.guard';
 import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
 
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent, 
-  // canActivate: [AuthGuard],
+  canActivate: [AuthGuard],
   children: [{
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
-<<<<<<< HEAD
-  },
-  { 
-    path: 'admin',
-    loadChildren: './add-new-admin/add-new-admin.module#AddNewAdminModule'
-  }, 
-=======
   }, {    
     path: 'admins',
     loadChildren: './admins/admins.module#AdminsModule'
   },
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
   {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
@@ -76,12 +63,6 @@ export const AppRoutes: Routes = [{
   }, {
     path: 'social',
     loadChildren: './social/social.module#SocialModule'
-<<<<<<< HEAD
-  }]
-},
-
-{
-=======
   }, {
     path: 'docs',
     loadChildren: './docs/docs.module#DocsModule'
@@ -96,7 +77,6 @@ export const AppRoutes: Routes = [{
     loadChildren: './movies/movies.module#MoviesModule'
 }]
 }, {
->>>>>>> 54260a05df41dcd2f8cca4c2cc6fac2ff7278c9f
   path: '',
   component: AuthLayoutComponent,
   children: [{

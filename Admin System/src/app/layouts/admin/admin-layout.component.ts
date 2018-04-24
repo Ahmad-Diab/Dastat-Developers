@@ -43,6 +43,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   width = window.innerWidth;
   username: string;
   cinemas = [];
+  isAppOwner = false;
 
   @ViewChild('sidebar') sidebar;
 
@@ -66,6 +67,11 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
+
+    var type = this.cookie.getObject('auth')['type'];
+    if(type === 'App Owner') {
+      this.isAppOwner = true;
+    }
 
     this.promocodesService.getPromocodesAndCinemas().subscribe((response) =>{
       this.cinemas = response.data.cinemaResults;

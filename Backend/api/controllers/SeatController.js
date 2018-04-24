@@ -59,7 +59,7 @@ module.exports.addLayout = function (req, res, next) {
   console.log(req.headers);
 
   var layout = {
-    encoded: req.body.encoding,
+    encoded: req.body.encoded,
     name: req.body.name
   }
   database.query('INSERT INTO layout SET ?', layout, function (error, layout, fields) {
@@ -72,7 +72,7 @@ module.exports.addLayout = function (req, res, next) {
 
 
 module.exports.updateLayout = function (req, res, next) {
-  database.query('UPDATE layout SET encoded = ?, name = ? where id = ? ', [req.body.encoding, req.body.name, req.body.id], function (error, layout, fields) {
+  database.query('UPDATE layout SET encoded = ?, name = ? where id = ? ', [req.body.encoded, req.body.name, req.body.id], function (error, layout, fields) {
     if (error) return next(error);
     res.status(200).json({
       msg: 'Layout Updated Successfully',

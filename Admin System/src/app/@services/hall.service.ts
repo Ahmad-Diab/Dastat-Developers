@@ -51,4 +51,8 @@ export class HallService extends HttpService{
       var url = 'layout/' + data
       return this.get_auth(url);
     }
+
+    editLayout(data) {
+      return this.post_auth('layout/update', data);
+    }
 }

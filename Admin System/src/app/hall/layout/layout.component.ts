@@ -1,9 +1,8 @@
 import { Component, OnInit, trigger, state, style, transition, animate  } from '@angular/core';
 import { HallService } from '../../@services/hall.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Layout } from '../../@objects/layout';
 import { lastDayOfQuarter } from 'date-fns';
-import { jsonpCallbackContext } from '@angular/common/http';
 
 @Component({
   selector: 'app-layout',
@@ -30,7 +29,8 @@ export class LayoutComponent implements OnInit {
   name: string;
 
   constructor(public hallService: HallService,
-  public route: ActivatedRoute) { 
+  public route: ActivatedRoute,
+  public router: Router) { 
     this.route.params.subscribe((params: Params )=> {
       this.mode = params['id'];
     });
@@ -51,29 +51,29 @@ export class LayoutComponent implements OnInit {
 
     encoded = JSON.parse(encoded);
 
-    var array = new Array(encoded.length);
-    for(var i = 0; i < array.length; i++){
-
-      console.log(encoded[i].margin)
+    var array = new Array();
+    for(var i = 0; i < encoded.length; i++){
 
       if(encoded[i].margin){
-        array[i] = new Array();
+        var temp = new Array();
 
         for(var j = 0; j < encoded[i].row.length; j++){
-          array[i].push(false);
+          temp.push(false);
         }
 
-        array[i+1] = new Array();
-      } else {
-        array[i] = new Array();
-      }
+        array.push(temp);
+      } 
+      
+      var temp = new Array();
 
       for(var j = 0; j < encoded[i].row.length; j++){
         if(encoded[i].row[j] == "offset")
-          array[i].push(false);
+          temp.push(false);
         else 
-          array[i].push(true);
+          temp.push(true);
       }
+
+      array.push(temp);
     }
 
     return array;
@@ -147,9 +147,16 @@ export class LayoutComponent implements OnInit {
   save(json) {
     this.layout.encoded = json;
 
-    this.hallService.saveLayout(this.layout).subscribe((response) => {
-      console.log("hall added");
-    })
+    if(this.mode == "add") {
+      this.hallService.saveLayout(this.layout).subscribe((response) => {
+        this.router.navigate(['/hall/layouts']);
+      });
+    } else {
+      this.hallService.editLayout(this.layout).subscribe((response) => {
+        this.router.navigate(['/hall/layouts']);
+      });
+    }
+    
   }
 }
 

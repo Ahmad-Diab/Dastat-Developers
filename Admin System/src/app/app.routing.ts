@@ -16,6 +16,9 @@ export const AppRoutes: Routes = [{
     path: 'halls',
     component: AdminHallsComponent
   },{
+    path: 'admins',
+    loadChildren: './admins/admins.module#AdminsModule'
+  },{
     path: 'email',
     loadChildren: './email/email.module#EmailModule'
   },{

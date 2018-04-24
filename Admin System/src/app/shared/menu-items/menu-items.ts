@@ -101,6 +101,11 @@ export class MenuItems {
           }
         ]
       },{
+        state: 'mycinemas',
+        name: 'My Cinemas',
+        type: 'link',
+        icon: 'basic-webpage-multiple'
+      },{
         state: 'halls',
         name: 'halls',
         type: 'link',
@@ -128,6 +133,27 @@ export class MenuItems {
         name: 'My Cinemas',
         type: 'link',
         icon: 'basic-webpage-multiple'
+      },
+      {
+        state: 'admins',
+        name: 'Admins',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'branchmanager',
+            name: 'Branch managers'
+          },
+          {
+            state: 'bookingusher',
+            name: 'Booking Ushers'
+          }
+        ]
+      },{
+        state: 'halls',
+        name: 'halls',
+        type: 'link',
+        icon: 'ecommerce-gift'
       })
     }
 

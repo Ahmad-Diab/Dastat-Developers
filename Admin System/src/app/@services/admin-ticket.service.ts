@@ -56,6 +56,15 @@ export class AdminTicketService extends HttpService {
       }});
   }
 
+  //-----halls---
+  getMoviesInHallsForCinemaForAdmin(admin_username:String ,cinema_name:String, cinema_location:String) {
+    return this.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin',{ headers: {
+        'username' : admin_username,
+        'cinema_name': cinema_name,
+        'cinema_location': cinema_location
+    }
+    });
+  }
   cancelReservation(reservation_id: number) {
     return this.delete('/tickets/cancelReservation', { headers: {
       //calls cancel reservation delete method to backend and gives it the tickets reservation id
@@ -65,3 +74,6 @@ export class AdminTicketService extends HttpService {
   }
 
 }
+
+
+

@@ -20,9 +20,10 @@ export class UsersService extends HttpService {
     return this.get('users/viewMyInfo',data);
   }
 
-  editProile(username:string, email:string, first_name:string, last_name:string, phone_number:number, age:number) {
-return this.post('users/editProfile'+username, {
-'email': email,
+ //--------------- edit profile mail, first & last name, phone, age using username as id----------------
+  editProfile(email:string,first_name:string, last_name:string, phone_number:number, age:number,username:string) {
+return this.post('users/editProfile/'+username, {
+  'email':email,
 'first_name': first_name,
 'last_name': last_name,
 'phone_number': phone_number,

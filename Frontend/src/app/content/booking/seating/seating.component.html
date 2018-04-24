@@ -25,10 +25,6 @@
           <br>
           <span class="order__descript">and have fun movie time</span>
         </p>
-        <div class="order__control">
-          <a href="#" class="order__control-btn active">Purchase</a>
-          <a href="#" class="order__control-btn">Reserve</a>
-        </div>
       </div>
     </div>
     <div class="order-step-area">
@@ -73,7 +69,7 @@
                 <span *ngFor="let one of temp.row">
                   <span *ngIf="one == 'offset'" id="empty-seat">none</span>
                   <span (click)="select(one.seat.number)">
-                      <span  *ngIf="one.seat" [ngClass]="{'sits-state--not': booked(one.seat.number),'sits-state--your' : isSelected(one.seat.number)}" class="sits__place sits-price--cheap" [attr.data-place]='one.seat.number' data-price='10'>{{one.seat.number}}</span>
+                      <span  *ngIf="one.seat" class="sits__place sits-price--cheap" [attr.data-place]='one.seat.number' data-price='10'>{{one.seat.number}}</span>
                   </span>
                 </span>
               </div>
@@ -85,7 +81,7 @@
 
             <aside class="sits__checked">
               <div class="checked-place">
-                 <span *ngFor="let seat of selected" class="choosen-place {{seat}}">    
+                 <span *ngFor="let seat of selected" class="choosen-place {{seat}}">
                 </span>
               </div>
               <div class="checked-result">
@@ -161,13 +157,6 @@
 
   <div class="clearfix"></div>
   <form id='film-and-time' class="booking-form" method='get' action='book3-buy.html'>
-
-    <input type='text' name='choosen-number' class="choosen-number">
-    <input type='text' name='choosen-number--cheap' class="choosen-number--cheap">
-    <input type='text' name='choosen-number--middle' class="choosen-number--middle">
-    <input type='text' name='choosen-number--expansive' class="choosen-number--expansive">
-    <input type='text' name='choosen-cost' class="choosen-cost">
-    <input type='text' name='choosen-sits' class="choosen-sits">
 
 
     <div class="booking-pagination booking-pagination--margin">

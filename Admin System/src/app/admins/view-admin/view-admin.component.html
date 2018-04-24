@@ -1,0 +1,57 @@
+<input type="cinema_name" class="form-control mb-3" placeholder="Type to filter the name column..." required (keyup)='updateFilter($event)'>
+<ngx-datatable
+  #mydatatable
+  [headerHeight]="40"
+  [limit]="10"
+  [columnMode]="'force'"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [rows]="rows">
+  <ngx-datatable-column name="Cinema Name">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{row.cinema_name}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Username">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        {{row.username}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Email">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        {{row.email}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Type">
+    <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+        {{row.type}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Salary">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        {{row.salary}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="First Name">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{row.first_name}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Last Name">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{row.last_name}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Phone Number">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      
+        {{row.phone_number}}
+     
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Gender">
+    <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+      {{row.gender}}
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

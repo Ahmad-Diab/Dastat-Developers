@@ -37,6 +37,7 @@ export class SigninComponent implements OnInit {
     this.authService.login(data).subscribe((response) => {
       var auth = {
         username: response.username,
+        type: response.type,
         token: response.data
       }
 

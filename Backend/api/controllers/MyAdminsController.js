@@ -10,6 +10,7 @@ var jwt = require('jsonwebtoken');
 
 //------------------------- Admin Login -----------------------------------
 
+
 module.exports.authenticate = function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
@@ -82,42 +83,11 @@ module.exports.authenticate = function(req, res, next) {
     }
     });
 }
-
 //------------------------- View all admins -------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//------------------------- Show Admins working in a certain Cinema -------------------------------
-
-module.exports.getAdmin = function(req, res, next){
-    var cinema_name = req.body.cinema_name;
-    var query = "select DISTINCT cinema_name, username, email, type, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND cinema_name = ?";
-    database.query(query, [cinema_name], function(err, results, fiels) {
+module.exports.getAdmins = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
+    database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);
         return res.send(results);
@@ -127,6 +97,50 @@ module.exports.getAdmin = function(req, res, next){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------- View all admins -------------------------------
+
+
+
+
+
+
+
+module.exports.viewAdmins = function(req, res, next){
+    var query = "select cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+
+//------------------------- Show Admins working in a certain Cinema -------------------------------
+
+module.exports.getAdmin = function(req, res, next){
+    var cinema_name = req.body.cinema_name;
+    console.log(req);
+    var query = "select cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND cinema_name LIKE ?";
+    database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
+        if(err) return next(err);
+        //console.log(results);
+        return res.send(results);
+    });
+}
 
 //------------------------- View all Users -------------------------------
 
@@ -166,35 +180,16 @@ module.exports.getAllUsers = function(req, res, next){
 
 //------------------------- View all Booking ushers -------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.viewBookingUshers = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 //------------------------- Add Booking ushers -------------------------------
-
-
 module.exports.addBookingUsher = function(req,res,next){
     var username = req.body.username;
     var email = req.body.email;
@@ -259,11 +254,29 @@ module.exports.addBookingUsher = function(req,res,next){
 
 //------------------------- Edit Booking ushers -------------------------------
 
+module.exports.getBookingUshers = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+module.exports.getBookingUsher = function(req, res, next){
+    var cinema_name = req.body.cinema_name;
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name like ?";
+    database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+
 module.exports.editBookingUsher = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Booking Usher"';
     database.query(user, [username], function(err, results, fiels) {
-        console.log("tested");
+        //console.log("tested");
         if(err) return next(err);
         if(results.length > 0){
             var email = req.body.email;
@@ -286,8 +299,8 @@ module.exports.editBookingUsher = function(req, res, next){
             database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
             if(err) return next(err);
             return res.send(results);
-            });  
-        }      
+            });
+        }
         else {
             res.status(200).json({
             err: null,
@@ -327,30 +340,14 @@ module.exports.deleteBookingUsher = function(req, res, next){
 
 //------------------------- View all Branch managers -------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.viewBranchManagers = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 
 //------------------------- Add Branch managers -------------------------------
@@ -416,31 +413,26 @@ module.exports.addBranchManager = function(req,res,next){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //------------------------- Edit Branch managers -------------------------------
 
+module.exports.getBranchManagers = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+
+module.exports.getBranchManager = function(req, res, next){
+    var cinema_name = req.body.cinema_name;
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager' AND cinema_name like ?";
+    database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 module.exports.editBranchManager = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Branch Manager"';
@@ -600,33 +592,34 @@ module.exports.addCinemaOwner = function(req,res,next){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.viewCinemaOwners = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, lastName, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 //------------------------- Edit Cinema owners -------------------------------
+
+module.exports.getCinemaOwners = function(req, res, next){
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
+    database.query(query, function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
+module.exports.getCinemaOwner = function(req, res, next){
+    var cinema_name = req.body.cinema_name;
+    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner' AND cinema_name like ?";
+    database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
+        if(err) return next(err);
+        console.log(results);
+        return res.send(results);
+    });
+}
 
 module.exports.editCinemaOwner = function(req, res, next){
     var username = req.body.username;

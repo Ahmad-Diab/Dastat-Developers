@@ -164,6 +164,53 @@ describe('Movie',function(){
 
 
 
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------  
+
+describe('View Admin Requests',function(){
+  it('Admin can view all his requests if there was any',function(done){
+    chai.request("localhost:8000").get("/api/requests/Israa_Yasser")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
+describe('View All Movies Requests',function(){
+  it('App Owner can view all the movies requests sent if there were any',function(done){
+    chai.request("localhost:8000").get('/api/requests/AllSHOW')
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
+describe('View All Movies Of the Database played in all cinema theaters',function(){
+  it('App Owner can view all the movies in the database',function(done){
+    chai.request("localhost:8000").get('/api/viewMovie/viewAllMovies')
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
+
+describe('View the information of a single movie in cinema',function(){
+  it('App Owner can view the information of any movie',function(done){
+    chai.request("localhost:8000").get('/api/viewMovie/:movie_id')
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
+
 
 
 
@@ -203,21 +250,94 @@ describe('Movie',function(){
 
 //Youssef Raphail
 
+describe('View All Movies',function(){
+  it('All movies are viewed' , function(done){
+    chai.request("localhost:8000").get("/api/movies/feature")
+    .end(function(req,res){
+      res.should.have.status(200); //Make sure that it is found.
+      res.should.be.json; //Make sure that it is a jason. 
+     done();
+    });
+    });
+});
 
 
 
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
+describe('Delete a specific request',function(){
+  it('CO/BM can delete their own requests',function(done){
+    chai.request("localhost:8000").post("/api/requests/delete/31")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
 
+describe('Edit a specific request',function(){
+  it('CO/BM can edit their own requests',(done)=> {
+    let requestDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/requests/edit/32")
+    .send(requestDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
+describe('Delete a specific movie',function(){
+  it('AO can delete a movie',function(done){
+    chai.request("localhost:8000").post("/api/movie/delete/33")
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
-
-
-
-
-
-
-
-
+describe('Edit a specific movie',function(){
+  it('Ao can edit a movie',(done)=> {
+    let movieDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/requests/edit/34")
+    .send(movieDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
 
 
@@ -267,9 +387,60 @@ describe('Movie',function(){
 
 
 
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
 
 
+describe('Add a request',function(){
+  it('CO/BM can add a request',(done)=> {
+    let requestDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/addRequests/andrew_shady")
+    .send(requestDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
+describe('Add a movie',function(){
+  it('CO/BM can add a movie',(done)=> {
+    let requestDetails = {
+        "title": "mai_emad",
+        "duration": 1,
+        "gerne": "New Cairo",
+        "description": "dxdfs",
+        "imagePath": "asdas",
+        "cast": "asda",
+        "year": 25,
+        "feature": 5,
+        "release_date": "2018-04-01",
+        "rating": 26,
+        "status":"ACCEPTED",
+        "admin_requested":"Israa_Yasser",
+    };
+    chai.request("localhost:8000").post("/api/addMovies")
+    .send(requestDetails)
+    .end(function(req,res){
+      res.should.have.status(200);
+      res.should.be.json;
+      done();
+    });
+  });
+});
 
 
 
@@ -314,6 +485,63 @@ describe('Movie',function(){
 
 
 //Omar Abdelaziz
+
+
+
+//---------------------A D M I N.. U N I T.. T E S T S--------------------------------
+describe('Movie Requests',function(){
+  it('Movie should not be Accepted because it is not pending' , function(done){
+
+    chai.request("localhost:8000").get("/api/AcceptMovieRequest/2")
+    .end(function(req,res){
+      res.should.have.json.status(404);
+      res.should.be.json;
+     done();
+   });
+ });
+
+ it('Movie should be Accepted' , function(done){
+
+  chai.request("localhost:8000").get("/api/AcceptMovieRequest/16")
+  .end(function(req,res){
+    res.should.have.json.status(200);
+    res.should.be.json;
+   done();
+ });
+});
+
+it('Movie should not be Rejected because it is not pending' , function(done){
+
+  chai.request("localhost:8000").get("/api/RejectMovieRequest/2")
+  .end(function(req,res){
+    res.should.have.json.status(404);
+    res.should.be.json;
+   done();
+ });
+});
+
+it('Movie should be Reject' , function(done){
+
+chai.request("localhost:8000").get("/api/RejectMovieRequest/17")
+.end(function(req,res){
+  res.should.have.json.status(200);
+  res.should.be.json;
+ done();
+});
+});
+
+it('Movie Request Shown' , function(done){
+
+  chai.request("localhost:8000").get("/api/ViewMovieRequest/4")
+  .end(function(req,res){
+    res.should.have.json.status(200);
+    res.should.be.json;
+   done();
+  });
+  });
+
+});
+
 
 
 

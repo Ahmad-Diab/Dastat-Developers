@@ -13,6 +13,8 @@ export class EditProfileComponent implements OnInit {
 
   user: User;
   username: string;
+  message;
+  
 
   constructor(public usersService : UsersService,
   public route: ActivatedRoute) {
@@ -31,13 +33,33 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  // onEdit(username : String = ''){
+  //--------------- edit profile mail, first & last name, phone, age using username as id----------------
+  onEdit(email: string, first_name: string, last_name: string, phone_number: number, age: number){
+  
+    if(email == ""){
+      email = this.user.email;
+    }
+    if(first_name == ""){
+      first_name = this.user.first_name;
+    }
+    if(last_name == ""){
+      last_name = this.user.last_name;
+    }
+    if(phone_number == 0){
+      phone_number = this.user.phone_number;
+    }
+    if(age == 0){
+      age = this.user.age;
+    }
+        this.usersService.editProfile(email, first_name,last_name,phone_number,age,this.username).subscribe((response)=>{
+  
+            this.ngOnInit();
+  
+          });  
 
-  //   this.usersService.editProile(username).subscribe((response) => {
-  //     //event.confirm.resolve(response);
-  //     console.log("onReserve order is met");
-  //   });
-  // }
+          
+  
+    }
 
 
 

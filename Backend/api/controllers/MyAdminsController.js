@@ -246,7 +246,10 @@ module.exports.addBookingUsher = function(req,res,next){
 //------------------------- Edit Booking ushers -------------------------------
 
 module.exports.getBookingUshers = function(req, res, next){
+    //var uname = req.body['uname'];
+    //console.log(uname);
     var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name = (select cinema_name from admins_cinemas where admin = ?"+" AND cinema_name = C.cinema_name GROUP BY cinema_name)";
     database.query(query, function(err, results, fiels) {
         if(err) return next(err);
         console.log(results);

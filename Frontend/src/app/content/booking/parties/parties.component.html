@@ -1,5 +1,4 @@
 <section class="container">
-
   <div class="order-container">
     <div class="order">
       <img class="order__images" alt='' src="images/tickets.png">
@@ -57,8 +56,8 @@
         <div *ngFor="let cinema of cinemas">
           <div class="col-xs-6 col-sm-3 cinema-item name">
             <div (click)="updateCinema(cinema)" class="cinema">
-              <a class="cinema__images">
-                <img alt='' src="assets/images/cinema/cinema2.jpg">
+              <a class="cinesma__images">
+                <img alt='' src="{{cinema.imagePath}}">
               </a>
               <a class="cinema-title">{{cinema.name}}</a>
             </div>
@@ -83,34 +82,43 @@
 
     <div style="alignment: right" class="choose-container choose-container--short">
       <div class="datepicker" STYLE="align-content: center">
-        <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
-        <input type="date" id="datepicker" [(ngModel)]="date">
-
+          <mat-form-field>
+              <input [(ngModel)]="dateTemp" matInput [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+      
         <br><br>
         <div class="movie__btns">
-          <a class="btn btn-md btn--warning" (click)="getPartiesAtThisDate(date)">Show Parties <span class="hidden-sm">for this movie</span></a>
+          <a class="btn btn-md btn--warning" (click)="getPartiesAtThisDate(date)">Show Parties for this movie</a>
         </div>
       </div>
 
     </div>
   </div>
-
+ 
   <div class="col-sm-12" >
+    
     <h2 class="page-heading">Pick time</h2>
-    <div *ngFor="let party of parties" class="time-select time-select--wide">
+    <div  class="time-select time-select--wide">
       <div class="time-select__group group--first">
         <div class="col-sm-3">
-          <p class="time-select__place">{{party.cinema_name}}</p>
+          <p class="time-select__place">{{selectedCinema.name}}</p>
         </div>
         <ul class="col-sm-6 items-wrap">
-          <li class="time-select__item" (click)="updateParty(party)">{{party.time}}</li>
+            <mat-button-toggle-group #group="matButtonToggleGroup" >
+            <mat-button-toggle *ngFor="let party of parties" (click)="updateParty(party)"  value='false'>{{party.time}}   </mat-button-toggle>
+
+          </mat-button-toggle-group>
+
         </ul>
       </div>
 
 
     </div>
-  </div>
 
+  </div>
+  
 </section>
 
 <div class="booking-pagination booking-pagination--margin">

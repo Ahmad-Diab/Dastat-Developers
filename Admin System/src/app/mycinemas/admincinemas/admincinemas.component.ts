@@ -89,7 +89,7 @@ export class AdmincinemasComponent implements OnInit {
         return;
       }*/
     }
-    console.log(this.AddedCinema[0])
+    console.log(this.AddedCinema)
     this.cinemalistService.addCinema(this.AddedCinema).subscribe((response) => {  
     });
      this.ngOnInit();

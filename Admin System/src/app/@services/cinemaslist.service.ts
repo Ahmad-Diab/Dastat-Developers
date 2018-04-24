@@ -16,13 +16,13 @@ export class CinemaslistService extends HttpService {
   }
   Update(key1: String,key2: String,cinema){
     console.log(cinema);
-    return this.post_auth('/Cinemas/editCinema/'+key1+'/'+key2,{body:cinema});
+    return this.post_auth('/Cinemas/editCinema/'+key1+'/'+key2,cinema);
   }
   delete(key1: String,key2: String){
     return this.get_auth('/mycinemas/delete/'+key1+'/'+key2);
   }
   addCinema(addedCinema:any){
-    console.log(addedCinema[0]);
-    return this.post_auth('addCinema',{body:addedCinema});
+    console.log(addedCinema);
+    return this.post_auth('addCinema',addedCinema);
   }
 }

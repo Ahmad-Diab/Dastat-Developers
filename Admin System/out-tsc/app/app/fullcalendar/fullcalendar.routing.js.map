@@ -1,1 +1,0 @@
-{"version":3,"file":"fullcalendar.routing.js","sourceRoot":"","sources":["../../../../src/app/fullcalendar/fullcalendar.routing.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,qBAAqB,EAAE,MAAM,0BAA0B,CAAC;AAEjE,MAAM,CAAC,IAAM,kBAAkB,GAAW,CAAC;QACzC,IAAI,EAAE,EAAE;QACR,SAAS,EAAE,qBAAqB;QAChC,IAAI,EAAE;YACJ,OAAO,EAAE,UAAU;SACpB;KACF,CAAC,CAAC"}

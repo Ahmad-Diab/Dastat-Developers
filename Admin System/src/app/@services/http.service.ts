@@ -8,7 +8,7 @@ import { Auth } from '../@guards/auth.guard';
 @Injectable()
 export class HttpService {
 
-  constructor(public cookie: CookieService, 
+  constructor(public cookie: CookieService,
     public http: Http) {}
 
   createAuthorizationHeader(headers: Headers) {
@@ -16,16 +16,22 @@ export class HttpService {
     headers.append('authorization', "token " + auth.token);
   }
 
-  get_auth(route, data?) {    
+  get_auth(route, data?) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.get(environment.api + route, {headers: headers}).pipe(map(res => res.json()));
+    return this.http.get(environment.api + route, {headers: headers, body: data}).pipe(map(res => res.json()));
   }
 
   post_auth(route, data?) {
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
-    return this.http.post(environment.api + route, {headers: headers}, data).pipe(map(res => res.json()));
+    return this.http.post(environment.api + route, data, {headers: headers}).pipe(map(res => res.json()));
+  }
+
+  patch_auth(route, data?) {
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.patch(environment.api + route, data, {headers: headers}).pipe(map(res => res.json()));
   }
 
   get(route, data?) {
@@ -34,5 +40,13 @@ export class HttpService {
 
   post(route, data?) {
     return this.http.post(environment.api + route, data).pipe(map(res => res.json()));
+  }
+
+  patch(route, data?) {
+    return this.http.patch(environment.api + route, data).pipe(map(res => res.json()));
+  }
+
+  delete(route, data?) {
+    return this.http.delete(environment.api + route, data).pipe(map(res => res.json()));
   }
 }

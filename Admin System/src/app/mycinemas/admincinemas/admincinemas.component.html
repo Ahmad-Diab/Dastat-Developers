@@ -8,7 +8,7 @@ All Cinemas
           <div class="card-header">
             Add new Cinema
     </div>
-    <div class="card-body">
+     <div class="card-body">
         <strong style="font-size:20px">name</strong>
         <input id="input1"  [(ngModel)]="AddedCinema[0]" type="text" class="form-control mb-3">
         <strong style="font-size:20px">location</strong>
@@ -29,7 +29,21 @@ All Cinemas
         <input id="input1"  [(ngModel)]="AddedCinema[8]"type="text" class="form-control mb-3">
         <button  type="button" (click) = "AddCinema()" class="btn btn-success mr-1 mb-1">Add</button>
         </div>
-      </div>
+      </div> 
+
+      <!-- <form action="AddCinema()" method="POST">
+        <input type="text" placeholder="location">
+        <input type="text" placeholder="address">
+        <input type="text" placeholder="name">
+        <input type="number" placeholder="number_of_halls">
+        <input type="number" placeholder="is3D">
+        <input type="number" placeholder="is4D">
+        <input type="text" placeholder="company">
+        <input type="url" placeholder="imagePath">
+        <input type="url" placeholder="imagePath2">
+        <button type="submit">Submit</button>
+      </form> -->
+
       <div>
           <button type="button" class="btn btn-success mr-1 mb-1" (click) = "toggleUpdateAction()" *ngIf = "!UpdateAction">Update or Delete Cinema</button>
           <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "toggleUpdateAction()" *ngIf = "UpdateAction">Done Updating Cinema</button>

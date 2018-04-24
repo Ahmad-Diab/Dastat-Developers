@@ -33,6 +33,7 @@ module.exports.login = function(req, res, next) {
           first_name: results[0].first_name,
           last_name: results[0].last_name,
           age: results[0].age,
+          type: results[0].type
         }
         console.log(results[0].active);
         bcrypt.compare(password, results[0].password, function(err, isMatch){
@@ -40,12 +41,15 @@ module.exports.login = function(req, res, next) {
             var token = jwt.sign(user, config.secret, {
               expiresIn: '10d'
             });
+            console.log(token.username);
             res.status(200).json({
               err: null,
               msg: "Logged in successfully",
               token: 'JWT' + token,
               data: token,
-              success: true
+              success: true,
+              username: user.username,
+              type: user.type
             });
           }
       

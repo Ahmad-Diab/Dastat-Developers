@@ -5,6 +5,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 @Injectable()
 export class SearchService extends HttpService{
 
+ 
     constructor(public cookie: CookieService, 
         public http: Http) {
           super(cookie, http);

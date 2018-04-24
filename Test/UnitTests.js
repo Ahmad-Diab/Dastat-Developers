@@ -141,22 +141,37 @@ describe('Layouts', function() {
         });
     });
 
-    it('should add a new layout on /layout/add POST',function(done){ //Just a Custom message to know describe what is the expected output
-                chai.request("localhost:8000").post("/api/halls/add").send({
-                    cinema_location : "New Cairo",
-                    cinema_name : "Point 90",
-                    hall_number : 5,
-                    type : "VIP",
-                    layout : 4,
-                    number_of_seats : 50,
-                    movie: null
-                })
-                .end(function(req,res){
-                  res.should.have.status(200); //response status should be 200 aka found
-                  res.should.be.json; //response type should be json
-                  done();
-                });
-            });
+    it('should add a new Hall on /halls/add POST',function(done){ //Just a Custom message to know describe what is the expected output
+        chai.request("localhost:8000").post("/api/halls/add").send({
+            cinema_location : "New Cairo",
+            cinema_name : "Point 190",
+            hall_number : 8,
+            type : "VIP",
+            layout : 4,
+            number_of_seats : 50,
+            movie: null
+        })
+        .end(function(req,res){
+          res.should.have.status(200); //response status should be 200 aka found
+          res.should.be.json; //response type should be json
+          done();
+        });
+     });
+
+     it('should add a new Hall on /halls/update POST',function(done){ //Just a Custom message to know describe what is the expected output
+        chai.request("localhost:8000").post("/api/halls/update").send({
+            cinema_location : "New Cairo",
+            cinema_name : "Point 190",
+            hall_number : 8,
+            type : "VIP",
+            layout : 4,
+        })
+        .end(function(req,res){
+          res.should.have.status(200); //response status should be 200 aka found
+          res.should.be.json; //response type should be json
+          done();
+        });
+     });
 });
 
 

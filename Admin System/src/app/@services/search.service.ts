@@ -13,7 +13,7 @@ export class SearchService extends HttpService{
 
 
    getSearchResult(key: String){
-     return this.get('adminsearch/' + key);
+     return this.get_auth('adminsearch/' + key);
    }
 
 }

@@ -10,18 +10,29 @@ import {FormControl} from '@angular/forms';
   templateUrl: './admincinemas.component.html',
   styleUrls: ['./admincinemas.component.scss']
 })
-export class AdmincinemasComponent implements OnInit {
 
+export class AdmincinemasComponent implements OnInit {
+  cinematoupdate={ 
+      address:undefined,  
+      number_of_halls:undefined,  
+      is3D: undefined,
+      is4D: undefined  ,
+      company: undefined ,  
+      imagePath: undefined   ,
+      imagePath2: undefined  ,   
+  }
+  AddedCinema=[]; 
   cinemas = [];
-  clickedcinema="";
+  clickedcinema={
+    name:undefined,
+    location:undefined
+  };
   sorting_item;
   searchValue ;
-  locations ;
   AddAction;
   UpdateAction;
   is3D = true;
   is4D = true;
-  AddedCinema; 
   constructor(public cinemalistService: CinemaslistService,
   public router: Router, public route: ActivatedRoute , public searchService : SearchService) { 
 
@@ -38,12 +49,8 @@ export class AdmincinemasComponent implements OnInit {
     });
   }
   ngOnInit() {
-
+     
     this.searchValue = 'All';
-    this.AddedCinema = [];
-    this.cinemalistService.getDistinctLocation().subscribe((response) => {
-      this.locations=response;
-    });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       this.cinemas=response;
       console.log(this.cinemas[0].company);
@@ -51,23 +58,43 @@ export class AdmincinemasComponent implements OnInit {
     });
 
   }
-  
-filter(){
-  var cinema3d = 0;
-  var cinema4d = 0;
-  if(this.is3D) cinema3d = 1;
-  if(this.is4D) cinema4d = 1;
-  this.cinemalistService.filterByLocation(this.searchValue,cinema3d,cinema4d).subscribe((response) => {
-    this.cinemas = response; 
-    console.log(response);
-
-  });
-}
-
-  cinemanav(cinema) {
-    this.router.navigate(['/cinemas', cinema.name, cinema.location]);
+  onupdate(){
+   // console.log(this.cinematoupdate);
+    this.cinemalistService.Update(this.clickedcinema.location,this.clickedcinema.name,this.cinematoupdate).subscribe((response) => {
+      console.log("update");
+      this.ngOnInit();
+   
+    });
   }
-
+  ondelete(){
+    this.cinemalistService.delete(this.clickedcinema.location,this.clickedcinema.name).subscribe((response) => {
+      console.log("delete");
+      this.ngOnInit();
+      this.clickedcinema.name=undefined;
+      this.clickedcinema.location=undefined;
+    });
+  }
+  AddCinema(){
+    for(var i = 0;i <8 ; i++){
+      if(this.AddedCinema[i] == undefined){
+        console.log("FAILLLS");
+        return;
+      }/*if (i==5 &&(this.AddedCinema[i]!="0")){
+           console.log("is3D should be 0 or 1 ");
+           return;
+      }
+      console.log(this.AddedCinema[i]);
+      if (i==6&&(this.AddedCinema[i]!="0"||this.AddedCinema[i]!="1")){
+        console.log("is4D should be 0 or 1 ");
+        return;
+      }*/
+    }
+    console.log(this.AddedCinema)
+    this.cinemalistService.addCinema(this.AddedCinema).subscribe((response) => {  
+    });
+     this.ngOnInit();
+     this.AddedCinema=[];
+}
   toggleAddAction(){
   this.AddAction=!this.AddAction;
   }
@@ -75,18 +102,8 @@ filter(){
     this.UpdateAction=!this.UpdateAction;
     }
   setupdateinputs(Cinema:any){
-    this.clickedcinema=Cinema;
-  }
-  AddCinema(){
-    for(var i = 0;i <8 ; i++){
-      if(this.AddedCinema[i] == undefined){
-        console.log("FAILLLS");
-        return;
-      }
-    }
-    console.log(this.AddedCinema[0])
-    this.cinemalistService.addCinema(this.AddedCinema).subscribe((response) => {  
-    });
+    this.clickedcinema.name=Cinema.name;
+    this.clickedcinema.location=Cinema.location;
   }
 
 }

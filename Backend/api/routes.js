@@ -18,11 +18,13 @@ var Cinema = require('./controllers/CinemasController');
 
 //----------- Admin ---------------
 var AdminHalls = require('./controllers/AdminHallsController');
-
 var MyMovies = require('./controllers/MyMoviesController');
-var MyMovies = require('./controllers/MyMoviesController');
+var Halls = require('./controllers/HallsController');
 
 //----------- Admin ---------------
+var AdminHalls = require('./controllers/AdminHallsController');
+
+var MyMovies = require('./controllers/MyMoviesController');
 var AuthenticationAdmin = require('./controllers/AuthenticatoinAdmin');
 var Authorization = require("./Authorization");
 var adminTicket = require('./controllers/AdminTicketController');
@@ -108,9 +110,12 @@ router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Seating routes--------------------------------------------//
 router.get('/layout/encoding', Seat.getSeats);
-
-
-
+router.get('/layout/minified', Seat.minifiedLayout);
+router.get('/layout/all', Seat.getAllLayouts);
+router.post('/layout/add', Seat.addLayout);
+router.post('/layout/update', Seat.updateLayout);
+router.post('/layout/delete', Seat.deleteLayout);
+router.get('/layout/:id', Seat.getLayout);
 //----------------------------------------------------Viewing routes--------------------------------------------//
 router.get('/viewCinemas',Cinema.ViewCinemas);
 router.get('/viewMovies',Search.viewMovies);
@@ -129,6 +134,8 @@ router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_locatio
 router.patch('/admin/adminHalls/assignMovieToHall', AdminHalls.assignMovieToHall);
 router.delete('/admin/adminHalls/deleteMovieFromHall', AdminHalls.deleteMovieFromHall);
 router.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin/' , AdminHalls.getMoviesInHallsForCinemaForAdmin);
+router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_location/:hall_number', AdminHalls.viewMoviesInHalls);
+
 
 
 /* 
@@ -235,6 +242,14 @@ router.post('/RejectMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovie
 //--------AS AN ADMIN I CAN Accept A SINGLE MOVIE REQUEST--------------
 router.post('/AcceptMovieRequest/:movie_id',Authorization.Verify("1000"),MyMovies.AcceptMovieRequest);
 
+//-------HALLS CRUD OPERATIONS ROUTES---------//
+router.get("/halls/all", Halls.getAllHalls);
+router.get("/halls/view", Halls.getHall);
+router.post("/halls/add", Halls.addHall);
+router.post("/halls/update", Halls.updateHall);
+router.post("/halls/deleteHall", Halls.deleteHall);
+router.get("/cinema/location/min", Seat.distinctLocations);
+router.get("/cinema/names/min", Seat.getCinemaName);
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
 router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name',MoviesInHalls.cinemaMovies);
 router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location' , MoviesInHalls.cinemaHalls);
@@ -253,17 +268,6 @@ router.post('/promocodes/addPromocode', Authorization.Verify('1000') , Promocode
 router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000') , Promocodes.deletePromocode);
 
 
-
-
-
-
-
-
-
-
-
-
-
 //////////////////////////////////////////////////// ADMIN ROUTES ////////////////////////////////////////////////////
 
 
@@ -272,6 +276,15 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 //As an Admin i can add cinema 
 
+router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
+router.get('/adminviewCinemas',Cinema.ViewCinemas);
+router.post('/addCinema', MyCinemas.addCinema);
+router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, MyCinemas.editCinema); 
+
+// ------------- As an Admin I can Delete a Cinema ----------------
+router.get('/mycinemas/delete/:cinema/:owner',MyCinemas.deleteCinemaForAdmin);
+
+
 router.get('/adminsearch/:searchKeyword',Authorization.Verify("1100") ,Search.searchByKeyword);
 router.get('/adminviewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
 router.post('/addCinema',Authorization.Verify("1100") , MyCinemas.addCinema);
@@ -279,6 +292,7 @@ router.post('/Cinemas/editCinema/:location/:name',Authorization.Verify("1100") ,
 router.get('/mycinemas/delete/:location/:name',Authorization.Verify("1100") ,MyCinemas.deleteCinemaForAdmin);
 
 // ------------- As an Admin I can Delete a Cinema ----------------
+
 
 
 

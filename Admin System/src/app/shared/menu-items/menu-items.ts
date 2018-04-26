@@ -21,41 +21,73 @@ export interface Menu {
   children?: ChildrenItems[];
 }
 
-const MENUITEMS =
-  [{
-    state: '/',
-    name: 'HOME',
-    type: 'link',
-    icon: 'basic-accelerator'
-  },
-  {
-    state: 'adminBooking',
-    name: 'Tickets',
-    type: 'sub',
-    icon: 'ecommerce-ticket',
-    children: [
-      {
-        state: 'makeReservation',
-        name: 'MakeReservation'
-      },
-      {
-        state: 'verifyTicket',
-        name: 'Verify or Cancel'
-      }
-    ]
-  },
+// const MENUITEMS =
+//   [{
+//     state: '/',
+//     name: 'HOME',
+//     type: 'link',
+//     icon: 'basic-accelerator'
+//   },
+//   {
+//     state: 'adminBooking',
+//     name: 'Tickets',
+//     type: 'sub',
+//     icon: 'ecommerce-ticket',
+//     children: [
+//       {
+//         state: 'makeReservation',
+//         name: 'MakeReservation'
+//       },
+//       {
+//         state: 'verifyTicket',
+//         name: 'Verify or Cancel'
+//       }
+//     ]
+//   },
  
   
  
-];
+// ];
 
 
 
 @Injectable()
 export class MenuItems {
 
-  constructor(cookie: CookieService) {
-    let type = cookie.getObject('auth')['type'];
+  constructor(public cookie: CookieService) {
+    //
+  }
+
+  getAll(): Menu[] {
+
+    var MENUITEMS = [{
+      state: '/',
+      name: 'HOME',
+      type: 'link',
+      icon: 'basic-accelerator'
+    },
+    {
+      state: 'adminBooking',
+      name: 'Tickets',
+      type: 'sub',
+      icon: 'ecommerce-ticket',
+      children: [
+        {
+          state: 'makeReservation',
+          name: 'MakeReservation'
+        },
+        {
+          state: 'verifyTicket',
+          name: 'Verify or Cancel'
+        }
+      ]
+    },
+   
+    
+   
+  ];
+
+    let type = this.cookie.getObject('auth')['type'];
 
     //APP OWNER SIDEBAR ITEMS
     if(type=='App Owner') {
@@ -110,6 +142,20 @@ export class MenuItems {
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
+      },{
+        state: 'hall',
+        name: 'Halls',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'all',
+            name: 'All Halls'
+          },{
+            state: 'layouts',
+            name: 'All Layouts'
+          }
+        ]
       })
     }
 
@@ -154,6 +200,20 @@ export class MenuItems {
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
+      },{
+        state: 'hall',
+        name: 'Halls',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'all',
+            name: 'All Halls'
+          },{
+            state: 'layouts',
+            name: 'All Layouts'
+          }
+        ]
       })
     }
 
@@ -190,15 +250,23 @@ export class MenuItems {
         name: 'halls',
         type: 'link',
         icon: 'ecommerce-gift'
+      },{
+        state: 'hall',
+        name: 'Halls',
+        type: 'sub',
+        icon: 'basic-star',
+        children: [
+          {
+            state: 'all',
+            name: 'All Halls'
+          },{
+            state: 'layouts',
+            name: 'All Layouts'
+          }
+        ]
       })
     }
 
-
-
-
-    //
-  }
-  getAll(): Menu[] {
     return MENUITEMS;
   }
 

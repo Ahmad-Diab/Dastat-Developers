@@ -44,6 +44,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   username: string;
   cinemas = [];
   isAppOwner = false;
+  menu;
 
   @ViewChild('sidebar') sidebar;
 
@@ -64,9 +65,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-
-    this.menuItems.getAll();
-
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
 
@@ -105,6 +103,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   runOnRouteChange(): void {
+    this.menu = this.menuItems.getAll();
+
     if (this.isOver() || this.router.url === '/maps/fullscreen') {
       this.isOpened = false;
     }
@@ -148,6 +148,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
+    
   }
 
   getChosenCinema(cinema: string) {

@@ -148,13 +148,13 @@ module.exports.verify = function (req, res, next) {
 
 /**
  *
- * @param req
- * @param res
- * @param next
+ * @params req, its body containing username, password, email, phone_number,
+ *              credit_card, first_name, last_name, age, and gender
+ * @params res, next
  * @constructor
  */
 module.exports.Register = function (req, res, next) {
-  console.log("heree");
+
   let username = req.body.username,
       password = req.body.password,
       email = req.body.email,
@@ -176,7 +176,7 @@ module.exports.Register = function (req, res, next) {
             req.body.last_name &&
             req.body.age &&
             req.body.gender;
-  
+
   let query = 'SELECT * FROM users WHERE username = ?';
   database.query(query, [username], function (err, results) {
 

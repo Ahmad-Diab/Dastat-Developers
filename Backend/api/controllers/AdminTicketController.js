@@ -11,7 +11,6 @@ let database = require('../config/db-connection'),
  * @param next, next middleware to handle errors
  */
 module.exports.verifyUnpaidTicket = function(req, res, next){
-    // TODO Check user is admin
 
     let adminUsername = req.body['username'],
         reservation_id = req.body['reservation_id'];
@@ -27,7 +26,7 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
     if(!reservation_id) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema data is required.',
+            msg: 'Reservation id is required.',
             data: null
         });
     }
@@ -46,7 +45,9 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
         if (error) {
             return next(error);
         }
+
         if (results.changedRows) {
+            console.log('ticket verified');
             res.status(200).json({
                 err: null,
                 msg: 'Ticket has been verified successfully.',

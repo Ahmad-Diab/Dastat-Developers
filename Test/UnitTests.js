@@ -803,7 +803,7 @@ describe('Booking Tickets', () => {
             "cinema_location": "New Cairo",
             "date": "2018-04-10",
             "time": "13:00:00",
-            "hall": "1",        
+            "hall": "1",
             "payment": false,
             "tickets": [3, 31, 32],
             "price": 150,

@@ -144,9 +144,9 @@ router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_lo
 
 router.post('/addBookingUsher',  Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
-router.get('/viewBookingUshers', Authorization.Verify('0101'), Admin.viewBookingUshers);
-router.get('/getBookingUshers', Authorization.Verify('0101'), Admin.getBookingUshers);
-router.post('/getBookingUsher', Authorization.Verify('0101'), Admin.getBookingUsher);
+router.get('/viewBookingUshers', Authorization.Verify('1101'), Admin.viewBookingUshers);
+router.get('/getBookingUshers', Authorization.Verify('1101'), Admin.getBookingUshers);
+router.post('/getBookingUsher', Authorization.Verify('1101'), Admin.getBookingUsher);
 router.post('/editBookingUsher', Authorization.Verify('1101'), Admin.editBookingUsher);
 router.post('/deleteBookingUsher', Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
@@ -255,7 +255,7 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 
 
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
-//As an Admin i can add cinema 
+//As an Admin i can add cinema
 
 router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
 router.get('/adminviewCinemas',Cinema.ViewCinemas);

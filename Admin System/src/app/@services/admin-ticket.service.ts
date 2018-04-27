@@ -32,11 +32,9 @@ export class AdminTicketService extends HttpService {
   }
 
   viewTicketInfo(adminUsername:String, reservation_id:String) {
-    console.log(adminUsername);
-    return this.get('tickets/viewTicketInfo',{ headers: {
+    return this.get_auth('tickets/viewTicketInfo',{
         'username': adminUsername,
         'reservation_id': reservation_id
-    }
     });
   }
 
@@ -48,21 +46,20 @@ export class AdminTicketService extends HttpService {
   }
 
   viewPartiesOfThatMovie(admin_username: String, cinema_name:String, cinema_location:String, movie_id: Number) {
-    return this.get('tickets/viewPartiesForThatMovie', { headers: {
+    return this.get_auth('tickets/viewPartiesForThatMovie', {
         'username' : admin_username,
         'cinema_name' : cinema_name,
         'cinema_location' : cinema_location,
         'movie_id' : movie_id
-      }});
+      });
   }
 
   //-----halls---
   getMoviesInHallsForCinemaForAdmin(admin_username:String ,cinema_name:String, cinema_location:String) {
-    return this.get('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin',{ headers: {
+    return this.get_auth('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin',{
         'username' : admin_username,
         'cinema_name': cinema_name,
         'cinema_location': cinema_location
-    }
     });
   }
   cancelReservation(reservation_id: number) {

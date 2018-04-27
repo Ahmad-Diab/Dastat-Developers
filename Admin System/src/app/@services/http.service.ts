@@ -34,6 +34,10 @@ export class HttpService {
     return this.http.patch(environment.api + route, data, {headers: headers}).pipe(map(res => res.json()));
   }
 
+  delete_auth(route, data?) {
+    //TODO
+  }
+
   get(route, data?) {
     return this.http.get(environment.api + route, data).pipe(map(res => res.json()));
   }

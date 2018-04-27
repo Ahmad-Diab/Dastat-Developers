@@ -224,23 +224,9 @@ module.exports.viewTicketInfo = function(req, res, next){
 
 };
 
-
-/**
- * A function to book a ticket for offline user by an admin user
- * @param req, required data for
- * @param res, results of changes on the tickets table in database
- * @param next, next middleware to handle errors
- */
-module.exports.makeReservationByAdmin = function(req, res, next){
-    console.log("I am here to test if I am reaching here");
-    return require('UserBookingController').makeReservation(req, res, next);
-
-};
-
-
 /**
  * A function to cancel a ticket reservation by an admin user
- * @param req, required data for
+ * @param req, id of reservation in headers
  * @param res, results of changes on the tickets table in database
  * @param next, next middleware to handle errors
  */

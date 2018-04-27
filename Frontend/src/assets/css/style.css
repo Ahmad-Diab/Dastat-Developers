@@ -10864,3 +10864,24 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
 }
+.main_title {
+  font: 25px 'aleobold', sans-serif;
+  line-height: 30px;
+  margin-top: 20px;
+  margin-bottom: 23px;
+  text-align: left;
+
+}
+.content {
+  font-size: 15px;
+  line-height: 28px;
+  color: #4c4145;
+  margin-bottom: 8px;
+  margin-left: 10px;
+}
+.strong {
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'aleoitalic', sans-serif;
+}
+

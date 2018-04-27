@@ -21,16 +21,19 @@
        <div class="tags-area">
           <div class="tags tags--unmarked">
               <span class="tags__label">Sorted by:</span>
+              <mat-form-field>
                   <mat-select #sortedBy (change)="SpecifySortingFilter(sortedBy.value)">
-                    <mat-option value="Not sorted">Not sorted</mat-option>
+                    <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="High Rates">High Rates</mat-option>
                     <mat-option value="Low Rates">Low Rates</mat-option>
                     <mat-option value="Latest">Latest</mat-option>
                     <mat-option value="Oldest">Oldest</mat-option>
                   </mat-select>
+                </mat-form-field> <br> 
                   <span class="tags__label">Filtered by Genre:</span>
+                  <mat-form-field>
                   <mat-select #genreFilter (change)="SpecifyGenre(genreFilter.value)">
-                    <mat-option value="No filter" >No filter</mat-option>
+                    <mat-option value="No filter" selected="selected">No filter</mat-option>
                     <mat-option value="Action">Action</mat-option>
                     <mat-option value="Adventure">Adventure</mat-option>
                     <mat-option value="Biography">Biography</mat-option>
@@ -39,6 +42,7 @@
                     <mat-option value="Horror">Horror</mat-option>
                     <mat-option value="Thriller">Thriller</mat-option>
                   </mat-select>
+                  </mat-form-field>
           </div>
       </div>
       

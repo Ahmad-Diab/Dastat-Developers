@@ -31,7 +31,7 @@ export class MoviesListComponent implements OnInit {
   }
   SpecifyGenre(genre : string){
     switch(genre){
-      case "Not sorted" : this.ngOnInit();break;
+      case "No filter" : this.ngOnInit();break;
       case "Action" : this.viewAction();break;
       case "Adventure" : this.viewAdventure();break;
       case "Biography" : this.viewBio();break;

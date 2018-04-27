@@ -18,49 +18,6 @@
 <section class="container">
   <div class="col-sm-12">
       <h2 class="page-heading">Movies</h2>
-      
-      <!-- <div class="select-area">
-          <form class="select" method='get'>
-                <select name="select_item" class="select__sort" tabindex="0">
-                  <option value="1" selected='selected'>London</option>
-                  <option value="2">New York</option>
-                  <option value="3">Paris</option>
-                  <option value="4">Berlin</option>
-                  <option value="5">Moscow</option>
-                  <option value="3">Minsk</option>
-                  <option value="4">Warsawa</option>
-                  <option value="5">Kiev</option>
-              </select>
-          </form>
-
-          <div class="datepicker">
-            <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
-            <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
-          </div>
-
-          <form class="select select--cinema" method='get'>
-                <select name="select_item" class="select__sort" tabindex="0">
-                  <option value="1" selected='selected'>Cineworld</option>
-                  <option value="2">Empire</option>
-                  <option value="3">Everyman</option>
-                  <option value="4">Odeon</option>
-                  <option value="5">Picturehouse</option>
-              </select>
-          </form>
-
-          <form class="select select--film-category" method='get'>
-                <select name="select_item" class="select__sort" tabindex="0">
-                  <option value="2" selected='selected'>Children's</option>
-                  <option value="3">Comedy</option>
-                  <option value="4">Drama</option>
-                  <option value="5">Fantasy</option>
-                  <option value="6">Horror</option>
-                  <option value="7">Thriller</option>
-              </select>
-          </form>
-
-      </div> -->
-
        <div class="tags-area">
           <div class="tags tags--unmarked">
               <span class="tags__label">Sorted by:</span>
@@ -88,11 +45,6 @@
                   <div class="movie__images">
                       <img alt='' src={{movie.imagePath}}>
                   </div>
-                 <!--  <div class="movie__feature">
-                      <a href="#" class="movie__feature-item movie__feature--comment">123</a>
-                      <a href="#" class="movie__feature-item movie__feature--video">7</a>
-                      <a href="#" class="movie__feature-item movie__feature--photo">352</a>
-                  </div> -->
           </div>
 
           <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
@@ -103,8 +55,7 @@
                
                   <p class="movie__option"><strong>Category: </strong><a href="#">{{movie.genre}}</a></p>
                   <p class="movie__option"><strong>Release date: </strong>{{movie.year}}</p>
-                 <!--  <p class="movie__option"><strong>Actors: </strong><a href="#">Robert De Niro</a>, <a href="#">Michael Douglas</a>, <a href="#">Morgan Freeman</a>, <a href="#">Kevin Kline</a>, <a href="#">Mary Steenburgen</a>, <a href="#">Jerry Ferrara</a>, <a href="#">Romany Malco</a> <a href="#">...</a></p>
- -->
+    
                   <div class="movie__btns">
                     <div *ngIf="movie.feature == 2 || movie.feature == 3">
                         <a href='booking/cinemas' class="btn btn-md btn--warning" (click)="GoToReservation(movie)">book a ticket <span class="hidden-sm">for this movie</span></a>

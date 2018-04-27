@@ -3,6 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { throttle } from '@swimlane/ngx-charts/release/utils';
 import { AdminService } from '../../@services/adminService.service';
+import { Admin } from '../../@objects/admin';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Alert } from '../../@objects/alert';
+import { ModalAdmin } from '../modals/admin.component';
+
 @Component({
   selector: 'app-edit',
   templateUrl: './booking-usher.component.html',
@@ -13,9 +18,10 @@ export class BookingUsher implements OnInit {
   //uname: string;
 
   editing = {};
-  rows = [];
+  rows: Admin[];
+  alert: Alert = new Alert();
 
-  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute) { }
+  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
   ngOnInit() {
     /*var data = {
       uname: this.cookie.getObject('auth')['username']
@@ -25,33 +31,33 @@ export class BookingUsher implements OnInit {
       this.rows = response;
     });
   }
-  updateValue(event, cell, cellValue, row) {
-    var data = {
-      "username":row.username,
-      [cell]:event.target.value,
-    }
-    console.log(data);
-    this.adminService.editBookingUsher(data).subscribe((response)=>{
-      console.log(response);
+  updateValue(admin) {
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.admin = admin;
+    modalRef.componentInstance.type = "BU";
+    modalRef.result.then((result) => {
+      this.alert = result;
       this.ngOnInit();
     });
   }
-  deleteRow(event, cell, cellValue, row) {
-    var data = {
-      "username":row.username,
-    }
-    this.adminService.deleteBookingUsher(data).subscribe((response)=>{
-      console.log(response);
+  deleteRow(admin) {
+    this.adminService.deleteBranchManager(admin).subscribe(() => {
+      this.alert = {
+        message: 'Admin Deleted',
+        type: 'success',
+        active: true
+      }
+
       this.ngOnInit();
     });
   }
-  updateFilter(event) {
-    const val = event.target.value;
-    var data = {
-      cinema_name: val
-    }
-    this.adminService.getBookingUsher(data).subscribe((response)=>{
-      this.rows=response;
-    });
-  }
+  // updateFilter(event) {
+  //   const val = event.target.value;
+  //   var data = {
+  //     cinema_name: val
+  //   }
+  //   this.adminService.getBookingUsher(data).subscribe((response)=>{
+  //     this.rows=response;
+  //   });
+  // }
 }

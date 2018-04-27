@@ -27,5 +27,8 @@ ngOnInit(){
 
 putMovieInCookie(){
   this.cookie.putObject('movie' , this.movie);
-}  
+} 
+hey(){
+  console.log("done");
+} 
 }

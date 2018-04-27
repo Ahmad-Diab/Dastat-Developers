@@ -246,6 +246,51 @@ module.exports.makeReservation = function (req, res, next) {
 
 };
 
+/*
+router.post("/users/platform/Notifications",routeValidator.validate({   body:{
+          'start': { isRequired: true },
+          'limit': { isRequired: true }
+       }
+    }),function(req, res) {
+//To calculate Total Count use MySQL count function
+var query = "Select count(*) as TotalCount from ??";
+// Mention table from where you want to fetch records example-users
+var table = ["users"];
+query = mysql.format(query, table);
+connection.query(query, function(err, rows) {
+ if(err){
+   return err;
+ }else{
+
+  //store Total count in variable
+  let totalCount = rows[0].TotalCount
+
+ if(req.body.start == '' || req.body.limit == ''){
+     let startNum = 0;
+     let LimitNum = 10;
+   }
+
+ else{
+     //parse int Convert String to number
+      let startNum = parseInt(req.body.start);
+      let LimitNum = parseInt(req.body.limit);
+   }
+}
+var query = "Select * from ?? ORDER BY created_at DESC limit ? OFFSET ?";
+//Mention table from where you want to fetch records example-users & send limit and start
+var table = ["users",LimitNum,startNum];
+query = mysql.format(query, table);
+connection.query(query, function(err, rest) {
+ if(err){
+  res.json(err);
+}
+else{
+// Total Count varibale display total Count in Db and data display the records
+   res.json("Total Count": totalCount , "data":rest)
+}
+});
+});
+ */
 module.exports.getCurrentMovies = function (req, res, next) {
 
     let currentDate = new Date();
@@ -318,7 +363,9 @@ module.exports.getUpcomingMovies = function (req, res, next) {
  */
 module.exports.getBookings = function (req, res, next) {
 
-    let username = req.params.username;
+    let username = req.params.username,
+        start = req.body.start,
+        limit = req.body.limit;
 
     if (!username) {
         return res.status(422).json({
@@ -328,19 +375,46 @@ module.exports.getBookings = function (req, res, next) {
         });
     }
 
-    let sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';
-    database.query(sqlBookings, [username], function (error, results) {
-        if (error) {
-            return next(error);
-        }
+    let queryForCount = "Select count(*) as TotalCount from ??";
+    queryForCount = database.format(queryForCount, table);
+    database.query(queryForCount, function (err, rows) {
+       if(err)
+           return err;
 
-        res.status(200).json({
-            err: null,
-            msg: 'Bookings Successfully Retrieved',
-            data: results
+       let startNum, limitNum;
+       let totalCount = rows[0]['TotalCount'];
+       if(start === '' || limit === '' ||
+           !start || !limit) {
+           // In case no limits entered, send just few.
+           startNum = 0;
+           limitNum = 10;
+       } else {
+           startNum = parseInt(start);
+           limitNum = parseInt(limit);
+       }
+
+        let sqlBookings = 'SELECT tickets.* ,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id' +
+            'WHERE user=? ORDER BY reservation_id DESC limit ? OFFSET ?';
+        let userAndLimitData = [username, limitNum, startNum];
+        sqlBookings = database.format(sqlBookings, userAndLimitData);
+        //let sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';
+        database.query(sqlBookings, function (error, results) {
+            if (error) {
+                return next(error);
+            }
+
+            res.status(200).json({
+                err: null,
+                msg: 'Bookings Successfully Retrieved',
+                data: results,
+                "totalCount" : totalCount
+            });
+
         });
 
     });
+
+
 };
 
 /**
@@ -533,7 +607,7 @@ module.exports.usePromoCode = function (req, res, next) {
                         }
                     });
                 } else {
-                    
+
                     res.status(200).send({
                         "error": null,
                         "msg": "Promocode success",
@@ -545,4 +619,50 @@ module.exports.usePromoCode = function (req, res, next) {
                 }
             });
         })
+};
+
+//Trying to make a unified example
+paginationExample = function (req, res) {
+
+    let table = req.body['table_name'],
+        start = req.body.start,
+        limit = req.body.limit;
+
+    // To calculate Total Count use MySQL count function
+    let query = "Select count(*) as TotalCount from ??";
+    query = database.format(query, table);
+
+    database.query(query, function (err, rows) {
+        if (err) {
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if (start === '' || limit === '') {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+
+        let query = "Select * from ?? ORDER BY created_at DESC limit ? OFFSET ?";
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = ["users", limitNum, startNum];
+        query = database.format(query, table);
+        database.query(query, function (err, rest) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json({
+                    "Total Count": totalCount,
+                    "data" : rest
+                });
+            }
+        });
+    });
 };

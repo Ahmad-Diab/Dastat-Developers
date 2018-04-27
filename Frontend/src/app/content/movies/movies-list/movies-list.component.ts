@@ -19,6 +19,29 @@ export class MoviesListComponent implements OnInit {
 
     this.viewMovies();
   }
+
+  SpecifySortingFilter(filter : string){
+    switch(filter){
+      case "Not sorted" : this.ngOnInit();break;
+      case "High Rates" : this.viewHighRate();break;
+      case "Low Rates" : this.viewLowRate();break;
+      case "Latest" : this.viewLatest();break;
+      case "Oldest" : this.viewOldest();break;
+    }
+  }
+  SpecifyGenre(genre : string){
+    switch(genre){
+      case "Not sorted" : this.ngOnInit();break;
+      case "Action" : this.viewAction();break;
+      case "Adventure" : this.viewAdventure();break;
+      case "Biography" : this.viewBio();break;
+      case "Comedy" : this.viewComedy();break;
+      case "Drama" : this.viewDrama();break;
+      case "Horror" : this.viewHorror();break;
+      case "Thriller" : this.viewThriller();break;
+       
+    }
+  }
     //----- HERE IS THE FUNCTIONS YOU CALL ON CLICK
     //------ DO NOT FORGET TO IMPLEMENT IT FIRST IN THE SERVICES----
   

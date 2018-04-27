@@ -21,22 +21,25 @@
        <div class="tags-area">
           <div class="tags tags--unmarked">
               <span class="tags__label">Sorted by:</span>
-                  <ul>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='all' (click)="ngOnInit()"> Home</a ></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='all' (click)="viewHighRate()">High Rates</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='release'(click)="viewLowRate()">Low Rates</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='popularity'(click)="viewLatest()">Latest</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='comments'(click)="viewOldest()">Oldest</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewAction()">Action</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewAdventure()">Adventure</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewBio()">Biography</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewComedy()">Comedy</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewDrama()">Drama</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewHorror()">Horror</a></li>
-                      <li class="item-wrap"><a href="#" class="tags__item" data-filter='ending'(click)="viewThriller()">Thriller</a></li>
-                      
-                  </ul>
-          </div>.
+                  <mat-select #sortedBy (change)="SpecifySortingFilter(sortedBy.value)">
+                    <mat-option value="Not sorted">Not sorted</mat-option>
+                    <mat-option value="High Rates">High Rates</mat-option>
+                    <mat-option value="Low Rates">Low Rates</mat-option>
+                    <mat-option value="Latest">Latest</mat-option>
+                    <mat-option value="Oldest">Oldest</mat-option>
+                  </mat-select>
+                  <span class="tags__label">Filtered by Genre:</span>
+                  <mat-select #genreFilter (change)="SpecifyGenre(genreFilter.value)">
+                    <mat-option value="No filter" >No filter</mat-option>
+                    <mat-option value="Action">Action</mat-option>
+                    <mat-option value="Adventure">Adventure</mat-option>
+                    <mat-option value="Biography">Biography</mat-option>
+                    <mat-option value="Comedy">Comedy</mat-option>
+                    <mat-option value="Drama">Drama</mat-option>
+                    <mat-option value="Horror">Horror</mat-option>
+                    <mat-option value="Thriller">Thriller</mat-option>
+                  </mat-select>
+          </div>
       </div>
       
       <!-- Movie preview item -->

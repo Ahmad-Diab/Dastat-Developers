@@ -20,7 +20,7 @@
       <h2 class="page-heading">Movies</h2>
        <div class="tags-area">
           <div class="tags tags--unmarked">
-              <span class="tags__label">Sorted by:</span>
+              <a class="page-heading3">Sorted by:</a>
               <mat-form-field>
                   <mat-select #sortedBy (change)="SpecifySortingFilter(sortedBy.value)">
                     <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
@@ -30,7 +30,7 @@
                     <mat-option value="Oldest">Oldest</mat-option>
                   </mat-select>
                 </mat-form-field> <br> 
-                  <span class="tags__label">Filtered by Genre:</span>
+                  <a class="page-heading3">Filtered by Genre:</a>
                   <mat-form-field>
                   <mat-select #genreFilter (change)="SpecifyGenre(genreFilter.value)">
                     <mat-option value="No filter" selected="selected">No filter</mat-option>

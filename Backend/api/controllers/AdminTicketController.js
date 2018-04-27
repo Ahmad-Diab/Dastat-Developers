@@ -14,6 +14,13 @@ module.exports.verifyUnpaidTicket = function(req, res, next){
 
     let adminUsername = req.body['username'],
         reservation_id = req.body['reservation_id'];
+        
+     if(!Validations.isString(adminUsername))
+        return res.status(422).json({
+          err: null,
+          msg: 'Provided data must be in valid types.',
+          data: null
+      });
 
     // Null Checkers
     if(!adminUsername) {
@@ -108,7 +115,7 @@ module.exports.viewPartiesOfThatMovie = function(req, res){
     // Validations of correct types
     if(!Validations.isString(cinema_name) ||
         !Validations.isString(cinema_location) ||
-        !Validations.isNumber(movie_id)) {
+        !Validations.isNumber(movie_id) || !Validations.isString(admin_username)) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -178,6 +185,14 @@ module.exports.viewTicketInfo = function(req, res, next){
     }
 
     if(!Validations.isNumber(reservation_id)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'reservation_id must be of correct type (number).',
+            data: null
+        });
+    }
+
+    if(!Validations.isString(adminUsername)) {
         return res.status(422).json({
             err: null,
             msg: 'reservation_id must be of correct type (number).',

@@ -1,6 +1,10 @@
 let express = require('express'),
     router = express.Router();
 
+// TODO function to add admins by app owner
+// TODO function admins add other low level admins
+// TODO app owner should view booking ushers
+
 //--------- USER ------------------
 let User = require('./controllers/UserController'),
     Seat = require('./controllers/SeatController'),
@@ -118,6 +122,8 @@ router.get('/getTopMovies',Search.getTopMovies);
 -----------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
 */
+
+// VERIFY OUTLINE => [App Owner][Cinema Owner][Booking Usher][Branch Manager] Ex. Verify("1111")
 
 
 //--------------------------------------Admin login------------------------------------------------------//

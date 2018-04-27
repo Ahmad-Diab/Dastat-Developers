@@ -61,7 +61,7 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
         });
     }
 
-    if(!movie_id) {
+    if (!movie_id) {
         return res.status(422).json({
             err: null,
             msg: 'movie_id is required.',
@@ -132,7 +132,7 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
     let movie_id = req.params['movie_id'],
         date = req.params['date'];
 
-    if(!movie_id) {
+    if (!movie_id) {
         return res.status(422).json({
             err: null,
             msg: 'movie_id is required.',

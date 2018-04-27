@@ -35,11 +35,8 @@ import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promo
 import { PromocodesService } from './@services/promocodes.service';
 import { MoviesService } from './@services/movies.service';
 import { ModalHall } from './hall/modals/hall.component';
-<<<<<<< HEAD
 import { ModalAdmin } from './admins/modals/admin.component';
-=======
 import { NgxPaginationModule } from 'ngx-pagination';
->>>>>>> 49db13e97d7b1a34d8edf39e96bcda6188067292
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

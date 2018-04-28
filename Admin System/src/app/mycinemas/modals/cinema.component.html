@@ -11,16 +11,16 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Cinema Location</label>
       <div class="col-10">
-        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" *ngIf = "add == false" disabled>
-        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" *ngIf = "add == true" required>
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" *ngIf = "!add" disabled>
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" *ngIf = "add" required>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Cinema Name</label>
       <div class="col-10">
-        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" *ngIf = "add == false" disabled>
-        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" *ngIf = "add == true" required>
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" *ngIf = "!add" disabled>
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" *ngIf = "add" required>
       </div>
     </div>
 
@@ -41,10 +41,10 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">3D</label>
       <div class="col-10">
-        <select class="form-control input" [(ngModel)]="cinema.is3D.data[0]" required>
+        <select class="form-control input" [(ngModel)]="cinema.is3D" required>
           <option value="2" disabled>Has 3D Screens?</option>
-          <option value="1">Yes</option>
-          <option value="0">No</option>
+          <option value= "1">Yes</option>
+          <option value= "0">No</option>
         </select>
       </div>
     </div>
@@ -52,10 +52,10 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">4D</label>
       <div class="col-10">
-        <select class="form-control input" [(ngModel)]="cinema.is4D.data[0]" required>
+        <select class="form-control input" [(ngModel)]="cinema.is4D" required>
           <option value="2" disabled>Has 4D Screens?</option>
-          <option value="1">Yes</option>
-          <option value="0">No</option>
+          <option value= "1">Yes</option>
+          <option value= "0">No</option>
         </select>
       </div>
     </div>

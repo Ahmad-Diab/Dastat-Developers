@@ -24,10 +24,12 @@ export class ModalCinema implements OnInit {
         if (this.cinema == undefined) {
             this.add = true;
             this.cinema = new Cinema();
-            this.cinema.is3D = {type: "Buffer", data: Array(1)}
-            this.cinema.is4D = {type: "Buffer", data: Array(1)}
-            this.cinema.is3D.data[0] = 0;
-            this.cinema.is4D.data[0] = 0;
+            // this.cinema.is3D = {type: "Buffer", data: Array(1)}
+            // this.cinema.is4D = {type: "Buffer", data: Array(1)}
+            // this.cinema.is3D.data[0] = 0;
+            // this.cinema.is4D.data[0] = 0;
+            this.cinema.is3D = 0;
+            this.cinema.is4D = 0;
         }
     }
 
@@ -52,7 +54,6 @@ export class ModalCinema implements OnInit {
                 this.activeModal.close(alert);
             });
         } else {
-            console.log(this.cinema.is3D)
             this.cinemalistService.Update(this.cinema.location,this.cinema.name,this.cinema).subscribe(() => {
                 var alert = {
                     message: 'Cinema Edited!',

@@ -28,6 +28,23 @@ export class AdmincinemasComponent implements OnInit {
   ngOnInit() {
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       this.cinemas=response;
+      var i;
+      for (i = 0; i < this.cinemas.length; i++) {
+        if(this.cinemas[i].is3D.data.length == 1){
+          if(this.cinemas[i].is3D.data[0] == "0") {
+            this.cinemas[i].is3D = "0";
+          } else {
+            this.cinemas[i].is3D = "1";
+          }
+        }
+        if(this.cinemas[i].is4D.data.length == 1){
+          if(this.cinemas[i].is4D.data[0] == "0") {
+            this.cinemas[i].is4D = "0";
+          } else {
+            this.cinemas[i].is4D = "1";
+          }
+        }
+      }
     });
   }
   

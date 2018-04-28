@@ -426,9 +426,9 @@ module.exports.getUpcomingMovies = function (req, res, next) {
  */
 module.exports.getBookings = function (req, res, next) {
 
-    let username = req.params.username,
-        start = req.body.start,
-        limit = req.body.limit;
+    let username = req.params['username'],
+        start = req.params['start'],
+        limit = req.params['limit'];
 
     if (!username) {
         return res.status(422).json({
@@ -437,6 +437,9 @@ module.exports.getBookings = function (req, res, next) {
             data: null
         });
     }
+
+    let limitEntered = !(!start || !limit);
+    // TODO send a msg that no limit entered
 
     let queryForCount = "Select count(*) as TotalCount from ??";
     queryForCount = database.format(queryForCount, table);
@@ -470,14 +473,10 @@ module.exports.getBookings = function (req, res, next) {
                 err: null,
                 msg: 'Bookings Successfully Retrieved',
                 data: results,
-                "totalCount": totalCount
+                totalCount: totalCount
             });
-
         });
-
     });
-
-
 };
 
 /**

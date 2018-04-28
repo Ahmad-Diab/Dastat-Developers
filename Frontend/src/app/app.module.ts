@@ -25,7 +25,7 @@ import { SearchService } from './@services/search.service';
 import { PartiesService } from './@services/parties.service';
 import { CinemaInfoService } from './@services/cinema-info.service';
 import {HttpModule} from "@angular/http";
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import {HttpModule} from "@angular/http";
 
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     SharedModule,
     ContentModule,

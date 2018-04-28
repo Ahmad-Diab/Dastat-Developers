@@ -1,9 +1,11 @@
 var mysql = require('mysql');
 var config = require('./config');
 
-var connection = mysql.createPool(config.database_prod);
-connection.getConnection(function() {
-  console.log('successfully connected to the database');
+var connection = mysql.createPool(config.database);
+connection.getConnection(function(err) {
+  if(err)
+    throw err;
+  console.log("successfully connected to the database")
 });
 
 function handleDisconnect(conn) {
@@ -18,8 +20,10 @@ function handleDisconnect(conn) {
     }
 
     console.log('Re-connecting lost connection: ' + err.stack);
-    connection.getConnection(function() {
-      console.log('successfully connected to the database');
+    connection.getConnection(function(err) {
+      if(err)
+        throw err;
+      console.log("successfully connected to the database")
     });
     handleDisconnect(connection);
   });

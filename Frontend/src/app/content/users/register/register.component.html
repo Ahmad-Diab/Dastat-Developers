@@ -16,8 +16,8 @@
         <input type='text' placeholder='First Name'  [(ngModel)]="user.first_name" name="first_name" class="login__input">
         <input type='text' placeholder='Last Name' [(ngModel)]="user.last_name" name="last_name" class="login__input">
         <input type='text' placeholder='Age' [(ngModel)]="user.age" name="age" class="login__input">
-        <select #gender>
-            <option style="display:none;" selected>Select a gender</option>
+        <select [(ngModel)]="user.gender" required>
+            <option value="all" disabled>Select a gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
         </select>
@@ -27,7 +27,7 @@
 
 
     <div class="login__control">
-        <button type='button' class="btn btn-md btn--warning btn--wider" (click)="onRegister(gender.value) ">sign up</button>
+        <button type='button' class="btn btn-md btn--warning btn--wider" (click)="onRegister() ">sign up</button>
 
     </div>
     <form>

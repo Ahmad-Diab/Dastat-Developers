@@ -17,9 +17,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     
   }
-  onRegister(gender:string){
+  onRegister(){
     console.log("hii");
-    this.user.gender = gender;
     if (!this.user.username){
       this.message="please Enter a Username";
       return;

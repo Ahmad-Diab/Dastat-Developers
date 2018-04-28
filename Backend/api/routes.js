@@ -46,7 +46,10 @@ router.post('/register', Authentication.Register);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
-router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
+
+// TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
+router.get('/userBooking/getBookings/:username/:start/:end', UserBooking.getBookings);
+
 router.get('/userBooking/getPartiesInSpecificCinema/:cinema_location/:cinema_name/:movie_id/:date',
     UserBooking.getPartiesOfThatMovieInSpecificCinema);
 router.get('/userBooking/getAllParties/:movie_id/:date', UserBooking.getAllPartiesForThatMovie);

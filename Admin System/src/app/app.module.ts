@@ -36,7 +36,9 @@ import { PromocodesService } from './@services/promocodes.service';
 import { MoviesService } from './@services/movies.service';
 import { ModalHall } from './hall/modals/hall.component';
 import { ModalAdmin } from './admins/modals/admin.component';
+import { ModalCinema } from './mycinemas/modals/cinema.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Cinema } from './@objects/cinema';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -50,7 +52,8 @@ export function createTranslateLoader(http: HttpClient) {
     AdminHallsComponent,
     MoviesInHallsComponent,
     ModalHall,
-    ModalAdmin
+    ModalAdmin,
+    ModalCinema
   ],
   imports: [
     NgxPaginationModule,
@@ -73,8 +76,8 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
-  CinemaslistService, SearchService, PromocodesService, HallService,MoviesService, HallsService ,AdminService],
+  CinemaslistService, SearchService, PromocodesService, HallService,MoviesService, HallsService ,AdminService,Cinema],
   bootstrap: [AppComponent],
-  entryComponents: [ModalHall, ModalAdmin]
+  entryComponents: [ModalHall, ModalAdmin, ModalCinema]
 })
 export class AppModule { }

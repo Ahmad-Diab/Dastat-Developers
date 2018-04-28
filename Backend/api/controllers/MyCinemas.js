@@ -1,5 +1,7 @@
 // OUR DATABASE IS HERE
-let database = require('../config/db-connection');
+let database = require('../config/db-connection'),
+    Validations = require('../utils/validations');
+
 
 module.exports.addCinema = function (req, res, next) {
     let location = req.body[1],
@@ -74,10 +76,40 @@ module.exports.editCinema = function (req, res, next) {
         });
     });
 };
+/**
+ * @param req, cinema_name & cinema_location in params
+ * @param res
+ * @param next
+ */
+module.exports.deleteCinema = function (req, res, next) {
+    let name = req.params['cinema_name'],
+        location = req.params['cinema_location'];
 
-module.exports.deleteCinemaForAdmin = function (req, res, next) {
-    let name = req.params['name'],
-        location = req.params['location'];
+    if (!name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'cinema_name is required.',
+            data: null
+        });
+    }
+
+    if (!date) {
+        return res.status(422).json({
+            err: null,
+            msg: 'cinema_location is required.',
+            data: null
+        });
+    }
+
+    if (!Validations.isString(name) ||
+        !Validations.isDate(date)) {
+
+        return res.status(422).json({
+            err: null,
+            msg: 'Provided data must be in valid types.',
+            data: null
+        });
+    }
 
     database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (error, results) {
         if (error) return next(error);

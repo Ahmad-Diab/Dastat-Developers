@@ -10,7 +10,7 @@ import { CookieService } from 'angular2-cookie/core';
 })
 export class MoviesListComponent implements OnInit {
   movies=[];
-
+  p : number = 1;
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
   public cookie : CookieService,) { 
   }

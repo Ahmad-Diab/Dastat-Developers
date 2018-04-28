@@ -34,6 +34,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/';
 import {MatInputModule} from '@angular/material';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -42,6 +43,7 @@ import {MatInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
+    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

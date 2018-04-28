@@ -5,8 +5,6 @@ let database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
 /**
- * A function to show the cinemas showing the requested movie
- *
  * @param req, movie_id of a movie in params
  * @param res, data of all cinemas which have the movie available
  */
@@ -27,16 +25,12 @@ module.exports.getCinemasForThatMovie = function (req, res) {
         if (err) throw err;
         //return res.send(result);
         if (!result.length) {
-
             res.status(200).json({
                 err: null,
                 msg: 'No cinemas show this movie',
                 data: result
             });
-
-        }
-        else {
-
+        } else {
             res.status(200).json({
                 err: null,
                 msg: 'Cinemas Successfully Retrieved',
@@ -49,21 +43,28 @@ module.exports.getCinemasForThatMovie = function (req, res) {
 
 
 /**
- *  A function to show parties to ordinary user based on his/her choice of
- *  Movie, Cinema, as well as Date (Day).
- * @param req
+ *  Show parties of a movie for a period of 5 days in specific cinema.
+ * @param req, cinema_name, cinema_location, movie_id, date in params
  * @param res
  */
-module.exports.getParties = function (req, res) {
-    let cinemaName = req.params['cinemaName'],
-        movieName = req.params['movieName'],
-        date = req.params['date'],
-        cinemaLocation = req.params['cinemaLocation'];
+module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
+    let cinemaName = req.params['cinema_name'],
+        cinemaLocation = req.params['cinema_location'],
+        movie_id = req.params['movie_id'],
+        date = req.params['date'];
 
     if (!cinemaName || !cinemaLocation) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema data is required.',
+            msg: 'cinema_name, and cinema_location are required required.',
+            data: null
+        });
+    }
+
+    if (!movie_id) {
+        return res.status(422).json({
+            err: null,
+            msg: 'movie_id is required.',
             data: null
         });
     }
@@ -71,7 +72,7 @@ module.exports.getParties = function (req, res) {
     if (!date) {
         return res.status(422).json({
             err: null,
-            msg: 'Party data is required.',
+            msg: 'Party data (date) is required.',
             data: null
         });
     }
@@ -79,7 +80,8 @@ module.exports.getParties = function (req, res) {
     // Validations of correct types
     if (!Validations.isString(cinemaName) ||
         !Validations.isString(cinemaLocation) ||
-        !Validations.isNumber(movieName)) {
+        !Validations.isNumber(movie_id) ||
+        !Validations.isDate(date)) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -92,25 +94,86 @@ module.exports.getParties = function (req, res) {
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
 
-    let query = 'SELECT * FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
-        + ' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ?';
-    //AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
+    let query =
+        'SELECT * ' +
+        'FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name ' +
+        'WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ? AND DATE(p.date) BETWEEN DATE_ADD(CURRENT_DATE, INTERVAL 5 DAY) AND CURRENT_DATE AND p.time > CURRENT_TIME';
 
-    console.log(cinemaName + 'getParties');
-
-    database.query(query, [cinemaName, cinemaLocation, movieName, date], function (err, result) {
+    database.query(query, [cinemaName, cinemaLocation, movie_id, date], function (err, result) {
 
         if (err) throw err;
 
         if (!result.length) {
             res.status(404).json({
                 err: null,
-                msg: 'No parties for this movie at this date',
-                data: null  // null instead of result
+                msg: 'No upcoming parties for this movie in this cinema at this date',
+                data: null
             });
 
         } else {
 
+            res.status(200).json({
+                err: null,
+                msg: 'Parties Successfully Retrieved',
+                data: result
+            });
+
+        }
+    });
+};
+
+
+/**
+ *  Show parties of a movie for a period of 5 days in all Cinemas.
+ * @param req, movie_id, and date in params
+ * @param res
+ */
+module.exports.getAllPartiesForThatMovie = function (req, res) {
+    let movie_id = req.params['movie_id'],
+        date = req.params['date'];
+
+    if (!movie_id) {
+        return res.status(422).json({
+            err: null,
+            msg: 'movie_id is required.',
+            data: null
+        });
+    }
+
+    if (!date) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Party data (date) is required.',
+            data: null
+        });
+    }
+
+    // Validations of correct types
+    if (!Validations.isNumber(movie_id) ||
+        !Validations.isDate(date)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Provided data must be in valid types.',
+            data: null
+        });
+    }
+
+    let query =
+        'SELECT * ' +
+        'FROM halls h JOIN parties p ON h.hall_number = p.hall' +
+        'WHERE h.movie = ? AND DATE(p.date) = ? AND DATE(p.date) BETWEEN DATE_ADD(CURRENT_DATE, INTERVAL 5 DAY) AND CURRENT_DATE AND p.time > CURRENT_TIME';
+
+    database.query(query, [movie_id, date], function (err, result) {
+
+        if (err) throw err;
+
+        if (!result.length) {
+            res.status(404).json({
+                err: null,
+                msg: 'No upcoming parties for this movie in this cinema at this date',
+                data: null
+            });
+        } else {
             res.status(200).json({
                 err: null,
                 msg: 'Parties Successfully Retrieved',
@@ -378,20 +441,20 @@ module.exports.getBookings = function (req, res, next) {
     let queryForCount = "Select count(*) as TotalCount from ??";
     queryForCount = database.format(queryForCount, table);
     database.query(queryForCount, function (err, rows) {
-       if(err)
-           return err;
+        if (err)
+            return err;
 
-       let startNum, limitNum;
-       let totalCount = rows[0]['TotalCount'];
-       if(start === '' || limit === '' ||
-           !start || !limit) {
-           // In case no limits entered, send just few.
-           startNum = 0;
-           limitNum = 10;
-       } else {
-           startNum = parseInt(start);
-           limitNum = parseInt(limit);
-       }
+        let startNum, limitNum;
+        let totalCount = rows[0]['TotalCount'];
+        if (start === '' || limit === '' ||
+            !start || !limit) {
+            // In case no limits entered, send just few.
+            startNum = 0;
+            limitNum = 10;
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
 
         let sqlBookings = 'SELECT tickets.* ,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id' +
             'WHERE user=? ORDER BY reservation_id DESC limit ? OFFSET ?';
@@ -407,7 +470,7 @@ module.exports.getBookings = function (req, res, next) {
                 err: null,
                 msg: 'Bookings Successfully Retrieved',
                 data: results,
-                "totalCount" : totalCount
+                "totalCount": totalCount
             });
 
         });
@@ -660,7 +723,7 @@ paginationExample = function (req, res) {
             } else {
                 res.json({
                     "Total Count": totalCount,
-                    "data" : rest
+                    "data": rest
                 });
             }
         });

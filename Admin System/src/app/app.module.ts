@@ -36,6 +36,8 @@ import { PromocodesService } from './@services/promocodes.service';
 import { MoviesService } from './@services/movies.service';
 import { ModalHall } from './hall/modals/hall.component';
 import { ModalAdmin } from './admins/modals/admin.component';
+import { ModalPromocodes } from './promocodes/modals/promocodes.component';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 
 export function createTranslateLoader(http: HttpClient) {

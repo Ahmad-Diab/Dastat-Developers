@@ -2,7 +2,7 @@
   <div class="order-container">
     <h3>Ticket</h3>
 
-    <div *ngFor="let ticket of tickets" class="ticket">
+    <div *ngFor="let ticket of tickets | paginate : {itemsPerPage: 5, currentPage: p,totalItems: size}" class="ticket">
       <div class="ticket-position">
         <div class="ticket__indecator indecator--pre">
           <div class="indecator-text pre--text">online ticket</div>
@@ -43,6 +43,8 @@
         </div>
       </div>
     </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
 
     <div class="ticket-control">
       <a href="#" class="watchlist list--download">Download</a>

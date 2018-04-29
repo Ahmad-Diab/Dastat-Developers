@@ -470,8 +470,8 @@ module.exports.getBookings = function (req, res, next) {
             res.status(200).json({
                 err: null,
                 msg: 'Bookings Successfully Retrieved',
-                data: results,
-                totalCount: totalCount
+                data: {"results" : results,
+                "totalCount": totalCount}
             });
         });
     });

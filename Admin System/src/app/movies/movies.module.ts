@@ -10,12 +10,14 @@ import { ViewMoviesComponent } from './view-movies/view-movies.component';
 import { InfoEditComponent } from './info-edit/info-edit.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditReqComponent } from './edit-req/edit-req.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
+    Ng2SearchPipeModule,
     RouterModule.forChild(MoviesRouting),
      FormsModule,
      NgbTooltipModule

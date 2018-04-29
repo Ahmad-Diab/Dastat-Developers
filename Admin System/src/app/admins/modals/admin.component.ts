@@ -3,7 +3,6 @@ import { CookieService } from "angular2-cookie/services";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Admin } from "../../@objects/admin";
 import { AdminService } from "../../@services/adminService.service";
-import { HallService } from "../../@services/hall.service";
 
 @Component({
     selector: 'modal-task',
@@ -14,15 +13,13 @@ export class ModalAdmin implements OnInit {
 
     @Input() admin: Admin;
 
-    locations;
-    names;
     type = "";
+    add = false;
 
     constructor(public cookie: CookieService,
         public activeModal: NgbActiveModal,
         public modalService: NgbModal,
-        public adminService: AdminService,
-        public hallService: HallService) { }
+        public adminService: AdminService) { }
 
     ngOnInit() {
 

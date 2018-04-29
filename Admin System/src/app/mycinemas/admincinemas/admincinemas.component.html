@@ -26,6 +26,8 @@
             <th>is3D</th>
             <th>is4D</th>
             <th>company</th>
+            <th>image</th>
+            <th>image 2</th>
             <th>
               Actions
             </th>
@@ -43,6 +45,8 @@
             <td>{{cinema.is3D}}</td>
             <td>{{cinema.is4D}}</td>
             <td>{{cinema.company}}</td>
+            <td><img src={{cinema.imagePath}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage1(cinema)" /></td>
+            <td><img src={{cinema.imagePath2}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage2(cinema)" /></td>
             <td>
               <div id="actions">
                 <a (click)="onupdate(cinema)">

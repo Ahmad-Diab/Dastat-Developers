@@ -14,6 +14,8 @@ export class ModalCinema implements OnInit {
     @Input() cinema: Cinema;
 
     add: boolean;
+    image1: boolean;
+    image2: boolean;
 
     constructor(public cookie: CookieService,
         public activeModal: NgbActiveModal,
@@ -34,11 +36,11 @@ export class ModalCinema implements OnInit {
     }
 
     close() {
-        var alert = {
-            message: 'No Changes Added',
-            type: 'danger',
-            active: true
-        };
+        // var alert = {
+        //     message: 'No Changes Added',
+        //     type: 'danger',
+        //     active: true
+        // };
         this.activeModal.close(alert);
     }
 

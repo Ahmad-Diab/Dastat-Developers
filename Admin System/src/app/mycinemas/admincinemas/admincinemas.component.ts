@@ -78,6 +78,26 @@ export class AdmincinemasComponent implements OnInit {
     });
   }
 
+  openImage1(cinema: Cinema){
+    const modalRef = this.modalService.open(ModalCinema);
+    modalRef.componentInstance.cinema = cinema;
+    modalRef.componentInstance.image1 = true;
+    modalRef.result.then((result) => {
+      this.alert = result;
+      this.ngOnInit();
+    });
+  }
+
+  openImage2(cinema: Cinema){
+    const modalRef = this.modalService.open(ModalCinema);
+    modalRef.componentInstance.cinema = cinema;
+    modalRef.componentInstance.image2 = true;
+    modalRef.result.then((result) => {
+      this.alert = result;
+      this.ngOnInit();
+    });
+  }
+
   closeAlert() {
     this.alert.active = false;
   }

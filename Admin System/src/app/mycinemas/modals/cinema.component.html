@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <div class="modal-body">
+  <div class="modal-body" *ngIf = "!image1 && !image2">
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Cinema Location</label>
@@ -81,9 +81,56 @@
       </div>
     </div>
 
+    <img src={{cinema.imagePath}} alt="Card image cap" class="img-fluid" style = "width: 30%" />
+    <img src={{cinema.imagePath2}} alt="Card image cap" class="img-fluid" style = "width: 30%" />
+
+
+  </div>
+
+
+
+
+  <div class="modal-body" *ngIf = "image1">
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Location</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" disabled>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" disabled>
+      </div>
+    </div>
+
+    <img src={{cinema.imagePath}} alt="Card image cap" class="img-fluid" />
+
+  </div>
+
+  <div class="modal-body" *ngIf = "image2">
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Location</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" disabled>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" disabled>
+      </div>
+    </div>
+
+    <img src={{cinema.imagePath2}} alt="Card image cap" class="img-fluid" />
+
   </div>
 
   <div class="modal-footer">
-    <button type="button" (click)="submit()" class="btn btn-success">Done</button>
+    <button type="button" (click)="submit()" class="btn btn-success" *ngIf = "!image1 && !image2">Done</button>
     <button type="button" (click)="close()" class="btn btn-danger">Cancel</button>
   </div>

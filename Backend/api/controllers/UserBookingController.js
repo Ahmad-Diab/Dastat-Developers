@@ -441,9 +441,9 @@ module.exports.getBookings = function (req, res, next) {
     let limitEntered = !(!start || !limit);
     // TODO send a msg that no limit entered
     console.log("About to enter queryForCount");
-    let queryForCount = "Select count(*) as TotalCount from tickets";
+    let queryForCount = "Select count(*) as TotalCount from tickets WHERE user = ?";
     console.log("queryIsReady");
-    database.query(queryForCount, function (err, rows) {
+    database.query(queryForCount, [username] ,function (err, rows) {
         if (err)
             return err;
         console.log("no error in query");
@@ -459,6 +459,8 @@ module.exports.getBookings = function (req, res, next) {
             limitNum = parseInt(limit);
         }
         console.log("About to enter query for selecting tickets info");
+        console.log("start :" + start);
+        console.log("limit : " + limit);
         let sqlBookings = 'SELECT tickets.* ,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=? ORDER BY reservation_id DESC limit ? OFFSET ?';
         let userAndLimitData = [username, limitNum, startNum];
         //let sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';

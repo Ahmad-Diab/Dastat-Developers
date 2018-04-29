@@ -35,7 +35,9 @@ export class HttpService {
   }
 
   delete_auth(route, data?) {
-    //TODO
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return this.http.delete(environment.api + route, {headers: headers}).pipe(map(res => res.json()));
   }
 
   get(route, data?) {

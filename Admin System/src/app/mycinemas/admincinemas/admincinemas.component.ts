@@ -58,7 +58,7 @@ export class AdmincinemasComponent implements OnInit {
   }
 
   ondelete(cinema: Cinema){
-    this.cinemalistService.delete(cinema.location, cinema.name).subscribe((response) => {
+    this.cinemalistService.deleteCinema(cinema.location, cinema.name).subscribe((response) => {
       console.log(response);
       this.alert = {
         message: 'Cinema Deleted',

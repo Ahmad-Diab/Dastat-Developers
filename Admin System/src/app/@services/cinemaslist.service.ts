@@ -17,8 +17,8 @@ export class CinemaslistService extends HttpService {
   Update(key1: String,key2: String,cinema){
     return this.post_auth('/Cinemas/editCinema/'+key1+'/'+key2,cinema);
   }
-  delete(key1: String,key2: String){
-    return this.get_auth('/mycinemas/delete/'+key1+'/'+key2);
+  deleteCinema(key1: String,key2: String){
+    return this.delete_auth('mycinemas/deleteCinema/'+key2+'/'+key1);
   }
   addCinema(addedCinema:any){
     console.log(addedCinema);

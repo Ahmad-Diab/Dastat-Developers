@@ -76,6 +76,7 @@ module.exports.editCinema = function (req, res, next) {
         });
     });
 };
+
 /**
  * @param req, cinema_name & cinema_location in params
  * @param res

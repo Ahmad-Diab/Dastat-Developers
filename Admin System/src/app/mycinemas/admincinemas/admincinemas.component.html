@@ -42,8 +42,10 @@
             <td>{{cinema.location}}</td>
             <td>{{cinema.address}}</td>
             <td>{{cinema.number_of_halls}}</td>
-            <td>{{cinema.is3D}}</td>
-            <td>{{cinema.is4D}}</td>
+            <td *ngIf = "cinema.is3D == 1"> YES </td>
+            <td *ngIf = "cinema.is3D == 0"> NO </td>
+            <td *ngIf = "cinema.is4D == 1"> YES </td>
+            <td *ngIf = "cinema.is4D == 0"> NO </td>
             <td>{{cinema.company}}</td>
             <td><img src={{cinema.imagePath}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage1(cinema)" /></td>
             <td><img src={{cinema.imagePath2}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage2(cinema)" /></td>

@@ -128,8 +128,8 @@
             <img alt="" src="assets/images/client-photo/auth.png">
           </span>
         </div>
-        <a *ngIf="!Signed_in" (click)="signin()" class="btn btn--sign btn--singin">Sign in</a>       
-        <a *ngIf="Signed_in" (click)="signin()"  class="btn btn--sign btn--singin">
+        <a *ngIf="!Signed_in" (click)="signin()" class="btn btn--singin">Sign In</a>       
+        <a *ngIf="Signed_in" (click)="signin()"  class="btn btn--singin">
          {{message}}
         </a>
         <ul *ngIf="Signed_in"  class="auth__function">
@@ -145,9 +145,9 @@
           <li>
             <a href="/user/bookings" class="auth__function-item">Booked tickets</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#" class="auth__function-item">Discussion</a>
-          </li>
+          </li> -->
           <li>
             <a href="#" class="auth__function-item">Settings</a>
           </li>

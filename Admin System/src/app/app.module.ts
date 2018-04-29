@@ -37,6 +37,8 @@ import { MoviesService } from './@services/movies.service';
 import { ModalHall } from './hall/modals/hall.component';
 import { ModalAdmin } from './admins/modals/admin.component';
 import { ModalCinema } from './mycinemas/modals/cinema.component';
+import { ModalPromocodes } from './promocodes/modals/promocodes.component';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Cinema } from './@objects/cinema';
 

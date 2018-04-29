@@ -425,11 +425,11 @@ module.exports.getUpcomingMovies = function (req, res, next) {
  * @params res, next
  */
 module.exports.getBookings = function (req, res, next) {
-
+    console.log("in getBookings");
     let username = req.params['username'],
         start = req.params['start'],
         limit = req.params['limit'];
-
+    console.log("got params");
     if (!username) {
         return res.status(422).json({
             err: null,
@@ -437,16 +437,16 @@ module.exports.getBookings = function (req, res, next) {
             data: null
         });
     }
-
+    console.log("Username = " + username);
     let limitEntered = !(!start || !limit);
     // TODO send a msg that no limit entered
-
-    let queryForCount = "Select count(*) as TotalCount from ??";
-    queryForCount = database.format(queryForCount, table);
+    console.log("About to enter queryForCount");
+    let queryForCount = "Select count(*) as TotalCount from tickets";
+    console.log("queryIsReady");
     database.query(queryForCount, function (err, rows) {
         if (err)
             return err;
-
+        console.log("no error in query");
         let startNum, limitNum;
         let totalCount = rows[0]['TotalCount'];
         if (start === '' || limit === '' ||
@@ -458,13 +458,11 @@ module.exports.getBookings = function (req, res, next) {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-
-        let sqlBookings = 'SELECT tickets.* ,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id' +
-            'WHERE user=? ORDER BY reservation_id DESC limit ? OFFSET ?';
+        console.log("About to enter query for selecting tickets info");
+        let sqlBookings = 'SELECT tickets.* ,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=? ORDER BY reservation_id DESC limit ? OFFSET ?';
         let userAndLimitData = [username, limitNum, startNum];
-        sqlBookings = database.format(sqlBookings, userAndLimitData);
         //let sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';
-        database.query(sqlBookings, function (error, results) {
+        database.query(sqlBookings, userAndLimitData, function (error, results) {
             if (error) {
                 return next(error);
             }

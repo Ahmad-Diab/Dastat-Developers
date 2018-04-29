@@ -79,10 +79,10 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
  */
 module.exports.viewPartiesOfThatMovie = function (req, res) {
 
-    let admin_username = req.queries['username'],
-        cinema_name = req.queries['cinema_name'],
-        cinema_location = req.queries['cinema_location'],
-        movie_id = req.queries['movie_id'];
+    let admin_username = req.query['username'],
+        cinema_name = req.query['cinema_name'],
+        cinema_location = req.query['cinema_location'],
+        movie_id = req.query['movie_id'];
 
     // Null Checkers
     console.log('I am in viewParties');
@@ -163,10 +163,9 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
  */
 module.exports.viewTicketInfo = function (req, res, next) {
 
-    let adminUsername = req.queries['username'],
-        reservation_id = req.queries['reservation_id'];
-    console.log(adminUsername);
-    console.log(reservation_id);
+    let adminUsername = req.query['username'],
+        reservation_id = req.query['reservation_id'];
+
     // Null Checkers
     if (!adminUsername) {
         return res.status(422).json({
@@ -231,7 +230,7 @@ module.exports.viewTicketInfo = function (req, res, next) {
  * @param next, next middleware to handle errors
  */
 module.exports.cancelReservation = function (req, res, next) {
-    let id = req.queries['reservation_id'];
+    let id = req.query['reservation_id'];
 
     if (isNaN(id)) return res.status(400).send({ //making sure it is a number, and returning an error if it is not
         "error": "Entered id not an integer",

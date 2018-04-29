@@ -103,7 +103,7 @@ module.exports.deleteCinema = function (req, res, next) {
     }
 
     if (!Validations.isString(name) ||
-        !Validations.isDate(date)) {
+        !Validations.isString(location)) {
 
         return res.status(422).json({
             err: null,

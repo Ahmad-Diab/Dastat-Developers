@@ -9,15 +9,15 @@ let database = require('../config/db-connection'),
  * @param next
  */
 module.exports.addCinema = function (req, res, next) {
-    let name = req.body["cinema_name"],
-        location = req.body["cinema_location"],
+    let name = req.body["name"],
+        location = req.body["location"],
         address = req.body["address"],
-        number_of_halls = req.body["num_of_halls"],
+        number_of_halls = req.body["number_of_halls"],
         is3D = req.body["is3D"],
         is4D = req.body["is4D"],
         company = req.body["company"],
-        imagePath = req.body["image_path_1"],
-        imagePath2 = req.body["image_path_2"];
+        imagePath = req.body["imagePath"],
+        imagePath2 = req.body["imagePath2"];
 
     if (!name) {
         return res.status(422).json({
@@ -47,14 +47,14 @@ module.exports.addCinema = function (req, res, next) {
             data: null
         });
     }
-    if (is3D !== 1 || is3D !== 0){
+    if (is3D !== 1 && is3D !== 0){
         return res.status(422).json({
             err: null,
             msg: 'is3D must be 0 or 1.',
             data: null
         });
     }
-    if (is4D !== 1 || is4D !== 0) {
+    if (is4D !== 1 && is4D !== 0) {
         return res.status(422).json({
             err: null,
             msg: 'is4D must be 0 or 1.',
@@ -117,12 +117,12 @@ module.exports.editCinema = function (req, res, next) {
         location = req.params['cinema_location'];
 
     let address = req.body['address'],
-        number_of_halls = req.body['num_of_halls'],
+        number_of_halls = req.body['number_of_halls'],
         is3D = req.body['is3D'],
         is4D = req.body['is4D'],
         company = req.body['company'],
-        imagePath = req.body['image_path_1'],
-        imagePath2 = req.body['image_path_2'];
+        imagePath = req.body['imagePath'],
+        imagePath2 = req.body['imagePath2'];
 
     if (!name) {
         return res.status(422).json({
@@ -152,14 +152,14 @@ module.exports.editCinema = function (req, res, next) {
             data: null
         });
     }
-    if (is3D !== 1 || is3D !== 0){
+    if (is3D !== 1 && is3D !== 0){
         return res.status(422).json({
             err: null,
             msg: 'is3D must be 0 or 1.',
             data: null
         });
     }
-    if (is4D !== 1 || is4D !== 0) {
+    if (is4D !== 1 && is4D !== 0) {
         return res.status(422).json({
             err: null,
             msg: 'is4D must be 0 or 1.',

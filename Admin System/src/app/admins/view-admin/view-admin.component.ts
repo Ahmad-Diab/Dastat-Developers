@@ -34,7 +34,7 @@ export class ViewAdminComponent implements OnInit {
     
     this.adminService.getAdmins().subscribe((response)=>{
       this.rows = response;
-     // console.log(response);
+      console.log(response);
     });
   }
   updateFilter(event) {

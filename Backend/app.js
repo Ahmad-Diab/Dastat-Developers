@@ -67,7 +67,7 @@ app.use(function(err, req, res, next) {
 });
 
 // 404 error handler
-app.use(function(err, req, res) {
+app.use(function(req, res, err) {
     res.status(404).json({
         err: err,
         msg: '404 Not Found',

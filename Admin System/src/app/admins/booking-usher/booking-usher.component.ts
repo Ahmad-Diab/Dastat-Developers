@@ -23,6 +23,7 @@ export class BookingUsher implements OnInit {
     console.log(data);*/
     this.adminService.getBookingUshers().subscribe((response)=>{
       this.rows = response;
+      console.log(response);
     });
   }
   updateValue(event, cell, cellValue, row) {

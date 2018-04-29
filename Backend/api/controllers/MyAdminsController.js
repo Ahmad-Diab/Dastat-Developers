@@ -86,12 +86,74 @@ module.exports.authenticate = function(req, res, next) {
 //------------------------- View all admins -------------------------------
 
 module.exports.getAdmins = function(req, res, next){
-    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
-    database.query(query, function(err, results, fiels) {
-        if(err) return next(err);
-        console.log(results);
-        return res.send(results);
+
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit;
+
+// To calculate Total Count use MySQL count function
+    let query = "Select count(*) as TotalCount from admins_cinemas C, admins A where C.admin = A.username";
+    query = database.format(query);
+
+    database.query(query, function (err, rows) {
+        if (err) {
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No admins available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '') {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+
+        let query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username DESC limit ? OFFSET ?";
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [limitNum, startNum];
+        query = database.format(query, table);
+        database.query(query, function (err, rest) {
+            if (err) {
+                //res.json(err);
+                return next(err);
+
+            } else {
+                return res.status(200).json({
+                    "Total Count": totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Admins have been successfully retrived"
+                });
+            }
+        });
     });
+
+
+    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
+    // database.query(query, function(err, results, fiels) {
+        // if(err) return next(err);
+        // console.log(results);
+        // return res.send(results);
+    // });
 }
 
 
@@ -172,12 +234,72 @@ module.exports.getAdmin = function(req, res, next){
 //------------------------- View all Booking ushers -------------------------------
 
 module.exports.viewBookingUshers = function(req, res, next){
-    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
-    database.query(query, function(err, results, fiels) {
-        if(err) return next(err);
-        console.log(results);
-        return res.send(results);
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit;
+
+// To calculate Total Count use MySQL count function
+    let query = "Select count(*) as TotalCount from admins_cinemas C, admins A where C.admin = A.username";
+    query = database.format(query);
+
+    database.query(query, function (err, rows) {
+        if (err) {
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            res.status(200).json({
+                err: null,
+                msg: 'No admins available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '') {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+
+        let query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' DESC limit ? OFFSET ?";
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [limitNum, startNum];
+        query = database.format(query, table);
+        database.query(query, function (err, rest) {
+            if (err) {
+                res.json(err);
+                return next(err);
+
+            } else {
+                return res.status(200).json({
+                    "Total Count": totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Booking ushers have been successfully retrived"
+                });
+            }
+        });
     });
+
+    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    // database.query(query, function(err, results, fiels) {
+    //     if(err) return next(err);
+    //     console.log(results);
+    //     return res.send(results);
+    // });
 }
 
 //------------------------- Add Booking ushers -------------------------------
@@ -246,15 +368,79 @@ module.exports.addBookingUsher = function(req,res,next){
 //------------------------- Edit Booking ushers -------------------------------
 
 module.exports.getBookingUshers = function(req, res, next){
+
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start; //req.query.start,
+        limit; //req.query.limit;
+    
+// To calculate Total Count use MySQL count function
+    let query = "Select count(*) as TotalCount from admins_cinemas C, admins A where C.admin = A.username AND A.type = 'Booking Usher'";
+    console.log("getBookingUshers");
+    query = database.format(query);
+    console.log("getBookingUshers");
+    database.query(query, function (err, rows) {
+        console.log("getBookingUshers");
+        if (err) {
+            console.log("err");
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
+                err: null,
+                msg: 'No admins available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '') {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+        console.log("getBookingUshers");
+        let query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [limitNum, startNum];
+        query = database.format(query, table);
+        database.query(query, function (err, rest) {
+            if (err) {
+                console.log("getBookingUshers");
+                return next(err);
+
+            } else {
+                console.log("getBookingUshers");
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: null,
+                    msg: "Booking Ushers have been successfully retrived"
+                });
+            }
+        });
+    });
     //var uname = req.body['uname'];
     //console.log(uname);
-    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name = (select cinema_name from admins_cinemas where admin = ?"+" AND cinema_name = C.cinema_name GROUP BY cinema_name)";
-    database.query(query, function(err, results, fiels) {
-        if(err) return next(err);
-        console.log(results);
-        return res.send(results);
-    });
+    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    // // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name = (select cinema_name from admins_cinemas where admin = ?"+" AND cinema_name = C.cinema_name GROUP BY cinema_name)";
+    // database.query(query, function(err, results, fiels) {
+    //     if(err) return next(err);
+    //     console.log(results);
+    //     return res.send(results);
+    // });
 }
 module.exports.getBookingUsher = function(req, res, next){
     var cinema_name = req.body.cinema_name;

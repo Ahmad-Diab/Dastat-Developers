@@ -56,6 +56,8 @@ export class ModalCinema implements OnInit {
                 this.activeModal.close(alert);
             });
         } else {
+            this.cinema.is3D = parseInt(this.cinema.is3D);
+            this.cinema.is4D = parseInt(this.cinema.is4D);
             this.cinemalistService.Update(this.cinema.location,this.cinema.name,this.cinema).subscribe(() => {
                 var alert = {
                     message: 'Cinema Edited!',

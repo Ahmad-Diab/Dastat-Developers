@@ -16,11 +16,11 @@ export class ActorInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.route.params.subscribe( params => this.actor = params['name']);
-    // console.log(this.actor);
-    // this.ActorInfoService.getActorInfo(this.actor).subscribe((response)=>{
-    //   this.actor=response.data[0];
-    //   console.log(response.data[0]);
-    // });
+    this.route.params.subscribe( params => this.actor = params['name']);
+    console.log(this.actor);
+    this.ActorInfoService.getActorInfo(this.actor).subscribe((response)=>{
+      this.actor=response.data[0];
+      console.log(response.data[0]);
+    });
   }
 }

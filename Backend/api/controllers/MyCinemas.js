@@ -94,7 +94,7 @@ module.exports.deleteCinema = function (req, res, next) {
         });
     }
 
-    if (!date) {
+    if (!location) {
         return res.status(422).json({
             err: null,
             msg: 'cinema_location is required.',
@@ -103,7 +103,7 @@ module.exports.deleteCinema = function (req, res, next) {
     }
 
     if (!Validations.isString(name) ||
-        !Validations.isDate(date)) {
+        !Validations.isString(location)) {
 
         return res.status(422).json({
             err: null,

@@ -3,8 +3,8 @@ let database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
 /**
- * @param req, cinema_name, cinema_location, address, num_of_halls, is3D, is4D, company,
- *      image_path_1 and image_path_2 in body
+ * @param req, name, cinema_location, address, num_of_halls, is3D, is4D, company,
+ *      imagePath and imagePath2 in body
  * @param res
  * @param next
  */
@@ -22,14 +22,14 @@ module.exports.addCinema = function (req, res, next) {
     if (!name) {
         return res.status(422).json({
             err: null,
-            msg: 'cinema_name is required.',
+            msg: 'cinema name as (name) is required.',
             data: null
         });
     }
     if (!location) {
         return res.status(422).json({
             err: null,
-            msg: 'cinema_location is required.',
+            msg: 'cinema location as (location) is required.',
             data: null
         });
     }
@@ -43,7 +43,7 @@ module.exports.addCinema = function (req, res, next) {
     if (!number_of_halls) {
         return res.status(422).json({
             err: null,
-            msg: 'num_of_halls is required.',
+            msg: 'number_of_halls is required.',
             data: null
         });
     }
@@ -71,14 +71,14 @@ module.exports.addCinema = function (req, res, next) {
     if (!imagePath) {
         return res.status(422).json({
             err: null,
-            msg: 'image_path_1 is required.',
+            msg: 'imagePath is required.',
             data: null
         });
     }
     if (!imagePath2) {
         return res.status(422).json({
             err: null,
-            msg: 'image_path_2 is required.',
+            msg: 'imagePath2 is required.',
             data: null
         });
     }
@@ -107,14 +107,14 @@ module.exports.addCinema = function (req, res, next) {
 };
 
 /**
- * @param req, cinema_name & cinema_location in params
+ * @param req, name & cinema_location in params
  *              address, num_of_halls, is3D, is4D, company, image_path_1 and image_path_2 in body
  * @param res
  * @param next
  */
 module.exports.editCinema = function (req, res, next) {
-    let name = req.params['cinema_name'],
-        location = req.params['cinema_location'];
+    let name = req.params['name'],
+        location = req.params['location'];
 
     let address = req.body['address'],
         number_of_halls = req.body['number_of_halls'],
@@ -127,14 +127,14 @@ module.exports.editCinema = function (req, res, next) {
     if (!name) {
         return res.status(422).json({
             err: null,
-            msg: 'cinema_name is required.',
+            msg: 'cinema name as (name) is required.',
             data: null
         });
     }
     if (!location) {
         return res.status(422).json({
             err: null,
-            msg: 'cinema_location is required.',
+            msg: 'cinema location as (location) is required.',
             data: null
         });
     }
@@ -148,7 +148,7 @@ module.exports.editCinema = function (req, res, next) {
     if (!number_of_halls) {
         return res.status(422).json({
             err: null,
-            msg: 'num_of_halls is required.',
+            msg: 'number_of_halls is required.',
             data: null
         });
     }
@@ -176,18 +176,17 @@ module.exports.editCinema = function (req, res, next) {
     if (!imagePath) {
         return res.status(422).json({
             err: null,
-            msg: 'image_path_1 is required.',
+            msg: 'imagePath is required.',
             data: null
         });
     }
     if (!imagePath2) {
         return res.status(422).json({
             err: null,
-            msg: 'image_path_2 is required.',
+            msg: 'imagePath2 is required.',
             data: null
         });
     }
-
 
     if (!Validations.isString(name) ||  !Validations.isString(location) || !Validations.isString(address) ||
         !Validations.isNumber(number_of_halls) || !Validations.isNumber(is3D) || !Validations.isNumber(is4D)  ||
@@ -222,13 +221,13 @@ module.exports.editCinema = function (req, res, next) {
  * @param next
  */
 module.exports.deleteCinema = function (req, res, next) {
-    let name = req.params['cinema_name'],
-        location = req.params['cinema_location'];
+    let name = req.params['name'],
+        location = req.params['location'];
 
     if (!name) {
         return res.status(422).json({
             err: null,
-            msg: 'cinema_name is required.',
+            msg: 'cinema name as (name) is required.',
             data: null
         });
     }
@@ -236,7 +235,7 @@ module.exports.deleteCinema = function (req, res, next) {
     if (!location) {
         return res.status(422).json({
             err: null,
-            msg: 'cinema_location is required.',
+            msg: 'cinema location as (location) is required.',
             data: null
         });
     }

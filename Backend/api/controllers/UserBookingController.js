@@ -441,9 +441,9 @@ module.exports.getBookings = function (req, res, next) {
     let limitEntered = !(!start || !limit);
     // TODO send a msg that no limit entered
     console.log("About to enter queryForCount");
-    let queryForCount = "Select count(*) as TotalCount from tickets";
+    let queryForCount = "Select count(*) as TotalCount from tickets WHERE user = ?";
     console.log("queryIsReady");
-    database.query(queryForCount, function (err, rows) {
+    database.query(queryForCount, [username] ,function (err, rows) {
         if (err)
             return err;
         console.log("no error in query");

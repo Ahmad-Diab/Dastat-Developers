@@ -12,7 +12,7 @@ import { CookieService } from 'angular2-cookie/core';
 export class BookingDetailsComponent implements OnInit {
   tickets=[];
   usersame;
-  p : number = 0;
+  p : number;
   size : number;
   
 
@@ -21,11 +21,10 @@ export class BookingDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.usersame=this.cookie.get('username');
-    this.userService.getBookingDetails(this.usersame,this.p * 5,(this.p * 5) + 4).subscribe((response) => {
+    this.userService.getBookingDetails(this.usersame,(this.p - 1)  * 5,((this.p - 1) * 5) + 4).subscribe((response) => {
       this.size=response.data.totalCount;
       this.tickets=response.data.results;
       console.log(this.tickets);
-      
     });
   }
 

@@ -2,7 +2,7 @@
     <div class="container container--add">
         <form id='search-form' method='get' class="search">
             <input type="text" class="search__field" placeholder="Search">
-            <button type='submit' class="btn btn-md btn--danger search__button">search a Actor</button>
+            <button type='submit' class="btn btn-md btn--danger search__button">search Actor</button>
         </form>
     </div>
 </div>
@@ -17,130 +17,24 @@
             <div class="col-sm-12">
                 <div class="movie">
                     <h2 class="page-heading">{{actor.name}}</h2>
-                    <div *ngIf="movie" class="movie__info">
+                    <div *ngIf="actor" class="movie__info">
                         <div class="col-sm-4 col-md-3 movie-mobile">
                             <div class="movie__images">
-                                <!-- <span class="movie__rating">{{movie.rating}}</span> -->
                                 <img alt='' src={{actor.imagePath}}>
                             </div>
                         </div>
 
-                        <div class="col-sm-8 col-md-9"> 
-                            <!-- <p class="movie__time">{{movie.duration}} hrs</p> -->
-
+                        <div class="col-sm-8 col-md-9">
                             <!--p class="movie__option"><strong>Country: </strong><a href="#">New Zeland</a>, <a href="#">USA</a></p-->
                             <p class="movie__option">
-                                <strong>Year: </strong>{{actor.bio}}</p>
+                                <strong></strong>{{actor.bio}}</p>
                             <p class="movie__option">
-                                <strong>Category: </strong>{{actor.gender}}</p>
+                                <strong><b>Born: </b></strong>{{actor.birth_date}}</p>
                             <!--p class="movie__option"><strong>Director: </strong><a href="#">Peter Jackson</a></p-->
                             <p class="movie__option">
-                                <strong>Cast: </strong>{{actor.age}}</p>
-                            <!-- <p class="movie__option">
-                                <strong>Release date: </strong>{{movie.release_date | date}}</p>
-                            <p class="movie__option">
-                                <strong>Age restriction: </strong>13</p> -->
+                                <strong><b>Age: </b></strong>{{actor.age}}</p>
                             <!--p class="movie__option"><strong>Box office: </strong><a href="#">$1 017 003 568</a></p-->
-
-
-                            <div class="movie__btns movie__btns--full">
-                                <a href="booking/cinemas" (click)="putMovieInCookie()" class="btn btn-md btn--warning">book a ticket
-                                    <span class="hidden-sm">for this movie</span>
-                                </a>
-                                <!--a href="#" class="watchlist">Add to watchlist</a-->
-                            </div>
                         </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <h2 class="page-heading">Description</h2>
-
-                    <p class="movie__describe">{{movie.description}}</p>
-
-                    <h2 class="page-heading">photos &amp; videos</h2>
-
-                    <div class="movie__media">
-                        <div class="movie__media-switch">
-                            <a class="watchlist list--photo" data-filter='media-photo'>234 photos</a>
-                            <a class="watchlist list--video" data-filter='media-video'>10 videos</a>
-                        </div>
-
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                <!--First Slide-->
-                                <div class="swiper-slide media-video">
-                                    <a href='https://www.youtube.com/watch?v=Y5AehBA3IsE' class="movie__media-item ">
-                                        <img alt='' src="images/movie/movie-video1.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Second Slide-->
-                                <div class="swiper-slide media-video">
-                                    <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-video2.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Third Slide-->
-                                <div class="swiper-slide media-photo">
-                                    <a href='images/movie/movie-img1-lg.jpg' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-img1.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Four Slide-->
-                                <div class="swiper-slide media-photo">
-                                    <a href='images/movie/movie-img2-lg.jpg' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-img2.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Slide-->
-                                <div class="swiper-slide media-photo">
-                                    <a href='images/gallery/large/item-7.jpg' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-img3.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Slide-->
-                                <div class="swiper-slide media-photo">
-                                    <a href='images/gallery/large/item-11.jpg' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-img4.jpg">
-                                    </a>
-                                </div>
-
-                                <!--First Slide-->
-                                <div class="swiper-slide media-video">
-                                    <a href='https://www.youtube.com/watch?v=Y5AehBA3IsE' class="movie__media-item ">
-                                        <img alt='' src="images/movie/movie-video1.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Second Slide-->
-                                <div class="swiper-slide media-video">
-                                    <a href='https://www.youtube.com/watch?v=Kb3ykVYvT4U' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-video2.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Slide-->
-                                <div class="swiper-slide media-photo">
-                                    <a href='images/gallery/large/item-15.jpg' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-img5.jpg">
-                                    </a>
-                                </div>
-
-                                <!--Slide-->
-                                <div class="swiper-slide media-photo">
-                                    <a href='images/gallery/large/item-16.jpg' class="movie__media-item">
-                                        <img alt='' src="images/movie/movie-img6.jpg">
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
@@ -149,130 +43,7 @@
 
         </section>
 
-        <div class="clearfix"></div>
-
-
-        <h2 class="page-heading">showtime &amp; tickets</h2>
-
-        <div class="choose-container">
-            <div class="tags-area tags-area--thin">
-
-                <i class="fa fa-compass">
-                    <a class="page-heading3"> City</a>
-                </i>
-                <mat-form-field>
-
-                    <mat-select [(ngModel)]="searchValue" [(value)]="searchValue" (ngModelChange)="filter()">
-                        <mat-option value="1" selected='selected'>London</mat-option>
-                        <mat-option value="2">New York</mat-option>
-                        <mat-option value="3">Paris</mat-option>
-                        <mat-option value="4">Berlin</mat-option>
-                        <mat-option value="5">Moscow</mat-option>
-                        <mat-option value="3">Minsk</mat-option>
-                        <mat-option value="4">Warsawa</mat-option>
-                        <mat-option value="5">Kiev</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-calendar">
-                    <a class="page-heading3"> Date</a>
-                </i>
-
-                <mat-form-field>
-                    <input [(ngModel)]="dateTemp" matInput [matDatepicker]="picker" placeholder="Choose a date">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-
-
-                <a class="btn btn-md btn--warning" (click)="getPartiesAtThisDate(date)" style="float: right;margin-top:8px;">Show Parties for this date and time</a>
-
-
-                <div class="clearfix"></div>
-            </div>
-
-
-        </div>
-
     </div>
-    <div class="time-select">
-        <div class="time-select__group group--first">
-            <div class="col-sm-4">
-                <p class="time-select__place">Cineworld</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='09:40'>09:40</li>
-                <li class="time-select__item" data-time='13:45'>13:45</li>
-                <li class="time-select__item active" data-time='15:45'>15:45</li>
-                <li class="time-select__item" data-time='19:50'>19:50</li>
-                <li class="time-select__item" data-time='21:50'>21:50</li>
-            </ul>
-        </div>
-
-        <div class="time-select__group">
-            <div class="col-sm-4">
-                <p class="time-select__place">Empire</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='10:45'>10:45</li>
-                <li class="time-select__item" data-time='16:00'>16:00</li>
-                <li class="time-select__item" data-time='19:00'>19:00</li>
-                <li class="time-select__item" data-time='21:15'>21:15</li>
-                <li class="time-select__item" data-time='23:00'>23:00</li>
-            </ul>
-        </div>
-
-        <div class="time-select__group">
-            <div class="col-sm-4">
-                <p class="time-select__place">Curzon</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='09:00'>09:00</li>
-                <li class="time-select__item" data-time='11:00'>11:00</li>
-                <li class="time-select__item" data-time='13:00'>13:00</li>
-                <li class="time-select__item" data-time='15:00'>15:00</li>
-                <li class="time-select__item" data-time='17:00'>17:00</li>
-                <li class="time-select__item" data-time='19:0'>19:00</li>
-                <li class="time-select__item" data-time='21:0'>21:00</li>
-                <li class="time-select__item" data-time='23:0'>23:00</li>
-                <li class="time-select__item" data-time='01:0'>01:00</li>
-            </ul>
-        </div>
-
-        <div class="time-select__group">
-            <div class="col-sm-4">
-                <p class="time-select__place">Odeon</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='10:45'>10:45</li>
-                <li class="time-select__item" data-time='16:00'>16:00</li>
-                <li class="time-select__item" data-time='19:00'>19:00</li>
-                <li class="time-select__item" data-time='21:15'>21:15</li>
-                <li class="time-select__item" data-time='23:00'>23:00</li>
-            </ul>
-        </div>
-
-        <div class="time-select__group group--last">
-            <div class="col-sm-4">
-                <p class="time-select__place">Picturehouse</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='17:45'>17:45</li>
-                <li class="time-select__item" data-time='21:30'>21:30</li>
-                <li class="time-select__item" data-time='02:20'>02:20</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- hiden maps with multiple locator-->
-    <div class="map">
-        <div id='cimenas-map'></div>
-    </div>
-    <!-- end movie preview item -->
-
-
-
-
 
 
 </section>

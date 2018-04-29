@@ -67,7 +67,7 @@ router.get('/filterByHall/:hallNumber', Cinema.filterByHalls);
 router.get('/viewCinema/:cinema/:loc',Cinema.viewCinema,Cinema.moviesInCinema);
 router.get('/viewCinema/:cinema/:loc/allMovies',Cinema.moviesInCinema);
 router.get('/viewCinema/DistinctLocations',Cinema.DistinctLocation);
-//router.get('/movies/id/:movie_id',Movie.getMovieInfo);
+router.get('/movies/id/:movie_id',Movie.getMovieInfo);
 
 //----------------------------------------------------User Info routes----------------------------------------//
 router.get('/users', User.getUsers);

@@ -12,8 +12,8 @@ import { CookieService } from 'angular2-cookie/core';
 export class BookingDetailsComponent implements OnInit {
   tickets=[];
   usersame;
-  p;
-  size;
+  p : number = 0;
+  size : number;
   
 
   constructor(public userService:UserService, public cookie : CookieService,) { }

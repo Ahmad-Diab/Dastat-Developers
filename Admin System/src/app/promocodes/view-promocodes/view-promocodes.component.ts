@@ -32,7 +32,7 @@ export class ViewPromocodesComponent implements OnInit {
 
   promocodeActions = false      //  boolean for showing/hiding actions like assign, add, edit
   assignedPromocodeView = true  //  controls which view is displayed. either view of promocodes or view of promocodes in which cinemas
-
+  p : number = 1;
 
   constructor(public promocodesService: PromocodesService) { }
 

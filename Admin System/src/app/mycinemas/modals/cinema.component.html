@@ -1,0 +1,136 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Cinema</h4>
+    <a (click)="activeModal.dismiss('Cross click')">
+      <i class="fa fa-times"></i>
+    </a>
+  </div>
+
+  <div class="modal-body" *ngIf = "!image1 && !image2">
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Location</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" *ngIf = "!add" disabled>
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" *ngIf = "add" required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" *ngIf = "!add" disabled>
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" *ngIf = "add" required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Address</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.address" placeholder="Address">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Number of Halls</label>
+      <div class="col-10">
+        <input class="form-control input" type="number" [(ngModel)]="cinema.number_of_halls" placeholder="5">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">3D</label>
+      <div class="col-10">
+        <select class="form-control input" [(ngModel)]="cinema.is3D" required>
+          <option value="2" disabled>Has 3D Screens?</option>
+          <option value= "1">Yes</option>
+          <option value= "0">No</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">4D</label>
+      <div class="col-10">
+        <select class="form-control input" [(ngModel)]="cinema.is4D" required>
+          <option value="2" disabled>Has 4D Screens?</option>
+          <option value= "1">Yes</option>
+          <option value= "0">No</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Company</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.company" placeholder="Company">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Image Path 1</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.imagePath" placeholder="www.image.com">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Image Path 2</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.imagePath2" placeholder="www.image.com">
+      </div>
+    </div>
+
+    <img src={{cinema.imagePath}} alt="Card image cap" class="img-fluid" style = "width: 30%" />
+    <img src={{cinema.imagePath2}} alt="Card image cap" class="img-fluid" style = "width: 30%" />
+
+
+  </div>
+
+
+
+
+  <div class="modal-body" *ngIf = "image1">
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Location</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" disabled>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" disabled>
+      </div>
+    </div>
+
+    <img src={{cinema.imagePath}} alt="Card image cap" class="img-fluid" />
+
+  </div>
+
+  <div class="modal-body" *ngIf = "image2">
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Location</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.name" placeholder="Cinema Location" disabled>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Cinema Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="cinema.location" placeholder="Cinema Name" disabled>
+      </div>
+    </div>
+
+    <img src={{cinema.imagePath2}} alt="Card image cap" class="img-fluid" />
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" (click)="submit()" class="btn btn-success" *ngIf = "!image1 && !image2">Done</button>
+    <button type="button" (click)="close()" class="btn btn-danger">Cancel</button>
+  </div>

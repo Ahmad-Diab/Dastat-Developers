@@ -9,8 +9,8 @@ export class UserService extends HttpService {
     super(http);
    }
 
-   getBookingDetails(username:string){
-    return this.get('userBooking/getBookings/'+username);
+   getBookingDetails(username:string,start:number,limit:number){
+    return this.get('userBooking/getBookings/'+username + '/' + start + '/' + limit);
    }
 
 }

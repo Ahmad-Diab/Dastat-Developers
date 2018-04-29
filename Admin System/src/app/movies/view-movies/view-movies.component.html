@@ -1,3 +1,8 @@
+
+<div class="form-group card">
+  <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
+</div>
+
 <div>
   <button type="button" class="btn btn-outline-success mr-1 mb-1" (click)="toogleMovie()" *ngIf="!moviesAction">Add Movie</button>
   <button type="button" class="btn btn-outline-danger mr-1 mb-1" (click)="toogleMovie()" *ngIf="moviesAction">Cancel</button>
@@ -123,7 +128,7 @@
 
 <div class="row">
 
-  <div class="media-grid col-lg-2 col-sm-6" *ngFor="let movie of movies">
+  <div class="media-grid col-lg-2 col-sm-6" *ngFor="let movie of movies |filter:term">
     <div [routerLink]='' (click)=getMovieInfo(movie)>
       <figure>
         <img src={{movie.imagePath}} alt="Card image cap" class="img-fluid" />

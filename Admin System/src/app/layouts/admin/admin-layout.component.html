@@ -106,7 +106,7 @@
             </a>
           </div>
         </li> 
-        <li class="nav-item" ngbDropdown placement="bottom-right">
+        <!-- <!-- <li class="nav-item" ngbDropdown placement="bottom-right">
           <a href="javascript:;" class="nav-link" ngbDropdownToggle>
             <i class="fi flaticon-notification"></i>
             <span class="badge badge-danger">4</span>
@@ -133,7 +133,7 @@
             </div>
             <div class="notification-footer">Notifications</div>
           </div>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="javascript:;" class="nav-link" appToggleFullscreen>
             <i class="fi flaticon-fullscreen"></i>
@@ -143,11 +143,11 @@
         <li class="nav-item">
           <span class="nav-divider"></span>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="javascript:;" class="nav-link" (click)="openSearch(search)">
             <i class="fi flaticon-search"></i>
           </a>
-        </li>
+        </li> -->
               
       </ul>
     </nav>
@@ -173,7 +173,7 @@
 
 </ng-sidebar-container>
 
-<ng-template #search let-c="close" let-d="dismiss">
+<!-- <ng-template #search let-c="close" let-d="dismiss">
   <form class="search__form" action="">
     <input class="search-input" name="search" type="search" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus="true" />
     <p class="text-muted"><small><strong>Hit enter to search or ESC to close</strong></small></p>
@@ -185,7 +185,7 @@
   <button type="button" class="search-close" aria-label="Close search form" (click)="d('Cross click')">
     <i class="fi flaticon-close"></i>
   </button>
-</ng-template>
+</ng-template> -->
 
 
 <div class="configuration hidden-sm-down" [ngClass]="{'active': showSettings}">

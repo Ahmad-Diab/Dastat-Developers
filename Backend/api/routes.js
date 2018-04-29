@@ -46,7 +46,10 @@ router.post('/register', Authentication.Register);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.post('/userBooking/makeReservation',UserBooking.makeReservation);
-router.get('/userBooking/getBookings/:username', UserBooking.getBookings);
+
+// TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
+router.get('/userBooking/getBookings/:username/:start/:limit', UserBooking.getBookings);
+
 router.get('/userBooking/getPartiesInSpecificCinema/:cinema_location/:cinema_name/:movie_id/:date',
     UserBooking.getPartiesOfThatMovieInSpecificCinema);
 router.get('/userBooking/getAllParties/:movie_id/:date', UserBooking.getAllPartiesForThatMovie);
@@ -256,21 +259,20 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 //As an Admin i can add cinema
-
-router.get('/adminsearch/:searchKeyword', Search.searchByKeyword);
-router.get('/adminviewCinemas',Cinema.ViewCinemas);
-router.post('/addCinema', MyCinemas.addCinema);
-router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, MyCinemas.editCinema); 
+//TODO What is up with that ?!
+//router.patch('/Cinemas/editCinema/:location/:name',(req,res,next)=>{console.log("hiii");next()}, MyCinemas.editCinema);
 
 // ------------- As an Admin I can Delete a Cinema ----------------
-router.get('/mycinemas/delete/:cinema/:owner',MyCinemas.deleteCinemaForAdmin);
+//router.get('/mycinemas/delete/:cinema/:owner',MyCinemas.deleteCinemaForAdmin);
 
 
-router.get('/adminsearch/:searchKeyword',Authorization.Verify("1100") ,Search.searchByKeyword);
-router.get('/adminviewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
-router.post('/addCinema',Authorization.Verify("1100") , MyCinemas.addCinema);
-router.post('/Cinemas/editCinema/:location/:name',Authorization.Verify("1100") , MyCinemas.editCinema); 
-router.get('/mycinemas/delete/:location/:name',Authorization.Verify("1100") ,MyCinemas.deleteCinemaForAdmin);
+router.get('/adminSearch/:searchKeyword',Authorization.Verify("1100") ,Search.searchByKeyword);
+router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
+
+// TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
+router.post('/myCinemas/addCinema',Authorization.Verify("1100") , MyCinemas.addCinema);
+router.patch('/myCinemas/editCinema/:cinema_name/:cinema_location',Authorization.Verify("1100") , MyCinemas.editCinema);
+router.delete('/myCinemas/deleteCinema/:cinema_name/:cinema_location',Authorization.Verify("1100") ,MyCinemas.deleteCinema);
 
 //exporting routes to the project
 module.exports = router;

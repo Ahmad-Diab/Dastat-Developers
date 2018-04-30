@@ -28,7 +28,7 @@ export class BookingUsher implements OnInit {
     }
     console.log(data);*/
     this.adminService.getBookingUshers().subscribe((response)=>{
-      this.rows = response;
+      this.rows = response.data;
       console.log(response);
     });
   }

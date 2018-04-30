@@ -369,19 +369,19 @@ module.exports.addBookingUsher = function(req,res,next){
 
 module.exports.getBookingUshers = function(req, res, next){
 
+    console.log("Entered getBookingUshers");
     var pagination = true; // boolean for checking if the user entered limits for pagination or not
     var errMsg = null;
 
-    let start; //req.query.start,
-        limit; //req.query.limit;
+    var start; //req.query.start,
+    var limit; //req.query.limit;
     
 // To calculate Total Count use MySQL count function
     let query = "Select count(*) as TotalCount from admins_cinemas C, admins A where C.admin = A.username AND A.type = 'Booking Usher'";
-    console.log("getBookingUshers");
-    query = database.format(query);
-    console.log("getBookingUshers");
+    
+    //query = database.format(query);    
     database.query(query, function (err, rows) {
-        console.log("getBookingUshers");
+        
         if (err) {
             console.log("err");
             return err;
@@ -411,18 +411,15 @@ module.exports.getBookingUshers = function(req, res, next){
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-        console.log("getBookingUshers");
+        
         let query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [limitNum, startNum];
-        query = database.format(query, table);
-        database.query(query, function (err, rest) {
+        
+        database.query(query, table , function (err, rest) {
             if (err) {
-                console.log("getBookingUshers");
                 return next(err);
-
             } else {
-                console.log("getBookingUshers");
                 res.status(200).json({
                     totalCount: totalCount,
                     data: rest,

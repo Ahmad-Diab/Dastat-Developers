@@ -271,8 +271,8 @@ router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
 
 // TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
 router.post('/myCinemas/addCinema',Authorization.Verify("1100") , MyCinemas.addCinema);
-router.patch('/myCinemas/editCinema/:cinema_name/:cinema_location',Authorization.Verify("1100") , MyCinemas.editCinema);
-router.delete('/myCinemas/deleteCinema/:cinema_name/:cinema_location',Authorization.Verify("1100") ,MyCinemas.deleteCinema);
+router.patch('/myCinemas/editCinema/:name/:location',Authorization.Verify("1100") , MyCinemas.editCinema);
+router.delete('/myCinemas/deleteCinema/:name/:location',Authorization.Verify("1100") ,MyCinemas.deleteCinema);
 
 //exporting routes to the project
 module.exports = router;

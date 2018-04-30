@@ -1,12 +1,20 @@
-var database = require('../config/db-connection');
-var config = require('../config/config');
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt');
+let database = require('../config/db-connection'),
+    config = require('../config/config'),
+    jwt = require('jsonwebtoken'),
+    bcrypt = require('bcrypt');
+
+/**
+ * Admin Log-in
+ * @param req, username and password in body
+ * @param res
+ * @param next
+ * @returns {*}
+ */
 module.exports.login = function(req, res, next) {
-    console.log("here");
-    console.log(req.body);
-    var username = req.body.username;
-    var password = req.body.password;
+
+    let username = req.body.username,
+        password = req.body.password;
+
     if(!username){
       return res.status(422).json({
         err: null,
@@ -14,6 +22,7 @@ module.exports.login = function(req, res, next) {
         data: null
       });
     }
+
     if(!password){
       return res.status(422).json({
         err: null,
@@ -21,13 +30,16 @@ module.exports.login = function(req, res, next) {
         data: null
       });
     }
-    console.log(username);
-    var query = 'SELECT * FROM admins WHERE username = ?';
-    database.query(query,[username], function(err, results, fields) {
+
+    console.log("Entered Username : " + username);
+    let query = 'SELECT * FROM admins WHERE username = ?';
+
+    database.query(query,[username], function(err, results) {
+
       if(err) return next(err);
       
       if(results.length > 0) { 
-        var user = {
+        let user = {
           username: results[0].username,
           email: results[0].email,
           phone_number: results[0].phone_number,
@@ -35,14 +47,17 @@ module.exports.login = function(req, res, next) {
           last_name: results[0].last_name,
           age: results[0].age,
           type: results[0].type
-        }
+        };
+
         console.log(results[0].active);
         bcrypt.compare(password, results[0].password, function(err, isMatch){
           if(isMatch){
-            var token = jwt.sign(user, config.secret, {
+            let token = jwt.sign(user, config.secret, {
               expiresIn: '10d'
             });
-            console.log(token.username);
+
+            console.log("Token Username : " + token.username);
+
             res.status(200).json({
               err: null,
               msg: "Logged in successfully",
@@ -52,9 +67,7 @@ module.exports.login = function(req, res, next) {
               username: user.username,
               type: user.type
             });
-          }
-      
-          else {
+          } else {
             res.status(401).json({
               err: null,
               msg: "Wrong Password",
@@ -62,8 +75,7 @@ module.exports.login = function(req, res, next) {
             });
           }
         });      
-      }
-      else {
+      } else {
         res.status(401).json({
           err: null,
           msg: "Wrong User Name",
@@ -71,4 +83,4 @@ module.exports.login = function(req, res, next) {
         });
       }
     });
-  }
+  };

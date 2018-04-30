@@ -3,6 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { throttle } from '@swimlane/ngx-charts/release/utils';
 import { AdminService } from '../../@services/adminService.service';
+import { Admin } from '../../@objects/admin';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Alert } from '../../@objects/alert';
+import { ModalAdmin } from '../modals/admin.component';
 
 @Component({
   selector: 'app-branch-manager',
@@ -14,44 +18,43 @@ export class BranchManagerComponent implements OnInit {
   cinema_name: string;
   
   editing = {};
-  rows = [];
+  rows: Admin[];
+  alert: Alert = new Alert();
 
-  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute) { }
+  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
 
   ngOnInit() {
     this.adminService.getBranchManagers().subscribe((response)=>{
       this.rows = response;
     });
   }
-  updateValue(event, cell, cellValue, row) {
-    var r = cell;
-    var data = {
-      "username":row.username,
-      [cell]:event.target.value
-    }
-    console.log(data);
-    this.adminService.editBranchManager(data).subscribe((response)=>{
-      console.log(response);
+  updateValue(admin) {
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.admin = admin;
+    modalRef.componentInstance.type = "BM";
+    modalRef.result.then((result) => {
+      this.alert = result;
       this.ngOnInit();
     });
   }
-  deleteRow(event, cell, cellValue, row) {
-    var r = cell;
-    var data = {
-      "username":row.username,
-    }
-    this.adminService.deleteBranchManager(data).subscribe((response)=>{
-      console.log(response);
+  deleteRow(admin) {
+    this.adminService.deleteBranchManager(admin).subscribe(() => {
+      this.alert = {
+        message: 'Admin Deleted',
+        type: 'success',
+        active: true
+      }
+
       this.ngOnInit();
     });
   }
-  updateFilter(event) {
-    const val = event.target.value;
-    var data = {
-      cinema_name: val
-    }
-    this.adminService.getBranchManager(data).subscribe((response)=>{
-      this.rows = response;
-    });
-  }
+  // updateFilter(event) {
+  //   const val = event.target.value;
+  //   var data = {
+  //     cinema_name: val
+  //   }
+  //   this.adminService.getBranchManager(data).subscribe((response)=>{
+  //     this.rows = response;
+  //   });
+  // }
 }

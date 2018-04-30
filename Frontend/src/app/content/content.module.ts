@@ -35,6 +35,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/';
 import {MatInputModule} from '@angular/material';
 import { ActorInfoComponent } from './movies/actor-info/actor-info.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -43,6 +44,7 @@ import { ActorInfoComponent } from './movies/actor-info/actor-info.component';
 
 @NgModule({
   imports: [
+    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

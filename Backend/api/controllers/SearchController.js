@@ -1,4 +1,5 @@
-var database = require('../config/db-connection');
+var database = require('../config/db-connection'),
+    Validations = require('../utils/validations');
 
 //Search Controllers should be implemented here
 
@@ -14,6 +15,12 @@ module.exports.searchByKeyword = function(req,res,next){
     var sqlMovie = 'SELECT movie_id,title,genre,imagePath,year,rating,duration FROM movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?';
     var sqlCinema = 'SELECT * FROM cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?';
     var sqlActor = 'SELECT name,age,bio FROM actors WHERE name LIKE ?'
+    if(!Validations.isString(req.params.searchKeyword))
+        return res.status(422).json({
+            err: null,
+            msg: 'Provided data must be in valid types.',
+            data: null
+        });
     database.query(sqlMovie, [searchKeyS,searchKeyS,searchKeyS,searchKeyN,searchKeyN], function(error, movieResult, fields){
         if(error) return next(error);
         database.query(sqlCinema, [searchKeyS,searchKeyS,searchKeyS], function(error, cinemaResult, fields){

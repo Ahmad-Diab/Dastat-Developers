@@ -1,111 +1,100 @@
-<input type="cinemaName" class="form-control mb-3" placeholder="Type to filter the name column..." required (keyup)='updateFilter($event)'>
-<ngx-datatable
-  #mydatatable
-  [headerHeight]="40"
-  [limit]="10"
-  [columnMode]="'force'"
-  [footerHeight]="50"
-  [rowHeight]="'auto'"
-  [rows]="rows">
-  <ngx-datatable-column name="Cinema Name">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      {{row.cinema_name}}
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Username">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-        <span
-        title="Double Click To Delete This Record"
-        (dblclick)="deleteRow($event, 'username', value, row)"
-        >
-        {{row.username}}
-      </span>
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Email">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      <span
-        title="Double Click To Edit"
-        (dblclick)="editing[row.$$index + '-email'] = true"
-        *ngIf="!editing[row.$$index + '-email']">
-        {{row.email}}
-      </span>
-      <input
-        autofocus
-        (blur)="updateValue($event, 'email', value, row)"
-        *ngIf="editing[row.$$index + '-email']"
-        type="text"
-        [value]="value"
-      />
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Type">
-    <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-       <span
-        title="Double Click To Edit"
-        (dblclick)="editing[row.$$index + '-type'] = true"
-        *ngIf="!editing[row.$$index + '-type']">
-        {{row.type}}
-      </span>
-      <select
-        *ngIf="editing[row.$$index + '-type']"
-        (change)="updateValue($event, 'type', value, row)"
-        [value]="value">
-        <option value="Booking Usher">Boooking Usher</option>
-        <option value="Admin User">Admin User</option>
-        <option value="Cinema Owner">Cinema Owner</option>
-        <option value="Branch Manager">Branch Manager</option>
-        <option value="App Owner">App Owner</option>
-      </select>
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Salary">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      <span
-        title="Double Click To Edit"
-        (dblclick)="editing[row.$$index + '-salary'] = true"
-        *ngIf="!editing[row.$$index + '-salary']">
-        {{row.salary}}
-      </span>
-      <input
-        autofocus
-        (blur)="updateValue($event, 'salary', value, row)"
-        *ngIf="editing[row.$$index + '-salary']"
-        type="text"
-        [value]="value"
-      />
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="First Number">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      {{row.first_name}}
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Last Name">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      {{row.last_name}}
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Phone Number">
-    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-      <span
-        title="Double Click To Edit"
-        (dblclick)="editing[row.$$index + '-phone_number'] = true"
-        *ngIf="!editing[row.$$index + '-phone_number']">
-        {{row.phone_number}}
-      </span>
-      <input
-        autofocus
-        (blur)="updateValue($event, 'phone_number', value, row)"
-        *ngIf="editing[row.$$index + '-phone_number']"
-        type="text"
-        [value]="value"
-      />
-    </ng-template>
-  </ngx-datatable-column>
-  <ngx-datatable-column name="Gender">
-    <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-      {{row.gender}}
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable>
+
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+<div *ngIf="alert.active">
+  <ngb-alert [type]="alert.type" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+</div>
+
+<div class="form-group card">
+  <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Branch Managers
+    <button type="button" class="btn btn-success mr-1 ml-auto">Add Branch Manager</button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>
+              Cinema Name
+            </th>
+            <th>
+              Username
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Type
+            </th>
+            <th>
+              Salary
+            </th>
+            <th>
+              First Name
+            </th>
+            <th>
+              Last Name
+            </th>
+            <th>
+              Phone number
+            </th>
+            <th>
+              Gender
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let row of rows |filter:term">
+            <td>
+              {{row.cinema_name}}
+            </td>
+            <td>
+              {{row.username}}
+            </td>
+            <td>
+             {{row.email}}
+            </td>
+            <td>
+              {{row.type}}
+            </td>
+            <td>
+              {{row.salary}}
+            </td>
+            <td>
+              {{row.first_name}}
+            </td>
+            <td>
+              {{row.last_name}}
+            </td>
+            <td>
+              {{row.phone_number}}
+            </td>
+            <td>
+              {{row.gender}}
+            </td>
+            <td>
+              <div id="actions">
+                <a (click)="updateValue(row)">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a (click)="deleteRow(row)">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

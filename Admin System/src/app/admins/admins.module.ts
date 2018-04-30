@@ -15,12 +15,20 @@ import { TableSortingComponent } from '../datatable/table-sorting/table-sorting.
 import { ViewAdminComponent } from './view-admin/view-admin.component';
 import { BranchManagerComponent } from './branch-manager/branch-manager.component';
 import { CinemaOwnerComponent } from './cinema-owner/cinema-owner.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminsRoutes),
-    NgxDatatableModule
+    NgxDatatableModule,
+    Ng2SearchPipeModule,
+    FormsModule,
+    NgbModule
   ],
   declarations: [
     BookingUsher,

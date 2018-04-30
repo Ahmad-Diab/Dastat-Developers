@@ -1,124 +1,66 @@
-All Cinemas
-<div  class="card-body">
-    <div>
-        <button type="button" class="btn btn-success mr-1 mb-1" (click) = "toggleAddAction()" *ngIf = "!AddAction">Add Cinema</button>
-        <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "toggleAddAction()" *ngIf = "AddAction">Done Adding Cinema</button>
-      </div>
-      <div *ngIf = "AddAction" class="card">
-          <div class="card-header">
-            Add new Cinema
-    </div>
-     <div class="card-body">
-        <strong style="font-size:20px">name</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[0]" type="text" class="form-control mb-3">
-        <strong style="font-size:20px">location</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[1]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">Address</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[2]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">number of halls</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[3]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">is3D</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[4]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">is4Da</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[5]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">company</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[6]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">imagePath</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[7]"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">imagePath2</strong>
-        <input id="input1"  [(ngModel)]="AddedCinema[8]"type="text" class="form-control mb-3">
-        <button  type="button" (click) = "AddCinema()" class="btn btn-success mr-1 mb-1">Add</button>
-        </div>
-      </div> 
 
-      <!-- <form action="AddCinema()" method="POST">
-        <input type="text" placeholder="location">
-        <input type="text" placeholder="address">
-        <input type="text" placeholder="name">
-        <input type="number" placeholder="number_of_halls">
-        <input type="number" placeholder="is3D">
-        <input type="number" placeholder="is4D">
-        <input type="text" placeholder="company">
-        <input type="url" placeholder="imagePath">
-        <input type="url" placeholder="imagePath2">
-        <button type="submit">Submit</button>
-      </form> -->
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
-      <div>
-          <button type="button" class="btn btn-success mr-1 mb-1" (click) = "toggleUpdateAction()" *ngIf = "!UpdateAction">Update or Delete Cinema</button>
-          <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "toggleUpdateAction()" *ngIf = "UpdateAction">Done Updating Cinema</button>
-        </div>
-      <div *ngIf = "UpdateAction" class="card">
-        <div class="card-header">
-            Update Cinema
+<div *ngIf="alert.active">
+  <ngb-alert [type]="alert.type" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+</div>
+
+<div class="form-group card">
+  <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Cinemas
+    <button type="button" (click) = "AddCinema()" class="btn btn-success mr-1 ml-auto">Add Cinema</button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped mb-0">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>location</th>
+            <th>Address</th>
+            <th>number of halls</th>
+            <th>is3D</th>
+            <th>is4D</th>
+            <th>company</th>
+            <th>image</th>
+            <th>image 2</th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let cinema of cinemas |filter:term">
+            <td>
+              {{cinema.name}}
+            </td>
+            <td>{{cinema.location}}</td>
+            <td>{{cinema.address}}</td>
+            <td>{{cinema.number_of_halls}}</td>
+            <td>{{cinema.is3D}}</td>
+            <td>{{cinema.is4D}}</td>
+            <td>{{cinema.company}}</td>
+            <td><img src={{cinema.imagePath}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage1(cinema)" /></td>
+            <td><img src={{cinema.imagePath2}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage2(cinema)" /></td>
+            <td>
+              <div id="actions">
+                <a (click)="onupdate(cinema)">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a (click)="ondelete(cinema)">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-   
-    <div class="card-body">
-        <strong style="font-size:20px">name</strong>
-        <input id="input1" type="text"  [(ngModel)]="clickedcinema.name"  class="form-control mb-3">
-        <strong style="font-size:20px">location</strong>
-        <input id="input1" type="text"  [(ngModel)]="clickedcinema.location"  class="form-control mb-3">
-        <button  type="button" (click) = "ondelete()" class="btn btn-success mr-1 mb-1">Delete that cinema</button>
-    </div>
-    <div class="card-header">
-        or Update it To have new Values
-    </div>
-    <div class="card-body">
-        
-        <strong style="font-size:20px">Address</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.address" type="text" class="form-control mb-3">
-        <strong style="font-size:20px">number of halls</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.number_of_halls" type="text" class="form-control mb-3">
-        <strong style="font-size:20px">is3D</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.is3D"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">is4Da</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.is4D"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">company</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.company"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">imagePath</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.imagePath"type="text" class="form-control mb-3">
-        <strong style="font-size:20px">imagePath2</strong>
-        <input id="input1" [(ngModel)]="cinematoupdate.imagePath2"type="text" class="form-control mb-3">
-        <button  type="button" (click) = "onupdate()" class="btn btn-success mr-1 mb-1">Update</button>
-        </div>
-      </div>
-      <div  class="card">
-      <div class="card-header">
-          Search For a cinema
-      </div>
-      <div class="card-body">
-          <strong style="font-size:20px">Search key</strong>
-          <input id="input1" type="text" #search class="form-control mb-3">  <button (click) = "onSearch(search.value)"  type="button" class="btn btn-success mr-1 mb-1">Search</button>
-     </div>
-    </div>
-  <div  class="table-responsive">
-    <table class="table mb-0">
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>location</th>
-          <th>Address</th>
-          <th>number of halls</th>
-          <th>is3D</th>
-          <th>is4D</th>
-          <th>company</th>
-          <th>imagePath </th>
-          <th>imagePath2</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr  *ngFor="let cinema of cinemas" >
-          <td><a (click) = "setupdateinputs(cinema)">{{cinema.name}}</a></td>
-          <td>{{cinema.location}}</td>
-          <td>{{cinema.address}}</td>
-          <td>{{cinema.number_of_halls}}</td>
-          <td>{{cinema.is3D.data[0]}}</td>
-          <td>{{cinema.is4D.data[0]}}</td>
-          <td>{{cinema.company}}</td>
-          <td><a href="{{cinema.imagePath}}">{{cinema.imagePath}}</a></td>
-          <td><a href="{{cinema.imagePath2}}">{{cinema.imagePath2}}</a></td>
-        </tr>
-      </tbody>
-    </table>
+
   </div>
 </div>

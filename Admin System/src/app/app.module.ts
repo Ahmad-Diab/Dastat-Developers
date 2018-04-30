@@ -27,7 +27,7 @@ import { AdminHallsComponent } from './admin-halls/admin-halls.component';
 import { HallsService } from './@services/halls.service';
 import { AdminService } from './@services/adminService.service';
 import { HallService } from './@services/hall.service';
-import {AdminTicketService} from "./@services/admin-ticket.service";
+import { AdminTicketService } from "./@services/admin-ticket.service";
 import { MoviesInHallsService } from "./@services/movies-in-halls.service";
 import { MoviesInHallsComponent } from './movies-in-halls/movies-in-halls.component';
 import { AdminBookingModule} from "./admin-booking/admin-booking.module";
@@ -35,6 +35,10 @@ import { ViewPromocodesComponent } from './promocodes/view-promocodes/view-promo
 import { PromocodesService } from './@services/promocodes.service';
 import { MoviesService } from './@services/movies.service';
 import { ModalHall } from './hall/modals/hall.component';
+import { ModalAdmin } from './admins/modals/admin.component';
+import { ModalCinema } from './mycinemas/modals/cinema.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Cinema } from './@objects/cinema';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,9 +51,12 @@ export function createTranslateLoader(http: HttpClient) {
     AuthLayoutComponent,
     AdminHallsComponent,
     MoviesInHallsComponent,
-    ModalHall
+    ModalHall,
+    ModalAdmin,
+    ModalCinema
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
@@ -69,8 +76,8 @@ export function createTranslateLoader(http: HttpClient) {
     AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
   ],
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
-  CinemaslistService, SearchService, PromocodesService, HallService,MoviesService, HallsService ,AdminService],
+  CinemaslistService, SearchService, PromocodesService, HallService,MoviesService, HallsService ,AdminService,Cinema],
   bootstrap: [AppComponent],
-  entryComponents: [ModalHall]
+  entryComponents: [ModalHall, ModalAdmin, ModalCinema]
 })
 export class AppModule { }

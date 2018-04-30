@@ -27,6 +27,7 @@ import { CinemaInfoService } from './@services/cinema-info.service';
 import {HttpModule} from "@angular/http";
 import { ActorInfoService } from './@services/actor-info.service';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ActorInfoService } from './@services/actor-info.service';
 
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     SharedModule,
     ContentModule,

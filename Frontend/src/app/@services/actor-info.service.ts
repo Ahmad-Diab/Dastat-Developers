@@ -8,7 +8,7 @@ export class ActorInfoService extends HttpService{
   constructor(public http: Http) {
     super(http);
   }
-  getActorInfo(actor: string){
+  getActorInfo(name: string){
     return this.get('/actors/'+ name);
   }
 

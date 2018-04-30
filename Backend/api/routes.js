@@ -79,7 +79,7 @@ router.post('/users/editProfile/:username', User.editProfile);
 
 
 //----------------------------------------------------Actor routes--------------------------------------------//
-router.post('/actors/:actor', Actor.getActors);
+router.get('/actors/:name', Actor.getActors);
 
 
 //----------------------------------------------------Movie Getters routes------------------------------------//

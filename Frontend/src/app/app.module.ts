@@ -25,6 +25,8 @@ import { SearchService } from './@services/search.service';
 import { PartiesService } from './@services/parties.service';
 import { CinemaInfoService } from './@services/cinema-info.service';
 import {HttpModule} from "@angular/http";
+import { ActorInfoService } from './@services/actor-info.service';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
@@ -45,7 +47,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers: [SeatingService, HttpService, MovieslistService, PartiesService,
   CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
     AuthService, AuthGuard, CookieService, UsersService,
-    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService],
+    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService,ActorInfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

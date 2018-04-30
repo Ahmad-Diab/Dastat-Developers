@@ -6,6 +6,7 @@ import { PromocodesRoutes } from './promocodes.routing';
 import { ViewPromocodesComponent } from './view-promocodes/view-promocodes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     Ng2SearchPipeModule,
     CommonModule,
     RouterModule.forChild(PromocodesRoutes),
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   declarations: [ViewPromocodesComponent]
 })

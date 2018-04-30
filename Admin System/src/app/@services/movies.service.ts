@@ -63,6 +63,7 @@ editMovie(title: string, duration: number, genre: string, description: string,im
       "year":year,
       "feature":feature,
       "release_date":release_date,
+      "rating":rating,
       "status":status,
       "admin_requested":admin_requested
     });

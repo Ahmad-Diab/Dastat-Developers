@@ -1,115 +1,29 @@
 
 <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
+<div *ngIf="alert.active">
+  <ngb-alert [type]="alert.type" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+</div>
 
 <div class="form-group card">
   <input class="form-control input" type="text" name="search" placeholder="search" [(ngModel)] = "term">
 </div>
 
-<!--  Start of Promocodes Actions card  -->
-<div class="card">
-  
-  <div class="card-header">
-    <div>
-      <button type="button" class="btn btn-success mr-1 mb-1" (click) = "promocodeActions = !promocodeActions" *ngIf = "!promocodeActions">Show Actions</button>
-      <button type="button" class="btn btn-danger mr-1 mb-1" (click) = "promocodeActions = !promocodeActions" *ngIf = "promocodeActions">Hide Actions</button>
-    </div>
-  </div>
-
-  <div class="card-body" *ngIf = "promocodeActions">
-
-  <!-- Start Of Assign Promocode -->
-    <div class="card">
-      <div class="card-header">
-        Assign promocode to cinema
-      </div>
-      <div class="card-body">
-        <strong style="margin-top: 1px">Choose a promocode</strong>
-        <select class="form-control" #Input1>
-            <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
-        </select><br/>
-        <strong style="margin-top: 1px">Choose a cinema</strong>
-        <select class="form-control" #Input2>
-          <option *ngFor = "let cinema of cinemasToShow" value="{{cinema.name}},{{cinema.location}}"   >{{ cinema.name }} , {{ cinema.location }}</option>
-        </select><br/>
-        <button (click)="assignPromocodeToCinema(Input1.value,Input2.value)" type="button" class="btn btn-success mr-1 mb-1">Assign</button>
-        <br/>
-      </div>
-      {{ assignResponseStatus }}
-
-    </div>
-    <!-- End Of Assign Promocode -->
-
-    <!--  Start Of Adding A Promocode -->
-    <div class="card">
-      <div class="card-header">
-        Add new promocode
-      </div>
-      <div class="card-body">
-      
-        <strong style="margin-top: 1px">Promocode</strong>          
-        <input #promocode  id="input1" type="text" class="form-control mb-3">
-
-        <strong style="margin-top: 1px">Choose a type</strong>    
-        <select #type class="form-control">
-          <option value= 'amount' >AMOUNT</option>
-          <option value= 'percentage' >PERCENTAGE</option>
-          <option value= 'package' >PACKAGE</option>
-        </select><br/>
-      
-        <strong style="margin-top: 1px">Value</strong>    
-        <input #value id="input1" type="text" class="form-control mb-3"> 
-      
-        <button (click)="addPromocode(promocode.value,type.value,value.value)" type="button" class="btn btn-success mr-1 mb-1">Add</button>
-      </div>
-      {{ addResponseStatus }}
-    </div>
-  <!--  End Of Adding A Promocode -->
-
-  <!--  Start Of Editing A Promocode -->
-    <div class="card">
-      <div class="card-header">
-        Edit promocode
-      </div>
-      <div class="card-body">
-      
-        <strong style="margin-top: 1px">Choose a promocode</strong>          
-        <select #selectPromocode class="form-control" (change) = "getPromocodeAttributes($event.target.value)">
-          <option *ngFor = "let promocode of promocodesToShow" value={{promocode.promocode}} >{{ promocode.promocode }}</option>
-        </select><br/>
-
-        <strong style="margin-top: 1px">Choose a type</strong>    
-        <select #selectType class="form-control">
-          <option value= 'amount' >AMOUNT</option>
-          <option value= 'percentage' >PERCENTAGE</option>
-          <option value= 'package' >PACKAGE</option>
-        </select><br/>
-
-        <strong style="margin-top: 1px">Value</strong>    
-        <input id="input1" type="text" class="form-control mb-3" [(ngModel)]="promocodeValueEdited"> 
-      
-        <button type="button" class="btn btn-info mr-1 mb-1"  (click)="editPromocode(selectPromocode.value, selectType.value)" >Edit</button>
-      </div>
-      {{editResponseStatus}}
-    </div>
-    <!--  End Of Editing A Promocode -->
-  </div>
-</div>
-<!--  End of Promocodes Actions card  -->
-
 <!--  Start of View Promocodes card -->
 <div class="card">
   
   <div class="card-header">
-    <div style="align-self: center; width: 100%">
-      <button style="align-self: left; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
-      <button style="align-self: left; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
-      <button style="align-self: right; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
-      <button style="align-self: right; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
-    </div>
+    Promocodes
+    <button type="button" (click) = "addPromocode()" class="btn btn-success mr-1 ml-auto">Add Promocode</button>
   </div>
   
   <div class="card-body" *ngIf = "assignedPromocodeView">
+      <div style="align-self: center; width: 100%">
+        <button style="align-self: left; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
+        <button style="align-self: left; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
+        <button style="align-self: right; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
+        <button style="align-self: right; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
+      </div>
 
     <div class="table-responsive">
       <table class="table table-bordered table-striped mb-0">
@@ -132,9 +46,6 @@
             <th>
               Location
             </th>
-            <th>
-              Actions
-            </th>
           </tr>
         </thead>
 
@@ -156,11 +67,6 @@
             <td>
               {{ promocode.cinema_location }}
             </td>
-            <td>
-              <button type="button" class="btn btn-danger" (click)="delete(promocode)">
-                <div class="icon icon-basic-trashcan"></div>
-              </button>
-            </td>
            </tr>
         </tbody>
       </table>
@@ -170,6 +76,12 @@
   </div>
 
   <div class="card-body" *ngIf = "!assignedPromocodeView">
+      <div style="align-self: center; width: 100%">
+        <button style="align-self: left; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = true" *ngIf = "!assignedPromocodeView">Promocode assigned view</button>
+        <button style="align-self: left; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "assignedPromocodeView">Promocode assigned view</button>
+        <button style="align-self: right; width: 49.5%" type="button" class="btn btn-info mr-1 mb-1" (click) = "assignedPromocodeView = false" *ngIf = "assignedPromocodeView">Promocode list view</button>
+        <button style="align-self: right; width: 49.5%" type="button" class="btn btn-primary mr-1 mb-1" *ngIf = "!assignedPromocodeView">Promocode list view</button>
+      </div>
     <div class="table-responsive">
       <table class="table table-bordered table-striped mb-0">
         
@@ -204,9 +116,15 @@
               {{ promocode.value }}
             </td>
             <td>
-              <button type="button" class="btn btn-danger" (click)="delete(promocode)">
-                <div class="icon icon-basic-trashcan"></div>
-              </button>
+              <div id="actions">
+                <a (click)="editPromocode(promocode)" ngbTooltip="Edit">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a (click)="delete(promocode)" ngbTooltip="Delete">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+                <a (click) = "assignPromocodeToCinema(promocode)" ngbTooltip="Assign Promocode to cinema" ><b>Assign</b></a>
+              </div>
             </td>
           </tr>
         </tbody>

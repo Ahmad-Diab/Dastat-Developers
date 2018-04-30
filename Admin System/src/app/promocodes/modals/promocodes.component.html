@@ -1,0 +1,69 @@
+<div>
+    <div class="modal-header">
+      <h4 class="modal-title">Promocode</h4>
+      <a (click)="activeModal.dismiss('Cross click')">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+  
+    <div class="modal-body">
+  
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Promocode</label>
+        <div class="col-10">
+          <input class="form-control input" [(ngModel)]="promocode.promocode" placeholder="freeTicket" *ngIf = "!add" disabled>
+          <input class="form-control input" [(ngModel)]="promocode.promocode" placeholder="freeTicket" *ngIf = "add" required>
+        </div>
+      </div>
+  
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Type</label>
+        <div class="col-10">
+          <select class="form-control input" [(ngModel)]="promocode.type" required *ngIf = "!assigned">
+            <option value="2" disabled>Select a Type</option>
+            <option value="amount">AMOUNT</option>
+            <option value="percentage">PERCENTAGE</option>
+            <option value="package">PACKAGE</option>
+          </select>
+          <select class="form-control input" [(ngModel)]="promocode.type" disabled *ngIf = "assigned">
+            <option value="2" disabled>Select a Type</option>
+            <option value="amount">AMOUNT</option>
+            <option value="percentage">PERCENTAGE</option>
+            <option value="package">PACKAGE</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Value</label>
+        <div class="col-10">
+          <input class="form-control input" [(ngModel)]="promocode.value" placeholder="10% off on 1 ticket" *ngIf = "!assigned">
+          <input class="form-control input" [(ngModel)]="promocode.value" placeholder="10% off on 1 ticket" *ngIf = "assigned" disabled>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf = "assigned">
+        <label class="col-2 col-form-label">Cinema location</label>
+        <div class="col-10">
+          <select (change)="getCinemaNames($event)" class="form-control input" [(ngModel)]="promocode.cinema_location" required>
+            <option value="0" disabled>Select a Location</option>
+            <option *ngFor="let location of locations" [value]="location.location">{{location.location}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf = "assigned">
+        <label class="col-2 col-form-label">Cinema name</label>
+        <div class="col-10">
+          <select class="form-control input" [(ngModel)]="promocode.cinema_name" required>
+            <option value="0" disabled>Select a Cinema</option>
+            <option *ngFor="let cinema of cinemas" [value]="cinema.name">{{cinema.name}}</option>
+          </select>
+        </div>
+      </div>
+  
+    <div class="modal-footer">
+      <button type="button" (click)="submit()" class="btn btn-success">Done</button>
+      <button type="button" (click)="close()" class="btn btn-danger">Cancel</button>
+    </div>
+  

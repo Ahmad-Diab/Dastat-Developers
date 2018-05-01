@@ -11,6 +11,8 @@ import { CookieService } from 'angular2-cookie/core';
 export class MoviesListComponent implements OnInit {
   movies=[];
   p : number = 1;
+  genre = "No filter";
+  sortingFilter = "Not sorted";
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
   public cookie : CookieService,) { 
   }
@@ -20,8 +22,8 @@ export class MoviesListComponent implements OnInit {
     this.viewMovies();
   }
 
-  SpecifySortingFilter(filter : string){
-    switch(filter){
+  SpecifySortingFilter(){
+    switch(this.sortingFilter){
       case "Not sorted" : this.ngOnInit();break;
       case "High Rates" : this.viewHighRate();break;
       case "Low Rates" : this.viewLowRate();break;
@@ -29,8 +31,8 @@ export class MoviesListComponent implements OnInit {
       case "Oldest" : this.viewOldest();break;
     }
   }
-  SpecifyGenre(genre : string){
-    switch(genre){
+  SpecifyGenre(){
+    switch(this.genre){
       case "No filter" : this.ngOnInit();break;
       case "Action" : this.viewAction();break;
       case "Adventure" : this.viewAdventure();break;
@@ -50,7 +52,7 @@ GoToReservation(movie){
   this.cookie.putObject('movie' , movie);
 }    
 viewHighRate(){
-  this.movieslistService.geHighRateMovies().subscribe((response)=>{
+  this.movieslistService.geHighRateMovies(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -66,7 +68,7 @@ viewMovies(){
 }
 
 viewLowRate(){
-  this.movieslistService.getLowRate().subscribe((response)=>{
+  this.movieslistService.getLowRate(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -74,7 +76,7 @@ viewLowRate(){
 }
 
 viewLatest(){
-  this.movieslistService.getLatest().subscribe((response)=>{
+  this.movieslistService.getLatest(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -83,7 +85,7 @@ viewLatest(){
 
 viewOldest(){
 
-  this.movieslistService.getOldest().subscribe((response)=>{
+  this.movieslistService.getOldest(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -92,7 +94,7 @@ viewOldest(){
 
 viewAction(){
 
-  this.movieslistService.getAction().subscribe((response)=>{
+  this.movieslistService.getAction(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -101,7 +103,7 @@ viewAction(){
 
 viewAdventure(){
 
-  this.movieslistService.getAdventure().subscribe((response)=>{
+  this.movieslistService.getAdventure(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -110,7 +112,7 @@ viewAdventure(){
 
 viewComedy(){
 
-  this.movieslistService.getComedy().subscribe((response)=>{
+  this.movieslistService.getComedy(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -119,7 +121,7 @@ viewComedy(){
 
 viewDrama(){
 
-  this.movieslistService.getDrama().subscribe((response)=>{
+  this.movieslistService.getDrama(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -129,7 +131,7 @@ viewDrama(){
 
 viewHorror(){
 
-  this.movieslistService.getHorror().subscribe((response)=>{
+  this.movieslistService.getHorror(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -138,7 +140,7 @@ viewHorror(){
 
 viewThriller(){
 
-  this.movieslistService.getThriller().subscribe((response)=>{
+  this.movieslistService.getThriller(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -146,7 +148,7 @@ viewThriller(){
 }
 viewBio(){
 
-  this.movieslistService.getBio().subscribe((response)=>{
+  this.movieslistService.getBio(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     

@@ -79,52 +79,205 @@ module.exports.addMovies = function(req,res,next){
 
 
 ///VIEW ALL OF MY REQUESTS
-module.exports.viewMyRequests =function(req,res,next){
+module.exports.viewMyRequests = function(req,res,next){
+
+    console.log("Entered viewMyRequests");
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit,
+        username = req.params.admin_requested;
+
+    console.log(req.query['username']);
+
+    if(!username){
+
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required',
+            data: null
+        });
+
+    }
+    
+// To calculate Total Count use MySQL count function
+    let query = 'Select count(*) as TotalCount FROM movies where status = "PENDING" and movies.admin_requested = ?';
+    
+    //query = database.format(query);    
+    database.query(query, username , function (err, rows) {
+        
+        if (err) {
+            console.log(err);
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
+                err: null,
+                msg: 'No requests available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+        
+        let query = 'select DISTINCT * FROM movies where status = "PENDING" and movies.admin_requested = ? limit ? OFFSET ?'
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [username , limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Requests have been successfully retrived"
+                });
+            }
+        });
+    });
 
     
-database.query('Select * FROM movies where status = "PENDING" and movies.admin_requested = ?', [req.params.admin_requested],
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length == 0){
-        return res.send("No Requested Movies here okk");
-    }
-    else{
-        return res.send(results);
-    }
-});
+// database.query('Select * FROM movies where status = "PENDING" and movies.admin_requested = ?', [req.params.admin_requested],
+// function(error,results,fields){
+//     if(error) return next(error);
+//     if(results.length == 0){
+//         return res.send("No Requested Movies here okk");
+//     }
+//     else{
+//         return res.send(results);
+//     }
+// });
+
+
 }
+
  //VIEW ALL REQUESTS
  module.exports.viewRequests = function(req,res,next){
 
-    database.query('SELECT * from movies where status ="PENDING" ORDER BY feature desc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Requested Movies nooooo!");
+    console.log("Entered viewRequests");
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit,
+        username = req.params.admin_requested;
+
+    console.log(req.query['username']);
+
+    if(!username){
+
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required',
+            data: null
+        });
+
     }
-    else{
-        return res.send(results);
-    }
-});
+    
+// To calculate Total Count use MySQL count function
+    let query = 'Select count(*) as TotalCount from movies where status ="PENDING" ORDER BY feature desc';
+    
+    //query = database.format(query);    
+    database.query(query, function (err, rows) {
+        
+        if (err) {
+            console.log(err);
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
+                err: null,
+                msg: 'No requests available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+        
+        let query = 'select DISTINCT * from movies where status ="PENDING" ORDER BY feature desc limit ? OFFSET ?'
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Requests have been successfully retrived"
+                });
+            }
+        });
+    });
+
+//     database.query('SELECT * from movies where status ="PENDING" ORDER BY feature desc',
+// function(error,results,fields){
+//     if(error) return next(error);
+//     if(results.length ==0){
+//         return res.send("No Requested Movies nooooo!");
+//     }
+//     else{
+//         return res.send(results);
+//     }
+// });
 }
 
 
 //VIEW ALL MOVIES
 
-module.exports.getMovies = function(req,res,next){
+// module.exports.getMovies = function(req,res,next){
 
-    database.query('SELECT * from movies where status ="ACCEPTED" ORDER BY feature desc',
+//     database.query('SELECT * from movies where status ="ACCEPTED" ORDER BY feature desc',
    
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found!");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
+// function(error,results,fields){
+//     if(error) return next(error);
+//     if(results.length ==0){
+//         return res.send("No Movies found!");
+//     }
+//     else{
+//         return res.send(results);
+//     }
+// });
+// }
 
 //VIEW A SINGLE MOVIE
 module.exports.viewSingleMovie = function(req, res, next){

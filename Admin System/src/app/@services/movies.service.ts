@@ -23,7 +23,7 @@ viewAllMovies(){
 
     //----------ADD A MOVIE------------------
 addMoviess(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-   year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
+   year: number, feature: number, release_date:Date,rating: number,admin_requested: string ){
         return this.post_auth('addMovies',{
           "title": title,
           "duration":duration,
@@ -34,7 +34,7 @@ addMoviess(title: string, duration: number, genre: string, description: string,i
           "year":year,
           "feature":feature,
           "release_date":release_date,
-          "status":status,
+          "rating": rating,
           "admin_requested":admin_requested
         });
     } 
@@ -51,7 +51,7 @@ getMovieInfo(movie_id: string){
 
 //---------EDIT A MOVIE--------------------------------
 editMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string, movie_id:string ){
+  year: number, feature: number, release_date:Date,rating: number,admin_requested: string, movie_id:string ){
 
     return this.post_auth('movie/edit/'+ movie_id,{
       "title": title,
@@ -64,7 +64,6 @@ editMovie(title: string, duration: number, genre: string, description: string,im
       "feature":feature,
       "release_date":release_date,
       "rating":rating,
-      "status":status,
       "admin_requested":admin_requested
     });
   }
@@ -78,7 +77,7 @@ editMovie(title: string, duration: number, genre: string, description: string,im
     return this.post_auth('requests/delete/'+movie_id);
   }
   addRequest(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-    year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string ){
+    year: number, feature: number, release_date:Date,rating: number,admin_requested: string ){
          return this.post_auth('addRequests/'+ admin_requested,{
            "title": title,
            "duration":duration,
@@ -89,7 +88,7 @@ editMovie(title: string, duration: number, genre: string, description: string,im
            "year":year,
            "feature":feature,
            "release_date":release_date,
-           "status":status,
+           "rating":rating,
            "admin_requested":admin_requested
        });
   } 
@@ -106,7 +105,7 @@ editMovie(title: string, duration: number, genre: string, description: string,im
 //----------------EDIT A REQUEST--------------------------
 
 editRequest(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,admin_requested: string, movie_id:string ){
+  year: number, feature: number, release_date:Date,rating: number,admin_requested: string, movie_id:string ){
 
     return this.post_auth('requests/edit/'+ movie_id,{
       "title": title,
@@ -118,7 +117,6 @@ editRequest(title: string, duration: number, genre: string, description: string,
       "year":year,
       "feature":feature,
       "release_date":release_date,
-      "status":status,
       "admin_requested":admin_requested
     });
   }

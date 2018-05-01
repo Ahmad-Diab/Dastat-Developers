@@ -151,14 +151,13 @@ module.exports.EditMyRequests=function(req,res,next){
         year = req.body['year'],
         feature = req.body['feature'],
         release_date = req.body['release_date'],
-        rating = req.body['rating'],
-        status = req.body['status'];
+        rating = req.body['rating'];
 
         database.query('Select * FROM movies where status = "PENDING" AND movies.movie_id = ?', [req.params.movie_id],function(err,results){
             if(err) return next(err);
 
             
-             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?  WHERE status = "PENDING" AND movies.movie_id = ?';
+             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?  WHERE status = "PENDING" AND movies.movie_id = ?';
              database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,req.params.movie_id],
              function(error,results){
                  if(error){
@@ -199,7 +198,6 @@ module.exports.EditMovies=function(req,res,next){
         feature = req.body['feature'],
         release_date = req.body['release_date'],
         rating = req.body['rating'],
-        status = req.body['status'];
         admin_requested = req.body['admin_requested'];
 
         database.query('Select * FROM movies where movies.movie_id = ?', [req.params.movie_id],function(err,results){
@@ -207,8 +205,8 @@ module.exports.EditMovies=function(req,res,next){
 
            
 
-             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,status = ?,admin_requested=?  WHERE  movies.movie_id = ?';
-             database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,admin_requested,req.params.movie_id],
+             var sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?,admin_requested=?  WHERE  movies.movie_id = ?';
+             database.query(sqlQuery,[title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,admin_requested,req.params.movie_id],
              function(error,results){
                  if(error){
                      return next(error);

@@ -75,7 +75,6 @@ module.exports.searchByKeyword = function(req,res,next){
 });
 }
 
-
 module.exports.viewMovies = function(req,res,next){
     database.query('SELECT * FROM Movies', function (error, results, fields) {
         if(error) return next(error);

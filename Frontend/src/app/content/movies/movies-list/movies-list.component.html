@@ -32,7 +32,7 @@
                 </mat-form-field> <br> 
                   <a class="page-heading3">Filtered by Genre:</a>
                   <mat-form-field>
-                  <mat-select #genreFilter (change)="SpecifyGenre(genreFilter.value)">
+                  <mat-select [(ngModel)] = "genre" (change)="SpecifyGenre()" required>
                     <mat-option value="No filter" selected="selected">No filter</mat-option>
                     <mat-option value="Action">Action</mat-option>
                     <mat-option value="Adventure">Adventure</mat-option>

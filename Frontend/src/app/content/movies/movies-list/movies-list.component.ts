@@ -11,6 +11,7 @@ import { CookieService } from 'angular2-cookie/core';
 export class MoviesListComponent implements OnInit {
   movies=[];
   p : number = 1;
+  genre;
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
   public cookie : CookieService,) { 
   }
@@ -29,8 +30,8 @@ export class MoviesListComponent implements OnInit {
       case "Oldest" : this.viewOldest();break;
     }
   }
-  SpecifyGenre(genre : string){
-    switch(genre){
+  SpecifyGenre(){
+    switch(this.genre){
       case "No filter" : this.ngOnInit();break;
       case "Action" : this.viewAction();break;
       case "Adventure" : this.viewAdventure();break;

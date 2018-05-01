@@ -22,7 +22,7 @@
           <div class="tags tags--unmarked">
               <a class="page-heading3">Sorted by:</a>
               <mat-form-field>
-                  <mat-select #sortedBy (change)="SpecifySortingFilter(sortedBy.value)">
+                  <mat-select [(ngModel)] = "sortingFilter" (change)="SpecifySortingFilter()">
                     <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="High Rates">High Rates</mat-option>
                     <mat-option value="Low Rates">Low Rates</mat-option>

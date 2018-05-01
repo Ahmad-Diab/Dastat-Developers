@@ -32,26 +32,26 @@ export class MovieslistService extends HttpService{
   getOldest(genre : string){
     return this.get('movies/oldest/' + genre);
   }
-  getAction(){
-    return this.get('movies/Action');
+  getAction(sortingFilter : string){
+    return this.get('movies/Action/' + sortingFilter);
   }
-  getAdventure(){
-    return this.get('movies/Adventure');
+  getAdventure(sortingFilter : string){
+    return this.get('movies/Adventure/' + sortingFilter);
   }
-  getComedy(){
-    return this.get('movies/Comedy');
+  getComedy(sortingFilter : string){
+    return this.get('movies/Comedy/' + sortingFilter);
   }
-  getDrama(){
-    return this.get('movies/Drama');
+  getDrama(sortingFilter : string){
+    return this.get('movies/Drama/' + sortingFilter);
   }
-  getHorror(){
-    return this.get('movies/Horror');
+  getHorror(sortingFilter : string){
+    return this.get('movies/Horror/' + sortingFilter);
   }
-  getThriller(){
-    return this.get('movies/Thriller');
+  getThriller(sortingFilter : string){
+    return this.get('movies/Thriller/' + sortingFilter);
   }
-  getBio(){
-    return this.get('movies/Bio');
+  getBio(sortingFilter : string){
+    return this.get('movies/Bio/' + sortingFilter);
   }
  
 

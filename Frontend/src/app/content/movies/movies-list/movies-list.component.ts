@@ -11,7 +11,8 @@ import { CookieService } from 'angular2-cookie/core';
 export class MoviesListComponent implements OnInit {
   movies=[];
   p : number = 1;
-  genre;
+  genre = "No filter";
+  sortingFilter = "Not sorted";
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
   public cookie : CookieService,) { 
   }
@@ -21,8 +22,8 @@ export class MoviesListComponent implements OnInit {
     this.viewMovies();
   }
 
-  SpecifySortingFilter(filter : string){
-    switch(filter){
+  SpecifySortingFilter(){
+    switch(this.sortingFilter){
       case "Not sorted" : this.ngOnInit();break;
       case "High Rates" : this.viewHighRate();break;
       case "Low Rates" : this.viewLowRate();break;
@@ -93,7 +94,7 @@ viewOldest(){
 
 viewAction(){
 
-  this.movieslistService.getAction().subscribe((response)=>{
+  this.movieslistService.getAction(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -102,7 +103,7 @@ viewAction(){
 
 viewAdventure(){
 
-  this.movieslistService.getAdventure().subscribe((response)=>{
+  this.movieslistService.getAdventure(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -111,7 +112,7 @@ viewAdventure(){
 
 viewComedy(){
 
-  this.movieslistService.getComedy().subscribe((response)=>{
+  this.movieslistService.getComedy(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -120,7 +121,7 @@ viewComedy(){
 
 viewDrama(){
 
-  this.movieslistService.getDrama().subscribe((response)=>{
+  this.movieslistService.getDrama(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -130,7 +131,7 @@ viewDrama(){
 
 viewHorror(){
 
-  this.movieslistService.getHorror().subscribe((response)=>{
+  this.movieslistService.getHorror(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -139,7 +140,7 @@ viewHorror(){
 
 viewThriller(){
 
-  this.movieslistService.getThriller().subscribe((response)=>{
+  this.movieslistService.getThriller(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -147,7 +148,7 @@ viewThriller(){
 }
 viewBio(){
 
-  this.movieslistService.getBio().subscribe((response)=>{
+  this.movieslistService.getBio(this.sortingFilter).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     

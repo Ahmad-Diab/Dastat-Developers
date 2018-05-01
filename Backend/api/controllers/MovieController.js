@@ -125,103 +125,319 @@ module.exports.getMoviesOldesttDate = function(req,res,next){
 
 //--View Biography Movies
 module.exports.getMoviesBiography = function(req,res,next){
-
-    database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED"  ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Biography Movies found");
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    
 }
 
 //--View Thriller Movies
 module.exports.getMoviesThriller = function(req,res,next){
-
-    database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Thriller Movies found");
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
 }
 
 //--View Drama Movies
 module.exports.getMoviesDrama = function(req,res,next){
-
-    database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Drama Movies found");
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
 }
-
+}
 //--View Adventure Movies
 module.exports.getMoviesAdventure = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Adventure Movies found");
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
 }
-
+}
 //--View Horror Movies
 module.exports.getMoviesHorror = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Horror Movies found");
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+}
 }
 //--View Action Movies
 module.exports.getMoviesAction = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Action Movies found");
+    
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
-}
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+}   
 //--View Comedy Movies
-module.exports.getMoviesComedy = function(req,res,next){
-
-    database.query('Select * FROM movies where genre="Comedy"  AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Comedy Movies found");
+module.exports.getMoviesComedy = function(req,res,next){ 
+    let sortingFilter = req.params.sortingFilter;
+    if(sortingFilter === "Not sorted"){
+        database.query('Select * FROM movies where genre="Comedy" AND  status ="ACCEPTED"',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-    else{
-        return res.send(results);
+    else if(sortingFilter === "High Rates")  {
+        database.query('Select * FROM movies where genre="Comedy" AND  status ="ACCEPTED" ORDER BY rating DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }  
+    else if(sortingFilter === "Low Rates") {
+        database.query('Select * FROM movies where genre="Comedy" AND  status ="ACCEPTED" ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
     }
-});
+    else if(sortingFilter === "Latest") {
+        database.query('Select * FROM movies where genre="Comedy" AND  status ="ACCEPTED" ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
+    else if(sortingFilter === "Oldest") {
+        database.query('Select * FROM movies where genre="Comedy" AND  status ="ACCEPTED" ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            else{
+            return res.send(results);
+            }
+        });
+    }
 }
+
+
+

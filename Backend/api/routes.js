@@ -95,13 +95,13 @@ router.get('/movies/highrate/:genre',Movie.getMoviesHighRatings);
 router.get('/movies/lowrate/:genre',Movie.getMoviesLowRatings);
 router.get('/movies/latest/:genre',Movie.getMoviesLastestDate);
 router.get('/movies/oldest/:genre',Movie.getMoviesOldesttDate);
-router.get('/movies/Action',Movie.getMoviesAction);
-router.get('/movies/Adventure',Movie.getMoviesAdventure);
-router.get('/movies/Comedy',Movie.getMoviesComedy);
-router.get('/movies/Drama',Movie.getMoviesDrama);
-router.get('/movies/Horror',Movie.getMoviesHorror);
-router.get('/movies/Thriller',Movie.getMoviesThriller);
-router.get('/movies/Bio',Movie.getMoviesBiography);
+router.get('/movies/Action/:sortingFilter',Movie.getMoviesAction);
+router.get('/movies/Adventure/:sortingFilter',Movie.getMoviesAdventure);
+router.get('/movies/Comedy/:sortingFilter',Movie.getMoviesComedy);
+router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
+router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
+router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
+router.get('/movies/Bio/:sortingFilter',Movie.getMoviesBiography);
 
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);

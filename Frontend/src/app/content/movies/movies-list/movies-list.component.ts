@@ -9,14 +9,14 @@ import { CookieService } from 'angular2-cookie/core';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
-  size: any;
+  size: number;
   movies=[];
   p : number = 1;
-  genre = "No filter";
+  genre;
   rateFilter;
   dateFilter;
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
-  public cookie : CookieService,) { 
+  public cookie : CookieService) { 
   }
   
   ngOnInit() {

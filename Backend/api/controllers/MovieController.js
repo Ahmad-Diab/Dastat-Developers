@@ -17,7 +17,7 @@ module.exports.getMovieInfo = function(req, res, next){
 //DONT FORGET TO ADD IT IN THE ROUTES
 
 //-------VIEW ALL MOVIES------
-
+/*
 module.exports.getMovies = function(req,res,next){
 
     console.log("Entered getMovies");
@@ -112,9 +112,9 @@ module.exports.getMoviesHighRatings = function(req,res,next){
 // To calculate Total Count use MySQL count function
 
     if(genre === "No filter")
-        let query = 'SELECT count(*) as TotalCount from movies where status ="ACCEPTED"  ORDER BY rating desc';
+        var query = 'SELECT count(*) as TotalCount from movies where status ="ACCEPTED"  ORDER BY rating desc';
     else
-        let query = 'SELECT count(*) as TotalCount from movies where genre = ? AND status ="ACCEPTED"  ORDER BY rating desc'
+        var query = 'SELECT count(*) as TotalCount from movies where genre = ? AND status ="ACCEPTED"  ORDER BY rating desc'
     //query = database.format(query);    
     database.query(query, genre , function (err, rows) {
         
@@ -150,9 +150,9 @@ module.exports.getMoviesHighRatings = function(req,res,next){
         }
         
         if(genre === "No filter")
-            let query = 'SELECT * from movies where status ="ACCEPTED"  ORDER BY rating desc limit ? OFFSET ? ';
+            var query = 'SELECT * from movies where status ="ACCEPTED"  ORDER BY rating desc limit ? OFFSET ? ';
         else
-            let query = 'SELECT * from movies where genre = ? AND status ="ACCEPTED"  ORDER BY rating desc limit ? OFFSET ?'
+            var query = 'SELECT * from movies where genre = ? AND status ="ACCEPTED"  ORDER BY rating desc limit ? OFFSET ?'
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [genre ,limitNum, startNum];
         
@@ -467,7 +467,7 @@ module.exports.getMoviesByDate = function(req,res,next){
 // }
 
 //------------------------VIEW BY GENRE-------------------
-
+*/
 //--View Biography Movies
 module.exports.getMoviesWithFilters = function(req,res,next){
 
@@ -510,6 +510,7 @@ module.exports.getMoviesWithFilters = function(req,res,next){
     query = 'Select count(*) as TotalCount FROM movies '+where+genreString+ratingString+dateString;
     
     if(!genre && !rating && !date){
+        console.log("All empty!");
         table = [];
         where = " ";
         and = " ";
@@ -535,7 +536,7 @@ module.exports.getMoviesWithFilters = function(req,res,next){
         query = database.format(query, table);
     
     //query = database.format(query);    
-    database.query(query , table ,function (err, rows) {
+    database.query(query  ,function (err, rows) {
         
         if (err) {
             console.log(err);

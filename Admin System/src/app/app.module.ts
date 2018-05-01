@@ -37,6 +37,8 @@ import { MoviesService } from './@services/movies.service';
 import { ModalHall } from './hall/modals/hall.component';
 import { ModalAdmin } from './admins/modals/admin.component';
 import { ModalCinema } from './mycinemas/modals/cinema.component';
+import { ModalPromocodes } from './promocodes/modals/promocodes.component';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Cinema } from './@objects/cinema';
 
@@ -53,7 +55,8 @@ export function createTranslateLoader(http: HttpClient) {
     MoviesInHallsComponent,
     ModalHall,
     ModalAdmin,
-    ModalCinema
+    ModalCinema,
+    ModalPromocodes
   ],
   imports: [
     NgxPaginationModule,
@@ -78,6 +81,6 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [AuthGuard, CookieService, HttpService, AuthService, AdminTicketService, MoviesInHallsService,
   CinemaslistService, SearchService, PromocodesService, HallService,MoviesService, HallsService ,AdminService,Cinema],
   bootstrap: [AppComponent],
-  entryComponents: [ModalHall, ModalAdmin, ModalCinema]
+  entryComponents: [ModalHall, ModalAdmin, ModalCinema, ModalPromocodes]
 })
 export class AppModule { }

@@ -47,8 +47,8 @@
             <td *ngIf = "cinema.is4D == 1"> YES </td>
             <td *ngIf = "cinema.is4D == 0"> NO </td>
             <td>{{cinema.company}}</td>
-            <td><img src={{cinema.imagePath}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage1(cinema)" /></td>
-            <td><img src={{cinema.imagePath2}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage2(cinema)" /></td>
+            <td><a><img src={{cinema.imagePath}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage1(cinema)" /></a></td>
+            <td><a><img src={{cinema.imagePath2}} alt="Card image cap" class="img-responsive smaller" (click) = "openImage2(cinema)" /></a></td>
             <td>
               <div id="actions">
                 <a (click)="onupdate(cinema)">

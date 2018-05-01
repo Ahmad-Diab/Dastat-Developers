@@ -32,16 +32,16 @@ export class AdmincinemasComponent implements OnInit {
       for (i = 0; i < this.cinemas.length; i++) {
         if(this.cinemas[i].is3D.data.length == 1){
           if(this.cinemas[i].is3D.data[0] == "0") {
-            this.cinemas[i].is3D = "0";
+            this.cinemas[i].is3D = 0;
           } else {
-            this.cinemas[i].is3D = "1";
+            this.cinemas[i].is3D = 1;
           }
         }
         if(this.cinemas[i].is4D.data.length == 1){
           if(this.cinemas[i].is4D.data[0] == "0") {
-            this.cinemas[i].is4D = "0";
+            this.cinemas[i].is4D = 0;
           } else {
-            this.cinemas[i].is4D = "1";
+            this.cinemas[i].is4D = 1;
           }
         }
       }

@@ -1,18 +1,15 @@
-<<<<<<< HEAD
-﻿-- phpMyAdmin SQL Dump
--- version 4.7.9
-=======
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
->>>>>>> master
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 19, 2018 at 07:36 PM
--- Server version: 5.7.21-0ubuntu0.17.10.1
--- PHP Version: 7.1.15-0ubuntu0.17.10.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 28, 2018 at 09:03 PM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -31,14 +28,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `actors`
 --
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> master
-
-
->>>>>>> master
 CREATE TABLE `actors` (
   `name` varchar(115) NOT NULL,
   `age` int(11) DEFAULT NULL,
@@ -53,15 +42,15 @@ CREATE TABLE `actors` (
 --
 
 INSERT INTO `actors` (`name`, `age`, `birth_date`, `gender`, `bio`, `imagePath`) VALUES
-('Alicia Vikander', 29, '1988-10-03 00:00:00', 'Female', 'Alicia Vikander is a Swedish actress, dancer and producer. She was born and raised in Gothenburg, Västra Götalands län, Sweden, to Maria Fahl-Vikander, an actress of stage and screen, and Svante Vikander, a psychiatrist. She is of Swedish and one quarter Finnish descent.', ''),
-('Bella Thorne', 20, '1997-10-08 00:00:00', 'Female', 'Bella Thorne was born in Pembroke Pines, Florida, to Tamara (Beckett) and Delancey Reinaldo \"Rey\" Thorne. She has three siblings, Remy Thorne, Dani Thorne and Kaili Thorne, all of whom have also acted. She is of Cuban (father) and Irish, Italian, English, German, and Welsh (mother) ancestry.', ''),
-('Chadwick Boseman', 40, '1996-11-29 00:00:00', 'Male', 'Chadwick Boseman is an American actor. He is known for his portrayal of TChalla / Black Panther in the Marvel Cinematic Universe (since 2016), particular in Black Panther (2018), and for his starring roles in as Jackie Robinson in 42 (2013), James Brown in Get on Up (2014), and Thurgood Marshall in Marshall (2017).', ''),
-('Dennis Quaid', 63, '1954-04-09 00:00:00', 'Male', 'Dennis Quaid was born in Houston, Texas, to Juanita Bonniedale (Jordan), a real estate agent, and William Rudy Quaid, an electrician. He grew up in the Houston suburban city of Bellaire. He was raised a Baptist, and studied drama, Mandarin Chinese, and dance while a student at Bellaire High School.', ''),
-('Hugh Jackman', 49, '1968-10-12 00:00:00', 'Male', 'Hugh Michael Jackman is an Australian actor, singer, multi-instrumentalist, dancer and producer. Jackman has won international recognition for his roles in major films, notably as superhero, period, and romance characters. He is best known for his long-running role as Wolverine in the X-Men film series.', ''),
-('Karen Gillan', 30, '1996-11-28 00:00:00', 'Female', 'Karen Sheila Gillan was born and raised in Inverness, Scotland, the daughter of Marie (Paterson) and John Gillan, who is a singer and recording artist. She developed a love for acting very early on, attending several youth theatre groups and taking part in a wide range of productions at her school, Charleston Academy.', ''),
-('Matthew Goode', 39, '1996-04-03 00:00:00', 'Male', 'Matthew William Goode (born 3 April 1978) is an English actor. His films include Chasing Liberty (2004), Match Point (2005), Imagine Me and You (2006), Brideshead Revisited (2008), Watchmen (2009), A Single Man (2009), Leap Year (2010), Stoker (2013) and The Imitation Game (2014). ', ''),
-('Scarlett Johansson', 33, '1996-11-22 00:00:00', 'Female', 'Scarlett Johansson was born in New York City. Her mother, Melanie Sloan, is from a Jewish family from the Bronx, and her father, Karsten Johansson, is a Danish-born architect, from Copenhagen.', ''),
-('Scott Eastwood', 32, '1986-03-21 00:00:00', 'Male', 'Scott Eastwood was born Scott Clinton Reeves in Carmel, Monterey County, California, to Jacelyn Ann Reeves, a flight attendant, and Clint Eastwood, an actor and director. He grew up in Hawaii. Scott has a younger sister, Kathryn Eastwood, and several half-siblings.', '');
+('Alicia Vikander', 29, '1988-10-03 00:00:00', 'Female', 'Alicia Vikander is a Swedish actress, dancer and producer. She was born and raised in Gothenburg, Västra Götalands län, Sweden, to Maria Fahl-Vikander, an actress of stage and screen, and Svante Vikander, a psychiatrist. She is of Swedish and one quarter Finnish descent.', 'https://image.ibb.co/gj7wTc/alicia_vikander_portrait_600x600.jpg'),
+('Bella Thorne', 20, '1997-10-08 00:00:00', 'Female', 'Bella Thorne was born in Pembroke Pines, Florida, to Tamara (Beckett) and Delancey Reinaldo \"Rey\" Thorne. She has three siblings, Remy Thorne, Dani Thorne and Kaili Thorne, all of whom have also acted. She is of Cuban (father) and Irish, Italian, English, German, and Welsh (mother) ancestry.', 'https://image.ibb.co/njm6Tc/Bella_Thorne.jpg'),
+('Chadwick Boseman', 40, '1996-11-29 00:00:00', 'Male', 'Chadwick Boseman is an American actor. He is known for his portrayal of TChalla / Black Panther in the Marvel Cinematic Universe (since 2016), particular in Black Panther (2018), and for his starring roles in as Jackie Robinson in 42 (2013), James Brown in Get on Up (2014), and Thurgood Marshall in Marshall (2017).', 'https://image.ibb.co/fB6vMx/Chadwick_Boseman.jpg'),
+('Dennis Quaid', 63, '1954-04-09 00:00:00', 'Male', 'Dennis Quaid was born in Houston, Texas, to Juanita Bonniedale (Jordan), a real estate agent, and William Rudy Quaid, an electrician. He grew up in the Houston suburban city of Bellaire. He was raised a Baptist, and studied drama, Mandarin Chinese, and dance while a student at Bellaire High School.', 'https://image.ibb.co/mD89gx/Dennis_Quaid.jpg'),
+('Hugh Jackman', 49, '1968-10-12 00:00:00', 'Male', 'Hugh Michael Jackman is an Australian actor, singer, multi-instrumentalist, dancer and producer. Jackman has won international recognition for his roles in major films, notably as superhero, period, and romance characters. He is best known for his long-running role as Wolverine in the X-Men film series.', 'https://image.ibb.co/cD5N1x/Hugh_Jackman.jpg'),
+('Karen Gillan', 30, '1996-11-28 00:00:00', 'Female', 'Karen Sheila Gillan was born and raised in Inverness, Scotland, the daughter of Marie (Paterson) and John Gillan, who is a singer and recording artist. She developed a love for acting very early on, attending several youth theatre groups and taking part in a wide range of productions at her school, Charleston Academy.', 'https://image.ibb.co/itk0oc/Karen_Gillan.jpg'),
+('Matthew Goode', 39, '1996-04-03 00:00:00', 'Male', 'Matthew William Goode (born 3 April 1978) is an English actor. His films include Chasing Liberty (2004), Match Point (2005), Imagine Me and You (2006), Brideshead Revisited (2008), Watchmen (2009), A Single Man (2009), Leap Year (2010), Stoker (2013) and The Imitation Game (2014). ', 'https://image.ibb.co/grgO8c/Matthew_Goode.jpg'),
+('Scarlett Johansson', 33, '1996-11-22 00:00:00', 'Female', 'Scarlett Johansson was born in New York City. Her mother, Melanie Sloan, is from a Jewish family from the Bronx, and her father, Karsten Johansson, is a Danish-born architect, from Copenhagen.', 'https://image.ibb.co/me7wTc/Scarlett_Johansson.jpg'),
+('Scott Eastwood', 32, '1986-03-21 00:00:00', 'Male', 'Scott Eastwood was born Scott Clinton Reeves in Carmel, Monterey County, California, to Jacelyn Ann Reeves, a flight attendant, and Clint Eastwood, an actor and director. He grew up in Hawaii. Scott has a younger sister, Kathryn Eastwood, and several half-siblings.', 'https://image.ibb.co/e3pAoc/Scott_Eastwood.jpg');
 
 -- --------------------------------------------------------
 
@@ -70,14 +59,14 @@ INSERT INTO `actors` (`name`, `age`, `birth_date`, `gender`, `bio`, `imagePath`)
 --
 
 CREATE TABLE `admins` (
-  `username` varchar(15) NOT NULL,
+  `username` varchar(70) NOT NULL,
   `password` varchar(110) NOT NULL,
   `email` varchar(30) NOT NULL,
   `salary` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
-  `firstName` varchar(15) NOT NULL,
-  `lastName` varchar(15) NOT NULL,
-  `phoneNumber` int(11) DEFAULT NULL,
+  `first_name` varchar(15) NOT NULL,
+  `last_name` varchar(15) NOT NULL,
+  `phone_number` int(11) DEFAULT NULL,
   `gender` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -85,11 +74,25 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `firstName`, `lastName`, `phoneNumber`, `gender`) VALUES
-('app', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'app@cinema-app.com', 200, 'App Owner', 'Amir', 'Zhagloul', 1818191918, 'female'),
-('booking', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking@cinema-app.com', 300, 'Booking Usher', 'Mostafa', 'Nasr', 1828282908, 'male'),
-('branch', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'branch@cinema-app.com', 200, 'Branch Manager', 'George', 'Maged', 1063961597, 'male'),
-('cinema', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'cinema@cinema-app.com', 200, 'Cinema Owner', 'Omar', 'El Sayed', 1228383990, 'male');
+INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `first_name`, `last_name`, `phone_number`, `gender`) VALUES
+('app', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'app@cinema-app.com', 200, 'App Owner', 'Sherif', 'Fawzy', 1818191918, 'male'),
+('booking1_Mawlana', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking1_Mawlana@cinema-app', 200, 'Booking Usher', 'mango', 'parpos', 114896627, 'male'),
+('booking1_Mayo', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking1_Mayo@cinema-app', 200, 'Booking Usher', 'nader', 'samy', 114896627, 'male'),
+('booking1_P90', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking1_P90@cinema-app.com', 300, 'Booking Usher', 'Mostafa', 'Nasr', 1828282908, 'male'),
+('booking2_Mawlana', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking2_Mawlana@cinema-app', 200, 'Booking Usher', 'gawa', 'chai', 114896627, 'male'),
+('booking2_Mayo', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking2_Mayo@cinema-app', 200, 'Booking Usher', 'geer', 'samy', 114896627, 'male'),
+('booking2_P90', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking2_P90@cinema-app.com', 200, 'Booking Usher', 'Ahmed', 'Moty', 102222002, 'male'),
+('booking3_Mawlana', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking3_Mawlana@cinema-app', 200, 'Booking Usher', 'atef', 'ashraf', 100249977, 'male'),
+('booking3_Mayo', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking3_Mayo@cinema-app', 200, 'Booking Usher', 'monaa', 'samy', 114896627, 'female'),
+('booking3_P90', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking3_P90@cinema-app.com', 200, 'Booking Usher', 'Maykel', 'Hanna', 100212188, 'male'),
+('booking4_Mawlana', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking4_Mawlana@cinema-app', 200, 'Booking Usher', 'runy', 'hify', 114896627, 'male'),
+('booking4_Mayo', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking4_Mayo@cinema-app', 200, 'Booking Usher', 'wafaa', 'samy', 114896627, 'female'),
+('booking4_P90', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'booking4_P90@cinema-app.com', 200, 'Booking Usher', 'jojo', 'baa', 100212188, 'male'),
+('branch_Mawlana', 'rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'branch_Mawlana@cinema-app.com', 3000, 'Branch Manager', 'Mik', 'Micheal', 1112336652, 'male'),
+('branch_Mayo', 'rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'branch_Mayo@cinema-app.com', 3000, 'Branch Manager', 'Bas', 'Rizk', 1112336652, 'male'),
+('branch_P90', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'branch_P90@cinema-app.com', 200, 'Branch Manager', 'George', 'Maged', 1063961597, 'male'),
+('cinema_Galaxco', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'cinema_Galaxo@cinema-app', 5000, 'Cinema Owner', 'Ahmed', 'Diab', 1124478874, 'male'),
+('cinema_Rain', '$2a$10$rmNDLY4P9QLcCav7pPFDGOb7t5XDmP7MRz6WAvIE556uYlILKQhPe', 'cinema_Rain@cinema-app.com', 200, 'Cinema Owner', 'Omar', 'El Sayed', 1228383990, 'male');
 
 -- --------------------------------------------------------
 
@@ -98,21 +101,34 @@ INSERT INTO `admins` (`username`, `password`, `email`, `salary`, `type`, `firstN
 --
 
 CREATE TABLE `admins_cinemas` (
-  `admin` varchar(20) DEFAULT NULL,
-  `cinema_location` varchar(100) DEFAULT NULL,
-  `cinemaName` varchar(200) DEFAULT NULL
+  `admin` varchar(70) NOT NULL,
+  `cinema_location` varchar(100) NOT NULL,
+  `cinema_name` varchar(115) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admins_cinemas`
 --
 
-INSERT INTO `admins_cinemas` (`admin`, `cinema_location`, `cinemaName`) VALUES
-('cinema', '9th of Mayo', 'Mayo Movies'),
-('cinema', 'Old Cairo', 'El Zaaeem El Cinema'),
-('cinema', 'Mokattam', 'Cinema Mawlana'),
-('booking', 'Mokattam', 'Cinema Mawlana'),
-('branch', 'Mokattam', 'Cinema Mawlana');
+INSERT INTO `admins_cinemas` (`admin`, `cinema_location`, `cinema_name`) VALUES
+('booking1_Mawlana', 'Mokattam', 'Cinema Mawlana'),
+('booking2_Mawlana', 'Mokattam', 'Cinema Mawlana'),
+('booking3_Mawlana', 'Mokattam', 'Cinema Mawlana'),
+('booking4_Mawlana', 'Mokattam', 'Cinema Mawlana'),
+('booking1_Mayo', '9th of Mayo', 'Mayo Movies'),
+('booking2_Mayo', '9th of Mayo', 'Mayo Movies'),
+('booking3_Mayo', '9th of Mayo', 'Mayo Movies'),
+('booking4_Mayo', '9th of Mayo', 'Mayo Movies'),
+('booking1_P90', 'New Cairo', 'Point 90'),
+('booking2_P90', 'New Cairo', 'Point 90'),
+('booking3_P90', 'New Cairo', 'Point 90'),
+('booking4_P90', 'New Cairo', 'Point 90'),
+('branch_Mawlana', 'Mokattam', 'Cinema Mawlana'),
+('branch_Mayo', '9th of Mayo', 'Mayo Movies'),
+('branch_P90', 'New Cairo', 'Point 90'),
+('cinema_Galaxco', 'New Cairo', 'Point 90'),
+('cinema_Rain', '9th of Mayo', 'Mayo Movies'),
+('cinema_Rain', 'Mokattam', 'Cinema Mawlana');
 
 -- --------------------------------------------------------
 
@@ -275,26 +291,13 @@ INSERT INTO `movies` (`movie_id`, `title`, `duration`, `genre`, `description`, `
 (28, 'Game Night', '01:40:00', 'Comedy', 'A group of friends who meet regularly for game nights find themselves entangled in a real-life mystery.', 'https://image.ibb.co/hNO7kS/indekkx.jpg', 'Jason Bateman, Rachel McAdams, Kyle Chandler', 2018, 2, '2018-02-23 00:00:00', 7.4, 'ACCEPTED', NULL),
 (29, 'Annihilation', '01:55:00', 'Adventure', 'A biologist signs up for a dangerous, secret expedition into a mysterious zone where the laws of nature dont apply.', 'https://image.ibb.co/iovWC7/MV5_BMTk2_Mjc2_Nz_Yx_Nl5_BMl5_Ban_Bn_Xk_Ft_ZTgw_MTA2_OTA1_NDM_V1_UY1200_CR69_0_630_1200_AL.jpg', 'Natalie Portman, Jennifer Jason Leigh, Tessa Thompson', 2018, 2, '2018-02-23 00:00:00', 7.1, 'ACCEPTED', NULL),
 (30, 'Every Day', '01:37:00', 'Drama', 'A shy teenager falls for someone who transforms into another person every day.', 'https://image.ibb.co/ig87kS/1650x650_Every_Day_Official_Movie_Auctionsdate.jpg', 'Angourie Rice, Justice Smith, Debby Ryan', 2018, 2, '2018-02-23 00:00:00', 5.9, 'ACCEPTED', NULL),
-(31, NULL, '02:37:00', 'att', 'Witnessing the Killing of his father as a kid, Ibraheim is dragged to the criminal underworld of Egypt. While making a name for himself, his plans meets Abdul-Malek Zarzur, the crime lord of the town.', 'https://image.ibb.co/hqBDWn/ibrahim.jpg', 'Ahmed el-Sakka,  Hend Sabry,  Amr Waked', 2009, 2, '2009-02-23 00:00:00', 7.4, 'PENDING', 'Amir_Karara'),
-(32, 'last goodbye', NULL, 'Cry', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Amir_Karara'),
-(33, 'last goodbye', NULL, 'Cry', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Andrew_Shady'),
-(34, 'last goodbye', '02:00:00', 'Cry', 'An Egyptian woman discovers that her husband is in fact a Jewish Mossad agent working for Israel. ', NULL, 'Kareem Abdel-Aziz,  Sherif Mounir,  Mona Zaki', 2009, 2, NULL, 7.4, 'PENDING', 'Andrew_Shady'),
-(35, ' Fasel wa Naood', '04:00:00', 'Comedy', 'The film story revolves around a taxi driver who has a son and a friend. His sons grandfather is fighting for the custody of the young boy after the death of his mother.', 'https://image.ibb.co/enK0Bn/fasl.jpg', 'Karim Abdel Aziz,  Dina Fuad,  Ahmed Rateb', 2012, 2, '2009-02-23 00:00:00', 6.5, 'PENDING', 'Israa_Yasser'),
-(39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(40, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(41, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(42, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(43, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(45, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(46, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', NULL),
-(47, 'the jos', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PENDING', 'Israa_Yasser'),
-(48, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'ACCEPTED', 'Israa_Yasser'),
-(49, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser'),
-(50, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser'),
-(51, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser'),
-(52, 'the jos', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'ACCEPTED', 'Israa_Yasser'),
-(53, 'the dibo', '04:00:40', 'Mystery', 'I love u, u love me!', 'https://ivev', 'joe and ron weasly', 2020, 7, '2009-02-23 00:00:00', 8.9, 'PENDING', 'Israa_Yasser');
+(31, 'Ibrahim Labyad', '02:37:00', 'Action', 'Witnessing the Killing of his father as a kid, Ibraheim is dragged to the criminal underworld of Egypt. While making a name for himself, his plans meets Abdul-Malek Zarzur, the crime lord of the town.', 'https://image.ibb.co/hqBDWn/ibrahim.jpg', 'Ahmed el-Sakka,  Hend Sabry,  Amr Waked', 2009, 2, '2009-02-23 00:00:00', 7.4, 'PENDING', 'branch_P90'),
+(32, 'Masgoon Transit ', '03:37:00', 'Thriller', 'A professional thief was caught in the act of stealing and killing a security guard. ', 'https://image.ibb.co/ibZdxS/masgon.jpg', ' Ahmed Ezz,  Nour El-Sherif,  Salah Abdulla', 2008, 2, '2008-02-23 00:00:00', 6.3, 'PENDING', 'branch_Mayo'),
+(33, 'X-Large', '01:37:00', 'Comedy', 'Majdi is a young man who lives alone because of his obesity which kept him away from his friends. He gets into many situations that makes him uncomfortable, so he decides to ask his uncle for help.', 'https://image.ibb.co/fkVkcS/x.jpg', 'Ahmed Helmy,  Donia Samir Ghanem,  Emmy Samir Ghanem', 2011, 2, '2011-02-23 00:00:00', 7.3, 'PENDING', 'branch_Mawlana'),
+(34, 'Welad el-Amm ', '02:00:00', 'Drama', 'An Egyptian woman discovers that her husband is in fact a Jewish Mossad agent working for Israel. ', 'https://image.ibb.co/bZz0Bn/wlad.jpg', 'Kareem Abdel-Aziz,  Sherif Mounir,  Mona Zaki', 2009, 2, '2009-09-23 00:00:00', 7.4, 'PENDING', 'cinema_Rain'),
+(35, ' Fasel wa Naood', '04:00:00', 'Comedy', 'The film story revolves around a taxi driver who has a son and a friend. His sons grandfather is fighting for the custody of the young boy after the death of his mother.', 'https://image.ibb.co/enK0Bn/fasl.jpg', 'Karim Abdel Aziz,  Dina Fuad,  Ahmed Rateb', 2012, 2, '2009-02-23 00:00:00', 6.5, 'PENDING', 'cinema_Galaxco'),
+(36, 'Avengers: Infinity War', '02:29:00', 'Action', 'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.', 'https://image.ibb.co/fP021x/Avengers.jpg', ' Robert Downey Jr., Chris Hemsworth, Mark Ruffalo ', 2018, 7, '2018-04-27 00:00:00', 8, 'ACCEPTED', NULL),
+(37, 'Deadpool 2', '01:50:00', 'Comedy', 'After surviving a near fatal bovine attack, a disfigured cafeteria chef (Wade Wilson) struggles to fulfill his dream of becoming Mayberrys hottest bartender while also learning to cope with his lost sense of taste. ', 'https://image.ibb.co/ibs4EH/deadpool.jpg', ' Morena Baccarin, Josh Brolin, Zazie Beetz ', 2018, 7, '2018-05-15 00:00:00', 7.6, 'ACCEPTED', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,156 +316,43 @@ CREATE TABLE `movies_in_cinemas` (
 --
 
 INSERT INTO `movies_in_cinemas` (`movie`, `cinema_location`, `cinema_name`) VALUES
-(1, 'New Cairo', 'Galaxy Cinema'),
-(1, 'Mokattam', 'Cinema Mawlana'),
 (1, '9th of Mayo', 'Mayo Movies'),
-(1, 'Old Cairo', 'El Zaaeem El Cinema'),
-(1, 'New Cairo', 'Point 90'),
-(1, 'Al Haram', 'Pharoahs Cinema'),
-(2, 'New Cairo', 'Galaxy Cinema'),
-(2, 'Mokattam', 'Cinema Mawlana'),
 (2, '9th of Mayo', 'Mayo Movies'),
-(2, 'Old Cairo', 'El Zaaeem El Cinema'),
-(2, 'New Cairo', 'Point 90'),
-(2, 'Al Haram', 'Pharoahs Cinema'),
-(3, 'New Cairo', 'Galaxy Cinema'),
-(3, 'Mokattam', 'Cinema Mawlana'),
 (3, '9th of Mayo', 'Mayo Movies'),
-(3, 'Old Cairo', 'El Zaaeem El Cinema'),
-(3, 'New Cairo', 'Point 90'),
-(3, 'Al Haram', 'Pharoahs Cinema'),
-(4, 'New Cairo', 'Galaxy Cinema'),
-(4, 'Mokattam', 'Cinema Mawlana'),
 (4, '9th of Mayo', 'Mayo Movies'),
-(4, 'Old Cairo', 'El Zaaeem El Cinema'),
-(4, 'New Cairo', 'Point 90'),
-(4, 'Al Haram', 'Pharoahs Cinema'),
-(5, 'New Cairo', 'Galaxy Cinema'),
-(5, 'Mokattam', 'Cinema Mawlana'),
-(5, '9th of Mayo', 'Mayo Movies'),
-(5, 'Old Cairo', 'El Zaaeem El Cinema'),
-(5, 'New Cairo', 'Point 90'),
+(36, '9th of Mayo', 'Mayo Movies'),
+(37, '9th of Mayo', 'Mayo Movies'),
 (5, 'Al Haram', 'Pharoahs Cinema'),
-(6, 'New Cairo', 'Galaxy Cinema'),
-(6, 'Mokattam', 'Cinema Mawlana'),
-(6, '9th of Mayo', 'Mayo Movies'),
-(6, 'Old Cairo', 'El Zaaeem El Cinema'),
-(6, 'New Cairo', 'Point 90'),
 (6, 'Al Haram', 'Pharoahs Cinema'),
-(7, 'New Cairo', 'Galaxy Cinema'),
-(7, 'Mokattam', 'Cinema Mawlana'),
-(7, '9th of Mayo', 'Mayo Movies'),
-(7, 'Old Cairo', 'El Zaaeem El Cinema'),
-(7, 'New Cairo', 'Point 90'),
 (7, 'Al Haram', 'Pharoahs Cinema'),
-(8, 'New Cairo', 'Galaxy Cinema'),
-(8, 'Mokattam', 'Cinema Mawlana'),
-(8, '9th of Mayo', 'Mayo Movies'),
-(8, 'Old Cairo', 'El Zaaeem El Cinema'),
-(8, 'New Cairo', 'Point 90'),
 (8, 'Al Haram', 'Pharoahs Cinema'),
-(9, 'New Cairo', 'Galaxy Cinema'),
-(9, 'Mokattam', 'Cinema Mawlana'),
-(9, '9th of Mayo', 'Mayo Movies'),
-(9, 'Old Cairo', 'El Zaaeem El Cinema'),
-(9, 'New Cairo', 'Point 90'),
 (9, 'Al Haram', 'Pharoahs Cinema'),
-(10, 'New Cairo', 'Galaxy Cinema'),
-(10, 'Mokattam', 'Cinema Mawlana'),
-(10, '9th of Mayo', 'Mayo Movies'),
-(10, 'Old Cairo', 'El Zaaeem El Cinema'),
-(10, 'New Cairo', 'Point 90'),
 (10, 'Al Haram', 'Pharoahs Cinema'),
-(11, 'New Cairo', 'Galaxy Cinema'),
 (11, 'Mokattam', 'Cinema Mawlana'),
-(11, '9th of Mayo', 'Mayo Movies'),
-(11, 'Old Cairo', 'El Zaaeem El Cinema'),
-(11, 'New Cairo', 'Point 90'),
-(11, 'Al Haram', 'Pharoahs Cinema'),
-(12, 'New Cairo', 'Galaxy Cinema'),
 (12, 'Mokattam', 'Cinema Mawlana'),
-(12, '9th of Mayo', 'Mayo Movies'),
-(12, 'Old Cairo', 'El Zaaeem El Cinema'),
-(12, 'New Cairo', 'Point 90'),
-(12, 'Al Haram', 'Pharoahs Cinema'),
-(13, 'New Cairo', 'Galaxy Cinema'),
 (13, 'Mokattam', 'Cinema Mawlana'),
-(13, '9th of Mayo', 'Mayo Movies'),
-(13, 'Old Cairo', 'El Zaaeem El Cinema'),
-(13, 'New Cairo', 'Point 90'),
-(13, 'Al Haram', 'Pharoahs Cinema'),
-(14, 'New Cairo', 'Galaxy Cinema'),
 (14, 'Mokattam', 'Cinema Mawlana'),
-(14, '9th of Mayo', 'Mayo Movies'),
-(14, 'Old Cairo', 'El Zaaeem El Cinema'),
-(14, 'New Cairo', 'Point 90'),
-(14, 'Al Haram', 'Pharoahs Cinema'),
+(36, 'Mokattam', 'Cinema Mawlana'),
+(37, 'Mokattam', 'Cinema Mawlana'),
 (15, 'New Cairo', 'Galaxy Cinema'),
-(15, 'Mokattam', 'Cinema Mawlana'),
-(15, '9th of Mayo', 'Mayo Movies'),
-(15, 'Old Cairo', 'El Zaaeem El Cinema'),
-(15, 'New Cairo', 'Point 90'),
-(15, 'Al Haram', 'Pharoahs Cinema'),
 (16, 'New Cairo', 'Galaxy Cinema'),
-(16, 'Mokattam', 'Cinema Mawlana'),
-(16, '9th of Mayo', 'Mayo Movies'),
-(16, 'Old Cairo', 'El Zaaeem El Cinema'),
-(16, 'New Cairo', 'Point 90'),
-(16, 'Al Haram', 'Pharoahs Cinema'),
 (17, 'New Cairo', 'Galaxy Cinema'),
-(17, 'Mokattam', 'Cinema Mawlana'),
-(17, '9th of Mayo', 'Mayo Movies'),
-(17, 'Old Cairo', 'El Zaaeem El Cinema'),
-(17, 'New Cairo', 'Point 90'),
-(17, 'Al Haram', 'Pharoahs Cinema'),
 (18, 'New Cairo', 'Galaxy Cinema'),
-(18, 'Mokattam', 'Cinema Mawlana'),
-(18, '9th of Mayo', 'Mayo Movies'),
-(18, 'Old Cairo', 'El Zaaeem El Cinema'),
-(18, 'New Cairo', 'Point 90'),
-(18, 'Al Haram', 'Pharoahs Cinema'),
 (19, 'New Cairo', 'Galaxy Cinema'),
-(19, 'Mokattam', 'Cinema Mawlana'),
-(19, '9th of Mayo', 'Mayo Movies'),
-(19, 'Old Cairo', 'El Zaaeem El Cinema'),
-(19, 'New Cairo', 'Point 90'),
-(19, 'Al Haram', 'Pharoahs Cinema'),
 (20, 'New Cairo', 'Galaxy Cinema'),
-(20, 'Mokattam', 'Cinema Mawlana'),
-(20, '9th of Mayo', 'Mayo Movies'),
-(20, 'Old Cairo', 'El Zaaeem El Cinema'),
-(20, 'New Cairo', 'Point 90'),
-(20, 'Al Haram', 'Pharoahs Cinema'),
 (21, 'New Cairo', 'Galaxy Cinema'),
-(21, 'Mokattam', 'Cinema Mawlana'),
-(21, '9th of Mayo', 'Mayo Movies'),
-(21, 'Old Cairo', 'El Zaaeem El Cinema'),
-(21, 'New Cairo', 'Point 90'),
-(21, 'Al Haram', 'Pharoahs Cinema'),
-(22, 'New Cairo', 'Galaxy Cinema'),
-(22, 'Mokattam', 'Cinema Mawlana'),
-(22, '9th of Mayo', 'Mayo Movies'),
-(22, 'Old Cairo', 'El Zaaeem El Cinema'),
 (22, 'New Cairo', 'Point 90'),
-(22, 'Al Haram', 'Pharoahs Cinema'),
-(23, 'New Cairo', 'Galaxy Cinema'),
-(23, 'Mokattam', 'Cinema Mawlana'),
-(23, '9th of Mayo', 'Mayo Movies'),
-(23, 'Old Cairo', 'El Zaaeem El Cinema'),
+(22, 'New Cairo', 'Point 90'),
 (23, 'New Cairo', 'Point 90'),
-(23, 'Al Haram', 'Pharoahs Cinema'),
-(24, 'New Cairo', 'Galaxy Cinema'),
-(24, 'Mokattam', 'Cinema Mawlana'),
-(24, '9th of Mayo', 'Mayo Movies'),
-(24, 'Old Cairo', 'El Zaaeem El Cinema'),
 (24, 'New Cairo', 'Point 90'),
-(24, 'Al Haram', 'Pharoahs Cinema'),
-(25, 'New Cairo', 'Galaxy Cinema'),
-(25, 'Mokattam', 'Cinema Mawlana'),
-(25, '9th of Mayo', 'Mayo Movies'),
-(25, 'Old Cairo', 'El Zaaeem El Cinema'),
 (25, 'New Cairo', 'Point 90'),
-(25, 'Al Haram', 'Pharoahs Cinema');
+(36, 'New Cairo', 'Point 90'),
+(37, 'New Cairo', 'Point 90'),
+(26, 'Old Cairo', 'El Zaaeem El Cinema'),
+(27, 'Old Cairo', 'El Zaaeem El Cinema'),
+(28, 'Old Cairo', 'El Zaaeem El Cinema'),
+(29, 'Old Cairo', 'El Zaaeem El Cinema'),
+(30, 'Old Cairo', 'El Zaaeem El Cinema');
 
 -- --------------------------------------------------------
 
@@ -474,8 +364,8 @@ CREATE TABLE `parties` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `hall` int(11) NOT NULL,
-  `cinema_location` varchar(20) NOT NULL,
-  `cinema_name` varchar(20) NOT NULL,
+  `cinema_location` varchar(100) NOT NULL,
+  `cinema_name` varchar(115) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -484,23 +374,216 @@ CREATE TABLE `parties` (
 --
 
 INSERT INTO `parties` (`date`, `time`, `hall`, `cinema_location`, `cinema_name`, `price`) VALUES
-('2018-04-10', '16:00:00', 1, '9th of Mayo', 'Mayo Movies', 50),
-('2018-04-14', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 50),
-('2018-04-10', '13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 50),
-('2018-04-10', '13:00:00', 1, 'New Cairo', 'Galaxy Cinema', 50),
-('2018-04-01', '10:00:00', 1, 'New Cairo', 'Point 90', 50),
-('2018-04-01', '13:00:00', 1, 'New Cairo', 'Point 90', 50),
-('2018-04-10', '13:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
-('2018-04-11', '16:00:00', 2, '9th of Mayo', 'Mayo Movies', 50),
-('2018-04-14', '16:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 50),
-('2018-04-11', '16:00:00', 2, 'Mokattam', 'Cinema Mawlana', 50),
-('2018-04-12', '16:00:00', 2, 'New Cairo', 'Galaxy Cinema', 50),
-('2018-04-01', '10:00:00', 2, 'New Cairo', 'Point 90', 50),
-('2018-04-10', '19:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
-('2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 50),
-('2018-04-14', '19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 50),
-('2018-04-14', '19:00:00', 3, 'New Cairo', 'Galaxy Cinema', 50),
-('2018-04-01', '10:00:00', 3, 'New Cairo', 'Point 90', 0);
+('2018-04-28', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-29', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-30', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-01', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-02', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-03', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-04', '10:00:00', 1, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-28', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-29', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-30', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-01', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-02', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-03', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-04', '10:00:00', 1, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-28', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-29', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-30', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-01', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-02', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-03', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-04', '10:00:00', 1, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-28', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-29', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-30', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-01', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-02', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-03', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-04', '10:00:00', 1, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-28', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-04-29', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-04-30', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-05-01', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-05-02', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-05-03', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-05-04', '10:00:00', 1, 'New Cairo', 'Point 90', 220),
+('2018-04-28', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-29', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-30', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-01', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-02', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-03', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-04', '10:00:00', 1, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-28', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-29', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-30', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-01', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-02', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-03', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-04', '10:00:00', 2, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-28', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-29', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-30', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-01', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-02', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-03', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-04', '10:00:00', 2, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-28', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-29', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-30', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-01', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-02', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-03', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-04', '10:00:00', 2, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-28', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-29', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-30', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-01', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-02', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-03', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-04', '10:00:00', 2, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-28', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-04-29', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-04-30', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-05-01', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-05-02', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-05-03', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-05-04', '10:00:00', 2, 'New Cairo', 'Point 90', 220),
+('2018-04-28', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-29', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-30', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-01', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-02', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-03', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-04', '10:00:00', 2, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-28', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-29', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-30', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-01', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-02', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-03', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-04', '13:00:00', 3, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-28', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-29', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-30', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-01', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-02', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-03', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-04', '13:00:00', 3, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-28', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-29', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-30', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-01', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-02', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-03', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-04', '13:00:00', 3, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-28', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-29', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-30', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-01', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-02', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-03', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-04', '13:00:00', 3, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-28', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-04-29', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-04-30', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-05-01', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-05-02', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-05-03', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-05-04', '13:00:00', 3, 'New Cairo', 'Point 90', 220),
+('2018-04-28', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-29', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-30', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-01', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-02', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-03', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-04', '13:00:00', 3, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-28', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-29', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-30', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-01', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-02', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-03', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-04', '13:00:00', 4, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-28', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-29', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-30', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-01', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-02', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-03', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-04', '13:00:00', 4, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-28', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-29', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-30', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-01', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-02', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-03', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-04', '13:00:00', 4, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-28', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-29', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-30', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-01', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-02', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-03', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-04', '13:00:00', 4, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-28', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-04-29', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-04-30', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-05-01', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-05-02', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-05-03', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-05-04', '13:00:00', 4, 'New Cairo', 'Point 90', 220),
+('2018-04-28', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-29', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-30', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-01', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-02', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-03', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-04', '13:00:00', 4, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-28', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-29', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-30', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-01', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-02', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-03', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-05-04', '16:00:00', 5, '9th of Mayo', 'Mayo Movies', 100),
+('2018-04-28', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-29', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-30', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-01', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-02', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-03', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-05-04', '16:00:00', 5, 'Al Haram', 'Pharoahs Cinema', 150),
+('2018-04-28', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-29', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-30', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-01', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-02', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-03', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-05-04', '16:00:00', 5, 'Mokattam', 'Cinema Mawlana', 120),
+('2018-04-28', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-29', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-30', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-01', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-02', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-03', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-05-04', '16:00:00', 5, 'New Cairo', 'Galaxy Cinema', 200),
+('2018-04-28', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-04-29', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-04-30', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-05-01', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-05-02', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-05-03', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-05-04', '16:00:00', 5, 'New Cairo', 'Point 90', 220),
+('2018-04-28', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-29', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-04-30', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-01', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-02', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-03', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50),
+('2018-05-04', '16:00:00', 5, 'Old Cairo', 'El Zaaeem El Cinema', 50);
 
 -- --------------------------------------------------------
 
@@ -519,8 +602,13 @@ CREATE TABLE `promocodes` (
 --
 
 INSERT INTO `promocodes` (`promocode`, `type`, `value`) VALUES
-('1H4H1LS0W', 'amount', '1000'),
-('1M2NN4N22', 'percentage', '10');
+('17FWENFW95', 'percentage', '10'),
+('17H4S1LS0R', 'amount', '40'),
+('17HHES1LS0R', 'amount', '60'),
+('1DWEF55E4E', 'amount', '54'),
+('1H4H1LS0W', 'amount', '50'),
+('1M2NN4N22', 'percentage', '10'),
+('NIEF998EEF', 'percentage', '7');
 
 -- --------------------------------------------------------
 
@@ -540,16 +628,16 @@ CREATE TABLE `promocodes_cinemas` (
 
 INSERT INTO `promocodes_cinemas` (`cinema_location`, `cinema_name`, `promocode`) VALUES
 ('9th of Mayo', 'Mayo Movies', '1H4H1LS0W'),
-('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
-('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
-('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
-('New Cairo', 'Point 90', '1H4H1LS0W'),
-('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
 ('9th of Mayo', 'Mayo Movies', '1M2NN4N22'),
+('Al Haram', 'Pharoahs Cinema', '1H4H1LS0W'),
 ('Al Haram', 'Pharoahs Cinema', '1M2NN4N22'),
+('Mokattam', 'Cinema Mawlana', '1H4H1LS0W'),
 ('Mokattam', 'Cinema Mawlana', '1M2NN4N22'),
+('New Cairo', 'Galaxy Cinema', '1H4H1LS0W'),
 ('New Cairo', 'Galaxy Cinema', '1M2NN4N22'),
+('New Cairo', 'Point 90', '1H4H1LS0W'),
 ('New Cairo', 'Point 90', '1M2NN4N22'),
+('Old Cairo', 'El Zaaeem El Cinema', '1H4H1LS0W'),
 ('Old Cairo', 'El Zaaeem El Cinema', '1M2NN4N22');
 
 -- --------------------------------------------------------
@@ -592,7 +680,10 @@ INSERT INTO `tickets` (`reservation_id`, `payment`, `seat_number`, `date`, `time
 (23, b'1', '3A', '2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 5, 50, ''),
 (24, b'1', '4B', '2018-04-12', '19:00:00', 3, '9th of Mayo', 'Mayo Movies', 'Hamza_Namira', 4, 50, ''),
 (25, b'1', '2A', '2018-04-10', '13:00:00', 1, 'Mokattam', 'Cinema Mawlana', 'Farida_Omar', 3, 50, ''),
-(30, b'1', '4B', '2018-04-14', '19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50, '');
+(30, b'1', '4B', '2018-04-14', '19:00:00', 3, 'Mokattam', 'Cinema Mawlana', 'Mariam_Medhat', 2, 50, ''),
+(31, b'1', '3', '2018-04-01', '10:00:00', 2, 'New Cairo', 'Point 90', 'mai_emad', 26, 150, ''),
+(32, b'1', '31', '2018-04-01', '10:00:00', 2, 'New Cairo', 'Point 90', 'mai_emad', 26, 150, ''),
+(33, b'1', '32', '2018-04-01', '10:00:00', 2, 'New Cairo', 'Point 90', 'mai_emad', 26, 150, '');
 
 -- --------------------------------------------------------
 
@@ -653,8 +744,8 @@ ALTER TABLE `admins`
 -- Indexes for table `admins_cinemas`
 --
 ALTER TABLE `admins_cinemas`
-  ADD KEY `cinema_location` (`cinema_location`,`cinema_name`),
-  ADD KEY `admin` (`admin`);
+  ADD KEY `cinema_location` (`cinema_location`),
+  ADD KEY `admins_cinemas_ibfk_1` (`admin`);
 
 --
 -- Indexes for table `cinemas`
@@ -696,7 +787,8 @@ ALTER TABLE `movies_in_cinemas`
 --
 ALTER TABLE `parties`
   ADD PRIMARY KEY (`hall`,`cinema_location`,`cinema_name`,`date`,`time`),
-  ADD KEY `hall` (`hall`,`cinema_name`,`cinema_location`);
+  ADD KEY `hall` (`hall`,`cinema_name`,`cinema_location`),
+  ADD KEY `cinema_location` (`cinema_location`,`cinema_name`);
 
 --
 -- Indexes for table `promocodes`
@@ -738,16 +830,19 @@ ALTER TABLE `users`
 --
 ALTER TABLE `layout`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `movie_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
 --
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
 --
 -- Constraints for dumped tables
 --
@@ -756,8 +851,8 @@ ALTER TABLE `tickets`
 -- Constraints for table `admins_cinemas`
 --
 ALTER TABLE `admins_cinemas`
-  ADD CONSTRAINT `Admins_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Admins_Cinemas_ibfk_2` FOREIGN KEY (`admin`) REFERENCES `admins` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `admins_cinemas_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `admins` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `admins_cinemas_ibfk_2` FOREIGN KEY (`cinema_location`) REFERENCES `cinemas` (`location`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `movies_in_cinemas`
@@ -765,6 +860,13 @@ ALTER TABLE `admins_cinemas`
 ALTER TABLE `movies_in_cinemas`
   ADD CONSTRAINT `Movies_in_Cinemas_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Movies_in_Cinemas_ibfk_2` FOREIGN KEY (`movie`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `parties`
+--
+ALTER TABLE `parties`
+  ADD CONSTRAINT `parties_ibfk_1` FOREIGN KEY (`cinema_location`,`cinema_name`) REFERENCES `cinemas` (`location`, `name`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

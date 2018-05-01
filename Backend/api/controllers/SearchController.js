@@ -72,7 +72,7 @@ module.exports.searchByKeyword = function(req,res,next){
             });
         });
     });   
-}
+});
 }
 
 module.exports.viewMovies = function(req,res,next){

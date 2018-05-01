@@ -9,19 +9,27 @@ import { CookieService } from 'angular2-cookie/core';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
+  size: any;
   movies=[];
   p : number = 1;
   genre = "No filter";
-  sortingFilter = "Not sorted";
+  rateFilter;
+  dateFilter;
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
   public cookie : CookieService,) { 
   }
   
   ngOnInit() {
-
-    this.viewMovies();
+    this.filterByAll();
   }
-
+  filterByAll(){
+    this.movieslistService.filterByAll(this.p,this.p * 5,this.genre,this.dateFilter,this.rateFilter).subscribe((response)=>{
+      this.movies=response.data;
+      this.size=response.totalCount;
+      console.log(response);
+    })
+  } 
+/*
   SpecifySortingFilter(){
     switch(this.sortingFilter){
       case "Not sorted" : this.ngOnInit();break;
@@ -153,7 +161,7 @@ viewBio(){
     console.log(response);
     
   });
-}
+}*/
 
 onSearch(searchKey : String = '') {
   console.log(searchKey);
@@ -164,5 +172,4 @@ onSearch(searchKey : String = '') {
 getMovieInfo(movie){
   this.router.navigate(['info',movie.movie_id]);
 }
-
 }

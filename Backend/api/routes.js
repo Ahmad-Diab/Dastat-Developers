@@ -101,7 +101,7 @@ router.get('/actors/:name', Actor.getActors);
 // router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
 // router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
 // router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
-router.get('/movies/Bio/:sortingFilter/:genre',Movie.getMoviesWithFilters);
+router.get('/movies/getMoviesWithFilters/',Movie.getMoviesWithFilters);
 
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);

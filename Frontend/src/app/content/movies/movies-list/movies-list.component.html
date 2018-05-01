@@ -20,7 +20,8 @@
       <h2 class="page-heading">Movies</h2>
        <div class="tags-area">
           <div class="tags tags--unmarked">
-              <a class="page-heading3">Sorted by rate:</a>
+
+            <a class="page-heading3">Sorted by rate:</a>
               <mat-form-field>
                   <mat-select [(ngModel)] = "rateFilter" (change)="filterByAll()">
                     <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
@@ -31,6 +32,7 @@
                   <a class="page-heading3">Sorted by date:</a>
                   <mat-form-field>
                   <mat-select [(ngModel)] = "dateFilter" (change)="filterByAll()">
+                    <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="Latest">Latest</mat-option>
                     <mat-option value="Oldest">Oldest</mat-option>
                 </mat-select>

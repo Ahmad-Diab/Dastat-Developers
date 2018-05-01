@@ -12,8 +12,16 @@ var database = require('../config/db-connection'),
  */
 
 module.exports.getHallsForThatCinema = function(req, res){
-    var cinema_name = req.params['cinema_name'];
-    var cinema_location = req.params['cinema_location'];
+
+    console.log("Entered getHallsForThatCinema");
+
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit,
+        cinema_name = req.params['cinema_name'],
+        cinema_location = req.params['cinema_location'];
 
     if(!cinema_name) {
         return res.status(422).json({
@@ -31,30 +39,85 @@ module.exports.getHallsForThatCinema = function(req, res){
         });
     }
 
-    var sql = 'SELECT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
+// To calculate Total Count use MySQL count function
+    let query = 'Select count(*) as TotalCount FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
+    
+    //query = database.format(query);    
+    database.query(query, cinema_name , cinema_location , function (err, rows) {
+        
+        if (err) {
+            console.log(err);
+            return err;
+        }
 
-    database.query(sql,[cinema_name , cinema_location],function (err, result) {
-        if (err) throw err;
-        //return res.send(result);
-        if(result.length == 0){
+        let startNum,
+            limitNum;
 
-            res.status(200).json({
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
                 err: null,
-                msg: 'No halls in this cinema',
-                data: result
+                msg: 'No Halls available',
+                data: rows
             });
 
         }
-        else{
-
-            res.status(200).json({
-                err: null,
-                msg: 'Halls Successfully Retrieved',
-                data: result
-            });
-
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
         }
+        
+        let query = 'select DISTINCT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [cinema_name, cinema_location , limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Halls have been successfully retrived"
+                });
+            }
+        });
     });
+
+    // var sql = 'SELECT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
+
+    // database.query(sql,[cinema_name , cinema_location],function (err, result) {
+    //     if (err) throw err;
+    //     //return res.send(result);
+    //     if(result.length == 0){
+
+    //         res.status(200).json({
+    //             err: null,
+    //             msg: 'No halls in this cinema',
+    //             data: result
+    //         });
+
+    //     }
+    //     else{
+
+    //         res.status(200).json({
+    //             err: null,
+    //             msg: 'Halls Successfully Retrieved',
+    //             data: result
+    //         });
+
+    //     }
+    // });
 };
 
 
@@ -306,55 +369,137 @@ module.exports.deleteMovieFromHall = function(req, res, next){
 
 module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
 
-    var cinemaName = req.headers.cinema_name;
-    var cinemaLocation = req.headers.cinema_location;
-    console.log("GETMOVIES ADMIN HALLS "+cinemaLocation +" "+cinemaName)
-    if(!cinemaName) {
+
+    console.log("Entered getMoviesInHallsForCinemaForAdmin");
+
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit,
+        cinema_name = req.params['cinema_name'],
+        cinema_location = req.params['cinema_location'];
+
+    if(!cinema_name) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema Name is required.',
+            msg: 'Cinema name is required.',
             data: null
         });
     }
 
-    if(!cinemaLocation) {
+    if(!cinema_location) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema Location is required.',
+            msg: 'Cinema location is required.',
             data: null
         });
     }
 
-    var sqlSelection = 'SELECT * FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
-
-    database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
-
+// To calculate Total Count use MySQL count function
+    let query = 'Select count(*) as TotalCount FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
+    
+    //query = database.format(query);    
+    database.query(query, cinema_name , cinema_location , function (err, rows) {
         
-        if(error){
-            return next(error);
+        if (err) {
+            console.log(err);
+            return err;
         }
-        
-        if(results.length == 0){
 
-            res.status(200).json({
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
                 err: null,
-                msg: 'No current movies Availiable.',
-                data: results
+                msg: 'No Halls available',
+                data: rows
             });
 
         }
-        else{
-
-            res.status(200).json({
-                err: null,
-                msg: 'Movies Successfully Retrieved',
-                data: results
-            });
-
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
         }
-
+        
+        let query = 'select DISTINCT * FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id limit ? OFFSET ?'
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [cinema_name, cinema_location , limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Halls have been successfully retrived"
+                });
+            }
+        });
     });
-  };
+
+    // var cinemaName = req.headers.cinema_name;
+    // var cinemaLocation = req.headers.cinema_location;
+    // console.log("GETMOVIES ADMIN HALLS "+cinemaLocation +" "+cinemaName)
+    // if(!cinemaName) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Cinema Name is required.',
+    //         data: null
+    //     });
+    // }
+
+    // if(!cinemaLocation) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Cinema Location is required.',
+    //         data: null
+    //     });
+    // }
+
+    // var sqlSelection = 'SELECT * FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
+
+    // database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
+
+        
+    //     if(error){
+    //         return next(error);
+    //     }
+        
+    //     if(results.length == 0){
+
+    //         res.status(200).json({
+    //             err: null,
+    //             msg: 'No current movies Availiable.',
+    //             data: results
+    //         });
+
+    //     }
+    //     else{
+
+    //         res.status(200).json({
+    //             err: null,
+    //             msg: 'Movies Successfully Retrieved',
+    //             data: results
+    //         });
+
+    //     }
+
+    // });
+};
 
 
 
@@ -369,82 +514,186 @@ module.exports.viewMoviesInHalls = function(req, res, next){
     // COMPLETED delete the assigned movie of the requested hall.
     // COMPLETED User-name validation needs to be done!
 
-    var username = req.params.username,
-        cinema_name = req.params.cinema_name,
-        cinema_location = req.params.cinema_location;
+    console.log("Entered viewMoviesInHalls");
+
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit,
+        cinema_name = req.params['cinema_name'],
+        cinema_location = req.params['cinema_location'],
+        username = req.params['username'];
+
+        if(!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+        if(!cinema_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema name is required.',
+                data: null
+            });
+        }
+        if(!cinema_location) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema location is required.',
+                data: null
+            });
+        }
+    
+        // Validations of correct types
+        if(!Validations.isString(cinema_name)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema name data type invalid.',
+                data: null
+            });
+        }
+        if(!Validations.isString(cinema_location)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema location data type invalid.',
+                data: null
+            });
+        }
+
+// To calculate Total Count use MySQL count function
+    let query = 'Select count(*) as TotalCount from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
+    
+    //query = database.format(query);    
+    database.query(query, cinema_name , cinema_location , function (err, rows) {
         
-    // Null Checkers
-    console.log(username+" "+cinema_name+" "+cinema_location);
-    console.log(req.body);
+        if (err) {
+            console.log(err);
+            return err;
+        }
 
-    if(!username) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required.',
-            data: null
-        });
-    }
-    if(!cinema_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema name is required.',
-            data: null
-        });
-    }
-    if(!cinema_location) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema location is required.',
-            data: null
-        });
-    }
+        let startNum,
+            limitNum;
 
-    // Validations of correct types
-    if(!Validations.isString(cinema_name)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema name data type invalid.',
-            data: null
-        });
-    }
-    if(!Validations.isString(cinema_location)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema location data type invalid.',
-            data: null
-        });
-    }
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
 
-    //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+            return res.status(200).json({
+                err: null,
+                msg: 'No Halls available',
+                data: rows
+            });
 
-    database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
-        [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
-            if (error) {
-                return next(error);
-            }
-            console.log(results);
-            if(!results || results.length == 0) {
-                return res.status(404).send({
-                    err: null,
-                    msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
-                    data: null
+        }
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+        
+        let query = 'select DISTINCT * from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [cinema_name, cinema_location , limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Halls have been successfully retrived"
                 });
             }
-    });
-
-    var query = 'select * from movies m Join Halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
-
-    database.query(query,[ cinema_name, cinema_location], function (error, results) {
-        if (error) {
-            return next(error);
-        }
-        return res.status(200).json({
-            err: null,
-            msg: 'Movies in halls of cinema '+cinema_name+', '+cinema_location+' sucessfully retrieved.',
-            data: results
         });
-
     });
+
+    // var username = req.params.username,
+    //     cinema_name = req.params.cinema_name,
+    //     cinema_location = req.params.cinema_location;
+        
+    // // Null Checkers
+    // console.log(username+" "+cinema_name+" "+cinema_location);
+    // console.log(req.body);
+
+    // if(!username) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Username is required.',
+    //         data: null
+    //     });
+    // }
+    // if(!cinema_name) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Cinema name is required.',
+    //         data: null
+    //     });
+    // }
+    // if(!cinema_location) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Cinema location is required.',
+    //         data: null
+    //     });
+    // }
+
+    // // Validations of correct types
+    // if(!Validations.isString(cinema_name)) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Cinema name data type invalid.',
+    //         data: null
+    //     });
+    // }
+    // if(!Validations.isString(cinema_location)) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Cinema location data type invalid.',
+    //         data: null
+    //     });
+    // }
+
+    // //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
+
+    // // database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
+    // //     [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
+    // //         if (error) {
+    // //             return next(error);
+    // //         }
+    // //         console.log(results);
+    // //         if(!results || results.length == 0) {
+    // //             return res.status(404).send({
+    // //                 err: null,
+    // //                 msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
+    // //                 data: null
+    // //             });
+    // //         }
+    // // });
+
+    // var query = 'select * from movies m Join Halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
+
+    // database.query(query,[ cinema_name, cinema_location], function (error, results) {
+    //     if (error) {
+    //         return next(error);
+    //     }
+    //     return res.status(200).json({
+    //         err: null,
+    //         msg: 'Movies in halls of cinema '+cinema_name+', '+cinema_location+' sucessfully retrieved.',
+    //         data: results
+    //     });
+
+    // });
 
 };
 

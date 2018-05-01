@@ -40,23 +40,24 @@ module.exports.getMoviesWithFilters = function(req,res,next){
 
 // To calculate Total Count use MySQL count function
 
-    if(rating === 'High Rates'){
+    if(rating === 'High Rates')
         ratingString = ' rating DESC';
-    }
-    else if(rating === 'Low Rates'){
+    else if(rating === 'Low Rates')
         ratingString = ' rating ASC';
-    }
+    else if(rating === 'Not sorted')
+        rating = null;
 
-    if(date === 'Latest'){
+    if(date === 'Latest')
         dateString = ' year DESC';
-    }
-    else if(date === 'Oldest'){
+    else if(date === 'Oldest')
         dateString = ' year ASC';
-    }
+    else if(date === 'Not sorted')
+        date = null;
 
-    if(genre){
+    if(genre === 'No filter')
+        genre = null;
+    else if(genre)
         genreString = ' genre = ?'
-    }
     
     if(!genre){
         console.log("All empty!" +start +"____"+ limit);

@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var config = require('./config');
 
-var connection = mysql.createPool(config.database_prod);
+var connection = mysql.createPool(config.database);
 connection.getConnection(function(err) {
   if(err)
     throw err;

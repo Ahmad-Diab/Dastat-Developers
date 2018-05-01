@@ -183,7 +183,7 @@ export class SliComponent {
       'paypal',
       'social-tumblr',
       'social-twitter',
-      'social-facebook',
+      'social-',
       'social-instagram',
       'social-linkedin',
       'social-pinterest',

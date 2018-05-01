@@ -1,0 +1,49 @@
+<div class="search-wrapper">
+    <div class="container container--add">
+        <form id='search-form' method='get' class="search">
+            <input type="text" class="search__field" placeholder="Search">
+            <button type='submit' class="btn btn-md btn--danger search__button">search Actor</button>
+        </form>
+    </div>
+</div>
+
+<!-- Main content -->
+<section class="container">
+    <div class="col-sm-12">
+
+
+        <!-- Main content -->
+        <section class="container">
+            <div class="col-sm-12">
+                <div class="movie">
+                    <h2 class="page-heading">{{actor.name}}</h2>
+                    <div *ngIf="actor" class="movie__info">
+                        <div class="col-sm-4 col-md-3 movie-mobile">
+                            <div class="movie__images">
+                                <img alt='' src={{actor.imagePath}}>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8 col-md-9">
+                            <!--p class="movie__option"><strong>Country: </strong><a href="#">New Zeland</a>, <a href="#">USA</a></p-->
+                            <p class="movie__option">
+                                <strong></strong>{{actor.bio}}</p>
+                            <p class="movie__option">
+                                <strong><b>Born: </b></strong>{{actor.birth_date}}</p>
+                            <!--p class="movie__option"><strong>Director: </strong><a href="#">Peter Jackson</a></p-->
+                            <p class="movie__option">
+                                <strong><b>Age: </b></strong>{{actor.age}}</p>
+                            <!--p class="movie__option"><strong>Box office: </strong><a href="#">$1 017 003 568</a></p-->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+</section>

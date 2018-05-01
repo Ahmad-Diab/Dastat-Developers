@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^5.2.10",
     "@angular/router": "^5.2.10",
     "@auth0/angular-jwt": "^1.1.0",
+    "angular-media-player": "^0.5.8",
     "angular-popper": "^1.0.0",
     "angular-swiper": "^0.4.0",
     "angular2-cookie": "^1.2.6",
@@ -39,12 +40,14 @@
     "popper.js": "^1.14.3",
     "raty-js": "^2.8.0",
     "rxjs": "^5.5.6",
+    "videogular2": "^6.1.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular/cli": "1.5.6",
     "@angular/compiler-cli": "^5.2.10",
     "@angular/language-service": "^5.2.10",
+    "@types/core-js": "^0.9.46",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^6.0.106",

@@ -38,32 +38,32 @@ export class HeaderComponent implements OnInit {
   name_or_signin(){
     if (this.message=="Log In"){
       console.log("click");
-      this.router.navigate(['/signin']);
+      window.open('/signin',"_self");
       this.ngOnInit();
     }
     else{
-      this.router.navigate(['user/'+this.cookie.get("username")]);
+      window.open('user/'+this.cookie.get("username"),"_self");
       this.ngOnInit();
     }
   }
 
   log_out(){
     this.cookie.remove("username");
-    this.router.navigate(['/']);
+    window.open('/',"_self");
     this.ngOnInit();
   }
   Book_or_Register(){
     if (this.message2=="Book Ticket"){
-      this.router.navigate(['booking/parties']);//Booking bage
+      window.open('booking/parties',"_self");//Booking bage
     }
     else{
-      this.router.navigate(['/register']);
+      window.open('/register',"_self")
       this.ngOnInit();
     }
   }
   signin(){
     if (this.message=="Log In"){
-      this.router.navigate(['/signin']);
+     window.open('/signin',"_self")
       this.ngOnInit();
     }
   }

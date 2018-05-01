@@ -28,6 +28,7 @@ module.exports.getMoviesWithFilters = function(req,res,next){
         genreString = "",
         where = " WHERE",
         and = " AND",
+        orderBy = " ORDER BY",
         query,
         table;
 
@@ -40,53 +41,43 @@ module.exports.getMoviesWithFilters = function(req,res,next){
 // To calculate Total Count use MySQL count function
 
     if(rating === 'High Rates'){
-        ratingString = ' ORDER BY rating DESC';
+        ratingString = ' rating DESC';
     }
     else if(rating === 'Low Rates'){
-        ratingString = ' ORDER BY rating ASC';
+        ratingString = ' rating ASC';
     }
 
     if(date === 'Latest'){
-        dateString = ' ORDER BY year DESC';
+        dateString = ' year DESC';
     }
     else if(date === 'Oldest'){
-        dateString = ' ORDER BY year ASC';
+        dateString = ' year ASC';
     }
 
     if(genre){
         genreString = ' genre = ?'
     }
-
-    query = 'Select count(*) as TotalCount FROM movies '+where+genreString+ratingString+dateString;
     
-    if(!genre && !rating && !date){
-        console.log("All empty!");
+    if(!genre){
+        console.log("All empty!" +start +"____"+ limit);
         table = [];
         where = " ";
         and = " ";
     }
-    else if (!genre && !rating && date)
-        table = [date];
-    else if (!genre && rating && !date)
-        table = [rating];
-    else if (!genre && rating && date)
-        table = [rating , date];
-    else if (genre && !rating && !date)
-        table = [genre];
-    else if (genre && !rating && date)
-        table = [genre , date];
-    else if (genre && rating && !date)
-        table = [genre , rating];
-    else if (genre && rating && date)
-        table = [genre , rating , date];
-    
-    if(table === [])
-        query = database.format(query);
     else
-        query = database.format(query, table);
+        table = [genre];   
+
+    if(!rating && !date){
+        orderBy = " ";
+    }
+    else if(rating && date){
+        dateString = ","+dateString
+    }
     
+    
+    query = 'Select count(*) as TotalCount FROM movies '+where+genreString+orderBy+ratingString+dateString;
     //query = database.format(query);    
-    database.query(query  ,function (err, rows) {
+    database.query(query ,table ,function (err, rows) {
         
         if (err) {
             console.log(err);
@@ -119,12 +110,24 @@ module.exports.getMoviesWithFilters = function(req,res,next){
             limitNum = parseInt(limit);
         }
 
-        query ='Select * FROM movies where '+genreString+ratingString+dateString+and+' status = "ACCEPTED" limit ? OFFSET ?'
+        if(!genre){
+            // console.log("All empty!" +start +"____"+ limit);
+            table = [limitNum  , startNum];
+            where = " ";
+            and = " ";
+        }
+        else 
+            table = [genre , limitNum , startNum];
+    
+        
+        
+        query ='Select * FROM movies where status = "ACCEPTED" '+and+genreString+orderBy+ratingString+dateString+'  limit ? OFFSET ?'
 
         //Mention table from where you want to fetch records example-users & send limit and start
-                
+         console.log(table);
         database.query(query, table , function (err, rest) {
             if (err) {
+                console.log(err);
                 return next(err);
             } else {
                 res.status(200).json({

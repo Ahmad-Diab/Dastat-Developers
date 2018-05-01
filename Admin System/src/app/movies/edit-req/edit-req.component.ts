@@ -34,10 +34,10 @@ export class EditReqComponent implements OnInit {
 
 
     //---------EDIT A REQUESR----------------
-editReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,username: string,movie_id: string){ 
-
-      this.MoviesService.editRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username,movie_id).subscribe((response)=>{
+editReq(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, feature: number, release_date:Date,rating: number,username: string,movie_id: string){ 
+    let year = parseInt(((String) (release_date)).substring(0,4));
+    duration = duration && duration.length === 5 ? duration + ":00" : duration;
+      this.MoviesService.editRequest(title,duration,genre,description,imagePath,cast,year,this.movie.feature,release_date,this.movie.rating,username,movie_id).subscribe((response)=>{
           this.ngOnInit();
         });  
   }

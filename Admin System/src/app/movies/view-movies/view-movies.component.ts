@@ -48,10 +48,10 @@ deleteMovie(movie_id: number){
 }
 
 ///----------ADD A MOVIE--------------------------
-addMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,username: string){
-
-     this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username).subscribe((response)=>{
+addMovie(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, feature: number, release_date:Date,username: string){
+    duration = duration && duration.length === 5 ? duration + ":00" : duration;
+    let year = parseInt(((String) (release_date)).substring(0,4));
+     this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,5,username).subscribe((response)=>{
        this.responeStatus="Added";
        this.ngOnInit();
      });  

@@ -91,10 +91,10 @@ router.get('/actors/:name', Actor.getActors);
 
 //----------------------------------------------------Movie Getters routes------------------------------------//
 router.get('/movies/feature',Movie.getMovies);
-router.get('/movies/highrate',Movie.getMoviesHighRatings);
-router.get('/movies/lowrate',Movie.getMoviesLowRatings);
-router.get('/movies/latest',Movie.getMoviesLastestDate);
-router.get('/movies/oldest',Movie.getMoviesOldesttDate);
+router.get('/movies/highrate/:genre',Movie.getMoviesHighRatings);
+router.get('/movies/lowrate/:genre',Movie.getMoviesLowRatings);
+router.get('/movies/latest/:genre',Movie.getMoviesLastestDate);
+router.get('/movies/oldest/:genre',Movie.getMoviesOldesttDate);
 router.get('/movies/Action',Movie.getMoviesAction);
 router.get('/movies/Adventure',Movie.getMoviesAdventure);
 router.get('/movies/Comedy',Movie.getMoviesComedy);

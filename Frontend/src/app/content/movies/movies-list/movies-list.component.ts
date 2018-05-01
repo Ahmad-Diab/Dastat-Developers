@@ -51,7 +51,7 @@ GoToReservation(movie){
   this.cookie.putObject('movie' , movie);
 }    
 viewHighRate(){
-  this.movieslistService.geHighRateMovies().subscribe((response)=>{
+  this.movieslistService.geHighRateMovies(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -67,7 +67,7 @@ viewMovies(){
 }
 
 viewLowRate(){
-  this.movieslistService.getLowRate().subscribe((response)=>{
+  this.movieslistService.getLowRate(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -75,7 +75,7 @@ viewLowRate(){
 }
 
 viewLatest(){
-  this.movieslistService.getLatest().subscribe((response)=>{
+  this.movieslistService.getLatest(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     
@@ -84,7 +84,7 @@ viewLatest(){
 
 viewOldest(){
 
-  this.movieslistService.getOldest().subscribe((response)=>{
+  this.movieslistService.getOldest(this.genre).subscribe((response)=>{
     this.movies=response;
     console.log(response);
     

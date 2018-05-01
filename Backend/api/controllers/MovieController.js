@@ -38,33 +38,41 @@ function(error,results,fields){
 //--View Movies by High ratings
 
 module.exports.getMoviesHighRatings = function(req,res,next){
-
-    database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating desc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their ratings!");
+    let genre = req.params.genre;
+    if(genre === "No filter"){
+        database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating desc',function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-    else{
-        return res.send(results);
+    else {
+        database.query('SELECT * from movies where genre = ? AND status ="ACCEPTED"  ORDER BY rating desc',[genre],function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-});
-}
+    }
 
 //--View Movies by Low ratings
 
 module.exports.getMoviesLowRatings = function(req,res,next){
-
-    database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating asc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their ratings!");
+    let genre = req.params.genre;
+    if(genre === "No filter"){
+        database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating ASC',function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-    else{
-        return res.send(results);
+    else {
+        database.query('SELECT * from movies where genre = ? AND status ="ACCEPTED"  ORDER BY rating ASC',[genre],function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-});
 }
 
 
@@ -76,33 +84,41 @@ function(error,results,fields){
 //--View Movies ordered by the latest
 
 module.exports.getMoviesLastestDate = function(req,res,next){
-
-    database.query('Select * FROM movies where status ="ACCEPTED" ORDER BY year desc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their dates");
+    let genre = req.params.genre;
+    if(genre === "No filter"){
+        database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY year DESC',function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-    else{
-        return res.send(results);
+    else {
+        database.query('SELECT * from movies where genre = ? AND status ="ACCEPTED"  ORDER BY year DESC',[genre],function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-});
 }
 
 //--View Movies ordered by the Oldest
 
 module.exports.getMoviesOldesttDate = function(req,res,next){
-
-    database.query('Select * FROM movies where status ="ACCEPTED"  ORDER BY year asc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their dates");
+    let genre = req.params.genre;
+    if(genre === "No filter"){
+        database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY year ASC',function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-    else{
-        return res.send(results);
+    else {
+        database.query('SELECT * from movies where genre = ? AND status ="ACCEPTED"  ORDER BY year ASC',[genre],function(error,results,fields){
+            if(error) return next(error);
+            return res.send(results);
+    
+        });
     }
-});
 }
 
 //------------------------VIEW BY GENRE-------------------

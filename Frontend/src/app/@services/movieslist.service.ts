@@ -14,23 +14,23 @@ export class MovieslistService extends HttpService{
    } 
     //DO NOT FORGET TO CALL ALL OF THE SERVICES IN THE MOVIES-LIST COMPONENTS
    //---------------------ALL VIEW MOVIES SERVICES-------------------
-   geHighRateMovies(){
-     return  this.get('movies/highrate');
+   geHighRateMovies(genre : string){
+     return  this.get('movies/highrate/' + genre);
    }
 
    getMovies(){
-    return  this.get('movies/feature');
+    return  this.get('movies/feature/');
   }
 
-  getLowRate(){
-    return this.get('movies/lowrate');
+  getLowRate(genre : string){
+    return this.get('movies/lowrate/' + genre);
   }
 
-  getLatest(){
-    return this.get('movies/latest');
+  getLatest(genre : string){
+    return this.get('movies/latest/' + genre);
   }
-  getOldest(){
-    return this.get('movies/oldest');
+  getOldest(genre : string){
+    return this.get('movies/oldest/' + genre);
   }
   getAction(){
     return this.get('movies/Action');

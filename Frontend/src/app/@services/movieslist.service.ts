@@ -14,6 +14,10 @@ export class MovieslistService extends HttpService{
    } 
     //DO NOT FORGET TO CALL ALL OF THE SERVICES IN THE MOVIES-LIST COMPONENTS
    //---------------------ALL VIEW MOVIES SERVICES-------------------
+   filterByAll(start : number,limit : number,genre : string,dataFilter : string,rateFilter : string){
+     return this.get('movies/');
+   }
+   /*
    geHighRateMovies(genre : string){
      return  this.get('movies/highrate/' + genre);
    }
@@ -61,5 +65,5 @@ export class MovieslistService extends HttpService{
 
    getTopMovies(){
      return this.get('getTopMovies')
-   }
+   }*/
 }

@@ -22,17 +22,19 @@
           <div class="tags tags--unmarked">
               <a class="page-heading3">Sorted by:</a>
               <mat-form-field>
-                  <mat-select [(ngModel)] = "sortingFilter" (change)="SpecifySortingFilter()">
+                  <mat-select [(ngModel)] = "rateFilter" (change)="filterByAll()">
                     <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="High Rates">High Rates</mat-option>
                     <mat-option value="Low Rates">Low Rates</mat-option>
+                  </mat-select>
+                  <mat-select [(ngModel)] = "dateFilter" (change)="filterByAll()">
                     <mat-option value="Latest">Latest</mat-option>
                     <mat-option value="Oldest">Oldest</mat-option>
-                  </mat-select>
-                </mat-form-field> <br> 
+                </mat-select>
+                </mat-form-field>  
                   <a class="page-heading3">Filtered by Genre:</a>
                   <mat-form-field>
-                  <mat-select [(ngModel)] = "genre" (change)="SpecifyGenre()" required>
+                  <mat-select [(ngModel)] = "genre" (change)="filterByAll()" required>
                     <mat-option value="No filter" selected="selected">No filter</mat-option>
                     <mat-option value="Action">Action</mat-option>
                     <mat-option value="Adventure">Adventure</mat-option>

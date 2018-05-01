@@ -264,8 +264,70 @@ module.exports.viewMyRequests = function(req,res,next){
 
 //VIEW ALL MOVIES
 
-// module.exports.getMovies = function(req,res,next){
+module.exports.getMovies = function(req,res,next){
 
+    console.log("Entered getMovies");
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit;
+
+    
+// To calculate Total Count use MySQL count function
+    let query = 'Select count(*) as TotalCount from movies where status ="ACCEPTED" ORDER BY feature desc';
+    
+    //query = database.format(query);    
+    database.query(query, function (err, rows) {
+        
+        if (err) {
+            console.log(err);
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
+                err: null,
+                msg: 'No Movies available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+        
+        let query = 'select DISTINCT * from movies where status ="ACCEPTED" ORDER BY feature desc limit ? OFFSET ?'
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Movies have been successfully retrived"
+                });
+            }
+        });
+    });
 //     database.query('SELECT * from movies where status ="ACCEPTED" ORDER BY feature desc',
    
 // function(error,results,fields){
@@ -277,7 +339,7 @@ module.exports.viewMyRequests = function(req,res,next){
 //         return res.send(results);
 //     }
 // });
-// }
+}
 
 //VIEW A SINGLE MOVIE
 module.exports.viewSingleMovie = function(req, res, next){

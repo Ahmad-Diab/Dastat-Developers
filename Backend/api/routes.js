@@ -101,7 +101,7 @@ router.get('/actors/:name', Actor.getActors);
 // router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
 // router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
 // router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
-router.get('/movies/getMoviesWithFilters/',Movie.getMoviesWithFilters);
+router.get('/movies/getMoviesWithFilters/', Movie.getMoviesWithFilters);
 
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
@@ -190,7 +190,7 @@ router.post('/requests/edit/:movie_id',Authorization.Verify("0101"),MyMovies.Edi
 router.post('/requests/delete/:movie_id',Authorization.Verify("0101"),MyMovies.DeleteMyRequests);
 router.get('/requests/:admin_requested',Authorization.Verify("0101"),MyMovies.viewMyRequests);
 router.get('/requests/AllSHOW',Authorization.Verify("1000"),MyMovies.viewRequests);
-// router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
+router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 router.post('/addMovies',Authorization.Verify("1000"),MyMovies.addMovies);
 router.post('/movie/edit/:movie_id',Authorization.Verify("1000"),MyMovies.EditMovies);

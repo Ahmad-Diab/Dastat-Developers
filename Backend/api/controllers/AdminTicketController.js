@@ -15,13 +15,6 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
     let adminUsername = req.body['username'],
         reservation_id = req.body['reservation_id'];
 
-    if (!Validations.isString(adminUsername))
-        return res.status(422).json({
-            err: null,
-            msg: 'Provided data must be in valid types.',
-            data: null
-        });
-
     // Null Checkers
     if (!adminUsername) {
         return res.status(422).json({
@@ -45,6 +38,14 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
             data: null
         });
     }
+
+    if (!Validations.isString(adminUsername))
+        return res.status(422).json({
+            err: null,
+            msg: 'Provided data must be in valid types.',
+            data: null
+        });
+
 
     let sqlQuery = "UPDATE tickets SET payment = 1 WHERE reservation_id = ?;";
 
@@ -71,29 +72,21 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
     });
 
 };
+
 /**
- * Function to return all parties in all halls for a movie
- * @param req
+ * Function to return all parties in all halls for a movie in
+ * specific cinema
+ * @param req, cinema_name, cinema_location and movie_id in query
  * @param res
  * @returns {*}
  */
 module.exports.viewPartiesOfThatMovie = function (req, res) {
 
-    let admin_username = req.query['username'],
-        cinema_name = req.query['cinema_name'],
+    let cinema_name = req.query['cinema_name'],
         cinema_location = req.query['cinema_location'],
         movie_id = req.query['movie_id'];
 
     // Null Checkers
-    console.log('I am in viewParties');
-    if (!admin_username) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Admin username is required.',
-            data: null
-        });
-    }
-
     if (!cinema_name || !cinema_location) {
         return res.status(422).json({
             err: null,
@@ -101,7 +94,6 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
             data: null
         });
     }
-
     if (!movie_id) {
         return res.status(422).json({
             err: null,
@@ -110,12 +102,10 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
         });
     }
 
-    console.log('I passed all null checkers');
-
     // Validations of correct types
     if (!Validations.isString(cinema_name) ||
         !Validations.isString(cinema_location) ||
-        !Validations.isNumber(movie_id) || !Validations.isString(admin_username)) {
+        !Validations.isNumber(movie_id)) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -123,41 +113,32 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
         });
     }
 
-    console.log('I passed all validations');
-
     let query = 'SELECT * FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name'
         + ' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ?';
 
     database.query(query, [cinema_name, cinema_location, movie_id], function (err, result) {
 
-        console.log("query is executed");
         if (err) throw err;
 
-        console.log("no errors in query");
         if (!result.length) {
-
             res.status(404).json({
                 err: null,
                 msg: 'No parties for this movie',
                 data: null
             });
-
         } else {
-
             res.status(200).json({
                 err: null,
                 msg: 'Parties Successfully Retrieved',
                 data: result
             });
-
         }
     });
 
 };
 
 /**
- * A function to view client's ticket info
- * @param req, reservation_id, and adminUsername
+ * @param req, reservation_id, and username in query
  * @param res, results of changes on the tickets table in database
  * @param next, next middleware to handle errors
  */
@@ -224,8 +205,7 @@ module.exports.viewTicketInfo = function (req, res, next) {
 };
 
 /**
- * A function to cancel a ticket reservation by an admin user
- * @param req, id of reservation in headers
+ * @param req, id of reservation in query
  * @param res, results of changes on the tickets table in database
  * @param next, next middleware to handle errors
  */
@@ -237,8 +217,8 @@ module.exports.cancelReservation = function (req, res, next) {
         "msg": null,
         "data": null
     });
-    database.query('SELECT * FROM tickets WHERE reservation_id = ?', [id], function (error, results, fields) { //making sure a ticket with this id exists in the database, and returning an error if it does not
-        if (results.length == 0) return res.status(404).send({
+    database.query('SELECT * FROM tickets WHERE reservation_id = ?', [id], function (error, results) { //making sure a ticket with this id exists in the database, and returning an error if it does not
+        if (!results.length) return res.status(404).send({
             "error": "Ticket does not exist",
             "msg": null,
             "data": null
@@ -249,7 +229,7 @@ module.exports.cancelReservation = function (req, res, next) {
                 return res.status(200).send({
                     "error": null,
                     "msg": "Deletion Success",
-                    "data": null
+                    "data": result
                 });
             });
         }

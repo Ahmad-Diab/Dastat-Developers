@@ -15,13 +15,12 @@ export class CinemaslistService extends HttpService {
     return this.get_auth('adminviewCinemas');
   }
   Update(key1: String,key2: String,cinema){
-    return this.post_auth('/Cinemas/editCinema/'+key1+'/'+key2,cinema);
+    return this.patch_auth('/myCinemas/editCinema/'+key2+'/'+key1,cinema);
   }
   deleteCinema(key1: String,key2: String){
-    return this.delete_auth('mycinemas/deleteCinema/'+key2+'/'+key1);
+    return this.delete_auth('myCinemas/deleteCinema/'+key2+'/'+key1);
   }
   addCinema(addedCinema:any){
-    console.log(addedCinema);
-    return this.post_auth('addCinema',addedCinema);
+    return this.post_auth('myCinemas/addCinema',addedCinema);
   }
 }

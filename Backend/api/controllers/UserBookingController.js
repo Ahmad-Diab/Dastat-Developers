@@ -89,7 +89,6 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
         });
     }
 
-    console.log('data passed all validations');
     //let query = 'SELECT h.cinema_location, h.cinema_name, h.hall_number, h.type, h.number_of_seats, h.movie, p.date_time, m.title, DATE_FORMAT(p.date_time, "%H:%i") AS time FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name JOIN Movies m ON h.movie = m.movie_id'
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) = ?';
@@ -207,35 +206,28 @@ module.exports.makeReservation = function (req, res, next) {
         numOfTickets = tickets.length,
         comment = req.body['comment'];
 
-    //console.log(req.body);
     // Null Checkers
     if (!username) {
         return res.status(422).json({
             err: null,
-            msg: 'Username is required.',
+            msg: 'username is required.',
             data: null
         });
     }
-
-    console.log('passed user check');
     if (!cinema_name || !cinema_location) {
         return res.status(422).json({
             err: null,
-            msg: 'Cinema data is required.',
+            msg: 'cinema_name & cinema_location are required.',
             data: null
         });
     }
-    console.log('passed party cinema check');
     if (!party_date || !party_time) {
         return res.status(422).json({
             err: null,
-            msg: 'Party data-time is required.',
+            msg: 'party_data & party_time are required.',
             data: null
         });
     }
-
-    console.log('passed party check');
-
     if (!hall || !movie) {
         return res.status(422).json({
             err: null,
@@ -243,8 +235,6 @@ module.exports.makeReservation = function (req, res, next) {
             data: null
         });
     }
-
-    console.log('passed hall & movie check');
     if (!tickets || !tickets_price) {
         return res.status(422).json({
             err: null,
@@ -252,12 +242,11 @@ module.exports.makeReservation = function (req, res, next) {
             data: null
         });
     }
-    console.log('passed tickets check');
+
     // Validations of correct types
     if (!Validations.isBoolean(payment) ||
         !Validations.isNumber(hall) ||
         !Validations.isNumber(tickets_price)) {
-
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -265,16 +254,14 @@ module.exports.makeReservation = function (req, res, next) {
         });
     }
 
-    console.log('passed validations check');
     // Verify that movie exists in hall
     // Verify that hall exists in Cinema, and retrieve movie
     database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall, cinema_location, cinema_name], function (error, results) {
             if (error) {
-                console.log('error selecting from halls the movie');
                 return next(error);
             }
-            //console.log(results);
+
             if (!results || !results.length || results[0].movie !== movie) {
                 return res.status(404).send({
                     err: null,
@@ -292,7 +279,6 @@ module.exports.makeReservation = function (req, res, next) {
             }
 
             let sqlQuery = 'INSERT INTO tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
-
             database.query(sqlQuery, [values], function (error, results) {
                 if (error) {
                     return next(error);
@@ -309,51 +295,6 @@ module.exports.makeReservation = function (req, res, next) {
 
 };
 
-/*
-router.post("/users/platform/Notifications",routeValidator.validate({   body:{
-          'start': { isRequired: true },
-          'limit': { isRequired: true }
-       }
-    }),function(req, res) {
-//To calculate Total Count use MySQL count function
-var query = "Select count(*) as TotalCount from ??";
-// Mention table from where you want to fetch records example-users
-var table = ["users"];
-query = mysql.format(query, table);
-connection.query(query, function(err, rows) {
- if(err){
-   return err;
- }else{
-
-  //store Total count in variable
-  let totalCount = rows[0].TotalCount
-
- if(req.body.start == '' || req.body.limit == ''){
-     let startNum = 0;
-     let LimitNum = 10;
-   }
-
- else{
-     //parse int Convert String to number
-      let startNum = parseInt(req.body.start);
-      let LimitNum = parseInt(req.body.limit);
-   }
-}
-var query = "Select * from ?? ORDER BY created_at DESC limit ? OFFSET ?";
-//Mention table from where you want to fetch records example-users & send limit and start
-var table = ["users",LimitNum,startNum];
-query = mysql.format(query, table);
-connection.query(query, function(err, rest) {
- if(err){
-  res.json(err);
-}
-else{
-// Total Count varibale display total Count in Db and data display the records
-   res.json("Total Count": totalCount , "data":rest)
-}
-});
-});
- */
 module.exports.getCurrentMovies = function (req, res, next) {
 
     let currentDate = new Date();
@@ -425,11 +366,10 @@ module.exports.getUpcomingMovies = function (req, res, next) {
  * @params res, next
  */
 module.exports.getBookings = function (req, res, next) {
-    console.log("in getBookings");
     let username = req.params['username'],
         start = req.params['start'],
         limit = req.params['limit'];
-    console.log("got params");
+
     if (!username) {
         return res.status(422).json({
             err: null,
@@ -437,16 +377,14 @@ module.exports.getBookings = function (req, res, next) {
             data: null
         });
     }
-    console.log("Username = " + username);
-    let limitEntered = !(!start || !limit);
-    // TODO send a msg that no limit entered
-    console.log("About to enter queryForCount");
+
+    let limitNotEnteredMsg = !(!start || !limit) ? "" : "- No limits have been entered.";
+
     let queryForCount = "Select count(*) as TotalCount from tickets WHERE user = ?";
-    console.log("queryIsReady");
     database.query(queryForCount, [username] ,function (err, rows) {
         if (err)
             return err;
-        console.log("no error in query");
+
         let startNum, limitNum;
         let totalCount = rows[0]['TotalCount'];
         if (start === '' || limit === '' ||
@@ -458,9 +396,7 @@ module.exports.getBookings = function (req, res, next) {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-        console.log("About to enter query for selecting tickets info");
-        console.log("start :" + start);
-        console.log("limit : " + limit);
+
         let sqlBookings = 'SELECT tickets.* ,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=? ORDER BY reservation_id DESC limit ? OFFSET ?';
         let userAndLimitData = [username, limitNum, startNum];
         //let sqlBookings = 'SELECT tickets.reservation_id,tickets.seat_number,tickets.date,time,tickets.hall,tickets.cinema_location,tickets.cinema_name,movies.title FROM tickets INNER JOIN movies ON tickets.movie_id=movies.movie_id WHERE user=?';
@@ -471,7 +407,7 @@ module.exports.getBookings = function (req, res, next) {
 
             res.status(200).json({
                 err: null,
-                msg: 'Bookings Successfully Retrieved',
+                msg: 'Bookings Successfully Retrieved' + limitNotEnteredMsg,
                 data: {"results" : results,
                 "totalCount": totalCount}
             });

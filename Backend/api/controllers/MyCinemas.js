@@ -47,7 +47,7 @@ module.exports.addCinema = function (req, res, next) {
             data: null
         });
     }
-    if (is3D !== 1 || is3D !== 0){
+    if (is3D !== 1 && is3D !== 0){
         return res.status(422).json({
             err: null,
             msg: 'is3D must be 0 or 1.',
@@ -124,7 +124,6 @@ module.exports.editCinema = function (req, res, next) {
         imagePath = req.body['imagePath'],
         imagePath2 = req.body['imagePath2'];
 
-
     if (!name) {
         return res.status(422).json({
             err: null,
@@ -160,7 +159,7 @@ module.exports.editCinema = function (req, res, next) {
             data: null
         });
     }
-    if (is4D !== 1 || is4D !== 0) {
+    if (is4D !== 1 && is4D !== 0) {
         return res.status(422).json({
             err: null,
             msg: 'is4D must be 0 or 1.',

@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   constructor(public router: Router,public authService:AuthService) { }
 
   ngOnInit() {
-    
+    this.user.gender = "gender";
+
   }
   onRegister(){
     console.log("hii");
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    if(!this.user.gender){
+    if(!this.user.gender || this.user.gender === "gender"){
       this.message = "please enter your Gender"
       return;
     }

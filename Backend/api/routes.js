@@ -190,7 +190,7 @@ router.post('/requests/edit/:movie_id',Authorization.Verify("0101"),MyMovies.Edi
 router.post('/requests/delete/:movie_id',Authorization.Verify("0101"),MyMovies.DeleteMyRequests);
 router.get('/requests/:admin_requested',Authorization.Verify("0101"),MyMovies.viewMyRequests);
 router.get('/requests/AllSHOW',Authorization.Verify("1000"),MyMovies.viewRequests);
-router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
+// router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 router.post('/addMovies',Authorization.Verify("1000"),MyMovies.addMovies);
 router.post('/movie/edit/:movie_id',Authorization.Verify("1000"),MyMovies.EditMovies);

@@ -16,7 +16,8 @@ import { ModalAdmin } from '../modals/admin.component';
 export class BranchManagerComponent implements OnInit {
 
   cinema_name: string;
-  
+  username: string;
+
   editing = {};
   rows: Admin[];
   alert: Alert = new Alert();
@@ -24,8 +25,13 @@ export class BranchManagerComponent implements OnInit {
   constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
 
   ngOnInit() {
-    this.adminService.getBranchManagers().subscribe((response)=>{
-      this.rows = response;
+
+    var data = {
+      username: this.cookie.getObject('auth')['username'], 
+    }
+    
+    this.adminService.getBranchManagers(data).subscribe((response)=>{
+      this.rows = response.data;
     });
   }
   updateValue(admin) {

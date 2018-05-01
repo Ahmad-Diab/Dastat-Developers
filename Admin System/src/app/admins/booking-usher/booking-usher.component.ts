@@ -15,7 +15,7 @@ import { ModalAdmin } from '../modals/admin.component';
 })
 export class BookingUsher implements OnInit {
   cinema_name: string;
-  //uname: string;
+  username: string;
 
   editing = {};
   rows: Admin[];
@@ -23,12 +23,15 @@ export class BookingUsher implements OnInit {
 
   constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
   ngOnInit() {
-    /*var data = {
-      uname: this.cookie.getObject('auth')['username']
+    var data = {
+      username: this.cookie.getObject('auth')['username'],
+      
     }
-    console.log(data);*/
-    this.adminService.getBookingUshers().subscribe((response)=>{
-      this.rows = response;
+    console.log(data);
+
+    this.adminService.getBookingUshers(data).subscribe((response)=>{
+      this.rows = response.data;
+      console.log(response);
     });
   }
   updateValue(admin) {

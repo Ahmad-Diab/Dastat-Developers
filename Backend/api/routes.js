@@ -90,18 +90,18 @@ router.post('/users/editProfile/:username', User.editProfile);
 router.get('/actors/:name', Actor.getActors);
 
 //----------------------------------------------------Movie Getters routes------------------------------------//
-router.get('/movies/feature',Movie.getMovies);
-router.get('/movies/highrate/:genre',Movie.getMoviesHighRatings);
-router.get('/movies/lowrate/:genre',Movie.getMoviesLowRatings);
-router.get('/movies/latest/:genre',Movie.getMoviesLastestDate);
-router.get('/movies/oldest/:genre',Movie.getMoviesOldesttDate);
-router.get('/movies/Action/:sortingFilter',Movie.getMoviesAction);
-router.get('/movies/Adventure/:sortingFilter',Movie.getMoviesAdventure);
-router.get('/movies/Comedy/:sortingFilter',Movie.getMoviesComedy);
-router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
-router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
-router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
-router.get('/movies/Bio/:sortingFilter',Movie.getMoviesBiography);
+// router.get('/movies/feature',Movie.getMovies);
+// router.get('/movies/highrate/:genre',Movie.getMoviesHighRatings);
+// router.get('/movies/lowrate/:genre',Movie.getMoviesLowRatings);
+// router.get('/movies/latest/:genre',Movie.getMoviesLastestDate);
+// router.get('/movies/oldest/:genre',Movie.getMoviesOldesttDate);
+// router.get('/movies/Action/:sortingFilter',Movie.getMoviesAction);
+// router.get('/movies/Adventure/:sortingFilter',Movie.getMoviesAdventure);
+// router.get('/movies/Comedy/:sortingFilter',Movie.getMoviesComedy);
+// router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
+// router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
+// router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
+router.get('/movies/Bio/:sortingFilter/:genre',Movie.getMoviesWithFilters);
 
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
@@ -145,27 +145,27 @@ router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_lo
 
 router.post('/addBookingUsher',  Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
-router.get('/viewBookingUshers', Authorization.Verify('1101'), Admin.viewBookingUshers);
+// router.get('/viewBookingUshers', Authorization.Verify('1101'), Admin.viewBookingUshers);
 router.get('/getBookingUshers', Authorization.Verify('1101'), Admin.getBookingUshers);
-router.post('/getBookingUsher', Authorization.Verify('1101'), Admin.getBookingUsher);
+// router.post('/getBookingUsher', Authorization.Verify('1101'), Admin.getBookingUsher);
 router.post('/editBookingUsher', Authorization.Verify('1101'), Admin.editBookingUsher);
 router.post('/deleteBookingUsher', Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
-router.get('/viewBranchManagers', Authorization.Verify('1100'), Admin.viewBranchManagers);
+// router.get('/viewBranchManagers', Authorization.Verify('1100'), Admin.viewBranchManagers);
 router.get('/getBranchManagers', Authorization.Verify('1100'), Admin.getBranchManagers);
-router.post('/getBranchManager', Authorization.Verify('1100'), Admin.getBranchManager);
+// router.post('/getBranchManager', Authorization.Verify('1100'), Admin.getBranchManager);
 router.post('/editBranchManager', Authorization.Verify('1100'), Admin.editBranchManager);
 router.post('/deleteBranchManager', Authorization.Verify('1100'), Admin.deleteBranchManager);
 
-router.get('/viewCinemaOwners', Authorization.Verify('1000'), Admin.viewCinemaOwners);
+// router.get('/viewCinemaOwners', Authorization.Verify('1000'), Admin.viewCinemaOwners);
 router.get('/getCinemaOwners', Authorization.Verify('1000'), Admin.getCinemaOwners);
-router.post('/getCinemaOwner', Authorization.Verify('1000'), Admin.getCinemaOwner);
+// router.post('/getCinemaOwner', Authorization.Verify('1000'), Admin.getCinemaOwner);
 router.post('/editCinemaOwner', Authorization.Verify('1000'), Admin.editCinemaOwner);
 router.post('/deleteCinemaOwner', Authorization.Verify('1000'), Admin.deleteCinemaOwner);
 
-router.post('/getAdmin', Authorization.Verify('0101'), Admin.getAdmin);
+// router.post('/getAdmin', Authorization.Verify('0101'), Admin.getAdmin);
 router.get('/viewAdmins', Authorization.Verify('1000'), Admin.getAdmins);
-router.get('/getAdmins', Authorization.Verify('1000'), Admin.viewAdmins);
+// router.get('/getAdmins', Authorization.Verify('1000'), Admin.viewAdmins);
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
 router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
 router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminTicket.verifyUnpaidTicket);
@@ -190,7 +190,7 @@ router.post('/requests/edit/:movie_id',Authorization.Verify("0101"),MyMovies.Edi
 router.post('/requests/delete/:movie_id',Authorization.Verify("0101"),MyMovies.DeleteMyRequests);
 router.get('/requests/:admin_requested',Authorization.Verify("0101"),MyMovies.viewMyRequests);
 router.get('/requests/AllSHOW',Authorization.Verify("1000"),MyMovies.viewRequests);
-router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
+// router.get('/viewMovie/viewAllMovies',MyMovies.getMovies);
 router.get('/viewMovie/:movie_id',MyMovies.viewSingleMovie);
 router.post('/addMovies',Authorization.Verify("1000"),MyMovies.addMovies);
 router.post('/movie/edit/:movie_id',Authorization.Verify("1000"),MyMovies.EditMovies);

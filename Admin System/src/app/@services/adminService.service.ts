@@ -20,8 +20,8 @@ export class AdminService extends HttpService {
       return this.get_auth('getAdmins');
     } 
    //----------------Booking Usher---------------------    
-    getBookingUshers(){
-      return this.get_auth('getBookingUshers');
+    getBookingUshers(data){
+      return this.get_auth('getBookingUshers' , data);
     }
     getBookingUsher(data){
       return this.post_auth('getBookingUsher');
@@ -33,8 +33,8 @@ export class AdminService extends HttpService {
       return this.post_auth('deleteBookingUsher', data);
     }
     //----------------Branch Manager-------------------
-    getBranchManagers(){
-      return this.get_auth('getBranchManagers');
+    getBranchManagers(data){
+      return this.get_auth('getBranchManagers' , data);
     }
     getBranchManager(data){
       return this.post_auth('getBranchManager', data);

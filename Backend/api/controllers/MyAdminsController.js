@@ -736,6 +736,40 @@ module.exports.addBranchManager = function(req,res,next){
         });
     }
 
+    //checking if the username already exists
+
+    database.query('SELECT * FROM admins WHERE username = ?', [newBranchManagerUsername], function (err, results) {
+
+        if (err) return next(err);
+
+        if (results.length > 0) {
+
+            return res.status(200).json({
+                err: null,
+                msg: "This username is already used , please enter a different one.",
+                success: true
+            });
+            
+        }
+    });
+
+    //checking if the email already exists
+    database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
+
+        if (err) return next(err);
+
+        if (results.length > 0) {
+            
+            return res.status(200).json({
+                err: null,
+                msg: "This email already exists , please enter a different one.",
+                success: true
+            });
+            
+        }
+
+    });
+
     //Verify that this admins user belongs to this cinema
     
     database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',

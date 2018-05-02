@@ -25,7 +25,8 @@ let MyMovies = require('./controllers/MyMoviesController'),
     MoviesInHalls = require('./controllers/MoviesInHallsController'),
     AdminHalls = require('./controllers/AdminHallsController'),
     Promocodes = require('./controllers/PromocodesController'),
-    MyCinemas = require('./controllers/MyCinemas');
+    MyCinemas = require('./controllers/MyCinemas'),
+    Dashboard = require('./controllers/DashboardController');
 
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -132,6 +133,24 @@ router.post('/adminlogin', AuthenticationAdmin.login);
 
 //router.post('/admin/login', Admin.authenticate);
 //router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
+
+//-----------------------------------------------------Dashboard Routes---------------------------------------//
+
+router.get('/dashboard/getAdminCount' , Dashboard.getAdminCount);
+router.get('/dashboard/getCinemaOwnerCount' , Dashboard.getCinemaOwnerCount);
+router.get('/dashboard/getBranchManagerCount' , Dashboard.getBranchManagerCount);
+router.get('/dashboard/getBookingUsherCount' , Dashboard.getBookingUsherCount);
+router.get('/dashboard/getCinemaCount' , Dashboard.getCinemaCount);
+router.get('/dashboard/getCinemasInReginsCount' , Dashboard.getCinemasInReginsCount);
+router.get('/dashboard/getMoviesPlayedCount' , Dashboard.getMoviesPlayedCount);
+router.get('/dashboard/getTicketsCount' , Dashboard.getTicketsCount);
+router.get('/dashboard/getTicketsInRegionsCount' , Dashboard.getTicketsInRegionsCount);
+router.get('/dashboard/getUsersCount' , Dashboard.getUsersCount);
+router.get('/dashboard/getPaidTicketsCount' , Dashboard.getPaidTicketsCount);
+router.get('/dashboard/getUnpaidTicketsCount' , Dashboard.getUnpaidTicketsCount);
+router.get('/dashboard/getTop10ReservedMovies' , Dashboard.getTop10ReservedMovies);
+router.get('/dashboard/getTopReservedMovie' , Dashboard.getTopReservedMovie);
+
 
 //-----------------------------------------------------Halls Routes---------------------------------------------//
 

@@ -523,6 +523,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
         cinema_name = req.params['cinema_name'],
         cinema_location = req.params['cinema_location'],
         username = req.params['username'];
+        limit = " limit ? OFFSET ?"
 
         if(!username) {
             return res.status(422).json({
@@ -591,6 +592,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             startNum = 0;
             limitNum = 10;
             pagination = false;
+            limit = "";
             errMsg = "No Limits were provided";
             console.log("No limits");
             
@@ -599,9 +601,9 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             limitNum = parseInt(limit);
         }
         
-        let query = 'select DISTINCT * from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
+        let query = 'select DISTINCT * from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ? '
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [cinema_name, cinema_location , limitNum, startNum];
+        let table = [cinema_name, cinema_location];
         
         database.query(query, table , function (err, rest) {
             if (err) {

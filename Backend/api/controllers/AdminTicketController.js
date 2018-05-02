@@ -15,7 +15,7 @@ let database = require('../config/db-connection'),
 module.exports.verifyUnpaidTicket = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -174,10 +174,11 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
  */
 module.exports.viewTicketInfo = function (req, res, next) {
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    console.log('tokenHeader in viewTicket in AdminTicket file' + tokenHeader);
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
-            msg: 'You must log in first',
+            msg: 'You must log in first.',
             data: null
         });
     }
@@ -195,7 +196,7 @@ module.exports.viewTicketInfo = function (req, res, next) {
         }
 
         let adminUsername = authData.username,
-            reservation_id = req.body['reservation_id'];
+            reservation_id = req.query['reservation_id'];
 
         // Null Checkers
         if (!adminUsername) {
@@ -252,7 +253,7 @@ module.exports.viewTicketInfo = function (req, res, next) {
  */
 module.exports.cancelReservation = function (req, res, next) {
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',

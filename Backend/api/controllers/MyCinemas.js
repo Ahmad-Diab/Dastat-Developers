@@ -13,7 +13,7 @@ let database = require('../config/db-connection'),
 module.exports.addCinema = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -150,7 +150,7 @@ module.exports.addCinema = function (req, res, next) {
 module.exports.editCinema = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -291,7 +291,7 @@ module.exports.editCinema = function (req, res, next) {
  */
 module.exports.deleteCinema = function (req, res, next) {
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',

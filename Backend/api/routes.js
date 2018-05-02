@@ -167,9 +167,9 @@ router.post('/deleteCinemaOwner', Authorization.Verify('1000'), Admin.deleteCine
 router.get('/viewAdmins', Authorization.Verify('1000'), Admin.getAdmins);
 // router.get('/getAdmins', Authorization.Verify('1000'), Admin.viewAdmins);
 //--------------------------------------------AdminTicket Interactions Routes---------------------------------//
-router.get('/tickets/viewTicketInfo', adminTicket.viewTicketInfo);
+router.get('/tickets/viewTicketInfo', Authorization.Verify('1111'), adminTicket.viewTicketInfo);
 router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminTicket.verifyUnpaidTicket);
-router.get('/tickets/viewPartiesForThatMovie', adminTicket.viewPartiesOfThatMovie);
+router.get('/tickets/viewPartiesForThatMovie', Authorization.Verify('1111'), adminTicket.viewPartiesOfThatMovie);
 router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), UserBooking.makeReservation);
 router.delete('/tickets/cancelReservation', adminTicket.cancelReservation);
 

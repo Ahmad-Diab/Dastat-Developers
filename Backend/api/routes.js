@@ -229,9 +229,9 @@ router.get('/adminSearch/:searchKeyword',Authorization.Verify("1100") ,Search.se
 router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
 
 // TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
-router.post('/myCinemas/addCinema',Authorization.Verify("1100") , MyCinemas.addCinema);
-router.patch('/myCinemas/editCinema/:name/:location',Authorization.Verify("1100") , MyCinemas.editCinema);
-router.delete('/myCinemas/deleteCinema/:name/:location',Authorization.Verify("1100") ,MyCinemas.deleteCinema);
+router.post('/myCinemas/addCinema',Authorization.Verify("0100") , MyCinemas.addCinema);
+router.patch('/myCinemas/editCinema/:name/:location',Authorization.Verify("0100") , MyCinemas.editCinema);
+router.delete('/myCinemas/deleteCinema/:name/:location',Authorization.Verify("0100") ,MyCinemas.deleteCinema);
 
 //exporting routes to the project
 module.exports = router;

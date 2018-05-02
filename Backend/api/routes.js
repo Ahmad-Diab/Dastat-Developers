@@ -151,6 +151,7 @@ router.get('/getBookingUshers', Authorization.Verify('1101'), Admin.getBookingUs
 router.post('/editBookingUsher', Authorization.Verify('1101'), Admin.editBookingUsher);
 router.post('/deleteBookingUsher', Authorization.Verify('1101'), Admin.deleteBookingUsher);
 
+router.post('/addBranchManager' , Authorization.verify('1100') , Admin.addBranchManager);
 // router.get('/viewBranchManagers', Authorization.Verify('1100'), Admin.viewBranchManagers);
 router.get('/getBranchManagers', Authorization.Verify('1100'), Admin.getBranchManagers);
 // router.post('/getBranchManager', Authorization.Verify('1100'), Admin.getBranchManager);

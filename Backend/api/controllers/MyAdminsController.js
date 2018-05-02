@@ -1,9 +1,9 @@
 //OUR DATABASE IS HERE
-var database = require('../config/db-connection');
-var config = require('../config/config');
-var bcrypt = require('bcrypt');
-var jwt = require('jsonwebtoken');
-
+let database = require('../config/db-connection'),
+    config = require('../config/config'),
+    bcrypt = require('bcrypt'),
+    jwt = require('jsonwebtoken'),
+    Validations = require('../utils/validations');
 
 //User stories related to the MyAdmins should be implemented here
 //DONT FORGET TO ADD IT IN THE ROUTES
@@ -600,6 +600,206 @@ module.exports.viewBranchManagers = function(req, res, next){
 
 
 //------------------------- Add Branch managers -------------------------------
+module.exports.addBranchManager = function(req,res,next){
+
+    let newBranchManagerUsername = req.body.username,
+        email = req.body.email,
+        salary = req.body.salary,
+        type = "Branch Manager",
+        first_name = req.body.first_name,
+        last_name = req.body.last_name,
+        phone_number = req.body.phone_number,
+        gender = req.body.gender,
+        cinema_location = req.body.cinema_location,
+        cinema_name = req.body.cinema_name,
+        hashed_password,
+        password = req.body.password,
+        adminUserName,
+        admin;
+
+    var adminsInsertionQuery = 'INSERT INTO admins SET ?';
+
+    //getting the username of the currently logged in admin
+    var tokenHeader = req.headers['authorization'];
+    if (typeof tokenHeader !== 'undefined') {
+        var tokenheadersplited = tokenHeader.split(' ');
+        var token = tokenheadersplited[1];
+        var decoded = jwt.verify(token, config.secret, (err, authData) => {
+            if (err) {
+                return res.status(401).json({
+                    err: err,
+                    msg: 'no username in headers token.',
+                    data: null
+                });
+            }
+            else
+                adminUserName = authData.username;
+        });
+    }
+
+    //checking for null values or not entered data
+    if(!newBranchManagerUsername) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+
+    if(!password) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Password is required.',
+            data: null
+        });
+    }
+
+    if(!email) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Email is required.',
+            data: null
+        });
+    }
+
+    if(!salary) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Salary is required.',
+            data: null
+        });
+    }
+
+    if(!first_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'First name is required.',
+            data: null
+        });
+    }
+
+    if(!last_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Last name is required.',
+            data: null
+        });
+    }
+
+    if(!gender) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Gender is required.',
+            data: null
+        });
+    }
+
+    if(!cinema_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Name is required.',
+            data: null
+        });
+    }
+
+    if(!cinema_location) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
+
+    //Valdiations for correct data types
+
+    if(!Validations.isNumber(phone_number)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Phone number must be numbers only.',
+            data: null
+        });
+    }
+
+    if(!Validations.isNumber(salary)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Salary must be numbers only.',
+            data: null
+        });
+    }
+
+    if(!Validations.isString(first_name) || !Validations.isString(last_name)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Invalid first name or last name',
+            data: null
+        });
+    }
+
+    //Verify that this admins user belongs to this cinema
+    
+    database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
+        [cinema_name, cinema_location, username],function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            console.log(results + "This Admin user doesn't belong to this cinema");
+            if(!results || !results.length) {
+                return res.status(404).json({
+                    err: null,
+                    msg: "You don't belong to this cinema.",
+                    data: null
+                });
+            }
+    });
+    
+    
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+            if(err) {
+                return next(err);
+            }
+            hashed_password = hash; 
+        });   
+    });
+
+    admin = {
+        username:username,
+        password:hashed_password,
+        email:email,
+        salary:salary,
+        type:type,
+        first_name:first_name,
+        last_name:last_name,
+        phone_number:phone_number,
+        gender:gender
+    }
+
+    let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
+    database.query(sqlQuery, [admin], function (err, results) {
+        if (err) {
+            return next(err);
+        }
+        else{
+
+            sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?'
+            database.query(sqlQuery, [username,cinema_location,cinema_name] ,function (err, results) {
+                if(err)
+                    return next(err);
+                else{
+                    res.status(200).json({
+                        err: null,
+                        msg: 'Branch manager added Successfully.',
+                        data: results
+                    });
+                }
+            });
+            
+        }
+        
+    });
+     
+}
 
 
 

@@ -6,16 +6,51 @@ let database = require('../config/db-connection'),
     jwt = require('jsonwebtoken');
 
 module.exports.ViewCinemas = function (req, res, next) {
-    database.query('SELECT * FROM cinemas', function (error, results) {
-        if (error) {
-            return next(error);
-        }
-        return res.status(200).send({
+
+    let tokenHeader = req.headers['authorization'];
+    if (!tokenHeader) {
+        return res.status(401).json({
             err: null,
-            msg: 'Cinemas are retrieved successfully',
-            data: results
+            msg: 'You must log in first',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: null,
+                msg: 'Must be a user of the system',
+                data: null
+            });
+        }
+
+        let admin_username = authData.username;
+
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
+
+        let query = 'SELECT C.* FROM cinemas C JOIN admins_cinemas A ON C.name = A.cinema_name AND C.location = A.cinema_location WHERE A.admin = ?;',
+            queryData = [admin_username];
+        database.query(query, queryData, function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            return res.status(200).send({
+                err: null,
+                msg: 'Cinemas are retrieved successfully',
+                data: results
+            });
         });
     });
+
 };
 
 /**
@@ -47,7 +82,14 @@ module.exports.addCinema = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-        console.log('Admin username : ' + authData.username);
+
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
 
         let name = req.body["name"],
             location = req.body["location"],
@@ -228,8 +270,14 @@ module.exports.editCinema = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-        console.log('Admin username : ' + authData.username);
-        //TODO does username still exist ??
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
+
         let name = req.params['name'],
             location = req.params['location'];
 
@@ -370,7 +418,13 @@ module.exports.deleteCinema = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-        console.log('Admin username : ' + authData.username);
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
 
         let name = req.params['name'],
             location = req.params['location'];

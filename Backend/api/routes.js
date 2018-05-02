@@ -84,17 +84,6 @@ router.post('/users/editProfile/:username', User.editProfile);
 router.get('/actors/:name', Actor.getActors);
 
 //----------------------------------------------------Movie Getters routes------------------------------------//
-// router.get('/movies/feature',Movie.getMovies);
-// router.get('/movies/highrate/:genre',Movie.getMoviesHighRatings);
-// router.get('/movies/lowrate/:genre',Movie.getMoviesLowRatings);
-// router.get('/movies/latest/:genre',Movie.getMoviesLastestDate);
-// router.get('/movies/oldest/:genre',Movie.getMoviesOldesttDate);
-// router.get('/movies/Action/:sortingFilter',Movie.getMoviesAction);
-// router.get('/movies/Adventure/:sortingFilter',Movie.getMoviesAdventure);
-// router.get('/movies/Comedy/:sortingFilter',Movie.getMoviesComedy);
-// router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
-// router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
-// router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
 router.get('/movies/getMoviesWithFilters/', Movie.getMoviesWithFilters);
 
 //----------------------------------------------------Search routes--------------------------------------------//

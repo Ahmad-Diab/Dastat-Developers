@@ -1,6 +1,7 @@
 // OUR DATABASE IS HERE
 let database = require('../config/db-connection'),
     Validations = require('../utils/validations'),
+    bcrypt = require('bcrypt'),
     config = require('../config/config'),
     jwt = require('jsonwebtoken');
 
@@ -122,19 +123,66 @@ module.exports.addCinema = function (req, res, next) {
 
         let cinemaInsertionQuery = 'INSERT INTO cinemas (location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2) VALUES (?,?,?,?,?,?,?,?,?);';
         let cinemaData = [location, address, name, number_of_halls, Boolean(is3D), Boolean(is4D), company, imagePath, imagePath2];
-        let membershipInsertionQuery = 'INSERT INTO admin_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
-        let membershipData = [admin_username, name, location];
-        let queries = cinemaInsertionQuery +  membershipInsertionQuery;
-        let allData = [cinemaData, membershipData];
-        database.query(queries, allData, function (error, results) {
+        database.query(cinemaInsertionQuery, cinemaData, function (error, cinemaInsertionResults) {
             if (error) {
                 return next(error);
             }
-            return res.status(200).json({
-                err: null,
-                msg: 'The cinema is added successfully.',
-                data: results
+
+            let membershipInsertionQuery = 'INSERT INTO admin_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
+            let membershipData = [admin_username, name, location];
+            database.query(membershipInsertionQuery, membershipData, function (error, membershipInsertionResults) {
+                if (error) {
+                    // Deleting not complete insertions if error
+                    database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (err) {
+                        if(err) return next(err);
+                    });
+
+                    return next(error);
+                }
+
+                // Adding user account for cinema, used for booking
+                let password = config.secret; // Untraceable password
+                let hashed_pass;
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(password, salt, (err, hash) => {
+                        if (err) {
+                            database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (err) {
+                                if(err) return next(err);
+                            });
+                            database.query('DELETE FROM admin_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
+                                [admin_username, name, location], function (err) {
+                                    if(err) return next(err);
+                                });
+                            return next(err);
+                        }
+
+                        hashed_pass = hash;
+                        let user = {
+                            username: cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim(),
+                            password: hashed_pass,
+                            email: email,
+                            phone_number: phone_number,
+                            credit_card: credit_card,
+                            first_name: first_name,
+                            last_name: last_name,
+                            age: age,
+                            gender: gender,
+                            active: active,
+                            active_code: active_code
+                        };
+
+                        database.query('INSERT INTO users SET ?', user, function (error, cinemaAccountInsertionResults) {
+                            if (error)
+                                return res.status(200).json({
+                                    err: null,
+                                    msg: 'The cinema is added successfully.',
+                                    data: [cinemaInsertionResults, membershipInsertionResults, cinemaAccountInsertionResults]
+                                });
+                        });
+                    });
+                });
             });
+
         });
     });
 
@@ -357,7 +405,12 @@ module.exports.deleteCinema = function (req, res, next) {
 
             database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (error, results) {
                 if (error) return next(error);
-
+                /* // CHECK IF DELETE ON CASCADE IS DONE
+                database.query('DELETE FROM admin_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
+                    [admin_username, name, location], function (err) {
+                        if(err) return next(err);
+                    });
+                */
                 res.status(200).json({
                     err: null,
                     msg: "Deleted Successfully!",

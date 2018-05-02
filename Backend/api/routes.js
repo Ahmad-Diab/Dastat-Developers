@@ -177,6 +177,7 @@ router.get('/getBranchManagers', Authorization.Verify('1100'), Admin.getBranchMa
 router.post('/editBranchManager', Authorization.Verify('1100'), Admin.editBranchManager);
 router.post('/deleteBranchManager', Authorization.Verify('1100'), Admin.deleteBranchManager);
 
+router.post('/addBranchManager' , Authorization.Verify('1000') , Admin.addCinemaOwner);
 // router.get('/viewCinemaOwners', Authorization.Verify('1000'), Admin.viewCinemaOwners);
 router.get('/getCinemaOwners', Authorization.Verify('1000'), Admin.getCinemaOwners);
 // router.post('/getCinemaOwner', Authorization.Verify('1000'), Admin.getCinemaOwner);

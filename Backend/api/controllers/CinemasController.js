@@ -1,7 +1,12 @@
 let database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
-//filter cinemas according to location
+//TODO function might NOT be USED
+/**
+ * @param req, location, is3D, is4D might be in params
+ * @param res
+ * @param next
+ */
 module.exports.filterByLocation = function (req, res, next) {
     let location = req.params.location,
         is3D = req.params.is3D,

@@ -15,10 +15,6 @@ import { ModalAdmin } from '../modals/admin.component';
 })
 export class BranchManagerComponent implements OnInit {
 
-  cinema_name: string;
-  username: string;
-
-  editing = {};
   rows: Admin[];
   alert: Alert = new Alert();
 
@@ -54,6 +50,15 @@ export class BranchManagerComponent implements OnInit {
       this.ngOnInit();
     });
   }
+  addBranchManager(){
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.type = "BM";
+    modalRef.result.then((result) => {
+      this.alert = result;
+      this.ngOnInit();
+    });
+  }
+
   // updateFilter(event) {
   //   const val = event.target.value;
   //   var data = {

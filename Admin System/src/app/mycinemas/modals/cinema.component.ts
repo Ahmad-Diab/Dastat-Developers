@@ -47,6 +47,8 @@ export class ModalCinema implements OnInit {
     submit() {
 
         if(this.add) {
+            this.cinema.is3D = parseInt(this.cinema.is3D);
+            this.cinema.is4D = parseInt(this.cinema.is4D);
             this.cinemalistService.addCinema(this.cinema).subscribe(() => {
                 var alert = {
                     message: 'Cinema Added!',

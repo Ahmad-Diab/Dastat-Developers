@@ -47,6 +47,14 @@ export class CinemaOwnerComponent implements OnInit {
       this.ngOnInit();
     });
   }
+  addCinemaOwner(){
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.type = "CO";
+    modalRef.result.then((result) => {
+      this.alert = result;
+      this.ngOnInit();
+    });
+  }
   // updateFilter(event) {
   //   const val = event.target.value;
   //   var data = {

@@ -247,9 +247,10 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 router.get('/adminSearch/:searchKeyword',Authorization.Verify("1100") ,Search.searchByKeyword);
-router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
+//router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
 
 // TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
+router.get('/myCinemas/viewCinemas',Authorization.Verify("1100"), MyCinemas.viewCinemas);
 router.post('/myCinemas/addCinema',Authorization.Verify("0100") , MyCinemas.addCinema);
 router.patch('/myCinemas/editCinema/:name/:location',Authorization.Verify("0100") , MyCinemas.editCinema);
 router.delete('/myCinemas/deleteCinema/:name/:location',Authorization.Verify("0100") ,MyCinemas.deleteCinema);

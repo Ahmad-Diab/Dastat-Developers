@@ -6,6 +6,157 @@ let database = require('../config/db-connection'),
     config = require('../config/config'),
     jwt = require('jsonwebtoken');
 
+
+/**
+ * @param req, required data for processing the request of making the reservation
+ * @param res, results of changes on the tickets table in database
+ * @param next, next middleware to handle errors
+ */
+module.exports.makeReservationAsAdmin = function (req, res, next) {
+
+    let tokenHeader = req.headers['authorization'];
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: null,
+            msg: 'You must log in first.',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: null,
+                msg: 'Must be a user of the system',
+                data: null
+            });
+        }
+
+        let admin_username = authData.username;
+
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
+        let cinema_name = req.body['cinema_name'],
+            cinema_location = req.body['cinema_location'],
+            party_date = req.body['date'],
+            party_time = req.body['time'],
+            hall = req.body['hall'],
+            movie = req.body['movie'],
+            payment = req.body['payment'],
+            tickets = req.body['tickets'],
+            tickets_price = req.body['price'],
+            numOfTickets = tickets.length,
+            comment = req.body['comment'];
+
+        // Null Checkers
+        if (!cinema_name || !cinema_location) {
+            return res.status(422).json({
+                err: null,
+                msg: 'cinema_name & cinema_location are required.',
+                data: null
+            });
+        }
+
+        let username = cinema_name.trim(' ').toLowerCase() + '_' + cinema_location.trim(' ').toLowerCase();
+
+        if (!party_date || !party_time) {
+            return res.status(422).json({
+                err: null,
+                msg: 'party_data & party_time are required.',
+                data: null
+            });
+        }
+        if (!hall || !movie) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Party hall and movie are required.',
+                data: null
+            });
+        }
+        if (!tickets || !tickets_price) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Tickets data is required.',
+                data: null
+            });
+        }
+
+        // Validations of correct types
+        if (!Validations.isBoolean(payment) ||
+            !Validations.isNumber(hall) ||
+            !Validations.isNumber(tickets_price)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Provided data must be in valid types.',
+                data: null
+            });
+        }
+
+        // Verify that movie exists in hall
+        // Verify that hall exists in Cinema, and retrieve movie
+        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
+            membershipData = [admin_username, name, location];
+        database.query(checkForMembershipQuery, membershipData, function (err, results) {
+            if (err) return next(err);
+
+            if (!results.length) {
+                return res.status(401).send({
+                    err: null,
+                    msg: "Not member of this cinema",
+                    data: null
+                });
+            }
+
+            database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
+                [hall, cinema_location, cinema_name], function (error, results) {
+                    if (error) {
+                        return next(error);
+                    }
+
+                    if (!results || !results.length || results[0].movie !== movie) {
+                        return res.status(404).send({
+                            err: null,
+                            msg: "The assigned hall does not exist.",
+                            data: null
+                        });
+                    }
+
+                    let values = [];
+                    for (let i = 0; i < numOfTickets; i++) {
+                        let seatNum = tickets[i];
+                        let ticket_details = [username, payment, seatNum, party_date, party_time, hall, cinema_location, cinema_name,
+                            tickets_price, movie, comment];
+                        values.push(ticket_details);
+                    }
+
+                    let sqlQuery = 'INSERT INTO tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
+                    database.query(sqlQuery, [values], function (error, results) {
+                        if (error) {
+                            return next(error);
+                        }
+
+                        res.status(200).json({
+                            err: null,
+                            msg: 'Booking Request has been completed successfully.',
+                            data: results
+                        });
+
+                    });
+                });
+
+        });
+
+    });
+
+};
+
 /**
  * A function to verify an unpaid ticket
  * @param req, reservation_id, and adminUsername

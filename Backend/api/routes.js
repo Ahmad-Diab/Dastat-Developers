@@ -191,7 +191,7 @@ router.get('/viewAdmins', Authorization.Verify('1000'), Admin.getAdmins);
 router.get('/tickets/viewTicketInfo', Authorization.Verify('1111'), adminTicket.viewTicketInfo);
 router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminTicket.verifyUnpaidTicket);
 router.get('/tickets/viewPartiesForThatMovie', Authorization.Verify('1111'), adminTicket.viewPartiesOfThatMovie);
-router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), UserBooking.makeReservation);
+router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), adminTicket.makeReservationAsAdmin);
 router.delete('/tickets/cancelReservation/:reservation_id', Authorization.Verify('1101'), adminTicket.cancelReservation);
 
 //-------------------------------------------Halls Routes-----------------------------

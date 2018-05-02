@@ -15,7 +15,7 @@ let database = require('../config/db-connection'),
 module.exports.verifyUnpaidTicket = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -61,12 +61,13 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
                 data: null
             });
         }
+
         let checkForMembershipQuery = 'SELECT a.admin FROM admins_cinemas a JOIN tickets t ON a.cinema_name = t.cinema_name AND a.cinema_location = t.cinema_location WHERE a.admin = ? AND t.reservation_id = ?',
             membershipData = [adminUsername, reservation_id];
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);
 
-            if (!results.length) {
+            if (!results.length && adminUsername !== 'app') {
                 return res.status(404).send({
                     err: null,
                     msg: "Ticket does not exist or not member of same cinema.",
@@ -174,10 +175,11 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
  */
 module.exports.viewTicketInfo = function (req, res, next) {
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
-            msg: 'You must log in first',
+            msg: 'You must log in first.',
             data: null
         });
     }
@@ -195,7 +197,7 @@ module.exports.viewTicketInfo = function (req, res, next) {
         }
 
         let adminUsername = authData.username,
-            reservation_id = req.body['reservation_id'];
+            reservation_id = req.query['reservation_id'];
 
         // Null Checkers
         if (!adminUsername) {
@@ -222,23 +224,29 @@ module.exports.viewTicketInfo = function (req, res, next) {
             });
         }
 
-        let sqlQuery = "SELECT * FROM tickets T INNER JOIN movies M ON  T.movie_id = M.movie_id INNER JOIN admins_cinemas A ON A.cinema_name = T.cinema_name WHERE T.reservation_id = ? AND A.admin = ? ;";
-        database.query(sqlQuery, [reservation_id, adminUsername], function (error, results) {
+        let sqlQuery = (adminUsername === 'app')?
+            "SELECT * FROM tickets t WHERE t.reservation_id = ?;" :
+            "SELECT * FROM tickets T INNER JOIN movies M ON  T.movie_id = M.movie_id INNER JOIN admins_cinemas A ON A.cinema_name = T.cinema_name AND A.cinema_location = T.cinema_location  WHERE A.admin = ? AND T.reservation_id = ?;";
+        let sqlData = (adminUsername === 'app')? [reservation_id] : [adminUsername, reservation_id];
+        database.query(sqlQuery, sqlData, function (error, results) {
             if (error) {
                 return next(error);
             }
-            if (results.length)
-                res.status(200).json({
-                    err: null,
-                    msg: 'Tickets data retrieved successfully.',
-                    data: results[0]
-                });
-            else
+
+            if (!results.length) {
                 res.status(404).json({
                     err: null,
                     msg: 'Tickets data not found.',
                     data: null
                 });
+            } else {
+                res.status(200).json({
+                    err: null,
+                    msg: 'Tickets data retrieved successfully.',
+                    data: results[0]
+                });
+            }
+
 
         });
 
@@ -252,7 +260,7 @@ module.exports.viewTicketInfo = function (req, res, next) {
  */
 module.exports.cancelReservation = function (req, res, next) {
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -282,7 +290,10 @@ module.exports.cancelReservation = function (req, res, next) {
 
         let checkForMembershipQuery = 'SELECT a.admin FROM admins_cinemas a JOIN tickets t ON a.cinema_name = t.cinema_name AND a.cinema_location = t.cinema_location WHERE a.admin = ? AND t.reservation_id = ?',
             membershipData = [adminUsername, id];
-        database.query(checkForMembershipQuery, membershipData, function (err, results) {
+        let sqlQuery = (adminUsername === 'app')?
+            "SELECT * FROM tickets t WHERE t.reservation_id = ?;" : checkForMembershipQuery;
+        let sqlData = (adminUsername === 'app')? [id] : membershipData;
+        database.query(sqlQuery, sqlData, function (err, results) {
             if (err) return next(err);
 
             if (!results.length) {

@@ -133,7 +133,27 @@ module.exports.filterByHalls = function (req, res, next) {
 
 //TODO NEEDED, do we need pagination
 module.exports.ViewCinemas = function (req, res, next) {
-    database.query('SELECT * FROM cinemas', function (error, results) {
+  let start = req.params['start'],
+      limit = req.params['limit'];
+
+      let startNum, limitNum;
+      if (start === '' || limit === '' ||
+          !start || !limit) {
+          // In case no limits entered, send just few.
+          startNum = 0;
+          limitNum = 10;
+      } else {
+          startNum = parseInt(start);
+          limitNum = parseInt(limit);
+      }
+
+      if(limitNum < startNum)
+      return res.status(400).send({
+        error: "Start must be less than limit",
+        msg: null,
+        data: null
+      });
+    database.query('SELECT * FROM cinemas LIMIT ? OFFSET ?', [limitNum, startNum], function (error, results) {
         if (error) {
             return next(error);
         }
@@ -250,4 +270,3 @@ module.exports.DistinctLocation = function (req, res, next) {
         });
     });
 };
-    

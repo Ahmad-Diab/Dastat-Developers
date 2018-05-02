@@ -18,7 +18,7 @@ let MyMovies = require('./controllers/MyMoviesController'),
     Authorization = require("./Authorization"),
     adminTicket = require('./controllers/AdminTicketController'),
     Admin = require('./controllers/MyAdminsController'),
-    MoviesInHalls = require('./controllers/MoviesInHallsController'),
+    //MoviesInHalls = require('./controllers/MoviesInHallsController'),
     AdminHalls = require('./controllers/AdminHallsController'),
     Promocodes = require('./controllers/PromocodesController'),
     MyCinemas = require('./controllers/MyCinemas'),
@@ -194,10 +194,10 @@ router.get("/cinema/location/min", Seat.distinctLocations);
 router.get("/cinema/names/min", Seat.getCinemaName);
 
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
-router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name', MoviesInHalls.cinemaMovies);
-router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location', MoviesInHalls.cinemaHalls);
-router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location',
-    MoviesInHalls.getMovieAndHallData);
+//router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name', MoviesInHalls.cinemaMovies);
+//router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location', MoviesInHalls.cinemaHalls);
+//router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location',
+//    MoviesInHalls.getMovieAndHallData);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 router.get('/promocodes', Authorization.Verify('1000'), Promocodes.viewPromocodes);

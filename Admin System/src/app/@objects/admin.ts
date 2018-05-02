@@ -9,4 +9,5 @@ export class Admin {
     first_name: string;
     last_name: string;
     gender: string;
+    password: string;
 }

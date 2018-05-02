@@ -60,7 +60,6 @@ export class SeatingComponent implements OnInit {
     }
     else{
       this.selected.push(seat);
-      this.total_money+=10;
     }
     console.log(this.selected);
   }

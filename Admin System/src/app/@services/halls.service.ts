@@ -4,34 +4,34 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Http, Headers } from '@angular/http';
 
 @Injectable()
-export class HallsService extends HttpService{
+export class HallsService extends HttpService {
 
-  constructor(public cookie: CookieService, 
-    public http: Http) { 
-      super(cookie, http);
-    }
-
-  getHallsForCinema(cinema){
-    return this.get('/admin/adminHalls/getHallsForThatCinema/'+cinema.cinema_name+'/'+cinema.cinema_location);
+  constructor(public cookie: CookieService,
+    public http: Http) {
+    super(cookie, http);
   }
 
-  getCinemasForAdminUser(username){
-    return this.get('/admin/adminHalls/viewCinemasForAdminUser/'+username);
+  getHallsForCinema(cinema) {
+    return this.get('/admin/adminHalls/getHallsForThatCinema/' + cinema.cinema_name + '/' + cinema.cinema_location);
   }
 
-  getAlltMoviesInCinemaForAdmin(cinema_name , cinema_location){
-    return this.get('/admin/getAlltMoviesInCinemaForAdmin/'+cinema_location+'/'+cinema_name);
+  getCinemasForAdminUser(username) {
+    return this.get('/admin/adminHalls/viewCinemasForAdminUser/' + username);
   }
 
-  deleteMovieFromHall(data){
-    return this.post_auth('/admin/adminHalls/deleteMovieFromHall' , data);
+  getAlltMoviesInCinemaForAdmin(cinema_name, cinema_location) {
+    return this.get('/admin/getAlltMoviesInCinemaForAdmin/' + cinema_location + '/' + cinema_name);
   }
 
-  assignMovieToHall(data){
-    return this.post_auth('/admin/adminHalls/assignMovieToHall' , data);
+  deleteMovieFromHall(data) {
+    return this.post_auth('/admin/adminHalls/deleteMovieFromHall', data);
   }
 
-  viewMoviesInHalls(username,cinema_name,cinema_location){
-    return this.get('/admin/adminHalls/viewMoviesInHalls/'+username+'/'+cinema_name+'/'+cinema_location);
+  assignMovieToHall(data) {
+    return this.post_auth('/admin/adminHalls/assignMovieToHall', data);
+  }
+
+  viewMoviesInHalls(username, cinema_name, cinema_location) {
+    return this.get('/admin/adminHalls/viewMoviesInHalls/' + username + '/' + cinema_name + '/' + cinema_location);
   }
 }

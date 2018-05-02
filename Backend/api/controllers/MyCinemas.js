@@ -5,6 +5,19 @@ let database = require('../config/db-connection'),
     config = require('../config/config'),
     jwt = require('jsonwebtoken');
 
+module.exports.ViewCinemas = function (req, res, next) {
+    database.query('SELECT * FROM cinemas', function (error, results) {
+        if (error) {
+            return next(error);
+        }
+        return res.status(200).send({
+            err: null,
+            msg: 'Cinemas are retrieved successfully',
+            data: results
+        });
+    });
+};
+
 /**
  * @param req, name, location, address, num_of_halls, is3D, is4D, company,
  *      imagePath and imagePath2 in body
@@ -302,7 +315,7 @@ module.exports.editCinema = function (req, res, next) {
             });
         }
 
-        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ?',
+        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
             membershipData = [admin_username, name, location];
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);
@@ -388,7 +401,7 @@ module.exports.deleteCinema = function (req, res, next) {
             });
         }
 
-        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ?',
+        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
             membershipData = [admin_username, name, location];
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);

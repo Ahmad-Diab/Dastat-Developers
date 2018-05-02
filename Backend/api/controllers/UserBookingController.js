@@ -156,7 +156,7 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
 
     let query =
         'SELECT * ' +
-        'FROM halls h JOIN parties p ON h.hall_number = p.hall' +
+        'FROM halls h JOIN parties p ON h.hall_number = p.hall ' +
         'WHERE h.movie = ? AND DATE(p.date) BETWEEN DATE_ADD(CURRENT_DATE, INTERVAL 5 DAY) AND CURRENT_DATE AND p.time > CURRENT_TIME';
 
     database.query(query, [movie_id], function (err, result) {

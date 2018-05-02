@@ -62,12 +62,9 @@ export class AdminTicketService extends HttpService {
         'cinema_location': cinema_location
     });
   }
+
   cancelReservation(reservation_id: number) {
-    return this.delete('/tickets/cancelReservation', { headers: {
-      //calls cancel reservation delete method to backend and gives it the tickets reservation id
-      'id': reservation_id
-    }
-    });
+    return this.delete_auth('/tickets/cancelReservation/' + reservation_id);
   }
 
 }

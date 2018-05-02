@@ -278,7 +278,7 @@ module.exports.cancelReservation = function (req, res, next) {
         }
 
         let adminUsername = authData.username,
-            id = req.query['reservation_id'];
+            id = req.params['reservation_id'];
 
         if (isNaN(id)) {
             return res.status(400).send({ //making sure it is a number, and returning an error if it is not

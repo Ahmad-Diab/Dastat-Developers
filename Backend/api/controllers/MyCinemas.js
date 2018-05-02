@@ -218,10 +218,6 @@ module.exports.addCinema = function (req, res, next) {
                             database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (err) {
                                 if(err) return next(err);
                             });
-                            database.query('DELETE FROM admin_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
-                                [admin_username, name, location], function (err) {
-                                    if(err) return next(err);
-                                });
                             return next(err);
                         }
 
@@ -484,12 +480,7 @@ module.exports.deleteCinema = function (req, res, next) {
 
             database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (error, results) {
                 if (error) return next(error);
-                /* // CHECK IF DELETE ON CASCADE IS DONE
-                database.query('DELETE FROM admin_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
-                    [admin_username, name, location], function (err) {
-                        if(err) return next(err);
-                    });
-                */
+    
                 res.status(200).json({
                     err: null,
                     msg: "Deleted Successfully!",

@@ -119,7 +119,7 @@ router.get('/dashboard/getCinemaOwnerCount', Dashboard.getCinemaOwnerCount);
 router.get('/dashboard/getBranchManagerCount', Dashboard.getBranchManagerCount);
 router.get('/dashboard/getBookingUsherCount', Dashboard.getBookingUsherCount);
 router.get('/dashboard/getCinemaCount', Dashboard.getCinemaCount);
-router.get('/dashboard/getCinemasInRegionsCount', Dashboard.getCinemasInReginsCount);
+router.get('/dashboard/getCinemasInRegionsCount', Dashboard.getCinemasInRegionsCount);
 router.get('/dashboard/getMoviesPlayedCount', Dashboard.getMoviesPlayedCount);
 router.get('/dashboard/getTicketsCount', Dashboard.getTicketsCount);
 router.get('/dashboard/getTicketsInRegionsCount', Dashboard.getTicketsInRegionsCount);

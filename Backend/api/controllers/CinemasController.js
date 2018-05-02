@@ -131,7 +131,6 @@ module.exports.filterByHalls = function (req, res, next) {
     });
 };
 
-//TODO NEEDED, do we need pagination
 module.exports.ViewCinemas = function (req, res, next) {
   let start = req.params['start'],
       limit = req.params['limit'];

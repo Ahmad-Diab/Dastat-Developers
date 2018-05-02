@@ -268,66 +268,302 @@ module.exports.getBookingUshers = function(req, res, next){
 }
 
 //------------------------- Add Booking ushers -------------------------------
+
 module.exports.addBookingUsher = function(req,res,next){
-    var username = req.body.username;
-    var email = req.body.email;
-    var salary = req.body.salary;
-    var type = "Booking Usher"; 
-    var first_name = req.body.first_name;
-    var last_name = req.body.last_name;
-    var phone_number = req.body.phone_number;
-    var gender = req.body.gender;
-   // var cinema_location = req.body.cinema_location;
-    var cinema_name = req.body.cinema_name;
-    
+
+    let newBookingUsherUsername = req.body.username,
+        email = req.body.email,
+        salary = req.body.salary,
+        type = "Booking Usher",
+        first_name = req.body.first_name,
+        last_name = req.body.last_name,
+        phone_number = req.body.phone_number,
+        gender = req.body.gender,
+        cinema_location = req.body.cinema_location,
+        cinema_name = req.body.cinema_name,
+        hashed_password,
+        password = req.body.password,
+        adminUserName,
+        admin;
+
     var adminsInsertionQuery = 'INSERT INTO admins SET ?';
-    var hashed_password ;
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-            if(err) return next(err);
-            hashed_password= hash; 
-            var admin={
-                username:username,
-                password:hashed_password,
-                email:email,
-                salary:salary,
-                type:type,
-                first_name:first_name,
-                last_name:last_name,
-                phone_number:phone_number,
-                gender:gender
-               }
+
+    //getting the username of the currently logged in admin
+    var tokenHeader = req.headers['authorization'];
+    if (typeof tokenHeader !== 'undefined') {
+        var tokenheadersplited = tokenHeader.split(' ');
+        var token = tokenheadersplited[1];
+        var decoded = jwt.verify(token, config.secret, (err, authData) => {
+            if (err) {
+                return res.status(401).json({
+                    err: err,
+                    msg: 'no username in headers token.',
+                    data: null
+                });
+            }
+            else
+                adminUserName = authData.username;
+        });
+    }
+
+    //checking for null values or not entered data
+    if(!newBookingUsherUsername) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required.',
+            data: null
+        });
+    }
+
+    if(!password) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Password is required.',
+            data: null
+        });
+    }
+
+    if(!email) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Email is required.',
+            data: null
+        });
+    }
+
+    if(!salary) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Salary is required.',
+            data: null
+        });
+    }
+
+    if(!first_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'First name is required.',
+            data: null
+        });
+    }
+
+    if(!last_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Last name is required.',
+            data: null
+        });
+    }
+
+    if(!gender) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Gender is required.',
+            data: null
+        });
+    }
+
+    if(!cinema_name) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Name is required.',
+            data: null
+        });
+    }
+
+    if(!cinema_location) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Cinema Location is required.',
+            data: null
+        });
+    }
+
+    //Valdiations for correct data types
+
+    if(!Validations.isNumber(phone_number)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Phone number must be numbers only.',
+            data: null
+        });
+    }
+
+    if(!Validations.isNumber(salary)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Salary must be numbers only.',
+            data: null
+        });
+    }
+
+    if(!Validations.isString(first_name) || !Validations.isString(last_name)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'Invalid first name or last name',
+            data: null
+        });
+    }
+
+    //checking if the username already exists
+
+    database.query('SELECT * FROM admins WHERE username = ?', [newBookingUsherUsername], function (err, results) {
+
+        if (err) return next(err);
+
+        if (results.length > 0) {
+
+            return res.status(200).json({
+                err: null,
+                msg: "This username is already used , please enter a different one.",
+                success: true
+            });
             
-                database.query(adminsInsertionQuery,admin, function (error, results, fields) {
-                    if(err) return next(err);
-                    return res.send(results);
+        }
+    });
+
+    //checking if the email already exists
+    database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
+
+        if (err) return next(err);
+
+        if (results.length > 0) {
+            
+            return res.status(200).json({
+                err: null,
+                msg: "This email already exists , please enter a different one.",
+                success: true
+            });
+            
+        }
+
+    });
+
+    //Verify that this admins user belongs to this cinema
+    
+    database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
+        [cinema_name, cinema_location, username],function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            console.log(results + "This Admin user doesn't belong to this cinema");
+            if(!results || !results.length) {
+                return res.status(404).json({
+                    err: null,
+                    msg: "You don't belong to this cinema.",
+                    data: null
+                });
+            }
+    });
+    
+    
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+            if(err) {
+                return next(err);
+            }
+            hashed_password = hash; 
+        });   
+    });
+
+    admin = {
+        username:newBookingUsherUsername,
+        password:hashed_password,
+        email:email,
+        salary:salary,
+        type:type,
+        first_name:first_name,
+        last_name:last_name,
+        phone_number:phone_number,
+        gender:gender
+    }
+
+    let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
+    database.query(sqlQuery, [admin], function (err, results) {
+        if (err) {
+            return next(err);
+        }
+        else{
+
+            sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?'
+            database.query(sqlQuery, [newBookingUsherUsername,cinema_location,cinema_name] ,function (err, results) {
+                if(err)
+                    return next(err);
+                else{
+                    res.status(200).json({
+                        err: null,
+                        msg: 'Booking Usher added Successfully.',
+                        data: results
                     });
-                    database.query('select * from cinemas where name = ?', cinema_name, function(err, res, fields){
-                        if(err) return next(err)
-                        if(res.length > 0){
-                            var admin_cinema = {
-                                admin: username,
-                                cinema_name: cinema_name,
-                                cinema_location: res[0].location
-                          };
-                        var cinemaAdminInsertionQuery = "INSERT INTO admins_cinemas (admin, cinema_location, cinema_name) VALUES('" + admin_cinema.admin + "', '" + admin_cinema.cinema_location + "', '" + admin_cinema.cinema_name + "')";
-                        console.log("tested")
-                        database.query(cinemaAdminInsertionQuery, function(err, results, fields) {
-                        if(err) return next(err);
-                       // return res.send(results);
-                        });
-                        }
-                        else {
-                            res.status(200).json({
-                            err: null,
-                            msg: "wrong cinema name",
-                            success: false
-                            });
-                        }
-                    });
-             });   
-        });          
+                }
+            });
+            
+        }
+        
+    });
+     
 }
+
+// module.exports.addBookingUsher = function(req,res,next){
+//     var username = req.body.username;
+//     var email = req.body.email;
+//     var salary = req.body.salary;
+//     var type = "Booking Usher"; 
+//     var first_name = req.body.first_name;
+//     var last_name = req.body.last_name;
+//     var phone_number = req.body.phone_number;
+//     var gender = req.body.gender;
+//    // var cinema_location = req.body.cinema_location;
+//     var cinema_name = req.body.cinema_name;
+    
+//     var adminsInsertionQuery = 'INSERT INTO admins SET ?';
+//     var hashed_password ;
+//     bcrypt.genSalt(10, (err, salt) => {
+//         bcrypt.hash(req.body.password, salt, (err, hash) => {
+//             if(err) return next(err);
+//             hashed_password= hash; 
+//             var admin={
+//                 username:username,
+//                 password:hashed_password,
+//                 email:email,
+//                 salary:salary,
+//                 type:type,
+//                 first_name:first_name,
+//                 last_name:last_name,
+//                 phone_number:phone_number,
+//                 gender:gender
+//                }
+            
+//                 database.query(adminsInsertionQuery,admin, function (error, results, fields) {
+//                     if(err) return next(err);
+//                     return res.send(results);
+//                     });
+//                     database.query('select * from cinemas where name = ?', cinema_name, function(err, res, fields){
+//                         if(err) return next(err)
+//                         if(res.length > 0){
+//                             var admin_cinema = {
+//                                 admin: username,
+//                                 cinema_name: cinema_name,
+//                                 cinema_location: res[0].location
+//                           };
+//                         var cinemaAdminInsertionQuery = "INSERT INTO admins_cinemas (admin, cinema_location, cinema_name) VALUES('" + admin_cinema.admin + "', '" + admin_cinema.cinema_location + "', '" + admin_cinema.cinema_name + "')";
+//                         console.log("tested")
+//                         database.query(cinemaAdminInsertionQuery, function(err, results, fields) {
+//                         if(err) return next(err);
+//                        // return res.send(results);
+//                         });
+//                         }
+//                         else {
+//                             res.status(200).json({
+//                             err: null,
+//                             msg: "wrong cinema name",
+//                             success: false
+//                             });
+//                         }
+//                     });
+//              });   
+//         });          
+// }
 
 
 //------------------------- Edit Booking ushers -------------------------------
@@ -597,7 +833,7 @@ module.exports.addBranchManager = function(req,res,next){
     });
 
     admin = {
-        username:username,
+        username:newBranchManagerUsername,
         password:hashed_password,
         email:email,
         salary:salary,
@@ -616,7 +852,7 @@ module.exports.addBranchManager = function(req,res,next){
         else{
 
             sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?'
-            database.query(sqlQuery, [username,cinema_location,cinema_name] ,function (err, results) {
+            database.query(sqlQuery, [newBranchManagerUsername,cinema_location,cinema_name] ,function (err, results) {
                 if(err)
                     return next(err);
                 else{
@@ -1081,7 +1317,7 @@ module.exports.addCinemaOwner = function(req,res,next){
     });
 
     admin = {
-        username:username,
+        username:newCinemaOwnserUsername,
         password:hashed_password,
         email:email,
         salary:salary,
@@ -1100,7 +1336,7 @@ module.exports.addCinemaOwner = function(req,res,next){
         else{
 
             sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?'
-            database.query(sqlQuery, [username,cinema_location,cinema_name] ,function (err, results) {
+            database.query(sqlQuery, [newCinemaOwnserUsername,cinema_location,cinema_name] ,function (err, results) {
                 if(err)
                     return next(err);
                 else{

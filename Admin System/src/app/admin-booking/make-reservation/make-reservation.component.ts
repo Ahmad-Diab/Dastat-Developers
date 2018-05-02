@@ -3,6 +3,8 @@ import {AdminTicketService} from "../../@services/admin-ticket.service";
 import {CookieService} from "angular2-cookie/core";
 import {Auth} from "../../@guards/auth.guard";
 import {MoviesInHallsService} from "../../@services/movies-in-halls.service";
+import { HallService } from '../../@services/hall.service';
+import { Layout } from '../../@objects/layout';
 
 @Component({
   selector: 'app-make-reservation',
@@ -25,9 +27,17 @@ export class MakeReservationComponent implements OnInit {
   selectedTickets = []; //TODO set the array of tickets
   totalPrice = null; // TODO set this with tickets
 
+  encoding;
+  selected;
+  seats = [];
+  flag = false;
+
   error = null;
 
-  constructor(public adminTicketService: AdminTicketService, public MoviesInHallsService: MoviesInHallsService, public cookie: CookieService) { }
+  constructor(public adminTicketService: AdminTicketService, 
+    public MoviesInHallsService: MoviesInHallsService, 
+    public hallService: HallService,
+    public cookie: CookieService) { }
 
   ngOnInit() {
     let auth = <Auth>(this.cookie.getObject('auth'));
@@ -36,11 +46,12 @@ export class MakeReservationComponent implements OnInit {
 
     this.reserveData = {
       username: 'mai_emad', // TODO To be changed
-      cinema_name: 'Mokattam',
-      cinema_location: 'Mawlana', // TODO to be changed (get from cookie)
-      date: null,
-      time: null,
+      cinema_name: 'Mayo Movies',
+      cinema_location: '9th of Mayo', // TODO to be changed (get from cookie)
+      date: '2018-04-28',
+      time: '10:00:00',
       hall: null,
+      hall_number: 1,
       payment: true,
       tickets: null,
       ticketsNum: null,
@@ -49,7 +60,14 @@ export class MakeReservationComponent implements OnInit {
       movie: null
     };
 
+    this.loadSeatLayout();
+
     console.log("ONITTTTT" +this.reserveData.cinema_location);
+  }
+
+  letter(index: number) {
+    var ascii = 65;
+    return String.fromCharCode(index + ascii);
   }
 
   loadMovies() {
@@ -155,8 +173,27 @@ export class MakeReservationComponent implements OnInit {
     this.loadSeatLayout();
   }
 
-  loadSeatLayout() {
+  select(i, j, seat) {
+    this.selected[i][j] = !this.selected[i][j];
 
+    if (this.seats.includes(seat)) {
+      var index = this.seats.indexOf(seat);
+      this.seats.splice(index, 1);
+    } else{
+      this.seats.push(seat);
+    }
+
+    console.log(this.seats);
+  }
+
+  loadSeatLayout() {
+    this.hallService.viewLayout(this.reserveData).subscribe((response) => {
+      this.encoding = JSON.parse(response.layout.encoded);
+      this.selected = new Array();
+      for(var i = 0; i < this.encoding.length; i++)
+        this.selected[i] = new Array();
+      this.flag = true;
+    });
   }
 
   makeReservation() {

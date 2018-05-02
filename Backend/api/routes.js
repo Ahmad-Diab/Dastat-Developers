@@ -25,7 +25,8 @@ let MyMovies = require('./controllers/MyMoviesController'),
     MoviesInHalls = require('./controllers/MoviesInHallsController'),
     AdminHalls = require('./controllers/AdminHallsController'),
     Promocodes = require('./controllers/PromocodesController'),
-    MyCinemas = require('./controllers/MyCinemas');
+    MyCinemas = require('./controllers/MyCinemas'),
+    Dashboard = require('./controllers/DashboardController');
 
 //please add only routers here, if you need to call a function require its class
 //DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
@@ -133,6 +134,24 @@ router.post('/adminlogin', AuthenticationAdmin.login);
 //router.post('/admin/login', Admin.authenticate);
 //router.get('/users',Authorization.Verify_App_Owner, User.getUsers);
 
+//-----------------------------------------------------Dashboard Routes---------------------------------------//
+
+router.get('/dashboard/getAdminCount' , Dashboard.getAdminCount);
+router.get('/dashboard/getCinemaOwnerCount' , Dashboard.getCinemaOwnerCount);
+router.get('/dashboard/getBranchManagerCount' , Dashboard.getBranchManagerCount);
+router.get('/dashboard/getBookingUsherCount' , Dashboard.getBookingUsherCount);
+router.get('/dashboard/getCinemaCount' , Dashboard.getCinemaCount);
+router.get('/dashboard/getCinemasInReginsCount' , Dashboard.getCinemasInReginsCount);
+router.get('/dashboard/getMoviesPlayedCount' , Dashboard.getMoviesPlayedCount);
+router.get('/dashboard/getTicketsCount' , Dashboard.getTicketsCount);
+router.get('/dashboard/getTicketsInRegionsCount' , Dashboard.getTicketsInRegionsCount);
+router.get('/dashboard/getUsersCount' , Dashboard.getUsersCount);
+router.get('/dashboard/getPaidTicketsCount' , Dashboard.getPaidTicketsCount);
+router.get('/dashboard/getUnpaidTicketsCount' , Dashboard.getUnpaidTicketsCount);
+router.get('/dashboard/getTop10ReservedMovies' , Dashboard.getTop10ReservedMovies);
+router.get('/dashboard/getTopReservedMovie' , Dashboard.getTopReservedMovie);
+
+
 //-----------------------------------------------------Halls Routes---------------------------------------------//
 
 router.get('/admin/adminHalls/getHallsForThatCinema/:cinema_name/:cinema_location' , AdminHalls.getHallsForThatCinema);
@@ -158,6 +177,7 @@ router.get('/getBranchManagers', Authorization.Verify('1100'), Admin.getBranchMa
 router.post('/editBranchManager', Authorization.Verify('1100'), Admin.editBranchManager);
 router.post('/deleteBranchManager', Authorization.Verify('1100'), Admin.deleteBranchManager);
 
+router.post('/addBranchManager' , Authorization.Verify('1000') , Admin.addCinemaOwner);
 // router.get('/viewCinemaOwners', Authorization.Verify('1000'), Admin.viewCinemaOwners);
 router.get('/getCinemaOwners', Authorization.Verify('1000'), Admin.getCinemaOwners);
 // router.post('/getCinemaOwner', Authorization.Verify('1000'), Admin.getCinemaOwner);
@@ -227,9 +247,10 @@ router.post('/promocodes/deletePromocode/:promocode', Authorization.Verify('1000
 
 ////////////////////////////////////////////////// MyCinemas ROUTES //////////////////////////////////////////////////
 router.get('/adminSearch/:searchKeyword',Authorization.Verify("1100") ,Search.searchByKeyword);
-router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
+//router.get('/adminViewCinemas',Authorization.Verify("1100"),Cinema.ViewCinemas);
 
 // TODO -- DELETE THIS COMMENT -- CHANGED ONES -> DOWN BELLOW
+router.get('/myCinemas/viewCinemas',Authorization.Verify("1100"), MyCinemas.viewCinemas);
 router.post('/myCinemas/addCinema',Authorization.Verify("0100") , MyCinemas.addCinema);
 router.patch('/myCinemas/editCinema/:name/:location',Authorization.Verify("0100") , MyCinemas.editCinema);
 router.delete('/myCinemas/deleteCinema/:name/:location',Authorization.Verify("0100") ,MyCinemas.deleteCinema);

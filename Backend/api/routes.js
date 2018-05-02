@@ -45,7 +45,7 @@ router.get('/userBooking/getBookings/:username/:start/:limit', UserBooking.getBo
 
 router.get('/userBooking/getPartiesInSpecificCinema/:cinema_location/:cinema_name/:movie_id/:date',
     UserBooking.getPartiesOfThatMovieInSpecificCinema);
-router.get('/userBooking/getAllParties/:movie_id/:date', UserBooking.getAllPartiesForThatMovie);
+router.get('/userBooking/getAllParties/:movie_id/', UserBooking.getAllPartiesForThatMovie);
 router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 
 //----------------------------------------------------Seating routes--------------------------------------------//

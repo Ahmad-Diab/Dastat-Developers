@@ -43,7 +43,7 @@ module.exports.getHallsForThatCinema = function(req, res){
     let query = 'Select count(*) as TotalCount FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ?';
     
     //query = database.format(query);    
-    database.query(query, cinema_name , cinema_location , function (err, rows) {
+    database.query(query, [cinema_name , cinema_location] , function (err, rows) {
         
         if (err) {
             console.log(err);
@@ -76,7 +76,7 @@ module.exports.getHallsForThatCinema = function(req, res){
             limitNum = parseInt(limit);
         }
         
-        let query = 'select DISTINCT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
+        query = 'select DISTINCT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [cinema_name, cinema_location , limitNum, startNum];
         
@@ -140,7 +140,7 @@ module.exports.assignMovieToHall = function(req, res, next){
         
     // Null Checkers
     console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number+" "+movie_id)
-    console.log(req.body);
+    // console.log(req.body);
     if(!username) {
         return res.status(422).json({
             err: null,
@@ -174,33 +174,32 @@ module.exports.assignMovieToHall = function(req, res, next){
 
     //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
 
-    database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin '+
-    'AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
-        [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
-            if (error) {
-                return next(error);
-            }
-            console.log(results);
-            if(!results || !results.length) {
-                return res.status(404).send({
-                    err: null,
-                    msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
-                    data: null
-                });
-            }
-    });
+    // database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin '+
+    // 'AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
+    //     [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
+    //         if (error) {
+    //             return next(error);
+    //         }
+    //         /console.log(results);
+    //         if(!results || !results.length) {
+    //             return res.status(404).send({
+    //                 err: null,
+    //                 msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
+    //                 data: null
+    //             });
+    //         }
+    // });
 
     // Verify that movie exists in Cinema
-
-    database.query('SELECT m.* FROM movies m , movies_in_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? '+
-    'AND m.movie_id = c.movie AND m.movie_id = ? AND ( m.feature = 2 OR m.feature = 3 )',
+    //console.log("Half way");
+    database.query('SELECT * FROM movies_in_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.movie = ?',
         [cinema_name, cinema_location, movie_id],function (error, results) {
             if (error) {
                 return next(error);
             }
-            console.log(results);
+            console.log(results + "This Movie is not assigned");
             if(!results || !results.length) {
-                return res.status(404).send({
+                return res.status(404).json({
                     err: null,
                     msg: "The assigned movie does not exist in this cinema.",
                     data: null
@@ -217,7 +216,7 @@ module.exports.assignMovieToHall = function(req, res, next){
             }
             console.log(results);
             if(!results || !results.length) {
-                return res.status(404).send({
+                return res.status(404).json({
                     err: null,
                     msg: "The assigned hall does not exist.",
                     data: null
@@ -305,7 +304,7 @@ module.exports.deleteMovieFromHall = function(req, res, next){
             }
             console.log(results);
             if(!results || !results.length) {
-                return res.status(404).send({
+                return res.status(404).json({
                     err: null,
                     msg: "This Admin user does NOT have authority to do this action or he is not in this cinema.",
                     data: null
@@ -341,7 +340,7 @@ module.exports.deleteMovieFromHall = function(req, res, next){
             }
             console.log(results);
             if(!results || !results.length) {
-                return res.status(404).send({
+                return res.status(404).json({
                     err: null,
                     msg: "The assigned hall does not exist.",
                     data: null

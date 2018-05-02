@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieInfoService } from '../../../@services/movie-info.service';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
+import { CinemaslistService } from '../../../@services/cinemaslist.service'
 
 @Component({
   selector: 'app-movie-info',
@@ -10,8 +11,10 @@ import { CookieService } from 'angular2-cookie/core';
 })
 export class MovieInfoComponent implements OnInit {
 movie;
+locations = [];
+location;
   constructor(public MovieInfoService: MovieInfoService, private route : ActivatedRoute, 
-  public cookie : CookieService) { 
+  public cookie : CookieService,public CinemaslistService : CinemaslistService) { 
 
   }
 
@@ -22,6 +25,10 @@ ngOnInit(){
   this.MovieInfoService.getMovieInfo(this.movie).subscribe((response)=>{
     this.movie=response.data[0];
     console.log(response.data[0]);
+  });
+  this.CinemaslistService.getDistinctLocation().subscribe((response) => {
+    this.locations=response;
+    console.log(response);
   });
 }
 

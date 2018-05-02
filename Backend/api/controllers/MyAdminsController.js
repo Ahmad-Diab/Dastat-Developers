@@ -172,71 +172,43 @@ module.exports.getAdmins = function(req, res, next){
     // });
 }
 
-// module.exports.viewAdmins = function(req, res, next){
-//     var query = "select cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
-//     database.query(query, function(err, results, fiels) {
-//         if(err) return next(err);
-//         console.log(results);
-//         return res.send(results);
-//     });
-// }
-
 //------------------------- Show Admins working in a certain Cinema -------------------------------
-
-// module.exports.getAdmin = function(req, res, next){
-//     var cinema_name = req.body.cinema_name;
-//     console.log(req);
-//     var query = "select cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND cinema_name LIKE ?";
-//     database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
-//         if(err) return next(err);
-//         //console.log(results);
-//         return res.send(results);
-//     });
-// }
 
 //------------------------- View all Users -------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //------------------------- View all Booking ushers -------------------------------
+module.exports.getBookingUshers = function(req, res, next){
 
-module.exports.viewBookingUshers = function(req, res, next){
+    console.log("Entered getBookingUshers");
     var pagination = true; // boolean for checking if the user entered limits for pagination or not
     var errMsg = null;
 
     let start = req.query.start,
-        limit = req.query.limit;
+        limit = req.query.limit,
+        username = req.query['username'];
 
+    console.log(req.query['username']);
+
+    if(!username){
+
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required',
+            data: null
+        });
+
+    }
+    
 // To calculate Total Count use MySQL count function
-    let query = "Select count(*) as TotalCount from admins_cinemas C, admins A where C.admin = A.username";
-    query = database.format(query);
-
-    database.query(query, function (err, rows) {
+    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
+    " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
+    
+    
+    //query = database.format(query);    
+    database.query(query, username , function (err, rows) {
+        
         if (err) {
+            console.log(err);
             return err;
         }
 
@@ -246,46 +218,48 @@ module.exports.viewBookingUshers = function(req, res, next){
         let totalCount = rows[0]['TotalCount'];
         if(totalCount == 0){
 
-            res.status(200).json({
+            return res.status(200).json({
                 err: null,
                 msg: 'No admins available',
                 data: rows
             });
 
         }
-        if (start === '' || limit === '') {
+        if (start === '' || limit === '' || !start || !limit) {
             // In case no limits entered.
             startNum = 0;
             limitNum = 10;
             pagination = false;
             errMsg = "No Limits were provided";
+            console.log("No limits");
             
         } else {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-
-        let query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' DESC limit ? OFFSET ?";
+        
+        let query = "select DISTINCT A.* , C1.cinema_name from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
+        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [limitNum, startNum];
-        query = database.format(query, table);
-        database.query(query, function (err, rest) {
+        let table = [username , limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
             if (err) {
-                res.json(err);
                 return next(err);
-
             } else {
-                return res.status(200).json({
-                    "Total Count": totalCount,
+                res.status(200).json({
+                    totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Booking ushers have been successfully retrived"
+                    msg: "Booking Ushers have been successfully retrived"
                 });
             }
         });
     });
-
+    //var uname = req.body['uname'];
+    //console.log(uname);
     // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
+    // // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name = (select cinema_name from admins_cinemas where admin = ?"+" AND cinema_name = C.cinema_name GROUP BY cinema_name)";
     // database.query(query, function(err, results, fiels) {
     //     if(err) return next(err);
     //     console.log(results);
@@ -358,169 +332,6 @@ module.exports.addBookingUsher = function(req,res,next){
 
 //------------------------- Edit Booking ushers -------------------------------
 
-module.exports.getBookingUshers = function(req, res, next){
-
-    console.log("Entered getBookingUshers");
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
-
-    let start = req.query.start,
-        limit = req.query.limit,
-        username = req.query['username'];
-
-    console.log(req.query['username']);
-
-    if(!username){
-
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required',
-            data: null
-        });
-
-    }
-    
-// To calculate Total Count use MySQL count function
-    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
-    " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
-    
-    
-    //query = database.format(query);    
-    database.query(query, username , function (err, rows) {
-        
-        if (err) {
-            console.log(err);
-            return err;
-        }
-
-        let startNum,
-            limitNum;
-
-        let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
-
-            return res.status(200).json({
-                err: null,
-                msg: 'No admins available',
-                data: rows
-            });
-
-        }
-        if (start === '' || limit === '' || !start || !limit) {
-            // In case no limits entered.
-            startNum = 0;
-            limitNum = 10;
-            pagination = false;
-            errMsg = "No Limits were provided";
-            console.log("No limits");
-            
-        } else {
-            startNum = parseInt(start);
-            limitNum = parseInt(limit);
-        }
-        
-        let query = "select DISTINCT A.* from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
-        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
-        //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username , limitNum, startNum];
-        
-        database.query(query, table , function (err, rest) {
-            if (err) {
-                return next(err);
-            } else {
-                res.status(200).json({
-                    totalCount: totalCount,
-                    data: rest,
-                    err: errMsg,
-                    msg: "Booking Ushers have been successfully retrived"
-                });
-            }
-        });
-    });
-    //var uname = req.body['uname'];
-    //console.log(uname);
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
-    // // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name = (select cinema_name from admins_cinemas where admin = ?"+" AND cinema_name = C.cinema_name GROUP BY cinema_name)";
-    // database.query(query, function(err, results, fiels) {
-    //     if(err) return next(err);
-    //     console.log(results);
-    //     return res.send(results);
-    // });
-}
-// module.exports.getBookingUsher = function(req, res, next){
-
-
-//     var cinema_name = req.body.cinema_name;
-
-//     console.log("Entered getBookingUshers");
-//     var pagination = true; // boolean for checking if the user entered limits for pagination or not
-//     var errMsg = null;
-
-//     var start = req.query.start;
-//     var limit = req.query.limit;
-    
-// // To calculate Total Count use MySQL count function
-//     let query = "Select count(*) as TotalCount from admins_cinemas C, admins A where C.admin = A.username AND A.type = 'Booking Usher'";
-    
-//     //query = database.format(query);    
-//     database.query(query, function (err, rows) {
-        
-//         if (err) {
-//             console.log("err");
-//             return err;
-//         }
-
-//         let startNum,
-//             limitNum;
-
-//         let totalCount = rows[0]['TotalCount'];
-//         if(totalCount == 0){
-
-//             return res.status(200).json({
-//                 err: null,
-//                 msg: 'No admins available',
-//                 data: rows
-//             });
-
-//         }
-//         if (start === '' || limit === '' || !start || !limit) {
-//             // In case no limits entered.
-//             startNum = 0;
-//             limitNum = 10;
-//             pagination = false;
-//             errMsg = "No Limits were provided";
-//             console.log("No limits");
-            
-//         } else {
-//             startNum = parseInt(start);
-//             limitNum = parseInt(limit);
-//         }
-        
-//         let query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
-//         //Mention table from where you want to fetch records example-users & send limit and start
-//         let table = [limitNum, startNum];
-        
-//         database.query(query, table , function (err, rest) {
-//             if (err) {
-//                 return next(err);
-//             } else {
-//                 res.status(200).json({
-//                     totalCount: totalCount,
-//                     data: rest,
-//                     err: errMsg,
-//                     msg: "Booking Usher has been successfully retrived"
-//                 });
-//             }
-//         });
-//     });
-//     // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name like ?";
-//     // database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
-//     //     if(err) return next(err);
-//     //     console.log(results);
-//     //     return res.send(results);
-//     // });
-// }
-
 module.exports.editBookingUsher = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Booking Usher"';
@@ -586,18 +397,6 @@ module.exports.deleteBookingUsher = function(req, res, next){
         }
     });
 }
-
-//------------------------- View all Branch managers -------------------------------
-
-module.exports.viewBranchManagers = function(req, res, next){
-    var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
-    database.query(query, function(err, results, fiels) {
-        if(err) return next(err);
-        console.log(results);
-        return res.send(results);
-    });
-}
-
 
 //------------------------- Add Branch managers -------------------------------
 module.exports.addBranchManager = function(req,res,next){
@@ -838,7 +637,7 @@ module.exports.addBranchManager = function(req,res,next){
 
 
 
-//------------------------- Edit Branch managers -------------------------------
+//------------------------- View All Branch managers -------------------------------
 
 module.exports.getBranchManagers = function(req, res, next){
 
@@ -900,7 +699,7 @@ module.exports.getBranchManagers = function(req, res, next){
             limitNum = parseInt(limit);
         }
         
-        let query = "select DISTINCT A.* from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'"+
+        let query = "select DISTINCT A.* , C1.cinema_name from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'"+
         " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [username , limitNum, startNum];
@@ -926,15 +725,7 @@ module.exports.getBranchManagers = function(req, res, next){
     // });
 }
 
-// module.exports.getBranchManager = function(req, res, next){
-//     var cinema_name = req.body.cinema_name;
-//     var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager' AND cinema_name like ?";
-//     database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
-//         if(err) return next(err);
-//         console.log(results);
-//         return res.send(results);
-//     });
-// }
+
 module.exports.editBranchManager = function(req, res, next){
     var username = req.body.username;
     var user = 'select * from admins where username = ? AND type = "Branch Manager"';
@@ -1005,7 +796,92 @@ module.exports.deleteBranchManager = function(req, res, next){
 
 //------------------------- View all Cinema owners -------------------------------
 
-//========================= add Cinema Owner===========================================
+module.exports.getCinemaOwners = function(req, res, next){
+
+    console.log("Entered getCinemaOwners");
+
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null;
+
+    let start = req.query.start,
+        limit = req.query.limit,
+        username = req.query['username'];
+
+    console.log(req.query['username']);
+
+    if(!username){
+
+        return res.status(422).json({
+            err: null,
+            msg: 'Username is required',
+            data: null
+        });
+
+    }
+    
+// To calculate Total Count use MySQL count function
+    let query = "Select count(*) as TotalCount from admins_cinemas WHERE type = 'Cinema Owner'";
+    
+    //query = database.format(query);    
+    database.query(query, username , function (err, rows) {
+        
+        if (err) {
+            console.log(err);
+            return err;
+        }
+
+        let startNum,
+            limitNum;
+
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
+
+            return res.status(200).json({
+                err: null,
+                msg: 'No Cinema Owners available',
+                data: rows
+            });
+
+        }
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+        
+        let query = "select DISTINCT * from admins_cinemas WHERE type = 'Cinema Owner' limit ? OFFSET ?"
+        //Mention table from where you want to fetch records example-users & send limit and start
+        let table = [username , limitNum, startNum];
+        
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Cinema Owners have been successfully retrived"
+                });
+            }
+        });
+    });
+    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
+    // database.query(query, function(err, results, fiels) {
+    //     if(err) return next(err);
+    //     console.log(results);
+    //     return res.send(results);
+    // });
+}
+
+//------------------------------ add Cinema Owner-----------------------------------
 
 module.exports.addCinemaOwner = function(req,res,next){
 
@@ -1244,129 +1120,8 @@ module.exports.addCinemaOwner = function(req,res,next){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//------------------------- Add Cinema owners -------------------------------
-
-
-// module.exports.viewCinemaOwners = function(req, res, next){
-//     var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, lastName, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
-//     database.query(query, function(err, results, fiels) {
-//         if(err) return next(err);
-//         console.log(results);
-//         return res.send(results);
-//     });
-// }
-
 //------------------------- Edit Cinema owners -------------------------------
 
-module.exports.getCinemaOwners = function(req, res, next){
-
-    console.log("Entered getCinemaOwners");
-
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
-
-    let start = req.query.start,
-        limit = req.query.limit,
-        username = req.query['username'];
-
-    console.log(req.query['username']);
-
-    if(!username){
-
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required',
-            data: null
-        });
-
-    }
-    
-// To calculate Total Count use MySQL count function
-    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Cinema Owner'"+
-    " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
-    
-    //query = database.format(query);    
-    database.query(query, username , function (err, rows) {
-        
-        if (err) {
-            console.log(err);
-            return err;
-        }
-
-        let startNum,
-            limitNum;
-
-        let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
-
-            return res.status(200).json({
-                err: null,
-                msg: 'No Cinema Owners available',
-                data: rows
-            });
-
-        }
-        if (start === '' || limit === '' || !start || !limit) {
-            // In case no limits entered.
-            startNum = 0;
-            limitNum = 10;
-            pagination = false;
-            errMsg = "No Limits were provided";
-            console.log("No limits");
-            
-        } else {
-            startNum = parseInt(start);
-            limitNum = parseInt(limit);
-        }
-        
-        let query = "select DISTINCT A.* from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Cinema Owner'"+
-        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
-        //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username , limitNum, startNum];
-        
-        database.query(query, table , function (err, rest) {
-            if (err) {
-                return next(err);
-            } else {
-                res.status(200).json({
-                    totalCount: totalCount,
-                    data: rest,
-                    err: errMsg,
-                    msg: "Cinema Owners have been successfully retrived"
-                });
-            }
-        });
-    });
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
-    // database.query(query, function(err, results, fiels) {
-    //     if(err) return next(err);
-    //     console.log(results);
-    //     return res.send(results);
-    // });
-}
 
 
 // module.exports.getCinemaOwner = function(req, res, next){

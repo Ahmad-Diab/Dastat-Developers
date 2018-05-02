@@ -128,7 +128,7 @@ module.exports.addCinema = function (req, res, next) {
                 return next(error);
             }
 
-            let membershipInsertionQuery = 'INSERT INTO admin_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
+            let membershipInsertionQuery = 'INSERT INTO admins_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
             let membershipData = [admin_username, name, location];
             database.query(membershipInsertionQuery, membershipData, function (error, membershipInsertionResults) {
                 if (error) {
@@ -158,17 +158,15 @@ module.exports.addCinema = function (req, res, next) {
 
                         hashed_pass = hash;
                         let user = {
-                            username: cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim(),
+                            username: name.toLowerCase().trim() + "_" + location.toLowerCase().trim(),
                             password: hashed_pass,
-                            email: email,
-                            phone_number: phone_number,
-                            credit_card: credit_card,
-                            first_name: first_name,
-                            last_name: last_name,
-                            age: age,
-                            gender: gender,
-                            active: active,
-                            active_code: active_code
+                            email: null,
+                            phone_number: null,
+                            credit_card: null,
+                            first_name: null,
+                            last_name: null,
+                            age: null,
+                            gender: null
                         };
 
                         database.query('INSERT INTO users SET ?', user, function (error, cinemaAccountInsertionResults) {

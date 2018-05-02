@@ -377,7 +377,7 @@ module.exports.getBookings = function (req, res, next) {
         });
     }
 
-    let limitNotEnteredMsg = !(!start || !limit) ? "" : "- No limits have been entered.";
+    let limitNotEnteredMsg = !(!start || !limit) ? "" : " - No limits have been entered.";
 
     let queryForCount = "Select count(*) as TotalCount from tickets WHERE user = ?";
     database.query(queryForCount, [username] ,function (err, rows) {

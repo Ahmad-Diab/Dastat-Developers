@@ -1,7 +1,7 @@
 /**
  * A Controller, having the functions to handle admin user processes.
  */
-var database = require('../config/db-connection'),
+let database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
 /**
@@ -15,8 +15,8 @@ module.exports.getHallsForThatCinema = function(req, res){
 
     console.log("Entered getHallsForThatCinema");
 
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
@@ -54,14 +54,12 @@ module.exports.getHallsForThatCinema = function(req, res){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
-
+        if(!totalCount){
             return res.status(200).json({
                 err: null,
                 msg: 'No Halls available',
                 data: rows
             });
-
         }
         if (start === '' || limit === '' || !start || !limit) {
             // In case no limits entered.
@@ -76,7 +74,7 @@ module.exports.getHallsForThatCinema = function(req, res){
             limitNum = parseInt(limit);
         }
         
-        query = 'select DISTINCT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
+        query = 'select DISTINCT * FROM halls h LEFT JOIN movies m ON m.movie_id = h.movie WHERE h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?';
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [cinema_name, cinema_location , limitNum, startNum];
         
@@ -88,7 +86,7 @@ module.exports.getHallsForThatCinema = function(req, res){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Halls have been successfully retrived"
+                    msg: "Halls have been successfully retrieved"
                 });
             }
         });
@@ -122,25 +120,21 @@ module.exports.getHallsForThatCinema = function(req, res){
 
 
 /**
- * A function to handle assigining a movie to a hall
- * 
  * @param req, required data for processing the request of assigning a movie to a hall
  * @param res, results of changes on the halls table in database
  * @param next, next middleware to handle errors
  */
 module.exports.assignMovieToHall = function(req, res, next){
-    // COMPLETED Make a reservation based on all data need for reservation.
-    // TODO User-name validation needs to be done!
 
-    var username = req.body['username'],
+    console.log("Entered assignMovieToHall");
+
+    let username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
         hall_number = req.body['hall_number'],
         movie_id = req.body['movie_id'];
         
     // Null Checkers
-    console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number+" "+movie_id)
-    // console.log(req.body);
     if(!username) {
         return res.status(422).json({
             err: null,
@@ -208,7 +202,6 @@ module.exports.assignMovieToHall = function(req, res, next){
     });
 
     // Verify that hall exists in Cinema
-    
     database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall_number, cinema_location, cinema_name],function (error, results) {
             if (error) {
@@ -225,8 +218,7 @@ module.exports.assignMovieToHall = function(req, res, next){
     });
 
 
-    var sqlQuery = 'UPDATE halls SET movie = ? WHERE halls.cinema_name = ? AND halls.cinema_location = ? AND halls.hall_number = ?';
-
+    let sqlQuery = 'UPDATE halls SET movie = ? WHERE halls.cinema_name = ? AND halls.cinema_location = ? AND halls.hall_number = ?';
     database.query(sqlQuery,[movie_id, cinema_name, cinema_location, hall_number], function (error, results) {
         if (error) {
             return next(error);
@@ -243,25 +235,22 @@ module.exports.assignMovieToHall = function(req, res, next){
 };
 
 /**
- * A function to handle assigining a movie to a hall
- * 
  * @param req, required data for processing the request of deleting a movie from a hall
  * @param res, results of changes on the halls table in database
  * @param next, next middleware to handle errors
  */
 module.exports.deleteMovieFromHall = function(req, res, next){
-    // COMPLETED delete the assigned movie of the requested hall.
-    // COMPLETED User-name validation needs to be done!
+    console.log("Entered deleteMovieFromHall");
 
-    var username = req.body['username'],
+    let username = req.body['username'],
         cinema_name = req.body['cinema_name'],
         cinema_location = req.body['cinema_location'],
         hall_number = req.body['hall_number'],
         movie_id = req.body['movie_id'];
         
     // Null Checkers
-    console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number+" "+movie_id)
-    console.log(req.body);
+    //console.log(username+" "+cinema_name+" "+cinema_location+" "+hall_number+" "+movie_id)
+    //console.log(req.body);
 
     if(!username) {
         return res.status(422).json({
@@ -295,7 +284,6 @@ module.exports.deleteMovieFromHall = function(req, res, next){
     }
 
     //Verify That this admin user is Branch Manager , Cinema Owner or App Owner
-
     database.query('SELECT * FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin '+
     'AND ac.cinema_name = ? AND ac.cinema_location = ? AND (a.type = ? OR a.type = ? OR a.type = ?)',
         [username, cinema_name, cinema_location, 'App Owner', 'Cinema Owner', 'Branch Manager'],function (error, results) {
@@ -349,8 +337,7 @@ module.exports.deleteMovieFromHall = function(req, res, next){
     });
 
 
-    var sqlQuery = 'UPDATE halls SET movie = ? WHERE halls.cinema_name = ? AND halls.cinema_location = ? AND halls.hall_number = ?';
-
+    let sqlQuery = 'UPDATE halls SET movie = ? WHERE halls.cinema_name = ? AND halls.cinema_location = ? AND halls.hall_number = ?';
     database.query(sqlQuery,[null, cinema_name, cinema_location, hall_number], function (error, results) {
         if (error) {
             return next(error);
@@ -368,11 +355,8 @@ module.exports.deleteMovieFromHall = function(req, res, next){
 
 module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
 
-
-    console.log("Entered getMoviesInHallsForCinemaForAdmin");
-
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
@@ -395,10 +379,8 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
         });
     }
 
-// To calculate Total Count use MySQL count function
+    // To calculate Total Count use MySQL count function
     let query = 'Select count(*) as TotalCount FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
-    
-    //query = database.format(query);    
     database.query(query, cinema_name , cinema_location , function (err, rows) {
         
         if (err) {
@@ -410,7 +392,7 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
+        if(!totalCount){
 
             return res.status(200).json({
                 err: null,
@@ -432,10 +414,9 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
             limitNum = parseInt(limit);
         }
         
-        let query = 'select DISTINCT * FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id limit ? OFFSET ?'
+        let query = 'select DISTINCT * FROM movies m , halls h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id limit ? OFFSET ?';
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [cinema_name, cinema_location , limitNum, startNum];
-        
         database.query(query, table , function (err, rest) {
             if (err) {
                 return next(err);
@@ -444,7 +425,7 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Halls have been successfully retrived"
+                    msg: "Halls have been successfully retrieved"
                 });
             }
         });
@@ -503,8 +484,6 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function(req, res, next){
 
 
 /**
- * A function to handle assigining a movie to a hall
- * 
  * @param req, required data for viewing movies in a hall
  * @param res, results of all movies in this hall
  * @param next
@@ -515,14 +494,15 @@ module.exports.viewMoviesInHalls = function(req, res, next){
 
     console.log("Entered viewMoviesInHalls");
 
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
         cinema_name = req.params['cinema_name'],
         cinema_location = req.params['cinema_location'],
         username = req.params['username'];
+        limit = " limit ? OFFSET ?";
 
         if(!username) {
             return res.status(422).json({
@@ -562,10 +542,8 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             });
         }
 
-// To calculate Total Count use MySQL count function
+    // To calculate Total Count use MySQL count function
     let query = 'Select count(*) as TotalCount from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ?';
-    
-    //query = database.format(query);    
     database.query(query, cinema_name , cinema_location , function (err, rows) {
         
         if (err) {
@@ -577,7 +555,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
+        if(!totalCount){
 
             return res.status(200).json({
                 err: null,
@@ -591,6 +569,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             startNum = 0;
             limitNum = 10;
             pagination = false;
+            limit = "";
             errMsg = "No Limits were provided";
             console.log("No limits");
             
@@ -599,10 +578,9 @@ module.exports.viewMoviesInHalls = function(req, res, next){
             limitNum = parseInt(limit);
         }
         
-        let query = 'select DISTINCT * from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ? limit ? OFFSET ?'
+        let query = 'select DISTINCT * from movies m Join halls h on m.movie_id = h.movie where h.cinema_name = ? AND h.cinema_location = ? ';
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [cinema_name, cinema_location , limitNum, startNum];
-        
+        let table = [cinema_name, cinema_location];
         database.query(query, table , function (err, rest) {
             if (err) {
                 return next(err);
@@ -611,7 +589,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Halls have been successfully retrived"
+                    msg: "Halls have been successfully retrieved"
                 });
             }
         });
@@ -688,7 +666,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
     //     }
     //     return res.status(200).json({
     //         err: null,
-    //         msg: 'Movies in halls of cinema '+cinema_name+', '+cinema_location+' sucessfully retrieved.',
+    //         msg: 'Movies in halls of cinema '+cinema_name+', '+cinema_location+' successfully retrieved.',
     //         data: results
     //     });
 
@@ -706,7 +684,7 @@ module.exports.viewMoviesInHalls = function(req, res, next){
  */
 module.exports.viewCinemasForAdminUser = function(req, res, next){
     
-    var username = req.params.username;
+    let username = req.params.username;
         
     // Null Checkers
     console.log(username);
@@ -734,10 +712,10 @@ module.exports.viewCinemasForAdminUser = function(req, res, next){
 
     database.query('SELECT ac.cinema_location , ac.cinema_name FROM admins a , admins_cinemas ac WHERE a.username = ? AND a.username = ac.admin',
         [username],function (error, result) {
-            if (error) throw error;
+            if (error) throw next(error);
             //return res.send(result);
             console.log(result);
-            if(result.length == 0){
+            if(!result.length){
     
                 res.status(200).json({
                     err: null,
@@ -761,9 +739,9 @@ module.exports.viewCinemasForAdminUser = function(req, res, next){
 
 module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
 
-    var cinemaName = req.params.cinema_name;
-    var cinemaLocation = req.params.cinema_location;
-    var currentDate = new Date();
+    let cinemaName = req.params.cinema_name,
+        cinemaLocation = req.params.cinema_location,
+        currentDate = new Date();
 
     if(!cinemaName) {
         return res.status(422).json({
@@ -781,18 +759,17 @@ module.exports.getAlltMoviesInCinemaForAdmin = function(req, res, next){
         });
     }
 
-    var sqlSelection = 'SELECT m.* FROM movies m , movies_in_cinemas h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
-
+    let sqlSelection = 'SELECT m.* FROM movies m , movies_in_cinemas h  WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = m.movie_id';
     database.query(sqlSelection, [cinemaName , cinemaLocation], function (error, results) {
         if(error){
             return next(error);
         }
 
-        if(results.length == 0){
+        if(!results.length){
 
             res.status(200).json({
                 err: null,
-                msg: 'No current movies Availiable.',
+                msg: 'No current movies Available.',
                 data: results
             });
 

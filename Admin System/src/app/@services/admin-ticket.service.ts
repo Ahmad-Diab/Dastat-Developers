@@ -14,10 +14,7 @@ export class AdminTicketService extends HttpService {
                   party_time:string, hall:string, tickets,
                   tickets_price: number, movie_id: number) {
 
-    let cinema_username = 'Mai_Emad'; // TODO cinema_name.toLowerCase().trim() + "_" + cinema_location.toLowerCase().trim();
-
-    return this.post("tickets/makeReservationAsAdmin", {
-      'username': cinema_username,
+    return this.post_auth("tickets/makeReservationAsAdmin", {
       'cinema_name': cinema_name,
       'cinema_location': cinema_location,
       'date': party_date,
@@ -62,12 +59,9 @@ export class AdminTicketService extends HttpService {
         'cinema_location': cinema_location
     });
   }
+
   cancelReservation(reservation_id: number) {
-    return this.delete('/tickets/cancelReservation', { headers: {
-      //calls cancel reservation delete method to backend and gives it the tickets reservation id
-      'id': reservation_id
-    }
-    });
+    return this.delete_auth('/tickets/cancelReservation/' + reservation_id);
   }
 
 }

@@ -1,19 +1,14 @@
 // OUR DATABASE IS HERE
 let database = require('../config/db-connection'),
     Validations = require('../utils/validations'),
+    bcrypt = require('bcrypt'),
     config = require('../config/config'),
     jwt = require('jsonwebtoken');
 
-/**
- * @param req, name, location, address, num_of_halls, is3D, is4D, company,
- *      imagePath and imagePath2 in body
- * @param res
- * @param next
- */
-module.exports.addCinema = function (req, res, next) {
+module.exports.viewCinemas = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -33,7 +28,82 @@ module.exports.addCinema = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-        console.log('Admin username : ' + authData.username);
+
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
+        if(admin_username !== 'app') {
+            let query = 'SELECT C.* FROM cinemas C JOIN admins_cinemas A ON C.name = A.cinema_name AND C.location = A.cinema_location WHERE A.admin = ?;',
+                queryData = [admin_username];
+            database.query(query, queryData, function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+                return res.status(200).send({
+                    err: null,
+                    msg: 'Cinemas are retrieved successfully',
+                    data: results
+                });
+            });
+        } else {
+            let query = 'SELECT C.* FROM cinemas C;';
+            database.query(query, function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+                return res.status(200).send({
+                    err: null,
+                    msg: 'Cinemas are retrieved successfully',
+                    data: results
+                });
+            });
+        }
+
+    });
+
+};
+
+/**
+ * @param req, name, location, address, num_of_halls, is3D, is4D, company,
+ *      imagePath and imagePath2 in body
+ * @param res
+ * @param next
+ */
+module.exports.addCinema = function (req, res, next) {
+
+    let tokenHeader = req.headers['authorization'];
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: null,
+            msg: 'You must log in first',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: null,
+                msg: 'Must be a user of the system',
+                data: null
+            });
+        }
+
+        let admin_username = authData.username;
+
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
 
         let name = req.body["name"],
             location = req.body["location"],
@@ -120,21 +190,62 @@ module.exports.addCinema = function (req, res, next) {
             });
         }
 
-        let membershipInsertionQuery = 'INSERT INTO admin_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
-        let membershipData = [admin_username, name, location];
         let cinemaInsertionQuery = 'INSERT INTO cinemas (location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2) VALUES (?,?,?,?,?,?,?,?,?);';
         let cinemaData = [location, address, name, number_of_halls, Boolean(is3D), Boolean(is4D), company, imagePath, imagePath2];
-        let queries = membershipInsertionQuery + cinemaInsertionQuery;
-        let allData = [membershipData, cinemaData];
-        database.query(queries, allData, function (error, results) {
+        database.query(cinemaInsertionQuery, cinemaData, function (error, cinemaInsertionResults) {
             if (error) {
                 return next(error);
             }
-            return res.status(200).json({
-                err: null,
-                msg: 'The cinema is added successfully.',
-                data: results
+
+            let membershipInsertionQuery = 'INSERT INTO admins_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
+            let membershipData = [admin_username, name, location];
+            database.query(membershipInsertionQuery, membershipData, function (error, membershipInsertionResults) {
+                if (error) {
+                    // Deleting not complete insertions if error
+                    database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (err) {
+                        if(err) return next(err);
+                    });
+
+                    return next(error);
+                }
+
+                // Adding user account for cinema, used for booking
+                let password = config.secret; // Untraceable password
+                let hashed_pass;
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(password, salt, (err, hash) => {
+                        if (err) {
+                            database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (err) {
+                                if(err) return next(err);
+                            });
+                            return next(err);
+                        }
+
+                        hashed_pass = hash;
+                        let user = {
+                            username: name.toLowerCase().trim() + "_" + location.toLowerCase().trim(),
+                            password: hashed_pass,
+                            email: null,
+                            phone_number: null,
+                            credit_card: null,
+                            first_name: null,
+                            last_name: null,
+                            age: null,
+                            gender: null
+                        };
+
+                        database.query('INSERT INTO users SET ?', user, function (error, cinemaAccountInsertionResults) {
+                            if (error)
+                                return res.status(200).json({
+                                    err: null,
+                                    msg: 'The cinema is added successfully.',
+                                    data: [cinemaInsertionResults, membershipInsertionResults, cinemaAccountInsertionResults]
+                                });
+                        });
+                    });
+                });
             });
+
         });
     });
 
@@ -150,7 +261,7 @@ module.exports.addCinema = function (req, res, next) {
 module.exports.editCinema = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -169,7 +280,13 @@ module.exports.editCinema = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-        console.log('Admin username : ' + authData.username);
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
 
         let name = req.params['name'],
             location = req.params['location'];
@@ -256,7 +373,7 @@ module.exports.editCinema = function (req, res, next) {
             });
         }
 
-        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ?',
+        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
             membershipData = [admin_username, name, location];
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);
@@ -291,7 +408,7 @@ module.exports.editCinema = function (req, res, next) {
  */
 module.exports.deleteCinema = function (req, res, next) {
     let tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
+    if (!tokenHeader) {
         return res.status(401).json({
             err: null,
             msg: 'You must log in first',
@@ -311,7 +428,13 @@ module.exports.deleteCinema = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-        console.log('Admin username : ' + authData.username);
+        if (!admin_username) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
 
         let name = req.params['name'],
             location = req.params['location'];
@@ -342,7 +465,7 @@ module.exports.deleteCinema = function (req, res, next) {
             });
         }
 
-        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ?',
+        let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
             membershipData = [admin_username, name, location];
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);
@@ -357,7 +480,7 @@ module.exports.deleteCinema = function (req, res, next) {
 
             database.query('DELETE FROM cinemas WHERE name = ? AND location = ?', [name, location], function (error, results) {
                 if (error) return next(error);
-
+    
                 res.status(200).json({
                     err: null,
                     msg: "Deleted Successfully!",

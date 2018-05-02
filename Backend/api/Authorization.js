@@ -8,6 +8,7 @@ module.exports.Verify_User = function (req, res, next) {
 
     //console.log(req.headers['authorization']);
     var tokenHeader = req.headers['authorization'];
+    console.log('Token Header in Authorization file: ' + tokenHeader);
     if (typeof tokenHeader !== 'undefined') {
         var tokenheadersplited = tokenHeader.split(' ');
         var token = tokenheadersplited[1];

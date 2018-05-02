@@ -23,7 +23,7 @@ export class MoviesListComponent implements OnInit {
     this.filterByAll();
   }
   filterByAll(){
-    this.movieslistService.filterByAll((this.p - 1) * 5,this.p * 5,this.genre,this.dateFilter,this.rateFilter).subscribe((response)=>{
+    this.movieslistService.filterByAll((this.p - 1) * 5,5,this.genre,this.dateFilter,this.rateFilter).subscribe((response)=>{
       this.movies=response.data;
       this.size=response.totalCount;
       console.log(response.data);

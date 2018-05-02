@@ -11,11 +11,10 @@ import { CinemaslistService } from '../../../@services/cinemaslist.service'
 })
 export class MovieInfoComponent implements OnInit {
 movie;
-locations = [];
-location;
+dates = [];
+date;
   constructor(public MovieInfoService: MovieInfoService, private route : ActivatedRoute, 
   public cookie : CookieService,public CinemaslistService : CinemaslistService) { 
-
   }
 
 ngOnInit(){
@@ -25,10 +24,6 @@ ngOnInit(){
   this.MovieInfoService.getMovieInfo(this.movie).subscribe((response)=>{
     this.movie=response.data[0];
     console.log(response.data[0]);
-  });
-  this.CinemaslistService.getDistinctLocation().subscribe((response) => {
-    this.locations=response;
-    console.log(response);
   });
 }
 

@@ -16,196 +16,124 @@ module.exports.getMovieInfo = function(req, res, next){
   }
 //DONT FORGET TO ADD IT IN THE ROUTES
 
-//-------VIEW ALL MOVIES------
-
-module.exports.getMovies = function(req,res,next){
-
-    database.query('SELECT * from movies where status ="ACCEPTED" ORDER BY feature desc',
-   
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found!");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-
-
-//-------------VIEW RATINGS-----------------
-//--View Movies by High ratings
-
-module.exports.getMoviesHighRatings = function(req,res,next){
-
-    database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating desc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their ratings!");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-
-//--View Movies by Low ratings
-
-module.exports.getMoviesLowRatings = function(req,res,next){
-
-    database.query('SELECT * from movies where status ="ACCEPTED"  ORDER BY rating asc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their ratings!");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-
-
-
-
-
-//-----------VIEW BY DATE -------------------
-
-//--View Movies ordered by the latest
-
-module.exports.getMoviesLastestDate = function(req,res,next){
-
-    database.query('Select * FROM movies where status ="ACCEPTED" ORDER BY year desc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their dates");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-
-//--View Movies ordered by the Oldest
-
-module.exports.getMoviesOldesttDate = function(req,res,next){
-
-    database.query('Select * FROM movies where status ="ACCEPTED"  ORDER BY year asc',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Movies found to view their dates");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-
-//------------------------VIEW BY GENRE-------------------
 
 //--View Biography Movies
-module.exports.getMoviesBiography = function(req,res,next){
+module.exports.getMoviesWithFilters = function(req,res,next){
 
-    database.query('Select * FROM movies where genre="Biography" AND  status ="ACCEPTED"  ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Biography Movies found");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
+    console.log("Entered getMoviesWithFilters");
+    var pagination = true; // boolean for checking if the user entered limits for pagination or not
+    var errMsg = null,
+        ratingString = "",
+        dateString = "",
+        genreString = "",
+        where = " WHERE",
+        and = " AND",
+        query,
+        table;
 
-//--View Thriller Movies
-module.exports.getMoviesThriller = function(req,res,next){
+    let start = req.query.start,
+        limit = req.query.limit,
+        rating = req.query.rating,
+        date = req.query.date,
+        genre = req.query.genre;
 
-    database.query('Select * FROM movies where genre="Thriller" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Thriller Movies found");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
+// To calculate Total Count use MySQL count function
 
-//--View Drama Movies
-module.exports.getMoviesDrama = function(req,res,next){
+    if(rating === 'High Rates'){
+        ratingString = ' ORDER BY rating DESC';
+    }
+    else if(rating === 'Low Rates'){
+        ratingString = ' ORDER BY rating ASC';
+    }
 
-    database.query('Select * FROM movies where genre="Drama" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Drama Movies found");
+    if(date === 'Latest'){
+        dateString = ' ORDER BY year DESC';
     }
-    else{
-        return res.send(results);
+    else if(date === 'Oldest'){
+        dateString = ' ORDER BY year ASC';
     }
-});
-}
 
-//--View Adventure Movies
-module.exports.getMoviesAdventure = function(req,res,next){
+    if(genre){
+        genreString = ' genre = ?'
+    }
 
-    database.query('Select * FROM movies where genre="Adventure" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Adventure Movies found");
+    query = 'Select count(*) as TotalCount FROM movies '+where+genreString+ratingString+dateString;
+    
+    if(!genre && !rating && !date){
+        console.log("All empty!");
+        table = [];
+        where = " ";
+        and = " ";
     }
-    else{
-        return res.send(results);
-    }
-});
-}
+    else if (!genre && !rating && date)
+        table = [date];
+    else if (!genre && rating && !date)
+        table = [rating];
+    else if (!genre && rating && date)
+        table = [rating , date];
+    else if (genre && !rating && !date)
+        table = [genre];
+    else if (genre && !rating && date)
+        table = [genre , date];
+    else if (genre && rating && !date)
+        table = [genre , rating];
+    else if (genre && rating && date)
+        table = [genre , rating , date];
+    
+    if(table === [])
+        query = database.format(query);
+    else
+        query = database.format(query, table);
+    
+    //query = database.format(query);    
+    database.query(query  ,function (err, rows) {
+        
+        if (err) {
+            console.log(err);
+            return err;
+        }
 
-//--View Horror Movies
-module.exports.getMoviesHorror = function(req,res,next){
+        let startNum,
+            limitNum;
 
-    database.query('Select * FROM movies where genre="Horror" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Horror Movies found");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-//--View Action Movies
-module.exports.getMoviesAction = function(req,res,next){
+        let totalCount = rows[0]['TotalCount'];
+        if(totalCount == 0){
 
-    database.query('Select * FROM movies where genre="Action" AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Action Movies found");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
-//--View Comedy Movies
-module.exports.getMoviesComedy = function(req,res,next){
+            return res.status(200).json({
+                err: null,
+                msg: 'No Movies available',
+                data: rows
+            });
 
-    database.query('Select * FROM movies where genre="Comedy"  AND  status ="ACCEPTED" ORDER BY rating desc ',
-function(error,results,fields){
-    if(error) return next(error);
-    if(results.length ==0){
-        return res.send("No Comedy Movies found");
-    }
-    else{
-        return res.send(results);
-    }
-});
-}
+        }
+        if (start === '' || limit === '' || !start || !limit) {
+            // In case no limits entered.
+            startNum = 0;
+            limitNum = 10;
+            pagination = false;
+            errMsg = "No Limits were provided";
+            console.log("No limits");
+            
+        } else {
+            startNum = parseInt(start);
+            limitNum = parseInt(limit);
+        }
+
+        query ='Select * FROM movies where '+genreString+ratingString+dateString+and+' status = "ACCEPTED" limit ? OFFSET ?'
+
+        //Mention table from where you want to fetch records example-users & send limit and start
+                
+        database.query(query, table , function (err, rest) {
+            if (err) {
+                return next(err);
+            } else {
+                res.status(200).json({
+                    totalCount: totalCount,
+                    data: rest,
+                    err: errMsg,
+                    msg: "Movies have been successfully retrived"
+                });
+            }
+        });
+    });
+}   

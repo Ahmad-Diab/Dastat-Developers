@@ -120,12 +120,12 @@ module.exports.addCinema = function (req, res, next) {
             });
         }
 
-        let membershipInsertionQuery = 'INSERT INTO admin_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
-        let membershipData = [admin_username, name, location];
         let cinemaInsertionQuery = 'INSERT INTO cinemas (location,address,name,number_of_halls,is3D,is4D,company,imagePath,imagePath2) VALUES (?,?,?,?,?,?,?,?,?);';
         let cinemaData = [location, address, name, number_of_halls, Boolean(is3D), Boolean(is4D), company, imagePath, imagePath2];
-        let queries = membershipInsertionQuery + cinemaInsertionQuery;
-        let allData = [membershipData, cinemaData];
+        let membershipInsertionQuery = 'INSERT INTO admin_cinemas (admin, cinema_name, cinema_location) VALUES (?,?,?);';
+        let membershipData = [admin_username, name, location];
+        let queries = cinemaInsertionQuery +  membershipInsertionQuery;
+        let allData = [cinemaData, membershipData];
         database.query(queries, allData, function (error, results) {
             if (error) {
                 return next(error);

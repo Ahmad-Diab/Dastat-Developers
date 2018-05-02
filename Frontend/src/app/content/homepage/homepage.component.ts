@@ -11,6 +11,7 @@ export class HomepageComponent implements OnInit {
   movies = [];
   topMovies = [];
 
+
   constructor(public moviesService: MovieslistService ,  private router : Router) { }
 
   ngOnInit() {

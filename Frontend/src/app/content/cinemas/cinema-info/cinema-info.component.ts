@@ -11,12 +11,12 @@ import { CookieService } from 'angular2-cookie/core';
   styleUrls: ['./cinema-info.component.css']
 })
 export class CinemaInfoComponent implements OnInit {
-  cinema;
-   name;
+  cinema = '';
+   name ='';
    location;
    moviesInCinema;
    chooseDate;
-   
+   loading = true;
 
 
   constructor(public cinemaSerive: CinemaInfoService,
@@ -32,7 +32,7 @@ export class CinemaInfoComponent implements OnInit {
    }
    
   ngOnInit() {
-    document.getElementById("moviesTab").click();
+
     var data = {
      cinema:this.name,
      location:this.location,
@@ -48,6 +48,8 @@ export class CinemaInfoComponent implements OnInit {
 
     this.cinemaSerive.getMoviesInCinema(data.cinema,data.location).subscribe((response) => {   
       this.moviesInCinema=response;
+
+      this.loading = false;
     });
 
   }
@@ -61,5 +63,10 @@ export class CinemaInfoComponent implements OnInit {
     if(sorting_item != undefined && searchValue != undefined) this.router.navigate(['cinemas/list',sorting_item,searchValue]);
     else this.router.navigate(['cinemas/list']);
 }
+showMoviesTab(){
+  document.getElementById("moviesTab").click();
+
+}
+
 
 }

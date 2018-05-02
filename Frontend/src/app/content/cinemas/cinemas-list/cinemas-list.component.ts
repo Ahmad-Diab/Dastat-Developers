@@ -18,6 +18,7 @@ export class CinemasListComponent implements OnInit {
   locations ;
   is3D = true;
   is4D = true;
+  loading = true;
   constructor(public cinemalistService: CinemaslistService,
   public router: Router, public route: ActivatedRoute , public searchService : SearchService) { 
 
@@ -42,7 +43,7 @@ export class CinemasListComponent implements OnInit {
     });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       this.cinemas=response;
-
+this.loading = false;
     });
 
   }

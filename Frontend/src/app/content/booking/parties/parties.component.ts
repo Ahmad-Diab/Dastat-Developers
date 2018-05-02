@@ -32,6 +32,7 @@ export class PartiesComponent implements OnInit {
   flagC;
   flagM;
   dateTemp;
+  loading = true;
 
   constructor(public partiesService:PartiesService,
     public router : Router,
@@ -47,11 +48,13 @@ export class PartiesComponent implements OnInit {
     this.viewMovies();
     if(this.selectedMovie)
       this.viewCinemas();
+
   }
 
   viewMovies(){
     this.movieslistService.getMovies().subscribe((response)=>{
       this.movies=response;
+      this.loading = false;
     });
   }
 

@@ -15,6 +15,7 @@ export class CinemasListBookingComponent implements OnInit {
   movie;
   searchValue ;
   locations = [];
+  loading = true;
 
 
   
@@ -34,6 +35,7 @@ export class CinemasListBookingComponent implements OnInit {
         console.log(this.cinemas[i].location);
       }
       this.locations = this.remove_duplicates(this.locations);
+      this.loading=false;
     });
 
   }

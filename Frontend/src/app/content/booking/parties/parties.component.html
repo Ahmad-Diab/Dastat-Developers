@@ -1,3 +1,4 @@
+<div *ngIf="!loading">
 <section class="container">
   <div class="order-container">
     <div class="order">
@@ -127,4 +128,7 @@
     <span class="arrow__text arrow--next">Next Step</span>
     <span class="arrow__info">Seating</span>
   </a>
+</div>
+</div>
+<div *ngIf="loading"><br><br><mat-spinner  [diameter]="300"></mat-spinner>
 </div>

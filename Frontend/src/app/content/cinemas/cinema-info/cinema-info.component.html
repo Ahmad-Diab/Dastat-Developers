@@ -1,4 +1,6 @@
 <!-- Search bar -->
+<div *ngIf="!loading">
+
 <div class="search-wrapper">
   <div class="container container--add">
     <form id='search-form' method='get' class="search">
@@ -13,7 +15,9 @@
 </div>
 
 <!-- Main content -->
+
 <section class="cinema-container">
+
   <div class="cinema cinema--full">
     <p class="cinema__title">{{cinema.name}}</p>
     <div class="cinema__rating">5.0</div>
@@ -113,3 +117,8 @@
   </div>
 
 </section>
+{{showMoviesTab()}}
+</div>
+
+<div *ngIf="loading"><br><br><mat-spinner  [diameter]="300"></mat-spinner>
+  </div>

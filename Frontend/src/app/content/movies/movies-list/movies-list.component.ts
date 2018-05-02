@@ -12,9 +12,9 @@ export class MoviesListComponent implements OnInit {
   size: number;
   movies=[];
   p : number = 1;
-  genre;
-  rateFilter;
-  dateFilter;
+  genre = "No filter";
+  rateFilter = "Not sorted";
+  dateFilter = "Not sorted";
   constructor(public movieslistService: MovieslistService, public searchService: SearchService,  private router : Router ,
   public cookie : CookieService) { 
   }
@@ -23,10 +23,10 @@ export class MoviesListComponent implements OnInit {
     this.filterByAll();
   }
   filterByAll(){
-    this.movieslistService.filterByAll(this.p,this.p * 5,this.genre,this.dateFilter,this.rateFilter).subscribe((response)=>{
+    this.movieslistService.filterByAll((this.p - 1) * 5,this.p * 5,this.genre,this.dateFilter,this.rateFilter).subscribe((response)=>{
       this.movies=response.data;
       this.size=response.totalCount;
-      console.log(response);
+      console.log(response.data);
     })
   } 
 /*

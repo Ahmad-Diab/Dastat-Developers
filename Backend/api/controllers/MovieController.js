@@ -126,6 +126,7 @@ module.exports.getMoviesWithFilters = function(req,res,next){
 
         //Mention table from where you want to fetch records example-users & send limit and start
          console.log(table);
+         console.log("start : " + startNum);
         database.query(query, table , function (err, rest) {
             if (err) {
                 console.log(err);

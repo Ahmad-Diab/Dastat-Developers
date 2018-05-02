@@ -20,7 +20,6 @@ module.exports.getCinemasForThatMovie = function (req, res) {
     }
 
     let sql = "SELECT C.* FROM cinemas C , halls H WHERE C.name = H.cinema_name AND C.location = H.cinema_location AND H.movie = ?";
-
     database.query(sql, [movie_id], function (err, result) {
         if (err) throw err;
         //return res.send(result);

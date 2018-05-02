@@ -5,7 +5,7 @@ let database = require('../config/db-connection'),
     config = require('../config/config'),
     jwt = require('jsonwebtoken');
 
-module.exports.ViewCinemas = function (req, res, next) {
+module.exports.viewCinemas = function (req, res, next) {
 
     let tokenHeader = req.headers['authorization'];
     if (!tokenHeader) {
@@ -36,19 +36,33 @@ module.exports.ViewCinemas = function (req, res, next) {
                 data: null
             });
         }
-
-        let query = 'SELECT C.* FROM cinemas C JOIN admins_cinemas A ON C.name = A.cinema_name AND C.location = A.cinema_location WHERE A.admin = ?;',
-            queryData = [admin_username];
-        database.query(query, queryData, function (error, results) {
-            if (error) {
-                return next(error);
-            }
-            return res.status(200).send({
-                err: null,
-                msg: 'Cinemas are retrieved successfully',
-                data: results
+        if(admin_username !== 'app') {
+            let query = 'SELECT C.* FROM cinemas C JOIN admins_cinemas A ON C.name = A.cinema_name AND C.location = A.cinema_location WHERE A.admin = ?;',
+                queryData = [admin_username];
+            database.query(query, queryData, function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+                return res.status(200).send({
+                    err: null,
+                    msg: 'Cinemas are retrieved successfully',
+                    data: results
+                });
             });
-        });
+        } else {
+            let query = 'SELECT C.* FROM cinemas C;';
+            database.query(query, function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+                return res.status(200).send({
+                    err: null,
+                    msg: 'Cinemas are retrieved successfully',
+                    data: results
+                });
+            });
+        }
+
     });
 
 };

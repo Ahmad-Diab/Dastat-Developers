@@ -1,10 +1,6 @@
 let express = require('express'),
     router = express.Router();
 
-// TODO function to add admins by app owner
-// TODO function admins add other low level admins
-// TODO app owner should view booking ushers
-
 //--------- USER ------------------
 let User = require('./controllers/UserController'),
     Seat = require('./controllers/SeatController'),
@@ -28,9 +24,7 @@ let MyMovies = require('./controllers/MyMoviesController'),
     MyCinemas = require('./controllers/MyCinemas'),
     Dashboard = require('./controllers/DashboardController');
 
-//please add only routers here, if you need to call a function require its class
-//DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
-
+//----------------------------------------------------Authentication routes------------------------------------//
 router.get('/authTest', Authorization.Verify("1000"), (req, res) => {
     return res.status(200).json({
         err: null,
@@ -39,7 +33,6 @@ router.get('/authTest', Authorization.Verify("1000"), (req, res) => {
     });
 });
 
-//----------------------------------------------------Authentication routes------------------------------------//
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
 router.post('/register', Authentication.Register);
@@ -214,7 +207,8 @@ router.get("/cinema/names/min", Seat.getCinemaName);
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
 router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name', MoviesInHalls.cinemaMovies);
 router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location', MoviesInHalls.cinemaHalls);
-router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location', MoviesInHalls.getMovieAndHallData);
+router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location',
+    MoviesInHalls.getMovieAndHallData);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 router.get('/promocodes', Authorization.Verify('1000'), Promocodes.viewPromocodes);

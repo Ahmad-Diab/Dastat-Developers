@@ -25,7 +25,19 @@ export class MoviesListComponent implements OnInit {
 GoToReservation(movie){
 
   this.cookie.putObject('movie' , movie);
-}    
+}
+
+Book_or_Signin(movie){
+  if (this.cookie.get("username")){
+    this.cookie.putObject('movie' , movie);
+    window.open('booking/cinemas',"_self");
+  }
+  else{
+    window.open('/signin',"_self")
+    this.ngOnInit();
+  }
+}
+    
 viewHighRate(){
   this.movieslistService.geHighRateMovies().subscribe((response)=>{
     this.movies=response;

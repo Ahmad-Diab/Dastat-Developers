@@ -59,6 +59,18 @@ export class CinemaInfoComponent implements OnInit {
     console.log(this.cinema);
   }
 
+  Book_or_Signin(movie,cinema){
+    if (this.cookie.get("username")){
+      this.cookie.putObject('movie' , movie);
+      this.cookie.putObject('cinema' , cinema);
+      window.open('booking/cinemas',"_self");
+    }
+    else{
+      window.open('/signin',"_self")
+      this.ngOnInit();
+    }
+  }
+  
   filterBy(sorting_item,searchValue){
     if(sorting_item != undefined && searchValue != undefined) this.router.navigate(['cinemas/list',sorting_item,searchValue]);
     else this.router.navigate(['cinemas/list']);

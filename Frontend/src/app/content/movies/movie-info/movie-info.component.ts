@@ -25,6 +25,17 @@ ngOnInit(){
   });
 }
 
+Book_or_Signin(movie){
+  if (this.cookie.get("username")){
+    this.cookie.putObject('movie' , movie);
+    window.open('booking/cinemas',"_self");
+  }
+  else{
+    window.open('/signin',"_self")
+    this.ngOnInit();
+  }
+}
+
 putMovieInCookie(){
   this.cookie.putObject('movie' , this.movie);
 } 

@@ -107,7 +107,7 @@
  -->
                   <div class="movie__btns">
                     <div *ngIf="movie.feature == 2 || movie.feature == 3">
-                        <a href='booking/cinemas' class="btn btn-md btn--warning" (click)="GoToReservation(movie)">book a ticket <span class="hidden-sm">for this movie</span></a>
+                        <button class="btn btn-md btn--warning" (click)="Book_or_Signin(movie)">book a ticket <span class="hidden-sm">for this movie</span></button>
                     </div>
                         <!-- <a href="#" class="watchlist">Add to watchlist</a> -->
                   </div>

@@ -170,7 +170,7 @@ module.exports.editCinema = function (req, res, next) {
 
         let admin_username = authData.username;
         console.log('Admin username : ' + authData.username);
-
+        //TODO does username still exist ??
         let name = req.params['name'],
             location = req.params['location'];
 

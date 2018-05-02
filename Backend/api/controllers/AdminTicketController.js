@@ -2,7 +2,9 @@
  * A Controller containing all functions, which may relate to the Admin and Cinema Tickets Interactions.
  */
 let database = require('../config/db-connection'),
-    Validations = require('../utils/validations');
+    Validations = require('../utils/validations'),
+    config = require('../config/config'),
+    jwt = require('jsonwebtoken');
 
 /**
  * A function to verify an unpaid ticket
@@ -12,64 +14,92 @@ let database = require('../config/db-connection'),
  */
 module.exports.verifyUnpaidTicket = function (req, res, next) {
 
-    let adminUsername = req.body['username'],
-        reservation_id = req.body['reservation_id'];
-
-    // Null Checkers
-    if (!adminUsername) {
-        return res.status(422).json({
+    let tokenHeader = req.headers['authorization'];
+    if (typeof tokenHeader !== 'undefined') {
+        return res.status(401).json({
             err: null,
-            msg: 'Admin username is required.',
-            data: null
-        });
-    }
-    if (!reservation_id) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Reservation id is required.',
+            msg: 'You must log in first',
             data: null
         });
     }
 
-    if (!Validations.isNumber(reservation_id)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'reservation_id must be of correct type (number).',
-            data: null
-        });
-    }
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
 
-    if (!Validations.isString(adminUsername))
-        return res.status(422).json({
-            err: null,
-            msg: 'Provided data must be in valid types.',
-            data: null
-        });
-
-
-    let sqlQuery = "UPDATE tickets SET payment = 1 WHERE reservation_id = ?;";
-
-    database.query(sqlQuery, reservation_id, function (error, results) {
-        if (error) {
-            return next(error);
-        }
-
-        if (results.changedRows) {
-            console.log('ticket verified');
-            res.status(200).json({
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
                 err: null,
-                msg: 'Ticket has been verified successfully.',
-                data: results
-            });
-        } else {
-            res.status(404).json({
-                err: null,
-                msg: 'There is no ticket with this reservation_id.',
+                msg: 'Must be a user of the system',
                 data: null
             });
         }
 
+        let adminUsername = authData.username,
+            reservation_id = req.body['reservation_id'];
+
+        // Null Checkers
+        if (!adminUsername) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
+        if (!reservation_id) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Reservation id is required.',
+                data: null
+            });
+        }
+
+        if (!Validations.isNumber(reservation_id)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'reservation_id must be of correct type (number).',
+                data: null
+            });
+        }
+        let checkForMembershipQuery = 'SELECT a.admin FROM admins_cinemas a JOIN tickets t ON a.cinema_name = t.cinema_name AND a.cinema_location = t.cinema_location WHERE a.admin = ? AND t.reservation_id = ?',
+            membershipData = [adminUsername, reservation_id];
+        database.query(checkForMembershipQuery, membershipData, function (err, results) {
+            if (err) return next(err);
+
+            if (!results.length) {
+                return res.status(404).send({
+                    err: null,
+                    msg: "Ticket does not exist or not member of same cinema.",
+                    data: null
+                });
+            }
+
+            let sqlQuery = "UPDATE tickets SET payment = 1 WHERE reservation_id = ?;";
+            database.query(sqlQuery, reservation_id, function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+
+                if (results.changedRows) {
+                    console.log('ticket verified');
+                    res.status(200).json({
+                        err: null,
+                        msg: 'Ticket has been verified successfully.',
+                        data: results
+                    });
+                } else {
+                    res.status(404).json({
+                        err: null,
+                        msg: 'There is no ticket with this reservation_id.',
+                        data: null
+                    });
+                }
+
+            });
+        });
+
     });
+
 
 };
 
@@ -143,65 +173,76 @@ module.exports.viewPartiesOfThatMovie = function (req, res) {
  * @param next, next middleware to handle errors
  */
 module.exports.viewTicketInfo = function (req, res, next) {
-
-    let adminUsername = req.query['username'],
-        reservation_id = req.query['reservation_id'];
-
-    // Null Checkers
-    if (!adminUsername) {
-        return res.status(422).json({
+    let tokenHeader = req.headers['authorization'];
+    if (typeof tokenHeader !== 'undefined') {
+        return res.status(401).json({
             err: null,
-            msg: 'Admin username is required.',
+            msg: 'You must log in first',
             data: null
         });
     }
 
-    if (!reservation_id) {
-        return res.status(422).json({
-            err: null,
-            msg: 'reservation_id is required.',
-            data: null
-        });
-    }
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
 
-    if (!Validations.isNumber(reservation_id)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'reservation_id must be of correct type (number).',
-            data: null
-        });
-    }
-
-    if (!Validations.isString(adminUsername)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'reservation_id must be of correct type (number).',
-            data: null
-        });
-    }
-
-    let sqlQuery = "SELECT * FROM tickets T INNER JOIN movies M ON  T.movie_id = M.movie_id WHERE T.reservation_id = ?;";
-
-    database.query(sqlQuery, reservation_id, function (error, results) {
-        if (error) {
-            return next(error);
-        }
-        if (results.length)
-            res.status(200).json({
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
                 err: null,
-                msg: 'Tickets data retrieved successfully.',
-                data: results[0]
-            });
-        else
-            res.status(404).json({
-                err: null,
-                msg: 'Tickets data not found.',
+                msg: 'Must be a user of the system',
                 data: null
             });
+        }
+
+        let adminUsername = authData.username,
+            reservation_id = req.body['reservation_id'];
+
+        // Null Checkers
+        if (!adminUsername) {
+            return res.status(401).json({
+                err: null,
+                msg: 'You must log in first.',
+                data: null
+            });
+        }
+
+        if (!reservation_id) {
+            return res.status(422).json({
+                err: null,
+                msg: 'reservation_id is required.',
+                data: null
+            });
+        }
+
+        if (!Validations.isNumber(reservation_id)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'reservation_id must be of correct type (number).',
+                data: null
+            });
+        }
+
+        let sqlQuery = "SELECT * FROM tickets T INNER JOIN movies M ON  T.movie_id = M.movie_id INNER JOIN admins_cinemas A ON A.cinema_name = T.cinema_name WHERE T.reservation_id = ? AND A.admin = ? ;";
+        database.query(sqlQuery, [reservation_id, adminUsername], function (error, results) {
+            if (error) {
+                return next(error);
+            }
+            if (results.length)
+                res.status(200).json({
+                    err: null,
+                    msg: 'Tickets data retrieved successfully.',
+                    data: results[0]
+                });
+            else
+                res.status(404).json({
+                    err: null,
+                    msg: 'Tickets data not found.',
+                    data: null
+                });
+
+        });
 
     });
-
-
 };
 
 /**
@@ -210,28 +251,56 @@ module.exports.viewTicketInfo = function (req, res, next) {
  * @param next, next middleware to handle errors
  */
 module.exports.cancelReservation = function (req, res, next) {
-    let id = req.query['reservation_id'];
-
-    if (isNaN(id)) return res.status(400).send({ //making sure it is a number, and returning an error if it is not
-        "error": "Entered id not an integer",
-        "msg": null,
-        "data": null
-    });
-    database.query('SELECT * FROM tickets WHERE reservation_id = ?', [id], function (error, results) { //making sure a ticket with this id exists in the database, and returning an error if it does not
-        if (!results.length) return res.status(404).send({
-            "error": "Ticket does not exist",
-            "msg": null,
-            "data": null
+    let tokenHeader = req.headers['authorization'];
+    if (typeof tokenHeader !== 'undefined') {
+        return res.status(401).json({
+            err: null,
+            msg: 'You must log in first',
+            data: null
         });
-        else {
-            database.query('DELETE FROM tickets WHERE reservation_id = ?', [id], function (error, result) { //deleting the ticket
-                if (error) return next(error);
-                return res.status(200).send({
-                    "error": null,
-                    "msg": "Deletion Success",
-                    "data": result
-                });
+    }
+
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: null,
+                msg: 'Must be a user of the system',
+                data: null
             });
         }
+
+        let adminUsername = authData.username,
+            id = req.query['reservation_id'];
+
+        if (isNaN(id)) {
+            return res.status(400).send({ //making sure it is a number, and returning an error if it is not
+                "error": "Entered id not an integer.",
+                "msg": null,
+                "data": null
+            });
+        }
+
+        let checkForMembershipQuery = 'SELECT a.admin FROM admins_cinemas a JOIN tickets t ON a.cinema_name = t.cinema_name AND a.cinema_location = t.cinema_location WHERE a.admin = ? AND t.reservation_id = ?',
+            membershipData = [adminUsername, id];
+        database.query(checkForMembershipQuery, membershipData, function (err, results) {
+            if (err) return next(err);
+
+            if (!results.length) {
+                return res.status(404).send({
+                    err: null,
+                    msg: "Ticket does not exist or not member of same cinema.",
+                    data: null
+                });
+            } else {
+                database.query('DELETE FROM tickets WHERE reservation_id = ?', [id], function (error, result) { //deleting the ticket
+                    if (error) return next(error);
+                    return res.status(200).send({
+                        "error": null,
+                        "msg": "Ticket is canceled successfully.",
+                        "data": result
+                    });
+                });
+            }
+        });
     });
 };

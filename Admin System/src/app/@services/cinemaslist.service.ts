@@ -12,7 +12,7 @@ export class CinemaslistService extends HttpService {
         }
 
   getAllCinemas(){
-    return this.get_auth('adminviewCinemas');
+    return this.get_auth('/myCinemas/viewCinemas');
   }
   Update(key1: String,key2: String,cinema){
     return this.patch_auth('/myCinemas/editCinema/'+key2+'/'+key1,cinema);

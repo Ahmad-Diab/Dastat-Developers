@@ -3,7 +3,7 @@ import { CookieService } from "angular2-cookie/services";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Admin } from "../../@objects/admin";
 import { AdminService } from "../../@services/adminService.service";
-import { HallService } from "../../@services/hall.service";
+import { CinemaslistService } from "../../@services/cinemaslist.service";
 
 @Component({
     selector: 'modal-task',
@@ -16,44 +16,30 @@ export class ModalAdmin implements OnInit {
 
     type = "";
     add = false;
-    locations = [];
     cinemas = [];
+    cinemaNameLocation;
 
     constructor(public cookie: CookieService,
         public activeModal: NgbActiveModal,
         public modalService: NgbModal,
         public adminService: AdminService,
-        public hallService: HallService) { }
+        public cinemalistService: CinemaslistService) { }
 
     ngOnInit() {
         if (this.admin == undefined) {
-            this.hallService.getCinemaLocations().subscribe((response) => {
-                this.locations = response;
-                var data = {
-                  cinema_location: this.locations[0].location
-                };
-        
-                this.hallService.getCinemasInLocation(data).subscribe((response) => {
-                  this.cinemas = response;
-                  this.admin.cinema_location = this.locations[0].location;
-                  this.admin.cinema_name = this.cinemas[0].name;
-                });
-              });
             this.add = true;
             this.admin = new Admin();
+            this.cinemalistService.getAllCinemas().subscribe((response) => {
+                this.cinemas = response.data;
+                this.admin.gender = 'female';
+                this.admin.cinema_name = this.cinemas[0].cinema_name;
+                this.admin.cinema_location = this.cinemas[0].cinema_location;
+                this.cinemaNameLocation = this.cinemas[0];
+            });
+
+
         }
     }
-
-    getCinemaNames(event) {
-        var data = {
-            cinema_location: event.target.value
-        };
-  
-        this.hallService.getCinemasInLocation(data).subscribe((response) => {
-            this.cinemas = response;
-            this.admin.cinema_name = this.cinemas[0].name;
-        });
-      }
 
     close() {
         var alert = {
@@ -67,6 +53,10 @@ export class ModalAdmin implements OnInit {
     submit() {
 
         if(this.add) {
+            console.log(this.cinemaNameLocation)
+            this.admin.cinema_name = this.cinemaNameLocation.name;
+            this.admin.cinema_location = this.cinemaNameLocation.location;
+            console.log(this.admin)
             if(this.type == "CO") {
                 this.adminService.addCinemaOwner(this.admin).subscribe(() => {
                     var alert = {

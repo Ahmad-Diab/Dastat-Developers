@@ -32,6 +32,10 @@ export class AdminService extends HttpService {
     deleteBookingUsher(data){
       return this.post_auth('deleteBookingUsher', data);
     }
+    addBookingUsher(data){
+      return this.post_auth('addBookingUsher',data);
+    }
+
     //----------------Branch Manager-------------------
     getBranchManagers(data){
       return this.get_auth('getBranchManagers' , data);
@@ -44,6 +48,9 @@ export class AdminService extends HttpService {
     }
     deleteBranchManager(data){
       return this.post_auth('deleteBranchManager',data);
+    }
+    addBranchManager(data){
+      return this.post_auth('addBranchManager',data);
     }
 
     //----------------Cinema Owner---------------------
@@ -58,5 +65,8 @@ export class AdminService extends HttpService {
     }
     deleteCinemaOwner(data){
       return this.post_auth('deleteCinemaOwner',data);
-    } 
+    }
+    addCinemaOwner(data){
+      return this.post_auth('addCinemaOwner',data);
+    }
 }

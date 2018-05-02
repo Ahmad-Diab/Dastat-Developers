@@ -143,7 +143,7 @@ router.get('/admin/adminHalls/viewMoviesInHall/:username/:cinema_name/:cinema_lo
 
 
 
-router.post('/addBookingUsher',  Authorization.Verify('1101'), Admin.deleteBookingUsher);
+router.post('/addBookingUsher',  Authorization.Verify('1101'), Admin.addBookingUsher);
 
 // router.get('/viewBookingUshers', Authorization.Verify('1101'), Admin.viewBookingUshers);
 router.get('/getBookingUshers', Authorization.Verify('1101'), Admin.getBookingUshers);

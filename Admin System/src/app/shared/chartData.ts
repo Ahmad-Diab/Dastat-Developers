@@ -1,27 +1,43 @@
 export const single = [
   {
-    name: 'Germany',
-    value: 40
+    name: 'Black Panther',
+    value: 2789
   },
   {
-    name: 'USA',
-    value: 49
+    name: 'Ready Player One',
+    value: 1637
   },
   {
-    name: 'France',
-    value: 36
+    name: 'Pacific Rim Uprising',
+    value: 1098
   },
   {
-    name: 'United Kingdom',
-    value: 36
+    name: 'Birthmarked',
+    value: 1748
   },
   {
-    name: 'Spain',
-    value: 33
+    name: 'A Wrinkle in Time',
+    value: 1903
   },
   {
-    name: 'Italy',
-    value: 35
+    name: 'The Strangers: Prey at Night',
+    value: 748
+  },
+  {
+    name: 'The Hurricane Heist',
+    value: 945
+  },
+  {
+    name: 'Paul, Apostle of Christ',
+    value: 1987
+  },
+  {
+    name: 'Unsane',
+    value: 1300
+  },
+  {
+    name: 'Tomb Raider',
+    value: 598
   }
 ];
 
@@ -239,11 +255,13 @@ export const countries = [
   'Wallis and Futuna', 'Yemen', 'Zambia', 'Zimbabwe'
 ];
 
+export const cinemas = ['New Cairo', 'October', 'Mokattam', 'Old Cairo', '9th Of May'];
+
 export function generateGraph(nodeCount: number) {
   const nodes = [];
   const links = [];
   for (let i = 0; i < nodeCount; i++) {
-    const country = countries[Math.floor(Math.random() * countries.length)];
+    const country = cinemas[i];
     nodes.push({
       value: country,
     });
@@ -264,13 +282,13 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean):
 
   const domain: Date[] = []; // array of time stamps in milliseconds
 
-  for (let j = 0; j < 8; j++) {
+  for (let j = 0; j < 15; j++) {
     // random dates between Sep 12, 2016 and Sep 24, 2016
     domain.push(new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)));
   }
 
   for (let i = 0; i < seriesLength; i++) {
-    const country = countries[Math.floor(Math.random() * countries.length)];
+    const country = cinemas[i];
     const series = {
       name: country,
       series: []

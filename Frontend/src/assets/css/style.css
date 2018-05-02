@@ -10745,25 +10745,7 @@ background: white;
   text-align: center   !important;
   font-family: 'Roboto', sans-serif;
 }
-.mat-form-field-underline {
-  background-image : url('../images/components/wave-main.svg') !important;
-  background-size: 40px 4px !important;
-  background-color: white !important;
-  background-repeat: repeat-x !important;
-  height: 5px !important;
-  width: 100% !important;
-  padding-top: -10px !important;
-}
-.mat-form-field-ripple {
-  background-color: white;
-  background-image : url('../images/components/wave-main.svg') !important;
-  background-size: 40px 4px !important;
-  background-color: white !important;
-  background-repeat: repeat-x !important;
-  height: 5px !important;
-  width: 100% !important;
-  padding-top: -10px !important;
-}
+
 .mat-select-value {
   color:  #fe505a !important;
 }

@@ -246,7 +246,8 @@ module.exports.getUnpaidTicketsCount = function(req,res,next){
 module.exports.getTop10ReservedMovies = function(req,res,next){
 
     console.log("Entered getTop10ReservedMovies")
-    let query = 'Select m.title , count(*) as Tickets FROM tickets t , halls h , movies m GROUP BY m.title WHERE h.hall_number = t.hall AND h.movie = m.movie_id limit 10 OFFSET 1';
+    let query = 'Select m.title , count(t.reservation_id) as TicketsCount FROM tickets t , halls h , movies m  '
+    +'WHERE h.hall_number = t.hall AND h.cinema_name = t.cinema_name AND h.cinema_location = t.cinema_location AND h.movie = m.movie_id GROUP BY m.title ORDER By TicketsCount DESC LIMIT 10 ';
         
     database.query(query , function (err, rows) {
         if(err){
@@ -266,7 +267,8 @@ module.exports.getTop10ReservedMovies = function(req,res,next){
 module.exports.getTopReservedMovie = function(req,res,next){
 
     console.log("Entered getTopReservedMovie")
-    let query = 'Select m.title , count(*) as Tickets FROM tickets t , movies m GROUP BY m.title WHERE m.movie_id = t.movie_id LIMIT 1 OFFSET 1';
+    let query = 'Select m.title , count(t.reservation_id) as TicketsCount FROM tickets t , halls h , movies m  '
+    +'WHERE h.hall_number = t.hall AND h.cinema_name = t.cinema_name AND h.cinema_location = t.cinema_location AND h.movie = m.movie_id GROUP BY m.title ORDER By TicketsCount DESC LIMIT 1 ';
         
     database.query(query , function (err, rows) {
         if(err){

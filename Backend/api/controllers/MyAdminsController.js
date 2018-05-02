@@ -699,11 +699,7 @@ module.exports.getBranchManagers = function(req, res, next){
             limitNum = parseInt(limit);
         }
         
-<<<<<<< HEAD
-        let query = "select DISTINCT A.*, C1.cinema_name from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'"+
-=======
         let query = "select DISTINCT A.* , C1.cinema_name from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'"+
->>>>>>> master
         " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
         //Mention table from where you want to fetch records example-users & send limit and start
         let table = [username , limitNum, startNum];

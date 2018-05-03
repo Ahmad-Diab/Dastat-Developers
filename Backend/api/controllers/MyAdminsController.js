@@ -353,8 +353,8 @@ module.exports.addBookingUsher = function (req, res, next) {
                                     if (err) {
                                         return next(err);
                                     }
-                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
-                                    database.query(sqlQuery, {newBookingUsherUsername, cinema_location, cinema_name}, function (err, results) {
+                                    sqlQuery = 'INSERT INTO admins_cinemas (username , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newBookingUsherUsername, cinema_location, cinema_name], function (err, results) {
                                         if (err)
                                             return next(err);
 
@@ -741,8 +741,8 @@ module.exports.addBranchManager = function (req, res, next) {
                                     }
 
 
-                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
-                                    database.query(sqlQuery, {newBranchManagerUsername, cinema_location, cinema_name},
+                                    sqlQuery = 'INSERT INTO admins_cinemas(username , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newBranchManagerUsername, cinema_location, cinema_name],
                                         function (err, results) {
                                             if (err)
                                                 return next(err);
@@ -1296,8 +1296,8 @@ module.exports.addCinemaOwner = function (req, res, next) {
                                     }
 
 
-                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
-                                    database.query(sqlQuery, {newCinemaOwnerUsername, cinema_location, cinema_name},
+                                    sqlQuery = 'INSERT INTO admins_cinemas(username , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newCinemaOwnerUsername, cinema_location, cinema_name],
                                         function (err, results) {
                                             if (err)
                                                 return next(err);

@@ -355,7 +355,7 @@ module.exports.EditMyRequests = function (req, res, next) {
             if (err) return next(err);
 
             let sqlQuery = 'UPDATE movies SET title= ?,duration= ? , genre = ?, description= ?,imagePath= ?,cast = ?, year= ?,feature= ?,release_date= ?,rating= ?  WHERE status = "PENDING" AND movies.movie_id = ?';
-            database.query(sqlQuery, [title, duration, genre, description, imagePath, cast, year, feature, release_date, rating, status, req.params.movie_id],
+            database.query(sqlQuery, [title, duration, genre, description, imagePath, cast, year, feature, release_date, rating , req.params.movie_id],
                 function (error, results) {
                     if (error) {
                         return next(error);

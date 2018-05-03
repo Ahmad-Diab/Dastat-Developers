@@ -1,5 +1,17 @@
 <!-- Main content -->
 <form  id="login-form" class="login" method='get' novalidate=''>
+    <div *ngIf="forgotmypassword">
+        <div  class="field-wrap">
+        <input *ngIf="!message2" [(ngModel)]="user.username" type='username' placeholder='Username' name='user-name' class="login__input">
+            <div (click)="onForgotmypassword()">
+                <button *ngIf="!message2"type='submit' class="btn btn-md btn--warning btn--wider">Send Me New Password</button>
+                <h6 style="color:red; margin-top: 20px" >{{message}}</h6>
+                <h6 style="color:green; margin-top: 20px" >{{message2}}</h6>
+                <button *ngIf="message2" (click)="ngOnInit()" class="btn btn-md btn--warning btn--wider">Log In Now</button>
+            </div>
+        </div>
+    </div >
+    <div *ngIf="!forgotmypassword">
     <p  *ngIf="!loogedin" class="login__title">sign in
         <br>
         <span class="login-edition">welcome to A.Movie</span>
@@ -27,8 +39,9 @@
             <button type='submit' class="btn btn-md btn--warning btn--wider">sign in</button>
 
         </div>
-        <a href="#" class="login__tracker form__tracker">Forgot password?</a>
+        <a   (click)="onForgotAction()" class="login__tracker form__tracker">Forgot password?</a>
     </div>
+</div>
 </form>
 
        

@@ -25,9 +25,7 @@ export class MakeReservationComponent implements OnInit {
   partiesTimesList = [];
   selectedPartyTime = null;
 
-  selectedTickets = []; //TODO set the array of tickets
   totalPrice = null; // TODO set this with tickets
-
   encoding;
   selected;
   seats = [];
@@ -45,9 +43,13 @@ export class MakeReservationComponent implements OnInit {
     let auth = <Auth>(this.cookie.getObject('auth'));
     this.adminUsername = auth.username;
 
+    let cinemaData = this.cookie.getObject('cinema');
+    console.log("cinema name = " + cinemaData['name']);
+    console.log("cinema_location = " + cinemaData['location']);
+
     this.reserveData = {
-      cinema_name: 'Cinema Mawlana', // TODO get from cookies
-      cinema_location: 'Mokattam', // TODO get from cookies
+      cinema_name: cinemaData['name'],
+      cinema_location: cinemaData['location'],
       date: null,
       time: null,
       hall: null,
@@ -178,7 +180,7 @@ export class MakeReservationComponent implements OnInit {
     this.reserveData.hall = this.selectedHall;
     this.reserveData.tickets = this.seats;
     // TODO set th price of tickets to the total price
-    this.reserveData.price = 100;
+    this.reserveData.price = this.seats.length * 50;
     this.reserveData.movie = this.selectedMovie.movie_id;
 
     this.adminTicketService.makeReservationByAdmin(
@@ -188,6 +190,7 @@ export class MakeReservationComponent implements OnInit {
     ).subscribe((response) => {
       //event.confirm.resolve(response);
       console.log(response);
+      this.ticketIsLoaded = false;
     });
 
   }

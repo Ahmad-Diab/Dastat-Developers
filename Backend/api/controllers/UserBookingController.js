@@ -137,14 +137,6 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
         });
     }
 
-    if (!date) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Party data (date) is required.',
-            data: null
-        });
-    }
-
     // Validations of correct types
     if (!Validations.isNumber(movie_id)) {
         return res.status(422).json({

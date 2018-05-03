@@ -127,8 +127,7 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
  * @param res
  */
 module.exports.getAllPartiesForThatMovie = function (req, res) {
-    let movie_id = req.params['movie_id'],
-        date = req.params['date'];
+    let movie_id = req.params['movie_id'];
 
     if (!movie_id) {
         return res.status(422).json({
@@ -147,8 +146,7 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
     }
 
     // Validations of correct types
-    if (!Validations.isNumber(movie_id) ||
-        !Validations.isDate(date)) {
+    if (!Validations.isNumber(movie_id)) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -158,10 +156,10 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
 
     let query =
         'SELECT * ' +
-        'FROM halls h JOIN parties p ON h.hall_number = p.hall' +
-        'WHERE h.movie = ? AND DATE(p.date) = ? AND DATE(p.date) BETWEEN DATE_ADD(CURRENT_DATE, INTERVAL 5 DAY) AND CURRENT_DATE AND p.time > CURRENT_TIME';
+        'FROM halls h JOIN parties p ON h.hall_number = p.hall ' +
+        'WHERE h.movie = ? AND DATE(p.date) BETWEEN DATE_ADD(CURRENT_DATE, INTERVAL 5 DAY) AND CURRENT_DATE AND p.time > CURRENT_TIME';
 
-    database.query(query, [movie_id, date], function (err, result) {
+    database.query(query, [movie_id], function (err, result) {
 
         if (err) throw err;
 
@@ -377,7 +375,7 @@ module.exports.getBookings = function (req, res, next) {
         });
     }
 
-    let limitNotEnteredMsg = !(!start || !limit) ? "" : "- No limits have been entered.";
+    let limitNotEnteredMsg = !(!start || !limit) ? "" : " - No limits have been entered.";
 
     let queryForCount = "Select count(*) as TotalCount from tickets WHERE user = ?";
     database.query(queryForCount, [username] ,function (err, rows) {

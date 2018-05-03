@@ -5,91 +5,12 @@ let database = require('../config/db-connection'),
     jwt = require('jsonwebtoken'),
     Validations = require('../utils/validations');
 
-//User stories related to the MyAdmins should be implemented here
-//DONT FORGET TO ADD IT IN THE ROUTES
-
-//------------------------- Admin Login -----------------------------------
-/*
-module.exports.authenticate = function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
-    if(!username){
-        return res.status(422).json({
-        err: null,
-        msg: 'Username is required.',
-        data: null
-        });
-    }
-    if(!password){
-        return res.status(422).json({
-        err: null,
-        msg: 'Password is required.',
-        data: null
-        });
-    }
-    var query = 'SELECT * FROM admins WHERE username = ?';
-    database.query(query,[username], function(err, results, fields) {
-    if(err) return next(err); 
-    if(results.length > 0) { 
-        var admin = {
-        username: results[0].username,
-        password: results[0].password,
-        email: results[0].email,
-        salary: results[0].salary,
-        type: results[0].type,
-        first_name: results[0].first_name,
-        last_name: results[0].last_name,
-        phone_number: results[0].phone_number,
-        gender: results[0].gender,
-    }
-    bcrypt.compare(password, results[0].password, function(err, isMatch){
-        if(isMatch){
-            if (results[0].active==true){
-            var token = jwt.sign(user, config.secret, {
-            expiresIn: 604800
-            });
-            res.status(200).json({
-                err: null,
-                msg: "Logged in successfully",
-                token: 'JWT' + token,
-                data: token,
-                success: true
-            });
-            }
-        else {
-            res.status(200).json({
-            err: null,
-            msg: "please Verify the account",
-            success: false
-            });
-        }
-        }
-        else {
-            res.status(200).json({
-            err: null,
-            msg: "Wrong Password",
-            success: false
-            });
-        }
-    });      
-    }
-    else {
-        res.status(200).json({
-        err: null,
-        msg: "Wrong Username",
-        success: false
-        });
-    }
-    });
-}
-*/
 //------------------------- View all admins -------------------------------
-
-module.exports.getAdmins = function(req, res, next){
+module.exports.getAdmins = function (req, res, next) {
 
     console.log("Entered getAdmins");
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
@@ -97,7 +18,7 @@ module.exports.getAdmins = function(req, res, next){
 
     console.log(req.query['username']);
 
-    if(!username){
+    if (!username) {
 
         return res.status(422).json({
             err: null,
@@ -106,15 +27,15 @@ module.exports.getAdmins = function(req, res, next){
         });
 
     }
-    
+
 // To calculate Total Count use MySQL count function
-    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
-    " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
-    
-    
-    //query = database.format(query);    
-    database.query(query, username , function (err, rows) {
-        
+    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'" +
+        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
+
+
+    //query = database.format(query);
+    database.query(query, username, function (err, rows) {
+
         if (err) {
             console.log(err);
             return err;
@@ -124,12 +45,12 @@ module.exports.getAdmins = function(req, res, next){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
+        if (!totalCount) {
 
             return res.status(200).json({
                 err: null,
                 msg: 'No admins available',
-                data: rows
+                data: null
             });
 
         }
@@ -140,18 +61,18 @@ module.exports.getAdmins = function(req, res, next){
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
-            
+
         } else {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-        
-        let query = "select DISTINCT A.* from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
-        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
+
+        let query = "select DISTINCT A.* from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'" +
+            " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?";
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username , limitNum, startNum];
-        
-        database.query(query, table , function (err, rest) {
+        let table = [username, limitNum, startNum];
+
+        database.query(query, table, function (err, rest) {
             if (err) {
                 return next(err);
             } else {
@@ -159,29 +80,19 @@ module.exports.getAdmins = function(req, res, next){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Admins have been successfully retrived"
+                    msg: "Admins have been successfully retrieved"
                 });
             }
         });
     });
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username";
-    // database.query(query, function(err, results, fiels) {
-        // if(err) return next(err);
-        // console.log(results);
-        // return res.send(results);
-    // });
-}
-
-//------------------------- Show Admins working in a certain Cinema -------------------------------
-
-//------------------------- View all Users -------------------------------
+};
 
 //------------------------- View all Booking ushers -------------------------------
-module.exports.getBookingUshers = function(req, res, next){
+module.exports.getBookingUshers = function (req, res, next) {
 
     console.log("Entered getBookingUshers");
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
@@ -189,24 +100,20 @@ module.exports.getBookingUshers = function(req, res, next){
 
     console.log(req.query['username']);
 
-    if(!username){
-
+    if (!username) {
         return res.status(422).json({
             err: null,
             msg: 'Username is required',
             data: null
         });
-
     }
-    
-// To calculate Total Count use MySQL count function
-    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
-    " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
-    
-    
-    //query = database.format(query);    
-    database.query(query, username , function (err, rows) {
-        
+
+    // To calculate Total Count use MySQL count function
+    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'" +
+        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
+
+    database.query(query, username, function (err, rows) {
+
         if (err) {
             console.log(err);
             return err;
@@ -216,12 +123,12 @@ module.exports.getBookingUshers = function(req, res, next){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
+        if (!totalCount) {
 
             return res.status(200).json({
                 err: null,
-                msg: 'No admins available',
-                data: rows
+                msg: 'No Booking Ushers available',
+                data: null
             });
 
         }
@@ -232,18 +139,18 @@ module.exports.getBookingUshers = function(req, res, next){
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
-            
+
         } else {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-        
-        let query = "select DISTINCT A.* , C1.cinema_name from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'"+
-        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
+
+        let query = "select DISTINCT A.* , C1.cinema_name , C1.cinema_location from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Booking Usher'" +
+            " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?";
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username , limitNum, startNum];
-        
-        database.query(query, table , function (err, rest) {
+        let table = [username, limitNum, startNum];
+
+        database.query(query, table, function (err, rest) {
             if (err) {
                 return next(err);
             } else {
@@ -251,155 +158,394 @@ module.exports.getBookingUshers = function(req, res, next){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Booking Ushers have been successfully retrived"
+                    msg: "Booking Ushers have been successfully retrieved"
                 });
             }
         });
     });
-    //var uname = req.body['uname'];
-    //console.log(uname);
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher'";
-    // // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Booking Usher' AND cinema_name = (select cinema_name from admins_cinemas where admin = ?"+" AND cinema_name = C.cinema_name GROUP BY cinema_name)";
-    // database.query(query, function(err, results, fiels) {
-    //     if(err) return next(err);
-    //     console.log(results);
-    //     return res.send(results);
-    // });
-}
+};
 
 //------------------------- Add Booking ushers -------------------------------
-module.exports.addBookingUsher = function(req,res,next){
-    var username = req.body.username;
-    var email = req.body.email;
-    var salary = req.body.salary;
-    var type = "Booking Usher"; 
-    var first_name = req.body.first_name;
-    var last_name = req.body.last_name;
-    var phone_number = req.body.phone_number;
-    var gender = req.body.gender;
-   // var cinema_location = req.body.cinema_location;
-    var cinema_name = req.body.cinema_name;
-    
-    var adminsInsertionQuery = 'INSERT INTO admins SET ?';
-    var hashed_password ;
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
-            if(err) return next(err);
-            hashed_password= hash; 
-            var admin={
-                username:username,
-                password:hashed_password,
-                email:email,
-                salary:salary,
-                type:type,
-                first_name:first_name,
-                last_name:last_name,
-                phone_number:phone_number,
-                gender:gender
-               }
-            
-                database.query(adminsInsertionQuery,admin, function (error, results, fields) {
-                    if(err) return next(err);
-                    return res.send(results);
+module.exports.addBookingUsher = function (req, res, next) {
+
+    let newBookingUsherUsername = req.body.username,
+        email = req.body.email,
+        salary = req.body.salary,
+        type = "Booking Usher",
+        first_name = req.body.first_name,
+        last_name = req.body.last_name,
+        phone_number = req.body.phone_number,
+        gender = req.body.gender,
+        cinema_location = req.body.cinema_location,
+        cinema_name = req.body.cinema_name,
+        password = req.body.password,
+        admin;
+
+    //getting the username of the currently logged in admin
+    let tokenHeader = req.headers['authorization'];
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
+            });
+        }
+        let adminUserName = authData.username;
+
+        //checking for null values or not entered data
+        if (!newBookingUsherUsername) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+        if (!password) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Password is required.',
+                data: null
+            });
+        }
+        if (!email) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Email is required.',
+                data: null
+            });
+        }
+        if (!salary) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Salary is required.',
+                data: null
+            });
+        }
+        if (!first_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'First name is required.',
+                data: null
+            });
+        }
+        if (!last_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Last name is required.',
+                data: null
+            });
+        }
+        if (!gender) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Gender is required.',
+                data: null
+            });
+        }
+        if (!cinema_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema Name is required.',
+                data: null
+            });
+        }
+        if (!cinema_location) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema Location is required.',
+                data: null
+            });
+        }
+        //Validations for correct data types
+        if (!Validations.isNumber(phone_number)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Phone number must be numbers only.',
+                data: null
+            });
+        }
+        if (!Validations.isNumber(salary)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Salary must be numbers only.',
+                data: null
+            });
+        }
+        if (!Validations.isString(first_name) || !Validations.isString(last_name)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Invalid first name or last name',
+                data: null
+            });
+        }
+
+        //checking if the username already exists
+        database.query('SELECT * FROM admins WHERE username = ?', [newBookingUsherUsername], function (err, results) {
+
+            if (err) return next(err);
+
+            if (results.length > 0) {
+                return res.status(200).json({
+                    err: null,
+                    msg: "This username is already used , please enter a different one.",
+                    success: true
+                });
+            }
+
+            //checking if the email already exists
+            database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
+
+                if (err) return next(err);
+
+                if (results.length > 0) {
+                    return res.status(200).json({
+                        err: null,
+                        msg: "This email already exists , please enter a different one.",
+                        success: true
                     });
-                    database.query('select * from cinemas where name = ?', cinema_name, function(err, res, fields){
-                        if(err) return next(err)
-                        if(res.length > 0){
-                            var admin_cinema = {
-                                admin: username,
-                                cinema_name: cinema_name,
-                                cinema_location: res[0].location
-                          };
-                        var cinemaAdminInsertionQuery = "INSERT INTO admins_cinemas (admin, cinema_location, cinema_name) VALUES('" + admin_cinema.admin + "', '" + admin_cinema.cinema_location + "', '" + admin_cinema.cinema_name + "')";
-                        console.log("tested")
-                        database.query(cinemaAdminInsertionQuery, function(err, results, fields) {
-                        if(err) return next(err);
-                       // return res.send(results);
-                        });
+                }
+
+                //Verify that this admins user belongs to this cinema
+                database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
+                    [cinema_name, cinema_location, adminUserName], function (error, results) {
+                        if (error) {
+                            return next(error);
                         }
-                        else {
-                            res.status(200).json({
-                            err: null,
-                            msg: "wrong cinema name",
-                            success: false
+
+                        if (!results || !results.length) {
+                            return res.status(404).json({
+                                err: null,
+                                msg: "You don't belong to this cinema.",
+                                data: null
                             });
                         }
-                    });
-             });   
-        });          
-}
 
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(password, salt, (err, hash) => {
+                                if (err) {
+                                    return next(err);
+                                }
+                                admin = {
+                                    username: newBookingUsherUsername,
+                                    password: hash,
+                                    email: email,
+                                    salary: salary,
+                                    type: type,
+                                    first_name: first_name,
+                                    last_name: last_name,
+                                    phone_number: phone_number,
+                                    gender: gender
+                                };
+
+                                let sqlQuery = 'INSERT INTO admins SET ?';
+                                database.query(sqlQuery, admin, function (err) {
+                                    if (err) {
+                                        return next(err);
+                                    }
+                                    sqlQuery = 'INSERT INTO admins_cinemas (admin , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newBookingUsherUsername, cinema_location, cinema_name], function (err, results) {
+                                        if (err)
+                                            return next(err);
+
+                                        res.status(200).json({
+                                            err: null,
+                                            msg: 'Booking Usher added Successfully.',
+                                            data: results
+                                        });
+
+                                    });
+
+                                });
+                            });
+                        });
+
+
+                    });
+
+            });
+        });
+    });
+};
 
 //------------------------- Edit Booking ushers -------------------------------
+// TODO Membership validations
+module.exports.editBookingUsher = function (req, res, next) {
+    let username = req.body.username,
+        user = 'select * from admins where username = ? AND type = "Booking Usher"',
+        tokenHeader = req.headers['authorization'],
+        adminUserName;
+        
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
+            data: null
+        });
+    }
 
-module.exports.editBookingUsher = function(req, res, next){
-    var username = req.body.username;
-    var user = 'select * from admins where username = ? AND type = "Booking Usher"';
-    database.query(user, [username], function(err, results, fiels) {
-        //console.log("tested");
-        if(err) return next(err);
-        if(results.length > 0){
-            var email = req.body.email;
-            var salary = req.body.salary;
-            var type = req.body.type;
-            var phone_number = req.body.phone_number;
-            if(!email){
-                email = results[0].email;
-            }
-            if(!salary){
-                salary = results[0].salary;
-            }
-            if(!type){
-                type = results[0].type;
-            }
-            if(!phone_number){
-                phone_number = results[0].phone_number;
-            }
-            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Booking Usher"';
-            database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
-            if(err) return next(err);
-            return res.send(results);
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
             });
         }
-        else {
-            res.status(200).json({
-            err: null,
-            msg: "wrong username or invalid admin type",
-            success: false
+
+        adminUserName = authData.username;
+
+        //checking for null values or not entered data
+        if (!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
             });
         }
+
+        database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
+            [username , adminUserName], function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+
+                if (!results || !results.length) {
+                    return res.status(404).json({
+                        err: null,
+                        msg: "You don't belong to this cinema.",
+                        data: null
+                    });
+                }
+            database.query(user, [username], function (err, results) {
+                if (err) return next(err);
+                if (results.length > 0) {
+                    let email = req.body.email,
+                        salary = req.body.salary,
+                        type = req.body.type,
+                        phone_number = req.body.phone_number;
+                    if (!email) {
+                        email = results[0].email;
+                    }
+                    if (!salary) {
+                        salary = results[0].salary;
+                    }
+                    if (!type) {
+                        type = results[0].type;
+                    }
+                    if (!phone_number) {
+                        phone_number = results[0].phone_number;
+                    }
+                    let query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Booking Usher"';
+                    database.query(query, [email, salary, type, phone_number, username], function (err, results) {
+                        if (err) return next(err);
+                        return res.send(results);
+                    });
+                }
+                else {
+                    res.status(200).json({
+                        err: null,
+                        msg: "wrong username or invalid admin type",
+                        success: false
+                    });
+                }
+            });
+        });
     });
-}
+};
+
 //------------------------- Delete Booking ushers -------------------------------
+module.exports.deleteBookingUsher = function (req, res, next) {
 
-module.exports.deleteBookingUsher = function(req, res, next){
-    var username = req.body.username;
-    var user = 'select * from admins where username = ? AND type = "Booking Usher"';
-    database.query(user, [username], function(err, results, fiels) {
-        if(err) return next(err);
-        if(results.length > 0){
-            var query = 'DELETE FROM admins_cinemas where admin = ?';
-            database.query(query, [username], function(err, results, fiels) {
-            if(err) return next(err);
-            });
-            var query = 'DELETE FROM admins where username = ? AND type = "Booking Usher"';
-            database.query(query, [username], function(err, results, fiels) {
-            if(err) return next(err);
-            return res.send(results);
-            });
-        }      
-        else {
-            res.status(200).json({
-            err: null,
-            msg: "wrong username or invalid admin type",
-            success: false
+    let username = req.body.username,
+        user = 'select * from admins where username = ? AND type = "Booking Usher"',
+        tokenHeader = req.headers['authorization'],
+        adminUserName;
+
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
             });
         }
-    });
-}
 
+        adminUserName = authData.username;
+
+        //checking for null values or not entered data
+        if (!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+
+        database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
+            [username , adminUserName], function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+
+                if (!results || !results.length) {
+                    return res.status(404).json({
+                        err: null,
+                        msg: "You don't belong to this cinema.",
+                        data: null
+                    });
+                }
+    
+            database.query(user, [username], function (err, results) {
+                if (err) return next(err);
+
+                if (results.length > 0) {
+                    let queryDeleteAdminCinemas = 'DELETE FROM admins_cinemas where admin = ?';
+                    database.query(queryDeleteAdminCinemas, [username], function (err) {
+                        if (err) return next(err);
+
+                        let queryDeleteAdmins = 'DELETE FROM admins where username = ? AND type = "Booking Usher"';
+                        database.query(queryDeleteAdmins, [username], function (err, results) {
+                            if (err) return next(err);
+                            return res.send(results);
+                        });
+                    });
+
+                } else {
+                    res.status(200).json({
+                        err: null,
+                        msg: "wrong username or invalid admin type",
+                        success: false
+                    });
+                }
+            });
+        });
+    });
+};
 //------------------------- Add Branch managers -------------------------------
-module.exports.addBranchManager = function(req,res,next){
+module.exports.addBranchManager = function (req, res, next) {
 
     let newBranchManagerUsername = req.body.username,
         email = req.body.email,
@@ -413,244 +559,232 @@ module.exports.addBranchManager = function(req,res,next){
         cinema_name = req.body.cinema_name,
         hashed_password,
         password = req.body.password,
-        adminUserName,
         admin;
 
-    var adminsInsertionQuery = 'INSERT INTO admins SET ?';
-
     //getting the username of the currently logged in admin
-    var tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
-        var tokenheadersplited = tokenHeader.split(' ');
-        var token = tokenheadersplited[1];
-        var decoded = jwt.verify(token, config.secret, (err, authData) => {
-            if (err) {
-                return res.status(401).json({
-                    err: err,
-                    msg: 'no username in headers token.',
-                    data: null
-                });
-            }
-            else
-                adminUserName = authData.username;
-        });
-    }
-
-    //checking for null values or not entered data
-    if(!newBranchManagerUsername) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required.',
+    let tokenHeader = req.headers['authorization'];
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
             data: null
         });
     }
 
-    if(!password) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Password is required.',
-            data: null
-        });
-    }
-
-    if(!email) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Email is required.',
-            data: null
-        });
-    }
-
-    if(!salary) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Salary is required.',
-            data: null
-        });
-    }
-
-    if(!first_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'First name is required.',
-            data: null
-        });
-    }
-
-    if(!last_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Last name is required.',
-            data: null
-        });
-    }
-
-    if(!gender) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Gender is required.',
-            data: null
-        });
-    }
-
-    if(!cinema_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema Name is required.',
-            data: null
-        });
-    }
-
-    if(!cinema_location) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema Location is required.',
-            data: null
-        });
-    }
-
-    //Valdiations for correct data types
-
-    if(!Validations.isNumber(phone_number)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Phone number must be numbers only.',
-            data: null
-        });
-    }
-
-    if(!Validations.isNumber(salary)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Salary must be numbers only.',
-            data: null
-        });
-    }
-
-    if(!Validations.isString(first_name) || !Validations.isString(last_name)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Invalid first name or last name',
-            data: null
-        });
-    }
-
-    //checking if the username already exists
-
-    database.query('SELECT * FROM admins WHERE username = ?', [newBranchManagerUsername], function (err, results) {
-
-        if (err) return next(err);
-
-        if (results.length > 0) {
-
-            return res.status(200).json({
-                err: null,
-                msg: "This username is already used , please enter a different one.",
-                success: true
-            });
-            
-        }
-    });
-
-    //checking if the email already exists
-    database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
-
-        if (err) return next(err);
-
-        if (results.length > 0) {
-            
-            return res.status(200).json({
-                err: null,
-                msg: "This email already exists , please enter a different one.",
-                success: true
-            });
-            
-        }
-
-    });
-
-    //Verify that this admins user belongs to this cinema
-    
-    database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
-        [cinema_name, cinema_location, username],function (error, results) {
-            if (error) {
-                return next(error);
-            }
-            console.log(results + "This Admin user doesn't belong to this cinema");
-            if(!results || !results.length) {
-                return res.status(404).json({
-                    err: null,
-                    msg: "You don't belong to this cinema.",
-                    data: null
-                });
-            }
-    });
-    
-    
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (err, hash) => {
-            if(err) {
-                return next(err);
-            }
-            hashed_password = hash; 
-        });   
-    });
-
-    admin = {
-        username:username,
-        password:hashed_password,
-        email:email,
-        salary:salary,
-        type:type,
-        first_name:first_name,
-        last_name:last_name,
-        phone_number:phone_number,
-        gender:gender
-    }
-
-    let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
-    database.query(sqlQuery, [admin], function (err, results) {
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
         if (err) {
-            return next(err);
-        }
-        else{
-
-            sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?'
-            database.query(sqlQuery, [username,cinema_location,cinema_name] ,function (err, results) {
-                if(err)
-                    return next(err);
-                else{
-                    res.status(200).json({
-                        err: null,
-                        msg: 'Branch manager added Successfully.',
-                        data: results
-                    });
-                }
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
             });
-            
         }
-        
+
+        let adminUserName = authData.username;
+
+        //checking for null values or not entered data
+        if (!newBranchManagerUsername) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+        if (!password) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Password is required.',
+                data: null
+            });
+        }
+        if (!email) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Email is required.',
+                data: null
+            });
+        }
+        if (!salary) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Salary is required.',
+                data: null
+            });
+        }
+        if (!first_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'First name is required.',
+                data: null
+            });
+        }
+        if (!last_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Last name is required.',
+                data: null
+            });
+        }
+        if (!gender) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Gender is required.',
+                data: null
+            });
+        }
+        if (!cinema_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema Name is required.',
+                data: null
+            });
+        }
+        if (!cinema_location) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema Location is required.',
+                data: null
+            });
+        }
+
+        // Validations for correct data types
+        if (!Validations.isNumber(phone_number)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Phone number must be numbers only.',
+                data: null
+            });
+        }
+        if (!Validations.isNumber(salary)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Salary must be numbers only.',
+                data: null
+            });
+        }
+        if (!Validations.isString(first_name) || !Validations.isString(last_name)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Invalid first name or last name',
+                data: null
+            });
+        }
+
+        //checking if the username already exists
+        database.query('SELECT * FROM admins WHERE username = ?', [newBranchManagerUsername], function (err, results) {
+
+            if (err) return next(err);
+
+            if (results.length > 0) {
+                return res.status(200).json({
+                    err: null,
+                    msg: "This username is already used , please enter a different one.",
+                    success: true
+                });
+            }
+
+            //checking if the email already exists
+            database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
+
+                if (err) return next(err);
+
+                if (results.length > 0) {
+
+                    return res.status(200).json({
+                        err: null,
+                        msg: "This email already exists , please enter a different one.",
+                        success: true
+                    });
+
+                }
+
+                //Verify that this admins user belongs to this cinema
+                database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
+                    [cinema_name, cinema_location, adminUserName], function (error, results) {
+                        if (error) {
+                            return next(error);
+                        }
+
+                        if (!results || !results.length) {
+                            return res.status(404).json({
+                                err: null,
+                                msg: "You don't belong to this cinema.",
+                                data: null
+                            });
+                        }
+
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(password, salt, (err, hash) => {
+                                if (err) {
+                                    return next(err);
+                                }
+                                hashed_password = hash;
+
+                                admin = {
+                                    username: newBranchManagerUsername,
+                                    password: hashed_password,
+                                    email: email,
+                                    salary: salary,
+                                    type: type,
+                                    first_name: first_name,
+                                    last_name: last_name,
+                                    phone_number: phone_number,
+                                    gender: gender
+                                };
+
+                                let sqlQuery = 'INSERT INTO admins SET ?';
+                                database.query(sqlQuery, admin, function (err) {
+                                    if (err) {
+                                        return next(err);
+                                    }
+
+
+                                    sqlQuery = 'INSERT INTO admins_cinemas(admin , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newBranchManagerUsername, cinema_location, cinema_name],
+                                        function (err, results) {
+                                            if (err)
+                                                return next(err);
+
+                                            res.status(200).json({
+                                                err: null,
+                                                msg: 'Branch manager added Successfully.',
+                                                data: results
+                                            });
+
+                                        });
+
+
+                                });
+
+                            });
+                        });
+
+                    });
+
+            });
+
+        });
+
     });
-     
-}
-
-
+};
 
 
 //------------------------- View All Branch managers -------------------------------
 
-module.exports.getBranchManagers = function(req, res, next){
+module.exports.getBranchManagers = function (req, res, next) {
 
     console.log("Entered getBranchManagers");
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
         username = req.query['username'];
 
     console.log(req.query['username']);
-    if(!username){
+    if (!username) {
 
         return res.status(422).json({
             err: null,
@@ -659,15 +793,15 @@ module.exports.getBranchManagers = function(req, res, next){
         });
 
     }
-    
+
 // To calculate Total Count use MySQL count function
-    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'"+
-    " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
-    
-    
-    //query = database.format(query);    
-    database.query(query, username , function (err, rows) {
-        
+    let query = "Select count(*) as TotalCount from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'" +
+        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location";
+
+
+    //query = database.format(query);
+    database.query(query, username, function (err, rows) {
+
         if (err) {
             console.log(err);
             return err;
@@ -677,12 +811,12 @@ module.exports.getBranchManagers = function(req, res, next){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
+        if (!totalCount) {
 
             return res.status(200).json({
                 err: null,
-                msg: 'No admins available',
-                data: rows
+                msg: 'No Branch Managers available',
+                data: null
             });
 
         }
@@ -693,18 +827,18 @@ module.exports.getBranchManagers = function(req, res, next){
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
-            
+
         } else {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-        
-        let query = "select DISTINCT A.* , C1.cinema_name from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'"+
-        " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?"
+
+        let query = "select DISTINCT A.* , C1.cinema_name , C1.cinema_location from admins_cinemas C1 , admins_cinemas C2, admins A WHERE C1.admin = A.username AND A.type = 'Branch Manager'" +
+            " AND C2.admin = ? AND C2.cinema_name = C1.cinema_name AND C2.cinema_location = C1.cinema_location limit ? OFFSET ?";
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username , limitNum, startNum];
-        
-        database.query(query, table , function (err, rest) {
+        let table = [username, limitNum, startNum];
+
+        database.query(query, table, function (err, rest) {
             if (err) {
                 return next(err);
             } else {
@@ -712,104 +846,196 @@ module.exports.getBranchManagers = function(req, res, next){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Branch Managers have been successfully retrived"
+                    msg: "Branch Managers have been successfully retrieved"
                 });
             }
         });
     });
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Branch Manager'";
-    // database.query(query, function(err, results, fiels) {
-    //     if(err) return next(err);
-    //     console.log(results);
-    //     return res.send(results);
-    // });
-}
+};
 
 
-module.exports.editBranchManager = function(req, res, next){
-    var username = req.body.username;
-    var user = 'select * from admins where username = ? AND type = "Branch Manager"';
-    database.query(user, [username], function(err, results, fiels) {
-        console.log("tested");
-        if(err) return next(err);
-        if(results.length > 0){
-            var email = req.body.email;
-            var salary = req.body.salary;
-            var type = req.body.type;
-            var phone_number = req.body.phone_number;
-            if(!email){
-                email = results[0].email;
-            }
-            if(!salary){
-                salary = results[0].salary;
-            }
-            if(!type){
-                type = results[0].type;
-            }
-            if(!phone_number){
-                phone_number = results[0].phone_number;
-            }
-            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Branch Manager"';
-            database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
-            if(err) return next(err);
-            return res.send(results);
-            });  
-        }      
-        else {
-            res.status(200).json({
-            err: null,
-            msg: "wrong username or invalid admin type",
-            success: false
+module.exports.editBranchManager = function (req, res, next) {
+
+    console.log("Entered editBranchManager");
+    let username = req.body.username,
+        user = 'select * from admins where username = ? AND type = "Branch Manager"',
+        tokenHeader = req.headers['authorization'],
+        adminUserName;
+        
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
+            data: null
+        });
+    }
+    console.log("Halfway editeBranchManager");
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
             });
         }
+
+        adminUserName = authData.username;
+
+        //checking for null values or not entered data
+        if (!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+
+        database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
+            [username, adminUserName], function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+
+                if (!results || !results.length) {
+                    return res.status(404).json({
+                        err: null,
+                        msg: "You don't belong to this cinema.",
+                        data: null
+                    });
+                }
+            database.query(user, [username], function (err, results) {
+                if (err) return next(err);
+                if (results.length > 0) {
+                    let email = req.body.email,
+                        salary = req.body.salary,
+                        type = req.body.type,
+                        phone_number = req.body.phone_number;
+                    if (!email) {
+                        email = results[0].email;
+                    }
+                    if (!salary) {
+                        salary = results[0].salary;
+                    }
+                    if (!type) {
+                        type = results[0].type;
+                    }
+                    if (!phone_number) {
+                        phone_number = results[0].phone_number;
+                    }
+                    let query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Branch Manager"';
+                    database.query(query, [email, salary, type, phone_number, username], function (err, results) {
+                        if (err) return next(err);
+                        return res.send(results);
+                    });
+                }
+                else {
+                    res.status(200).json({
+                        err: null,
+                        msg: "wrong username or invalid admin type",
+                        success: false
+                    });
+                }
+            });
+        });
     });
-}
+};
+
 
 //------------------------- Delete Branch managers -------------------------------
+module.exports.deleteBranchManager = function (req, res, next) {
 
+    let username = req.body.username,
+        user = 'select * from admins where username = ? AND type = "Branch Manager"',
+        tokenHeader = req.headers['authorization'],
+        adminUserName;
 
-module.exports.deleteBranchManager = function(req, res, next){
-    var username = req.body.username;
-    var user = 'select * from admins where username = ? AND type = "Branch Manager"';
-    database.query(user, [username], function(err, results, fiels) {
-        if(err) return next(err);
-        if(results.length > 0){
-            var query = 'DELETE FROM admins_cinemas where admin = ?';
-            database.query(query, [username], function(err, results, fiels) {
-            if(err) return next(err);
-            });
-            var query = 'DELETE FROM admins where username = ? AND type = "Branch Manager"';
-            database.query(query, [username], function(err, results, fiels) {
-            if(err) return next(err);
-            return res.send(results);
-            });  
-        }      
-        else {
-            res.status(200).json({
-            err: null,
-            msg: "wrong username or invalid admin type",
-            success: false
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
             });
         }
+
+        adminUserName = authData.username;
+
+        //checking for null values or not entered data
+        if (!username) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+
+        database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
+            [username, adminUserName], function (error, results) {
+                if (error) {
+                    return next(error);
+                }
+
+                if (!results || !results.length) {
+                    return res.status(404).json({
+                        err: null,
+                        msg: "You don't belong to this cinema.",
+                        data: null
+                    });
+                }
+    
+            database.query(user, [username], function (err, results) {
+                if (err) return next(err);
+
+                if (results.length > 0) {
+                    let queryDeleteAdminCinemas = 'DELETE FROM admins_cinemas where admin = ?';
+                    database.query(queryDeleteAdminCinemas, [username], function (err) {
+                        if (err) return next(err);
+
+                        let queryDeleteAdmins = 'DELETE FROM admins where username = ? AND type = "Branch Manager"';
+                        database.query(queryDeleteAdmins, [username], function (err, results) {
+                            if (err) return next(err);
+                            return res.send(results);
+                        });
+                    });
+
+                } else {
+                    res.status(200).json({
+                        err: null,
+                        msg: "wrong username or invalid admin type",
+                        success: false
+                    });
+                }
+            });
+        });
     });
-}
+};
 
 //------------------------- View all Cinema owners -------------------------------
 
-module.exports.getCinemaOwners = function(req, res, next){
+module.exports.getCinemaOwners = function (req, res, next) {
 
     console.log("Entered getCinemaOwners");
 
-    var pagination = true; // boolean for checking if the user entered limits for pagination or not
-    var errMsg = null;
+    let pagination = true, // boolean for checking if the user entered limits for pagination or not
+        errMsg = null;
 
     let start = req.query.start,
         limit = req.query.limit,
         username = req.query['username'];
 
-    console.log(req.query['username']);
-
-    if(!username){
+    if (!username) {
 
         return res.status(422).json({
             err: null,
@@ -818,13 +1044,13 @@ module.exports.getCinemaOwners = function(req, res, next){
         });
 
     }
-    
+
 // To calculate Total Count use MySQL count function
     let query = "Select count(*) as TotalCount from admins_cinemas WHERE type = 'Cinema Owner'";
-    
-    //query = database.format(query);    
-    database.query(query, username , function (err, rows) {
-        
+
+    //query = database.format(query);
+    database.query(query, username, function (err, rows) {
+
         if (err) {
             console.log(err);
             return err;
@@ -834,12 +1060,12 @@ module.exports.getCinemaOwners = function(req, res, next){
             limitNum;
 
         let totalCount = rows[0]['TotalCount'];
-        if(totalCount == 0){
+        if (!totalCount) {
 
             return res.status(200).json({
                 err: null,
                 msg: 'No Cinema Owners available',
-                data: rows
+                data: null
             });
 
         }
@@ -850,17 +1076,17 @@ module.exports.getCinemaOwners = function(req, res, next){
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
-            
+
         } else {
             startNum = parseInt(start);
             limitNum = parseInt(limit);
         }
-        
-        let query = "select DISTINCT * from admins_cinemas WHERE type = 'Cinema Owner' limit ? OFFSET ?"
+
+        let query = "select DISTINCT * from admins_cinemas ac , admins a WHERE ac.admin = a.username AND type = 'Cinema Owner' limit ? OFFSET ?";
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username , limitNum, startNum];
-        
-        database.query(query, table , function (err, rest) {
+        let table = [username, limitNum, startNum];
+
+        database.query(query, table, function (err, rest) {
             if (err) {
                 return next(err);
             } else {
@@ -868,24 +1094,17 @@ module.exports.getCinemaOwners = function(req, res, next){
                     totalCount: totalCount,
                     data: rest,
                     err: errMsg,
-                    msg: "Cinema Owners have been successfully retrived"
+                    msg: "Cinema Owners have been successfully retrieved"
                 });
             }
         });
     });
-    // var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner'";
-    // database.query(query, function(err, results, fiels) {
-    //     if(err) return next(err);
-    //     console.log(results);
-    //     return res.send(results);
-    // });
-}
+};
 
 //------------------------------ add Cinema Owner-----------------------------------
+module.exports.addCinemaOwner = function (req, res, next) {
 
-module.exports.addCinemaOwner = function(req,res,next){
-
-    let newCinemaOwnserUsername = req.body.username,
+    let newCinemaOwnerUsername = req.body.username,
         email = req.body.email,
         salary = req.body.salary,
         type = "Cinema Owner",
@@ -895,307 +1114,278 @@ module.exports.addCinemaOwner = function(req,res,next){
         gender = req.body.gender,
         cinema_location = req.body.cinema_location,
         cinema_name = req.body.cinema_name,
-        hashed_password,
         password = req.body.password,
-        adminUserName,
         admin;
 
-    var adminsInsertionQuery = 'INSERT INTO admins SET ?';
-
     //getting the username of the currently logged in admin
-    var tokenHeader = req.headers['authorization'];
-    if (typeof tokenHeader !== 'undefined') {
-        var tokenheadersplited = tokenHeader.split(' ');
-        var token = tokenheadersplited[1];
-        var decoded = jwt.verify(token, config.secret, (err, authData) => {
-            if (err) {
-                return res.status(401).json({
-                    err: err,
-                    msg: 'no username in headers token.',
-                    data: null
+    let tokenHeader = req.headers['authorization'];
+    if (!tokenHeader) {
+        return res.status(401).json({
+            err: err,
+            msg: 'no username in headers token.',
+            data: null
+        });
+    }
+
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
+    jwt.verify(token, config.secret, (err, authData) => {
+        if (err) {
+            return res.status(401).json({
+                err: err,
+                msg: 'no username in headers token.',
+                data: null
+            });
+        }
+
+        let adminUsername = authData.username;
+
+        //checking for null values or not entered data
+        if (!newCinemaOwnerUsername) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Username is required.',
+                data: null
+            });
+        }
+        if (!password) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Password is required.',
+                data: null
+            });
+        }
+        if (!email) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Email is required.',
+                data: null
+            });
+        }
+        if (!salary) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Salary is required.',
+                data: null
+            });
+        }
+        if (!first_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'First name is required.',
+                data: null
+            });
+        }
+        if (!last_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Last name is required.',
+                data: null
+            });
+        }
+        if (!gender) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Gender is required.',
+                data: null
+            });
+        }
+        if (!cinema_name) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema Name is required.',
+                data: null
+            });
+        }
+        if (!cinema_location) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Cinema Location is required.',
+                data: null
+            });
+        }
+
+        //Validations for correct data types
+        if (!Validations.isNumber(phone_number)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Phone number must be numbers only.',
+                data: null
+            });
+        }
+        if (!Validations.isNumber(salary)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Salary must be numbers only.',
+                data: null
+            });
+        }
+        if (!Validations.isString(first_name) || !Validations.isString(last_name)) {
+            return res.status(422).json({
+                err: null,
+                msg: 'Invalid first name or last name',
+                data: null
+            });
+        }
+
+        //checking if the username already exists
+        database.query('SELECT * FROM admins WHERE username = ?', [newCinemaOwnerUsername], function (err, results) {
+
+            if (err) return next(err);
+
+            if (results.length > 0) {
+                return res.status(200).json({
+                    err: null,
+                    msg: "This username is already used , please enter a different one.",
+                    success: true
                 });
             }
-            else
-                adminUserName = authData.username;
-        });
-    }
 
-    //checking for null values or not entered data
-    if(!newCinemaOwnserUsername) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required.',
-            data: null
-        });
-    }
+            //checking if the email already exists
+            database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
 
-    if(!password) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Password is required.',
-            data: null
-        });
-    }
+                if (err) return next(err);
 
-    if(!email) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Email is required.',
-            data: null
-        });
-    }
-
-    if(!salary) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Salary is required.',
-            data: null
-        });
-    }
-
-    if(!first_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'First name is required.',
-            data: null
-        });
-    }
-
-    if(!last_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Last name is required.',
-            data: null
-        });
-    }
-
-    if(!gender) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Gender is required.',
-            data: null
-        });
-    }
-
-    if(!cinema_name) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema Name is required.',
-            data: null
-        });
-    }
-
-    if(!cinema_location) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Cinema Location is required.',
-            data: null
-        });
-    }
-
-    //Valdiations for correct data types
-
-    if(!Validations.isNumber(phone_number)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Phone number must be numbers only.',
-            data: null
-        });
-    }
-
-    if(!Validations.isNumber(salary)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Salary must be numbers only.',
-            data: null
-        });
-    }
-
-    if(!Validations.isString(first_name) || !Validations.isString(last_name)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Invalid first name or last name',
-            data: null
-        });
-    }
-
-    //checking if the username already exists
-
-    database.query('SELECT * FROM admins WHERE username = ?', [newCinemaOwnserUsername], function (err, results) {
-
-        if (err) return next(err);
-
-        if (results.length > 0) {
-
-            return res.status(200).json({
-                err: null,
-                msg: "This username is already used , please enter a different one.",
-                success: true
-            });
-            
-        }
-    });
-
-    //checking if the email already exists
-    database.query('SELECT * FROM admins WHERE email = ?', [email], function (err, results) {
-
-        if (err) return next(err);
-
-        if (results.length > 0) {
-            
-            return res.status(200).json({
-                err: null,
-                msg: "This email already exists , please enter a different one.",
-                success: true
-            });
-            
-        }
-
-    });
-
-    // //Verify that this admins user belongs to this cinema
-    
-    // database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
-    //     [cinema_name, cinema_location, username],function (error, results) {
-    //         if (error) {
-    //             return next(error);
-    //         }
-    //         console.log(results + "This Admin user doesn't belong to this cinema");
-    //         if(!results || !results.length) {
-    //             return res.status(404).json({
-    //                 err: null,
-    //                 msg: "You don't belong to this cinema.",
-    //                 data: null
-    //             });
-    //         }
-    // });
-    
-    
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(password, salt, (err, hash) => {
-            if(err) {
-                return next(err);
-            }
-            hashed_password = hash; 
-        });   
-    });
-
-    admin = {
-        username:username,
-        password:hashed_password,
-        email:email,
-        salary:salary,
-        type:type,
-        first_name:first_name,
-        last_name:last_name,
-        phone_number:phone_number,
-        gender:gender
-    }
-
-    let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
-    database.query(sqlQuery, [admin], function (err, results) {
-        if (err) {
-            return next(err);
-        }
-        else{
-
-            sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?'
-            database.query(sqlQuery, [username,cinema_location,cinema_name] ,function (err, results) {
-                if(err)
-                    return next(err);
-                else{
-                    res.status(200).json({
+                if (results.length > 0) {
+                    return res.status(200).json({
                         err: null,
-                        msg: 'Cinema Owner added Successfully.',
-                        data: results
+                        msg: "This email already exists , please enter a different one.",
+                        success: true
                     });
                 }
-            });
-            
-        }
-        
-    });
-     
-}
 
+
+                // Verify that this admins user belongs to this cinema
+
+                database.query('SELECT * FROM admins_cinemas c  WHERE c.cinema_name = ? AND c.cinema_location = ? AND c.admin = ?',
+                    [cinema_name, cinema_location, adminUsername], function (error, results) {
+                        if (error) {
+                            return next(error);
+                        }
+                        console.log(results + "This Admin user doesn't belong to this cinema");
+                        if (!results || !results.length) {
+                            return res.status(404).json({
+                                err: null,
+                                msg: "You don't belong to this cinema.",
+                                data: null
+                            });
+                        }
+
+                        bcrypt.genSalt(10, (err, salt) => {
+                            bcrypt.hash(password, salt, (err, hash) => {
+                                if (err) {
+                                    return next(err);
+                                }
+
+                                admin = {
+                                    username: newCinemaOwnerUsername,
+                                    password: hash,
+                                    email: email,
+                                    salary: salary,
+                                    type: type,
+                                    first_name: first_name,
+                                    last_name: last_name,
+                                    phone_number: phone_number,
+                                    gender: gender
+                                };
+
+                                let sqlQuery = 'INSERT INTO admins SET ?';
+                                database.query(sqlQuery, admin, function (err) {
+                                    if (err) {
+                                        return next(err);
+                                    }
+
+
+                                    sqlQuery = 'INSERT INTO admins_cinemas(admin , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newCinemaOwnerUsername, cinema_location, cinema_name],
+                                        function (err, results) {
+                                            if (err)
+                                                return next(err);
+                                            else {
+                                                res.status(200).json({
+                                                    err: null,
+                                                    msg: 'Cinema Owner added Successfully.',
+                                                    data: results
+                                                });
+                                            }
+                                        });
+
+                                });
+                            });
+                        });
+                    });
+            });
+        });
+    });
+};
 
 
 //------------------------- Edit Cinema owners -------------------------------
 
-
-
-// module.exports.getCinemaOwner = function(req, res, next){
-//     var cinema_name = req.body.cinema_name;
-//     var query = "select DISTINCT cinema_name, username, email, type, salary, first_name, last_name, phone_number, gender from admins_cinemas C, admins A where C.admin = A.username AND type = 'Cinema Owner' AND cinema_name like ?";
-//     database.query(query, '%'+[cinema_name]+'%', function(err, results, fiels) {
-//         if(err) return next(err);
-//         console.log(results);
-//         return res.send(results);
-//     });
-// }
-
-module.exports.editCinemaOwner = function(req, res, next){
-    var username = req.body.username;
-    var user = 'select * from admins where username = ? AND type = "Cinema Owner"';
-    database.query(user, [username], function(err, results, fiels) {
-        if(err) return next(err);
-        if(results.length > 0){
-            var email = req.body.email;
-            var salary = req.body.salary;
-            var type = req.body.type;
-            var phone_number = req.body.phone_number;
-            if(!email){
+module.exports.editCinemaOwner = function (req, res, next) {
+    let username = req.body.username,
+        user = 'select * from admins where username = ? AND type = "Cinema Owner"';
+    
+    database.query(user, [username], function (err, results) {
+        if (err) return next(err);
+        if (results.length > 0) {
+            let email = req.body.email,
+                salary = req.body.salary,
+                type = req.body.type,
+                phone_number = req.body.phone_number;
+            if (!email) {
                 email = results[0].email;
             }
-            if(!salary){
+            if (!salary) {
                 salary = results[0].salary;
             }
-            if(!type){
+            if (!type) {
                 type = results[0].type;
             }
-            if(!phone_number){
+            if (!phone_number) {
                 phone_number = results[0].phone_number;
             }
-            var query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Cinema Owner"';
-            database.query(query, [email, salary, type, phone_number, username], function(err, results, fiels) {
-            if(err) return next(err);
-            return res.send(results);
-            });  
-        }      
+            let query = 'UPDATE admins SET email = ?, salary = ?, type = ?, phone_number = ? where username = ? AND type = "Cinema Owner"';
+            database.query(query, [email, salary, type, phone_number, username], function (err, results) {
+                if (err) return next(err);
+                return res.send(results);
+            });
+        }
         else {
             res.status(200).json({
-            err: null,
-            msg: "wrong username or invalid admin type",
-            success: false
+                err: null,
+                msg: "wrong username or invalid admin type",
+                success: false
             });
         }
     });
-}
+};
 
 //------------------------- Delete Cinema owners -------------------------------
 
-module.exports.deleteCinemaOwner = function(req, res, next){
-    var username = req.body.username;
-    var user = 'select * from admins where username = ? AND type = "Cinema Owner"';
-    database.query(user, [username], function(err, results, fiels) {
-        if(err) return next(err);
-        if(results.length > 0){
-            var query = 'DELETE FROM admins_cinemas where admin = ?';
-            database.query(query, [username], function(err, results, fiels) {
-            if(err) return next(err);
+module.exports.deleteCinemaOwner = function (req, res, next) {
+    let username = req.body.username,
+        user = 'select * from admins where username = ? AND type = "Cinema Owner"';
+    database.query(user, [username], function (err, results) {
+        if (err) return next(err);
+
+        if (results.length > 0) {
+            let queryDeleteAdminCinemas = 'DELETE FROM admins_cinemas where admin = ?';
+            database.query(queryDeleteAdminCinemas, [username], function (err) {
+                if (err) return next(err);
             });
-            var query = 'DELETE FROM admins where username = ? AND type = "Cinema Owner"';
-            database.query(query, [username], function(err, results, fiels) {
-            if(err) return next(err);
-            return res.send(results);
-            });  
-        }      
+            let queryDeleteAdmins = 'DELETE FROM admins where username = ? AND type = "Cinema Owner"';
+            database.query(queryDeleteAdmins, [username], function (err, results) {
+                if (err) return next(err);
+                return res.send(results);
+            });
+        }
         else {
             res.status(200).json({
-            err: null,
-            msg: "wrong username or invalid admin type",
-            success: false
+                err: null,
+                msg: "wrong username or invalid admin type",
+                success: false
             });
         }
     });
-}
+};

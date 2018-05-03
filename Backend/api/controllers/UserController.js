@@ -100,8 +100,9 @@ module.exports.editProfile = function (req, res, next) {
         });
     }
 
-    database.query('UPDATE users SET email = ?, first_name = ?, last_name = ?, phone_number = ?, age = ? where username = ?', [email, first_name, last_name, phone_number, age, username], function (err, results, fields) {
-        if (err) return next(err);
-        return res.send(results);
-    });
+    database.query('UPDATE users SET email = ?, first_name = ?, last_name = ?, phone_number = ?, age = ? where username = ?',
+        [email, first_name, last_name, phone_number, age, username], function (err, results) {
+            if (err) return next(err);
+            return res.send(results);
+        });
 };

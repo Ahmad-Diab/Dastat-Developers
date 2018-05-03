@@ -9,24 +9,21 @@
   <div class="modal-body">
 
     <div class="form-group row">
-      <label class="col-2 col-form-label">Cinema Location</label>
+      <label class="col-2 col-form-label" *ngIf = "!add">Cinema Name</label>
+      <label class="col-2 col-form-label" *ngIf = "add">Cinema Name and Location</label>
       <div class="col-10">
-        <input class="form-control input" [(ngModel)]="admin.cinema_name" placeholder="Cinema Location" *ngIf = "!add" disabled>
-        <select (change)="getCinemaNames($event)" class="form-control input" [(ngModel)]="admin.cinema_location" required>
-          <option value="0" disabled>Select a Location</option>
-          <option *ngFor="let location of locations" [value]="location.location">{{location.location}}</option>
+        <input class="form-control input" [(ngModel)]="admin.cinema_name" placeholder="Cinema Name" *ngIf = "!add" disabled>
+        <select class="form-control input" [(ngModel)]="cinemaNameLocation" *ngIf = "add" required>
+          <option value="0" disabled>Select a Cinema</option>
+          <option *ngFor="let cinema of cinemas" [value]="cinema">{{cinema.name}},{{cinema.location}}</option>
         </select>
       </div>
     </div>
 
-    <div class="form-group row">
-      <label class="col-2 col-form-label">Cinema Name</label>
+    <div class="form-group row"  *ngIf = "!add">
+      <label class="col-2 col-form-label">Cinema Location</label>
       <div class="col-10">
-        <input class="form-control input" [(ngModel)]="admin.cinema_name" placeholder="Cinema Name" *ngIf = "!add" disabled>
-        <select class="form-control input" [(ngModel)]="admin.cinema_name" required>
-          <option value="0" disabled>Select a Cinema</option>
-          <option *ngFor="let cinema of cinemas" [value]="cinema.name">{{cinema.name}}</option>
-        </select>
+        <input class="form-control input" [(ngModel)]="admin.cinema_location" placeholder="Cinema Location" disabled>
       </div>
     </div>
 
@@ -60,7 +57,7 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Salary</label>
       <div class="col-10">
-        <input class="form-control input" type="number" [(ngModel)]="admin.salary" required>
+        <input class="form-control input" type="number" [(ngModel)]="admin.salary" placeholder="3000" required>
       </div>
     </div>
 
@@ -78,8 +75,8 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      <label class="col-2 col-form-label" *ngIf = "add">Last Name</label>
+    <div class="form-group row"  *ngIf = "add">
+      <label class="col-2 col-form-label">Last Name</label>
       <div class="col-10">
         <input class="form-control input" [(ngModel)]="admin.last_name" placeholder="name">
       </div>

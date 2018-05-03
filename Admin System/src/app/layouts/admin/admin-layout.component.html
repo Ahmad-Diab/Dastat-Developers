@@ -75,9 +75,7 @@
         </li>
       </ul>
       <span class="navbar-heading hidden-xs-down">{{options?.heading}}</span>
-      <select #cinemaDrop style="width: 20%" class="form-control" *ngIf = 'isAppOwner' (change) = "getChosenCinema($event.target.value)">
-          <option *ngFor = 'let cinema of cinemas' value="{{cinema.name}},{{cinema.location}}"   >{{ cinema.name }} , {{ cinema.location }}</option>
-      </select><br/>
+      
       <span class="mr-auto"></span>
       <ul class="navbar-nav">
         <li class="nav-item" ngbDropdown placement="bottom-right">

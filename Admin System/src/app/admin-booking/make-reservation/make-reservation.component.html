@@ -12,13 +12,13 @@
 
       <div class="ticket__inner">
 
-        <div class="ticket-secondary" >
+        <div class="ticket-secondary">
           <span class="ticket__item">Reservation ID:
             <strong class="ticket__number">"New Ticket"</strong>
           </span>
 
           <!-- ----------DATE & TIME OF TICKET---------- -->
-          <div class="ticket__date" >
+          <div class="ticket__date">
 
             <span class="btn-group">
 
@@ -27,7 +27,7 @@
                   {{(selectedPartyDate)? (selectedPartyDate | date:'yyyy-MM-dd'): "N/A"}}
                 </button>
                 <span class="dropdown-menu" ngbDropdownMenu>
-                  <span  *ngFor="let date of partiesDatesList">
+                  <span *ngFor="let date of partiesDatesList">
                     <button class="dropdown-item" (click)="selectPartyDate(date)">{{date| date:'yyyy-MM-dd'}}</button>
                   </span>
                 </span>
@@ -66,9 +66,9 @@
           </div>
 
           <span class="ticket__item ticket__item--primery">Hall:
-             <strong class="ticket__hall">
-               {{(selectedHall) ? selectedHall: "N/A"}}
-             </strong>
+            <strong class="ticket__hall">
+              {{(selectedHall) ? selectedHall: "N/A"}}
+            </strong>
           </span>
         </div>
       </div>
@@ -82,21 +82,36 @@
 </div>
 
 <br>
-<div style="align-content: center; clear: none; width: 50%; margin: 0 auto;">
+
+
+<div class="table-responsive" style="margin-bottom: 40px; width: 90%">
+  <div *ngIf="flag" id="layout">
+    <div [ngClass]="{'margin-seats': row.margin}" class="row" *ngFor="let row of encoding; let i = index">
+      <button disabled="" class="btn primary mr-1 mb-1">{{letter(i)}}</button>
+      <div style="display: block !important" *ngFor="let seat of row.row; let j = index">
+        <button *ngIf="seat != 'offset'" class="btn mr-1 mb-1" (click)="select(i,j,seat.seat.number)" [ngClass]="{'btn-secondary': !selected[i][j], 'btn-success': selected[i][j]}">{{seat.seat.number}}</button>
+        <button *ngIf="seat == 'offset'" class="btn mr-1 mb-1" disabled="" style="background: none;"></button>
+      </div>
+    </div>
+    <div id="numbers" class="row">
+      <div *ngFor="let number of encoding[0].row; let i = index">
+        <button disabled="" class="btn primary mr-1 mb-1">{{i+1}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div style="align-content: center; clear: none; width: 50%; margin: 0 auto; display: block">
 
   <div class="form-control" style="float: inherit">
     <h1 class="ticket__cost">Price: {{(totalPrice) ? totalPrice : "N/A"}}</h1>
   </div>
   <br>
   <div style="margin: 0 auto;float: inherit">
-    <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 "
-            [disabled]="ticketIsLoaded" (click)="makeReservation()">
+    <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 " [disabled]="ticketIsLoaded" (click)="makeReservation()">
       Make the Reservation
     </button>
   </div>
 
 </div>
-
-
-
-

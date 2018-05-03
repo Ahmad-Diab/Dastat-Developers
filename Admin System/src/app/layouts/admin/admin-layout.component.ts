@@ -42,8 +42,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   _autoCollapseWidth = 991;
   width = window.innerWidth;
   username: string;
-  cinemas = [];
-  isAppOwner = false;
+
   menu;
 
   @ViewChild('sidebar') sidebar;
@@ -68,19 +67,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
 
-    var type = this.cookie.getObject('auth')['type'];
-    if(type === 'App Owner') {
-      this.isAppOwner = true;
-    }
-
-   /*  this.promocodesService.getPromocodesAndCinemas().subscribe((response) =>{
-      this.cinemas = response.data.cinemaResults;
-      var cinemaName = this.cinemas[0].name;
-      var cinemaLocation = this.cinemas[0].location;
-      var cinemaNameLocation = cinemaName + ',' + cinemaLocation;
-      this.cookie.putObject('cinema', cinemaNameLocation);
-      console.log(this.cookie.getObject('cinema'));
-    }); */
     
     if (this.isOver()) {
       this._mode = 'over';
@@ -149,11 +135,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
     
-  }
-
-  getChosenCinema(cinema: string) {
-    this.cookie.putObject('cinema', cinema);
-    console.log(this.cookie.getObject('cinema'));
   }
 
 }

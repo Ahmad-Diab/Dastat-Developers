@@ -27,7 +27,7 @@ export class RequestsCoBmComponent implements OnInit {
     
     this.movieServices.viewRequests(this.username).subscribe((response)=>{
       if(!response) this.movies = []
-      else this.movies= response;
+      else this.movies= response.data;
     });
     
 
@@ -52,8 +52,6 @@ toogleMovie(){
 
 addReq(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, release_date:Date,username: string){
     let year = parseInt(((String) (release_date)).substring(0,4));
-    console.log(duration)
-    duration = duration && duration.length === 5 ? duration + ":00" : duration;
     this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,3,release_date,5,username).subscribe((response)=>{
       this.responeStatus="Added";
       this.ngOnInit();

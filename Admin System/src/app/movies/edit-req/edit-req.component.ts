@@ -22,6 +22,7 @@ export class EditReqComponent implements OnInit {
     console.log(this.movie);
     this.MoviesService.getMovieInfo(this.movie).subscribe((response)=>{
       this.movie=response.data[0];
+      console.log(this.movie.movie_id)
       console.log(response.data[0]);
       var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
@@ -36,9 +37,8 @@ export class EditReqComponent implements OnInit {
     //---------EDIT A REQUESR----------------
 editReq(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, feature: number, release_date:Date,rating: number,username: string,movie_id: string){ 
     let year = parseInt(((String) (release_date)).substring(0,4));
-    duration = duration && duration.length === 5 ? duration + ":00" : duration;
-      this.MoviesService.editRequest(title,duration,genre,description,imagePath,cast,year,this.movie.feature,release_date,this.movie.rating,username,movie_id).subscribe((response)=>{
-          this.ngOnInit();
+      this.MoviesService.editRequest(title,duration,genre,description,imagePath,cast,year,this.movie.feature,release_date,this.movie.rating,username,this.movie.movie_id).subscribe((response)=>{
+        this.ngOnInit();
         });  
   }
 

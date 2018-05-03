@@ -24,7 +24,7 @@ export class ViewMoviesComponent implements OnInit {
     //-------VIEW ALL MOVIES------------------
 
         this.movieServices.viewAllMovies().subscribe((response)=>{
-        this.movies = response;
+        this.movies = response.data;
         console.log(response);
         var auth = <Auth>(this.cookie.getObject('auth'));
         this.username = auth.username;
@@ -49,7 +49,6 @@ deleteMovie(movie_id: number){
 
 ///----------ADD A MOVIE--------------------------
 addMovie(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, feature: number, release_date:Date,username: string){
-    duration = duration && duration.length === 5 ? duration + ":00" : duration;
     let year = parseInt(((String) (release_date)).substring(0,4));
      this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,5,username).subscribe((response)=>{
        this.responeStatus="Added";

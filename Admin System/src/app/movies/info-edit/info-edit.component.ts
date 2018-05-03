@@ -40,7 +40,8 @@ export class InfoEditComponent implements OnInit {
   }
 
   //---------EDIT A MOVIE----------------
-editMovie(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string,feature: number, release_date:Date,rating: number,username: string,movie_id: string){ 
+editMovie(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string,feature: number, release_date:Date,rating: number,username: string,movie_id: string){
+      console.log(typeof duration)
       duration = duration && duration.length === 5 ? duration + ":00" : duration;
       let year = parseInt(((String) (release_date)).substring(0,4));
       console.log(release_date);

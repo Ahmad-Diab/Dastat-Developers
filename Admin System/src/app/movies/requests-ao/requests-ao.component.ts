@@ -22,7 +22,7 @@ export class RequestsAoComponent implements OnInit {
   ngOnInit() {
 
     this.movieServices.viewALlRequests().subscribe((response)=>{
-      this.movies = response;
+      this.movies = response.data;
       console.log(response);
       var auth = <Auth>(this.cookie.getObject('auth'));
       this.username = auth.username;

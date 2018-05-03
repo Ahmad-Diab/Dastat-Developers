@@ -42,8 +42,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   _autoCollapseWidth = 991;
   width = window.innerWidth;
   username: string;
-  cinemas = [];
-  isAppOwner = false;
+
   menu;
 
   @ViewChild('sidebar') sidebar;
@@ -149,11 +148,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
     
-  }
-
-  getChosenCinema(cinema: string) {
-    this.cookie.putObject('cinema', cinema);
-    console.log(this.cookie.getObject('cinema'));
   }
 
 }

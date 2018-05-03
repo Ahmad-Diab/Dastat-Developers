@@ -7,6 +7,7 @@ import { Admin } from '../../@objects/admin';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Alert } from '../../@objects/alert';
 import { ModalAdmin } from '../modals/admin.component';
+import { CinemaslistService } from '../../@services/cinemaslist.service';
 
 @Component({
   selector: 'app-branch-manager',
@@ -18,7 +19,10 @@ export class BranchManagerComponent implements OnInit {
   rows: Admin[];
   alert: Alert = new Alert();
 
-  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
+  cinemaChoosen;
+  cinemas = [];
+
+  constructor(public adminService: AdminService, public cinemalistService: CinemaslistService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
 
   ngOnInit() {
 
@@ -28,6 +32,13 @@ export class BranchManagerComponent implements OnInit {
     
     this.adminService.getBranchManagers(data).subscribe((response)=>{
       this.rows = response.data;
+    });
+
+    this.cinemalistService.getAllCinemas().subscribe((response) => {
+      this.cinemas = response.data;
+      console.log(this.cinemas)
+      this.cinemaChoosen = 'all';
+      console.log(this.cinemaChoosen)
     });
   }
   updateValue(admin) {

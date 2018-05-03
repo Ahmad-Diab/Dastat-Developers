@@ -12,6 +12,13 @@
 <div class="card">
   <div class="card-header">
     Cinema Owners
+    <div class="col-3">
+      <select class="form-control input" [(ngModel)]="cinemaChoosen" required>
+        <option value="0" disabled>Select a Cinema</option>
+        <option value="all" selected>ALL</option>
+        <option *ngFor="let cinema of cinemas" [ngValue]="cinema">{{cinema.name}},{{cinema.location}}</option>
+      </select>
+    </div>
     <button type="button" class="btn btn-success mr-1 ml-auto" (click) = "addCinemaOwner()">Add Cinema Owner</button>
   </div>
   <div class="card-body">
@@ -21,6 +28,9 @@
           <tr>
             <th>
               Cinema Name
+            </th>
+            <th>
+              Cinema Location
             </th>
             <th>
               Username
@@ -52,16 +62,65 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody *ngIf = "cinemaChoosen != 'all'">
+            <tr *ngFor="let row of rows |filter:term" >
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.cinema_name}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.cinema_location}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.username}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+              {{row.email}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.type}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.salary}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.first_name}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.last_name}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.phone_number}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                {{row.gender}}
+              </td>
+              <td *ngIf = "row.cinema_name == cinemaChoosen.name && row.cinema_location == cinemaChoosen.location">
+                <div id="actions">
+                  <a (click)="updateValue(row)">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <a (click)="deleteRow(row)">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+        </tbody>
+
+
+        <tbody *ngIf = "cinemaChoosen == 'all'">
           <tr *ngFor="let row of rows |filter:term">
             <td>
               {{row.cinema_name}}
             </td>
             <td>
+              {{row.cinema_location}}
+            </td>
+            <td>
               {{row.username}}
             </td>
             <td>
-             {{row.email}}
+              {{row.email}}
             </td>
             <td>
               {{row.type}}

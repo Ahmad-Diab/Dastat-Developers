@@ -21,21 +21,15 @@
        <div class="tags-area">
           <div class="tags tags--unmarked">
 
-            <a class="page-heading3">Sorted by rate:</a>
+            <a class="page-heading3">Sorted by:</a>
               <mat-form-field>
-                  <mat-select [(ngModel)] = "rateFilter" (change)="filterByAll()">
+                  <mat-select [(ngModel)] = "sortingFilter" (change)="filterByAll()">
                     <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="High Rates">High Rates</mat-option>
                     <mat-option value="Low Rates">Low Rates</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                  <a class="page-heading3">Sorted by date:</a>
-                  <mat-form-field>
-                  <mat-select [(ngModel)] = "dateFilter" (change)="filterByAll()">
-                    <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="Latest">Latest</mat-option>
                     <mat-option value="Oldest">Oldest</mat-option>
-                </mat-select>
+                  </mat-select>
                 </mat-form-field>  
                   <a class="page-heading3">Filtered by Genre:</a>
                   <mat-form-field>

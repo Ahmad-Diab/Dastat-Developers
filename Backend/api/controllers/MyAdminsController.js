@@ -50,7 +50,7 @@ module.exports.getAdmins = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No admins available',
-                data: rows
+                data: null
             });
 
         }
@@ -127,8 +127,8 @@ module.exports.getBookingUshers = function (req, res, next) {
 
             return res.status(200).json({
                 err: null,
-                msg: 'No admins available',
-                data: rows
+                msg: 'No Booking Ushers available',
+                data: null
             });
 
         }
@@ -815,8 +815,8 @@ module.exports.getBranchManagers = function (req, res, next) {
 
             return res.status(200).json({
                 err: null,
-                msg: 'No admins available',
-                data: rows
+                msg: 'No Branch Managers available',
+                data: null
             });
 
         }
@@ -1065,7 +1065,7 @@ module.exports.getCinemaOwners = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No Cinema Owners available',
-                data: rows
+                data: null
             });
 
         }

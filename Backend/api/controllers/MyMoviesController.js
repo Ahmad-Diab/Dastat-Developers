@@ -104,7 +104,7 @@ module.exports.viewMyRequests = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No requests available',
-                data: rows
+                data: null
             });
 
         }
@@ -197,7 +197,7 @@ module.exports.viewRequests = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No requests available',
-                data: rows
+                data: null
             });
 
         }
@@ -275,7 +275,7 @@ module.exports.getMovies = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No Movies available',
-                data: rows
+                data: null
             });
 
         }

@@ -348,13 +348,13 @@ module.exports.addBookingUsher = function (req, res, next) {
                                     gender: gender
                                 };
 
-                                let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
-                                database.query(sqlQuery, [admin], function (err) {
+                                let sqlQuery = 'INSERT INTO admins SET ?';
+                                database.query(sqlQuery, admin, function (err) {
                                     if (err) {
                                         return next(err);
                                     }
-                                    sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?';
-                                    database.query(sqlQuery, [newBookingUsherUsername, cinema_location, cinema_name], function (err, results) {
+                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
+                                    database.query(sqlQuery, {newBookingUsherUsername, cinema_location, cinema_name}, function (err, results) {
                                         if (err)
                                             return next(err);
 
@@ -417,7 +417,7 @@ module.exports.editBookingUsher = function (req, res, next) {
         }
 
         database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
-            [cinema_name, cinema_location, adminUserName], function (error, results) {
+            [username , adminUserName], function (error, results) {
                 if (error) {
                     return next(error);
                 }
@@ -505,7 +505,7 @@ module.exports.deleteBookingUsher = function (req, res, next) {
         }
 
         database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
-            [cinema_name, cinema_location, adminUserName], function (error, results) {
+            [username , adminUserName], function (error, results) {
                 if (error) {
                     return next(error);
                 }
@@ -734,15 +734,15 @@ module.exports.addBranchManager = function (req, res, next) {
                                     gender: gender
                                 };
 
-                                let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
-                                database.query(sqlQuery, [admin], function (err) {
+                                let sqlQuery = 'INSERT INTO admins SET ?';
+                                database.query(sqlQuery, admin, function (err) {
                                     if (err) {
                                         return next(err);
                                     }
 
 
-                                    sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?';
-                                    database.query(sqlQuery, [newBranchManagerUsername, cinema_location, cinema_name],
+                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
+                                    database.query(sqlQuery, {newBranchManagerUsername, cinema_location, cinema_name},
                                         function (err, results) {
                                             if (err)
                                                 return next(err);
@@ -891,7 +891,7 @@ module.exports.editBranchManager = function (req, res, next) {
         }
 
         database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
-            [cinema_name, cinema_location, adminUserName], function (error, results) {
+            [username, adminUserName], function (error, results) {
                 if (error) {
                     return next(error);
                 }
@@ -980,7 +980,7 @@ module.exports.deleteBranchManager = function (req, res, next) {
         }
 
         database.query('SELECT * FROM admins_cinemas C1 , admins_cinemas C2  WHERE C1.admin = ? AND C2.admin = ? AND C1.cinema_name = C2.cinema_name AND C1.cinema_location = C2.cinema_location',
-            [cinema_name, cinema_location, adminUserName], function (error, results) {
+            [username, adminUserName], function (error, results) {
                 if (error) {
                     return next(error);
                 }
@@ -1287,15 +1287,15 @@ module.exports.addCinemaOwner = function (req, res, next) {
                                     gender: gender
                                 };
 
-                                let sqlQuery = 'INSERT INTO admins (username,password,email,salary,type,first_name,last_name,phone_number,gender) VALUES ?';
-                                database.query(sqlQuery, [admin], function (err) {
+                                let sqlQuery = 'INSERT INTO admins SET ?';
+                                database.query(sqlQuery, admin, function (err) {
                                     if (err) {
                                         return next(err);
                                     }
 
 
-                                    sqlQuery = 'INSERT INTO admins_cinemas (admin,cinema_location,cinema_name) VALUES ?';
-                                    database.query(sqlQuery, [newCinemaOwnerUsername, cinema_location, cinema_name],
+                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
+                                    database.query(sqlQuery, {newCinemaOwnerUsername, cinema_location, cinema_name},
                                         function (err, results) {
                                             if (err)
                                                 return next(err);

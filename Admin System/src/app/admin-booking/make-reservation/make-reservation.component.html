@@ -1,7 +1,3 @@
-<p>
-  make-reservation under construction!
-</p>
-
 <div class="ticket-view" style=" align-self: center; margin: 0 auto;">
   <div class="ticket">
     <div class="ticket-position">
@@ -109,8 +105,8 @@
   </div>
   <br>
   <div style="margin: 0 auto;float: inherit">
-    <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 " [disabled]="ticketIsLoaded" (click)="makeReservation()">
-      Make the Reservation
+    <button type="button" class="btn-outline-primary btn-lg mr-5 mb-lg-3 " [disabled]="!ticketIsLoaded" (click)="makeReservation()">
+      {{statusOfTicket}}
     </button>
   </div>
 

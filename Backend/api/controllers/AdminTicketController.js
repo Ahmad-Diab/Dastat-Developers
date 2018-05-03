@@ -22,7 +22,6 @@ module.exports.makeReservationAsAdmin = function (req, res, next) {
             data: null
         });
     }
-
     let tokenHeaderSpliced = tokenHeader.split(' '),
         token = tokenHeaderSpliced[1];
     jwt.verify(token, config.secret, (err, authData) => {
@@ -35,7 +34,6 @@ module.exports.makeReservationAsAdmin = function (req, res, next) {
         }
 
         let admin_username = authData.username;
-
         if (!admin_username) {
             return res.status(401).json({
                 err: null,
@@ -63,9 +61,7 @@ module.exports.makeReservationAsAdmin = function (req, res, next) {
                 data: null
             });
         }
-
-        let username = cinema_name.trim(' ').toLowerCase() + '_' + cinema_location.trim(' ').toLowerCase();
-
+        let username = cinema_name.replace(" ", "").toLowerCase() + '_' + cinema_location.replace(" ", "").toLowerCase();
         if (!party_date || !party_time) {
             return res.status(422).json({
                 err: null,
@@ -102,11 +98,10 @@ module.exports.makeReservationAsAdmin = function (req, res, next) {
         // Verify that movie exists in hall
         // Verify that hall exists in Cinema, and retrieve movie
         let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
-            membershipData = [admin_username, name, location];
+            membershipData = [admin_username, cinema_name, cinema_location];
 
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);
-
             if (!results.length && admin_username !== 'app') {
                 return res.status(401).send({
                     err: null,
@@ -177,7 +172,6 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
 
     let tokenHeaderSpliced = tokenHeader.split(' '),
         token = tokenHeaderSpliced[1];
-
     jwt.verify(token, config.secret, (err, authData) => {
         if (err) {
             return res.status(401).json({
@@ -234,7 +228,6 @@ module.exports.verifyUnpaidTicket = function (req, res, next) {
                 }
 
                 if (results.changedRows) {
-                    console.log('ticket verified');
                     res.status(200).json({
                         err: null,
                         msg: 'Ticket has been verified successfully.',
@@ -338,7 +331,6 @@ module.exports.viewTicketInfo = function (req, res, next) {
 
     let tokenHeaderSpliced = tokenHeader.split(' '),
         token = tokenHeaderSpliced[1];
-
     jwt.verify(token, config.secret, (err, authData) => {
         if (err) {
             return res.status(401).json({
@@ -420,6 +412,8 @@ module.exports.cancelReservation = function (req, res, next) {
         });
     }
 
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
     jwt.verify(token, config.secret, (err, authData) => {
         if (err) {
             return res.status(401).json({
@@ -480,6 +474,8 @@ module.exports.getCurrentMoviesForCinemaForAdmin = function (req, res, next) {
         });
     }
 
+    let tokenHeaderSpliced = tokenHeader.split(' '),
+        token = tokenHeaderSpliced[1];
     jwt.verify(token, config.secret, (err, authData) => {
         if (err) {
             return res.status(401).json({
@@ -488,12 +484,9 @@ module.exports.getCurrentMoviesForCinemaForAdmin = function (req, res, next) {
                 data: null
             });
         }
-
         let adminUsername = authData.username;
-
         let cinema_name = req.query['cinema_name'],
             cinema_location = req.query['cinema_location'];
-
         if (!cinema_name) {
             return res.status(422).json({
                 err: null,
@@ -509,7 +502,6 @@ module.exports.getCurrentMoviesForCinemaForAdmin = function (req, res, next) {
                 data: null
             });
         }
-
         let checkForMembershipQuery = 'SELECT a.admin FROM admins_cinemas a ON a.cinema_name = ? AND a.cinema_location = ? WHERE a.admin = ?',
             membershipData = [cinema_name, cinema_location, adminUsername];
 
@@ -521,7 +513,6 @@ module.exports.getCurrentMoviesForCinemaForAdmin = function (req, res, next) {
         let sqlData = (adminUsername === 'app')? table : membershipData;
         database.query(sqlQuery, sqlData, function (err, results) {
             if (err) return next(err);
-
             if (!results.length) {
                 return res.status(404).send({
                     err: null,

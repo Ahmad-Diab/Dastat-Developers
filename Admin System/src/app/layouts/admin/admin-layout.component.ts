@@ -75,10 +75,12 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.cinemas = response.data;
       this.cinemaChoosen = response.data[0];
+      this.cookie.putObject('cinema', this.cinemaChoosen);
+
       console.log(this.cinemaChoosen);
     });
 
-    
+
     if (this.isOver()) {
       this._mode = 'over';
       this.isOpened = false;
@@ -141,11 +143,11 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     var auth: Auth = {
       token: undefined,
       username: undefined
-    }
+    };
 
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
-    
+
   }
 
   getChosenCinema(ok) {

@@ -10,17 +10,8 @@ let database = require('../config/db-connection'),
  * @param {*} next
  */
 module.exports.searchByKeyword = function (req, res, next) {
-    let username = req.params['username'],
-        start = req.params['start'],
+    let start = req.params['start'],
         limit = req.params['limit'];
-
-    if (!username) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required.',
-            data: null
-        });
-    }
 
     if (!req.params['searchKeyword']) {
         return res.status(422).json({
@@ -53,12 +44,12 @@ module.exports.searchByKeyword = function (req, res, next) {
     let sqlMovie = 'SELECT movie_id,title,genre,imagePath,year,rating,duration FROM movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ? ORDER BY title DESC limit ? OFFSET ?';
     let sqlCinema = 'SELECT * FROM cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ? ORDER BY name limit ? OFFSET ?';
     let sqlActor = 'SELECT name,age,bio FROM actors WHERE name LIKE ? ORDER BY name limit ? OFFSET ?';
-    let userAndLimitData = [limitNum, startNum];
+    let userAndLimitData = startNum;
     let searchKeyS = '%' + req.params['searchKeyword'] + '%';        // used in comparison to char columns using 'LIKE'
     let searchKeyN = req.params['searchKeyword'];                     // used in comparison to int columns using '='
-    let sqlMovieData = [searchKeyS, searchKeyS, searchKeyS, searchKeyN, searchKeyN, userAndLimitData],
-        sqlCinemaData = [searchKeyS, searchKeyS, searchKeyS, userAndLimitData],
-        sqlActorData = [searchKeyS, userAndLimitData];
+    let sqlMovieData = [searchKeyS, searchKeyS, searchKeyS, searchKeyN, 20, userAndLimitData],
+        sqlCinemaData = [searchKeyS, searchKeyS, searchKeyS,20, userAndLimitData],
+        sqlActorData = [searchKeyS,20, userAndLimitData];
 
     let sqlMovieCount = 'SELECT count(*) AS TotalCount FROM movies WHERE title LIKE ? OR genre LIKE ? OR cast LIKE ? OR year = ?',
         sqlCinemaCount = 'SELECT count(*) AS TotalCount FROM cinemas WHERE name LIKE ? OR company LIKE ? OR location LIKE ?',
@@ -124,7 +115,11 @@ module.exports.viewMovies3 = function (req, res, next) {
     database.query('SELECT * FROM movies WHERE feature=3', function (error, results) {
         if (error) return next(error);
         console.log(results);
-        return res.send(results);
+        return res.status(200).send({
+            err: null,
+            msg: 'data retrieved.',
+            data: results
+        });
     });
 };
 

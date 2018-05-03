@@ -15,10 +15,13 @@ export class SigninComponent implements OnInit {
   
   user: User = new User();
   message;
+  message2;
+  forgotmypassword:boolean;
   loogedin:boolean;
   constructor(public cookie: CookieService, public router: Router,private location:Location, public authService: AuthService) { }
 
   ngOnInit() {
+    this.forgotmypassword=false;
     if (this.cookie.get("username")){
       this.loogedin=true;
     }
@@ -26,6 +29,22 @@ export class SigninComponent implements OnInit {
       this.loogedin=false;
     }
   }
+  onForgotmypassword(){
+    if(!this.user.username){
+      this.message = "please enter a username"
+      return;
+    }
+    this.authService.forgotpassword(this.user).subscribe((response)=>{
+      if(!response.success){
+      this.message = response.msg;
+      return;
+    }
+      else{
+       this.message2=response.msg;    
+      }
+
+  });
+}
   onLogin(){
     if(!this.user.username){
       this.message = "please enter a username"
@@ -58,7 +77,10 @@ export class SigninComponent implements OnInit {
     location.reload();
     
   }
-
+onForgotAction(){
+  this.forgotmypassword=true;
+  this.user=new User();
+}
   
 
     

@@ -135,7 +135,7 @@ module.exports.getBookingUshers = function (req, res, next) {
         if (start === '' || limit === '' || !start || !limit) {
             // In case no limits entered.
             startNum = 0;
-            limitNum = 10;
+            limitNum = 100;
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
@@ -823,7 +823,7 @@ module.exports.getBranchManagers = function (req, res, next) {
         if (start === '' || limit === '' || !start || !limit) {
             // In case no limits entered.
             startNum = 0;
-            limitNum = 10;
+            limitNum = 100;
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
@@ -1072,7 +1072,7 @@ module.exports.getCinemaOwners = function (req, res, next) {
         if (start === '' || limit === '' || !start || !limit) {
             // In case no limits entered.
             startNum = 0;
-            limitNum = 10;
+            limitNum = 100;
             pagination = false;
             errMsg = "No Limits were provided";
             console.log("No limits");
@@ -1082,9 +1082,17 @@ module.exports.getCinemaOwners = function (req, res, next) {
             limitNum = parseInt(limit);
         }
 
-        let query = "select DISTINCT * from admins_cinemas ac , admins a WHERE ac.admin = a.username AND type = 'Cinema Owner' limit ? OFFSET ?";
+        if(username !== 'app') {
+            return res.status(401).json({
+                err: null,
+                msg: 'Not allowed to enter here',
+                data: null
+            });
+        }
+
+        let query = "select DISTINCT * from admins a limit ? OFFSET ?";
         //Mention table from where you want to fetch records example-users & send limit and start
-        let table = [username, limitNum, startNum];
+        let table = [limitNum, startNum];
 
         database.query(query, table, function (err, rest) {
             if (err) {

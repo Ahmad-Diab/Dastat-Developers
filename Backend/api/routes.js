@@ -36,6 +36,7 @@ router.get('/authTest', Authorization.Verify("1000"), (req, res) => {
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
 router.post('/register', Authentication.Register);
+router.post('/forgotpassword', Authentication.ForgotPassword);
 
 //---------------------------------------------------User Booking Routes--------------------------------------//
 router.post('/userBooking/makeReservation', UserBooking.makeReservation);

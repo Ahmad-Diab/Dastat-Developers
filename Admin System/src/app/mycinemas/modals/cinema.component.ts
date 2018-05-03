@@ -49,9 +49,9 @@ export class ModalCinema implements OnInit {
         if(this.add) {
             this.cinema.is3D = parseInt(this.cinema.is3D);
             this.cinema.is4D = parseInt(this.cinema.is4D);
-            this.cinemalistService.addCinema(this.cinema).subscribe(() => {
+            this.cinemalistService.addCinema(this.cinema).subscribe((response) => {
                 var alert = {
-                    message: 'Cinema Added!',
+                    message: response.msg,
                     type: 'success',
                     active: true
                 };
@@ -60,9 +60,9 @@ export class ModalCinema implements OnInit {
         } else {
             this.cinema.is3D = parseInt(this.cinema.is3D);
             this.cinema.is4D = parseInt(this.cinema.is4D);
-            this.cinemalistService.Update(this.cinema.location,this.cinema.name,this.cinema).subscribe(() => {
+            this.cinemalistService.Update(this.cinema.location,this.cinema.name,this.cinema).subscribe((response) => {
                 var alert = {
-                    message: 'Cinema Edited!',
+                    message: response.msg,
                     type: 'success',
                     active: true
                 };

@@ -67,19 +67,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
 
-    var type = this.cookie.getObject('auth')['type'];
-    if(type === 'App Owner') {
-      this.isAppOwner = true;
-    }
-
-   /*  this.promocodesService.getPromocodesAndCinemas().subscribe((response) =>{
-      this.cinemas = response.data.cinemaResults;
-      var cinemaName = this.cinemas[0].name;
-      var cinemaLocation = this.cinemas[0].location;
-      var cinemaNameLocation = cinemaName + ',' + cinemaLocation;
-      this.cookie.putObject('cinema', cinemaNameLocation);
-      console.log(this.cookie.getObject('cinema'));
-    }); */
     
     if (this.isOver()) {
       this._mode = 'over';

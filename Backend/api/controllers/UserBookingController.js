@@ -136,7 +136,6 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
             data: null
         });
     }
-
     // Validations of correct types
     if (!Validations.isNumber(movie_id)) {
         return res.status(422).json({

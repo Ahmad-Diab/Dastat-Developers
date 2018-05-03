@@ -44,7 +44,6 @@ export class MakeReservationComponent implements OnInit {
   ngOnInit() {
     let auth = <Auth>(this.cookie.getObject('auth'));
     this.adminUsername = auth.username;
-    this.loadMovies();
 
     this.reserveData = {
       cinema_name: 'Cinema Mawlana', // TODO get from cookies
@@ -61,6 +60,7 @@ export class MakeReservationComponent implements OnInit {
       movie: null
     };
 
+    this.loadMovies();
     this.loadSeatLayout();
   }
 

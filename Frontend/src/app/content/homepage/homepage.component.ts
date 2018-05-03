@@ -17,12 +17,12 @@ export class HomepageComponent implements OnInit {
     //this.load();
 
     this.moviesService.getFeaturedMovies().subscribe((response) => { 
-      this.movies = response;
+      this.movies = response.data;
       console.log(response);
     });
 
     this.moviesService.getTopMovies().subscribe((response) => { 
-      this.topMovies = response;
+      this.topMovies = response.data;
       console.log(response);
     });
   }

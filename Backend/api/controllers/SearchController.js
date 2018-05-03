@@ -124,7 +124,11 @@ module.exports.viewMovies3 = function (req, res, next) {
     database.query('SELECT * FROM movies WHERE feature=3', function (error, results) {
         if (error) return next(error);
         console.log(results);
-        return res.send(results);
+        return res.status(200).send({
+            err: null,
+            msg: 'data retrieved.',
+            data: results
+        });
     });
 };
 

@@ -90,7 +90,7 @@ router.get('/movies/getMoviesWithFilters/', Movie.getMoviesWithFilters);
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Viewing routes--------------------------------------------//
-router.get('/viewCinemas/:start/:limit',Cinema.ViewCinemas);
+router.get('/viewCinemas',Cinema.ViewCinemas);
 router.get('/viewMovies',Search.viewMovies);
 router.get('/viewMovies3',Search.viewMovies3);
 router.get('/viewMovies2',Search.viewMovies2);

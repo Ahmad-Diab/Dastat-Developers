@@ -50,7 +50,7 @@ module.exports.getAdmins = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No admins available',
-                data: rows
+                data: null
             });
 
         }
@@ -127,8 +127,8 @@ module.exports.getBookingUshers = function (req, res, next) {
 
             return res.status(200).json({
                 err: null,
-                msg: 'No admins available',
-                data: rows
+                msg: 'No Booking Ushers available',
+                data: null
             });
 
         }
@@ -353,8 +353,8 @@ module.exports.addBookingUsher = function (req, res, next) {
                                     if (err) {
                                         return next(err);
                                     }
-                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
-                                    database.query(sqlQuery, {newBookingUsherUsername, cinema_location, cinema_name}, function (err, results) {
+                                    sqlQuery = 'INSERT INTO admins_cinemas (username , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newBookingUsherUsername, cinema_location, cinema_name], function (err, results) {
                                         if (err)
                                             return next(err);
 
@@ -741,8 +741,8 @@ module.exports.addBranchManager = function (req, res, next) {
                                     }
 
 
-                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
-                                    database.query(sqlQuery, {newBranchManagerUsername, cinema_location, cinema_name},
+                                    sqlQuery = 'INSERT INTO admins_cinemas(username , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newBranchManagerUsername, cinema_location, cinema_name],
                                         function (err, results) {
                                             if (err)
                                                 return next(err);
@@ -815,8 +815,8 @@ module.exports.getBranchManagers = function (req, res, next) {
 
             return res.status(200).json({
                 err: null,
-                msg: 'No admins available',
-                data: rows
+                msg: 'No Branch Managers available',
+                data: null
             });
 
         }
@@ -1065,7 +1065,7 @@ module.exports.getCinemaOwners = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No Cinema Owners available',
-                data: rows
+                data: null
             });
 
         }
@@ -1296,8 +1296,8 @@ module.exports.addCinemaOwner = function (req, res, next) {
                                     }
 
 
-                                    sqlQuery = 'INSERT INTO admins_cinemas SET ?';
-                                    database.query(sqlQuery, {newCinemaOwnerUsername, cinema_location, cinema_name},
+                                    sqlQuery = 'INSERT INTO admins_cinemas(username , cinema_location , cinema_name) VALUES (?,?,?)';
+                                    database.query(sqlQuery, [newCinemaOwnerUsername, cinema_location, cinema_name],
                                         function (err, results) {
                                             if (err)
                                                 return next(err);

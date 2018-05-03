@@ -57,7 +57,7 @@ module.exports.getHallsForThatCinema = function (req, res) {
             return res.status(200).json({
                 err: null,
                 msg: 'No Halls available',
-                data: rows
+                data: null
             });
         }
         if (start === '' || limit === '' || !start || !limit) {
@@ -370,7 +370,7 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No Halls available',
-                data: rows
+                data: null
             });
 
         }
@@ -480,7 +480,7 @@ module.exports.viewMoviesInHalls = function (req, res, next) {
             return res.status(200).json({
                 err: null,
                 msg: 'No Halls available',
-                data: rows
+                data: null
             });
 
         }

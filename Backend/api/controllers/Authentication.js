@@ -158,6 +158,50 @@ module.exports.verify = function (req, res, next) {
 
 };
 
+module.exports.ForgotPassword = function(req,res,next){
+    let username = req.body.username;
+    if (!username) {
+        return res.status(422).json({
+            err: null,
+            msg: 'username is required field.',
+            data: null
+        });}
+        let query = 'SELECT * FROM users WHERE username = ?';
+        database.query(query, [username], function (err, results) {
+            if (err) return next(err);
+    
+            if (!results.length) {
+                res.status(200).json({
+                    err: null,
+                    msg: "Please Enter a valid Username",
+                    success: false
+                });
+                return;
+            }//else
+            let newpass = randomstring.generate(7);
+            let email=results[0].email;
+            let hashed_pass;
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newpass, salt, (err, hash) => {
+                    if (err) return next(err);
+                    hashed_pass = hash;
+        database.query('UPDATE users SET password = ? where username = ?',[hashed_pass,username],function(err,result){
+            if (err) return next(err);
+            const html = '<p>Hi there</p><br/><p>This is Your new Password</p><br/><p>'+ newpass +'</p><b></b> <br/>';
+              mailer.sendmail(email, html);
+              res.status(200).json({
+                err: null,
+                msg: "A New Password Sent to Your Email Check it :D",
+                success: true
+            });
+        })
+    })
+});
+
+        });
+
+}
+
 /**
  *
  * @params req, its body containing username, password, email, phone_number,
@@ -303,14 +347,14 @@ module.exports.Register = function (req, res, next) {
                         if (error)
                             return next(error);
 
-                        const html = '<p>Hi there,</p><br/><p>Thank you For Registering!</p><br/><p> Token:' + active_code + '</p><b></b> <br/><p>Please Write that token on that link to activate your Account.</p><a href ="http://localhost:4200/verify">here</a>';
+                        const html = '<p>Hi there,</p><br/><p>Thank you For Registering!</p><br/><p> Activation Code:' + active_code + '</p><b></b> <br/><p>Please Write that Activation Code on the following link to activate your Account.</p><a href ="http://localhost:4200/verify">here</a>';
 
                         mailer.sendmail(email, html);
 
                         res.status(200).json({
                             err: null,
                             msg: "Registration done successfully," +
-                            " Please check your account to verify your account.",
+                            " Please check your Email to verify your account.",
                             success: true
                         });
 

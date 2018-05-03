@@ -1298,7 +1298,7 @@ describe('Movie Requests', function () {
             });
     });
 
-// });
+});
 
 
 // //Omar Abdelaziz

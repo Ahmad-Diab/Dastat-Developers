@@ -1,10 +1,6 @@
 let express = require('express'),
     router = express.Router();
 
-// TODO function to add admins by app owner
-// TODO function admins add other low level admins
-// TODO app owner should view booking ushers
-
 //--------- USER ------------------
 let User = require('./controllers/UserController'),
     Seat = require('./controllers/SeatController'),
@@ -22,15 +18,13 @@ let MyMovies = require('./controllers/MyMoviesController'),
     Authorization = require("./Authorization"),
     adminTicket = require('./controllers/AdminTicketController'),
     Admin = require('./controllers/MyAdminsController'),
-    MoviesInHalls = require('./controllers/MoviesInHallsController'),
+    //MoviesInHalls = require('./controllers/MoviesInHallsController'),
     AdminHalls = require('./controllers/AdminHallsController'),
     Promocodes = require('./controllers/PromocodesController'),
     MyCinemas = require('./controllers/MyCinemas'),
     Dashboard = require('./controllers/DashboardController');
 
-//please add only routers here, if you need to call a function require its class
-//DON'T IMPLEMENT CONTROLLER FUNCTION HERE!!
-
+//----------------------------------------------------Authentication routes------------------------------------//
 router.get('/authTest', Authorization.Verify("1000"), (req, res) => {
     return res.status(200).json({
         err: null,
@@ -39,7 +33,6 @@ router.get('/authTest', Authorization.Verify("1000"), (req, res) => {
     });
 });
 
-//----------------------------------------------------Authentication routes------------------------------------//
 router.post('/login', Authentication.authenticate);
 router.post('/verify', Authentication.verify);
 router.post('/register', Authentication.Register);
@@ -52,7 +45,7 @@ router.get('/userBooking/getBookings/:username/:start/:limit', UserBooking.getBo
 
 router.get('/userBooking/getPartiesInSpecificCinema/:cinema_location/:cinema_name/:movie_id/:date',
     UserBooking.getPartiesOfThatMovieInSpecificCinema);
-router.get('/userBooking/getAllParties/:movie_id/:date', UserBooking.getAllPartiesForThatMovie);
+router.get('/userBooking/getAllParties/:movie_id/', UserBooking.getAllPartiesForThatMovie);
 router.post('/userBooking/usePromoCode', UserBooking.usePromoCode);
 
 //----------------------------------------------------Seating routes--------------------------------------------//
@@ -91,32 +84,21 @@ router.post('/users/editProfile/:username', User.editProfile);
 router.get('/actors/:name', Actor.getActors);
 
 //----------------------------------------------------Movie Getters routes------------------------------------//
-// router.get('/movies/feature',Movie.getMovies);
-// router.get('/movies/highrate/:genre',Movie.getMoviesHighRatings);
-// router.get('/movies/lowrate/:genre',Movie.getMoviesLowRatings);
-// router.get('/movies/latest/:genre',Movie.getMoviesLastestDate);
-// router.get('/movies/oldest/:genre',Movie.getMoviesOldesttDate);
-// router.get('/movies/Action/:sortingFilter',Movie.getMoviesAction);
-// router.get('/movies/Adventure/:sortingFilter',Movie.getMoviesAdventure);
-// router.get('/movies/Comedy/:sortingFilter',Movie.getMoviesComedy);
-// router.get('/movies/Drama/:sortingFilter',Movie.getMoviesDrama);
-// router.get('/movies/Horror/:sortingFilter',Movie.getMoviesHorror);
-// router.get('/movies/Thriller/:sortingFilter',Movie.getMoviesThriller);
 router.get('/movies/getMoviesWithFilters/', Movie.getMoviesWithFilters);
 
 //----------------------------------------------------Search routes--------------------------------------------//
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Viewing routes--------------------------------------------//
-router.get('/viewCinemas', Cinema.ViewCinemas);
-router.get('/viewMovies', Search.viewMovies);
-router.get('/viewMovies3', Search.viewMovies3);
-router.get('/viewMovies2', Search.viewMovies2);
-router.get('/viewMovies1', Search.viewMovies1);
-router.get('/viewMovies0', Search.viewMovies0);
-router.get('/getTopMovies', Search.getTopMovies);
+router.get('/viewCinemas/:start/:limit',Cinema.ViewCinemas);
+router.get('/viewMovies',Search.viewMovies);
+router.get('/viewMovies3',Search.viewMovies3);
+router.get('/viewMovies2',Search.viewMovies2);
+router.get('/viewMovies1',Search.viewMovies1);
+router.get('/viewMovies0',Search.viewMovies0);
+router.get('/getTopMovies',Search.getTopMovies);
 
-/* 
+/*
 -----------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------
 ---------------------                                                        ------------------------------------------------------
@@ -137,7 +119,7 @@ router.get('/dashboard/getCinemaOwnerCount', Dashboard.getCinemaOwnerCount);
 router.get('/dashboard/getBranchManagerCount', Dashboard.getBranchManagerCount);
 router.get('/dashboard/getBookingUsherCount', Dashboard.getBookingUsherCount);
 router.get('/dashboard/getCinemaCount', Dashboard.getCinemaCount);
-router.get('/dashboard/getCinemasInRegionsCount', Dashboard.getCinemasInReginsCount);
+router.get('/dashboard/getCinemasInRegionsCount', Dashboard.getCinemasInRegionsCount);
 router.get('/dashboard/getMoviesPlayedCount', Dashboard.getMoviesPlayedCount);
 router.get('/dashboard/getTicketsCount', Dashboard.getTicketsCount);
 router.get('/dashboard/getTicketsInRegionsCount', Dashboard.getTicketsInRegionsCount);
@@ -212,9 +194,10 @@ router.get("/cinema/location/min", Seat.distinctLocations);
 router.get("/cinema/names/min", Seat.getCinemaName);
 
 //--------AS AN ADMIN I CAN View MOVIES IN MY HALLS--------------
-router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name', MoviesInHalls.cinemaMovies);
-router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location', MoviesInHalls.cinemaHalls);
-router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location', MoviesInHalls.getMovieAndHallData);
+//router.get('/MoviesInHalls/cinemaMovies/:cinema_location/:cinema_name', MoviesInHalls.cinemaMovies);
+//router.get('/MoviesInHalls/cinemaHalls/:cinema_name/:cinema_location', MoviesInHalls.cinemaHalls);
+//router.get('/MoviesInHalls/getMovieAndHallData/:movie_id/:movie_id/:cinema_name/:cinema_location',
+//    MoviesInHalls.getMovieAndHallData);
 
 //--------------------------------Promocode routes------------------------------------------------------------//
 router.get('/promocodes', Authorization.Verify('1000'), Promocodes.viewPromocodes);

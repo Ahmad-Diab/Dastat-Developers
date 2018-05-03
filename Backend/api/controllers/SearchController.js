@@ -10,17 +10,8 @@ let database = require('../config/db-connection'),
  * @param {*} next
  */
 module.exports.searchByKeyword = function (req, res, next) {
-    let username = req.params['username'],
-        start = req.params['start'],
+    let start = req.params['start'],
         limit = req.params['limit'];
-
-    if (!username) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Username is required.',
-            data: null
-        });
-    }
 
     if (!req.params['searchKeyword']) {
         return res.status(422).json({

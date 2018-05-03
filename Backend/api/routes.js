@@ -91,7 +91,7 @@ router.get('/movies/getMoviesWithFilters/', Movie.getMoviesWithFilters);
 router.get('/search/:searchKeyword', Search.searchByKeyword);
 
 //----------------------------------------------------Viewing routes--------------------------------------------//
-router.get('/viewCinemas/:start/:limit',Cinema.ViewCinemas);
+router.get('/viewCinemas',Cinema.ViewCinemas);
 router.get('/viewMovies',Search.viewMovies);
 router.get('/viewMovies3',Search.viewMovies3);
 router.get('/viewMovies2',Search.viewMovies2);
@@ -160,6 +160,8 @@ router.patch('/tickets/verifyUnpaidTicket', Authorization.Verify('1111'), adminT
 router.get('/tickets/viewPartiesForThatMovie', Authorization.Verify('1111'), adminTicket.viewPartiesOfThatMovie);
 router.post('/tickets/makeReservationAsAdmin', Authorization.Verify('1111'), adminTicket.makeReservationAsAdmin);
 router.delete('/tickets/cancelReservation/:reservation_id', Authorization.Verify('1101'), adminTicket.cancelReservation);
+router.get('/tickets/getCurrentMoviesForCinemaForAdmin', Authorization.Verify("1111"),
+    adminTicket.getCurrentMoviesForCinemaForAdmin);
 
 //-------------------------------------------Halls Routes-----------------------------
 

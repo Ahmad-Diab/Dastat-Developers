@@ -132,8 +132,8 @@ module.exports.filterByHalls = function (req, res, next) {
 };
 
 module.exports.ViewCinemas = function (req, res, next) {
-  let start = req.params['start'],
-      limit = req.params['limit'];
+  let start = req.query['start'],
+      limit = req.query['limit'];
 
       let startNum, limitNum;
       if (start === '' || limit === '' ||
@@ -265,7 +265,7 @@ module.exports.DistinctLocation = function (req, res, next) {
         return res.status(200).send({
             err: null,
             msg: 'Cinemas are retrieved successfully.',
-            res: results
+            data: results
         });
     });
 };

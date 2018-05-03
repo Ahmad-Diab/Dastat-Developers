@@ -38,10 +38,10 @@ export class CinemasListComponent implements OnInit {
     this.searchValue = 'All';
 
     this.cinemalistService.getDistinctLocation().subscribe((response) => {
-      this.locations=response;
+      this.locations=response.data;
     });
     this.cinemalistService.getAllCinemas().subscribe((response) => {
-      this.cinemas=response;
+      this.cinemas=response.data;
 
     });
 

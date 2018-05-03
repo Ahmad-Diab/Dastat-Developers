@@ -49,7 +49,7 @@
                 <b>Title</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <input #title id="input1" type="text" class="form-control mb-3" placeholder="Title">
+                <input #title id="input1" type="text" [(ngModel)] = "movie.title" class="form-control mb-3" placeholder="Title">
               </div>
             </div>
       
@@ -58,7 +58,7 @@
                 <b>Duration</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <input #duration id="input1" type="text" class="form-control mb-3" placeholder="Duration">
+                <input #duration id="input1" type="text" [(ngModel)] = "movie.duration" class="form-control mb-3" placeholder="Duration">
               </div>
             </div>
       
@@ -67,7 +67,7 @@
                 <b>Genre</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <select #genre class="form-control input" required>
+                <select #genre [(ngModel)] = "movie.genre" class="form-control input" required>
                   <option value="2" disabled>Select a Type</option>
                   <option selected value="Biography">Biography</option>
                   <option value="Thriller">Thriller</option>
@@ -85,7 +85,7 @@
                 <b>Description</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <input #description id="input1" type="text" class="form-control mb-3" placeholder="Description">
+                <input #description id="input1" [(ngModel)] = "movie.description" type="text" class="form-control mb-3" placeholder="Description">
               </div>
             </div>
       
@@ -94,7 +94,7 @@
                 <b>Image Path</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <input #imagePath id="input1" type="text" class="form-control mb-3" placeholder="Image Path">
+                <input #imagePath id="input1" type="text" [(ngModel)] = "movie.imagePath" class="form-control mb-3" placeholder="Image Path">
               </div>
             </div>
       
@@ -103,7 +103,7 @@
                 <b>Cast</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <input #cast id="input1" type="text" class="form-control mb-3" placeholder="Cast">
+                <input #cast id="input1" type="text" [(ngModel)] = "movie.cast" class="form-control mb-3" placeholder="Cast">
               </div>
             </div>
       
@@ -112,7 +112,7 @@
                 <b>Release Date</b>
               </label>
               <div _ngcontent-c37="" class="col-11">
-                <input #releasedate id="input1" id="example-date-input" type="date" class="form-control mb-3" placeholder="Release Date">
+                <input #releasedate id="input1" id="example-date-input" type="date" [(ngModel)] = "movie.release_date" class="form-control mb-3" placeholder="Release Date">
               </div>
             </div>  
            

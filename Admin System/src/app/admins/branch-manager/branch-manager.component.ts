@@ -19,7 +19,7 @@ export class BranchManagerComponent implements OnInit {
   rows: Admin[];
   alert: Alert = new Alert();
 
-  cinemaChoosen;
+  cinemaChoosen = 'all';
   cinemas = [];
 
   constructor(public adminService: AdminService, public cinemalistService: CinemaslistService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
@@ -32,6 +32,7 @@ export class BranchManagerComponent implements OnInit {
     
     this.adminService.getBranchManagers(data).subscribe((response)=>{
       this.rows = response.data;
+      console.log(response.data)
     });
 
     this.cinemalistService.getAllCinemas().subscribe((response) => {

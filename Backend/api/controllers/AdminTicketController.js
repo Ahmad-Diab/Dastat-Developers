@@ -103,10 +103,11 @@ module.exports.makeReservationAsAdmin = function (req, res, next) {
         // Verify that hall exists in Cinema, and retrieve movie
         let checkForMembershipQuery = 'SELECT admin FROM admins_cinemas WHERE admin = ? AND cinema_name = ? AND cinema_location = ?',
             membershipData = [admin_username, name, location];
+
         database.query(checkForMembershipQuery, membershipData, function (err, results) {
             if (err) return next(err);
 
-            if (!results.length) {
+            if (!results.length && admin_username !== 'app') {
                 return res.status(401).send({
                     err: null,
                     msg: "Not member of this cinema",

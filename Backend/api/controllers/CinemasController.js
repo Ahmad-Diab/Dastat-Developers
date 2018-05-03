@@ -97,7 +97,6 @@ module.exports.filterByLocation = function (req, res, next) {
     }
 };
 
-//TODO not needed probably
 /**
  * @param req, hallNumber in params
  * @param res

@@ -382,7 +382,7 @@ module.exports.addBookingUsher = function (req, res, next) {
 // TODO Membership validations
 module.exports.editBookingUsher = function (req, res, next) {
     let username = req.body.username,
-        user = 'select * from admins where username = ? AND type = "Booking Usher"';
+        user = 'select * from admins where username = ? AND type = "Booking Usher"',
         tokenHeader = req.headers['authorization'],
         adminUserName;
         
@@ -855,8 +855,10 @@ module.exports.getBranchManagers = function (req, res, next) {
 
 
 module.exports.editBranchManager = function (req, res, next) {
+
+    console.log("Entered editBranchManager");
     let username = req.body.username,
-        user = 'select * from admins where username = ? AND type = "Branch Manager"';
+        user = 'select * from admins where username = ? AND type = "Branch Manager"',
         tokenHeader = req.headers['authorization'],
         adminUserName;
         
@@ -867,7 +869,7 @@ module.exports.editBranchManager = function (req, res, next) {
             data: null
         });
     }
-
+    console.log("Halfway editeBranchManager");
     let tokenHeaderSpliced = tokenHeader.split(' '),
         token = tokenHeaderSpliced[1];
     jwt.verify(token, config.secret, (err, authData) => {

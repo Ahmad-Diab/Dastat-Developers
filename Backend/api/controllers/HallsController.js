@@ -1,5 +1,8 @@
 let database = require('../config/db-connection');
-
+    config = require('../config/config'),
+    bcrypt = require('bcrypt'),
+    jwt = require('jsonwebtoken'),
+    Validations = require('../utils/validations');
 
 module.exports.getAllHalls = function (req, res, next) {
     database.query("SELECT h.*,l.name as layout_name FROM `halls` h inner join `layout` l on h.layout = l.id ", function (error, hall, field) {
@@ -58,13 +61,7 @@ module.exports.addHall = function (req, res, next) {
         adminUserName = authData.username;
 
         //checking for null values or not entered data
-        if (!username) {
-            return res.status(422).json({
-                err: null,
-                msg: 'Username is required.',
-                data: null
-            });
-        }
+   
 
         database.query('SELECT * FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ? AND admin = ?',
             [hall.cinema_name, hall.cinema_location, adminUserName], function (error, results) {
@@ -92,6 +89,7 @@ module.exports.addHall = function (req, res, next) {
 
 module.exports.updateHall = function (req, res, next) {
 
+    console.log("Entered updateHall");
     let type = req.body.type,
         layout = req.body.layout,
         cinema_name = req.body.cinema_name,
@@ -99,8 +97,8 @@ module.exports.updateHall = function (req, res, next) {
         hall_number = req.body.hall_number,
         tokenHeader = req.headers['authorization'],
         adminUserName;
-
-
+        tokenHeader;
+        
     if (!tokenHeader) {
         return res.status(401).json({
             err: err,
@@ -108,7 +106,7 @@ module.exports.updateHall = function (req, res, next) {
             data: null
         });
     }
-
+    
     let tokenHeaderSpliced = tokenHeader.split(' '),
         token = tokenHeaderSpliced[1];
     jwt.verify(token, config.secret, (err, authData) => {
@@ -119,18 +117,11 @@ module.exports.updateHall = function (req, res, next) {
                 data: null
             });
         }
-
+        
         adminUserName = authData.username;
 
         //checking for null values or not entered data
-        if (!username) {
-            return res.status(422).json({
-                err: null,
-                msg: 'Username is required.',
-                data: null
-            });
-        }
-
+        
         database.query('SELECT * FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ? AND admin = ?',
             [cinema_name, cinema_location, adminUserName], function (error, results) {
                 if (error) {
@@ -147,7 +138,10 @@ module.exports.updateHall = function (req, res, next) {
             database.query('UPDATE halls SET type = ?, layout = ? where cinema_name = ? AND cinema_location = ? AND hall_number = ?',
                 [req.body.type, req.body.layout, req.body.cinema_name, req.body.cinema_location, req.body.hall_number],
                 function (error) {
-                    if (error) return next(error);
+                    if (error) {
+                        console.log(error);
+                        return (error);
+                    }
                     res.status(200).json({
                         msg: 'Hall Updated Successfully',
                     });
@@ -187,13 +181,7 @@ module.exports.deleteHall = function (req, res, next) {
         adminUserName = authData.username;
 
         //checking for null values or not entered data
-        if (!username) {
-            return res.status(422).json({
-                err: null,
-                msg: 'Username is required.',
-                data: null
-            });
-        }
+        
 
         database.query('SELECT * FROM admins_cinemas WHERE cinema_name = ? AND cinema_location = ? AND admin = ?',
             [cinema_name, cinema_location, adminUserName], function (error, results) {

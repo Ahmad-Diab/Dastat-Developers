@@ -14,13 +14,12 @@ export class MovieslistService extends HttpService{
    } 
     //DO NOT FORGET TO CALL ALL OF THE SERVICES IN THE MOVIES-LIST COMPONENTS
    //---------------------ALL VIEW MOVIES SERVICES-------------------
-   filterByAll(start : number,limit : number,genre : string,dataFilter : string,rateFilter : string){
+   filterByAll(start : number,limit : number,genre : string,sortingFilter : string){
      return this.get('movies/getMoviesWithFilters/',{
        "start" : start,
        "limit" : limit,
        "genre" : genre,
-       "date" : dataFilter,
-       "rating" : rateFilter
+       "filter" : sortingFilter 
      });
    }
    

@@ -11,6 +11,7 @@ import { AuthService } from '../../@services/auth.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Auth } from '../../@guards/auth.guard';
 import { PromocodesService } from '../../@services/promocodes.service';
+import { CinemaslistService } from '../../@services/cinemaslist.service';
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -42,6 +43,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   _autoCollapseWidth = 991;
   width = window.innerWidth;
   username: string;
+  cinemas = [];
+  cinemaChoosen;
 
   menu;
 
@@ -57,7 +60,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     private zone: NgZone,
     private authService: AuthService,
     private cookie: CookieService,
-    private promocodesService: PromocodesService) {
+    private cinemalistService: CinemaslistService) {
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
@@ -66,6 +69,14 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
+
+    this.cinemalistService.getAllCinemas().subscribe((response) => {
+      console.log(response);
+
+      this.cinemas = response.data;
+      this.cinemaChoosen = response.data[0];
+      console.log(this.cinemaChoosen);
+    });
 
     
     if (this.isOver()) {
@@ -135,6 +146,11 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cookie.putObject('auth', auth);
     this.router.navigate(['/authentication/signin']);
     
+  }
+
+  getChosenCinema(ok) {
+    this.cookie.putObject('cinema', this.cinemaChoosen);
+    console.log(this.cookie.getObject('cinema'));
   }
 
 }

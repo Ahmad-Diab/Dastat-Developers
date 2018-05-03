@@ -223,7 +223,7 @@ module.exports.addCinema = function (req, res, next) {
 
                         hashed_pass = hash;
                         let user = {
-                            username: name.toLowerCase().trim() + "_" + location.toLowerCase().trim(),
+                            username: name.toLowerCase().replace(" ", "") + "_" + location.toLowerCase().replace(" ", ""),
                             password: hashed_pass,
                             email: null,
                             phone_number: null,

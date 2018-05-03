@@ -66,11 +66,9 @@ export class MakeReservationComponent implements OnInit {
 
   loadMovies() {
 
-    this.adminTicketService.getMoviesInHallsForCinemaForAdmin(this.adminUsername, this.reserveData.cinema_name,
+    this.adminTicketService.getMoviesInHallsForCinemaForAdmin(this.reserveData.cinema_name,
       this.reserveData.cinema_location).subscribe((response) => {
       this.moviesList = response.data;
-      console.log(response.data);
-      console.log(this.moviesList);
       this.moviesList.sort();
       this.selectedMovie = this.moviesList[0];
       this.selectedHall = this.moviesList[0].hall_number;

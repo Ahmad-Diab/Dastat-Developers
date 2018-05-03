@@ -158,24 +158,12 @@
             <div class="tags-area tags-area--thin">
 
                 <i class="fa fa-compass">
-                    <a class="page-heading3"> City</a>
-                </i>
-                <mat-form-field>
-
-                    <mat-select [(ngModel)]="date" >
-                        <mat-option *ngFor="let date of dates" value ={{date.date}} >{{date.date}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-calendar">
                     <a class="page-heading3"> Date</a>
                 </i>
 
-                <mat-form-field>
-                    <input [(ngModel)]="dateTemp" matInput [matDatepicker]="picker" placeholder="Choose a date">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                    <input (click) = "getPartiesForCinemaAndMovie()" type="date" [(ngModel)]="date">
+                
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
 
                 <a class="btn btn-md btn--warning" (click)="getPartiesAtThisDate(date)" style="float: right;margin-top:8px;">Show Parties for this date and time</a>
@@ -232,28 +220,18 @@
             </ul>
         </div>
 
-        <div class="time-select__group">
+
+        <div *ngFor="let cinema of cinemasForMovie" class="time-select__group group--last"  >
             <div class="col-sm-4">
-                <p class="time-select__place">Odeon</p>
-            </div>
-            <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='10:45'>10:45</li>
-                <li class="time-select__item" data-time='16:00'>16:00</li>
-                <li class="time-select__item" data-time='19:00'>19:00</li>
-                <li class="time-select__item" data-time='21:15'>21:15</li>
-                <li class="time-select__item" data-time='23:00'>23:00</li>
+            <ul>    
+                <li>{{cinema.name}},{{cinema.location}}</li>
             </ul>
         </div>
-
-        <div class="time-select__group group--last">
-            <div class="col-sm-4">
-                <p class="time-select__place">Picturehouse</p>
-            </div>
+        <div *ngFor="let partylist of parties">
             <ul class="col-sm-8 items-wrap">
-                <li class="time-select__item" data-time='17:45'>17:45</li>
-                <li class="time-select__item" data-time='21:30'>21:30</li>
-                <li class="time-select__item" data-time='02:20'>02:20</li>
+                <li (click)="submit(cinema,party)" class="time-select__item" *ngFor="let party of partylist">{{party.time}}</li>
             </ul>
+        </div>
         </div>
     </div>
 

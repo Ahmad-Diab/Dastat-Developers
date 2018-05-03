@@ -51,7 +51,7 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
         cinemaLocation = req.params['cinema_location'],
         movie_id = req.params['movie_id'],
         date = req.params['date'];
-
+    console.log(date);
     if (!cinemaName || !cinemaLocation) {
         return res.status(422).json({
             err: null,
@@ -79,8 +79,8 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
     // Validations of correct types
     if (!Validations.isString(cinemaName) ||
         !Validations.isString(cinemaLocation) ||
-        !Validations.isNumber(movie_id) ||
-        !Validations.isDate(date)) {
+        !Validations.isNumber(movie_id)/* ||
+!Validations.isDate(date)*/) {
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
@@ -95,7 +95,7 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
     let query =
         'SELECT * ' +
         'FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name ' +
-        'WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ? AND DATE(p.date) BETWEEN DATE_ADD(CURRENT_DATE, INTERVAL 5 DAY) AND CURRENT_DATE AND p.time > CURRENT_TIME';
+        'WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND p.date = ?';
 
     database.query(query, [cinemaName, cinemaLocation, movie_id, date], function (err, result) {
 

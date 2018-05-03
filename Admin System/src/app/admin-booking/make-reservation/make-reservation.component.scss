@@ -2,6 +2,8 @@
   width: 1170px;
   position: relative;
   margin-top: 68px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 37px 0;
   text-align: center;
   //background-image: url(../images/icons/stroke.svg);
@@ -142,4 +144,26 @@
 }
 .booking-form input {
   display: none;
+}
+
+#layout {
+  width: 500px;
+  white-space: nowrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#layout button {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  padding: 0;
+}
+
+#numbers {
+  margin-left: 26px;
+}
+
+.margin-seats {
+  margin-top: 25px;
 }

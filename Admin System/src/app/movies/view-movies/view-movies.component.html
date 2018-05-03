@@ -40,7 +40,16 @@
           <b>Genre</b>
         </label>
         <div _ngcontent-c37="" class="col-11">
-          <input #genre id="input1" type="text" class="form-control mb-3" placeholder="Genre">
+          <select #genre class="form-control input" required>
+            <option value="2" disabled>Select a Type</option>
+            <option selected value="Biography">Biography</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Drama">Drama</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Horror">Horror</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+          </select>
         </div>
       </div>
 
@@ -73,19 +82,15 @@
 
       <div _ngcontent-c37="" class="form-group row">
         <label _ngcontent-c37="" class="col-1 col-form-label">
-          <b>Year</b>
-        </label>
-        <div _ngcontent-c37="" class="col-11">
-          <input #year id="input1" type="text" class="form-control mb-3" placeholder="Year">
-        </div>
-      </div>
-
-      <div _ngcontent-c37="" class="form-group row">
-        <label _ngcontent-c37="" class="col-1 col-form-label">
           <b>Feature</b>
         </label>
         <div _ngcontent-c37="" class="col-11">
-          <input #feature id="input1" type="text" class="form-control mb-3" placeholder="Feature">
+          <select #feature class="form-control input" required>
+            <option value="4" disabled>Select a Type</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
         </div>
       </div>
 
@@ -98,27 +103,7 @@
         </div>
       </div>
 
-      <div _ngcontent-c37="" class="form-group row">
-        <label _ngcontent-c37="" class="col-1 col-form-label">
-          <b>Rating</b>
-        </label>
-        <div _ngcontent-c37="" class="col-11">
-          <input #rating id="input1" type="text" class="form-control mb-3" placeholder="Rating">
-        </div>
-      </div>
-
-      <div _ngcontent-c37="" class="form-group row">
-        <label _ngcontent-c37="" class="col-1 col-form-label">
-          <b>Status</b>
-        </label>
-        <div _ngcontent-c37="" class="col-11">
-          <input #status id="input1" type="text" class="form-control mb-3" placeholder="Status">
-        </div>
-      </div>
-
-     
-
-      <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="addMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,username)"
+      <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="addMovie(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,feature.value,releasedate.value,username)"
         href="movies/view-movies"> Submit</button>
     </div>
   </div>

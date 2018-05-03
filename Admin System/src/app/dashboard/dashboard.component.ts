@@ -7,6 +7,7 @@ import {
 } from '../shared/chartData';
 
 @Component({
+
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
@@ -23,12 +24,12 @@ export class DashboardComponent {
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = false;
-  showXAxisLabel = false;
+  showLegend = true;
+  showXAxisLabel = true;
   tooltipDisabled = false;
-  xAxisLabel = 'Country';
-  showYAxisLabel = false;
-  yAxisLabel = 'GDP Per Capita';
+  xAxisLabel = 'April';
+  showYAxisLabel = true;
+  yAxisLabel = 'TICKETS PER REGION';
   showGridLines = true;
   roundDomains = false;
   colorScheme = {
@@ -42,18 +43,18 @@ export class DashboardComponent {
   // line, area
   timeline = false;
   // margin
-  margin = false;
-  marginTop = 40;
+  margin = true;
+  marginTop = 60;
   marginRight = 40;
-  marginBottom = 40;
-  marginLeft = 40;
+  marginBottom = 20;
+  marginLeft = 20;
   // gauge
   gaugeMin = 0;
-  gaugeMax = 50;
+  gaugeMax = 3000;
   gaugeLargeSegments = 10;
   gaugeSmallSegments = 5;
   gaugeTextValue = '';
-  gaugeUnits = 'alerts';
+  gaugeUnits = 'TICKETS';
   gaugeAngleSpan = 240;
   gaugeStartAngle = -120;
   gaugeShowAxis = true;
@@ -64,7 +65,7 @@ export class DashboardComponent {
     Object.assign(this, {
       single
     });
-    this.dateData = generateData(5, false);
+    this.dateData = generateData(5, true);
   }
 
   select(data) {

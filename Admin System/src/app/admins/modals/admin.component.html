@@ -9,18 +9,29 @@
   <div class="modal-body">
 
     <div class="form-group row">
-      <label class="col-2 col-form-label">Cinema Name</label>
+      <label class="col-2 col-form-label" *ngIf = "!add">Cinema Name</label>
+      <label class="col-2 col-form-label" *ngIf = "add">Cinema Name and Location</label>
       <div class="col-10">
-        <input class="form-control input" [(ngModel)]="admin.cinema_name" placeholder="Cinema Location" *ngIf = "!add" disabled>
-        <input class="form-control input" [(ngModel)]="admin.cinema_name" placeholder="Cinema Location" *ngIf = "add" required>
+        <input class="form-control input" [(ngModel)]="admin.cinema_name" placeholder="Cinema Name" *ngIf = "!add" disabled>
+        <select class="form-control input" [(ngModel)]="cinemaNameLocation" *ngIf = "add" required>
+          <option value="0" disabled>Select a Cinema</option>
+          <option *ngFor="let cinema of cinemas" [value]="cinema">{{cinema.name}},{{cinema.location}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row"  *ngIf = "!add">
+      <label class="col-2 col-form-label">Cinema Location</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="admin.cinema_location" placeholder="Cinema Location" disabled>
       </div>
     </div>
 
     <div class="form-group row">
       <label class="col-2 col-form-label">Username</label>
       <div class="col-10">
-        <input class="form-control input" [(ngModel)]="admin.username" placeholder="Cinema Name" *ngIf = "!add" disabled>
-        <input class="form-control input" [(ngModel)]="admin.username" placeholder="Cinema Name" *ngIf = "add" required>
+        <input class="form-control input" [(ngModel)]="admin.username" placeholder="username" *ngIf = "!add" disabled>
+        <input class="form-control input" [(ngModel)]="admin.username" placeholder="username" *ngIf = "add" required>
       </div>
     </div>
     
@@ -31,7 +42,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row" *ngIf="!add">
       <label class="col-2 col-form-label">Type</label>
       <div class="col-10">
         <select class="form-control input" [(ngModel)]="admin.type" required>
@@ -46,7 +57,7 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Salary</label>
       <div class="col-10">
-        <input class="form-control input" type="number" [(ngModel)]="admin.salary" required>
+        <input class="form-control input" type="number" [(ngModel)]="admin.salary" placeholder="3000" required>
       </div>
     </div>
 
@@ -54,6 +65,38 @@
       <label class="col-2 col-form-label">Phone number</label>
       <div class="col-10">
         <input class="form-control input" type="number" [(ngModel)]="admin.phone_number" placeholder="0123232323">
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf = "add">
+      <label class="col-2 col-form-label">First Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="admin.first_name" placeholder="name">
+      </div>
+    </div>
+
+    <div class="form-group row"  *ngIf = "add">
+      <label class="col-2 col-form-label">Last Name</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="admin.last_name" placeholder="name">
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf = "add">
+      <label class="col-2 col-form-label">Gender</label>
+      <div class="col-10">
+        <select class="form-control input" [(ngModel)]="admin.gender" required>
+          <option value="0" disabled selected>Select Gender</option>
+          <option value="male">MALE</option>
+          <option value="female" selected>FEMALE</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf = "add">
+      <label class="col-2 col-form-label">Password</label>
+      <div class="col-10">
+        <input class="form-control input" [(ngModel)]="admin.password" placeholder="*****">
       </div>
     </div>
   </div>

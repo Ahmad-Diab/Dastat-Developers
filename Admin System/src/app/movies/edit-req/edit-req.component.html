@@ -45,106 +45,78 @@
           </div>
           <div class="card-body">
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col9-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Title</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #title id="input1" type="text" [(ngModel)]="movie.title" class="form-control mb-3" placeholder="Title">
+              <div _ngcontent-c37="" class="col-11">
+                <input #title id="input1" type="text" [(ngModel)] = "movie.title" class="form-control mb-3" placeholder="Title">
               </div>
             </div>
-  
+      
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Duration</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #duration id="input1" type="text" [(ngModel)]="movie.duration" class="form-control mb-3" placeholder="Duration">
+              <div _ngcontent-c37="" class="col-11">
+                <input #duration id="input1" type="text" [(ngModel)] = "movie.duration" class="form-control mb-3" placeholder="Duration">
               </div>
             </div>
-  
+      
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Genre</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #genre id="input1" type="text" [(ngModel)]="movie.genre" class="form-control mb-3" placeholder="Genre">
+              <div _ngcontent-c37="" class="col-11">
+                <select #genre [(ngModel)] = "movie.genre" class="form-control input" required>
+                  <option value="2" disabled>Select a Type</option>
+                  <option selected value="Biography">Biography</option>
+                  <option value="Thriller">Thriller</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Horror">Horror</option>
+                  <option value="Action">Action</option>
+                  <option value="Comedy">Comedy</option>
+                </select>
               </div>
             </div>
-  
+      
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Description</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #description id="input1" type="text" [(ngModel)]="movie.description" class="form-control mb-3" placeholder="Description">
+              <div _ngcontent-c37="" class="col-11">
+                <input #description id="input1" [(ngModel)] = "movie.description" type="text" class="form-control mb-3" placeholder="Description">
               </div>
             </div>
-  
+      
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Image Path</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #imagePath id="input1" type="text" [(ngModel)]="movie.imagePath" class="form-control mb-3" placeholder="Image Path">
+              <div _ngcontent-c37="" class="col-11">
+                <input #imagePath id="input1" type="text" [(ngModel)] = "movie.imagePath" class="form-control mb-3" placeholder="Image Path">
               </div>
             </div>
-  
+      
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Cast</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #cast id="input1" type="text" [(ngModel)]="movie.cast" class="form-control mb-3" placeholder="Cast">
+              <div _ngcontent-c37="" class="col-11">
+                <input #cast id="input1" type="text" [(ngModel)] = "movie.cast" class="form-control mb-3" placeholder="Cast">
               </div>
             </div>
-  
+      
             <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
-                <b>Year</b>
-              </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #year id="input1" type="text" [(ngModel)]="movie.year" class="form-control mb-3" placeholder="Year">
-              </div>
-            </div>
-  
-            <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
-                <b>Feature</b>
-              </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #feature id="input1" type="text" [(ngModel)]="movie.feature" class="form-control mb-3" placeholder="Feature">
-              </div>
-            </div>
-  
-            <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
+              <label _ngcontent-c37="" class="col-1 col-form-label">
                 <b>Release Date</b>
               </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #releasedate id="input1" type="text" [(ngModel)]="movie.release_date" class="form-control mb-3" placeholder="Release Date">
+              <div _ngcontent-c37="" class="col-11">
+                <input #releasedate id="input1" id="example-date-input" type="date" [(ngModel)] = "movie.release_date" class="form-control mb-3" placeholder="Release Date">
               </div>
-            </div>
-  
-            <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
-                <b>Rating</b>
-              </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #rating id="input1" type="text" [(ngModel)]="movie.rating" class="form-control mb-3" placeholder="Rating">
-              </div>
-            </div>
-  
-            <div _ngcontent-c37="" class="form-group row">
-              <label _ngcontent-c37="" class="col-2 col-form-label">
-                <b>Status</b>
-              </label>
-              <div _ngcontent-c37="" class="col-10">
-                <input #status id="input1" type="text" [(ngModel)]="movie.status" class="form-control mb-3" placeholder="Status">
-              </div>
-            </div>
-  
+            </div>  
            
-            <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="editReq(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,year.value,feature.value,releasedate.value,rating.value,status.value,username,movie.movie_id)"
+            <button class="btn btn-outline-success mr-1 mb-1" type="button" (click)="editReq(title.value,duration.value,genre.value,description.value,imagePath.value,cast.value,releasedate.value,username,movie.movie_id)"
               href="movies/info-edit"> Submit</button>
   
           </div>

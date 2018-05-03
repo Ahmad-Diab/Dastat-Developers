@@ -25,11 +25,9 @@ export class RequestsCoBmComponent implements OnInit {
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
     
-    console.log(this.username);
     this.movieServices.viewRequests(this.username).subscribe((response)=>{
-       this.movies=response;
-      console.log(this.username);
-      console.log(response.data[0]);
+      if(!response) this.movies = []
+      else this.movies= response.data;
     });
     
 
@@ -38,6 +36,7 @@ export class RequestsCoBmComponent implements OnInit {
   deleteReq(movie_id: number){
     this.movieServices.deleteRequest(movie_id).subscribe((response)=>{
         this.responeStatus="Successfully deleted";
+        this.ngOnInit();
     });
 }
 
@@ -51,13 +50,12 @@ toogleMovie(){
 
 // ADD A REQUEST
 
-addReq(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,username: string){
-
-     this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username).subscribe((response)=>{
-       this.responeStatus="Added";
-       this.ngOnInit();
-     });  
+addReq(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, release_date:Date,username: string){
+    let year = parseInt(((String) (release_date)).substring(0,4));
+    this.movieServices.addRequest(title,duration,genre,description,imagePath,cast,year,3,release_date,5,username).subscribe((response)=>{
+      this.responeStatus="Added";
+      this.ngOnInit();
+    });  
      
 }
 

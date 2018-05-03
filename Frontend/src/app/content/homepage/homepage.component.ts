@@ -15,6 +15,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     //this.load();
+
     this.moviesService.getFeaturedMovies().subscribe((response) => { 
       this.movies = response;
       console.log(response);
@@ -27,6 +28,6 @@ export class HomepageComponent implements OnInit {
   }
 
   getMovieInfo(movie){
-    this.router.navigate(['info',movie.movie_id]);
+    window.open('/info/'+movie.movie_id,"_self")
   }
 }

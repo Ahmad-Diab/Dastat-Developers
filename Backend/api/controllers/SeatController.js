@@ -2,6 +2,9 @@ let database = require('../config/db-connection'),
     Validations = require('../utils/validations');
 
 module.exports.getSeats = function (req, res, next) { //gets the Layout of a Hall along with the Booked Seats in a certain Party
+    
+    console.log(req.query);
+
     if (!Validations.isString(req.query.cinema_location) ||
         !Validations.isString(req.query.cinema_name) ||
         !Validations.isNumber(req.query.hall_number) ||

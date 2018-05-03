@@ -27,7 +27,9 @@ export class AdmincinemasComponent implements OnInit {
 
   ngOnInit() {
     this.cinemalistService.getAllCinemas().subscribe((response) => {
-      this.cinemas=response;
+      console.log(response);
+
+      this.cinemas = response.data;
       var i;
       for (i = 0; i < this.cinemas.length; i++) {
         if(this.cinemas[i].is3D.data.length == 1){

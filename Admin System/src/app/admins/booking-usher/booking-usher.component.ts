@@ -7,6 +7,7 @@ import { Admin } from '../../@objects/admin';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Alert } from '../../@objects/alert';
 import { ModalAdmin } from '../modals/admin.component';
+import { CinemaslistService } from '../../@services/cinemaslist.service';
 
 @Component({
   selector: 'app-edit',
@@ -14,23 +15,35 @@ import { ModalAdmin } from '../modals/admin.component';
   styleUrls: ['./booking-usher.component.scss']
 })
 export class BookingUsher implements OnInit {
-  cinema_name: string;
-  //uname: string;
+  cinemaChoosen;
+  username: string;
 
   editing = {};
   rows: Admin[];
   alert: Alert = new Alert();
 
-  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
+  cinemas = [];
+
+  constructor(public adminService: AdminService, public cinemalistService: CinemaslistService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
   ngOnInit() {
-    /*var data = {
-      uname: this.cookie.getObject('auth')['username']
+    var data = {
+      username: this.cookie.getObject('auth')['username'],
+      
     }
-    console.log(data);*/
-    this.adminService.getBookingUshers().subscribe((response)=>{
-      this.rows = response;
+    console.log(data);
+
+    this.adminService.getBookingUshers(data).subscribe((response)=>{
+      this.rows = response.data;
+      console.log(response);
+    });
+
+    this.cinemalistService.getAllCinemas().subscribe((response) => {
+      this.cinemas = response.data;
+      console.log(this.cinemas)
+      this.cinemaChoosen = 'all';
     });
   }
+
   updateValue(admin) {
     const modalRef = this.modalService.open(ModalAdmin);
     modalRef.componentInstance.admin = admin;
@@ -41,13 +54,21 @@ export class BookingUsher implements OnInit {
     });
   }
   deleteRow(admin) {
-    this.adminService.deleteBranchManager(admin).subscribe(() => {
+    this.adminService.deleteBookingUsher(admin).subscribe(() => {
       this.alert = {
         message: 'Admin Deleted',
         type: 'success',
         active: true
       }
 
+      this.ngOnInit();
+    });
+  }
+  addBookingUsher(){
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.type = "BU";
+    modalRef.result.then((result) => {
+      this.alert = result;
       this.ngOnInit();
     });
   }

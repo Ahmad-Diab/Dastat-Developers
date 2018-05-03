@@ -8,6 +8,7 @@ module.exports.Verify_User = function (req, res, next) {
 
     //console.log(req.headers['authorization']);
     var tokenHeader = req.headers['authorization'];
+    console.log('Token Header in Authorization file: ' + tokenHeader);
     if (typeof tokenHeader !== 'undefined') {
         var tokenheadersplited = tokenHeader.split(' ');
         var token = tokenheadersplited[1];
@@ -51,7 +52,7 @@ module.exports.Verify_User = function (req, res, next) {
 module.exports.Verify = function (data) {
     return function(req, res, next) {
     var allowed = data.split('');
-    console.log(req.headers);
+    //console.log(req.headers);
     var tokenHeader = req.headers['authorization'];
     if (typeof tokenHeader !== 'undefined') {
         var tokenheadersplited = tokenHeader.split(' ');

@@ -14,16 +14,19 @@
     <div *ngIf="!forgotmypassword">
     <p  *ngIf="!loogedin" class="login__title">sign in
         <br>
-        <span class="login-edition">welcome to A.Movie</span>
+        <span class="login-edition">Welcome to A`Movie</span>
     </p>
 
-    <div *ngIf="!loogedin"  class="social social--colored">
+    <!-- <div *ngIf="!loogedin"  class="social social--colored">
         <a href='#' class="social__variant fa fa-facebook"></a>
         <a href='#' class="social__variant fa fa-twitter"></a>
         <a href='#' class="social__variant fa fa-tumblr"></a>
-    </div>
-    <p *ngIf="loogedin" class="login__title">Logged in successfully :D</p>
-    <p *ngIf="!loogedin" class="login__tracker">or</p>
+    </div> -->
+    <p *ngIf="loogedin" class="login__title">Logged in successfully :D
+        <META HTTP-EQUIV="refresh" CONTENT="5;URL=/">
+
+    </p>
+    <!-- <p *ngIf="!loogedin" class="login__tracker">or</p> -->
          
     <div *ngIf="!loogedin" class="field-wrap">
         <input [(ngModel)]="user.username" type='username' placeholder='Username' name='user-name' class="login__input">

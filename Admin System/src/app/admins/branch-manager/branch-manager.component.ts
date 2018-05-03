@@ -7,6 +7,7 @@ import { Admin } from '../../@objects/admin';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Alert } from '../../@objects/alert';
 import { ModalAdmin } from '../modals/admin.component';
+import { CinemaslistService } from '../../@services/cinemaslist.service';
 
 @Component({
   selector: 'app-branch-manager',
@@ -15,17 +16,30 @@ import { ModalAdmin } from '../modals/admin.component';
 })
 export class BranchManagerComponent implements OnInit {
 
-  cinema_name: string;
-  
-  editing = {};
   rows: Admin[];
   alert: Alert = new Alert();
 
-  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
+  cinemaChoosen = 'all';
+  cinemas = [];
+
+  constructor(public adminService: AdminService, public cinemalistService: CinemaslistService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
 
   ngOnInit() {
-    this.adminService.getBranchManagers().subscribe((response)=>{
-      this.rows = response;
+
+    var data = {
+      username: this.cookie.getObject('auth')['username'], 
+    }
+    
+    this.adminService.getBranchManagers(data).subscribe((response)=>{
+      this.rows = response.data;
+      console.log(response.data)
+    });
+
+    this.cinemalistService.getAllCinemas().subscribe((response) => {
+      this.cinemas = response.data;
+      console.log(this.cinemas)
+      this.cinemaChoosen = 'all';
+      console.log(this.cinemaChoosen)
     });
   }
   updateValue(admin) {
@@ -48,6 +62,15 @@ export class BranchManagerComponent implements OnInit {
       this.ngOnInit();
     });
   }
+  addBranchManager(){
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.type = "BM";
+    modalRef.result.then((result) => {
+      this.alert = result;
+      this.ngOnInit();
+    });
+  }
+
   // updateFilter(event) {
   //   const val = event.target.value;
   //   var data = {

@@ -24,7 +24,7 @@ export class ViewMoviesComponent implements OnInit {
     //-------VIEW ALL MOVIES------------------
 
         this.movieServices.viewAllMovies().subscribe((response)=>{
-        this.movies = response;
+        this.movies = response.data;
         console.log(response);
         var auth = <Auth>(this.cookie.getObject('auth'));
         this.username = auth.username;
@@ -48,10 +48,9 @@ deleteMovie(movie_id: number){
 }
 
 ///----------ADD A MOVIE--------------------------
-addMovie(title: string, duration: number, genre: string, description: string,imagePath: string,cast: string,
-  year: number, feature: number, release_date:Date,rating: number,status: string,username: string){
-
-     this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,rating,status,username).subscribe((response)=>{
+addMovie(title: string, duration: any, genre: string, description: string,imagePath: string,cast: string, feature: number, release_date:Date,username: string){
+    let year = parseInt(((String) (release_date)).substring(0,4));
+     this.movieServices.addMoviess(title,duration,genre,description,imagePath,cast,year,feature,release_date,5,username).subscribe((response)=>{
        this.responeStatus="Added";
        this.ngOnInit();
      });  

@@ -7,6 +7,7 @@ import { Alert } from '../../@objects/alert';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalAdmin } from '../modals/admin.component';
 import { Admin } from '../../@objects/admin';
+import { CinemaslistService } from '../../@services/cinemaslist.service';
 
 
 @Component({
@@ -21,11 +22,21 @@ export class CinemaOwnerComponent implements OnInit {
   rows: Admin[];
   alert: Alert = new Alert();
 
-  constructor(public adminService: AdminService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
+  cinemaChoosen;
+  cinemas = [];
+
+  constructor(public adminService: AdminService, public cinemalistService: CinemaslistService, private router : Router, public cookie : CookieService, private route : ActivatedRoute, public modalService: NgbModal) { }
   ngOnInit() {
     this.adminService.getCinemaOwners().subscribe((response)=>{
       this.rows = response;
     });
+
+    this.cinemalistService.getAllCinemas().subscribe((response) => {
+      this.cinemas = response.data;
+      console.log(this.cinemas)
+      this.cinemaChoosen = 'all';
+    });
+
   }
   updateValue(admin) {
     const modalRef = this.modalService.open(ModalAdmin);
@@ -44,6 +55,14 @@ export class CinemaOwnerComponent implements OnInit {
         active: true
       }
 
+      this.ngOnInit();
+    });
+  }
+  addCinemaOwner(){
+    const modalRef = this.modalService.open(ModalAdmin);
+    modalRef.componentInstance.type = "CO";
+    modalRef.result.then((result) => {
+      this.alert = result;
       this.ngOnInit();
     });
   }

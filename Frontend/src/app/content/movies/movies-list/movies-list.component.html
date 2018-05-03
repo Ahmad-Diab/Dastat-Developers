@@ -20,19 +20,26 @@
       <h2 class="page-heading">Movies</h2>
        <div class="tags-area">
           <div class="tags tags--unmarked">
-              <a class="page-heading3">Sorted by:</a>
+
+            <a class="page-heading3">Sorted by rate:</a>
               <mat-form-field>
-                  <mat-select #sortedBy (change)="SpecifySortingFilter(sortedBy.value)">
+                  <mat-select [(ngModel)] = "rateFilter" (change)="filterByAll()">
                     <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="High Rates">High Rates</mat-option>
                     <mat-option value="Low Rates">Low Rates</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                  <a class="page-heading3">Sorted by date:</a>
+                  <mat-form-field>
+                  <mat-select [(ngModel)] = "dateFilter" (change)="filterByAll()">
+                    <mat-option value="Not sorted" selected="selected">Not sorted</mat-option>
                     <mat-option value="Latest">Latest</mat-option>
                     <mat-option value="Oldest">Oldest</mat-option>
-                  </mat-select>
-                </mat-form-field> <br> 
+                </mat-select>
+                </mat-form-field>  
                   <a class="page-heading3">Filtered by Genre:</a>
                   <mat-form-field>
-                  <mat-select #genreFilter (change)="SpecifyGenre(genreFilter.value)">
+                  <mat-select [(ngModel)] = "genre" (change)="filterByAll()" required>
                     <mat-option value="No filter" selected="selected">No filter</mat-option>
                     <mat-option value="Action">Action</mat-option>
                     <mat-option value="Adventure">Adventure</mat-option>
@@ -42,12 +49,12 @@
                     <mat-option value="Horror">Horror</mat-option>
                     <mat-option value="Thriller">Thriller</mat-option>
                   </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
           </div>
       </div>
       
       <!-- Movie preview item -->
-      <div *ngFor="let movie of movies | paginate : { itemsPerPage: 5, currentPage: p }"  class="movie movie--preview movie--full release">
+      <div *ngFor="let movie of movies | paginate : {itemsPerPage: 5, currentPage: p,totalItems: size}"  class="movie movie--preview movie--full release">
            <div [routerLink] = '' (click)=getMovieInfo(movie)    class="col-sm-3 col-md-2 col-lg-2">
                   <div class="movie__images">
                       <img alt='' src={{movie.imagePath}}>
@@ -67,14 +74,14 @@
                     <div *ngIf="movie.feature == 2 || movie.feature == 3">
                         <a href='booking/cinemas' class="btn btn-md btn--warning" (click)="GoToReservation(movie)">book a ticket <span class="hidden-sm">for this movie</span></a>
                     </div>
-                        <a href="#" class="watchlist">Add to watchlist</a>
+                        <!-- <a href="#" class="watchlist">Add to watchlist</a> -->
                   </div>
 
                   <div class="preview-footer">
                       <div class="movie__rate"><p class="movie__rate-number"><strong> Rating</strong></p> <span class="movie__rating">{{movie.rating}}</span></div>
                       
 
-                      <a href="#" class="movie__show-btn">Showtime</a>
+                      <!-- <a href="#" class="movie__show-btn">Showtimes</a> -->
                   </div>
           </div>
 
@@ -152,7 +159,7 @@
           <!-- end time table-->
 
       </div><br>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls (pageChange)="p = $event;filterByAll()"></pagination-controls>
       <!-- end movie preview item -->
 
     

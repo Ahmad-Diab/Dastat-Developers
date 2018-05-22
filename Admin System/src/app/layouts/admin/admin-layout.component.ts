@@ -12,6 +12,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Auth } from '../../@guards/auth.guard';
 import { PromocodesService } from '../../@services/promocodes.service';
 import { CinemaslistService } from '../../@services/cinemaslist.service';
+import { Location } from '@angular/common';
 
 const SMALL_WIDTH_BREAKPOINT = 991;
 
@@ -58,6 +59,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     private modalService: NgbModal,
     private titleService: Title,
     private zone: NgZone,
+    private location: Location,
     private authService: AuthService,
     private cookie: CookieService,
     private cinemalistService: CinemaslistService) {
@@ -70,12 +72,21 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     var auth = <Auth>(this.cookie.getObject('auth'));
     this.username = auth.username;
 
+    
+
     this.cinemalistService.getAllCinemas().subscribe((response) => {
       console.log(response);
 
       this.cinemas = response.data;
-      this.cinemaChoosen = response.data[0];
-      this.cookie.putObject('cinema', this.cinemaChoosen);
+
+      if(this.cookie.getObject('cinema') == null){
+        this.cinemaChoosen = response.data[0];
+        this.cinemaChoosen.model = this.cinemaChoosen.name + " , " + this.cinemaChoosen.location;
+        this.cookie.putObject('cinema', this.cinemaChoosen);
+        console.log('why the fuck');
+      } else {
+        this.cinemaChoosen = this.cookie.getObject('cinema');
+      }
 
       console.log(this.cinemaChoosen);
     });
@@ -153,6 +164,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   getChosenCinema(ok) {
     this.cookie.putObject('cinema', this.cinemaChoosen);
     console.log(this.cookie.getObject('cinema'));
+    location.reload();
   }
 
 }

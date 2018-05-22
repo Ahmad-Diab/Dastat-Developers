@@ -1,16 +1,9 @@
 <ng-sidebar-container class="app" [ngClass]="{'mode-boxed': isBoxed, 'sidebar-opened': isOpened, 'theme-light': theme == 'light', 'theme-dark': theme == 'dark', 'mode-push': _mode == 'push', 'mode-dock': _mode == 'dock', 'mode-over': _mode == 'over', 'mode-slide': _mode == 'slide', 'no-footer': options?.removeFooter, 'map-header': options?.mapHeader}">
-  <ng-sidebar
-    [(opened)]="isOpened"
-    [(mode)]="_mode"
-    [position]="'left'"
-    [dockedSize]="'80px'"
-    [autoCollapseWidth]="'991'"
-    [closeOnClickOutside]="isOver()"
-    [showBackdrop]="isOver()"
-    [sidebarClass]="'sidebar-panel'" #sidebar>
+  <ng-sidebar [(opened)]="isOpened" [(mode)]="_mode" [position]="'left'" [dockedSize]="'80px'" [autoCollapseWidth]="'991'"
+    [closeOnClickOutside]="isOver()" [showBackdrop]="isOver()" [sidebarClass]="'sidebar-panel'" #sidebar>
     <nav class="navbar custom-navbar main-brand">
       <a class="navbar-brand mr-auto" [routerLink]="['/']">
-       <h5>Cinema App</h5>
+        <h5>Cinema App</h5>
       </a>
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -57,7 +50,9 @@
             </li>
           </ul>
         </li>
-        <li class="navigation-item"><hr class="mt-0 mb-0" /></li>
+        <li class="navigation-item">
+          <hr class="mt-0 mb-0" />
+        </li>
       </ul>
     </nav>
     <!-- /main navigation -->
@@ -75,9 +70,12 @@
         </li>
       </ul>
       <span class="navbar-heading hidden-xs-down">{{options?.heading}}</span>
-      <select #cinemaDrop style="width: 20%" class="form-control" [(ngModel)] = "cinemaChoosen" (change) = "getChosenCinema($event.target.value)">
-        <option *ngFor = 'let cinema of cinemas' [ngValue]="cinema"   >{{ cinema.name }} , {{ cinema.location }}</option>
-      </select><br/>
+
+      <select *ngIf="cinemaChoosen" #cinemaDrop style="width: 20%" class="form-control" [(ngModel)]="cinemaChoosen" (change)="getChosenCinema($event.target.value)">
+        <option *ngFor='let cinema of cinemas' [ngValue]="cinema">{{ cinema.name }} , {{ cinema.location }}</option>
+      </select>
+
+      <br/>
       <span class="mr-auto"></span>
       <ul class="navbar-nav">
         <li class="nav-item" ngbDropdown placement="bottom-right">
@@ -104,7 +102,7 @@
               <span>Signout</span>
             </a>
           </div>
-        </li> 
+        </li>
         <!-- <!-- <li class="nav-item" ngbDropdown placement="bottom-right">
           <a href="javascript:;" class="nav-link" ngbDropdownToggle>
             <i class="fi flaticon-notification"></i>
@@ -138,7 +136,7 @@
             <i class="fi flaticon-fullscreen"></i>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <span class="nav-divider"></span>
         </li>
@@ -147,7 +145,7 @@
             <i class="fi flaticon-search"></i>
           </a>
         </li> -->
-              
+
       </ul>
     </nav>
 
@@ -157,7 +155,8 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="javascript:;">
-              <span>Copyright &copy; 2017</span> <span class="ff-headers text-uppercase">Decima</span>. All rights reserved
+              <span>Copyright &copy; 2017</span>
+              <span class="ff-headers text-uppercase">Decima</span>. All rights reserved
             </a>
           </li>
         </ul>
@@ -196,7 +195,9 @@
       Template Options
     </div>
     <div class="card-body">
-      <small class="ff-headers text-uppercase mb-3"><strong>Explore Sidebar API</strong></small>
+      <small class="ff-headers text-uppercase mb-3">
+        <strong>Explore Sidebar API</strong>
+      </small>
       <div class="custom-controls-stacked mb-2">
         <label class="custom-control custom-checkbox">
           <input class="custom-control-input" name="radio-stacked" type="radio" value="push" [(ngModel)]="_mode" (change)="isOpened = true; mode = _mode">
@@ -220,7 +221,9 @@
         </label>
       </div>
 
-      <small class="ff-headers text-uppercase mb-3"><strong>Select A Layout</strong></small>
+      <small class="ff-headers text-uppercase mb-3">
+        <strong>Select A Layout</strong>
+      </small>
       <div class="d-flex align-items-center">
         <label class="custom-control custom-checkbox mb-2">
           <input type="checkbox" class="custom-control-input" [(ngModel)]="isBoxed">
@@ -236,7 +239,9 @@
         </label>
       </div>
 
-      <small class="ff-headers text-uppercase mb-3"><strong>Select A Theme</strong></small>
+      <small class="ff-headers text-uppercase mb-3">
+        <strong>Select A Theme</strong>
+      </small>
       <div class="custom-controls-stacked mb-2">
         <label class="custom-control custom-checkbox">
           <input class="custom-control-input" name="radio-stacked" type="radio" value="light" [(ngModel)]="theme">
@@ -250,9 +255,12 @@
         </label>
       </div>
 
-      <small class="ff-headers text-uppercase mb-3"><strong>Select A Language</strong></small>
+      <small class="ff-headers text-uppercase mb-3">
+        <strong>Select A Language</strong>
+      </small>
       <div class="d-flex align-items-center">
-        <select class="custom-select" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)" placeholder="Select language" style="min-width: 50%;">
+        <select class="custom-select" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)"
+          placeholder="Select language" style="min-width: 50%;">
           <option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</option>
         </select>
       </div>

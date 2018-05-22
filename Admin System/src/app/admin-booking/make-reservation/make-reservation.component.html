@@ -20,11 +20,11 @@
 
               <span class="btn-group " ngbDropdown role="group" aria-label="Button group with nested dropdown">
                 <button [disabled]="!selectedPartyDate" class="btn btn-outline-danger" ngbDropdownToggle>
-                  {{(selectedPartyDate)? (selectedPartyDate | date:'yyyy-MM-dd'): "N/A"}}
+                  {{(selectedPartyDate)? (selectedPartyDate.split("T")[0]): "N/A"}}
                 </button>
                 <span class="dropdown-menu" ngbDropdownMenu>
                   <span *ngFor="let date of partiesDatesList">
-                    <button class="dropdown-item" (click)="selectPartyDate(date)">{{date| date:'yyyy-MM-dd'}}</button>
+                    <button class="dropdown-item" (click)="selectPartyDate(date)">{{date.split("T")[0]}}</button>
                   </span>
                 </span>
               </span>
@@ -85,7 +85,8 @@
     <div [ngClass]="{'margin-seats': row.margin}" class="row" *ngFor="let row of encoding; let i = index">
       <button disabled="" class="btn primary mr-1 mb-1">{{letter(i)}}</button>
       <div style="display: block !important" *ngFor="let seat of row.row; let j = index">
-        <button *ngIf="seat != 'offset'" class="btn mr-1 mb-1" (click)="select(i,j,seat.seat.number)" [ngClass]="{'btn-secondary': !selected[i][j], 'btn-success': selected[i][j]}">{{seat.seat.number}}</button>
+        <button *ngIf="seat != 'offset' && !booked(seat.seat.number)" class="btn mr-1 mb-1" (click)="select(i,j,seat.seat.number)" [ngClass]="{'btn-secondary': !selected[i][j], 'btn-success': selected[i][j]}">{{seat.seat.number}}</button>
+        <button  *ngIf="seat != 'offset' && booked(seat.seat.number)" disabled="" class="btn primary mr-1 mb-1">{{seat.seat.number}}</button>
         <button *ngIf="seat == 'offset'" class="btn mr-1 mb-1" disabled="" style="background: none;"></button>
       </div>
     </div>

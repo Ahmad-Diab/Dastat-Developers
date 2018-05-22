@@ -13,7 +13,8 @@ module.exports.getSeats = function (req, res, next) { //gets the Layout of a Hal
         return res.status(422).json({
             err: null,
             msg: 'Provided data must be in valid types.',
-            data: null
+            data: null,
+            some: Validations.isString(req.query.date)
         });
 
     database.query('SELECT L.encoded FROM halls H inner join layout L ON H.layout=L.id WHERE H.cinema_location =? AND H.cinema_name=? AND H.hall_number=?',

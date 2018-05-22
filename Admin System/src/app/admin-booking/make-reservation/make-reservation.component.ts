@@ -25,6 +25,7 @@ export class MakeReservationComponent implements OnInit {
   selectedPartyDate = null;
   partiesTimesList = [];
   selectedPartyTime = null;
+  booked_seats;
 
   totalPrice = 0;
   singleTicketPrice = 50;
@@ -131,17 +132,16 @@ export class MakeReservationComponent implements OnInit {
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
       let party = this.partiesBigList[partyNum];
       if (party.date)
-        if(!this.partiesDatesList.includes(party.date))
+        if(!this.partiesDatesList.includes(party.date.split('T')[0]))
           this.partiesDatesList.push(party.date);
     }
     this.partiesDatesList.sort();
     console.log(this.selectedPartyDate + " - " + this.partiesDatesList + " - " + this.selectedPartyDate);
-    this.selectedPartyDate = this.partiesDatesList[0];
-
+    this.selectedPartyDate = this.partiesDatesList[0]
     this.loadPartiesTimes();
   }
 
-  selectPartyDate(date) {
+  selectPartyDate(date, element) {
     this.selectedPartyDate = date;
     this.loadPartiesTimes();
   }
@@ -151,12 +151,13 @@ export class MakeReservationComponent implements OnInit {
     this.selectedPartyTime = null;
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
       let party = this.partiesBigList[partyNum];
-      if (this.selectedPartyDate = party.date)
+      if (this.selectedPartyDate == party.date)
         if(!this.partiesTimesList.includes(party.time))
           this.partiesTimesList.push(party.time);
     }
 
     this.selectedPartyTime = this.partiesTimesList[0];
+    console.log(this.partiesTimesList);
     this.loadSeatLayout();
 
   }
@@ -186,7 +187,7 @@ export class MakeReservationComponent implements OnInit {
 
   loadSeatLayout() {
 
-    this.reserveData.date = this.selectedPartyDate;
+    this.reserveData.date = this.selectedPartyDate.split('T')[0];
     this.reserveData.time = this.selectedPartyTime;
     this.reserveData.hall_number = this.selectedHall;
     this.reserveData.hall = this.selectedHall;
@@ -195,12 +196,21 @@ export class MakeReservationComponent implements OnInit {
     this.reserveData.movie = this.selectedMovie.movie_id;
 
     this.hallService.viewLayout(this.reserveData).subscribe((response) => {
+      this.booked_seats = response.seats;
+      console.log(response.seats);
       this.encoding = JSON.parse(response.layout.encoded);
       this.selected = new Array();
       for (var i = 0; i < this.encoding.length; i++)
         this.selected[i] = new Array();
       this.flag = true;
     });
+  }
+
+  booked(seat: string) {
+    for (var i = 0; i < this.booked_seats.length; i++)
+      if (this.booked_seats[i].seat_number == seat)
+        return true;
+    return false;
   }
 
   makeReservation() {

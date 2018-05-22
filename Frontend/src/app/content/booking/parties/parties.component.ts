@@ -32,6 +32,7 @@ export class PartiesComponent implements OnInit {
   flagC;
   flagM;
   dateTemp;
+  choosenDate;
 
   constructor(public partiesService:PartiesService,
     public router : Router,
@@ -44,7 +45,6 @@ export class PartiesComponent implements OnInit {
 
     this.selectedCinema = this.cookie.getObject('cinema');
     this.selectedMovie = this.cookie.getObject('movie');
-    this.viewMovies();
     if(this.selectedMovie)
       this.viewCinemas();
   }
@@ -104,14 +104,13 @@ export class PartiesComponent implements OnInit {
   }
 
   getPartiesAtThisDate(){
-    this.date = this.dateTemp._i.year+'-'+(this.dateTemp._i.month+1)+'-'+this.dateTemp._i.date;
-    if(this.flagD == this.date && this.flagM == this.selectedMovie && this.flagC == this.selectedCinema){
-      return;
-    }
-    console.log(this.date);
-    this.partiesService.getParties(this.selectedCinema.location ,this.selectedCinema.name , this.selectedMovie.movie_id , this.date).subscribe((response) =>{
+    // this.date = this.dateTemp._i.year+'-'+(this.dateTemp._i.month+1)+'-'+this.dateTemp._i.date;
+    // if(this.flagD == this.date && this.flagM == this.selectedMovie && this.flagC == this.selectedCinema){
+    //   return;
+    // }
+    this.partiesService.getParties(this.selectedCinema.location ,this.selectedCinema.name , this.selectedMovie.movie_id , this.choosenDate).subscribe((response) =>{
       this.parties = response.data;
-      //console.log(response.data);
+      console.log(response.data);
       this.flagD = this.date;
       this.flagM = this.selectedMovie ;
       this.flagC = this.selectedCinema;

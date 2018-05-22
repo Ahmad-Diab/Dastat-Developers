@@ -77,16 +77,16 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
     }
 
     // Validations of correct types
-    if (!Validations.isString(cinemaName) ||
-        !Validations.isString(cinemaLocation) ||
-        !Validations.isNumber(movie_id) ||
-        !Validations.isDate(date)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Provided data must be in valid types.',
-            data: null
-        });
-    }
+    // if (!Validations.isString(cinemaName) ||
+    //     !Validations.isString(cinemaLocation) ||
+    //     !Validations.isNumber(movie_id) ||
+    //     !Validations.isDate(date)) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Provided data must be in valid types.',
+    //         data: null
+    //     });
+    // }
 
     //let query = 'SELECT h.cinema_location, h.cinema_name, h.hall_number, h.type, h.number_of_seats, h.movie, p.date_time, m.title, DATE_FORMAT(p.date_time, "%H:%i") AS time FROM Halls h JOIN Parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name JOIN Movies m ON h.movie = m.movie_id'
     //+' WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date_time) < DATE_ADD(CURRENT_DATE, INTERVAL 4 DAY) AND DATE(p.date_time) > DATE_ADD(CURRENT_DATE, INTERVAL -1 DAY)';
@@ -129,13 +129,13 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
 module.exports.getAllPartiesForThatMovie = function (req, res) {
     let movie_id = req.params['movie_id'];
 
-    if (!movie_id) {
-        return res.status(422).json({
-            err: null,
-            msg: 'movie_id is required.',
-            data: null
-        });
-    }
+    // if (!movie_id) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'movie_id is required.',
+    //         data: null
+    //     });
+    // }
 
     if (!date) {
         return res.status(422).json({
@@ -146,13 +146,13 @@ module.exports.getAllPartiesForThatMovie = function (req, res) {
     }
 
     // Validations of correct types
-    if (!Validations.isNumber(movie_id)) {
-        return res.status(422).json({
-            err: null,
-            msg: 'Provided data must be in valid types.',
-            data: null
-        });
-    }
+    // if (!Validations.isNumber(movie_id)) {
+    //     return res.status(422).json({
+    //         err: null,
+    //         msg: 'Provided data must be in valid types.',
+    //         data: null
+    //     });
+    // }
 
     let query =
         'SELECT * ' +

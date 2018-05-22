@@ -231,7 +231,7 @@ module.exports.makeReservation = function (req, res, next) {
             data: null
         });
     }
-    if (!tickets || !tickets_price) {
+    if (!tickets || !tickets.length || !tickets_price) {
         return res.status(422).json({
             err: null,
             msg: 'Tickets data is required.',

@@ -239,9 +239,13 @@ module.exports.makeReservation = function (req, res, next) {
         });
     }
 
+    if(payment !== true || payment !== false) {
+        console.log("Payment is null => to be converted to false.");
+        payment = false;
+    }
+
     // Validations of correct types
-    if (!Validations.isBoolean(payment) ||
-        !Validations.isNumber(hall) ||
+    if (!Validations.isNumber(hall) ||
         !Validations.isNumber(tickets_price)) {
         return res.status(422).json({
             err: null,
@@ -255,13 +259,14 @@ module.exports.makeReservation = function (req, res, next) {
     database.query('SELECT movie FROM halls WHERE hall_number = ? AND cinema_location = ? AND cinema_name = ?',
         [hall, cinema_location, cinema_name], function (error, results) {
             if (error) {
+                console.log("Error checking the movie in the hall in halls table.");
                 return next(error);
             }
 
             if (!results || !results.length || results[0].movie !== movie) {
                 return res.status(404).send({
                     err: null,
-                    msg: "The assigned hall does not exist.",
+                    msg: "The assigned movie with this hall does not exist.",
                     data: null
                 });
             }
@@ -277,6 +282,7 @@ module.exports.makeReservation = function (req, res, next) {
             let sqlQuery = 'INSERT INTO tickets (user,payment,seat_number,date,time,hall,cinema_location,cinema_name,price,movie_id,comment) VALUES ?';
             database.query(sqlQuery, [values], function (error, results) {
                 if (error) {
+                    console.log("Error inserting the tickets in the DB.");
                     return next(error);
                 }
 

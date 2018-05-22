@@ -6,6 +6,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { BookingService } from '../../../@services/booking.service';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 import * as _moment from 'moment';
 
 
@@ -33,15 +34,23 @@ export class PartiesComponent implements OnInit {
   flagM;
   dateTemp;
   choosenDate;
+  day0;
+  day1;
+  day2;
+  day3;
+  day4;
+  today;
 
   constructor(public partiesService:PartiesService,
     public router : Router,
     public route: ActivatedRoute,
     public cookie : CookieService,
     public movieslistService: MovieslistService,
-    public bookingService: BookingService) { }
+    public bookingService: BookingService,
+    private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.getDates();
 
     this.selectedCinema = this.cookie.getObject('cinema');
     this.selectedMovie = this.cookie.getObject('movie');
@@ -91,7 +100,7 @@ export class PartiesComponent implements OnInit {
       cinema_name: this.selectedCinema.name,
       cinema_location: this.selectedCinema.location,
       hall_number: this.selectedParty.hall,
-      date: this.date,
+      date: this.choosenDate,
       time: this.selectedParty.time,
       seats: null,
       eachPrice: this.selectedParty.price,
@@ -116,6 +125,38 @@ export class PartiesComponent implements OnInit {
       this.flagC = this.selectedCinema;
 
     });
+  }
+
+
+  getDates(){
+    this.today=new Date();
+    this.today=this.datePipe.transform(this.today,'yyyy-MM-dd');
+    this.day0=this.addDays(this.today,0);
+    this.day0=this.datePipe.transform(this.day0,'yyyy-MM-dd');
+    this.today=new Date();
+    this.today=this.datePipe.transform(this.today,'yyyy-MM-dd');
+    this.day1=this.addDays(this.today,1);
+    this.day1=this.datePipe.transform(this.day1,'yyyy-MM-dd');
+    this.today=new Date();
+    this.today=this.datePipe.transform(this.today,'yyyy-MM-dd');
+    this.day2=this.addDays(this.today,2);
+    this.day2=this.datePipe.transform(this.day2,'yyyy-MM-dd');
+    this.today=new Date();
+    this.today=this.datePipe.transform(this.today,'yyyy-MM-dd');
+    this.day3=this.addDays(this.today,3);
+    this.day3=this.datePipe.transform(this.day3,'yyyy-MM-dd');
+    this.today=new Date();
+    this.today=this.datePipe.transform(this.today,'yyyy-MM-dd');
+    this.day4=this.addDays(this.today,4);
+    this.day4=this.datePipe.transform(this.day4,'yyyy-MM-dd');
+
+  }
+
+
+  addDays(date,days){
+    this.today=new Date(date);
+    this.today.setDate(this.today.getDate()+days);
+    return this.today;
   }
 
 

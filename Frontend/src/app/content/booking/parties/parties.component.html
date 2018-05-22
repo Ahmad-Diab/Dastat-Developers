@@ -39,11 +39,11 @@
     </span>
     <mat-form-field>
       <mat-select [(ngModel)] = "choosenDate" (change)="getPartiesAtThisDate()">
-        <mat-option value="2018-05-22" selected="selected">2018-05-22</mat-option>
-        <mat-option value="High Rates">High Rates</mat-option>
-        <mat-option value="Low Rates">Low Rates</mat-option>
-        <mat-option value="Latest">Latest</mat-option>
-        <mat-option value="Oldest">Oldest</mat-option>
+        <mat-option value={{day0}} selected="selected">{{day0}}</mat-option>
+        <mat-option value={{day1}}>{{day1}}</mat-option>
+        <mat-option value={{day2}}>{{day2}}</mat-option>
+        <mat-option value={{day3}}>{{day3}}</mat-option>
+        <mat-option value={{day4}}>{{day4}}</mat-option>
       </mat-select>
     </mat-form-field>  
   </div>

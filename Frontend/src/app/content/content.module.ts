@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ContentRoutes } from './content.routing';
 import { AppModule } from '../app.module';
 import { SharedModule } from '../shared';
+import { DatePipe } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { TimingComponent } from './booking/timing/timing.component';
 import { SeatingComponent } from './booking/seating/seating.component';

@@ -56,8 +56,8 @@ export class ReservationComponent implements OnInit {
 
   }
 
-  onReserve(event): void {
-    event = this.searchValue;
+  onReserve(): void {
+    
     this.bookingService.makeReservation(
       this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
       this.reserveData['date'], this.reserveData['time'],this.reserveData['hall'], this.reserveData['payment'],

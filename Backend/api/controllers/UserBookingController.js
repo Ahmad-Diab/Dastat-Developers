@@ -51,7 +51,7 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
         cinemaLocation = req.params['cinema_location'],
         movie_id = req.params['movie_id'],
         date = req.params['date'];
-    console.log(date);
+
     if (!cinemaName || !cinemaLocation) {
         return res.status(422).json({
             err: null,
@@ -95,20 +95,20 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
     let query =
         'SELECT * ' +
         'FROM halls h JOIN parties p ON h.hall_number = p.hall AND h.cinema_location = p.cinema_location AND h.cinema_name = p.cinema_name ' +
-        'WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND p.date = ?';
+        'WHERE h.cinema_name = ? AND h.cinema_location = ? AND h.movie = ? AND DATE(p.date) = ? ';
 
     database.query(query, [cinemaName, cinemaLocation, movie_id, date], function (err, result) {
 
         if (err) throw err;
 
-        if (!result.length) {
-            res.status(404).json({
-                err: null,
-                msg: 'No upcoming parties for this movie in this cinema at this date',
-                data: null
-            });
+        // if (!result.length) {
+        //     res.status(404).json({
+        //         err: null,
+        //         msg: 'No upcoming parties for this movie in this cinema at this date',
+        //         data: null
+        //     });
 
-        } else {
+        // } else {
 
             res.status(200).json({
                 err: null,
@@ -116,10 +116,9 @@ module.exports.getPartiesOfThatMovieInSpecificCinema = function (req, res) {
                 data: result
             });
 
-        }
+        //}
     });
 };
-
 
 /**
  *  Show parties of a movie for a period of 5 days in all Cinemas.

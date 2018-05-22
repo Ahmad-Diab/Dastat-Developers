@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HeaderComponent, FooterComponent } from './shared/layout';
 import { SharedModule } from './shared';
@@ -47,7 +47,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   providers: [SeatingService, HttpService, MovieslistService, PartiesService,
   CinemaslistService,MovieInfoService, UserService, BookingService, CookieService,
     AuthService, AuthGuard, CookieService, UsersService,
-    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService,ActorInfoService],
+    CinemaslistService,MovieInfoService,SearchService,CinemaInfoService,ActorInfoService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

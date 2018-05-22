@@ -52,9 +52,8 @@ export class AdminTicketService extends HttpService {
   }
 
   //-----halls---
-  getMoviesInHallsForCinemaForAdmin(admin_username:String ,cinema_name:String, cinema_location:String) {
-    return this.get_auth('/admin/adminHalls/getMoviesInHallsForCinemaForAdmin',{
-        'username' : admin_username,
+  getMoviesInHallsForCinemaForAdmin(cinema_name:String, cinema_location:String) {
+    return this.get_auth('/tickets/getCurrentMoviesForCinemaForAdmin',{
         'cinema_name': cinema_name,
         'cinema_location': cinema_location
     });

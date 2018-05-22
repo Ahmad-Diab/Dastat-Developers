@@ -13,6 +13,7 @@ import {Layout} from '../../@objects/layout';
 })
 export class MakeReservationComponent implements OnInit {
 
+  statusOfTicket = 'Make the Reservation';
   adminUsername = null;
   reserveData;
   ticketIsLoaded = false;
@@ -25,9 +26,8 @@ export class MakeReservationComponent implements OnInit {
   partiesTimesList = [];
   selectedPartyTime = null;
 
-  selectedTickets = []; //TODO set the array of tickets
-  totalPrice = null; // TODO set this with tickets
-
+  totalPrice = 0;
+  singleTicketPrice = 50;
   encoding;
   selected;
   seats = [];
@@ -42,13 +42,33 @@ export class MakeReservationComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.statusOfTicket = 'Make the Reservation';
+    this.adminUsername = null;
+    this.ticketIsLoaded = false;
+    this.moviesList = [];
+    this.selectedMovie = null;
+    this.selectedHall = null;
+    this.partiesBigList = [];
+    this.partiesDatesList = [];
+    this.selectedPartyDate = null;
+    this.partiesTimesList = [];
+    this.selectedPartyTime = null;
+
+    this.totalPrice = 0;
+    this.singleTicketPrice = 50;
+    this.seats = [];
+    this.flag = false;
+
+    this.error = null;
+
     let auth = <Auth>(this.cookie.getObject('auth'));
     this.adminUsername = auth.username;
-    this.loadMovies();
+    let cinemaData = this.cookie.getObject('cinema');
 
     this.reserveData = {
-      cinema_name: 'Cinema Mawlana', // TODO get from cookies
-      cinema_location: 'Mokattam', // TODO get from cookies
+      cinema_name: cinemaData['name'],
+      cinema_location: cinemaData['location'],
       date: null,
       time: null,
       hall: null,
@@ -60,20 +80,18 @@ export class MakeReservationComponent implements OnInit {
       eachPrice: null,
       movie: null
     };
-
-    this.loadSeatLayout();
+    this.flag = false;
+    this.loadMovies();
   }
 
   loadMovies() {
-
-    this.adminTicketService.getMoviesInHallsForCinemaForAdmin(this.adminUsername, this.reserveData.cinema_name,
+    this.adminTicketService.getMoviesInHallsForCinemaForAdmin(this.reserveData.cinema_name,
       this.reserveData.cinema_location).subscribe((response) => {
       this.moviesList = response.data;
-      console.log(response.data);
-      console.log(this.moviesList);
       this.moviesList.sort();
       this.selectedMovie = this.moviesList[0];
       this.selectedHall = this.moviesList[0].hall_number;
+
       this.loadParties();
     })
 
@@ -87,8 +105,13 @@ export class MakeReservationComponent implements OnInit {
   }
 
   loadParties() {
+    this.flag = false;
     this.partiesBigList = [];
-    console.log("load parties data");
+    this.partiesTimesList = [];
+    this.partiesDatesList = [];
+    this.selectedPartyDate = null;
+    this.selectedPartyTime = null;
+
     this.adminTicketService.viewPartiesOfThatMovie(
       this.adminUsername, this.selectedMovie.cinema_name,
       this.selectedMovie.cinema_location, this.selectedMovie.movie_id
@@ -96,48 +119,50 @@ export class MakeReservationComponent implements OnInit {
       this.partiesBigList = response.data;
 
       if (this.partiesBigList && this.partiesBigList.length) {
-        console.log('parties should be loaded');
         this.takeOnlyDatesInPartiesDateList();
       }
-      console.log('Parties Big List :' + this.partiesBigList);
     });
 
   }
 
   takeOnlyDatesInPartiesDateList() {
     this.partiesDatesList = [];
+    this.selectedPartyDate = null;
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
       let party = this.partiesBigList[partyNum];
-      if (party.date && !this.partiesDatesList.includes(party.date))
-        this.partiesDatesList.push(party.date);
+      if (party.date)
+        if(!this.partiesDatesList.includes(party.date))
+          this.partiesDatesList.push(party.date);
     }
     this.partiesDatesList.sort();
+    console.log(this.selectedPartyDate + " - " + this.partiesDatesList + " - " + this.selectedPartyDate);
     this.selectedPartyDate = this.partiesDatesList[0];
-    console.log("takeOnlyDates done");
+
     this.loadPartiesTimes();
   }
 
   selectPartyDate(date) {
     this.selectedPartyDate = date;
-    //this.reserveData.date = this.selectedPartyDate;
     this.loadPartiesTimes();
   }
 
   loadPartiesTimes() {
     this.partiesTimesList = [];
+    this.selectedPartyTime = null;
     for (let partyNum = 0; partyNum < this.partiesBigList.length; partyNum++) {
       let party = this.partiesBigList[partyNum];
       if (this.selectedPartyDate = party.date)
-        this.partiesTimesList.push(party.time);
+        if(!this.partiesTimesList.includes(party.time))
+          this.partiesTimesList.push(party.time);
     }
 
     this.selectedPartyTime = this.partiesTimesList[0];
+    this.loadSeatLayout();
 
   }
 
   selectPartyTime(time) {
     this.selectedPartyTime = time;
-    //this.reserveData.time = this.selectedPartyTime;
     this.loadSeatLayout();
   }
 
@@ -155,11 +180,20 @@ export class MakeReservationComponent implements OnInit {
     } else {
       this.seats.push(seat);
     }
-    this.ticketIsLoaded = true; //TODO assure
-    console.log(this.seats);
+    this.ticketIsLoaded = this.seats.length > 0;
+    this.totalPrice = this.seats.length * this.singleTicketPrice;
   }
 
   loadSeatLayout() {
+
+    this.reserveData.date = this.selectedPartyDate;
+    this.reserveData.time = this.selectedPartyTime;
+    this.reserveData.hall_number = this.selectedHall;
+    this.reserveData.hall = this.selectedHall;
+    this.reserveData.tickets = this.seats;
+    this.reserveData.price = this.totalPrice;
+    this.reserveData.movie = this.selectedMovie.movie_id;
+
     this.hallService.viewLayout(this.reserveData).subscribe((response) => {
       this.encoding = JSON.parse(response.layout.encoded);
       this.selected = new Array();
@@ -170,17 +204,12 @@ export class MakeReservationComponent implements OnInit {
   }
 
   makeReservation() {
-    //ONLY FOR TEST: TODO Delete
-    this.reserveData.cinema_name = this.selectedMovie.cinema_name;
-    this.reserveData.cinema_location = this.selectedMovie.cinema_location;
-    //END TEST PIECE OF CODE
 
     this.reserveData.date = this.selectedPartyDate;
     this.reserveData.time = this.selectedPartyTime;
     this.reserveData.hall = this.selectedHall;
     this.reserveData.tickets = this.seats;
-    // TODO set th price of tickets to the total price
-    this.reserveData.price = 100;
+    this.reserveData.price = this.totalPrice;
     this.reserveData.movie = this.selectedMovie.movie_id;
 
     this.adminTicketService.makeReservationByAdmin(
@@ -190,6 +219,9 @@ export class MakeReservationComponent implements OnInit {
     ).subscribe((response) => {
       //event.confirm.resolve(response);
       console.log(response);
+      this.ticketIsLoaded = false;
+      this.statusOfTicket = 'Booked Successfully';
+      this.ngOnInit();
     });
 
   }

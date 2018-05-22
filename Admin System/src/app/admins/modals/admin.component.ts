@@ -58,27 +58,27 @@ export class ModalAdmin implements OnInit {
             this.admin.cinema_location = this.cinemaNameLocation.location;
             console.log(this.admin)
             if(this.type == "CO") {
-                this.adminService.addCinemaOwner(this.admin).subscribe(() => {
+                this.adminService.addCinemaOwner(this.admin).subscribe((response) => {
                     var alert = {
-                        message: 'Cinema Owner Added!',
+                        message: response.msg,
                         type: 'success',
                         active: true
                     };
                     this.activeModal.close(alert);
                 });
             } else if(this.type == "BM") {
-                this.adminService.addBranchManager(this.admin).subscribe(() => {
+                this.adminService.addBranchManager(this.admin).subscribe((response) => {
                     var alert = {
-                        message: 'Branch Manager Added!',
+                        message: response.msg,
                         type: 'success',
                         active: true
                     };
                     this.activeModal.close(alert);
                 });
             } else if(this.type == "BU") {
-                this.adminService.addBookingUsher(this.admin).subscribe(() => {
+                this.adminService.addBookingUsher(this.admin).subscribe((response) => {
                     var alert = {
-                        message: 'Booking Usher Added!',
+                        message: response.msg,
                         type: 'success',
                         active: true
                     };
@@ -87,27 +87,27 @@ export class ModalAdmin implements OnInit {
             }
         } else {
             if(this.type == "CO") {
-                this.adminService.editCinemaOwner(this.admin).subscribe(() => {
+                this.adminService.editCinemaOwner(this.admin).subscribe((response) => {
                     var alert = {
-                        message: 'Admin Edited!',
+                        message: response.msg,
                         type: 'success',
                         active: true
                     };
                     this.activeModal.close(alert);
                 });
             } else if (this.type == "BM") {
-                this.adminService.editBranchManager(this.admin).subscribe(() => {
+                this.adminService.editBranchManager(this.admin).subscribe((response) => {
                     var alert = {
-                        message: 'Admin Edited!',
+                        message: response.msg,
                         type: 'success',
                         active: true
                     };
                     this.activeModal.close(alert);
                 });
             } else if (this.type == "BU") {
-                this.adminService.editBookingUsher(this.admin).subscribe(() => {
+                this.adminService.editBookingUsher(this.admin).subscribe((response) => {
                     var alert = {
-                        message: 'Admin Edited!',
+                        message: response.msg,
                         type: 'success',
                         active: true
                     };

@@ -226,7 +226,6 @@ module.exports.assignMovieToHall = function (req, res, next) {
         });
 
 
-
 };
 
 /**
@@ -404,6 +403,7 @@ module.exports.getMoviesInHallsForCinemaForAdmin = function (req, res, next) {
         });
     });
 };
+
 
 /**
  * @param req, required data for viewing movies in a hall

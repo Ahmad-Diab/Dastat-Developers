@@ -57,7 +57,7 @@ export class ReservationComponent implements OnInit {
   }
 
   onReserve(): void {
-    
+    console.log("This is a paid payment: " + this.reserveData['payment']);
     this.bookingService.makeReservation(
       this.reserveData['username'],this.reserveData['cinema_name'], this.reserveData['cinema_location'],
       this.reserveData['date'], this.reserveData['time'],this.reserveData['hall'], this.reserveData['payment'],

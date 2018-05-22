@@ -239,10 +239,6 @@ module.exports.makeReservation = function (req, res, next) {
         });
     }
 
-    if(payment !== true || payment !== false) {
-        console.log("Payment is null => to be converted to false.");
-        payment = false;
-    }
 
     // Validations of correct types
     if (!Validations.isNumber(hall) ||
@@ -252,6 +248,13 @@ module.exports.makeReservation = function (req, res, next) {
             msg: 'Provided data must be in valid types.',
             data: null
         });
+    }
+
+    //payment = payment === "true";
+    if(payment !== true && payment !== false) {
+        console.log("Payment is " + payment);
+        console.log("=> to be converted to false.");
+        payment = false;
     }
 
     // Verify that movie exists in hall

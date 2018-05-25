@@ -38,58 +38,74 @@
     </div>
   </div>
 
-  <div class="tabs tabs--horizontal">
+  <div class="tabs tabs--horisontal">
     <!-- Nav tabs -->
     <div class="container">
       <ul class="nav nav-tabs" id="hTab">
+        <li class="active">
+          <a href="#movie1" data-toggle="tab">Movies</a>
+        </li>
         <li>
-          <a data-toggle="tab" id="moviesTab">Movies</a>
+          <a href="#comment1" data-toggle="tab">Comments</a>
+        </li>
+        <li>
+          <a href="#map1" data-toggle="tab">Map</a>
         </li>
       </ul>
     </div>
 
     <!-- Tab panes -->
     <div class="tab-content">
-      <div class="tab-pane">
+      <div class="tab-pane" id="movie1">
         <div class="container">
           <div class="movie-time-wrap">
+
+            <div class="datepicker">
+              <span class="datepicker__marker">
+                <i class="fa fa-calendar"></i>Date</span>
+              <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
+            </div>
+
             <div class="clearfix"></div>
 
-            <div *ngFor="let movie of moviesInCinema">
-              <div class="col-sm-6">
-                <div class="movie movie--time">
-                  <div class="row">
-                    <div class="col-sm-6 col-md-5">
-                      <div class="movie__images">
-                        <span class="movie__rating">{{movie.rating}}</span>
-                        <img alt='' [src]="movie.imagePath">
+            <div *ngFor="let movie of moviesInCinema" class="col-sm-6">
+
+              <!-- Movie variant with time -->
+              <div class="movie movie--time">
+                <div class="row">
+                  <div class="col-sm-6 col-md-5">
+                    <div class="movie__images">
+                      <span class="movie__rating">4.1</span>
+                      <div class="crop">
+                          <img [src]="movie.imagePath">
                       </div>
-
                     </div>
-
-
-                    <div class="col-sm-6 col-md-7">
-                      <a class="movie__title">{{movie.title}}</a>
-
-                      <p class="movie__time">{{movie.duration}}</p>
-
-                      <p class="movie__option">
-                        <a>{{movie.genre}}</a>
-                      </p>
-
-                    </div>
-                    <div class="movie__btns" class="col-sm-7 col-md-7">
-                      <div *ngIf="movie.feature == 2 || movie.feature == 3">
-                        <a href='booking/parties' class="btn btn-md btn--warning" (click)="GoToReservation(movie)">book a ticket
-                          <span class="hidden-sm">for this movie</span>
-                        </a>
-                      </div>
-                      <a href="#" class="watchlist">Add to watchlist</a>
-                    </div>
-
                   </div>
+
+                  <div class="col-sm-6 col-md-7">
+                    <a href='movie-page-left.html' class="movie__title">{{movie.title}}</a>
+
+                    <p class="movie__time">{{movie.duration}}</p>
+
+                    <p class="movie__option">
+                      <a href="#">Drama</a> |
+                      <a href="#">Sci-Fi</a> |
+                      <a href="#">Thriller</a>
+                    </p>
+                  </div>
+                  <div class="time-select">
+                    <ul class="items-wrap">
+                      <li class="time-select__item" data-time='09:40'>09:40</li>
+                      <li class="time-select__item" data-time='13:45'>13:45</li>
+                      <li class="time-select__item" data-time='15:45'>15:45</li>
+                      <li class="time-select__item" data-time='19:50'>19:50</li>
+                      <li class="time-select__item" data-time='21:50'>21:50</li>
+                    </ul>
+                  </div>
+
                 </div>
               </div>
+              <!-- Movie variant with time -->
             </div>
 
           </div>
